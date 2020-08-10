@@ -166,6 +166,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Shell.h" />
+    <ClInclude Include="Spawn.h" />
     <ClInclude Include="SymHook.h" />
     <ClInclude Include="Tick.h" />
     <ClInclude Include="Village.h" />
@@ -181,7 +182,7 @@
     <ClCompile Include="mod.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="bedrock_server的PDB符号信息.txt" />
+    <Text Include="1.16bedrock_server的PDB符号信息.txt" />
     <Text Include="symbol.txt" />
     <Text Include="使用说明.txt" />
   </ItemGroup>

@@ -4,6 +4,12 @@
 #include "mod.h"
 #include "SymHook.h"
 
+
+#include<set>
+using namespace SymHook;
+
+
+
 Vec3 getCenter(void* village) {
 	Vec3 center = {
 
@@ -20,9 +26,15 @@ AABB getAABB(void *village) {
 	return aabb;
 }
 
+float getVillageRadius(void *village){
+	if (!village)return -1.0;
+	return SYM_CALL(
+		float(*)(void*),
+		MSSYM_B1QE20getApproximateRadiusB1AA7VillageB2AAA7QEBAMXZ,
+		village
+		);
+}
 
-#include<set>
-using namespace SymHook;
 struct VillageHelper {
 	VillageHelper() = default;
 	std::set<void*> villageList;
@@ -54,15 +66,15 @@ struct VillageHelper {
 
 	void list() {
 		int i = 0;
-		sendText("here are all the villages:\n");
+		sendText("here are all the ticking villages:\n");
 		for (auto village : villageList)
 		{
 			if (village)
 			{
 				auto aabb = getAABB(village);
 				auto center = getCenter(village);
-				char msg[64];
-				sprintf_s(msg, "village %d:  bound: [(%d,%d,%d),(%d,%d,%d) center: (%d,%d,%d)\n",
+				char msg[512];
+				sprintf_s(msg, "v %d: b: [(%d,%d,%d),(%d,%d,%d) c: (%d,%d,%d) r:%.2f \n",
 					i,
 					(int)aabb.p1.x,
 					(int)aabb.p1.y,
@@ -72,9 +84,11 @@ struct VillageHelper {
 					(int)aabb.p2.z,
 					(int)center.x,
 					(int)center.y,
-					(int)center.z
+					(int)center.z,
+					getVillageRadius(village)
 					);
 				sendText(msg);
+				++i;
 			}
 		}
 
@@ -94,13 +108,13 @@ THook(
 
 int villageInterval = 0;
 void villageTask() {
-	if (villageInterval % 7 == 0) {
+	if (villageInterval % 8 == 0) {
 		globalVillageHeleper.draw();
 	}
-	if (villageInterval % 40 == 0 ) {
+	if (villageInterval % 100 == 0 ) {
 		globalVillageHeleper.clear();
 	}
-	villageInterval = (villageInterval + 1) % 280;
+	villageInterval = (villageInterval + 1) % 200;
 }
 
 void listVillages() {

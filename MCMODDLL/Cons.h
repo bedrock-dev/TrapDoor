@@ -11,7 +11,7 @@ void* player = nullptr; //全局玩家对象
 void* level = nullptr; //全局存档对象
 void* dimension = nullptr; //全局维度对象
 void* globalBlockSource = nullptr;
-
+void* spawner = nullptr;
 enum class TickStatus {
 	Frozen,
 	Normal,
@@ -34,23 +34,24 @@ int profileRound = 0;
 long long redstoenUpdateTime = 0;
 long long playerTickTime = 0;
 long long levelTickTime = 0;
-	long long dimTickTime = 0;
-	long long chunkTickTime = 0;
-		long long randTickTime = 0;
-		long long pendingTickTime = 0;
-		long long blockEntityTickTime = 0;
-		long long SpawnerTickTime = 0;
+long long dimTickTime = 0;
+long long chunkTickTime = 0;
+long long randTickTime = 0;
+long long pendingTickTime = 0;
+long long blockEntityTickTime = 0;
+long long SpawnerTickTime = 0;
 
 
 
 void msg(std::string& s) {
 	if (!player)return;
 	std::vector<std::string> v;
+	v.emplace_back("test");
 	SYM_CALL(
-		void(*)(void*, std::string&, std::vector<std::string>&),
-		MSSYM_MD5_39e2c315b1969108fef04029f8bddbb8,
-		player, s, v);
-
+		void(*)(bool,void*, std::string&, std::vector<std::string>&),
+		MSSYM_MD5_24be62e9330073695808606844de0d99,
+		true,player, s, v);
+	//printf("%s",s.c_str());
 }
 void sendText(const char* m) {
 	std::string s(m);
@@ -62,6 +63,18 @@ struct Vec3 {
 	float x;
 	float y;
 	float z;
+	Vec3() = default;
+	Vec3(int _x, int _y, int _z) :x((float)_x), y((float)_y), z((float)_z) {}
+	Vec3(float _x, float _y, float _z) :x(_x), y(_y), z(_z) {}
+	bool operator ==(const Vec3 &v)const {
+		return x == v.x && y == v.y && z == v.z;
+	}
+
+	bool operator !=(const Vec3& v)const {
+		return x != v.x || y != v.y || z != v.z;
+	}
+
+
 };
 
 struct AABB
@@ -88,7 +101,7 @@ void spawnParticle(float* p , std::string &type) {
 }
 
 void spawnRectangleParticle(AABB aabb, std::string &type) {
-	for (auto i = aabb.p1.x + 0.5; i<= aabb.p2.x+0.5 ; i+=0.5)
+	for (auto i = aabb.p1.x + 0.5; i<= aabb.p2.x+0.5 ; i+=0.8)
 	{
 		float point[3] = {i,aabb.p1.y + 0.5,aabb.p1.z + 0.5 };
 		spawnParticle(point, type); //p1y p1z
@@ -100,7 +113,7 @@ void spawnRectangleParticle(AABB aabb, std::string &type) {
 		spawnParticle(point, type);
 	}
 
-	for (auto i = aabb.p1.y + 0.5; i <= aabb.p2.y + 0.5; i+=0.5)
+	for (auto i = aabb.p1.y + 0.5; i <= aabb.p2.y + 0.5; i+= 0.8)
 	{
 		float point[3] = {aabb.p1.x + 0.5,i,aabb.p1.z + 0.5 };
 		spawnParticle(point, type); //p1x p1z
@@ -112,7 +125,7 @@ void spawnRectangleParticle(AABB aabb, std::string &type) {
 		spawnParticle(point, type);
 	}
 
-	for (auto i = aabb.p1.z + 0.5; i <= aabb.p2.z+0.5; i+=0.5)
+	for (auto i = aabb.p1.z + 0.5; i <= aabb.p2.z+0.5; i+= 0.8)
 	{
 		float point[3] = { aabb.p1.x + 0.5,aabb.p1.y + 0.5,i };
 		spawnParticle(point, type); //p1x p1z
@@ -126,4 +139,8 @@ void spawnRectangleParticle(AABB aabb, std::string &type) {
 }
 
 
+bool enableMarkPos = false;
 bool enableVillageShow = false;
+bool enableExtraTickWork = true;
+bool enableExplosion = true;
+bool enableObserve = false;

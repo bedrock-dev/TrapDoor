@@ -16,8 +16,10 @@ typedef std::chrono::high_resolution_clock timer_clock;
 
 
 void extraTask() {
+	if (!enableExtraTickWork)return;
+	
+	//here are the works;
 	villageTask();
-
 }
 
 void worldFrozen() {
@@ -71,16 +73,17 @@ void worldForword(int tickNum) {
 
 
 void worldProfile() {
+	sendText("start profiling");
 	profileStart = true;
 	profileRound = 10;
 }
 
 void calProfile() {
-	char msg[256];
+	char msg[512];
 
-	sprintf_s(msg, "mspt: %.3f ms\nredstone: %.3f ms\nlevel: %.3f ms\n    dim(chunk (un)load,village): %.3f ms\n" \
-		"    player: %.3f ms\n        chunk: %.3f ms\n            random tick & env: %.3f ms\n"\
-		"            blockEntities: %.3f ms\n            (de)spawn: %.3f ms",
+	sprintf_s(msg, "mspt: %.3f ms\nredstone: %.3f ms\nlevel: %.3f ms\n    - dim(chunk (un)load,village): %.3f ms\n" \
+		"    - player: %.3f ms\n        - chunk: %.3f ms\n            - random tick & env: %.3f ms\n"\
+		"            - blockEntities: %.3f ms\n            - (de)spawn: %.3f ms",
 		(double)redstoenUpdateTime / 9000 + (double)levelTickTime / 10000,
 		(double)redstoenUpdateTime / 9000,
 		(double)levelTickTime / 10000,
@@ -114,6 +117,7 @@ THook(void,
 			
 			TIMER_START
 			original(l);
+			extraTask();
 			TIMER_END
 			levelTickTime += timeReslut;
 			profileRound--;
@@ -149,9 +153,6 @@ THook(void,
 			original(l);
 		}
 		slowCounter = (slowCounter + 1) % SlowTimes;
-	}
-	else if (tickStatus == TickStatus::Frozen) {
-		//nothing todo
 	}
 }
 
@@ -242,7 +243,6 @@ THook(
 		original(levelChunk, blockSource, a3, a4);
 	}
 
-	
 }
 
 
@@ -266,14 +266,16 @@ THook(
 	
 }
 
+
 //mobspawn Spawner::tick
 THook(
 	void,
-	MSSYM_B1QA4tickB1AA7SpawnerB2AAE20QEAAXAEAVBlockSourceB2AAE14AEAVLevelChunkB3AAAA1Z,
+	MSSYM_B1QA4tickB1AA7SpawnerB2AAE20QEAAXAEAVBlockSourceB2AAE14AEBVLevelChunkB3AAAA1Z,
 	void* swr,
 	void* blockSource,
 	void* chunk
 ) {
+	if (!spawner)spawner = swr;
 
 	if (profileStart) {
 		TIMER_START

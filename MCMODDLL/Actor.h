@@ -3,6 +3,7 @@
 #include "pch.h"
 #include "mod.h"
 #include "SymHook.h"
+#include "Spawn.h"
 #include <vector>
 using namespace SymHook;
 
@@ -23,15 +24,43 @@ std::string getActorText(void* actor) {
 
 
 /**实体标定**/
-THook(
+/*THook(
 	void,
 	MSSYM_B1QA6attackB1AA6PlayerB2AAA4UEAAB1UE10NAEAVActorB3AAAA1Z,
 	void* p1,
 	void* p2
 ) {
 	if (p1 && p2) {
-		printf("attack");
+		original(p1,p2);
 		auto text = getActorText(p2);
 		msg(text);
 	}
+}*/
+
+
+void sendInfo() {
+	auto mobNum = getMobCount(spawner);
+	char str[64];
+	sprintf_s(str,"total mob count: %d",mobNum);
+	sendText(str);
+	
 }
+
+//爆炸产生
+THook(
+	void,
+	MSSYM_B1QA7explodeB1AA9ExplosionB2AAA7QEAAXXZ,
+	void* exp
+) {
+	if (enableExplosion) {
+		original(exp);
+	}
+}
+
+//THook(
+//	void,
+//	MSSYM_B2QUE11refreshAABBB1AA5ActorB2AAA7IEAAXXZ,
+//	void* atr
+//) {
+//	original(atr);
+//}

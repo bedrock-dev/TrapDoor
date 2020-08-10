@@ -5,19 +5,30 @@
 #include "SymHook.h"
 #include "Tick.h"
 #include "Village.h"
+#include <map>
+#include "Actor.h"
+#include "Spawn.h"
 
 #include <vector>
 using namespace SymHook;
 enum class CmdType {
 	Tick,
 	Profile,
-	Village
+	Village,
+	Function,
+	Position,
+	Info,
+	Help
 };
 
 std::map<std::string, CmdType> cmd_map = {
 		{"./tick", CmdType::Tick},
 		{"./prof", CmdType::Profile},
-		{"./vill",CmdType::Village}
+		{"./vill",CmdType::Village},
+		{"./func",CmdType::Function},
+		{"./p",CmdType::Position},
+		{"./info",CmdType::Info},
+		{"./help",CmdType::Help}
 };
 
 
@@ -95,14 +106,38 @@ THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void* self, std::string 
 			}
 		}
 		else if (tokens[1] == "list") {
-			//listVillages();
+				listVillages();
 		}
 	
 		break;
+
+	case CmdType::Function:
+		if (tokens.size() != 3 || !(tokens[2] == "true" || tokens[2] == "false")) {
+			sendText("use ./func xxx [true/false]\nfor more info type /help");
+			return;
+		}
+		if (tokens[1] == "extratickwork") 
+		{
+			enableExtraTickWork = tokens[2] == "true" ? true : false;
+		}
+		else if (tokens[1] == "explosion")
+		{
+			enableExplosion = tokens[2] == "true" ? true : false;
+		}
+	/*	else if (tokens[1] == "observe") {
+			enableObserve = tokens[2] == "true" ? true : false;
+			sendText("observe changed");
+		}*/
+		break;
+	case CmdType::Position:
+		enableMarkPos = !enableMarkPos;
+		break;
+	case CmdType::Info:
+			sendInfo();
+			break;
 	default:
 		break;
 	}
-
 	return original(self, player_name, command_line);
 }
 
