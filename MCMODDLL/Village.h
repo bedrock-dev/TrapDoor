@@ -4,6 +4,7 @@
 #include "pch.h"
 #include "mod.h"
 #include "SymHook.h"
+#include <strstream>
 
 
 #include<set>
@@ -72,8 +73,8 @@ struct VillageHelper {
             if (village) {
                 auto aabb = getVillageBound(village);
                 auto center = getVillageCenter(village);
-                char msg[512];
-                gamePrintf("v %d: b: [(%d,%d,%d),(%d,%d,%d) c: (%d,%d,%d) r:%.2f \n",
+
+                gamePrintf("v§2%d§b: [%d,%d,%d],[%d,%d,%d]§rc:§b[%d,%d,%d]§rr:§2%.2f \n",
                            i,
                            (int) aabb.p1.x,
                            (int) aabb.p1.y,
@@ -86,7 +87,6 @@ struct VillageHelper {
                            (int) center.z,
                            getVillageRadius(village)
                 );
-                gamePrintf(msg);
                 ++i;
             }
         }
@@ -94,7 +94,6 @@ struct VillageHelper {
 };
 
 VillageHelper villageHelper;
-
 
 THook(
         void, MSSYM_B1QA4tickB1AA7VillageB2AAE10QEAAXUTickB2AAE15AEAVBlockSourceB3AAAA1Z,

@@ -9,7 +9,6 @@
 #include <map>
 #include "Actor.h"
 #include "Spawn.h"
-
 #include <vector>
 
 using namespace SymHook;
@@ -20,20 +19,20 @@ enum class CmdType {
     Function,
     Position,
     Info,
-    Help
+    Help,
+    Spawn
 };
 
 std::map<std::string, CmdType> cmdMap = {
-        {"./tick", CmdType::Tick},
-        {"./prof", CmdType::Profile},
-        {"./vill", CmdType::Village},
-        {"./func", CmdType::Function},
-        {"./p",    CmdType::Position},
-        {"./info", CmdType::Info},
-        {"./help", CmdType::Help}
+        {"./tick",  CmdType::Tick},
+        {"./prof",  CmdType::Profile},
+        {"./vill",  CmdType::Village},
+        {"./func",  CmdType::Function},
+        {"./p",     CmdType::Position},
+        {"./spawn", CmdType::Spawn},
+        {"./info",  CmdType::Info},
+        {"./help",  CmdType::Help}
 };
-
-
 
 
 THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string const &playerName,
@@ -47,35 +46,39 @@ THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string 
         tokens.push_back(commandLine);
     auto result = cmdMap.find(tokens[0]);
     if (result == cmdMap.end()) {
-        gamePrintf("unknown command , use [./help] to show help");
+        error("unknown command , use [./help] to show help");
         return;
     }
 
 
+    const char *banner = "Â§6          _                \n"
+                         "_|_ __ _ |_) _| _  _  __   \n"
+                         " |_ | (_||  (_|(_)(_) |   ";
+
     switch (result->second) {
         case CmdType::Tick:
             if (tokens.size() == 1)return;
-            //ÔİÍ£ÊÀ½çÔËĞĞ
-            if (tokens[1] == "fz" || tokens[1] == "frozen") {//ÖØÖÃÎªÕı³£×´Ì¬
+            //æš‚åœä¸–ç•Œè¿è¡Œ
+            if (tokens[1] == "fz" || tokens[1] == "frozen") {//é‡ç½®ä¸ºæ­£å¸¸çŠ¶æ€
                 worldFrozen();
             } else if (tokens[1] == "reset" || tokens[1] == "r") {
                 worldReset();
-            } else if (tokens[1] == "forward" || tokens[1] == "fw") {//Ç°½øn tick
+            } else if (tokens[1] == "forward" || tokens[1] == "fw") {//å‰è¿›n tick
                 if (tokens.size() != 3)return;
                 int time = strtol(tokens[2].c_str(), nullptr, 10);
                 if (time < 0) {
-                    gamePrintf("invalid parameter\n");
+                    error("invalid parameter\n");
                     return;
                 }
                 worldForward(time);
             }
 
-                //·ÅÂı
+                //æ”¾æ…¢
             else if (tokens[1] == "slow") {
                 if (tokens.size() != 3)return;
                 int time = strtol(tokens[2].c_str(), nullptr, 10);
                 if (time < 0) {
-                    gamePrintf("invalid parameter\n");
+                    error("invalid parameter\n");
                     return;
                 }
                 worldSlow(time);
@@ -88,7 +91,7 @@ THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string 
 
         case CmdType::Village:
             if (tokens.size() == 1)return;
-            if (tokens[1] == "draw") {//ÖØÖÃÎªÕı³£×´Ì¬
+            if (tokens[1] == "draw") {//é‡ç½®ä¸ºæ­£å¸¸çŠ¶æ€
                 if (tokens.size() == 3) {
                     if (tokens[2] == "true") {
                         enableVillageShow = true;
@@ -107,7 +110,7 @@ THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string 
 
         case CmdType::Function:
             if (tokens.size() != 3 || !(tokens[2] == "true" || tokens[2] == "false")) {
-                gamePrintf("use ./func xxx [true/false]\nfor more info type /help");
+                error("use ./func xxx [true/false]\nfor more info type /help");
                 return;
             }
             if (tokens[1] == "extratickwork") {
@@ -123,7 +126,28 @@ THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string 
             sendInfo();
             break;
         case CmdType::Help:
-            gamePrintf("function developing,visit https://github.com/hhhxiao/MCBEtoolSet for help");
+            gamePrintf("%s" \
+                    "./tick fz freeze the world\n"\
+                    "./tick slow [num] slow the world\n"\
+                    "./tick fw [num] forward the world to num tick\n"\
+                    "./vill draw [true/false] (dis)enable the village bound and center show\n"\
+                    "./vill list  list all the ticking villages\n"\
+                    "./func explosion [true/false] (dis)enable explosion\n"\
+                    "./prof profile the world run\n"\
+                    "./p line measure\n", banner);
+            break;
+        case CmdType::Spawn :
+            if (tokens.size() == 1)return;
+            if (tokens[1] == "start") {
+                startSpawnCounter();
+            } else if (tokens[1] == "end") {
+                endSpawnerCounter();
+            } else if (tokens[1] == "clear") {
+                clearSpawnCounter();
+            } else if (tokens[1] == "p" || tokens[1] == "print") {
+                auto str = tokens.size() == 3 ? tokens[2] : "null";
+                spawnAnalysis(str);
+            }
         default:
             break;
     }

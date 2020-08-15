@@ -68,18 +68,24 @@ void worldProfile() {
 
 void calProfile() {
 
-    gamePrintf("mspt: %.3f ms\nredstone: %.3f ms\nlevel: %.3f ms\n    - dim(chunk (un)load,village): %.3f ms\n" \
-        "    - player: %.3f ms\n        - chunk: %.3f ms\n            - random tick & env: %.3f ms\n"\
-        "            - blockEntities: %.3f ms\n            - (de)spawn: %.3f ms",
-              (double) redstoneUpdateTime / 90000 + (double) levelTickTime / 100000,
-              (double) redstoneUpdateTime / 90000,
-              (double) levelTickTime / 100000,
-              (double) dimTickTime / 100000,
-              (double) playerTickTime / 100000,
-              (double) chunkTickTime / 100000,
-              (double) randTickTime / 100000,
-              (double) blockEntityTickTime / 100000,
-              (double) spawnerTickTime / 100000
+    gamePrintf("mpst:            Â§2%.3f\n" \
+               "Â§rredstone:             Â§2%.3f\n" \
+               "Â§rlevel:                Â§2%.3f\n" \
+               "Â§rchunk & village:      Â§2%.3f\n" \
+               "Â§rplayer:               Â§2%.3f\n" \
+               "Â§rchunk tick:           Â§2%.3f\n" \
+               "Â§random tick & env:     Â§2%.3f\n" \
+               "Â§rblockEntities:   Â§2%.3f\n" \
+               "Â§r(de)spawn:       Â§2%.3f",
+               (double) redstoneUpdateTime / 90000 + (double) levelTickTime / 100000,
+               (double) redstoneUpdateTime / 90000,
+               (double) levelTickTime / 100000,
+               (double) dimTickTime / 100000,
+               (double) playerTickTime / 100000,
+               (double) chunkTickTime / 100000,
+               (double) randTickTime / 100000,
+               (double) blockEntityTickTime / 100000,
+               (double) spawnerTickTime / 100000
     );
     redstoneUpdateTime = 0;
     levelTickTime = 0;
@@ -91,13 +97,13 @@ void calProfile() {
     spawnerTickTime = 0;
 }
 
-//ÊÀ½çÔËĞĞ Level::tick
+//ä¸–ç•Œè¿è¡Œ Level::tick
 THook(void,
       MSSYM_B1QA4tickB1AA5LevelB2AAA7UEAAXXZ,
       void *l) {
-    //»ñÈ¡level¶ÔÏó
+    //è·å–levelå¯¹è±¡
     if (!level) { level = l; }
-    //Õı³£×´Ì¬ÏÂµÄÕı³£tick
+    //æ­£å¸¸çŠ¶æ€ä¸‹çš„æ­£å¸¸tick
     if (tickStatus == TickStatus::Normal) {
         if (profileStart) {
             TIMER_START
@@ -114,13 +120,13 @@ THook(void,
             original(l);
             extraTask();
         }
-        //Ç°½øtick ×´Ì¬
+        //å‰è¿›tick çŠ¶æ€
     } else if (tickStatus == TickStatus::Forward) {
         gamePrintf("forward start ,please wait\n");
         for (int i = 0; i < forwardTickNum; i++) {
-            //ÏÈµ÷ÓÃlevel::tick
+            //å…ˆè°ƒç”¨level::tick
             original(l);
-            //ÔÙµ÷ÓÃ Dimension::tick
+            //å†è°ƒç”¨ Dimension::tick
             SYM_CALL(
                     void(*)(void * ),
                     MSSYM_B1QE12tickRedstoneB1AA9DimensionB2AAA7UEAAXXZ,
@@ -138,7 +144,7 @@ THook(void,
     }
 }
 
-//Íæ¼Ò¸üĞÂÊÀ½ç ServerPlayer::tickWorld
+//ç©å®¶æ›´æ–°ä¸–ç•Œ ServerPlayer::tickWorld
 THook(
         void,
         MSSYM_B1QA9tickWorldB1AE12ServerPlayerB2AAE13UEAAHAEBUTickB3AAAA1Z,
@@ -146,7 +152,7 @@ THook(
         void * tick
 ) {
     if (!player)player = p;
-    //Èç¹ûÊÇÒ»°ã×´Ì¬
+    //å¦‚æœæ˜¯ä¸€èˆ¬çŠ¶æ€
     if (profileStart) {
         TIMER_START
         original(p, tick);
@@ -157,7 +163,7 @@ THook(
     }
 }
 
-//Î¬¶È¸üĞÂ Dimension::tick
+//ç»´åº¦æ›´æ–° Dimension::tick
 THook(
         void,
         MSSYM_B1QA4tickB1AA9DimensionB2AAA7UEAAXXZ,
@@ -174,7 +180,7 @@ THook(
     }
 
 }
-//Çø¿é¸üĞÂ LevelChunk::tick
+//åŒºå—æ›´æ–° LevelChunk::tick
 THook(
         void,
         MSSYM_B1QA4tickB1AE10LevelChunkB2AAE20QEAAXAEAVBlockSourceB2AAA8AEBUTickB3AAAA1Z,
@@ -193,7 +199,7 @@ THook(
     }
 }
 
-//ÌìÆøºÍËæ»ú¿Ì LevelChunk::tickBlocks
+//å¤©æ°”å’Œéšæœºåˆ» LevelChunk::tickBlocks
 THook(
         void,
         MSSYM_B1QE10tickBlocksB1AE10LevelChunkB2AAE20QEAAXAEAVBlockSourceB3AAAA1Z,
@@ -215,7 +221,7 @@ THook(
 }
 
 
-//·½¿éÊµÌå LevelChunk::tickEntities
+//æ–¹å—å®ä½“ LevelChunk::tickEntities
 THook(
         void,
         MSSYM_B1QE17tickBlockEntitiesB1AE10LevelChunkB2AAE20QEAAXAEAVBlockSourceB3AAAA1Z,
@@ -255,7 +261,7 @@ THook(
 
 }
 
-//¼Æ»®¿Ì¸üĞÂ  BlockTickingQueue::pendingTicks
+//è®¡åˆ’åˆ»æ›´æ–°  BlockTickingQueue::pendingTicks
 THook(
         void,
         MSSYM_B1QE16tickPendingTicksB1AE17BlockTickingQueueB2AAA4QEAAB1UE16NAEAVBlockSourceB2AAA8AEBUTickB2AAA1HB1UA1NB1AA1Z,
@@ -268,7 +274,7 @@ THook(
 
 }
 
-//ºìÊ¯¸üĞÂ
+//çº¢çŸ³æ›´æ–°
 THook(
         void,
         MSSYM_B1QE12tickRedstoneB1AA9DimensionB2AAA7UEAAXXZ,

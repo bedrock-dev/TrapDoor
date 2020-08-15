@@ -1,17 +1,17 @@
-#pragma once
+ï»¿#pragma once
 
-//ÕâÀï´æÁËËùÓĞµÄÈ«¾Ö±äÁ¿ºÍÈ«¾Öº¯Êı
 #include <vector>
 #include "SymHook.h"
 #include "detours.h"
 #include "mod.h"
 #include <string>
+#include <ostream>
 
 using namespace SymHook;
 
-void *player = nullptr; //È«¾ÖÍæ¼Ò¶ÔÏó
-void *level = nullptr; //È«¾Ö´æµµ¶ÔÏó
-void *dimension = nullptr; //È«¾ÖÎ¬¶È¶ÔÏó
+void *player = nullptr; //å…¨å±€ç©å®¶å¯¹è±¡
+void *level = nullptr; //å…¨å±€å­˜æ¡£å¯¹è±¡
+void *dimension = nullptr; //å…¨å±€ç»´åº¦å¯¹è±¡
 void *globalBlockSource = nullptr;
 void *spawner = nullptr;
 enum class TickStatus {
@@ -23,13 +23,13 @@ enum class TickStatus {
 
 
 TickStatus tickStatus = TickStatus::Normal;
-//tickÔËĞĞ¿ØÖÆ
-int SlowTimes = 1;  //·ÅÂı±¶Êı
-int slowCounter = 0; //¼ÆÊıÆ÷
-int forwardTickNum = 0; //¿ì½øµÄtickÊıÁ¿
+//tickè¿è¡Œæ§åˆ¶
+int SlowTimes = 1;  //æ”¾æ…¢å€æ•°
+int slowCounter = 0; //è®¡æ•°å™¨
+int forwardTickNum = 0; //å¿«è¿›çš„tickæ•°é‡
 
 
-//ĞÔÄÜ·ÖÎö
+//æ€§èƒ½åˆ†æ
 bool profileStart = false;
 int profileRound = 0;
 long long redstoneUpdateTime = 0;
@@ -52,6 +52,9 @@ void sendLocalMessage(std::string &s) {
             true, player, s, v);
 }
 
+
+
+
 //void gamePrintf(const char *m) {
 //    std::string s(m);
 //    sendLocalMessage(s);
@@ -66,6 +69,14 @@ void gamePrintf(const std::string &format, Args ... args) {
     snprintf(buf.get(), size, format.c_str(), args ...);
     auto str = std::string(buf.get(), buf.get() + size - 1); // We don't want the '\0' inside
     sendLocalMessage(str);
+}
+
+void error(const std::string &s) {
+    gamePrintf("Â§c%s", s.c_str());
+}
+
+void warning(const std::string &s) {
+    gamePrintf("Â§6%s", s.c_str());
 }
 
 
@@ -88,7 +99,10 @@ struct Vec3 {
         return x != v.x || y != v.y || z != v.z;
     }
 
-
+    friend std::ostream &operator<<(std::ostream &os, const Vec3 &vec3) {
+        os << "[" << vec3.x << "," << vec3.y << "," << vec3.z << "]";
+        return os;
+    }
 };
 
 struct AABB {
@@ -105,8 +119,9 @@ struct AABB {
     }
 };
 
+
 void spawnParticle(float *p, std::string &type) {
-    for (int i = 0; i < 3; ++i)
+    for (auto i = 0; i < 3; ++i)
         p[i] += 0.5;
     SYM_CALL(
             void(*)(void * , std::string, float *, void *),
@@ -116,7 +131,6 @@ void spawnParticle(float *p, std::string &type) {
 }
 
 void spawnRectangleParticle(AABB aabb, std::string &type) {
-
 
     for (auto i = static_cast<int>(aabb.p1.x); i <= aabb.p2.x; i++) {
         float point[3] = {(float) i, aabb.p1.y, aabb.p1.z};
@@ -139,6 +153,7 @@ void spawnRectangleParticle(AABB aabb, std::string &type) {
         spawnParticle(point, type);
     }
 
+
     for (auto i = static_cast<int>(aabb.p1.z); i <= aabb.p2.z; i++) {
         float point[3] = {aabb.p1.x, aabb.p1.y, static_cast<float>(i)};
         spawnParticle(point, type); //p1x p1z
@@ -156,3 +171,4 @@ bool enableMarkPos = false;
 bool enableVillageShow = false;
 bool enableExtraTickWork = true;
 bool enableExplosion = true;
+bool mobSpawnCounterStart = false;

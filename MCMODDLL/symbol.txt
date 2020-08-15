@@ -1,115 +1,123 @@
-# ´ËÎÄ¼şÄÚÌîĞ´ĞèÒªHookµÄ·ûºÅÃû³Æ¡£
-# Ã¿ĞĞÌîÒ»¸öÍêÕûµÄ·ûºÅÃû³Æ£¬²»¶à²»ÉÙ£¬²»Òª°üÀ¨ÆäËûÄÚÈİ£¡
-# ÒÔ#»ò//¿ªÍ·µÄĞĞ½«±»ÊÓÎª×¢ÊÍ£¬²»Ó°ÏìPDB¹¤¾ß½âÎö¡£
-# ÀıÈç£º
+# æ­¤æ–‡ä»¶å†…å¡«å†™éœ€è¦Hookçš„ç¬¦å·åç§°ã€‚
+# æ¯è¡Œå¡«ä¸€ä¸ªå®Œæ•´çš„ç¬¦å·åç§°ï¼Œä¸å¤šä¸å°‘ï¼Œä¸è¦åŒ…æ‹¬å…¶ä»–å†…å®¹ï¼
+# ä»¥#æˆ–//å¼€å¤´çš„è¡Œå°†è¢«è§†ä¸ºæ³¨é‡Šï¼Œä¸å½±å“PDBå·¥å…·è§£æã€‚
+# ä¾‹å¦‚ï¼š
 # ??0ProjectileComponent@@QEAA@AEAVActor@@@Z
-# ´Ë´¦¿ªÊ¼ÌîÈë·ûºÅ
+# æ­¤å¤„å¼€å§‹å¡«å…¥ç¬¦å·
 
-# ÒÔÏÂÄÚÈİÊÊºÏBDSµÄ°æ±¾Îª1.13.0.34£¬Èç¹ûÒÔºó°æ±¾¸üĞÂµ¼ÖÂÆäÖĞµÄÄ³Ğ©·ûºÅ±ä»¯£¬ÇëÄú×ÔĞĞ¼ì²é¸üĞÂÊÊÅä¡£
+# ä»¥ä¸‹å†…å®¹é€‚åˆBDSçš„ç‰ˆæœ¬ä¸º1.13.0.34ï¼Œå¦‚æœä»¥åç‰ˆæœ¬æ›´æ–°å¯¼è‡´å…¶ä¸­çš„æŸäº›ç¬¦å·å˜åŒ–ï¼Œè¯·æ‚¨è‡ªè¡Œæ£€æŸ¥æ›´æ–°é€‚é…ã€‚
 
-# BlockTypeRegistry×¢²á·½¿é±í
+# BlockTypeRegistryæ³¨å†Œæ–¹å—è¡¨
 ?mBlockLookupMap@BlockTypeRegistry@@0V?$unordered_map@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$SharedPtr@VBlockLegacy@@@@U?$hash@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@U?$equal_to@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@U?$pair@$$CBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$SharedPtr@VBlockLegacy@@@@@std@@@2@@std@@A
-# VanillaBlockTypes·½¿é×¢²á¹ı³Ì
+# VanillaBlockTypesæ–¹å—æ³¨å†Œè¿‡ç¨‹
 #?registerBlocks@VanillaBlockTypes@@YAXXZ
 
 
 
 
-##################################ÕâÀï¿ªÊ¼ÊÇÓĞĞ§µÄº¯ÊıĞÅÏ¢,ÉÏ·½ÊÇÔ­×÷ÕßĞ´µÄ¶«Î÷###########################################
+##################################è¿™é‡Œå¼€å§‹æ˜¯æœ‰æ•ˆçš„å‡½æ•°ä¿¡æ¯,ä¸Šæ–¹æ˜¯åŸä½œè€…å†™çš„ä¸œè¥¿###########################################
 
-#¼ì²âÍæ¼ÒÏûÏ¢(Ö¸Áî¼àÌı)
+#æ£€æµ‹ç©å®¶æ¶ˆæ¯(æŒ‡ä»¤ç›‘å¬)
 ?fireEventPlayerMessageChat@MinecraftEventing@@UEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0@Z
-#Éú³ÉÁ£×ÓĞ§¹û level * ,std::string , Vec3 ,Dimension ´å×¯¿ÉÊÓ»¯µÄ»ù´¡£¬Ò²Ëã¸öõ¿½ÅµÄÍ¼ĞÎ½Ó¿Ú
+#ç”Ÿæˆç²’å­æ•ˆæœ level * ,std::string , Vec3 ,Dimension æ‘åº„å¯è§†åŒ–çš„åŸºç¡€ï¼Œä¹Ÿç®—ä¸ªè¹©è„šçš„å›¾å½¢æ¥å£
 ?spawnParticleEffect@Level@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBVVec3@@PEAVDimension@@@Z
 
 
-############################ÎÄ±¾ÌáÊ¾##################################
-ÒÔ·şÎñÆ÷µÄÉí·İ·¢ËÍÏûÏ¢
+############################æ–‡æœ¬æç¤º##################################
+ä»¥æœåŠ¡å™¨çš„èº«ä»½å‘é€æ¶ˆæ¯
 ?displayLocalizableMessage@CommandUtils@@YAX_NAEAVPlayer@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@4@@Z
 
 
 
 
-############################ÊÀ½ç¸üĞÂ###################################
-#Íæ¼ÒtickÊÀ½ç
+############################ä¸–ç•Œæ›´æ–°###################################
+#ç©å®¶tickä¸–ç•Œ
 Player::tickWorld
-# ·şÎñÆ÷Íæ¼ÒtickÊÀ½ç
+# æœåŠ¡å™¨ç©å®¶tickä¸–ç•Œ
 ?tickWorld@ServerPlayer@@UEAAHAEBUTick@@@Z
-#Î¬¶Ètick
+#ç»´åº¦tick
 ?tick@Dimension@@UEAAXXZ
-#´æµµ¸üĞÂº¯Êı
+#å­˜æ¡£æ›´æ–°å‡½æ•°
 ?tick@Level@@UEAAXXZ
-#Çø¿é¸üĞÂ
+#åŒºå—æ›´æ–°
 ?tick@LevelChunk@@QEAAXAEAVBlockSource@@AEBUTick@@@Z
-#Ëæ»ú¿Ì¸üĞÂ
+#éšæœºåˆ»æ›´æ–°
 ?tickBlocks@LevelChunk@@QEAAXAEAVBlockSource@@@Z
-#·½¿éÊµÌå¸üĞÂ
+#æ–¹å—å®ä½“æ›´æ–°
 ?tickBlockEntities@LevelChunk@@QEAAXAEAVBlockSource@@@Z
-#Ë¢¹Ö
+#åˆ·æ€ª
 ?tick@Spawner@@QEAAXAEAVBlockSource@@AEBVLevelChunk@@@Z
 #pendingtick
 ?tickPendingTicks@BlockTickingQueue@@QEAA_NAEAVBlockSource@@AEBUTick@@H_N@Z
-#Î¬¶È¸üĞÂ
+#ç»´åº¦æ›´æ–°
 #?tick@TheEndDimension@@UEAAXXZ
-#¸üĞÂ´å×¯
+#æ›´æ–°æ‘åº„
 #?tick@Village@@QEAAXUTick@@AEAVBlockSource@@@Z
-#Î¬¶È¸üĞÂºìÊ¯
+#ç»´åº¦æ›´æ–°çº¢çŸ³
 ?tickRedstone@Dimension@@UEAAXXZ
 
 
 
-#############################ÊµÌåĞÅÏ¢#######################################
-#»ñÈ¡Íæ¼Ò½ÅÏÂ·½¿é×ø±ê
+#############################å®ä½“ä¿¡æ¯#######################################
+#è·å–ç©å®¶è„šä¸‹æ–¹å—åæ ‡
 ?_getBlockOnPos@Actor@@IEAA?AVBlockPos@@XZ
-#»ñÈ¡ÊµÌåµ÷ÊÔĞÅÏ¢
+#è·å–å®ä½“è°ƒè¯•ä¿¡æ¯
 ?getDebugText@Actor@@UEAAXAEAV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@@Z
-#»ñÈ¡Íæ¼ÒÎ»ÖÃ
+#è·å–ç©å®¶ä½ç½®
 ?getPos@Actor@@UEBAAEBVVec3@@XZ
-#¹¥»÷ÊµÌå
+#æ”»å‡»å®ä½“
 ?attack@Actor@@UEAA_NAEAV1@@Z
-Íæ¼Ò¹¥»÷ÊµÌå
+ç©å®¶æ”»å‡»å®ä½“
 ?attack@Player@@UEAA_NAEAVActor@@@Z
-#±¬Õ¨
+#çˆ†ç‚¸
 ?explode@Explosion@@QEAAXXZ
-#Ë¢ĞÂÅö×²Ïä
+#åˆ·æ–°ç¢°æ’ç®±
 ?_refreshAABB@Actor@@IEAAXXZ
-
-
-#»ñÈ¡µ±Ç°Õ¾µÄ·½¿é
+#è·å–å½“å‰ç«™çš„æ–¹å—
 #?getBlockPosCurrentlyStandingOn@Actor@@QEBA?AVBlockPos@@PEAV1@@Z
-#»ñÈ¡ÊÓ½Ç
+#è·å–è§†è§’
 #?getViewVector@Actor@@QEBA?AVVec3@@M@Z
 #?getPosOld@Actor@@UEBAAEBVVec3@@XZ
 
 
-################################·½¿éĞÅÏ¢###################################
-#È¾ÁÏÓÒ»÷·½¿é
-?_useOn@DyePowderItem@@EEBA_NAEAVItemStack@@AEAVActor@@VBlockPos@@EMMM@Z
 
-#ºìÊ¯·ÛÓÒ»÷·½¿é
+
+################################æ–¹å—ä¿¡æ¯###################################
+#æŸ“æ–™å³å‡»æ–¹å—
+?_useOn@DyePowderItem@@EEBA_NAEAVItemStack@@AEAVActor@@VBlockPos@@EMMM@Z
+#çº¢çŸ³ç²‰å³å‡»æ–¹å—
 ?_useOn@RedStoneDustItem@@EEBA_NAEAVItemStack@@AEAVActor@@VBlockPos@@EMMM@Z
-#¸ù¾İblockSource»ñÈ¡·½¿éÊµÌå¶ÔÏó
+#æ ¹æ®blockSourceè·å–æ–¹å—å®ä½“å¯¹è±¡
 #?getBlockEntity@BlockSource@@QEAAPEAVBlockActor@@AEBVBlockPos@@@Z
-#»ñÈ¡·½¿é¶ÔÏó
+#è·å–æ–¹å—å¯¹è±¡
 ?getBlock@BlockSource@@QEBAAEBVBlock@@AEBVBlockPos@@@Z
 ?getBlock@BlockSource@@QEBAAEBVBlock@@HHH@Z
-#ÉèÖÃ·½¿é·½Ïò
+#è®¾ç½®æ–¹å—æ–¹å‘
 ??$setState@W4Type@Direction@@@Block@@QEBAPEBV0@AEBVItemState@@W4Type@Direction@@@Z
-#»ñÈ¡·½¿éµ÷ÊÔĞÅÏ¢
+#è·å–æ–¹å—è°ƒè¯•ä¿¡æ¯
 ?toDebugString@Block@@QEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
-#·ÅÖÃ·½¿é
+#æ”¾ç½®æ–¹å—
 ?setBlock@BlockSource@@QEAA_NHHHAEBVBlock@@H@Z
-#ÇÂÓÒ¼ü·½¿é
+#é”¹å³é”®æ–¹å—
 ?_useOn@ShovelItem@@EEBA_NAEAVItemStack@@AEAVActor@@VBlockPos@@EMMM@Z
 
+#æ”¾ç½®æµ·ç»µæ–¹å—
+?onPlace@SpongeBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@@Z
 
-########################################´å×¯#######################################
 
-#´å×¯¸üĞÂ
+########################################æ‘åº„#######################################
+
+#æ‘åº„æ›´æ–°
 ?tick@Village@@QEAAXUTick@@AEAVBlockSource@@@Z
-
-#»ñÈ¡°ë¾¶
+#è·å–åŠå¾„
 ?getApproximateRadius@Village@@QEBAMXZ
+
+#è·å–æ‘æ°‘ä¿¡æ¯
+?buildDebugInfo@VillagerV2@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+
+#######################Spawner############################
+#ç”Ÿæˆæ€ªç‰©
+?spawnMob@Spawner@@QEAAPEAVMob@@AEAVBlockSource@@AEBUActorDefinitionIdentifier@@PEAVActor@@AEBVVec3@@_N44@Z
 
 
 

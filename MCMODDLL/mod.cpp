@@ -12,26 +12,26 @@
 #include "Block.h"
 #include "Actor.h"
 using namespace SymHook;
-/**¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª**
- |              MOD C++ÎÄ¼þ               |
- **¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª**
-ËµÃ÷£º
-¸ÃcppÎÄ¼þµÄÄ¿µÄÊÇ°üº¬MOD¹¦ÄÜÖ÷Òª´úÂë£¬Çë½«Ö÷Òª²¿·Ö´úÂëÐ´ÔÚÕâ¸öÎÄ¼þÄÚ£¡
-¡°T¡±¿ªÍ·µÄÏµÁÐHookºêÔÚÄ£¿é¼ÓÔØµÄÊ±ºòµ÷ÓÃ£¬Ê¹ÓÃ·½·¨Çë²Î¿¼MCMrARMµÄmodloader¡£
-µØÖ·£ºhttps://github.com/minecraft-linux/server-modloader/wiki
-Çë×¢Òâ£ºÊ¹ÓÃ·½·¨ÂÔÓÐ²»Í¬£¬±¾ÎÄ¼þµÄº¯Êý·ûºÅÓÃµÄÊÇPDB¹¤¾ßÉú³ÉµÄC++±äÁ¿£¬¶ø²»ÊÇ×Ö·û´®×ÖÃæÁ¿£¡
-ÁíÍâ£¬¸ÃÎÄ¼þ°üº¬Á½¸öº¯Êýmod_initºÍmod_exit£¬·Ö±ðÔÚ¸ÃÄ£¿é¼ÓÔØ»òÍË³öÊ±µ÷ÓÃ¡£
-±¾Ä£¿éÀý×Ó£º
-THook(void,							// º¯Êý·µ»ØÀàÐÍ
-	MSSYM_XXXXXXXXXXXXXXXXXXXXX,	// º¯Êý·ûºÅÃû¶ÔÓ¦µÄC++±äÁ¿£¨Î»ÓÚSymHook.h£©
-	__int64 a1, __int64 a2) {		// º¯Êý²ÎÊýÀàÐÍÁÐ±í£¨¼ÙÉè´æÔÚ²ÎÊýa1Óëa2£©
+/**â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”**
+ |              MOD C++æ–‡ä»¶               |
+ **â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”**
+è¯´æ˜Žï¼š
+è¯¥cppæ–‡ä»¶çš„ç›®çš„æ˜¯åŒ…å«MODåŠŸèƒ½ä¸»è¦ä»£ç ï¼Œè¯·å°†ä¸»è¦éƒ¨åˆ†ä»£ç å†™åœ¨è¿™ä¸ªæ–‡ä»¶å†…ï¼
+â€œTâ€å¼€å¤´çš„ç³»åˆ—Hookå®åœ¨æ¨¡å—åŠ è½½çš„æ—¶å€™è°ƒç”¨ï¼Œä½¿ç”¨æ–¹æ³•è¯·å‚è€ƒMCMrARMçš„modloaderã€‚
+åœ°å€ï¼šhttps://github.com/minecraft-linux/server-modloader/wiki
+è¯·æ³¨æ„ï¼šä½¿ç”¨æ–¹æ³•ç•¥æœ‰ä¸åŒï¼Œæœ¬æ–‡ä»¶çš„å‡½æ•°ç¬¦å·ç”¨çš„æ˜¯PDBå·¥å…·ç”Ÿæˆçš„C++å˜é‡ï¼Œè€Œä¸æ˜¯å­—ç¬¦ä¸²å­—é¢é‡ï¼
+å¦å¤–ï¼Œè¯¥æ–‡ä»¶åŒ…å«ä¸¤ä¸ªå‡½æ•°mod_initå’Œmod_exitï¼Œåˆ†åˆ«åœ¨è¯¥æ¨¡å—åŠ è½½æˆ–é€€å‡ºæ—¶è°ƒç”¨ã€‚
+æœ¬æ¨¡å—ä¾‹å­ï¼š
+THook(void,							// å‡½æ•°è¿”å›žç±»åž‹
+	MSSYM_XXXXXXXXXXXXXXXXXXXXX,	// å‡½æ•°ç¬¦å·åå¯¹åº”çš„C++å˜é‡ï¼ˆä½äºŽSymHook.hï¼‰
+	__int64 a1, __int64 a2) {		// å‡½æ•°å‚æ•°ç±»åž‹åˆ—è¡¨ï¼ˆå‡è®¾å­˜åœ¨å‚æ•°a1ä¸Ža2ï¼‰
 	std::cout << "Hello world!" << std::endl;
-	original(a1, a2);				// µ÷ÓÃ¸Ãº¯ÊýHookÇ°µÄÔ­Ê¼º¯Êý
+	original(a1, a2);				// è°ƒç”¨è¯¥å‡½æ•°Hookå‰çš„åŽŸå§‹å‡½æ•°
 }
 */
 
-// ´Ë´¦¿ªÊ¼±àÐ´MOD´úÂë
-// ÏÂÃæÁ½¸öº¯Êý²»ÊÇ±ØÒªµÄ£¬Äã¿ÉÒÔÊ¹ÓÃ£¬Ò²¿ÉÒÔ²»Ê¹ÓÃ¡£
+// æ­¤å¤„å¼€å§‹ç¼–å†™MODä»£ç 
+// ä¸‹é¢ä¸¤ä¸ªå‡½æ•°ä¸æ˜¯å¿…è¦çš„ï¼Œä½ å¯ä»¥ä½¿ç”¨ï¼Œä¹Ÿå¯ä»¥ä¸ä½¿ç”¨ã€‚
 void mod_init() {
     const char *banner = "\n"
                          "  _______                  _                   \n"
@@ -43,8 +43,8 @@ void mod_init() {
                          "                | |                            \n"
                          "                |_|                            ";
     printf("%s\nTrapdoor V0.1.2\ngithub:https://github.com/hhhxiao/MCBEtoolSet ",banner);
-	// ´Ë´¦ÌîÐ´Ä£¿é¼ÓÔØÊ±ºòµÄ²Ù×÷
+	// æ­¤å¤„å¡«å†™æ¨¡å—åŠ è½½æ—¶å€™çš„æ“ä½œ
 }
 void mod_exit() {
-	// ´Ë´¦ÌîÐ´Ä£¿éÐ¶ÔØÊ±ºòµÄ²Ù×÷
+	// æ­¤å¤„å¡«å†™æ¨¡å—å¸è½½æ—¶å€™çš„æ“ä½œ
 }

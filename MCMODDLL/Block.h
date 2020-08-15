@@ -8,12 +8,12 @@ using namespace SymHook;
 
 std::vector<Vec3> cachePosList;
 /**
- * ¼ÆËãÁ½µãÖ®¼äµÄ¾àÀë °üÀ¨Å·ÊÏ¾àÀëÒÔ¼°Âü¹ş¶Ù¾àÀë
- * @param p1 µÚÒ»¸öµã
- * @param p2 µÚ¶ş¸öµã
- * @param useManhattan ÊÇ·ñ²ÉÓÃÂü¹ş¶Ù¾àÀë
- * @param withY y×ø±êÊÇ·ñ¼ÆËãÔÚÄÚ
- * @return ¾àÀëÖµ
+ * è®¡ç®—ä¸¤ç‚¹ä¹‹é—´çš„è·ç¦» åŒ…æ‹¬æ¬§æ°è·ç¦»ä»¥åŠæ›¼å“ˆé¡¿è·ç¦»
+ * @param p1 ç¬¬ä¸€ä¸ªç‚¹
+ * @param p2 ç¬¬äºŒä¸ªç‚¹
+ * @param useManhattan æ˜¯å¦é‡‡ç”¨æ›¼å“ˆé¡¿è·ç¦»
+ * @param withY yåæ ‡æ˜¯å¦è®¡ç®—åœ¨å†…
+ * @return è·ç¦»å€¼
  */
 double distance(Vec3 p1,Vec3 p2,bool useManhattan,bool withY) {
 	auto dx = fabs(p2.x - p1.x);
@@ -23,7 +23,7 @@ double distance(Vec3 p1,Vec3 p2,bool useManhattan,bool withY) {
 }
 
 /**
- * Hook ÓÃ²ù×ÓÓÒ»÷·½¿éµÄº¯Êı
+ * Hook ç”¨é“²å­å³å‡»æ–¹å—çš„å‡½æ•°
  */
 THook(
 	void,
