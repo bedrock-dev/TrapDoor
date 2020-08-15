@@ -29,9 +29,20 @@ THook(void,							// 函数返回类型
 	original(a1, a2);				// 调用该函数Hook前的原始函数
 }
 */
+
 // 此处开始编写MOD代码
 // 下面两个函数不是必要的，你可以使用，也可以不使用。
 void mod_init() {
+    const char *banner = "\n"
+                         "  _______                  _                   \n"
+                         " |__   __|                | |                  \n"
+                         "    | |_ __ __ _ _ __   __| | ___   ___  _ __  \n"
+                         "    | | '__/ _` | '_ \\ / _` |/ _ \\ / _ \\| '__| \n"
+                         "    | | | | (_| | |_) | (_| | (_) | (_) | |    \n"
+                         "    |_|_|  \\__,_| .__/ \\__,_|\\___/ \\___/|_|    \n"
+                         "                | |                            \n"
+                         "                |_|                            ";
+    printf("%s\nTrapdoor V0.1.2\ngithub:https://github.com/hhhxiao/MCBEtoolSet ",banner);
 	// 此处填写模块加载时候的操作
 }
 void mod_exit() {

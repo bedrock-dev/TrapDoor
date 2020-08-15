@@ -5,199 +5,28 @@
 # ??0ProjectileComponent@@QEAA@AEAVActor@@@Z
 # 此处开始填入符号
 
-
-
 # 以下内容适合BDS的版本为1.13.0.34，如果以后版本更新导致其中的某些符号变化，请您自行检查更新适配。
 
 # BlockTypeRegistry注册方块表
-#?mBlockLookupMap@BlockTypeRegistry@@0V?$unordered_map@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$SharedPtr@VBlockLegacy@@@@U?$hash@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@U?$equal_to@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@U?$pair@$$CBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$SharedPtr@VBlockLegacy@@@@@std@@@2@@std@@A
+?mBlockLookupMap@BlockTypeRegistry@@0V?$unordered_map@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$SharedPtr@VBlockLegacy@@@@U?$hash@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@U?$equal_to@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@U?$pair@$$CBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$SharedPtr@VBlockLegacy@@@@@std@@@2@@std@@A
 # VanillaBlockTypes方块注册过程
 #?registerBlocks@VanillaBlockTypes@@YAXXZ
 
 
-#创建村庄
-#??0Village@@QEAA@AEAVDimension@@VUUID@mce@@AEBVBlockPos@@@Z
-#给村庄添加兴趣点
-#?_addPoiToVillage@Village@@AEAAXAEBUActorUniqueID@@V?$weak_ptr@VPOIInstance@@@std@@@Z
-#输出村庄的debug信息
-#?debugDraw@Village@@QEAAXXZ
-#给村庄添加新成员
-#?addActorToVillage@Village@@QEAAXW4DwellerRole@@AEBUActorUniqueID@@@Z
-#移除新成员
-#?removeActorFromVillage@Village@@QEAA?AV?$_List_iterator@V?$_List_val@U?$_List_simple_types@U?$pair@$$CBUActorUniqueID@@UTick@@@std@@@std@@@std@@@std@@W4DwellerRole@@AEBUActorUniqueID@@@Z
-#一个村庄的数据被移除了
-#?removeVillageSavedData@Village@@QEAAXXZ
-##一个POI被移除了
-#?removePOI@VillageManager@@QEAAXV?$weak_ptr@VPOIInstance@@@std@@@Z
-#世界生成器被创建
-#??0WorldGenerator@@QEAA@XZ
-#主世界生成器被创建
-#??0OverworldGenerator@@QEAA@AEAVDimension@@I_N@Z
-#主世界生成器构造表面
-#?buildSurfaces@OverworldGenerator@@QEAAXAEAUThreadData@1@AEAVBlockVolume@@AEAVLevelChunk@@AEBVChunkPos@@@Z
-#准备结构生成蓝图
-#?_prepareStructureBlueprints@OverworldGenerator@@AEAAXAEBVChunkPos@@AEAVBiomeSource@@@Z
-#构造层
-#?_makeLayers@OverworldGenerator@@AEAAXAEBVLevelData@@AEBVBiomeRegistry@@@Z
-#修复水边
-#?_fixWaterAlongEdges@OverworldGenerator@@QEAAXAEAVLevelChunk@@AEAVBlockSource@@AEAVBlockTickingQueue@@@Z
-#postProcess
-#?postProcess@OverworldGenerator@@UEAA_NAEAVChunkViewSource@@@Z
-#放置刷怪笼
-#?place@MonsterRoomFeature@@UEBA_NAEAVBlockSource@@AEBVBlockPos@@AEAVRandom@@@Z
-
-#产生一随机数
-#?nextInt@Random@@QEAAHHH@Z
-
-#等级函数附魔
-#?apply@EnchantWithLevelsFunction@@UEAAXAEAVItemStack@@AEAVRandom@@AEAVLootTableContext@@@Z
-#等级函数附魔
-#?apply@EnchantWithLevelsFunction@@UEAAXAEAVItemInstance@@AEAVRandom@@AEAVLootTableContext@@@Z
-#获取一个随机整数
-#?getInt@RandomValueBounds@@QEBAHAEAVRandom@@@Z
-#附魔相关函数
-#?recalculateOptions@EnchantingContainerManagerModel@@QEAAXXZ
-#更改树苗年龄
-#?advanceTree@Sapling@@IEBA_NAEAVBlockSource@@AEBVBlockPos@@AEAVRandom@@PEAVActor@@@Z
-
-#尝试生成树
-#?growTree@Sapling@@QEBA_NAEAVBlockSource@@AEBVBlockPos@@AEAVRandom@@PEAVActor@@@Z
-
-#骨粉催熟树苗
-#?onFertilized@KelpBlock@@UEBA_NAEAVBlockSource@@AEBVBlockPos@@PEAVActor@@W4FertilizerType@@@Z
 
 
-#放置死的花
-#?_placeDeadFlower@ChorusFlowerBlock@@AEBAXAEAVBlockSource@@AEBVBlockPos@@@Z
+##################################这里开始是有效的函数信息,上方是原作者写的东西###########################################
 
-#放置活的花
-#?_placeGrownFlower@ChorusFlowerBlock@@AEBAXAEAVBlockSource@@AEBVBlockPos@@H@Z
-
-#debug draw
-#?debugDraw@Village@@QEAAXXZ
-
-#village tick
-#?tick@Village@@QEAAXUTick@@AEAVBlockSource@@@Z
-
-#红石更新
-#?tickRedstone@Dimension@@UEAAXXZ
-
-#生成怪物群
-#?spawnMobGroup@Spawner@@QEAA?AV?$unordered_set@UActorUniqueID@@U?$hash@UActorUniqueID@@@std@@U?$equal_to@UActorUniqueID@@@3@V?$allocator@UActorUniqueID@@@3@@std@@AEAVBlockSource@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@3@AEBVVec3@@_N$$QEAV?$function@$$A6AXAEAVMob@@@Z@3@@Z
-#生成怪物
-#?spawnMob@Spawner@@QEAAPEAVMob@@AEAVBlockSource@@AEBUActorDefinitionIdentifier@@PEAVActor@@AEBVVec3@@_N44@Z
-
-#构造实体
-#?_constructActor@ActorFactory@@AEAA?AV?$unique_ptr@VActor@@U?$default_delete@VActor@@@std@@@std@@AEBUActorDefinitionIdentifier@@AEBVVec3@@AEBVVec2@@@Z
-
-#添加结构
-#?addFeature@StructureFeature@@IEAAXAEAVDimension@@AEAVRandom@@AEBVChunkPos@@AEAVBiomeSource@@@Z
-
-#获取兽群生成数量，这里disable 判定，直接返回1
-#?getSpawnCount@MobSpawnRules@@QEBAHAEBVSpawnConditions@@AEAVBlockSource@@AEAVRandom@@AEBUMobSpawnHerdInfo@@@Z
-#构造command couput对象
-#??0CommandOutput@@QEAA@W4CommandOutputType@@@Z
-
-#输出信息??
-#??$set@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@CommandOutput@@QEAAXPEBDV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-#观察者的tick
-#?tick@ObserverBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@AEAVRandom@@@Z
-
-
-
-#区块tick
-#?tick@LevelChunk@@QEAAXAEAVBlockSource@@AEBUTick@@@Z
-#spawner的tick
-#?tick@Spawner@@QEAAXAEAVBlockSource@@AEAVLevelChunk@@@Z
-#随机方块更新的tick
-#?tickBlocks@LevelChunk@@QEAAXAEAVBlockSource@@@Z
-
-
-
-#更新队列的更新
-#?tickPendingTicks@BlockTickingQueue@@QEAA_NAEAVBlockSource@@AEBUTick@@H_N@Z
-#更新方块实体
-#?tickBlockEntities@LevelChunk@@QEAAXAEAVBlockSource@@@Z
-#更新实体
-#?tickEntities@Level@@QEAAXXZ
-#红石更新
-#?updateBlocks@CircuitSystem@@QEAAXAEAVBlockSource@@AEBVBlockPos@@@Z
-
-#沙子临近方块被更新
-#?neighborChanged@SandB
-#lock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@1@Z
-#blockSource临近方块被更新
-#?neighborChanged@BlockSource@@QEAAXAEBVBlockPos@@0@Z
-
-#random set seed
-#?_setSeed@Random@Core@@AEAAXI@Z
-# nextInt 
-#?_genRandInt32@Random@Core@@AEAAIXZ
-
-#exlode
-#?explode@Explosion@@QEAAXXZ
-
-
-
-
-#更新红石信号
-#?evaluate@CircuitSystem@@QEAAXPEAVBlockSource@@@Z
-
-#levelTick
-#?tick@Level@@UEAAXXZ
-
-#更新方块实体
-#?tickBlockEntities@LevelChunk@@QEAAXAEAVBlockSource@@@Z
-
-#更新红石线
-#?evaluate@TransporterComponent@@UEAA_NAEAVCircuitSystem@@AEBVBlockPos@@@Z
-
-
-#更新生产者
-#?evaluate@ProducerComponent@@UEAA_NAEAVCircuitSystem@@AEBVBlockPos@@@Z
-
-#更新脉冲电容器
-#?evaluate@PulseCapacitor@@UEAA_NAEAVCircuitSystem@@AEBVBlockPos@@@Z
-
-#更新比较器
-#?evaluate@ComparatorCapacitor@@UEAA_NAEAVCircuitSystem@@AEBVBlockPos@@@Z
-
-#更新消费者
-#?evaluate@ConsumerComponent@@UEAA_NAEAVCircuitSystem@@AEBVBlockPos@@@Z
-
-#更新红石火把
-#?evaluate@RepeaterCapacitor@@UEAA_NAEAVCircuitSystem@@AEBVBlockPos@@@Z
-
-
-#?neighborChanged@BaseRailBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@1@Z
-
-#?place@Rail@BaseRailBlock@@QEAAXH_N@Z
-
-
-
-
-##################################这里开始是有效的函数信息###########################################
-
-#检测玩家信息
+#检测玩家消息(指令监听)
 ?fireEventPlayerMessageChat@MinecraftEventing@@UEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0@Z
-
-#获取到玩家对象(因为只有一个玩家)
-#?getRandomPlayer@Level@@QEAAPEAVPlayer@@XZ
-#玩家增加经验
-#?addExperience@Player@@UEAAXH@Z
-#生成粒子效果 level * ,std::string , Vec3 ,Dimension
+#生成粒子效果 level * ,std::string , Vec3 ,Dimension 村庄可视化的基础，也算个蹩脚的图形接口
 ?spawnParticleEffect@Level@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBVVec3@@PEAVDimension@@@Z
-
-
 
 
 ############################文本提示##################################
 以服务器的身份发送消息
-?_messagePlayers@SurvivalMode@@AEAAXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-#展示本地消息
-?displayLocalizableMessage@ServerPlayer@@UEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@3@@Z
-#悄话消息
-?displayWhisperMessage@ServerPlayer@@UEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@000@Z
+?displayLocalizableMessage@CommandUtils@@YAX_NAEAVPlayer@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@4@@Z
+
 
 
 
@@ -217,7 +46,7 @@ Player::tickWorld
 #方块实体更新
 ?tickBlockEntities@LevelChunk@@QEAAXAEAVBlockSource@@@Z
 #刷怪
-?tick@Spawner@@QEAAXAEAVBlockSource@@AEAVLevelChunk@@@Z
+?tick@Spawner@@QEAAXAEAVBlockSource@@AEBVLevelChunk@@@Z
 #pendingtick
 ?tickPendingTicks@BlockTickingQueue@@QEAA_NAEAVBlockSource@@AEBUTick@@H_N@Z
 #维度更新
@@ -229,7 +58,7 @@ Player::tickWorld
 
 
 
-#############################实体更新#######################################
+#############################实体信息#######################################
 #获取玩家脚下方块坐标
 ?_getBlockOnPos@Actor@@IEAA?AVBlockPos@@XZ
 #获取实体调试信息
@@ -240,10 +69,17 @@ Player::tickWorld
 ?attack@Actor@@UEAA_NAEAV1@@Z
 玩家攻击实体
 ?attack@Player@@UEAA_NAEAVActor@@@Z
+#爆炸
+?explode@Explosion@@QEAAXXZ
+#刷新碰撞箱
+?_refreshAABB@Actor@@IEAAXXZ
 
 
-
-
+#获取当前站的方块
+#?getBlockPosCurrentlyStandingOn@Actor@@QEBA?AVBlockPos@@PEAV1@@Z
+#获取视角
+#?getViewVector@Actor@@QEBA?AVVec3@@M@Z
+#?getPosOld@Actor@@UEBAAEBVVec3@@XZ
 
 
 ################################方块信息###################################
@@ -266,9 +102,14 @@ Player::tickWorld
 #锹右键方块
 ?_useOn@ShovelItem@@EEBA_NAEAVItemStack@@AEAVActor@@VBlockPos@@EMMM@Z
 
+
 ########################################村庄#######################################
+
+#村庄更新
 ?tick@Village@@QEAAXUTick@@AEAVBlockSource@@@Z
 
+#获取半径
+?getApproximateRadius@Village@@QEBAMXZ
 
 
 

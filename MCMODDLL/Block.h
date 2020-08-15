@@ -6,9 +6,15 @@
 #include <vector>
 using namespace SymHook;
 
-
-
 std::vector<Vec3> cachePosList;
+/**
+ * 计算两点之间的距离 包括欧氏距离以及曼哈顿距离
+ * @param p1 第一个点
+ * @param p2 第二个点
+ * @param useManhattan 是否采用曼哈顿距离
+ * @param withY y坐标是否计算在内
+ * @return 距离值
+ */
 double distance(Vec3 p1,Vec3 p2,bool useManhattan,bool withY) {
 	auto dx = fabs(p2.x - p1.x);
 	auto dy = withY ? fabs(p2.y - p1.y):0;
@@ -16,8 +22,9 @@ double distance(Vec3 p1,Vec3 p2,bool useManhattan,bool withY) {
 	return  useManhattan? dx + dy + dz:sqrt(dx *dx + dy*dy + dz*dz);
 }
 
-
-
+/**
+ * Hook 用铲子右击方块的函数
+ */
 THook(
 	void,
 	MSSYM_B2QUA5useOnB1AE10ShovelItemB2AAA4EEBAB1UE14NAEAVItemStackB2AAA9AEAVActorB2AAA9VBlockPosB2AAA4EMMMB1AA1Z,
@@ -29,16 +36,15 @@ THook(
 	float a5,
 	float a6
 ) {
-	//printf("right click,pos is %d %d %d\n", blockPos[0], blockPos[1], blockPos[2]);
-	Vec3 v(blockPos[0], blockPos[1], blockPos[2]);
+	Vec3 pos(blockPos[0], blockPos[1], blockPos[2]);
 	if (enableMarkPos) {
 		if (cachePosList.empty()) {
-			cachePosList.emplace_back(v);
-			cachePosList.emplace_back(v);
+			cachePosList.emplace_back(pos);
+			cachePosList.emplace_back(pos);
 		}
 		else {
 			cachePosList[0] = cachePosList[1];
-			cachePosList[1] = v;
+			cachePosList[1] = pos;
 		}
 		if (cachePosList[0] != cachePosList[1]) {
 			char str[256];
@@ -54,16 +60,13 @@ THook(
 				(int)distance(cachePosList[0], cachePosList[1], true, true),
 				(int)distance(cachePosList[0], cachePosList[1], true, false)
 			);
-			sendText(str);
+            gamePrintf(str);
 		}
-		
 	}
 	else {
 		original(a1, a2, actor, blockPos, a4, a5, a6);
 	}
 }
-
-
 
 
 //THook(
@@ -91,7 +94,7 @@ THook(
 //		void(*)(void* block, std::string&),
 //		MSSYM_B1QE13toDebugStringB1AA5BlockB2AAA4QEBAB1QA2AVB2QDA5basicB1UA6stringB1AA2DUB2QDA4charB1UA6traitsB1AA1DB1AA3stdB2AAA1VB2QDA9allocatorB1AA1DB1AA12B2AAA3stdB2AAA2XZ,
 //		block,debugStr);
-//	msg(debugStr);
+//	sendLocalMessage(debugStr);
 //	SYM_CALL(
 //		void(*)(void *,int,int,int,void *,int),
 //		MSSYM_B1QA8setBlockB1AE11BlockSourceB2AAA4QEAAB1UE13NHHHAEBVBlockB2AAA1HB1AA1Z,
