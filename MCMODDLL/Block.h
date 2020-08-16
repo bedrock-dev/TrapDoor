@@ -12,10 +12,8 @@ std::vector<Vec3> cachePosList;
 
 /**
  * Hook 用铲子右击方块的函数
+ * 老实说这里的功能蛮费的
  */
-
-
-
 THook(
         void,
         MSSYM_B2QUA5useOnB1AE10ShovelItemB2AAA4EEBAB1UE14NAEAVItemStackB2AAA9AEAVActorB2AAA9VBlockPosB2AAA4EMMMB1AA1Z,
@@ -30,7 +28,7 @@ THook(
     Vec3 pos(blockPos[0], blockPos[1], blockPos[2]);
     BlockPos bp(blockPos[0], blockPos[1], blockPos[2]);
     //printf("%d %d %d\n", blockPos[0], blockPos[1], blockPos[2]);
- //   villageHelper.POIBelong(&bp);
+    //   villageHelper.POIBelong(&bp);
     if (enableMarkPos) {
         if (cachePosList.empty()) {
             cachePosList.emplace_back(pos);
@@ -60,7 +58,7 @@ THook(
     }
 }
 
-
+//这里是红石粉右击事件，暂时关闭了
 //THook(
 //	void,
 //	MSSYM_B2QUA5useOnB1AE16RedStoneDustItemB2AAA4EEBAB1UE14NAEAVItemStackB2AAA9AEAVActorB2AAA9VBlockPosB2AAA4EMMMB1AA1Z,

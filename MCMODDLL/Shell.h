@@ -11,6 +11,11 @@
 #include "Spawn.h"
 #include <vector>
 
+
+/*
+ * Dirty Command Parser 简单的命令解释器
+ * if else 大法好
+ */
 using namespace SymHook;
 enum class CmdType {
     Tick,
@@ -35,6 +40,7 @@ std::map<std::string, CmdType> cmdMap = {
 };
 
 
+//捕捉玩家信息
 THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string const &playerName,
       std::string &commandLine) {
     if (commandLine.size() < 2)return;
@@ -55,6 +61,8 @@ THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string 
                          "_|_ __ _ |_) _| _  _  __   \n"
                          " |_ | (_||  (_|(_)(_) |   ";
 
+
+    //命令选择界面
     switch (result->second) {
         case CmdType::Tick:
             if (tokens.size() == 1)return;
@@ -85,10 +93,12 @@ THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string 
             }
             break;
 
+            //Profile
         case CmdType::Profile:
             worldProfile();
             break;
 
+            //村庄相关只指令
         case CmdType::Village:
             if (tokens.size() == 1)return;
             if (tokens[1] == "draw") {//重置为正常状态
@@ -108,6 +118,7 @@ THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string 
             break;
 
 
+            //原版特性修改器
         case CmdType::Function:
             if (tokens.size() != 3 || !(tokens[2] == "true" || tokens[2] == "false")) {
                 error("use ./func xxx [true/false]\nfor more info type /help");
@@ -119,12 +130,15 @@ THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string 
                 enableExplosion = tokens[2] == "true";
             }
             break;
+
+            //位置计算(暂时未知)
         case CmdType::Position:
             enableMarkPos = !enableMarkPos;
             break;
         case CmdType::Info:
             sendInfo();
             break;
+            //帮助指令
         case CmdType::Help:
             gamePrintf("%s" \
                     "./tick fz freeze the world\n"\
@@ -136,14 +150,13 @@ THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string 
                     "./prof profile the world run\n"\
                     "./p line measure\n", banner);
             break;
+            //刷怪相关指令
         case CmdType::Spawn :
             if (tokens.size() == 1)return;
             if (tokens[1] == "start") {
                 startSpawnCounter();
             } else if (tokens[1] == "end") {
                 endSpawnerCounter();
-            } else if (tokens[1] == "clear") {
-                clearSpawnCounter();
             } else if (tokens[1] == "p" || tokens[1] == "print") {
                 auto str = tokens.size() == 3 ? tokens[2] : "null";
                 spawnAnalysis(str);

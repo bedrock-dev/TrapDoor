@@ -5,16 +5,18 @@
 #include "mod.h"
 #include "SymHook.h"
 #include <strstream>
-
-
 #include<set>
+
+
+/*
+ * 这里是所有村庄相关的实现
+ */
 
 using namespace SymHook;
 
 
 Vec3 getVillageCenter(void *village) {
     Vec3 center = {
-
             (*((float *) village + 107) + *((float *) village + 104)) / 2,
             (*((float *) village + 108) + *((float *) village + 105)) / 2,
             (*((float *) village + 109) + *((float *) village + 106)) / 2,
@@ -28,7 +30,6 @@ AABB getVillageBound(void *village) {
     AABB aabb(p2, p1);
     return aabb;
 }
-
 
 float getVillageRadius(void *village) {
     if (!village)return -1.0;
