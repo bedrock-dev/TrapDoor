@@ -105,6 +105,50 @@ struct Vec3 {
     }
 };
 
+/**
+ * 计算两点之间的距离 包括欧氏距离以及曼哈顿距离
+ * @param p1 第一个点
+ * @param p2 第二个点
+ * @param useManhattan 是否采用曼哈顿距离
+ * @param withY y坐标是否计算在内
+ * @return 距离值
+ */
+double distance(Vec3 p1, Vec3 p2, bool useManhattan, bool withY) {
+    auto dx = fabs(p2.x - p1.x);
+    auto dy = withY ? fabs(p2.y - p1.y) : 0;
+    auto dz = fabs(p2.z - p1.z);
+    return useManhattan ? dx + dy + dz : sqrt(dx * dx + dy * dy + dz * dz);
+}
+
+struct BlockPos {
+    int x;
+    int y;
+    int z;
+
+    BlockPos() = default;
+
+    BlockPos(int _x, int _y, int _z) : x(_x), y(_y), z(_z) {}
+
+    BlockPos(float _x, float _y, float _z) : x((int) _x), y((int) _y), z((int) _z) {}
+
+    bool operator==(const BlockPos &v) const {
+        return x == v.x && y == v.y && z == v.z;
+    }
+
+    bool operator!=(const BlockPos &v) const {
+        return x != v.x || y != v.y || z != v.z;
+    }
+
+    friend std::ostream &operator<<(std::ostream &os, const BlockPos &vec3) {
+        os << "[" << vec3.x << "," << vec3.y << "," << vec3.z << "]";
+        return os;
+    }
+
+    Vec3 toVec3() const {
+        return {x, y, z};
+    }
+};
+
 struct AABB {
     Vec3 p1{};
     Vec3 p2{};
@@ -130,10 +174,35 @@ void spawnParticle(float *p, std::string &type) {
     );
 }
 
+//等距切分坐标
+std::vector<float> cut(float begin, float end, int num) {
+    float distance = (end - begin) / (float) num;
+    std::vector<float> result;
+    result.reserve(num);
+    for (int i = 0; i <= num; ++i)
+        result.emplace_back(begin + (float) i * distance);
+    return result;
+}
+
+
+void spawnLineParticle(Vec3 *p1, Vec3 *p2, std::string &type) {
+    float num = sqrt((p1->x - p2->x) * (p1->x - p2->x) +
+                     (p1->y - p2->y) * (p1->y - p2->y) +
+                     (p1->z - p2->z) * (p1->z - p2->z));
+    for (int i = 0; i <= num; i++) {
+        float point[3] = {p1->x + (p2->x - p1->x) / num * (float) i,
+                          p1->y + (p2->y - p1->y) / num * (float) i,
+                          p1->z + (p2->z - p1->z) / num * (float) i,
+        };
+        spawnParticle(point, type);
+    }
+}
+
 void spawnRectangleParticle(AABB aabb, std::string &type) {
 
-    for (auto i = static_cast<int>(aabb.p1.x); i <= aabb.p2.x; i++) {
-        float point[3] = {(float) i, aabb.p1.y, aabb.p1.z};
+    auto pointList = cut(aabb.p1.x, aabb.p2.x, (int) (aabb.p2.x - aabb.p1.x) / 3);
+    for (auto i :pointList) {
+        float point[3] = {i, aabb.p1.y, aabb.p1.z};
         spawnParticle(point, type); //p1y p1z
         point[1] = aabb.p2.y; //p2y 1z
         spawnParticle(point, type);
@@ -142,7 +211,8 @@ void spawnRectangleParticle(AABB aabb, std::string &type) {
         point[1] = aabb.p1.y; //p1y p2z
         spawnParticle(point, type);
     }
-    for (auto i = static_cast<int>(aabb.p1.y); i <= aabb.p2.y; i++) {
+    pointList = cut(aabb.p1.y, aabb.p2.y, (int) (aabb.p2.y - aabb.p1.y) / 3);
+    for (auto i: pointList) {
         float point[3] = {aabb.p1.x, static_cast<float>(i), aabb.p1.z};
         spawnParticle(point, type); //p1x p1z
         point[0] = aabb.p2.x; //p2x p1z
@@ -153,8 +223,8 @@ void spawnRectangleParticle(AABB aabb, std::string &type) {
         spawnParticle(point, type);
     }
 
-
-    for (auto i = static_cast<int>(aabb.p1.z); i <= aabb.p2.z; i++) {
+    pointList = cut(aabb.p1.z, aabb.p2.z, (int) (aabb.p2.z - aabb.p1.z) / 3);
+    for (auto i:pointList) {
         float point[3] = {aabb.p1.x, aabb.p1.y, static_cast<float>(i)};
         spawnParticle(point, type); //p1x p1z
         point[0] = aabb.p2.x; //p2x p1z
@@ -171,4 +241,6 @@ bool enableMarkPos = false;
 bool enableVillageShow = false;
 bool enableExtraTickWork = true;
 bool enableExplosion = true;
+
 bool mobSpawnCounterStart = false;
+int mobTickCounter = 0;

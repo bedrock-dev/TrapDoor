@@ -170,6 +170,7 @@
     <ClInclude Include="Spawn.h" />
     <ClInclude Include="SymHook.h" />
     <ClInclude Include="Tick.h" />
+    <ClInclude Include="Tools.h" />
     <ClInclude Include="Village.h" />
   </ItemGroup>
   <ItemGroup>

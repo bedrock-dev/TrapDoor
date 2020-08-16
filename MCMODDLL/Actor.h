@@ -85,29 +85,34 @@ THook(
     // printf("spawn %s at %f %f %f \n", actorIDtoString(id).c_str(), pos->x, pos->y, pos->z);
     original(sp, bs, id, actor, pos, a6, a7, a8);
     if (mobSpawnCounterStart) {
-        auto mobName = actorIDtoString(id);
+        auto mobName = std::string("test_mob");
         mobCounterList[mobName].emplace_back(*pos);
     }
 }
 
+//开始生物计数
 void startSpawnCounter() {
+
     if (mobSpawnCounterStart) {
-        error("this command can only be run after the counter end");
+        error("it's already start some ticks before");
     } else {
-        mobCounterList.clear();
+        mobCounterList.clear(); //清空计数器
+        mobTickCounter = 0;
         mobSpawnCounterStart = true;
         gamePrintf("counter start");
     }
 }
 
 void endSpawnerCounter() {
-    if (!mobSpawnCounterStart) {
+    if (!mobSpawnCounterStart) { //没开始直接提示
         error("this command can only be run after the counter start");
     } else {
+        //开始了
         mobSpawnCounterStart = false;
         gamePrintf("counter end");
     }
 }
+
 
 void clearSpawnCounter() {
     if (mobSpawnCounterStart) {
@@ -120,6 +125,10 @@ void clearSpawnCounter() {
 }
 
 void spawnAnalysis(std::string &type) {
+    if (mobTickCounter == 0) {
+        warning("no data");
+        return;
+    }
     if (type == "null") {
         std::map<std::string, size_t> mobList;
         std::map<int, int> heightMap;
@@ -130,12 +139,13 @@ void spawnAnalysis(std::string &type) {
             for (auto vec : item.second)
                 heightMap[vec.y]++;
         }
+        gamePrintf("total §2%d §r tick", mobTickCounter);
         for (auto &i: mobList)
-            gamePrintf("%s : §2%d\n", i.first.c_str(), i.second);
+            gamePrintf("%s : §2%d       §r(§2%.2f§r/h)\n", i.first.c_str(), i.second,
+                       (float) i.second * 72000.0 / (float) mobTickCounter);
         gamePrintf("----------");
         for (auto &i: heightMap)
             gamePrintf("§2%d: §2%d", i.first, i.second);
-
     } else {
         auto iter = mobCounterList.find(type);
         if (iter == mobCounterList.end()) {

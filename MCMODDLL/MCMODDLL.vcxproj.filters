@@ -57,6 +57,9 @@
     <ClInclude Include="Spawn.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Tools.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">

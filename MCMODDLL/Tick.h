@@ -15,9 +15,12 @@ typedef std::chrono::high_resolution_clock timer_clock;
 #define TIMER_END auto elapsed = timer_clock::now() - start; long long timeReslut =  std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
 
 void extraTask() {
-    if (!enableExtraTickWork)return;
     //here are the tasks;
-    villageTask();
+    //正常模式才执行的任务(不限制额外任务可能会吃太多内存)
+    if (tickStatus == TickStatus::Normal) {
+        villageTask();
+    }
+    if (mobSpawnCounterStart)++mobTickCounter;
 }
 
 void worldFrozen() {
@@ -55,7 +58,7 @@ void worldForward(int tickNum) {
         forwardTickNum = tickNum;
         tickStatus = TickStatus::Forward;
     } else {
-        gamePrintf("this command must be run at frozen status\n");
+        error("this command must be run at frozen status\n");
     }
 }
 
@@ -97,13 +100,10 @@ void calProfile() {
     spawnerTickTime = 0;
 }
 
-//世界运行 Level::tick
 THook(void,
       MSSYM_B1QA4tickB1AA5LevelB2AAA7UEAAXXZ,
       void *l) {
-    //获取level对象
     if (!level) { level = l; }
-    //正常状态下的正常tick
     if (tickStatus == TickStatus::Normal) {
         if (profileStart) {
             TIMER_START
@@ -126,6 +126,7 @@ THook(void,
         for (int i = 0; i < forwardTickNum; i++) {
             //先调用level::tick
             original(l);
+            extraTask();
             //再调用 Dimension::tick
             SYM_CALL(
                     void(*)(void * ),
@@ -139,6 +140,7 @@ THook(void,
     } else if (tickStatus == TickStatus::Slow) {
         if (slowCounter % SlowTimes == 0) {
             original(l);
+            extraTask();
         }
         slowCounter = (slowCounter + 1) % SlowTimes;
     }
@@ -237,7 +239,6 @@ THook(
     } else {
         original(levelChunk, blockSource);
     }
-
 }
 
 //mobspawn Spawner::tick

@@ -54,26 +54,26 @@ struct VillageHelper {
 
     void draw() {
         if (enableVillageShow) {
-            std::string type = "minecraft:redstone_ore_dust_particle";
+            std::string borderParticleType = "minecraft:totem_particle";
+            std::string centerParticleType = "minecraft:heart_particle";
             for (auto village:villageList) {
                 if (village) {
-                    spawnRectangleParticle(getVillageBound(village), type);
+                    spawnRectangleParticle(getVillageBound(village), borderParticleType);
                     Vec3 center = getVillageCenter(village);
-                    float pos[3] = {center.x, center.y + 0.2f, center.z};
-                    spawnParticle(pos, type);
+                    float pos[3] = {center.x, center.y + 0.3f, center.z};
+                    spawnParticle(pos, centerParticleType);
                 }
             }
         }
     }
 
     void list() {
-        int i = 0;
         gamePrintf("here are all the ticking villages:\n");
+        int i = 0;
         for (auto village : villageList) {
             if (village) {
                 auto aabb = getVillageBound(village);
                 auto center = getVillageCenter(village);
-
                 gamePrintf("v§2%d§b: [%d,%d,%d],[%d,%d,%d]§rc:§b[%d,%d,%d]§rr:§2%.2f \n",
                            i,
                            (int) aabb.p1.x,
@@ -87,10 +87,35 @@ struct VillageHelper {
                            (int) center.z,
                            getVillageRadius(village)
                 );
-                ++i;
+                i++;
             }
         }
     }
+
+
+    //这功能先鸽了
+//    void POIBelong(BlockPos *pos) {
+//        auto vec = pos->toVec3();
+//        for (auto village:villageList) {
+//            if (village && globalBlockSource) {
+//                auto result = SYM_CALL(
+//                        bool(*)(void * village, void * bs, void * bp),
+//                        MSSYM_B1QE12isVillagePOIB1AA7VillageB2AAA2SAB1UE16NAEBVBlockSourceB2AAE12AEBVBlockPosB3AAAA1Z,
+//                        village,
+//                        globalBlockSource,
+//                        pos
+//                );
+//                if (result) {
+//                    auto center = getVillageCenter(village);
+//                    gamePrintf("this POI belongs to center:§b[%d %d %d]", center.x, center.y, center.z);
+//                    //  std::string particleName = "minecraft:redstone_wire_dust_particle";
+//                    //  spawnLineParticle(&vec, &center, particleName);
+//                    return;
+//                }
+//            }
+//        }
+//        gamePrintf("it don't belong to any village");
+//    }
 };
 
 VillageHelper villageHelper;
@@ -107,13 +132,13 @@ THook(
 int villageInterval = 0;
 
 void villageTask() {
-    if (villageInterval % 8 == 0) {
+    if (villageInterval % 15 == 0 && enableVillageShow) {
         villageHelper.draw();
     }
     if (villageInterval % 100 == 0) {
         villageHelper.clear();
     }
-    villageInterval = (villageInterval + 1) % 200;
+    villageInterval = (villageInterval + 1) % 300;
 }
 
 void listVillages() {

@@ -115,6 +115,8 @@ Player::tickWorld
 #获取村民信息
 ?buildDebugInfo@VillagerV2@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
 
+#判定POI是否是某个方块
+?isVillagePOI@Village@@SA_NAEBVBlockSource@@AEBVBlockPos@@@Z
 #######################Spawner############################
 #生成怪物
 ?spawnMob@Spawner@@QEAAPEAVMob@@AEAVBlockSource@@AEBUActorDefinitionIdentifier@@PEAVActor@@AEBVVec3@@_N44@Z
