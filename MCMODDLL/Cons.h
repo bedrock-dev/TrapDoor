@@ -12,8 +12,9 @@ using namespace SymHook;
 void *player = nullptr; //全局玩家对象
 void *level = nullptr; //全局存档对象
 void *dimension = nullptr; //全局维度对象
-void *globalBlockSource = nullptr;
-void *spawner = nullptr;
+void *globalBlockSource = nullptr; //全局bs对象
+void *spawner = nullptr; //全局刷怪器对象
+void *villageManager = nullptr; //全局村庄管理器对象
 enum class TickStatus {
     Frozen,
     Normal,

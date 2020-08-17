@@ -14,7 +14,7 @@ using namespace SymHook;
 /**
  * 从Actor 对象获取调式信息
  * @param actor Actor对象
- * @return
+ * @returnTRACEDESIGNTIME
  */
 std::vector<std::string> getActorText(void *actor) {
     std::vector<std::string> info;
@@ -59,24 +59,24 @@ THook(
 /*
  * 实体标定(攻击实体的时候返回实体消息)
  */
-THook(
-        void,
-        MSSYM_B1QA6attackB1AA6PlayerB2AAA4UEAAB1UE10NAEAVActorB3AAAA1Z,
-        void *p1,
-        void * p2
-) {
-    if (p1 && p2) {
-        if (getActorName(p2) == "minecraft:villager_v2<>") {
-            std::string infoText;
-            SYM_CALL(void(*)(void * villager, std::string &),
-                     MSSYM_B1QE14buildDebugInfoB1AE10VillagerV2B2AAA9UEBAXAEAVB2QDA5basicB1UA6stringB1AA2DUB2QDA4charB1UA6traitsB1AA1DB1AA3stdB2AAA1VB2QDA9allocatorB1AA1DB1AA12B2AAA3stdB3AAAA1Z,
-                     p2, infoText
-            );
-            printf("%s", infoText.c_str());
-            gamePrintf(infoText);
-        }
-    }
-}
+//THook(
+//        void,
+//        MSSYM_B1QA6attackB1AA6PlayerB2AAA4UEAAB1UE10NAEAVActorB3AAAA1Z,
+//        void *p1,
+//        void * p2
+//) {
+//    if (p1 && p2) {
+//        if (getActorName(p2) == "minecraft:villager_v2<>") {
+//            std::string infoText;
+//            SYM_CALL(void(*)(void * villager, std::string &),
+//                     MSSYM_B1QE14buildDebugInfoB1AE10VillagerV2B2AAA9UEBAXAEAVB2QDA5basicB1UA6stringB1AA2DUB2QDA4charB1UA6traitsB1AA1DB1AA3stdB2AAA1VB2QDA9allocatorB1AA1DB1AA12B2AAA3stdB3AAAA1Z,
+//                     p2, infoText
+//            );
+//            printf("%s", infoText.c_str());
+//            gamePrintf(infoText);
+//        }
+//    }
+//}
 
 /*
  * 从ActorIdentifier 中提取出实体名称

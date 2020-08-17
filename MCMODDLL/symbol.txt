@@ -92,15 +92,15 @@ Player::tickWorld
 #获取方块对象
 ?getBlock@BlockSource@@QEBAAEBVBlock@@AEBVBlockPos@@@Z
 ?getBlock@BlockSource@@QEBAAEBVBlock@@HHH@Z
-#设置方块方向
-??$setState@W4Type@Direction@@@Block@@QEBAPEBV0@AEBVItemState@@W4Type@Direction@@@Z
 #获取方块调试信息
 ?toDebugString@Block@@QEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+
 #放置方块
 ?setBlock@BlockSource@@QEAA_NHHHAEBVBlock@@H@Z
+#放置方块
+?setBlock@BlockSource@@QEAA_NAEBVBlockPos@@AEBVBlock@@HPEBUActorBlockSyncMessage@@@Z
 #锹右键方块
 ?_useOn@ShovelItem@@EEBA_NAEAVItemStack@@AEAVActor@@VBlockPos@@EMMM@Z
-
 #放置海绵方块
 ?onPlace@SpongeBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@@Z
 
@@ -117,6 +117,12 @@ Player::tickWorld
 
 #判定POI是否是某个方块
 ?isVillagePOI@Village@@SA_NAEBVBlockSource@@AEBVBlockPos@@@Z
+#村庄管理器tick
+?tick@VillageManager@@QEAAXAEBUTick@@@Z
+#获取POI
+?getPOI@VillageManager@@QEBA?AV?$weak_ptr@VPOIInstance@@@std@@AEBVBlockPos@@@Z
+#获取村庄床POI的数量
+?getBedPOICount@Village@@QEBA_KXZ
 #######################Spawner############################
 #生成怪物
 ?spawnMob@Spawner@@QEAAPEAVMob@@AEAVBlockSource@@AEBUActorDefinitionIdentifier@@PEAVActor@@AEBVVec3@@_N44@Z

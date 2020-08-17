@@ -58,6 +58,36 @@ THook(
     }
 }
 
+
+
+//海绵放置
+THook(
+        void,
+        MSSYM_B1QA7onPlaceB1AE11SpongeBlockB2AAE20UEBAXAEAVBlockSourceB2AAE12AEBVBlockPosB3AAAA1Z,
+        void *b,
+        void *bs,
+        BlockPos * blockPos
+) {
+    void *block = SYM_CALL(
+            void* (*)(void * , int, int, int),
+            MSSYM_B1QA8getBlockB1AE11BlockSourceB2AAE13QEBAAEBVBlockB2AAA3HHHB1AA1Z, globalBlockSource,
+            blockPos->x, blockPos->y - 1, blockPos->z
+    );
+    if (block) {
+        for (int i = 0; i < 10; i++) {
+            BlockPos p(blockPos->x, blockPos->y + i, blockPos->z);
+            SYM_CALL(
+                    void(*)(void * , BlockPos*, void *, int, void *),
+                    MSSYM_B1QA8setBlockB1AE11BlockSourceB2AAA4QEAAB1UE13NAEBVBlockPosB2AAA9AEBVBlockB2AAE26HPEBUActorBlockSyncMessageB3AAAA1Z,
+                    globalBlockSource, &p, block, 0, nullptr
+            );
+        }
+    } else {
+        gamePrintf("can't get block");
+    }
+
+}
+
 //这里是红石粉右击事件，暂时关闭了
 //THook(
 //	void,
