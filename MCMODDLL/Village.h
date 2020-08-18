@@ -15,12 +15,12 @@
 using namespace SymHook;
 
 int getPopulation(void *village) {
-    return *((int64_t *) village + 22);
+    return (int) *((int64_t *) village + 22);
 }
 
 //*((_QWORD *)village + 30)
 int getIronGolemNum(void *village) {
-    return *((int64_t *) village + 30);
+    return (int) *((int64_t *) village + 30);
 }
 
 int getBedCount(void *village) {
@@ -92,14 +92,14 @@ struct VillageHelper {
 
     void draw() {
         if (enableVillageShow) {
-            std::string borderParticleType = "trapdoor:redplane";
+            std::string borderParticleType = "minecraft:dragon_breath_trail";
             std::string centerParticleType = "minecraft:heart_particle";
             for (auto village:villageList) {
                 if (village) {
                     spawnRectangleParticle(getVillageBound(village), borderParticleType);
                     Vec3 center = getVillageCenter(village);
-                    float pos[3] = {center.x, center.y + 0.3f, center.z};
-                    spawnParticle(pos, centerParticleType);
+                    //float pos[3] = {center.x, center.y + 0.3f, center.z};
+                    spawnParticle(center, centerParticleType);
                 }
             }
         }
@@ -116,7 +116,7 @@ struct VillageHelper {
                 auto bedNum = getBedCount(village);
                 auto golem = getIronGolemNum(village);
                 auto worked = getWorkedNum(village);
-                gamePrintf("v§2%d§b: [%d,%d,%d],[%d,%d,%d]§rc:§b[%d,%d,%d]§rr:§2%.2f  p:%d/%d g:%d b:%d\n",
+                gamePrintf("v§2%d§b: [%d,%d,%d],[%d,%d,%d]§rc:§b[%d,%d,%d]§rr:§2%.2f p:%d/%d g:%d b:%d\n",
                            i,
                            (int) aabb.p1.x,
                            (int) aabb.p1.y,
@@ -129,7 +129,6 @@ struct VillageHelper {
                            (int) center.z,
                            getVillageRadius(village),
                            worked,
-                        // worked,
                            population,
                            golem,
                            bedNum
@@ -180,13 +179,13 @@ THook(
 int villageInterval = 0;
 
 void villageTask() {
-    if (villageInterval % 40 == 0 && enableVillageShow) {
+    if (villageInterval % 20 == 0 && enableVillageShow) {
         villageHelper.draw();
     }
     if (villageInterval % 100 == 0) {
         villageHelper.clear();
     }
-    villageInterval = (villageInterval + 1) % 200;
+    villageInterval = (villageInterval + 1) % 100;
 }
 
 

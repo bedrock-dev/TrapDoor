@@ -42,8 +42,8 @@ void mod_init() {
                          "    |_|_|  \\__,_| .__/ \\__,_|\\___/ \\___/|_|    \n"
                          "                | |                            \n"
                          "                |_|                            ";
-    printf("%s\nTrapdoor V0.1.2\ngithub:https://github.com/hhhxiao/MCBEtoolSet ",banner);
-	// 此处填写模块加载时候的操作
+    printf("%s\nTrapdoor V0.1.4\ngithub:https://github.com/hhhxiao/MCBEtoolSet\nLicense: MIT\n",banner);
+    // 此处填写模块加载时候的操作
 }
 void mod_exit() {
 	// 此处填写模块卸载时候的操作

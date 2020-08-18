@@ -23,9 +23,9 @@ enum class CmdType {
     Village,
     Function,
     Position,
-    Info,
     Help,
-    Spawn
+    Spawn,
+    Config
 };
 
 std::map<std::string, CmdType> cmdMap = {
@@ -35,8 +35,8 @@ std::map<std::string, CmdType> cmdMap = {
         {"./func",  CmdType::Function},
         {"./p",     CmdType::Position},
         {"./spawn", CmdType::Spawn},
-        {"./info",  CmdType::Info},
-        {"./help",  CmdType::Help}
+        {"./help",  CmdType::Help},
+        {"./conf",  CmdType::Config}
 };
 
 
@@ -57,10 +57,7 @@ THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string 
     }
 
 
-    const char *banner = "§6          _                \n"
-                         "_|_ __ _ |_) _| _  _  __   \n"
-                         " |_ | (_||  (_|(_)(_) |   ";
-
+    const char *banner = "§5§l          TRAPDOOR v0.1.4                \n";
 
     //命令选择界面
     switch (result->second) {
@@ -135,20 +132,40 @@ THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string 
         case CmdType::Position:
             enableMarkPos = !enableMarkPos;
             break;
-        case CmdType::Info:
-            sendInfo();
+        case CmdType::Config:
+            if (tokens.size() == 3) {
+                if (tokens[1] == "particleViewDis" || tokens[1] == "pvd") {
+                    int distance = strtol(tokens[2].c_str(), nullptr, 10);
+                    if (distance > 0 && distance < 32768) {
+                        particleViewDistance = distance;
+                        gamePrintf("particle view set to %d", distance);
+                    } else {
+                        error("invalid distance");
+                    }
+                }
+            } else {
+                error("unknown command");
+            }
             break;
             //帮助指令
         case CmdType::Help:
             gamePrintf("%s" \
-                    "./tick fz freeze the world\n"\
-                    "./tick slow [num] slow the world\n"\
-                    "./tick fw [num] forward the world to num tick\n"\
-                    "./vill draw [true/false] (dis)enable the village bound and center show\n"\
-                    "./vill list  list all the ticking villages\n"\
-                    "./func explosion [true/false] (dis)enable explosion\n"\
-                    "./prof profile the world run\n"\
-                    "./p line measure\n", banner);
+                    "§r§6./tick fz - freeze the world\n"\
+                    "./tick slow [num] -  slow the world\n"\
+                    "./tick fw [num] - forward the world to num tick\n"\
+                    "./vill draw [true/false] - (dis)enable the village bound and center show\n"\
+                    "./vill list - list all the ticking villages\n"\
+                    "./func explosion [true/false] - (dis)enable explosion\n"\
+                    "./prof - profile the world run\n"\
+                    "./p - line measure(need rewrite)\n"\
+                    "./spawn start -  start the mob spawner counter\n"\
+                    "./spawn end -  end the mob spawner counter\n"\
+                    "./spawn p -  print the counter result\n"\
+                    "./spawn info -  print some mob info\n"\
+                    "./conf pvd [distance] - config the particle view distance(default=128)\n-------------------\n",
+                       banner);
+            gamePrintf("§rThanks:\n zhkj-liuxiaohua ΘΣΦΓΥΔΝ 莵道三室戸 兰瑟头颅emm想无 TestBH 暮月云龙 其它相关SAC群友");
+
             break;
             //刷怪相关指令
         case CmdType::Spawn :
@@ -160,6 +177,8 @@ THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string 
             } else if (tokens[1] == "p" || tokens[1] == "print") {
                 auto str = tokens.size() == 3 ? tokens[2] : "null";
                 spawnAnalysis(str);
+            } else if (tokens[1] == "info") {
+                sendMobInfo();
             }
         default:
             break;

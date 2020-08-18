@@ -51,7 +51,6 @@ THook(
                        (int) distance(cachePosList[0], cachePosList[1], true, false)
             );
             std::string str = "minecraft:redstone_wire_dust_particle";
-            spawnLineParticle(&cachePosList[0], &cachePosList[1], str);
         }
     } else {
         original(a1, a2, actor, blockPos, a4, a5, a6);

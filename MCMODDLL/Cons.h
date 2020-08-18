@@ -106,6 +106,7 @@ struct Vec3 {
     }
 };
 
+
 /**
  * 计算两点之间的距离 包括欧氏距离以及曼哈顿距离
  * @param p1 第一个点
@@ -114,7 +115,7 @@ struct Vec3 {
  * @param withY y坐标是否计算在内
  * @return 距离值
  */
-double distance(Vec3 p1, Vec3 p2, bool useManhattan, bool withY) {
+double distance(Vec3 p1, Vec3 p2, bool useManhattan = false, bool withY = true) {
     auto dx = fabs(p2.x - p1.x);
     auto dy = withY ? fabs(p2.y - p1.y) : 0;
     auto dz = fabs(p2.z - p1.z);
@@ -165,13 +166,29 @@ struct AABB {
 };
 
 
-void spawnParticle(float *p, std::string &type) {
-    for (auto i = 0; i < 3; ++i)
-        p[i] += 0.5;
+//粒子效果配置(性能配置)
+int particleViewDistance = 128;
+
+Vec3 *getPos(void *actor) {
+    return SYM_CALL(
+            Vec3*(*)(void * ),
+            MSSYM_B1QA6getPosB1AA5ActorB2AAE12UEBAAEBVVec3B2AAA2XZ,
+            actor
+    );
+}
+
+void spawnParticle(Vec3 p, std::string &type) {
+    if (distance(p, *getPos(player)) > particleViewDistance)return;
+    p.x += 0.5;
+    p.y += 0.5;
+    p.z += 0.5;
+    //for (auto i = 0; i < 3; ++i)
+    // p[i] += 0.5f;
+    if ((!level || !dimension))return;
     SYM_CALL(
-            void(*)(void * , std::string, float *, void *),
+            void(*)(void * , std::string, Vec3 *, void *),
             MSSYM_MD5_a2fdc6a066bbe9a360c9c9d76725a8fb,
-            level, type, p, dimension
+            level, type, &p, dimension
     );
 }
 
@@ -186,53 +203,53 @@ std::vector<float> cut(float begin, float end, int num) {
 }
 
 
-void spawnLineParticle(Vec3 *p1, Vec3 *p2, std::string &type) {
-    float num = sqrt((p1->x - p2->x) * (p1->x - p2->x) +
-                     (p1->y - p2->y) * (p1->y - p2->y) +
-                     (p1->z - p2->z) * (p1->z - p2->z));
-    for (int i = 0; i <= num; i++) {
-        float point[3] = {p1->x + (p2->x - p1->x) / num * (float) i,
-                          p1->y + (p2->y - p1->y) / num * (float) i,
-                          p1->z + (p2->z - p1->z) / num * (float) i,
-        };
-        spawnParticle(point, type);
-    }
-}
+//void spawnLineParticle(Vec3 *p1, Vec3 *p2, std::string &type) {
+//    float num = sqrt((p1->x - p2->x) * (p1->x - p2->x) +
+//                     (p1->y - p2->y) * (p1->y - p2->y) +
+//                     (p1->z - p2->z) * (p1->z - p2->z));
+//    for (int i = 0; i <= num; i++) {
+//        float point[3] = {p1->x + (p2->x - p1->x) / num * (float) i,
+//                          p1->y + (p2->y - p1->y) / num * (float) i,
+//                          p1->z + (p2->z - p1->z) / num * (float) i,
+//        };
+//        spawnParticle(point, type);
+//    }
+//}
 
 void spawnRectangleParticle(AABB aabb, std::string &type) {
 
-    auto pointList = cut(aabb.p1.x, aabb.p2.x, (int) (aabb.p2.x - aabb.p1.x) / 3);
+    auto pointList = cut(aabb.p1.x, aabb.p2.x, (int) (aabb.p2.x - aabb.p1.x) / 4);
     for (auto i :pointList) {
-        float point[3] = {i, aabb.p1.y, aabb.p1.z};
+        Vec3 point = {i, aabb.p1.y, aabb.p1.z};
         spawnParticle(point, type); //p1y p1z
-        point[1] = aabb.p2.y; //p2y 1z
+        point.y = aabb.p2.y; //p2y 1z
         spawnParticle(point, type);
-        point[2] = aabb.p2.z; //p2y p2z
+        point.z = aabb.p2.z; //p2y p2z
         spawnParticle(point, type);
-        point[1] = aabb.p1.y; //p1y p2z
+        point.y = aabb.p1.y; //p1y p2z
         spawnParticle(point, type);
     }
-    pointList = cut(aabb.p1.y, aabb.p2.y, (int) (aabb.p2.y - aabb.p1.y) / 3);
+    pointList = cut(aabb.p1.y, aabb.p2.y, (int) (aabb.p2.y - aabb.p1.y) / 4);
     for (auto i: pointList) {
-        float point[3] = {aabb.p1.x, static_cast<float>(i), aabb.p1.z};
+        Vec3 point = {aabb.p1.x, static_cast<float>(i), aabb.p1.z};
         spawnParticle(point, type); //p1x p1z
-        point[0] = aabb.p2.x; //p2x p1z
+        point.x = aabb.p2.x; //p2x p1z
         spawnParticle(point, type);
-        point[2] = aabb.p2.z; //p2x p2z
+        point.z = aabb.p2.z; //p2x p2z
         spawnParticle(point, type);
-        point[0] = aabb.p1.x; //p1x p2z
+        point.x = aabb.p1.x; //p1x p2z
         spawnParticle(point, type);
     }
 
-    pointList = cut(aabb.p1.z, aabb.p2.z, (int) (aabb.p2.z - aabb.p1.z) / 3);
+    pointList = cut(aabb.p1.z, aabb.p2.z, (int) (aabb.p2.z - aabb.p1.z) / 4);
     for (auto i:pointList) {
-        float point[3] = {aabb.p1.x, aabb.p1.y, static_cast<float>(i)};
+        Vec3 point = {aabb.p1.x, aabb.p1.y, static_cast<float>(i)};
         spawnParticle(point, type); //p1x p1z
-        point[0] = aabb.p2.x; //p2x p1z
+        point.x = aabb.p2.x; //p2x p1z
         spawnParticle(point, type);
-        point[1] = aabb.p2.y; //p2x p2z
+        point.y = aabb.p2.y; //p2x p2z
         spawnParticle(point, type);
-        point[0] = aabb.p1.x; //p1x p2z
+        point.x = aabb.p1.x; //p1x p2z
         spawnParticle(point, type);
     }
 }
@@ -242,6 +259,5 @@ bool enableMarkPos = false;
 bool enableVillageShow = false;
 bool enableExtraTickWork = true;
 bool enableExplosion = true;
-
 bool mobSpawnCounterStart = false;
 int mobTickCounter = 0;

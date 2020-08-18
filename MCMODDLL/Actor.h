@@ -25,6 +25,7 @@ std::vector<std::string> getActorText(void *actor) {
     return info;
 }
 
+
 //0: Entity type: minecraft:villager_v2<>
 /**
  * 从Actor对象中取到实体名称
@@ -37,7 +38,7 @@ std::string getActorName(void *actor) {
 }
 
 
-void sendInfo() {
+void sendMobInfo() {
     auto mobNum = getMobCount(spawner);
     char str[64];
     sprintf_s(str, "total mob count: %d", mobNum);
@@ -145,20 +146,28 @@ void spawnAnalysis(std::string &type) {
         //如果没有指定生物种类，放出大概的数据
         std::map<std::string, size_t> mobList;
         std::map<int, int> heightMap;
+        std::map<int, int> disMap;
+        auto playerPos = getPos(player);
         size_t totalNum = 0;
         for (const auto &item:mobCounterList) {
             mobList[item.first] = item.second.size();
             totalNum += item.second.size();
-            for (auto vec : item.second)
-                heightMap[vec.y]++;
+
+            for (auto vec : item.second) {
+                heightMap[(int) vec.y]++;
+                disMap[(int) distance(vec, *playerPos)]++;
+            }
         }
         gamePrintf("total §2%d §r tick", mobTickCounter);
         for (auto &i: mobList)
             gamePrintf("%s : §2%d       §r(§2%.2f§r/h)\n", i.first.c_str(), i.second,
                        (float) i.second * 72000.0 / (float) mobTickCounter);
-        gamePrintf("----------");
+        gamePrintf("-------distance map---------");
         for (auto &i: heightMap)
-            gamePrintf("§2%d: §2%d", i.first, i.second);
+            gamePrintf("[%d-%d]: §2%d", i.first, i.first + 1, i.second);
+        gamePrintf("--------height map--------");
+        for (auto &i: heightMap)
+            gamePrintf("%d: §2%d", i.first, i.second);
 
     } else {
         //给定生物种类(暂时未开发)
@@ -170,3 +179,4 @@ void spawnAnalysis(std::string &type) {
         }
     }
 }
+
