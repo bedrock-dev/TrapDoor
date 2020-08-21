@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Cons.h"
 #include "pch.h"
 #include "mod.h"
@@ -10,11 +9,9 @@
 #include "Actor.h"
 #include "Spawn.h"
 #include <vector>
-
-
 /*
- * Dirty Command Parser 简单的命令解释器
- * if else 大法好
+ * Dirty Command Parser
+ * if else
  */
 using namespace SymHook;
 enum class CmdType {
@@ -40,7 +37,6 @@ std::map<std::string, CmdType> cmdMap = {
 };
 
 
-//捕捉玩家信息
 THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string const &playerName,
       std::string &commandLine) {
     if (commandLine.size() < 2)return;
@@ -58,12 +54,9 @@ THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string 
 
 
     const char *banner = "§5§l          TRAPDOOR v0.1.4                \n";
-
-    //命令选择界面
     switch (result->second) {
         case CmdType::Tick:
             if (tokens.size() == 1)return;
-            //暂停世界运行
             if (tokens[1] == "fz" || tokens[1] == "frozen") {//重置为正常状态
                 worldFrozen();
             } else if (tokens[1] == "reset" || tokens[1] == "r") {
@@ -77,8 +70,6 @@ THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string 
                 }
                 worldForward(time);
             }
-
-                //放慢
             else if (tokens[1] == "slow") {
                 if (tokens.size() != 3)return;
                 int time = strtol(tokens[2].c_str(), nullptr, 10);
@@ -95,10 +86,9 @@ THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string 
             worldProfile();
             break;
 
-            //村庄相关只指令
         case CmdType::Village:
             if (tokens.size() == 1)return;
-            if (tokens[1] == "draw") {//重置为正常状态
+            if (tokens[1] == "draw") {
                 if (tokens.size() == 3) {
                     if (tokens[2] == "true") {
                         enableVillageShow = true;
@@ -114,8 +104,6 @@ THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string 
             }
             break;
 
-
-            //原版特性修改器
         case CmdType::Function:
             if (tokens.size() != 3 || !(tokens[2] == "true" || tokens[2] == "false")) {
                 error("use ./func xxx [true/false]\nfor more info type /help");
@@ -128,7 +116,6 @@ THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string 
             }
             break;
 
-            //位置计算(暂时未知)
         case CmdType::Position:
             enableMarkPos = !enableMarkPos;
             break;
@@ -147,7 +134,8 @@ THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string 
                 error("unknown command");
             }
             break;
-            //帮助指令
+
+
         case CmdType::Help:
             gamePrintf("%s" \
                     "§r§6./tick fz - freeze the world\n"\
@@ -164,10 +152,10 @@ THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string 
                     "./spawn info -  print some mob info\n"\
                     "./conf pvd [distance] - config the particle view distance(default=128)\n-------------------\n",
                        banner);
-            gamePrintf("§rThanks:\n zhkj-liuxiaohua ΘΣΦΓΥΔΝ 莵道三室戸 兰瑟头颅emm想无 TestBH 暮月云龙 其它相关SAC群友");
+            //gamePrintf("§rThanks:\n zhkj-liuxiaohua ΘΣΦΓΥΔΝ 莵道三室戸 兰瑟头颅emm想无 TestBH 暮月云龙 其它相关SAC群友");
 
             break;
-            //刷怪相关指令
+
         case CmdType::Spawn :
             if (tokens.size() == 1)return;
             if (tokens[1] == "start") {

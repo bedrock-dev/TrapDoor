@@ -263,17 +263,17 @@ THook(
 }
 
 //计划刻更新  BlockTickingQueue::pendingTicks
-THook(
-        void,
-        MSSYM_B1QE16tickPendingTicksB1AE17BlockTickingQueueB2AAA4QEAAB1UE16NAEAVBlockSourceB2AAA8AEBUTickB2AAA1HB1UA1NB1AA1Z,
-        void *queue,
-        void *source,
-        int flag,
-        bool a1
-) {
-    original(queue, source, flag, a1);
-
-}
+//THook(
+//        void,
+//        MSSYM_B1QE16tickPendingTicksB1AE17BlockTickingQueueB2AAA4QEAAB1UE16NAEAVBlockSourceB2AAA8AEBUTickB2AAA1HB1UA1NB1AA1Z,
+//        void *queue,
+//        void *source,
+//        int flag,
+//        bool a1
+//) {
+//    original(queue, source, flag, a1);
+//
+//}
 
 //红石更新
 THook(
