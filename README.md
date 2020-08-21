@@ -7,8 +7,16 @@ V0.1.4 **仅支持MCBE1.16.10.02正式版**
 
 ### 使用:
 
-打开绿色图标的BDSLauncher.exe 后选择 bedrock_server.exe运行，你的游戏需要enable look back，不然没法连上本地服务器 
-注意：这插件是给玩单机的人做的，不是服务器插件，通过服务器来做只是曲线救国，因此，请本地单人使用，多人可能会出现信息乱发的现象
+`release`中的文件只是单纯的`dll`文件，你**需要下载一个dll注入器才能启动游戏**，dll注入器你可以前往[https://github.com/DarthTon/Xenos/releases/tag/2.3.2](https://github.com/DarthTon/Xenos/releases/tag/2.3.2) 下载。下载完后运行`Xenos64.exe`，剩下的看下图即可:
+
+![](./img/howto.png)
+
+上面点`new`后会弹出窗口，选择服务端文件`bedrock_server.exe`即可。然后点`add`添加`dll`文件，最后点`Inject`启动服务器。
+
+使用其它的注入器请自行探索用法。
+
+> 注意: 你需要开启MC的loop back，不然无法连接本地服务端
+
 
 ### 功能介绍:
 
@@ -25,25 +33,18 @@ V0.1.4 **仅支持MCBE1.16.10.02正式版**
 
 下面是服务器每gt执行的函数其中叶子节点包含在上一级节点內部
 
+```
 -- Dimension::updateRedstone() 更新所有红石原件的内部信号,这个时候就算红石灯收到信号也不会量，因为它还没收到更新，活塞同理
-
 -- Level::tick()  更新除了红石之外的世界所有东西
-
-​	-- Dimension::tick() 区块加载和卸载，村庄更新
-
-​	-- ServerPlayer::tickWorld()  更新玩家所在的区域
-
-​		-- LevelChunk::tick()  区块加载
-
-​		--  LevelChunk::tickBlocks() 随机刻和环境更新(下雨，结冰等等)
-
-​		--  LevelChunk::tickEntities() 方块实体更新，到这个时候活塞才会对伸出作出反应，漏斗也会漏东西
-
-​		-- Spawner::tick()
-
-​		-- Others 包括计划刻更新等等
-
+	-- Dimension::tick() 区块加载和卸载，村庄更新
+	-- ServerPlayer::tickWorld()  更新玩家所在的区域
+		-- LevelChunk::tick()  区块加载
+		--  LevelChunk::tickBlocks() 随机刻和环境更新(下雨，结冰等等)
+		--  LevelChunk::tickEntities() 方块实体更新，到这个时候活塞才会对伸出作出反应，漏斗也会漏东西
+		-- Spawner::tick()
+		-- Others 包括计划刻更新等等
   -- others
+```
 
 `fz` 做的就是每gt都阻止`Dimension::updateRedstone() 和Level::tick()`函数的执行
 

@@ -12,30 +12,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b8a60db2-baf4-4087-8601-d054cc921b14" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/MCMODDLL.sln" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCMODDLL/Actor.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCMODDLL/Block.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCMODDLL/Cons.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCMODDLL/MCMODDLL.vcxproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCMODDLL/MCMODDLL.vcxproj.filters" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCMODDLL/Shell.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCMODDLL/Spawn.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCMODDLL/SymHook.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCMODDLL/Tick.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCMODDLL/Tools.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCMODDLL/Village.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCMODDLL/detours.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCMODDLL/detours.lib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCMODDLL/detver.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCMODDLL/dllmain.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCMODDLL/mod.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCMODDLL/mod.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCMODDLL/pch.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCMODDLL/pch.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCMODDLL/resource.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCMODDLL/symbol.txt" beforeDir="false" />
-    </list>
+    <list default="true" id="b8a60db2-baf4-4087-8601-d054cc921b14" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,7 +21,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -80,7 +57,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1598020571838</updated>
-      <workItem from="1598020573393" duration="93000" />
+      <workItem from="1598020573393" duration="400000" />
     </task>
     <servers />
   </component>
