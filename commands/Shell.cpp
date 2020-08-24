@@ -1,32 +1,15 @@
-#pragma once
-#include "Cons.h"
-#include "pch.h"
-#include "mod.h"
-#include "SymHook.h"
-#include "Tick.h"
-#include "Village.h"
-#include <map>
-#include "Actor.h"
-#include "Spawn.h"
-#include <vector>
-/*
- * Dirty Command Parser
- * if else
- */
-using namespace SymHook;
-enum class CmdType {
-    Tick,
-    Profile,
-    Village,
-    Function,
-    Position,
-    Help,
-    Spawn,
-    Config
-};
+#pragma warning (disable:4819)
+//
+// Created by xhy on 2020/8/24.
+//
+#include "Shell.h"
 
-std::map<std::string, CmdType> cmdMap = {
+std::map<std::string, CmdType> commandMap = {  // NOLINT(cert-err58-cpp)
         {"./tick",  CmdType::Tick},
+        {"fw",      ParaType::TickForward},
+        {"slow",    ParaType::TickSlow},
+        {"fz",      ParaType::TickFreeze},
+        {"r",       ParaType::TickReset},
         {"./prof",  CmdType::Profile},
         {"./vill",  CmdType::Village},
         {"./func",  CmdType::Function},
@@ -37,30 +20,34 @@ std::map<std::string, CmdType> cmdMap = {
 };
 
 
+std::vector<std::string> tokenize(std::string &commandString) {
+    std::vector<std::string> tokens;
+    std::stringstream s(commandString);
+    std::string command;
+    while (s >> commandString)
+        tokens.push_back(commandString);
+    return tokens;
+}
+
 THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string const &playerName,
       std::string &commandLine) {
     if (commandLine.size() < 2)return;
     if (!(commandLine[0] == '.' && commandLine[1] == '/'))return;
-    std::vector<std::string> tokens;
-    std::stringstream s(commandLine);
-    std::string command;
-    while (s >> commandLine)
-        tokens.push_back(commandLine);
-    auto result = cmdMap.find(tokens[0]);
-    if (result == cmdMap.end()) {
+    auto tokens = tokenize(commandLine);
+    auto result = commandMap.find(tokens[0]);
+    if (result == commandMap.end()) {
         error("unknown command , use [./help] to show help");
         return;
     }
-
 
     const char *banner = "§5§l          TRAPDOOR v0.1.4                \n";
     switch (result->second) {
         case CmdType::Tick:
             if (tokens.size() == 1)return;
             if (tokens[1] == "fz" || tokens[1] == "frozen") {//重置为正常状态
-                worldFrozen();
+                tick::freezeWorld();
             } else if (tokens[1] == "reset" || tokens[1] == "r") {
-                worldReset();
+                tick::resetWorld();
             } else if (tokens[1] == "forward" || tokens[1] == "fw") {//前进n tick
                 if (tokens.size() != 3)return;
                 int time = strtol(tokens[2].c_str(), nullptr, 10);
@@ -68,22 +55,20 @@ THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string 
                     error("invalid parameter\n");
                     return;
                 }
-                worldForward(time);
-            }
-            else if (tokens[1] == "slow") {
+                tick::forwardWorld(time);
+            } else if (tokens[1] == "slow") {
                 if (tokens.size() != 3)return;
                 int time = strtol(tokens[2].c_str(), nullptr, 10);
                 if (time < 0) {
                     error("invalid parameter\n");
                     return;
                 }
-                worldSlow(time);
+                tick::slowWorld(time);
             }
             break;
-
             //Profile
         case CmdType::Profile:
-            worldProfile();
+            tick::profileWorld();
             break;
 
         case CmdType::Village:
@@ -100,7 +85,7 @@ THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string 
                     gamePrintf("use ./vill draw [true/false]");
                 }
             } else if (tokens[1] == "list") {
-                listVillages();
+                village::listVillages();
             }
             break;
 
@@ -135,7 +120,6 @@ THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string 
             }
             break;
 
-
         case CmdType::Help:
             gamePrintf("%s" \
                     "§r§6./tick fz - freeze the world\n"\
@@ -152,26 +136,26 @@ THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string 
                     "./spawn info -  print some mob info\n"\
                     "./conf pvd [distance] - config the particle view distance(default=128)\n-------------------\n",
                        banner);
-            //gamePrintf("§rThanks:\n zhkj-liuxiaohua ΘΣΦΓΥΔΝ 莵道三室戸 兰瑟头颅emm想无 TestBH 暮月云龙 其它相关SAC群友");
-
+            //gamePrintf("§rThanks:\commandMap zhkj-liuxiaohua ΘΣΦΓΥΔΝ 莵道三室戸 兰瑟头颅emm想无 TestBH 暮月云龙 其它相关SAC群友");
             break;
 
         case CmdType::Spawn :
             if (tokens.size() == 1)return;
             if (tokens[1] == "start") {
-                startSpawnCounter();
+                spawn::startSpawnCounter();
             } else if (tokens[1] == "end") {
-                endSpawnerCounter();
+                spawn::endSpawnerCounter();
             } else if (tokens[1] == "p" || tokens[1] == "print") {
                 auto str = tokens.size() == 3 ? tokens[2] : "null";
-                spawnAnalysis(str);
+                spawn::spawnAnalysis(str);
             } else if (tokens[1] == "info") {
-                sendMobInfo();
+                spawn::sendMobInfo();
             }
         default:
             break;
     }
     return original(self, playerName, commandLine);
 }
+
 
 

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Cons.h"
-#include "pch.h"
-#include "mod.h"
-#include "SymHook.h"
+#include "common/Common.h"
+#include "lib/pch.h"
+#include "lib/mod.h"
+#include "lib/SymHook.h"
 #include <vector>
 
 using namespace SymHook;
@@ -27,7 +27,7 @@ THook(
 ) {
     Vec3 pos(blockPos[0], blockPos[1], blockPos[2]);
     BlockPos bp(blockPos[0], blockPos[1], blockPos[2]);
-    //printf("%d %d %d\n", blockPos[0], blockPos[1], blockPos[2]);
+    //printf("%d %d %d\commandMap", blockPos[0], blockPos[1], blockPos[2]);
     //   villageHelper.POIBelong(&bp);
     if (enableMarkPos) {
         if (cachePosList.empty()) {
@@ -101,7 +101,7 @@ THook(
 //) {
 //	original(a1, a2, actor, blockPos, a4, a5, a6);
 //	original(a1, a2, actor, blockPos, a4, a5, a6);
-//	printf("right click,pos is %d %d %d\n", blockPos[0], blockPos[1], blockPos[2]);
+//	printf("right click,pos is %d %d %d\commandMap", blockPos[0], blockPos[1], blockPos[2]);
 //	void* block = SYM_CALL(
 //		void* (*)(void*, int, int, int),
 //		MSSYM_B1QA8getBlockB1AE11BlockSourceB2AAE13QEBAAEBVBlockB2AAA3HHHB1AA1Z

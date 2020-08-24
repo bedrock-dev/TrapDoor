@@ -1,6 +1,6 @@
 #pragma once
-#include "detours.h"
-#include "detver.h"
+#include "lib/detours.h"
+#include "lib/detver.h"
 using VA = unsigned __int64;
 using RVA = unsigned long int;
 

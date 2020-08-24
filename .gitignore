@@ -1,3 +1,5 @@
 cmake-build-debug
 cmake-build-release
 PDB.txt
+cvdump.exe
+PDB导出工具.exe

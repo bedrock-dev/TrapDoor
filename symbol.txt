@@ -59,8 +59,6 @@ Player::tickWorld
 
 
 #############################实体信息#######################################
-#获取玩家脚下方块坐标
-?_getBlockOnPos@Actor@@IEAA?AVBlockPos@@XZ
 #获取实体调试信息
 ?getDebugText@Actor@@UEAAXAEAV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@@Z
 #获取玩家位置
@@ -71,14 +69,10 @@ Player::tickWorld
 ?attack@Player@@UEAA_NAEAVActor@@@Z
 #爆炸
 ?explode@Explosion@@QEAAXXZ
-#刷新碰撞箱
-?_refreshAABB@Actor@@IEAAXXZ
-#获取当前站的方块
-#?getBlockPosCurrentlyStandingOn@Actor@@QEBA?AVBlockPos@@PEAV1@@Z
-#获取视角
-#?getViewVector@Actor@@QEBA?AVVec3@@M@Z
-#?getPosOld@Actor@@UEBAAEBVVec3@@XZ
-
+#设置命名牌内容
+?setNameTag@Actor@@UEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+#获取生物的debug信息
+?buildDebugInfo@Mob@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
 
 
 

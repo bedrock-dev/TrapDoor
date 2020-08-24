@@ -1,16 +1,13 @@
 #include "pch.h"
 #include "mod.h"
 #include "SymHook.h"
-#include<ctype.h>
+#include<cctype>
 #include <string>
 #include<ctime>
 #include<map>
 #include <sstream>
 #include<vector>
-#include "Shell.h"
-#include "Cons.h"
-#include "Block.h"
-#include "Actor.h"
+
 using namespace SymHook;
 /**——————————————————————————————————————**
  |              MOD C++文件               |
@@ -42,9 +39,10 @@ void mod_init() {
                          "    |_|_|  \\__,_| .__/ \\__,_|\\___/ \\___/|_|    \n"
                          "                | |                            \n"
                          "                |_|                            ";
-    printf("%s\nTrapdoor V0.1.4\ngithub:https://github.com/hhhxiao/MCBEtoolSet\nLicense: MIT\n",banner);
+    printf("%s\nTrapdoor V0.1.4\ngithub:https://github.com/hhhxiao/MCBEtoolSet\nLicense: MIT\n", banner);
     // 此处填写模块加载时候的操作
 }
+
 void mod_exit() {
-	// 此处填写模块卸载时候的操作
+    // 此处填写模块卸载时候的操作
 }

@@ -6,20 +6,22 @@ set(CMAKE_CXX_STANDARD 14)
 include_directories(.)
 
 add_library (TrapDoor SHARED
-        Actor.h
-        Block.h
-        Cons.h
-        detours.h
-        detver.h
+        entity/Actor.h
+        block/Block.h
+        common/Common.h
+        lib/detours.h
+        lib/detver.h
         dllmain.cpp
-        framework.h
-        mod.cpp
-        mod.h
-        pch.cpp
-        pch.h
-        Shell.h
-        Spawn.h
-        SymHook.h
-        Tick.h
+        lib/framework.h
+        lib/mod.cpp
+        lib/mod.h
+        lib/pch.cpp
+        lib/pch.h
+        spawn/Spawn.h
+        lib/SymHook.h
         Tools.h
-        Village.h)
+        village/Village.h
+        tools/MessageBuilder.cpp
+        common/Vec3.h common/BlockPos.h common/AABB.h
+        tick/Tick.h
+        commands/Shell.cpp commands/Shell.h entity/ActorHook.h tick/TickHook.h tools/MathTool.h tools/Particle.h tools/Message.h village/VillagerHook.h)
