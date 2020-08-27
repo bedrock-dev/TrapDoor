@@ -1,6 +1,13 @@
 //
-// Created by xhy on 2020/8/24.
+// Created by xhy on 2020/8/25.
 //
-
 #include "MessageBuilder.h"
-const std::string MessageBuilder::POS_COLOR = "$2";
+
+MessageBuilder &MessageBuilder::Text(const std::string &s) {
+    messageBuffer.emplace_back(s);
+    return *this;
+}
+
+MessageBuilder &MessageBuilder::pos() {
+    return *this;
+}

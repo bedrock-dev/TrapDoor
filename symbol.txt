@@ -97,7 +97,8 @@ Player::tickWorld
 ?_useOn@ShovelItem@@EEBA_NAEAVItemStack@@AEAVActor@@VBlockPos@@EMMM@Z
 #放置海绵方块
 ?onPlace@SpongeBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@@Z
-
+#阻止NC更新
+?updateNeighborsAt@BlockSource@@QEAAXAEBVBlockPos@@@Z
 
 ########################################村庄#######################################
 
@@ -121,6 +122,9 @@ Player::tickWorld
 #生成怪物
 ?spawnMob@Spawner@@QEAAPEAVMob@@AEAVBlockSource@@AEBUActorDefinitionIdentifier@@PEAVActor@@AEBVVec3@@_N44@Z
 
+####################指令#############################
+##指令范围判定
+?validRange@Command@@SA_NHHHAEAVCommandOutput@@@Z
 
 
 

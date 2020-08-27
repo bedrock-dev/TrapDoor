@@ -1,3 +1,2 @@
-﻿#include "lib/pch.h"
-
+#include "pch.h"
 #pragma comment(lib, "detours.lib")

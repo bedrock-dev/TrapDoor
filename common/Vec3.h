@@ -5,12 +5,18 @@
 #ifndef TRAPDOOR_VEC3_H
 #define TRAPDOOR_VEC3_H
 
+#include <iostream>
+
 struct Vec3 {
     float x;
     float y;
     float z;
 
     Vec3() = default;
+
+    explicit Vec3(int _x) : Vec3(_x, _x, _x) {}
+
+    explicit Vec3(float _x) : Vec3(_x, _x, _x) {}
 
     Vec3(int _x, int _y, int _z) : x((float) _x), y((float) _y), z((float) _z) {}
 
@@ -30,11 +36,6 @@ struct Vec3 {
                (vec3.z - z) * (vec3.z - z);
     }
 
-
-    friend std::ostream &operator<<(std::ostream &os, const Vec3 &vec3) {
-        os << "[" << vec3.x << "," << vec3.y << "," << vec3.z << "]";
-        return os;
-    }
 };
 
 

@@ -5,7 +5,11 @@
 #include <Windows.h>
 #include <iostream>
 
-#include "detours.h"
-#include "detver.h"
+#include "./detours.h"
+#include "./detver.h"
+
+#include "SymHook.h"
+#include "common/AABB.h"
+#include "common/Vec3.h"
 
 #endif //PCH_H

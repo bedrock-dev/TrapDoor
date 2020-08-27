@@ -1,27 +1,11 @@
 //
-// Created by xhy on 2020/8/24.
+// Created by xhy on 2020/8/26.
 //
 
 #ifndef TRAPDOOR_SHELL_H
 #define TRAPDOOR_SHELL_H
-#pragma once
-
-#include "lib/pch.h"
-#include "lib/mod.h"
-#include "lib/SymHook.h"
-#include "village/Village.h"
-#include <map>
-#include "spawn/Spawn.h"
 #include <vector>
-#include <sstream>
-#include "tick/Tick.h"
-#include "entity/Actor.h"
-/*
- * Dirty Command Parser
- * if else
- */
-
-using namespace SymHook;
+#include <string>
 enum class CmdType {
     Tick,
     TickForward,
@@ -37,8 +21,6 @@ enum class CmdType {
     Config
 };
 typedef CmdType ParaType;
-
-
-std::vector<std::string> tokenize(std::string &commandString);
+std::vector <std::string> tokenize(std::string &commandString);
 
 #endif //TRAPDOOR_SHELL_H

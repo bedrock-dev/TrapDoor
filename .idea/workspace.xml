@@ -5,7 +5,7 @@
       <config projectName="TrapDoor" targetName="TrapDoor" />
     </generated>
   </component>
-  <component name="CMakeSettings">
+  <component name="CMakeSettings" AUTO_RELOAD="true">
     <configurations>
       <configuration PROFILE_NAME="Release" CONFIG_NAME="Release" />
       <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
@@ -13,41 +13,47 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b8a60db2-baf4-4087-8601-d054cc921b14" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/commands/Shell.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/commands/Shell.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/AABB.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/BlockPos.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/Vec3.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/entity/ActorHook.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/SymHook.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tick/TickHook.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tools/MathTool.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tools/Message.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tools/MessageBuilder.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tools/MessageBuilder.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tools/Particle.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/village/VillagerHook.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/block/Block.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/commands/VanillaCommand.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/commands/VanillaCommand.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/Common.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/entity/Actor.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spawn/Spawn.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tick/Tick.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/MathTool.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/Message.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/Particle.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/village/Village.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Actor.h" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Actor.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Block.h" beforeDir="false" afterPath="$PROJECT_DIR$/block/Block.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cons.h" beforeDir="false" afterPath="$PROJECT_DIR$/common/Common.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shell.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Spawn.h" beforeDir="false" afterPath="$PROJECT_DIR$/spawn/Spawn.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SymHook.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tick.h" beforeDir="false" afterPath="$PROJECT_DIR$/tick/Tick.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Village.h" beforeDir="false" afterPath="$PROJECT_DIR$/village/Village.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/detours.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/detours.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/detver.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/detver.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tools.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/block/Block.h" beforeDir="false" afterPath="$PROJECT_DIR$/block/Block.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/Shell.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/commands/Shell.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/Shell.h" beforeDir="false" afterPath="$PROJECT_DIR$/commands/Shell.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/BlockPos.h" beforeDir="false" afterPath="$PROJECT_DIR$/common/BlockPos.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/Common.h" beforeDir="false" afterPath="$PROJECT_DIR$/common/Common.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/Vec3.h" beforeDir="false" afterPath="$PROJECT_DIR$/common/Vec3.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dllmain.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/dllmain.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/framework.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/mod.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/mod.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pch.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pch.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pch.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pch.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/Actor.h" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Actor.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/ActorHook.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SymHook.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/SymHook.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/framework.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/framework.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/mod.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/mod.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/mod.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/mod.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pch.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pch.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pch.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pch.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spawn/Spawn.h" beforeDir="false" afterPath="$PROJECT_DIR$/spawn/Spawn.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/symbol.txt" beforeDir="false" afterPath="$PROJECT_DIR$/symbol.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tick/Tick.h" beforeDir="false" afterPath="$PROJECT_DIR$/tick/Tick.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tick/TickHook.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/MathTool.h" beforeDir="false" afterPath="$PROJECT_DIR$/tools/MathTool.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/Message.h" beforeDir="false" afterPath="$PROJECT_DIR$/tools/Message.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/MessageBuilder.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tools/MessageBuilder.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/MessageBuilder.h" beforeDir="false" afterPath="$PROJECT_DIR$/tools/MessageBuilder.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/Particle.h" beforeDir="false" afterPath="$PROJECT_DIR$/tools/Particle.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/village/Village.h" beforeDir="false" afterPath="$PROJECT_DIR$/village/Village.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/village/VillagerHook.h" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +66,9 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="NamedScopeManager">
+    <scope name="Trapdoor" pattern="!file:cvdump.exe&amp;&amp;!file:PDB导出工具.exe" />
   </component>
   <component name="ProjectId" id="1gPeI5asxovqHB8dxz0p5WrKTOo" />
   <component name="ProjectViewState">
@@ -78,18 +87,13 @@
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\xhy\dev\TrapDoor\lib" />
+      <recent name="C:\Users\xhy\dev\TrapDoor\tick" />
+      <recent name="C:\Users\xhy\dev\TrapDoor\commands" />
+      <recent name="C:\Users\xhy\dev\TrapDoor" />
       <recent name="C:\Users\xhy\dev\TrapDoor\common" />
-      <recent name="C:\Users\xhy\dev\TrapDoor\block" />
-      <recent name="C:\Users\xhy\dev\TrapDoor\village" />
-      <recent name="C:\Users\xhy\dev\TrapDoor\spawn" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="TrapDoor" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="TrapDoor" TARGET_NAME="TrapDoor" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -111,34 +115,44 @@
       <workItem from="1598259610836" duration="550000" />
       <workItem from="1598260189183" duration="4193000" />
       <workItem from="1598265278595" duration="6506000" />
-      <workItem from="1598276860521" duration="3950000" />
+      <workItem from="1598276860521" duration="4683000" />
+      <workItem from="1598326484129" duration="15729000" />
+      <workItem from="1598412456190" duration="3199000" />
+      <workItem from="1598418022397" duration="2259000" />
+      <workItem from="1598514432355" duration="5175000" />
+      <workItem from="1598521390317" duration="173000" />
+      <workItem from="1598521618674" duration="75000" />
     </task>
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="230" y="71" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598178377055">
+    <state x="230" y="71" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598353747711">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="230" y="71" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1549.831@0.0.1549.831" timestamp="1598178377055" />
-    <state x="505" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1598270355739">
+    <state x="230" y="71" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1549.831@0.0.1549.831" timestamp="1598353747711" />
+    <state x="521" y="205" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1598352302891">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="505" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1549.831@0.0.1549.831" timestamp="1598270355739" />
-    <state x="213" y="100" width="1046" height="710" key="SettingsEditor" timestamp="1598277034031">
+    <state x="521" y="205" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1549.831@0.0.1549.831" timestamp="1598352302891" />
+    <state x="505" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1598412574378">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="213" y="100" width="1046" height="710" key="SettingsEditor/0.0.1549.831@0.0.1549.831" timestamp="1598277034031" />
-    <state x="567" y="53" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1598280271768">
+    <state x="505" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1549.831@0.0.1549.831" timestamp="1598412574378" />
+    <state x="55" y="61" width="1170" height="707" key="SettingsEditor" timestamp="1598521695170">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="567" y="53" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1549.831@0.0.1549.831" timestamp="1598280271768" />
+    <state x="55" y="61" width="1170" height="707" key="SettingsEditor/0.0.1549.831@0.0.1549.831" timestamp="1598521695170" />
+    <state x="567" y="53" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1598519023770">
+      <screen x="0" y="0" width="1549" height="831" />
+    </state>
+    <state x="567" y="53" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1549.831@0.0.1549.831" timestamp="1598519023770" />
     <state x="474" y="0" width="600" height="831" key="find.popup" timestamp="1598268539707">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="474" y="0" width="600" height="831" key="find.popup/0.0.1549.831@0.0.1549.831" timestamp="1598268539707" />
-    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup" timestamp="1598198229868">
+    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup" timestamp="1598517801276">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup/0.0.1549.831@0.0.1549.831" timestamp="1598198229868" />
+    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup/0.0.1549.831@0.0.1549.831" timestamp="1598517801276" />
   </component>
 </project>

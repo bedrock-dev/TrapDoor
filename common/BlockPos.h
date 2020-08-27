@@ -31,6 +31,12 @@ struct BlockPos {
         return x != v.x || y != v.y || z != v.z;
     }
 
+    float distanceTo(const BlockPos &blockPos) const {
+        return (float) ((blockPos.x - x) * (blockPos.x - x) +
+                        (blockPos.y - y) * (blockPos.y - y) +
+                        (blockPos.z - z) * (blockPos.z - z));
+    }
+
     friend std::ostream &operator<<(std::ostream &os, const BlockPos &vec3) {
         os << "[" << vec3.x << "," << vec3.y << "," << vec3.z << "]";
         return os;
@@ -39,6 +45,8 @@ struct BlockPos {
     Vec3 toVec3() const {
         return {x, y, z};
     }
+
+
 };
 
 #endif //TRAPDOOR_BLOCKPOS_H

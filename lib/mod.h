@@ -1,9 +1,7 @@
 #pragma once
-#include "lib/detours.h"
-#include "lib/detver.h"
+#include "pch.h"
 using VA = unsigned __int64;
 using RVA = unsigned long int;
-
 template<typename T>
 auto Hook(T* p, T f) {
 	int error = DetourTransactionBegin();

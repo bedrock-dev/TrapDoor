@@ -1,9 +1,21 @@
-#pragma warning (disable:4819)
 //
-// Created by xhy on 2020/8/24.
+// Created by xhy on 2020/8/26.
 //
+#include "lib/mod.h"
+#include "village/Village.h"
+#include <map>
+#include "spawn/Spawn.h"
+#include <vector>
+#include "tick/Tick.h"
 #include "Shell.h"
+#include "entity/Actor.h"
+#include "VanillaCommand.h"
+/*
+ * Dirty Command Parser
+ * if else
+ */
 
+using namespace SymHook;
 std::map<std::string, CmdType> commandMap = {  // NOLINT(cert-err58-cpp)
         {"./tick",  CmdType::Tick},
         {"fw",      ParaType::TickForward},
@@ -29,11 +41,15 @@ std::vector<std::string> tokenize(std::string &commandString) {
     return tokens;
 }
 
-THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string const &playerName,
+
+THook(void, //NOLINT
+      MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334,
+      void *self, std::string const &playerName,
       std::string &commandLine) {
     if (commandLine.size() < 2)return;
     if (!(commandLine[0] == '.' && commandLine[1] == '/'))return;
     auto tokens = tokenize(commandLine);
+
     auto result = commandMap.find(tokens[0]);
     if (result == commandMap.end()) {
         error("unknown command , use [./help] to show help");
@@ -41,6 +57,8 @@ THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string 
     }
 
     const char *banner = "§5§l          TRAPDOOR v0.1.4                \n";
+
+
     switch (result->second) {
         case CmdType::Tick:
             if (tokens.size() == 1)return;
@@ -51,11 +69,12 @@ THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string 
             } else if (tokens[1] == "forward" || tokens[1] == "fw") {//前进n tick
                 if (tokens.size() != 3)return;
                 int time = strtol(tokens[2].c_str(), nullptr, 10);
-                if (time < 0) {
-                    error("invalid parameter\n");
+                if (time <= 0) {
+                    error("invalid parameter in time\n");
                     return;
                 }
                 tick::forwardWorld(time);
+
             } else if (tokens[1] == "slow") {
                 if (tokens.size() != 3)return;
                 int time = strtol(tokens[2].c_str(), nullptr, 10);
@@ -71,6 +90,8 @@ THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string 
             tick::profileWorld();
             break;
 
+
+            //command about Village
         case CmdType::Village:
             if (tokens.size() == 1)return;
             if (tokens[1] == "draw") {
@@ -114,6 +135,9 @@ THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string 
                     } else {
                         error("invalid distance");
                     }
+                } else if (tokens[1] == "fillCloneRange" || tokens[1] == "fcr") {
+                    size_t newRange = strtol(tokens[2].c_str(), nullptr, 10);
+                    setFillCloneRange(newRange);
                 }
             } else {
                 error("unknown command");
@@ -156,6 +180,5 @@ THook(void, MSSYM_MD5_c5508c07a9bc049d2b327ac921a4b334, void *self, std::string 
     }
     return original(self, playerName, commandLine);
 }
-
 
 

@@ -1,35 +1,26 @@
-﻿#pragma once
+//
+// Created by xhy on 2020/8/25.
+//
 
-#include <vector>
-#include "lib/pch.h"
-#include "lib/mod.h"
-#include "lib/SymHook.h"
-#include <string>
-#include <ostream>
-#include "Vec3.h"
-#include "BlockPos.h"
-#include "AABB.h"
-#include "tools/MathTool.h"
-
-using namespace SymHook;
-void *globalPlayer = nullptr; //全局玩家对象
-void *globalLevel = nullptr; //全局存档对象
-void *globalDimension = nullptr; //全局维度对象
-void *globalBlockSource = nullptr; //全局bs对象
-void *globalSpawner = nullptr; //全局刷怪器对象
-void *globalVillageManager = nullptr; //全局村庄管理器对象
-
-
-//this code is from https://stackoverflow.com/questions/2342162/stdstring-formatting-like-sprintf
-
-
+#ifndef TRAPDOOR_COMMON_H
+#define TRAPDOOR_COMMON_H
+extern void *globalPlayer; //全局玩家对象
+extern void *globalLevel; //全局存档对象
+extern void *globalDimension; //全局维度对象
+extern void *globalBlockSource; //全局bs对象
+extern void *globalSpawner; //全局刷怪器对象
+extern void *globalVillageManager; //全局村庄管理器对象
 
 //粒子效果配置(性能配置)
-int particleViewDistance = 128;
-//等距切分坐标
-bool enableMarkPos = false;
-bool enableVillageShow = false;
-bool enableExtraTickWork = true;
-bool enableExplosion = true;
-bool mobSpawnCounterStart = false;
-int mobTickCounter = 0;
+extern int particleViewDistance;
+
+
+extern bool enableMarkPos;
+extern bool enableVillageShow;
+extern bool enableExtraTickWork;
+extern bool enableExplosion;
+extern bool mobSpawnCounterStart;
+extern bool enableBlockUpdate;
+extern int mobTickCounter;
+
+#endif //TRAPDOOR_COMMON_H
