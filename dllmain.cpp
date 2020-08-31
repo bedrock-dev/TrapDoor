@@ -1,8 +1,6 @@
 // dllmain.cpp : 定义 DLL 应用程序的入口点。
 #include  "lib/pch.h"
 
-#define _SILENCE_CXX17_STRSTREAM_DEPRECATION_WARNING
-
 void mod_init();
 
 void mod_exit();

@@ -10,6 +10,7 @@
 #include "Shell.h"
 #include "entity/Actor.h"
 #include "VanillaCommand.h"
+#include "block/Hopper.h"
 /*
  * Dirty Command Parser
  * if else
@@ -17,18 +18,18 @@
 
 using namespace SymHook;
 std::map<std::string, CmdType> commandMap = {  // NOLINT(cert-err58-cpp)
-        {"./tick",  CmdType::Tick},
-        {"fw",      ParaType::TickForward},
-        {"slow",    ParaType::TickSlow},
-        {"fz",      ParaType::TickFreeze},
-        {"r",       ParaType::TickReset},
-        {"./prof",  CmdType::Profile},
-        {"./vill",  CmdType::Village},
-        {"./func",  CmdType::Function},
-        {"./p",     CmdType::Position},
-        {"./spawn", CmdType::Spawn},
-        {"./help",  CmdType::Help},
-        {"./conf",  CmdType::Config}
+        {"./tick",    CmdType::Tick},
+        {"fw",        ParaType::TickForward},
+        {"slow",      ParaType::TickSlow},
+        {"fz",        ParaType::TickFreeze},
+        {"r",         ParaType::TickReset},
+        {"./prof",    CmdType::Profile},
+        {"./vill",    CmdType::Village},
+        {"./func",    CmdType::Function},
+        {"./spawn",   CmdType::Spawn},
+        {"./help",    CmdType::Help},
+        {"./conf",    CmdType::Config},
+        {"./counter", CmdType::Counter}
 };
 
 
@@ -119,11 +120,13 @@ THook(void, //NOLINT
                 enableExtraTickWork = tokens[2] == "true";
             } else if (tokens[1] == "explosion") {
                 enableExplosion = tokens[2] == "true";
+            } else if (tokens[1] == "hoppercounter" || tokens[1] == "hc") {
+                enableHopperCounter = tokens[2] == "true";
+                gamePrintf("set hopper counter to %d", tokens[2] == "true");
+            } else if (tokens[1] == "positionmeasure" || tokens[1] == "pm") {
+                enableMarkPos = tokens[2] == "true";
+                gamePrintf("set block measure to %d", tokens[2] == "true");
             }
-            break;
-
-        case CmdType::Position:
-            enableMarkPos = !enableMarkPos;
             break;
         case CmdType::Config:
             if (tokens.size() == 3) {
@@ -143,7 +146,20 @@ THook(void, //NOLINT
                 error("unknown command");
             }
             break;
-
+        case CmdType::Counter :
+            if (tokens.size() != 3) {
+                error("use [./help] for help");
+            } else {
+                size_t channel = strtol(tokens[1].c_str(), nullptr, 10);
+                if (tokens[2] == "p") {
+                    hopperCounterManager.printChannel(channel);
+                } else if (tokens[2] == "reset") {
+                    hopperCounterManager.resetChannel(channel);
+                } else {
+                    error("unknown command");
+                }
+            }
+            break;
         case CmdType::Help:
             gamePrintf("%s" \
                     "§r§6./tick fz - freeze the world\n"\
@@ -152,15 +168,18 @@ THook(void, //NOLINT
                     "./vill draw [true/false] - (dis)enable the village bound and center show\n"\
                     "./vill list - list all the ticking villages\n"\
                     "./func explosion [true/false] - (dis)enable explosion\n"\
-                    "./prof - profile the world run\n"\
-                    "./p - line measure(need rewrite)\n"\
+                    "./func hoppercounter/hc [true/false] - (dis)enable hopper counter\n"\
+                    "./func positionmeasure/pm [true/false] - (dis)enable block measure\n"\
+                    "./counter [channel index] p print counter data\n" \
+                    "./counter [channel index] reset reset channel data\n" \
+                    "./prof - profile the level run health\n"\
                     "./spawn start -  start the mob spawner counter\n"\
                     "./spawn end -  end the mob spawner counter\n"\
                     "./spawn p -  print the counter result\n"\
                     "./spawn info -  print some mob info\n"\
                     "./conf pvd [distance] - config the particle view distance(default=128)\n-------------------\n",
                        banner);
-            //gamePrintf("§rThanks:\commandMap zhkj-liuxiaohua ΘΣΦΓΥΔΝ 莵道三室戸 兰瑟头颅emm想无 TestBH 暮月云龙 其它相关SAC群友");
+            gamePrintf("§rThanks:\n zhkj-liuxiaohua ΘΣΦΓΥΔΝ 莵道三室戸 兰瑟头颅emm想无 TestBH 暮月云龙 其它相关SAC群友");
             break;
 
         case CmdType::Spawn :

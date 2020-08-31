@@ -19,4 +19,10 @@ add_library(TrapDoor SHARED
         tick/Tick.cpp
         commands/Shell.cpp
         commands/Shell.h
-        block/Block.cpp commands/VanillaCommand.cpp commands/VanillaCommand.h)
+        block/Block.cpp commands/VanillaCommand.cpp commands/VanillaCommand.h entity/Item.cpp entity/Item.h block/Hopper.cpp block/Hopper.h entity/Player.cpp entity/Player.h)
+
+add_executable(Test
+        test/Test.cpp test/Test.cpp
+        tools/MessageBuilder.cpp
+        tools/dbg.h
+        )

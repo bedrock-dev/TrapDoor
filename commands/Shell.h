@@ -15,10 +15,10 @@ enum class CmdType {
     Profile,
     Village,
     Function,
-    Position,
     Help,
     Spawn,
-    Config
+    Config,
+    Counter
 };
 typedef CmdType ParaType;
 std::vector <std::string> tokenize(std::string &commandString);

@@ -1,9 +1,70 @@
 #pragma once
 
-#include "common/Common.h"
 #include "lib/mod.h"
 #include "lib/SymHook.h"
 #include <vector>
+#include "common/BlockPos.h"
+
+struct BlockLegacy {
+
+    std::string getDebugText();
+};
+
+struct Block {
+    BlockLegacy *getLegacy();
+
+    std::string getName();
+};
+
+struct BlockSource {
+    Block *getBlock(int x, int y, int z);
+
+    Block *getBlock(const BlockPos &);
+};
+
+struct BlockActor {
+    BlockPos *getPosition() {
+        return reinterpret_cast<BlockPos*>(reinterpret_cast<VA>(this) + 44);
+    }
+//
+    Block* getBlock() {
+        return *reinterpret_cast<Block**>(reinterpret_cast<VA>(this) + 16);
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -13,14 +74,14 @@
 //	MSSYM_B2QUA5useOnB1AE16RedStoneDustItemB2AAA4EEBAB1UE14NAEAVItemStackB2AAA9AEAVActorB2AAA9VBlockPosB2AAA4EMMMB1AA1Z,
 //	void* a1,
 //	void* a2,
-//	void* actor,
+//	void* hopperBlockActor,
 //	int * blockPos,
 //	float a4,
 //	float a5,
 //	float a6
 //) {
-//	original(a1, a2, actor, blockPos, a4, a5, a6);
-//	original(a1, a2, actor, blockPos, a4, a5, a6);
+//	original(a1, a2, hopperBlockActor, blockPos, a4, a5, a6);
+//	original(a1, a2, hopperBlockActor, blockPos, a4, a5, a6);
 //	printf("right click,pos is %d %d %d\commandMap", blockPos[0], blockPos[1], blockPos[2]);
 //	void* block = SYM_CALL(
 //		void* (*)(void*, int, int, int),

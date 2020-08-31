@@ -9,9 +9,9 @@
 #include "Vec3.h"
 
 struct BlockPos {
-    int x;
-    int y;
-    int z;
+    int x = 0;
+    int y = 0;
+    int z = 0;
 
     BlockPos() = default;
 
@@ -31,6 +31,19 @@ struct BlockPos {
         return x != v.x || y != v.y || z != v.z;
     }
 
+    bool operator<(const BlockPos &rhs) const {
+        if (x < rhs.x)
+            return true;
+        if (rhs.x < x)
+            return false;
+        if (y < rhs.y)
+            return true;
+        if (rhs.y < y)
+            return false;
+        return z < rhs.z;
+    }
+
+
     float distanceTo(const BlockPos &blockPos) const {
         return (float) ((blockPos.x - x) * (blockPos.x - x) +
                         (blockPos.y - y) * (blockPos.y - y) +
@@ -46,6 +59,13 @@ struct BlockPos {
         return {x, y, z};
     }
 
+
+    std::string toString() const {
+        return "["
+               + std::to_string(x) + ","
+               + std::to_string(y) + ","
+               + std::to_string(z) + "]";
+    }
 
 };
 

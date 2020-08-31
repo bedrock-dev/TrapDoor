@@ -2,34 +2,35 @@
 
 #include "lib/mod.h"
 #include "lib/SymHook.h"
+#include "common/BlockPos.h"
 #include<set>
+
 namespace village {
 
+    class Village {
+    public:
+        int getPopulation();
 
-    int getPopulation(void *village);
+        int getIronGolemNum();
 
-    int getIronGolemNum(void *village);
+        int getBedPOICount();
 
-    int getBedPOICount(void *village);
+        int getWorkedVillagerNum();
 
+        bool canSpawnIronGolem();
 
-    int getWorkedVillagerNum(void *village);
+        BlockPos getCenter();
 
-    bool canSpawnIronGolem(int population, int golemNum, int workedNum, int bedNUm);
-
-
-    Vec3 getVillageCenter(void *village);
-
-    AABB getVillageBound(void *village);
-
-    float getVillageRadius(void *village);
+        float getRadius();
+        AABB getBounds();
+    };
 
     struct VillageHelper {
         VillageHelper() = default;
 
-        std::set<void *> villageList;
+        std::set<Village *> villageList;
 
-        void insert(void *village);
+        void insert(Village *village);
 
         void clear();
 
@@ -38,29 +39,7 @@ namespace village {
         void list();
     };
 
-
-
-
     void villageTask();
 
     void listVillages();
 }
-//THook(void,
-//      MSSYM_B1QA4tickB1AE14VillageManagerB2AAE13QEAAXAEBUTickB3AAAA1Z,
-//      void *manager,
-//      void * tick
-//) {
-//    if (!villageManager)villageManager = manager;
-//    original(manager, tick);
-//}
-
-//THook(
-//        bool,
-//        MSSYM_B1QE12isVillagePOIB1AA7VillageB2AAA2SAB1UE16NAEBVBlockSourceB2AAE12AEBVBlockPosB3AAAA1Z,
-//        void *bs,
-//        int32_t * blockPos
-//) {
-//    printf("update POI at (%d %d %d) blockSource: %d\commandMap", blockPos[0], blockPos[1], blockPos[2],
-//           globalBlockSource == bs);
-//    return original(bs, blockPos);
-//}

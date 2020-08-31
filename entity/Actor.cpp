@@ -8,7 +8,6 @@
 using namespace SymHook;
 
 namespace spawn {
-
     std::map<std::string, std::vector<Vec3>> mobCounterList;//NOLINT
 
     Vec3 *getPos(void *actor) {

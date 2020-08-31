@@ -5,6 +5,7 @@
 #include "common/Common.h"
 #include "tools/Message.h"
 #include "tools/Particle.h"
+#include "tools/MessageBuilder.h "
 
 using namespace SymHook;
 //village tick
@@ -16,30 +17,30 @@ namespace village {
     VillageHelper villageHelper; //NOLINT
 
     //get village population
-    int getPopulation(void *village) {
-        return (int) *((int64_t *) village + POPULATION_OFFSET);
+    int Village::getPopulation() {
+        return (int) *((int64_t *) this + POPULATION_OFFSET);
     }
 
     //get village owned iron golem num
-    int getIronGolemNum(void *village) {
-        return (int) *((int64_t *) village + GOLEM_NUM_OFFSET);
+    int Village::getIronGolemNum() {
+        return (int) *((int64_t *) this + GOLEM_NUM_OFFSET);
     }
 
     //get village owned bed poi count(max is villager num + 32)
-    int getBedPOICount(void *village) {
+    int Village::getBedPOICount() {
         return
                 SYM_CALL(
-                        int(*)(void * ),
+                        int(*)(Village * ),
                         MSSYM_B1QE14getBedPOICountB1AA7VillageB2AAA4QEBAB1UA3KXZ,
-                        village
+                        this
                 );
     }
 
     //get worked villager num
-    int getWorkedVillagerNum(void *village) {
-        auto timeOfDay = *(reinterpret_cast<int64_t *>(village) + 60) - 24000;
-        auto begin = *(reinterpret_cast<int64_t *>(village) + 85);
-        auto end = *(reinterpret_cast<int64_t *>(village) + 86);
+    int Village::getWorkedVillagerNum() {
+        auto timeOfDay = *(reinterpret_cast<int64_t *>(this) + 60) - 24000;
+        auto begin = *(reinterpret_cast<int64_t *>(this) + 85);
+        auto end = *(reinterpret_cast<int64_t *>(this) + 86);
         int num;
         for (num = 0; begin != end; begin += 16) {
             if (*(int64_t *) (begin + 8) > timeOfDay)
@@ -49,40 +50,43 @@ namespace village {
     }
 
     //check can spawn iron golem
-    bool canSpawnIronGolem(int population, int golemNum, int workedNum, int bedNUm) {
+    bool Village::canSpawnIronGolem() {
+        auto population = getPopulation();
+        auto workedNum = getWorkedVillagerNum();
+        auto golemNum = getIronGolemNum();
+        auto bedNum = getBedPOICount();
         int max = 20 > population ? 20 : population;
-        return (float) workedNum > population * 0.75 && golemNum < population / 10 && bedNUm > max;
+        return (float) workedNum > population * 0.75 && golemNum < population / 10 && bedNum > max;
     }
 
     //get village center
-    Vec3 getVillageCenter(void *village) {
-        Vec3 center = {
-                (*((float *) village + BOUND_OFFSET + 3) + *((float *) village + BOUND_OFFSET)) / 2,
-                (*((float *) village + BOUND_OFFSET + 4) + *((float *) village + BOUND_OFFSET + 1)) / 2,
-                (*((float *) village + BOUND_OFFSET + 5) + *((float *) village + BOUND_OFFSET + 2)) / 2,
+    BlockPos Village::getCenter() {
+        BlockPos center = {
+                (*((float *) this + BOUND_OFFSET + 3) + *((float *) this + BOUND_OFFSET)) / 2,
+                (*((float *) this + BOUND_OFFSET + 4) + *((float *) this + BOUND_OFFSET + 1)) / 2,
+                (*((float *) this + BOUND_OFFSET + 5) + *((float *) this + BOUND_OFFSET + 2)) / 2,
         };
         return center;
     }
 
     //get village bounds
-    AABB getVillageBound(void *village) {
-        Vec3 p1 = {*((float *) village + BOUND_OFFSET + 3),
-                   *((float *) village + BOUND_OFFSET + 4),
-                   *((float *) village + BOUND_OFFSET + 5)};
-        Vec3 p2 = {*((float *) village + BOUND_OFFSET),
-                   *((float *) village + BOUND_OFFSET + 1),
-                   *((float *) village + BOUND_OFFSET + 2)};
+    AABB Village::getBounds() {
+        Vec3 p1 = {*((float *) this + BOUND_OFFSET + 3),
+                   *((float *) this + BOUND_OFFSET + 4),
+                   *((float *) this + BOUND_OFFSET + 5)};
+        Vec3 p2 = {*((float *) this + BOUND_OFFSET),
+                   *((float *) this + BOUND_OFFSET + 1),
+                   *((float *) this + BOUND_OFFSET + 2)};
         AABB aabb(p2, p1);
         return aabb;
     }
 
     //get village radius
-    float getVillageRadius(void *village) {
-        if (!village)return -1.0;
+    float Village::getRadius() {
         return SYM_CALL(
-                float(*)(void * ),
+                float(*)(Village * ),
                 MSSYM_B1QE20getApproximateRadiusB1AA7VillageB2AAA7QEBAMXZ,
-                village
+                this
         );
     }
 
@@ -106,7 +110,7 @@ namespace village {
         villageList.clear();
     }
 
-    void VillageHelper::insert(void *village) {
+    void VillageHelper::insert(Village *village) {
         villageList.insert(village);
     }
 
@@ -116,51 +120,48 @@ namespace village {
             std::string centerParticleType = "minecraft:heart_particle";
             for (auto village:villageList) {
                 if (village) {
-                    spawnRectangleParticle(getVillageBound(village), borderParticleType);
-                    Vec3 center = getVillageCenter(village);
-                    spawnParticle(center, centerParticleType);
+                    spawnRectangleParticle(village->getBounds(), borderParticleType);
+                    spawnParticle(village->getCenter().toVec3(), centerParticleType);
                 }
             }
         }
     }
 
     void VillageHelper::list() {
-        gamePrintf("here are all the ticking villages:\n");
+        MessageBuilder builder;
+        builder.text("here are all the ticking villages:\n");
         int i = 0;
         for (auto village : villageList) {
             if (village) {
-                auto aabb = getVillageBound(village);
-                auto center = getVillageCenter(village);
-                auto population = getPopulation(village);
-                auto bedNum = getBedPOICount(village);
-                auto golem = getIronGolemNum(village);
-                auto worked = getWorkedVillagerNum(village);
-                gamePrintf("v§2%d§b: [%d,%d,%d],[%d,%d,%d]§rc:§b[%d,%d,%d]§rr:§2%.2f p:%d/%d g:%d b:%d  %d\n",
-                           i,
-                           (int) aabb.p1.x,
-                           (int) aabb.p1.y,
-                           (int) aabb.p1.z,
-                           (int) aabb.p2.x,
-                           (int) aabb.p2.y,
-                           (int) aabb.p2.z,
-                           (int) center.x,
-                           (int) center.y,
-                           (int) center.z,
-                           getVillageRadius(village),
-                           worked,
-                           population,
-                           golem,
-                           bedNum,
-                           canSpawnIronGolem(population, golem, worked, bedNum)
-                );
                 i++;
+                auto aabb = village->getBounds();
+                builder.num(i).text(": ")
+                        .pos(village->getCenter())
+                        .text("r")
+                        .num(village->getRadius())
+                        .text(" p")
+                        .num(village->getWorkedVillagerNum())
+                        .text("/")
+                        .num(village->getPopulation())
+                        .text(" g:")
+                        .num(village->getIronGolemNum())
+                        .text(" b:")
+                        .num(village->getBedPOICount())
+                        .text(" s:")
+                        .num((int)village->canSpawnIronGolem())
+                        .text(" ")
+                        .aabb(aabb)
+                        .text("\n");
             }
         }
+        builder.send();
     }
 }
+
+
 THook(
         void, MSSYM_B1QA4tickB1AA7VillageB2AAE10QEAAXUTickB2AAE15AEAVBlockSourceB3AAAA1Z,
-        void *vill, void *tick, void * blockSource
+        village::Village *vill, void *tick, void * blockSource
 ) {
     original(vill, tick, blockSource);
     village::villageHelper.insert(vill);

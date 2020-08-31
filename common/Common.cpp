@@ -6,7 +6,7 @@
 void *globalPlayer = nullptr; //全局玩家对象
 void *globalLevel = nullptr; //全局存档对象
 void *globalDimension = nullptr; //全局维度对象
-void *globalBlockSource = nullptr; //全局bs对象
+BlockSource *globalBlockSource = nullptr; //全局bs对象
 void *globalSpawner = nullptr; //全局刷怪器对象
 void *globalVillageManager = nullptr; //全局村庄管理器对象
 
@@ -20,4 +20,5 @@ bool enableBlockUpdate = true;
 bool enableExtraTickWork = true;
 bool enableExplosion = false;
 bool mobSpawnCounterStart = false;
+bool enableHopperCounter = false;
 int mobTickCounter = 0;

@@ -10,9 +10,12 @@
 #include "tools/Message.h"
 
 /**
- * todo: need re write
+ * todo: need rewrite
  */
 namespace spawn {
+    class Actor {
+
+    };
 
 
     Vec3 *getPos(void *actor);

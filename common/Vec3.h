@@ -6,6 +6,7 @@
 #define TRAPDOOR_VEC3_H
 
 #include <iostream>
+#include <string>
 
 struct Vec3 {
     float x;
@@ -36,6 +37,11 @@ struct Vec3 {
                (vec3.z - z) * (vec3.z - z);
     }
 
+    std::string toString() const {
+        char buffer[64];
+        sprintf(buffer, "[%.2f %.2f %.2f]", x, y, z);
+        return std::string(buffer);
+    }
 };
 
 

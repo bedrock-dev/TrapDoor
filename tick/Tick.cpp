@@ -3,6 +3,7 @@
 //
 
 #include "Tick.h"
+#include "block/Hopper.h"
 
 using namespace SymHook;
 
@@ -35,6 +36,8 @@ namespace tick {
         }
         //task in any status (light work)
         if (mobSpawnCounterStart)++mobTickCounter;
+        hopperCounterManager.tick();
+
     }
 
     void freezeWorld() {
@@ -211,7 +214,7 @@ THook(
         void,
         MSSYM_B1QA4tickB1AE10LevelChunkB2AAE20QEAAXAEAVBlockSourceB2AAA8AEBUTickB3AAAA1Z,
         void *levelChunk,
-        void *blockSource,
+        BlockSource *blockSource,
         void * tick
 ) {
     if (!globalBlockSource)globalBlockSource = blockSource;

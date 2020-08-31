@@ -87,7 +87,10 @@ Player::tickWorld
 ?getBlock@BlockSource@@QEBAAEBVBlock@@AEBVBlockPos@@@Z
 ?getBlock@BlockSource@@QEBAAEBVBlock@@HHH@Z
 #获取方块调试信息
-?toDebugString@Block@@QEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+?getName@Block@@QEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+
+#getLegacyBlock
+?getLegacyBlock@Block@@QEBAAEBVBlockLegacy@@XZ
 
 #放置方块
 ?setBlock@BlockSource@@QEAA_NHHHAEBVBlock@@H@Z
@@ -99,7 +102,18 @@ Player::tickWorld
 ?onPlace@SpongeBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@@Z
 #阻止NC更新
 ?updateNeighborsAt@BlockSource@@QEAAXAEBVBlockPos@@@Z
-
+#玩家放置方块
+?onBlockPlacedByPlayer@VanillaServerGameplayEventListener@@UEAA?AW4EventResult@@AEAVPlayer@@AEBVBlock@@AEBVBlockPos@@_N@Z
+#玩家破坏方块
+?_destroyBlockInternal@GameMode@@AEAA_NAEBVBlockPos@@E@Z
+#获取方块调试信息
+?toDebugString@Block@@QEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+#获取方块边框
+?getOutline@BlockLegacy@@UEBAAEBVAABB@@AEAVBlockSource@@AEBVBlockPos@@AEAV2@@Z
+#获取方块legacy调试信息
+?getDebugText@BlockLegacy@@QEBAXAEAV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@AEBVBlockPos@@@Z
+#获取方块实体的调试信息
+?getDebugText@BlockActor@@UEAAXAEAV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@AEBVBlockPos@@@Z
 ########################################村庄#######################################
 
 #村庄更新
@@ -122,10 +136,20 @@ Player::tickWorld
 #生成怪物
 ?spawnMob@Spawner@@QEAAPEAVMob@@AEAVBlockSource@@AEBUActorDefinitionIdentifier@@PEAVActor@@AEBVVec3@@_N44@Z
 
+
+
 ####################指令#############################
 ##指令范围判定
 ?validRange@Command@@SA_NHHHAEAVCommandOutput@@@Z
 
+##################################Hopper counter##################################
+?_tryMoveInItem@Hopper@@IEAA_NAEAVBlockSource@@AEAVContainer@@AEAVItemStack@@HHH@Z
+#HopperBlockActor setItem
+?setItem@HopperBlockActor@@UEAAXHAEBVItemStack@@@Z
 
 
-
+######################################物品#######################################
+#获取物品名字
+?getName@ItemStackBase@@QEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+#实体使用物品
+?useItem@Actor@@UEAAXAEAVItemStack@@W4ItemUseMethod@@_N@Z
