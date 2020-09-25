@@ -22,6 +22,7 @@ enum class TickStatus {
 
 
 namespace tick {
+    extern TickStatus tickStatus;
 
     void extraTickTask();
 

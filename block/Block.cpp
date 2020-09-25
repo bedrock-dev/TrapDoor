@@ -85,11 +85,7 @@ using namespace SymHook;
 //    if (block) {
 //        for (int i = 0; i < 10; i++) {
 //            BlockPos p(blockPos->x, blockPos->y + i, blockPos->z);
-//            SYM_CALL(
-//                    void(*)(void * , BlockPos *, void *, int, void *),
-//                    MSSYM_B1QA8setBlockB1AE11BlockSourceB2AAA4QEAAB1UE13NAEBVBlockPosB2AAA9AEBVBlockB2AAE26HPEBUActorBlockSyncMessageB3AAAA1Z,
-//                    globalBlockSource, &p, block, 0, nullptr
-//            );
+
 //        }
 //    } else {
 //        gamePrintf("can't get block");
@@ -115,6 +111,10 @@ std::string Block::getName() {
             this, debugStr);
     //remove "name: "
     return debugStr.erase(0, 6);
+}
+
+bool Block::isNotAir() {
+    return this->getName() != "minecraft:air";
 }
 
 
@@ -144,5 +144,88 @@ Block *BlockSource::getBlock(int x, int y, int z) {
 
 Block *BlockSource::getBlock(const BlockPos &blockPos) {
     return getBlock(blockPos.x, blockPos.y, blockPos.z);
+}
+
+void BlockSource::setBlock(BlockPos *blockPos, Block *block) {
+    SYM_CALL(
+            void(*)(void * , BlockPos *, void *, int, void *),
+            MSSYM_B1QA8setBlockB1AE11BlockSourceB2AAA4QEAAB1UE13NAEBVBlockPosB2AAA9AEBVBlockB2AAE26HPEBUActorBlockSyncMessageB3AAAA1Z,
+            this, blockPos, block, 0, nullptr
+    );
+    this->updateNeighborsAt(blockPos);
+}
+
+void BlockSource::updateNeighborsAt(const BlockPos *pos) {
+//    dbg("update");
+    SYM_CALL(
+            void(*)(BlockSource * self,const BlockPos *pos),
+            MSSYM_B1QE17updateNeighborsAtB1AE11BlockSourceB2AAE17QEAAXAEBVBlockPosB3AAAA1Z,
+            this, pos
+    );
+}
+
+THook(
+        void,
+        MSSYM_B1QE17updateNeighborsAtB1AE11BlockSourceB2AAE17QEAAXAEBVBlockPosB3AAAA1Z,
+        BlockSource *self, const BlockPos *pos
+) {
+    original(self, pos);
+}
+//explosion enable
+THook(
+        void,
+        MSSYM_B1QA7explodeB1AA9ExplosionB2AAA7QEAAXXZ,
+        void * exp
+) {
+    if (enableExplosion) {
+        original(exp);
+    }
+}
+
+int BaseCircuitComponent::getStrength() {
+    return *((uint32_t *) this + 13);
+}
+
+int BaseCircuitComponent::getVar2() {
+    return *((uint64_t *) this + 2);
+
+}
+
+void BaseCircuitComponent::printSource() {
+    auto begin = (uint32_t *) *((uint64_t *) this + 1);
+    auto end = (uint32_t *) *((uint64_t *) this + 2);
+    int num = 0;
+
+    for (; begin != end; begin += 8) {
+        auto val = (int *) begin;
+        BlockPos pos = BlockPos(val[3], val[4], val[5]);
+        auto comp = globalCircuitSceneGraph->getBaseCircuitComponent(&pos);
+        if (comp) {
+            printf(" [%d %d %d]-> %d\n", pos.x, pos.y, pos.z, comp->getStrength());
+        }
+        num++;
+    }
+    gamePrintf("\nsignal:%d source: %d\n", getStrength(), num);
+}
+
+BaseCircuitComponent *CircuitSceneGraph::getBaseCircuitComponent(BlockPos *pos) {
+    return SYM_CALL(
+            BaseCircuitComponent*(*)(CircuitSceneGraph * graph,const BlockPos *pos),
+            MSSYM_B1QE16getBaseComponentB1AE17CircuitSceneGraphB2AAE28QEAAPEAVBaseCircuitComponentB2AAE12AEBVBlockPosB3AAAA1Z,
+            this, pos
+    );
+}
+
+THook(
+        BaseCircuitComponent *,
+        MSSYM_B1QE16getBaseComponentB1AE17CircuitSceneGraphB2AAE28QEAAPEAVBaseCircuitComponentB2AAE12AEBVBlockPosB3AAAA1Z,
+        CircuitSceneGraph *graph,
+        BlockPos * pos
+) {
+    if (graph && !globalCircuitSceneGraph) {
+        dbg("init graph");
+        globalCircuitSceneGraph = graph;
+    }
+    return original(graph, pos);
 }
 

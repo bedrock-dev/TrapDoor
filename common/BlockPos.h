@@ -6,6 +6,7 @@
 #define TRAPDOOR_BLOCKPOS_H
 
 #include <iostream>
+#include <vector>
 #include "Vec3.h"
 
 struct BlockPos {
@@ -65,6 +66,17 @@ struct BlockPos {
                + std::to_string(x) + ","
                + std::to_string(y) + ","
                + std::to_string(z) + "]";
+    }
+
+    std::vector<BlockPos> getNeighbourPos() {
+        std::vector<BlockPos> list;
+        list.emplace_back(x+1,y,z);
+        list.emplace_back(x-1,y,z);
+        list.emplace_back(x,y+1,z);
+        list.emplace_back(x,y-1,z);
+        list.emplace_back(x,y,z+1);
+        list.emplace_back(x,y,z-1);
+        return list;
     }
 
 };

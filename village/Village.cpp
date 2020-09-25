@@ -49,7 +49,7 @@ namespace village {
         return num;
     }
 
-    //check can spawn iron golem
+    //check can actor iron golem
     bool Village::canSpawnIronGolem() {
         auto population = getPopulation();
         auto workedNum = getWorkedVillagerNum();

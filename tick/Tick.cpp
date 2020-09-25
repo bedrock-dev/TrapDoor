@@ -33,6 +33,8 @@ namespace tick {
         //task in normal status(heavy work)
         if (tickStatus == TickStatus::Normal) {
             village::villageTask();
+        } else {
+            dbg("level::tick");
         }
         //task in any status (light work)
         if (mobSpawnCounterStart)++mobTickCounter;
@@ -96,7 +98,7 @@ namespace tick {
                "§rchunk tick:           §2%.3f\n" \
                "§random tick & env:     §2%.3f\n" \
                "§rblockEntities:   §2%.3f\n" \
-               "§r(de)spawn:       §2%.3f",
+               "§r(de)actor:       §2%.3f",
                    (double) redstoneUpdateTime / 90000 + (double) levelTickTime / 100000,
                    (double) redstoneUpdateTime / 90000,
                    (double) levelTickTime / 100000,
@@ -268,7 +270,7 @@ THook(
     }
 }
 
-//mob spawn Spawner::tick
+//mob actor Spawner::tick
 THook(
         void,
         MSSYM_B1QA4tickB1AA7SpawnerB2AAE20QEAAXAEAVBlockSourceB2AAE14AEBVLevelChunkB3AAAA1Z,
@@ -320,7 +322,11 @@ THook(
     }
 
     if (tick::tickStatus == TickStatus::Forward) {
+        auto v1 = *((int *) globalDimension + 69);
+        auto v2 = *((int *) globalDimension + 68);
+        printf("69%d 68%d\n", v1, v2);
         original(dim);
+        printf("69:%d 68:%d\n", v1, v2);
     } else if (tick::tickStatus == TickStatus::Slow) {
         if (tick::slowDownCounter % tick::SlowDownTimes == 0) {
             original(dim);

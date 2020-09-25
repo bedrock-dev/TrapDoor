@@ -26,7 +26,7 @@ std::map<std::string, CmdType> commandMap = {  // NOLINT(cert-err58-cpp)
         {"./prof",    CmdType::Profile},
         {"./vill",    CmdType::Village},
         {"./func",    CmdType::Function},
-        {"./spawn",   CmdType::Spawn},
+        {"./actor",   CmdType::Spawn},
         {"./help",    CmdType::Help},
         {"./conf",    CmdType::Config},
         {"./counter", CmdType::Counter}
@@ -138,9 +138,6 @@ THook(void, //NOLINT
                     } else {
                         error("invalid distance");
                     }
-                } else if (tokens[1] == "fillCloneRange" || tokens[1] == "fcr") {
-                    size_t newRange = strtol(tokens[2].c_str(), nullptr, 10);
-                    setFillCloneRange(newRange);
                 }
             } else {
                 error("unknown command");
@@ -173,10 +170,10 @@ THook(void, //NOLINT
                     "./counter [channel index] p print counter data\n" \
                     "./counter [channel index] reset reset channel data\n" \
                     "./prof - profile the level run health\n"\
-                    "./spawn start -  start the mob spawner counter\n"\
-                    "./spawn end -  end the mob spawner counter\n"\
-                    "./spawn p -  print the counter result\n"\
-                    "./spawn info -  print some mob info\n"\
+                    "./actor start -  start the mob spawner counter\n"\
+                    "./actor end -  end the mob spawner counter\n"\
+                    "./actor p -  print the counter result\n"\
+                    "./actor info -  print some mob info\n"\
                     "./conf pvd [distance] - config the particle view distance(default=128)\n-------------------\n",
                        banner);
             gamePrintf("§rThanks:\n zhkj-liuxiaohua ΘΣΦΓΥΔΝ 莵道三室戸 兰瑟头颅emm想无 TestBH 暮月云龙 其它相关SAC群友");
@@ -185,14 +182,14 @@ THook(void, //NOLINT
         case CmdType::Spawn :
             if (tokens.size() == 1)return;
             if (tokens[1] == "start") {
-                spawn::startSpawnCounter();
+                actor::startSpawnCounter();
             } else if (tokens[1] == "end") {
-                spawn::endSpawnerCounter();
+                actor::endSpawnerCounter();
             } else if (tokens[1] == "p" || tokens[1] == "print") {
                 auto str = tokens.size() == 3 ? tokens[2] : "null";
-                spawn::spawnAnalysis(str);
+                actor::spawnAnalysis(str);
             } else if (tokens[1] == "info") {
-                spawn::sendMobInfo();
+                actor::sendMobInfo();
             }
         default:
             break;

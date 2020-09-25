@@ -203,6 +203,46 @@ namespace SymHook{
 	// [符号] ?useItem@Actor@@UEAAXAEAVItemStack@@W4ItemUseMethod@@_N@Z
 	constexpr RVA MSSYM_B1QA7useItemB1AA5ActorB2AAE18UEAAXAEAVItemStackB2AAE15W4ItemUseMethodB3AAUA1NB1AA1Z = 0x00566020;
 
+	// [原型] public: class BaseCircuitComponent * __ptr64 __cdecl CircuitSceneGraph::getBaseComponent(class BlockPos const & __ptr64) __ptr64
+	// [符号] ?getBaseComponent@CircuitSceneGraph@@QEAAPEAVBaseCircuitComponent@@AEBVBlockPos@@@Z
+	constexpr RVA MSSYM_B1QE16getBaseComponentB1AE17CircuitSceneGraphB2AAE28QEAAPEAVBaseCircuitComponentB2AAE12AEBVBlockPosB3AAAA1Z = 0x00B8A9B0;
+
+	// [原型] public: void __cdecl CircuitSystem::evaluate(class BlockSource * __ptr64) __ptr64
+	// [符号] ?evaluate@CircuitSystem@@QEAAXPEAVBlockSource@@@Z
+	constexpr RVA MSSYM_B1QA8evaluateB1AE13CircuitSystemB2AAE20QEAAXPEAVBlockSourceB3AAAA1Z = 0x00B8FA50;
+
+	// [原型] public: virtual bool __cdecl ConsumerComponent::evaluate(class CircuitSystem & __ptr64,class BlockPos const & __ptr64) __ptr64
+	// [符号] ?evaluate@ConsumerComponent@@UEAA_NAEAVCircuitSystem@@AEBVBlockPos@@@Z
+	constexpr RVA MSSYM_B1QA8evaluateB1AE17ConsumerComponentB2AAA4UEAAB1UE18NAEAVCircuitSystemB2AAE12AEBVBlockPosB3AAAA1Z = 0x00B90E60;
+
+	// [原型] public: virtual bool __cdecl TransporterComponent::evaluate(class CircuitSystem & __ptr64,class BlockPos const & __ptr64) __ptr64
+	// [符号] ?evaluate@TransporterComponent@@UEAA_NAEAVCircuitSystem@@AEBVBlockPos@@@Z
+	constexpr RVA MSSYM_B1QA8evaluateB1AE20TransporterComponentB2AAA4UEAAB1UE18NAEAVCircuitSystemB2AAE12AEBVBlockPosB3AAAA1Z = 0x00B932B0;
+
+	// [原型] public: virtual void __cdecl TransporterComponent::cacheValues(class CircuitSystem & __ptr64,class BlockPos const & __ptr64) __ptr64
+	// [符号] ?cacheValues@TransporterComponent@@UEAAXAEAVCircuitSystem@@AEBVBlockPos@@@Z
+	constexpr RVA MSSYM_B1QE11cacheValuesB1AE20TransporterComponentB2AAE22UEAAXAEAVCircuitSystemB2AAE12AEBVBlockPosB3AAAA1Z = 0x00B93240;
+
+	// [原型] public: virtual void __cdecl ComparatorCapacitor::cacheValues(class CircuitSystem & __ptr64,class BlockPos const & __ptr64) __ptr64
+	// [符号] ?cacheValues@ComparatorCapacitor@@UEAAXAEAVCircuitSystem@@AEBVBlockPos@@@Z
+	constexpr RVA MSSYM_B1QE11cacheValuesB1AE19ComparatorCapacitorB2AAE22UEAAXAEAVCircuitSystemB2AAE12AEBVBlockPosB3AAAA1Z = 0x00B90D50;
+
+	// [原型] public: virtual void __cdecl RepeaterCapacitor::cacheValues(class CircuitSystem & __ptr64,class BlockPos const & __ptr64) __ptr64
+	// [符号] ?cacheValues@RepeaterCapacitor@@UEAAXAEAVCircuitSystem@@AEBVBlockPos@@@Z
+	constexpr RVA MSSYM_B1QE11cacheValuesB1AE17RepeaterCapacitorB2AAE22UEAAXAEAVCircuitSystemB2AAE12AEBVBlockPosB3AAAA1Z = 0x00B92C20;
+
+	// [原型] public: virtual void __cdecl RedstoneTorchCapacitor::cacheValues(class CircuitSystem & __ptr64,class BlockPos const & __ptr64) __ptr64
+	// [符号] ?cacheValues@RedstoneTorchCapacitor@@UEAAXAEAVCircuitSystem@@AEBVBlockPos@@@Z
+	constexpr RVA MSSYM_B1QE11cacheValuesB1AE22RedstoneTorchCapacitorB2AAE22UEAAXAEAVCircuitSystemB2AAE12AEBVBlockPosB3AAAA1Z = 0x00B91730;
+
+	// [原型] public: virtual void __cdecl Actor::setPos(class Vec3 const & __ptr64) __ptr64
+	// [符号] ?setPos@Actor@@UEAAXAEBVVec3@@@Z
+	constexpr RVA MSSYM_B1QA6setPosB1AA5ActorB2AAE13UEAAXAEBVVec3B3AAAA1Z = 0x00551020;
+
+	// [原型] private: class std::unique_ptr<class Actor,struct std::default_delete<class Actor> > __cdecl ActorFactory::_constructActor(struct ActorDefinitionIdentifier const & __ptr64,class Vec3 const & __ptr64,class Vec2 const & __ptr64) __ptr64
+	// [符号] ?_constructActor@ActorFactory@@AEAA?AV?$unique_ptr@VActor@@U?$default_delete@VActor@@@std@@@std@@AEBUActorDefinitionIdentifier@@AEBVVec3@@AEBVVec2@@@Z
+	constexpr RVA MSSYM_MD5_4ad35b002b3931f6af40cb4fe59053ef = 0x005FAA50;
+
 }
 
 // 文件结束

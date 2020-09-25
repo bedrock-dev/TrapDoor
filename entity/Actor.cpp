@@ -7,8 +7,10 @@
 
 using namespace SymHook;
 
-namespace spawn {
+namespace actor {
     std::map<std::string, std::vector<Vec3>> mobCounterList;//NOLINT
+
+
 
     Vec3 *getPos(void *actor) {
         return SYM_CALL(
@@ -18,8 +20,17 @@ namespace spawn {
         );
     }
 
-    std::string actorIDtoString(char *actorID) {
-        auto str = reinterpret_cast<std::string *>(actorID + 32);
+    Vec3 *Actor::getPos() {
+        return SYM_CALL(
+                Vec3*(*)(void * ),
+                MSSYM_B1QA6getPosB1AA5ActorB2AAE12UEBAAEBVVec3B2AAA2XZ,
+                this
+        );
+    }
+
+
+    std::string ActorDefinitionIdentifier::getName() {
+        auto str = reinterpret_cast<std::string *>((char *) this + 32);
         return std::string(*str);
     }
 
@@ -35,8 +46,7 @@ namespace spawn {
     void sendMobInfo() {
         int mobNum = getMobCount(globalSpawner);
         char str[64];
-        sprintf_s(str, "total mob count: %d", mobNum);
-        gamePrintf(str);
+        gamePrintf("total mob count: %d", mobNum);
     }
 
     void startSpawnCounter() {
@@ -105,6 +115,8 @@ namespace spawn {
 //#warning this func is hardcoded, it may need rewrite when update the game
         return actor ? getActorText(actor)[0].substr(13) : "null";
     }
+
+
 }
 
 THook(
@@ -139,28 +151,45 @@ THook(
         MSSYM_B1QA8spawnMobB1AA7SpawnerB2AAE11QEAAPEAVMobB2AAE15AEAVBlockSourceB2AAE29AEBUActorDefinitionIdentifierB2AAA9PEAVActorB2AAA8AEBVVec3B3AAUA3N44B1AA1Z,
         void *sp,
         void *bs,
-        char *actorId,
+        actor::ActorDefinitionIdentifier *actorId,
         void *actor,
         Vec3 *pos,
         bool a6,
         bool a7,
         bool a8
 ) {
-    // printf("spawn %s at %f %f %f \commandMap", actorIDtoString(actorId).c_str(), pos->x, pos->y, pos->z);
+    //printf("(%f, %f, %f)\n", pos->x, pos->y, pos->z);
     if (mobSpawnCounterStart && pos) {
-        auto mobName = spawn::actorIDtoString(actorId);
+        auto mobName = actorId->getName();
         Vec3 vec(pos->x, pos->y, pos->z);
-        spawn::mobCounterList[mobName].emplace_back(vec);
+        actor::mobCounterList[mobName].emplace_back(vec);
     }
     original(sp, bs, actorId, actor, pos, a6, a7, a8);
 }
 
+
 THook(
         void,
-        MSSYM_B1QA7explodeB1AA9ExplosionB2AAA7QEAAXXZ,
-        void * exp
+        MSSYM_MD5_4ad35b002b3931f6af40cb4fe59053ef,
+        void *self,
+        void *actorID,
+        void *actor,
+        Vec3 *pos,
+        int flag
 ) {
-    if (enableExplosion) {
-        original(exp);
-    }
+    printf("   constructor (%f, %f, %f)\n", pos->x, pos->y, pos->z);
+    original(self, actorID, actor, pos, flag);
 }
+
+THook(
+        void,
+        MSSYM_B1QA6setPosB1AA5ActorB2AAE13UEAAXAEBVVec3B3AAAA1Z,
+        void *self,
+        Vec3 *pos
+        ){
+    if(self != globalPlayer){
+        printf("set pos: (%f, %f, %f)\n", pos->x, pos->y, pos->z);
+    }
+    original(self,pos);
+}
+

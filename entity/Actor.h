@@ -12,9 +12,15 @@
 /**
  * todo: need rewrite
  */
-namespace spawn {
+namespace actor {
     class Actor {
+        Vec3* getPos();
 
+    };
+
+    class ActorDefinitionIdentifier{
+    public:
+        std::string getName();
     };
 
 

@@ -8,6 +8,8 @@
 #include "block/Block.h"
 #include "tools/dbg.h"
 #include "common/Common.h"
+#include "tools/Message.h"
+#include <queue>
 
 using namespace SymHook;
 
@@ -27,12 +29,45 @@ THook(
         measureManager.setPos1(pos);
     } else if (name == "minecraft:crimson_planks") {
         measureManager.setPos2(pos);
+    } else if (name == "minecraft:stone" || name == "minecraft:dirt") {
+        if (globalCircuitSceneGraph) {
+            auto p = BlockPos(pos.x, pos.y - 1, pos.z);
+            if (name == "minecraft:dirt")--p.y;
+            auto component = globalCircuitSceneGraph->getBaseCircuitComponent(&p);
+            if (component) {
+                component->printSource();
+            }
+        }
     }
     return original(self, player, block, pos, flag);
 
 //    dbg(name);
 }
 //BlockLegacy *this, struct Player *a2, const struct BlockPos *a3, const struct Block *a4)
+//player destroy block
+
+
+void chainDestroy(const BlockPos *pos, const std::string &blockName, int max) {
+    auto air = globalBlockSource->getBlock(*pos);
+    gamePrintf("chain destroy");
+    std::queue<BlockPos> destroyQueue;
+    destroyQueue.push(*pos);
+    int num = 0;
+    while (!destroyQueue.empty() && num < max) {
+        auto f = destroyQueue.front();
+        destroyQueue.pop();
+        std::vector<BlockPos> list = f.getNeighbourPos();
+        for (BlockPos position:list) {
+            auto block = globalBlockSource->getBlock(position);
+            if (block->getName() == blockName) {
+                destroyQueue.push(position);
+            }
+        }
+        globalBlockSource->setBlock(&f, air);
+        num++;
+    }
+}
+
 THook(
         void,
         MSSYM_B2QUE20destroyBlockInternalB1AA8GameModeB2AAA4AEAAB1UE13NAEBVBlockPosB2AAA1EB1AA1Z,
@@ -41,11 +76,14 @@ THook(
         int64_t a3,
         int a4
 ) {
-//    Block *block = globalBlockSource->getBlock(pos->x, pos->y + 1, pos->z);
-//    auto name = block->getName();
-//    dbg(name);
+    Block *block = globalBlockSource->getBlock(*pos);
+    auto blockName = block->getName();
     original(self, pos, a3, a4);
+//    if (blockName != "minecraft:air") {
+//        chainDestroy(pos, blockName, 20);
+//    }
 }
+
 
 void MeasureManager::setPos1(const BlockPos pos) {
     if (!enableMarkPos)return;

@@ -14,23 +14,42 @@ struct Block {
     BlockLegacy *getLegacy();
 
     std::string getName();
+
+    bool isNotAir();
 };
 
 struct BlockSource {
     Block *getBlock(int x, int y, int z);
 
     Block *getBlock(const BlockPos &);
+
+    void setBlock(BlockPos *, Block *block);
+
+    void updateNeighborsAt(const BlockPos *pos);
 };
+
 
 struct BlockActor {
     BlockPos *getPosition() {
-        return reinterpret_cast<BlockPos*>(reinterpret_cast<VA>(this) + 44);
+        return reinterpret_cast<BlockPos *>(reinterpret_cast<VA>(this) + 44);
     }
+
 //
-    Block* getBlock() {
-        return *reinterpret_cast<Block**>(reinterpret_cast<VA>(this) + 16);
+    Block *getBlock() {
+        return *reinterpret_cast<Block **>(reinterpret_cast<VA>(this) + 16);
     }
 };
+struct BaseCircuitComponent{
+    int getStrength();
+    int getVar2();
+    void printSource();
+};
+
+
+struct CircuitSceneGraph{
+    BaseCircuitComponent *getBaseCircuitComponent(BlockPos *pos);
+};
+
 
 
 

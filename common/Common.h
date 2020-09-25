@@ -13,7 +13,7 @@ extern void *globalDimension; //全局维度对象
 extern BlockSource *globalBlockSource; //全局bs对象
 extern void *globalSpawner; //全局刷怪器对象
 extern void *globalVillageManager; //全局村庄管理器对象
-
+extern CircuitSceneGraph *globalCircuitSceneGraph;
 //粒子效果配置(性能配置)
 extern int particleViewDistance;
 

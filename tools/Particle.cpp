@@ -16,7 +16,7 @@ namespace particle {
 }
 
 void spawnParticle(Vec3 p, std::string &type) {
-    if (math::distance(p, *spawn::getPos(globalPlayer)) > particleViewDistance)return;
+    if (math::distance(p, *actor::getPos(globalPlayer)) > particleViewDistance)return;
     p.x += 0.5;
     p.y += 0.5;
     p.z += 0.5;
