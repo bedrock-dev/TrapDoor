@@ -322,11 +322,11 @@ THook(
     }
 
     if (tick::tickStatus == TickStatus::Forward) {
-        auto v1 = *((int *) globalDimension + 69);
-        auto v2 = *((int *) globalDimension + 68);
-        printf("69%d 68%d\n", v1, v2);
+        // auto v1 = *((int *) globalDimension + 69);
+        // auto v2 = *((int *) globalDimension + 68);
+        // printf("69%d 68%d\n", v1, v2);
         original(dim);
-        printf("69:%d 68:%d\n", v1, v2);
+        // printf("69:%d 68:%d\n", v1, v2);
     } else if (tick::tickStatus == TickStatus::Slow) {
         if (tick::slowDownCounter % tick::SlowDownTimes == 0) {
             original(dim);

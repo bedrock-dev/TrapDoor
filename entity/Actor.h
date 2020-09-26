@@ -13,12 +13,15 @@
  * todo: need rewrite
  */
 namespace actor {
-    class Actor {
-        Vec3* getPos();
+    struct Actor {
+        Vec3 *getPos();
+
+        void getViewActor(Vec3 *vec3,float val);
+
 
     };
 
-    class ActorDefinitionIdentifier{
+    class ActorDefinitionIdentifier {
     public:
         std::string getName();
     };

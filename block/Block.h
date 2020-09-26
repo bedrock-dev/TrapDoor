@@ -5,9 +5,13 @@
 #include <vector>
 #include "common/BlockPos.h"
 
+struct Block;
+
 struct BlockLegacy {
 
     std::string getDebugText();
+
+    Block *tryGetStateBlock(unsigned short state);
 };
 
 struct Block {
@@ -39,14 +43,17 @@ struct BlockActor {
         return *reinterpret_cast<Block **>(reinterpret_cast<VA>(this) + 16);
     }
 };
-struct BaseCircuitComponent{
+
+struct BaseCircuitComponent {
     int getStrength();
+
     int getVar2();
+
     void printSource();
 };
 
 
-struct CircuitSceneGraph{
+struct CircuitSceneGraph {
     BaseCircuitComponent *getBaseCircuitComponent(BlockPos *pos);
 };
 

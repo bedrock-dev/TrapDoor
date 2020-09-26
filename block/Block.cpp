@@ -134,6 +134,14 @@ std::string BlockLegacy::getDebugText() {
     return std::string("text");
 }
 
+Block *BlockLegacy::tryGetStateBlock(unsigned short state) {
+    return SYM_CALL(
+            Block *(*)(BlockLegacy * , unsigned short),
+            MSSYM_B1QE25tryGetStateFromLegacyDataB1AE11BlockLegacyB2AAE13QEBAPEBVBlockB2AAA1GB1AA1Z,
+            this, state
+    );
+}
+
 Block *BlockSource::getBlock(int x, int y, int z) {
     return SYM_CALL(
             Block* (*)(void * , int, int, int),
@@ -150,9 +158,9 @@ void BlockSource::setBlock(BlockPos *blockPos, Block *block) {
     SYM_CALL(
             void(*)(void * , BlockPos *, void *, int, void *),
             MSSYM_B1QA8setBlockB1AE11BlockSourceB2AAA4QEAAB1UE13NAEBVBlockPosB2AAA9AEBVBlockB2AAE26HPEBUActorBlockSyncMessageB3AAAA1Z,
-            this, blockPos, block, 0, nullptr
+            this, blockPos, block, 3, nullptr
     );
-    this->updateNeighborsAt(blockPos);
+    // this->updateNeighborsAt(blockPos);
 }
 
 void BlockSource::updateNeighborsAt(const BlockPos *pos) {
@@ -229,3 +237,14 @@ THook(
     return original(graph, pos);
 }
 
+THook(
+        void,
+        MSSYM_B1QE13setExtraBlockB1AE11BlockSourceB2AAA4QEAAB1UE13NAEBVBlockPosB2AAA9AEBVBlockB2AAA1HB1AA1Z,
+        BlockSource *source,
+        BlockPos *pos,
+        Block *block,
+        int flag
+) {
+    dbg("set extra block");
+    //no origin call()
+}

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.17)
 project(TrapDoor)
 
 set(CMAKE_CXX_STANDARD 17)
-#set(CMAKE_CXX_FLAGS "/IGNORE:C4819")
+set(CMAKE_CXX_FLAGS  "/wd4819 /EHsc")
 include_directories(.)
 add_library(TrapDoor SHARED
         dllmain.cpp

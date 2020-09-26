@@ -73,7 +73,8 @@ Player::tickWorld
 ?setNameTag@Actor@@UEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
 #获取生物的debug信息
 ?buildDebugInfo@Mob@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-
+#获取玩家视角
+?getViewVector@Actor@@QEBA?AVVec3@@M@Z
 
 
 ################################方块信息###################################
@@ -114,6 +115,10 @@ Player::tickWorld
 ?getDebugText@BlockLegacy@@QEBAXAEAV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@AEBVBlockPos@@@Z
 #获取方块实体的调试信息
 ?getDebugText@BlockActor@@UEAAXAEAV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@AEBVBlockPos@@@Z
+#设置额外方块
+?setExtraBlock@BlockSource@@QEAA_NAEBVBlockPos@@AEBVBlock@@H@Z
+#获取具有特殊值的方块?
+?tryGetStateFromLegacyData@BlockLegacy@@QEBAPEBVBlock@@G@Z
 ########################################村庄#######################################
 
 #村庄更新
@@ -151,8 +156,9 @@ Player::tickWorld
 ######################################物品#######################################
 #获取物品名字
 ?getName@ItemStackBase@@QEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
-#实体使用物品
-?useItem@Actor@@UEAAXAEAVItemStack@@W4ItemUseMethod@@_N@Z
+#实体对方块使用物品
+?useOn@Item@@QEBA_NAEAVItemStack@@AEAVActor@@HHHEMMM@Z
+
 #########################################红石#############################################
 #获取红石组件
 ?getBaseComponent@CircuitSceneGraph@@QEAAPEAVBaseCircuitComponent@@AEBVBlockPos@@@Z

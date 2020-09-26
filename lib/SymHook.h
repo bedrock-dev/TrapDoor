@@ -87,6 +87,10 @@ namespace SymHook{
 	// [符号] ?buildDebugInfo@Mob@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
 	constexpr RVA MSSYM_B1QE14buildDebugInfoB1AA3MobB2AAA9UEBAXAEAVB2QDA5basicB1UA6stringB1AA2DUB2QDA4charB1UA6traitsB1AA1DB1AA3stdB2AAA1VB2QDA9allocatorB1AA1DB1AA12B2AAA3stdB3AAAA1Z = 0x006F1660;
 
+	// [原型] public: class Vec3 __cdecl Actor::getViewVector(float)const __ptr64
+	// [符号] ?getViewVector@Actor@@QEBA?AVVec3@@M@Z
+	constexpr RVA MSSYM_B1QE13getViewVectorB1AA5ActorB2AAA4QEBAB1QA6AVVec3B2AAA1MB1AA1Z = 0x005518A0;
+
 	// [原型] private: virtual bool __cdecl DyePowderItem::_useOn(class ItemStack & __ptr64,class Actor & __ptr64,class BlockPos,unsigned char,float,float,float)const __ptr64
 	// [符号] ?_useOn@DyePowderItem@@EEBA_NAEAVItemStack@@AEAVActor@@VBlockPos@@EMMM@Z
 	constexpr RVA MSSYM_B2QUA5useOnB1AE13DyePowderItemB2AAA4EEBAB1UE14NAEAVItemStackB2AAA9AEAVActorB2AAA9VBlockPosB2AAA4EMMMB1AA1Z = 0x007D1EB0;
@@ -151,6 +155,14 @@ namespace SymHook{
 	// [符号] ?getDebugText@BlockActor@@UEAAXAEAV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@AEBVBlockPos@@@Z
 	constexpr RVA MSSYM_MD5_b5a16de43d7486d6e9b23cfb126773a7 = 0x0089A7A0;
 
+	// [原型] public: bool __cdecl BlockSource::setExtraBlock(class BlockPos const & __ptr64,class Block const & __ptr64,int) __ptr64
+	// [符号] ?setExtraBlock@BlockSource@@QEAA_NAEBVBlockPos@@AEBVBlock@@H@Z
+	constexpr RVA MSSYM_B1QE13setExtraBlockB1AE11BlockSourceB2AAA4QEAAB1UE13NAEBVBlockPosB2AAA9AEBVBlockB2AAA1HB1AA1Z = 0x00A12970;
+
+	// [原型] public: class Block const * __ptr64 __cdecl BlockLegacy::tryGetStateFromLegacyData(unsigned short)const __ptr64
+	// [符号] ?tryGetStateFromLegacyData@BlockLegacy@@QEBAPEBVBlock@@G@Z
+	constexpr RVA MSSYM_B1QE25tryGetStateFromLegacyDataB1AE11BlockLegacyB2AAE13QEBAPEBVBlockB2AAA1GB1AA1Z = 0x008D54C0;
+
 	// [原型] public: void __cdecl Village::tick(struct Tick,class BlockSource & __ptr64) __ptr64
 	// [符号] ?tick@Village@@QEAAXUTick@@AEAVBlockSource@@@Z
 	constexpr RVA MSSYM_B1QA4tickB1AA7VillageB2AAE10QEAAXUTickB2AAE15AEAVBlockSourceB3AAAA1Z = 0x00641170;
@@ -199,9 +211,9 @@ namespace SymHook{
 	// [符号] ?getName@ItemStackBase@@QEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
 	constexpr RVA MSSYM_B1QA7getNameB1AE13ItemStackBaseB2AAA4QEBAB1QA2AVB2QDA5basicB1UA6stringB1AA2DUB2QDA4charB1UA6traitsB1AA1DB1AA3stdB2AAA1VB2QDA9allocatorB1AA1DB1AA12B2AAA3stdB2AAA2XZ = 0x007F5D20;
 
-	// [原型] public: virtual void __cdecl Actor::useItem(class ItemStack & __ptr64,enum ItemUseMethod,bool) __ptr64
-	// [符号] ?useItem@Actor@@UEAAXAEAVItemStack@@W4ItemUseMethod@@_N@Z
-	constexpr RVA MSSYM_B1QA7useItemB1AA5ActorB2AAE18UEAAXAEAVItemStackB2AAE15W4ItemUseMethodB3AAUA1NB1AA1Z = 0x00566020;
+	// [原型] public: bool __cdecl Item::useOn(class ItemStack & __ptr64,class Actor & __ptr64,int,int,int,unsigned char,float,float,float)const __ptr64
+	// [符号] ?useOn@Item@@QEBA_NAEAVItemStack@@AEAVActor@@HHHEMMM@Z
+	constexpr RVA MSSYM_B1QA5useOnB1AA4ItemB2AAA4QEBAB1UE14NAEAVItemStackB2AAA9AEAVActorB2AAA7HHHEMMMB1AA1Z = 0x007E9BC0;
 
 	// [原型] public: class BaseCircuitComponent * __ptr64 __cdecl CircuitSceneGraph::getBaseComponent(class BlockPos const & __ptr64) __ptr64
 	// [符号] ?getBaseComponent@CircuitSceneGraph@@QEAAPEAVBaseCircuitComponent@@AEBVBlockPos@@@Z

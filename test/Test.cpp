@@ -7,9 +7,10 @@
 #include <string>
 
 int main() {
-    int a = 1;
-    int b = 2;
-    dbg("%d %d",a,b);
+
+    int a;
+    std::cin>>a;
+    int map[a][a];
     return 0;
 }
 

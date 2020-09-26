@@ -10,11 +10,13 @@
 #include "common/Common.h"
 #include "tools/Message.h"
 #include <queue>
+#include "entity/Actor.h"
 
 using namespace SymHook;
 
 MeasureManager measureManager;
-//VanillaServerGameplayEventListener::onBlockPlacedByPlayer(Player &,Block const &,BlockPos const &,bool)	.text	0000000140BD0EF0	000002A6	00000188	00000008	R	.	.	.	.	T	.
+int piston_aux = 0;
+//player place block
 THook(
         int64_t,
         MSSYM_B1QE21onBlockPlacedByPlayerB1AE34VanillaServerGameplayEventListenerB2AAA4UEAAB1QE14AW4EventResultB2AAE10AEAVPlayerB2AAA9AEBVBlockB2AAE12AEBVBlockPosB3AAUA1NB1AA1Z,
@@ -29,27 +31,16 @@ THook(
         measureManager.setPos1(pos);
     } else if (name == "minecraft:crimson_planks") {
         measureManager.setPos2(pos);
-    } else if (name == "minecraft:stone" || name == "minecraft:dirt") {
-        if (globalCircuitSceneGraph) {
-            auto p = BlockPos(pos.x, pos.y - 1, pos.z);
-            if (name == "minecraft:dirt")--p.y;
-            auto component = globalCircuitSceneGraph->getBaseCircuitComponent(&p);
-            if (component) {
-                component->printSource();
-            }
-        }
     }
+    dbg(name);
     return original(self, player, block, pos, flag);
 
-//    dbg(name);
 }
-//BlockLegacy *this, struct Player *a2, const struct BlockPos *a3, const struct Block *a4)
-//player destroy block
 
 
+//player destroy block chained
 void chainDestroy(const BlockPos *pos, const std::string &blockName, int max) {
     auto air = globalBlockSource->getBlock(*pos);
-    gamePrintf("chain destroy");
     std::queue<BlockPos> destroyQueue;
     destroyQueue.push(*pos);
     int num = 0;
@@ -68,6 +59,11 @@ void chainDestroy(const BlockPos *pos, const std::string &blockName, int max) {
     }
 }
 
+
+
+
+
+//player destroy block
 THook(
         void,
         MSSYM_B2QUE20destroyBlockInternalB1AA8GameModeB2AAA4AEAAB1UE13NAEBVBlockPosB2AAA1EB1AA1Z,
@@ -106,6 +102,7 @@ void MeasureManager::setPos2(const BlockPos pos) {
         sendSetInfo(2);
     }
 }
+
 
 void MeasureManager::print() {
     auto d1 = math::distance(pos1.toVec3(), pos2.toVec3());

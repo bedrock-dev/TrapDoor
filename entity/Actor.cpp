@@ -28,6 +28,14 @@ namespace actor {
         );
     }
 
+    void Actor::getViewActor(Vec3 *vec3, float val) {
+        SYM_CALL(
+                Vec3*(*)(Actor * , Vec3 *, float),
+                MSSYM_B1QE13getViewVectorB1AA5ActorB2AAA4QEBAB1QA6AVVec3B2AAA1MB1AA1Z,
+                this, vec3, val
+        );
+    }
+
 
     std::string ActorDefinitionIdentifier::getName() {
         auto str = reinterpret_cast<std::string *>((char *) this + 32);
@@ -177,7 +185,7 @@ THook(
         Vec3 *pos,
         int flag
 ) {
-    printf("   constructor (%f, %f, %f)\n", pos->x, pos->y, pos->z);
+    // printf("   constructor (%f, %f, %f)\n", pos->x, pos->y, pos->z);
     original(self, actorID, actor, pos, flag);
 }
 
@@ -185,11 +193,11 @@ THook(
         void,
         MSSYM_B1QA6setPosB1AA5ActorB2AAE13UEAAXAEBVVec3B3AAAA1Z,
         void *self,
-        Vec3 *pos
-        ){
-    if(self != globalPlayer){
-        printf("set pos: (%f, %f, %f)\n", pos->x, pos->y, pos->z);
-    }
-    original(self,pos);
+        Vec3 * pos
+) {
+//    if(self != globalPlayer){
+//        printf("set pos: (%f, %f, %f)\n", pos->x, pos->y, pos->z);
+//    }
+    original(self, pos);
 }
 

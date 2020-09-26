@@ -1,6 +1,8 @@
 // dllmain.cpp : 定义 DLL 应用程序的入口点。
 #include  "lib/pch.h"
 
+#define DBG_MACRO_NO_WARNING
+
 void mod_init();
 
 void mod_exit();

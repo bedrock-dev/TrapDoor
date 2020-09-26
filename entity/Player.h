@@ -29,7 +29,6 @@ public:
 
 };
 
-
 extern MeasureManager measureManager;
 
 #endif //TRAPDOOR_PLAYER_H
