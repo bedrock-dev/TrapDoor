@@ -1,119 +1,93 @@
-# TrapDoor 
+V0.2.0 **Current only support Minecraft Bedrock Edition 1.16.10.02**
 
-English is [here](https://github.com/hhhxiao/TrapDoor/blob/master/README-en.md)
+ 中文在  [这里](https://github.com/hhhxiao/TrapDoor/blob/master/README-zh.md)
 
-V0.2.0 **仅支持MCBE1.16.10.02正式版**
-开源地址:[https://github.com/hhhxiao/TrapDoor/](https://github.com/hhhxiao/TrapDoor/)
-本项在[https://github.com/zhkj-liuxiaohua/MCMODDLL-CPP]( https://github.com/zhkj-liuxiaohua/MCMODDLL-CPP )的基础上开发而成
-欢迎给这两个项目star
-
-### 使用:
-
-`release`中的文件只是单纯的`dll`文件，你**需要下载一个dll注入器才能启动游戏**，dll注入器你可以前往[https://github.com/DarthTon/Xenos/releases/tag/2.3.2](https://github.com/DarthTon/Xenos/releases/tag/2.3.2) 下载。下载完后运行`Xenos64.exe`，剩下的看下图即可:
+### What‘s this
+This is a BDS-based server plugin which provides some useful functions to help player understandning the game. I want it can play a role like **capert-mod-be**
+### How to use
+1. The release only provide a`Trapdoor.dll`file.To use this,you **need to prepare a DLL injetor**，here is an avaliable one: [https://github.com/DarthTon/Xenos/releases/tag/2.3.2](https://github.com/DarthTon/Xenos/releases/tag/2.3.2) 
+2. you need to enable the loopback of Minecraft Windows 10 UWP APP. click [here](https://www.google.com/search?sxsrf=ALeKk02SoLVvT6Rg8w5sAViKIJtnPDjx_Q%3A1601094611292&ei=08NuX5W6EcKbmAWT7KjwAg&q=how+to+enable+loopback+for+a+UWP+app&oq=how+to+enable+loopback+for+a+UWP+app&gs_lcp=CgZwc3ktYWIQAzoECCMQJzoFCCEQoAE6BwghEAoQoAFQkiNY_kpgmE5oA3AAeACAAdsDiAGHHpIBCDItMTEuMS4ymAEAoAEBqgEHZ3dzLXdpesABAQ&sclient=psy-ab&ved=0ahUKEwjV77qc_oXsAhXCDaYKHRM2Ci4Q4dUDCA0&uact=5) to seaech in google
+3. prepare the BDS file for windows 1.16.10.2
+4. double click the`Xenos64.exe`,click  `add`  to select the dll file,then click `select`  to select `bedrock_server.exe`
+5. click `Inject` to start the server
+6. open you game , in Servers tab  click `add Server`, set Server address  to `127.0.0.1`,  port is dealut `19132`  then enjoy it.
 
 ![](./img/howto.png)
 
-上面点`new`后会弹出窗口，选择服务端文件`bedrock_server.exe`即可。然后点`add`添加`dll`文件，最后点`Inject`启动服务器。
 
-使用其它的注入器请自行探索用法。
-
-> 注意: 你需要开启MC的loop back，不然无法连接本地服务端
-
-
-### 功能介绍:
+### Command list
 
 #### ./tick
 
-- `./tick fz` 暂停世界运行,包括区块加载，更新，实体更新，红石信号更新等等等行为。
-- `./tick r` 恢复世界到正常状态
-- `./tick slow num` 世界运行放慢num倍
-- `./tick fw num` 步进n个游戏刻(如果tick数太多会导致客户端暂时没响应，请耐心等待，开始结束会有提示)
+- `./tick fz`  to freeze the world ticking,such as chunk (un)load,chunk tick, tick redstone and so on 
+- `./tick slow num` set the world ticking speed [num] times slower than default
+- `./tick fw num` forward [num] ticks 
+- `./tick r` reset the world ticking to default
 
+#### ./prof
 
-
-实现原理解析:
-
-下面是服务器每gt执行的函数其中叶子节点包含在上一级节点內部
-
-```
--- Dimension::updateRedstone() 更新所有红石原件的内部信号,这个时候就算红石灯收到信号也不会量，因为它还没收到更新，活塞同理
--- Level::tick()  更新除了红石之外的世界所有东西
-	-- Dimension::tick() 区块加载和卸载，村庄更新
-	-- ServerPlayer::tickWorld()  更新玩家所在的区域
-		-- LevelChunk::tick()  区块加载
-		--  LevelChunk::tickBlocks() 随机刻和环境更新(下雨，结冰等等)
-		--  LevelChunk::tickEntities() 方块实体更新，到这个时候活塞才会对伸出作出反应，漏斗也会漏东西
-		-- Spawner::tick()
-		-- Others 包括计划刻更新等等
-  -- others
-```
-
-`fz` 做的就是每gt都阻止`Dimension::updateRedstone() 和Level::tick()`函数的执行
-
-`slow`就更傻逼了，放慢了n倍就设置一个模n的计数器，只有计数器能倍n整除的时候才执行上面两个函数
-
-`fw`也是一样的，连续执行n次上述两个函数 
-
-#### 性能分析
-
-性能分析目前仅支持下面一个指令
-
-- `./prof` 性能分析，显示红石，世界运行，随机刻更新，方块实体更新，刷怪等的时间占用以及mspt(统计100gt的数据，因此数据显示会有5s的延迟)(请在./tick r后执行，不然不准)
-
-原理分析：用高精度计时器在100gt内计算上述各函数的执行时间，然后平均就行了。
+- Proflie the world ticking，including mspt, redstone tick,random tick,block entity tick,spawn tick and so on. the mod will print the average run time in the next 100 gt.
 
 #### Villiage
 
-村庄相关目前有两个指令
+- `./vill list ` list all villages' som useful  imformation,these information is ：
+  - center
+  - radius
+  - worked dwellers number
+  - population
+  - golem number in current village
+  - bedPOI  number(include claimed and unclaimed)
+  - can spawn irom golem or not
+  - bounds
+- `./vill draw [true/false]` [enable/disable] the display of ticking villages' bounds and center 
 
-- `./vill list `列出正在ticking的村庄 村庄边界 村庄中心 村庄半径
-- `./vill draw [true/false]` 开启/关闭村庄范围和中心的显示，爱心粒子是村庄中心，龙息粒子是边框
+> notice: the above two commands can only be used in **ticking villages**
 
-注意`list`是列出**在ticking的村庄，不是所有在加载区块内的村庄都会加载**，这个指令能直观地告诉你玩家在某个挂机点的时候刷帖机的核心数到底是多少，有多少个村子在有效更新。
+#### Spawn
 
-村庄边界的格式: `center,radius,workded/population golem,bedPOI canSpawnGolem,bounds `边界矩形框两个对角线的坐标，中心是矩形框的中心，`radius`是村庄半径,`worked`是工作过的村民数,`population`是当前村庄的村民数,`goldem`是属于该村庄的铁傀儡数，`bedPOI`是村庄拥有(已和村民绑定的)床的数量。
+- `./actor start` start a mob spawn counter
+- `./actor end`  to end a mob spawn counter
+- `./actor p` to print the counter result，the first line is number of ticks，follow part  is spawn mobs' type and num , the third part is a histogram of `distanceToPalyer - num`(**this part seems wrong**)，the last part is a histogram of `heght(y)-num`
+- `./actor info` to list some info, currently only support global total mob num
 
-实现原理：维护了一个全局的村庄集合，每gt只要有village调用tick函数，它就会被加入set，这个集合会每5s清一次，方便从集合中移除被游戏移除的村庄
+### Hopper counter
 
-#### 刷怪
+> this function is from carpet
 
-- `./actor start` 开始计数器，插件开始统计所有生成的生物
-- `./actor end` 结束计数器
-- `./actor p`打印统计结果，第一行是计时器经过的时间，第二行是各种生物的数量，第三行是刷怪点到玩家的距离(玩家打本条指令时的距离)分布(这一条好像数据有问题)，后面是每一行是每一个`y`值的刷怪数量
-- `./actor info`列出一些刷怪信息，目前只有全局生物数量(大于小于200就不刷怪的那个数量)，如有更新会添加
+Different from carpet, this mod only provides 5 channels ,they are:
 
-### 漏斗计数器
+- diamond_block 0
+- emerald_block 1
+- iron_block 2
+- gold_block 3
+- lapis_block 4
 
-> 这个功能完全抄`carpet`的
+after you type`./func hc true`，all the hoppers above these hoppers will have an unlimited capacity.you can type`./counter channel p` to print the absorbing items' name , number and speed 。Please  use `./counter channel reset` to reset the data of one chaeenl.  please **use number or not block name** to replace `channel`  in above commands.
 
-一共有五个频道
+### Distance measure
 
-- 钻石 0
-- 绿宝石 1
-- 铁 2
-- 金 3
-- 青金石 4
+After you use `./func pm true`， the two kinds new planks will become the distance measure tools. the screen will print the distance information between the two points. 
 
-在你用`./func hc true`后，放在这些矿物块上的漏斗会变成无尽的漏斗，所有吸入的东西都没了，但是数据会保留下来.你可以用`./counter channel p`来查看这些漏斗吸收的物品数据,包括每种物品的个数和吸入平均速率。用`./counter channel reset`来重置某个频道的所有漏斗。`channel`选填`[0-4]`.
+#### Others
 
-### 测距
+- `./config pvd [distance]`  set the village particles max view distance(to decrease network load) default is 128 
+- `./func explosion [true/false]`  disable/enable explosion destroy blocks.
+- `./help ` show some help information and credits.
 
-> 移除了 `./p`指令
+### Notice
 
-在你使用`./func pm true`后，1.16新增的两种地狱菌类的木板会作为测距点，你挨个放置这两个方块的时候屏幕会显示这两个点之间欧式距离和曼哈顿距离，括号内的数据是忽略`y`的平面数据。
+- if you have used `./tick` commands, please type `./tick r ` before left the game(or directly restart the server) 
+- Please backup you level
 
-#### 其它
+### Develop
 
-- `./config pvd [distance]` 控制村庄显示时候的粒子显示范围 默认是128 
-- `./func explosion [true/false]` 开启/关闭爆炸(tnt，苦力怕等)破坏方块
-- `./help `会显示一些简单的版本信息和帮助信息和感谢列表
+this poroject is build by cmake and complied by MSVC,to build this project you should download  `detours.lib` file 
 
-### 注意
+welcome pull requests.
 
-- 退出游戏之前请调用./tick r，不然因为时钟同步问题还会显示你在线上但你进不去服务器，这样只能重启服务器解决
-- 使用的时候建议备份存档，个人不能保证肯定不会对存档造成问题
-- 免责声明：如果本插件对你的存档造成损坏，概不负责，因此建议备份
-- 如果你有任何问题可以在issue中提出
+### Credit
+[https://github.com/zhkj-liuxiaohua/MCMODDLL-CPP]( https://github.com/zhkj-liuxiaohua/MCMODDLL-CPP )
 
-license : GPL
+### License
 
+GPL

@@ -15,22 +15,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b8a60db2-baf4-4087-8601-d054cc921b14" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/block/Block.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/block/Block.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/block/Block.h" beforeDir="false" afterPath="$PROJECT_DIR$/block/Block.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dllmain.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/dllmain.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/Actor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Actor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/Actor.h" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Actor.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/Item.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Item.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/Player.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Player.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/Player.h" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Player.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/SymHook.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/SymHook.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symbol.txt" beforeDir="false" afterPath="$PROJECT_DIR$/symbol.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/Test.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tick/Tick.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tick/Tick.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/MathTool.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tools/MathTool.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/MathTool.h" beforeDir="false" afterPath="$PROJECT_DIR$/tools/MathTool.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +132,7 @@
       <workItem from="1601087505213" duration="1261000" />
       <workItem from="1601093604381" duration="3000" />
       <workItem from="1601113047540" duration="3503000" />
-      <workItem from="1601117410686" duration="10784000" />
+      <workItem from="1601117410686" duration="11094000" />
     </task>
     <servers />
   </component>
@@ -169,30 +153,30 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="505" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1549.831@0.0.1549.831" timestamp="1598412574378" />
-    <state width="1528" height="89" key="GridCell.Tab.0.bottom" timestamp="1601125956928">
+    <state width="1528" height="89" key="GridCell.Tab.0.bottom" timestamp="1601135052516">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state width="1528" height="89" key="GridCell.Tab.0.bottom/0.0.1549.831@0.0.1549.831" timestamp="1601125956928" />
-    <state width="1528" height="89" key="GridCell.Tab.0.center" timestamp="1601125956927">
+    <state width="1528" height="89" key="GridCell.Tab.0.bottom/0.0.1549.831@0.0.1549.831" timestamp="1601135052516" />
+    <state width="1528" height="89" key="GridCell.Tab.0.center" timestamp="1601135052516">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state width="1528" height="89" key="GridCell.Tab.0.center/0.0.1549.831@0.0.1549.831" timestamp="1601125956927" />
-    <state width="1528" height="89" key="GridCell.Tab.0.left" timestamp="1601125956927">
+    <state width="1528" height="89" key="GridCell.Tab.0.center/0.0.1549.831@0.0.1549.831" timestamp="1601135052516" />
+    <state width="1528" height="89" key="GridCell.Tab.0.left" timestamp="1601135052516">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state width="1528" height="89" key="GridCell.Tab.0.left/0.0.1549.831@0.0.1549.831" timestamp="1601125956927" />
-    <state width="1528" height="89" key="GridCell.Tab.0.right" timestamp="1601125956928">
+    <state width="1528" height="89" key="GridCell.Tab.0.left/0.0.1549.831@0.0.1549.831" timestamp="1601135052516" />
+    <state width="1528" height="89" key="GridCell.Tab.0.right" timestamp="1601135052516">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state width="1528" height="89" key="GridCell.Tab.0.right/0.0.1549.831@0.0.1549.831" timestamp="1601125956928" />
+    <state width="1528" height="89" key="GridCell.Tab.0.right/0.0.1549.831@0.0.1549.831" timestamp="1601135052516" />
     <state x="131" y="0" width="1170" height="707" key="SettingsEditor" timestamp="1601088680784">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="131" y="0" width="1170" height="707" key="SettingsEditor/0.0.1549.831@0.0.1549.831" timestamp="1601088680784" />
-    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1601134345624">
+    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1601134747290">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1549.831@0.0.1549.831" timestamp="1601134345624" />
+    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1549.831@0.0.1549.831" timestamp="1601134747290" />
     <state x="474" y="0" width="600" height="831" key="find.popup" timestamp="1598268539707">
       <screen x="0" y="0" width="1549" height="831" />
     </state>

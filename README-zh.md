@@ -1,30 +1,64 @@
-V0.2.0 **Current only support Minecraft Bedrock Edition 1.16.10.02**
+# TrapDoor 
 
-### What‘s this
-This is a BDS-based server plugin which provides some useful functions to help player understandning the game. I want it can play a role like **capert-mod-be**
-### How to use
-1. The release only provide a`Trapdoor.dll`file.To use this,you **need to prepare a DLL injetor**，here is an avaliable one: [https://github.com/DarthTon/Xenos/releases/tag/2.3.2](https://github.com/DarthTon/Xenos/releases/tag/2.3.2) 
-2. you need to enable the loopback of Minecraft Windows 10 UWP APP. click [here](https://www.google.com/search?sxsrf=ALeKk02SoLVvT6Rg8w5sAViKIJtnPDjx_Q%3A1601094611292&ei=08NuX5W6EcKbmAWT7KjwAg&q=how+to+enable+loopback+for+a+UWP+app&oq=how+to+enable+loopback+for+a+UWP+app&gs_lcp=CgZwc3ktYWIQAzoECCMQJzoFCCEQoAE6BwghEAoQoAFQkiNY_kpgmE5oA3AAeACAAdsDiAGHHpIBCDItMTEuMS4ymAEAoAEBqgEHZ3dzLXdpesABAQ&sclient=psy-ab&ved=0ahUKEwjV77qc_oXsAhXCDaYKHRM2Ci4Q4dUDCA0&uact=5) to seaech in google
-3. prepare the BDS file for windows 1.16.10.2
-4. double click the`Xenos64.exe`,click  `add`  to select the dll file,then click `select`  to select `bedrock_server.exe`
-5. click `Inject` to start the server
-6. open you game , set IP to `127.0.0.1`, then enjoy.
+V0.2.0 **仅支持MCBE1.16.10.02正式版**
+开源地址:[https://github.com/hhhxiao/TrapDoor/](https://github.com/hhhxiao/TrapDoor/)
+本项在[https://github.com/zhkj-liuxiaohua/MCMODDLL-CPP]( https://github.com/zhkj-liuxiaohua/MCMODDLL-CPP )的基础上开发而成
+欢迎给这两个项目star
+
+### 使用:
+
+`release`中的文件只是单纯的`dll`文件，你**需要下载一个dll注入器才能启动游戏**，dll注入器你可以前往[https://github.com/DarthTon/Xenos/releases/tag/2.3.2](https://github.com/DarthTon/Xenos/releases/tag/2.3.2) 下载。下载完后运行`Xenos64.exe`，剩下的看下图即可:
 
 ![](./img/howto.png)
 
+上面点`new`后会弹出窗口，选择服务端文件`bedrock_server.exe`即可。然后点`add`添加`dll`文件，最后点`Inject`启动服务器。
 
-### Command list
+使用其它的注入器请自行探索用法。
+
+> 注意: 你需要开启MC的loop back，不然无法连接本地服务端
+
+
+### 功能介绍:
 
 #### ./tick
 
-- `./tick fz`  to freeze the world ticking,such as chunk (un)load,chunk tick, tick redstone and so on 
-- `./tick slow num` set the world ticking speed [num] times slower then default
-- `./tick fw num` forward [num] ticks 
-- `./tick r` reset the world ticking to default
+- `./tick fz` 暂停世界运行,包括区块加载，更新，实体更新，红石信号更新等等等行为。
+- `./tick r` 恢复世界到正常状态
+- `./tick slow num` 世界运行放慢num倍
+- `./tick fw num` 步进n个游戏刻(如果tick数太多会导致客户端暂时没响应，请耐心等待，开始结束会有提示)
 
-#### ./prof
 
-- Proflie the world ticking，including mspt, redstone tick,random tick,block entity tick,spawn tick and so on. the mod will print the average run time in the next 100 gt.
+
+实现原理解析:
+
+下面是服务器每gt执行的函数其中叶子节点包含在上一级节点內部
+
+```
+-- Dimension::updateRedstone() 更新所有红石原件的内部信号,这个时候就算红石灯收到信号也不会量，因为它还没收到更新，活塞同理
+-- Level::tick()  更新除了红石之外的世界所有东西
+	-- Dimension::tick() 区块加载和卸载，村庄更新
+	-- ServerPlayer::tickWorld()  更新玩家所在的区域
+		-- LevelChunk::tick()  区块加载
+		--  LevelChunk::tickBlocks() 随机刻和环境更新(下雨，结冰等等)
+		--  LevelChunk::tickEntities() 方块实体更新，到这个时候活塞才会对伸出作出反应，漏斗也会漏东西
+		-- Spawner::tick()
+		-- Others 包括计划刻更新等等
+  -- others
+```
+
+`fz` 做的就是每gt都阻止`Dimension::updateRedstone() 和Level::tick()`函数的执行
+
+`slow`就更傻逼了，放慢了n倍就设置一个模n的计数器，只有计数器能倍n整除的时候才执行上面两个函数
+
+`fw`也是一样的，连续执行n次上述两个函数 
+
+#### 性能分析
+
+性能分析目前仅支持下面一个指令
+
+- `./prof` 性能分析，显示红石，世界运行，随机刻更新，方块实体更新，刷怪等的时间占用以及mspt(统计100gt的数据，因此数据显示会有5s的延迟)(请在./tick r后执行，不然不准)
+
+原理分析：用高精度计时器在100gt内计算上述各函数的执行时间，然后平均就行了。
 
 #### Villiage
 
@@ -79,7 +113,5 @@ This is a BDS-based server plugin which provides some useful functions to help p
 - 免责声明：如果本插件对你的存档造成损坏，概不负责，因此建议备份
 - 如果你有任何问题可以在issue中提出
 
-### Credit
-[https://github.com/zhkj-liuxiaohua/MCMODDLL-CPP]( https://github.com/zhkj-liuxiaohua/MCMODDLL-CPP )
-
 license : GPL
+
