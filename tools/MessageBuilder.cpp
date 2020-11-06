@@ -4,6 +4,7 @@
 #include "MessageBuilder.h"
 #include "type_traits"
 #include "Message.h"
+#include "entity/Actor.h"
 
 const uint8_t MessageBuilder::BLACK = 0x0;
 const uint8_t MessageBuilder::DARK_READ = 0x4;
@@ -79,8 +80,10 @@ MessageBuilder &MessageBuilder::sText(const std::string &s, uint8_t style) {
     return *this;
 }
 
-void MessageBuilder::send() {
-    info(get());
+void MessageBuilder::send(Actor *actor) {
+    info(actor,get());
+    //todo: rewrite
+    // info(get());
 }
 
 

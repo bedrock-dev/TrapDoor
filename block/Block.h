@@ -30,6 +30,8 @@ struct BlockSource {
     void setBlock(BlockPos *, Block *block);
 
     void updateNeighborsAt(const BlockPos *pos);
+
+
 };
 
 
@@ -49,7 +51,19 @@ struct BaseCircuitComponent {
 
     int getVar2();
 
-    void printSource();
+    int getPowerCount();
+
+    int getAcceptHalfPulse();
+
+    int getHalfPulse();
+
+    void setAcceptHalfPulse();
+
+    void basePrint();
+
+    void printRepeater();
+
+    void printTorch(BlockPos blockPos);
 };
 
 

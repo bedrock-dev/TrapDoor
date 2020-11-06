@@ -3,7 +3,7 @@
 //
 #include "Particle.h"
 #include "common/Common.h"
-#include "../lib/mod.h"
+#include "lib/mod.h"
 #include <string>
 
 using namespace SymHook;
@@ -16,13 +16,15 @@ namespace particle {
 }
 
 void spawnParticle(Vec3 p, std::string &type) {
-    if (math::distance(p, *actor::getPos(globalPlayer)) > particleViewDistance)return;
+
+    //todo rewrite distance check
+    //   if (math::distance(p, *getPos(globalPlayer)) > particleViewDistance)return;
     p.x += 0.5;
     p.y += 0.5;
     p.z += 0.5;
     if ((!globalLevel || !globalDimension))return;
     SYM_CALL(
-            void(*)(void * , std::string, Vec3 *, void *),
+            void(*)(Level * , std::string, Vec3 *, void *),
             MSSYM_MD5_a2fdc6a066bbe9a360c9c9d76725a8fb,
             globalLevel, type, &p, globalDimension
     );

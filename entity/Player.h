@@ -6,9 +6,8 @@
 #define TRAPDOOR_PLAYER_H
 
 #include "common/BlockPos.h"
-#include "common/Common.h"
-#include "tools/MathTool.h"
-#include "tools/MessageBuilder.h"
+#include <vector>
+#include <set>
 
 class MeasureManager {
     BlockPos pos1{};

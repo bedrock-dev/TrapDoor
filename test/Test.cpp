@@ -7,11 +7,8 @@
 #include <string>
 
 int main() {
-
-    int a;
-    std::cin>>a;
-    int map[a][a];
+    std::string s = "QAQ";
+    auto b = "ccc" + s;
+    std::cout<<b;
     return 0;
 }
-
-

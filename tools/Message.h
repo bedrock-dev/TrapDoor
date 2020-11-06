@@ -1,37 +1,59 @@
 //
-// Created by xhy on 2020/8/24.
+// Created by xhy on 2020/10/31.
 //
 
 #ifndef TRAPDOOR_MESSAGE_H
 #define TRAPDOOR_MESSAGE_H
 
 #include "lib/mod.h"
-#include "common/Common.h"
 #include "dbg.h"
-#include "../lib/pch.h"
+#include "lib/pch.h"
+#include "entity/Actor.h"
+#include "level/Level.h"
+#include "common/Common.h"
+#include <string>
 
-using namespace SymHook;
+void mcbe_sendMessage(std::string &s, Actor *player);
 
-void sendLocalMessage(std::string &s, void *player);
 
 template<typename ... Args>
-void gamePrintf(const std::string &format, Args ... args) {
-    if (!globalPlayer)return;
-    size_t size = snprintf(nullptr, 0, format.c_str(), args ...) + 1;
+std::string stringFmt(const std::string &format, Args ... args) {
+    size_t size = snprintf(nullptr, 0, format.c_str(), args ...) + 1; // Extra space for '\0'
     if (size <= 0) {
-        throw std::runtime_error("Error during formatting.");
+        return std::string("");
     }
     std::unique_ptr<char[]> buf(new char[size]);
     snprintf(buf.get(), size, format.c_str(), args ...);
-    auto str = std::string(buf.get(), buf.get() + size - 1);
-    sendLocalMessage(str, globalPlayer);
+    return std::string(buf.get(), buf.get() + size - 1); // We don't want the '\0' inside
 }
 
-void info(const std::string &message);
+template<typename ... Args>
+void gamePrintf(Actor *player, const std::string &prefix, const std::string &format, Args ... args) {
+    auto str = prefix + stringFmt(format, args...);
+    mcbe_sendMessage(str, player);
+}
 
-void error(const std::string &message);
+template<typename ... Args>
+void waring(Actor *player, const std::string &format, Args ... args) {
+    gamePrintf(player, "§6[TD] ", format, args...);
+}
 
-void warning(const std::string &message);
+template<typename ... Args>
+void error(Actor *player, const std::string &format, Args ... args) {
+    gamePrintf(player, "§c[TD] ", format, args...);
+}
 
+template<typename ... Args>
+void info(Actor *player, const std::string &format, Args ... args) {
+    gamePrintf(player, "[TD] ", format, args...);
+}
+
+template<typename ... Args>
+void broadcastMsg(const std::string &format, Args ... args) {
+    auto msg = "[TD BR] " + stringFmt(format, args...);
+    globalLevel->forEachPlayer([&msg](Actor *player) {
+        mcbe_sendMessage(msg, player);
+    });
+}
 
 #endif //TRAPDOOR_MESSAGE_H

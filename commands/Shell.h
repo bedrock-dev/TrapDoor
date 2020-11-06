@@ -4,23 +4,24 @@
 
 #ifndef TRAPDOOR_SHELL_H
 #define TRAPDOOR_SHELL_H
+
 #include <vector>
 #include <string>
+
 enum class CmdType {
     Tick,
-    TickForward,
-    TickFreeze,
-    TickSlow,
-    TickReset,
+    Mspt,
     Profile,
     Village,
     Function,
     Help,
     Spawn,
     Config,
-    Counter
+    Counter,
+    Rand
 };
 typedef CmdType ParaType;
-std::vector <std::string> tokenize(std::string &commandString);
+
+void initCommand();
 
 #endif //TRAPDOOR_SHELL_H

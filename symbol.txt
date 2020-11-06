@@ -31,6 +31,8 @@
 
 
 ############################世界更新###################################
+#全局servertick
+?tick@ServerLevel@@UEAAXXZ
 #玩家tick世界
 Player::tickWorld
 # 服务器玩家tick世界
@@ -75,8 +77,8 @@ Player::tickWorld
 ?buildDebugInfo@Mob@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
 #获取玩家视角
 ?getViewVector@Actor@@QEBA?AVVec3@@M@Z
-
-
+#获取实体tag
+?getNameTag@Actor@@UEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
 ################################方块信息###################################
 #染料右击方块
 ?_useOn@DyePowderItem@@EEBA_NAEAVItemStack@@AEAVActor@@VBlockPos@@EMMM@Z
@@ -168,6 +170,8 @@ Player::tickWorld
 ?evaluate@ConsumerComponent@@UEAA_NAEAVCircuitSystem@@AEBVBlockPos@@@Z
 #红石线更新
 ?evaluate@TransporterComponent@@UEAA_NAEAVCircuitSystem@@AEBVBlockPos@@@Z
+#红石火把 更新
+?evaluate@RedstoneTorchCapacitor@@UEAA_NAEAVCircuitSystem@@AEBVBlockPos@@@Z
 
 
 #红石线cacheValue
@@ -178,8 +182,15 @@ Player::tickWorld
 ?cacheValues@RepeaterCapacitor@@UEAAXAEAVCircuitSystem@@AEBVBlockPos@@@Z
 #火把cacheValue
 ?cacheValues@RedstoneTorchCapacitor@@UEAAXAEAVCircuitSystem@@AEBVBlockPos@@@Z
-
+#火把计算能量等级
+?FindStrongestStrength@RedstoneTorchCapacitor@@AEAAHAEBVBlockPos@@AEAVCircuitSystem@@AEA_N@Z
 #设置坐标
 ?setPos@Actor@@UEAAXAEBVVec3@@@Z
 #构造实体
 ?_constructActor@ActorFactory@@AEAA?AV?$unique_ptr@VActor@@U?$default_delete@VActor@@@std@@@std@@AEBUActorDefinitionIdentifier@@AEBVVec3@@AEBVVec2@@@Z
+
+##############seed################
+#重置种子
+?_setSeed@Random@Core@@AEAAXI@Z
+#生成随机数
+?_genRandInt32@Random@Core@@AEAAIXZ

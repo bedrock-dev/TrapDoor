@@ -1,48 +1,46 @@
-#pragma once
 
-#include "common/Common.h"
-#include "lib/mod.h"
-#include "lib/SymHook.h"
-#include "spawn/Spawn.h"
+
+#ifndef TRAPDOOR_ACTOR_H
+#define TRAPDOOR_ACTOR_H
+
+#include "common/Vec3.h"
 #include <vector>
-#include <map>
-#include "../spawn/Spawn.h"
-#include "tools/Message.h"
+#include <string>
 
 /**
  * todo: need rewrite
  */
-namespace actor {
-    struct Actor {
-        Vec3 *getPos();
+class BlockSource;
 
-        void getViewActor(Vec3 *vec3,float val);
+class Actor {
+public:
+    Vec3 *getPos();
 
+    void getViewActor(Vec3 *vec3, float val);
 
-    };
+    std::string getNameTag();
 
-    class ActorDefinitionIdentifier {
-    public:
-        std::string getName();
-    };
+    BlockSource *getBlockSource();
 
+};
 
-    Vec3 *getPos(void *actor);
+class ActorDefinitionIdentifier {
+public:
+    std::string getName();
+};
 
-    std::string actorIDtoString(char *actorID);
+std::string actorIDtoString(char *actorID);
 
-    std::vector<std::string> getActorText(void *actor);
+std::vector<std::string> getActorText(void *actor);
 
-    void sendMobInfo();
+void sendMobInfo();
 
-    void startSpawnCounter();
+void startSpawnCounter();
 
-    void endSpawnerCounter();
+void endSpawnerCounter();
 
-    void spawnAnalysis(std::string &type);
+void spawnAnalysis(std::string &type);
 
-    std::string getActorName(void *actor);
+std::string getActorName(void *actor);
 
-
-}
-
+#endif

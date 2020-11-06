@@ -16,9 +16,11 @@
 #include "lib/pch.h"
 #include "lib/mod.h"
 #include <map>
-#include "common/BlockPos.h"
 #include <array>
 #include <vector>
+
+class Actor;
+
 
 class CounterChannel {
     const size_t channel;
@@ -29,7 +31,7 @@ public:
 
     void reset();
 
-    void print();
+    void print(Actor *actor);
 
     void add(const std::string &itemName, size_t num);
 
@@ -57,9 +59,9 @@ public:
 
     void printAll();
 
-    void printChannel(size_t channel);
+    void printChannel(Actor *player , size_t channel);
 
-    void resetChannel(size_t channel);
+    void resetChannel(Actor *player,size_t channel);
 };
 
 extern ChannelManager hopperCounterManager;

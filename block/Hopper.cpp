@@ -4,7 +4,7 @@
 
 #include "Hopper.h"
 #include "entity/Item.h"
-#include "block/Block.h"
+#include "Block.h"
 #include "common/Common.h"
 #include "tools/Message.h"
 #include "tools/MessageBuilder.h"
@@ -19,9 +19,9 @@ const std::map<std::string, size_t> ChannelManager::BLOCK_NAME_CHANNEL_MAPPER = 
 };
 
 void ChannelManager::printAll() {
-    for (auto channel:this->channels) {
-        channel.print();
-    }
+//    for (auto channel:this->channels) {
+//        channel.print();
+//    }
 }
 
 void ChannelManager::tick() {
@@ -31,20 +31,20 @@ void ChannelManager::tick() {
     }
 }
 
-void ChannelManager::printChannel(size_t channel) {
+void ChannelManager::printChannel(Actor *player, size_t channel) {
     if (channel < 0 || channel > 4) {
-        error("this channel do not exist");
+        error(player, "this channel do not exist");
     } else {
-        getChannel(channel).print();
+        getChannel(channel).print(player);
     }
 }
 
-void ChannelManager::resetChannel(size_t channel) {
+void ChannelManager::resetChannel(Actor *player, size_t channel) {
     if (channel < 0 || channel > 4) {
-        error("this channel do not exist");
+        error(player, "this channel do not exist");
     } else {
         getChannel(channel).reset();
-        info("channel reset");
+        broadcastMsg("channel[%zu] reset", channel);
     }
 }
 
@@ -62,18 +62,23 @@ THook(
     if (enableHopperCounter) {
         std::string itemName = itemStack->getItemName();
         int stackNum = itemStack->getNum();
-
-        auto block = globalBlockSource->getBlock(blockPos->x, blockPos->y - 1, blockPos->z);
+        BlockPos pos(blockPos->x, blockPos->y, blockPos->z);
+        auto nearestPlayer = globalLevel->getNearestPlayer(pos);
+        if (!nearestPlayer) {
+            original(hopperActor, index, itemStack);
+            return;
+        }
+        auto blockSource = nearestPlayer->getBlockSource();
+        auto block = blockSource->getBlock(blockPos->x, blockPos->y - 1, blockPos->z);
         std::string blockName = block->getName();
-
         //find channel
+        // dbg(blockName);
         auto result = ChannelManager::BLOCK_NAME_CHANNEL_MAPPER.find(blockName);
         if (result != ChannelManager::BLOCK_NAME_CHANNEL_MAPPER.end()) {
-            if (globalPlayer && !itemName.empty()) {
+            if (!itemName.empty()) {
                 hopperCounterManager.getChannel(result->second).add(itemName, stackNum);
             }
         }
-
     } else {
         original(hopperActor, index, itemStack);
     }
@@ -88,14 +93,14 @@ void CounterChannel::reset() {
     counterList.clear();
 }
 
-void CounterChannel::print() {
+void CounterChannel::print(Actor *actor) {
 
     int num = 0;
     for (const auto &i:this->counterList) {
         num += i.second;
     }
     if (this->tick == 0 || num == 0) {
-        info("no data in this channel");
+        info(actor, "no data in this channel");
         return;
     }
     std::vector<uint8_t> color = {
@@ -119,7 +124,7 @@ void CounterChannel::print() {
                 .text("  (")
                 .num((float) i.second * 72000 / (float) tick)
                 .text("/h)\n");
-        // gamePrintf("%s: %zu(%.2f/h)\n", i.first.c_str(), i.second, (float) i.second * 72000 / (float) tick);
+        // sendBroadcastMessgae("%s: %zu(%.2f/h)\n", i.first.c_str(), i.second, (float) i.second * 72000 / (float) tick);
     }
-    builder.send();
+    builder.send(actor);
 }

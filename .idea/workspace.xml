@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
       <config projectName="TrapDoor" targetName="TrapDoor" />
@@ -8,13 +11,57 @@
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true">
     <configurations>
-      <configuration PROFILE_NAME="Release" CONFIG_NAME="Release" />
+      <configuration PROFILE_NAME="Release" CONFIG_NAME="Release" TOOLCHAIN_NAME="Visual Studio" />
       <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
     </configurations>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b8a60db2-baf4-4087-8601-d054cc921b14" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/entity/PlayerSpace.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/entity/PlayerSpace.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/level/Level.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/level/Level.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tick/GameTick.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tick/GameTick.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README-zh.md" beforeDir="false" afterPath="$PROJECT_DIR$/README-zh.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/block/Block.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/block/Block.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/block/Block.h" beforeDir="false" afterPath="$PROJECT_DIR$/block/Block.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/block/Hopper.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/block/Hopper.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/block/Hopper.h" beforeDir="false" afterPath="$PROJECT_DIR$/block/Hopper.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/Shell.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/commands/Shell.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/Shell.h" beforeDir="false" afterPath="$PROJECT_DIR$/commands/Shell.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/VanillaCommand.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/VanillaCommand.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/BlockPos.h" beforeDir="false" afterPath="$PROJECT_DIR$/common/BlockPos.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/Common.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/common/Common.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/Common.h" beforeDir="false" afterPath="$PROJECT_DIR$/common/Common.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/Vec3.h" beforeDir="false" afterPath="$PROJECT_DIR$/common/Vec3.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/Actor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Actor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/Actor.h" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Actor.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/Item.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Item.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/Player.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Player.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/Player.h" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Player.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exexpermental/Redstone.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/exexpermental/Redstone.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SymHook.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/SymHook.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/mod.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/mod.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pch.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pch.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symbol.txt" beforeDir="false" afterPath="$PROJECT_DIR$/symbol.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/Test.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tick/Tick.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tick/Tick.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/MathTool.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tools/MathTool.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/MathTool.h" beforeDir="false" afterPath="$PROJECT_DIR$/tools/MathTool.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/Message.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tools/Message.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/Message.h" beforeDir="false" afterPath="$PROJECT_DIR$/tools/Message.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/MessageBuilder.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tools/MessageBuilder.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/MessageBuilder.h" beforeDir="false" afterPath="$PROJECT_DIR$/tools/MessageBuilder.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/Particle.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tools/Particle.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/Particle.h" beforeDir="false" afterPath="$PROJECT_DIR$/tools/Particle.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/village/Village.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/village/Village.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,15 +98,15 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="CMakeSettings" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\xhy\dev\TrapDoor\lib" />
-      <recent name="C:\Users\xhy\dev\TrapDoor\tick" />
-      <recent name="C:\Users\xhy\dev\TrapDoor\commands" />
       <recent name="C:\Users\xhy\dev\TrapDoor" />
-      <recent name="C:\Users\xhy\dev\TrapDoor\common" />
+      <recent name="C:\Users\xhy\dev\TrapDoor\src\minecraft\entity" />
+      <recent name="C:\Users\xhy\dev\TrapDoor\src\minecraft" />
+      <recent name="C:\Users\xhy\dev\TrapDoor\src" />
+      <recent name="C:\Users\xhy\dev\TrapDoor\lib" />
     </key>
   </component>
   <component name="RunManager" selected="CMake Application.TrapDoor">
@@ -68,7 +115,7 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TrapDoor" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="TrapDoor" TARGET_NAME="TrapDoor" CONFIG_NAME="Debug">
+    <configuration name="TrapDoor" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="TrapDoor" TARGET_NAME="TrapDoor" CONFIG_NAME="Release">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -133,50 +180,91 @@
       <workItem from="1601093604381" duration="3000" />
       <workItem from="1601113047540" duration="3503000" />
       <workItem from="1601117410686" duration="11094000" />
+      <workItem from="1601476067976" duration="13000" />
+      <workItem from="1601649156356" duration="967000" />
+      <workItem from="1601652843663" duration="3000" />
+      <workItem from="1601778937029" duration="1428000" />
+      <workItem from="1601803703236" duration="14000" />
+      <workItem from="1601804062553" duration="533000" />
+      <workItem from="1601821312139" duration="1665000" />
+      <workItem from="1601864960055" duration="1353000" />
+      <workItem from="1601892360181" duration="1369000" />
+      <workItem from="1601977782985" duration="1050000" />
+      <workItem from="1602255539364" duration="875000" />
+      <workItem from="1602404828415" duration="1364000" />
+      <workItem from="1602478592336" duration="2426000" />
+      <workItem from="1602511487668" duration="1060000" />
+      <workItem from="1603354207555" duration="2818000" />
+      <workItem from="1603375773615" duration="2622000" />
+      <workItem from="1603445313750" duration="38000" />
+      <workItem from="1603463654873" duration="1655000" />
+      <workItem from="1603501517426" duration="4000" />
+      <workItem from="1603502231349" duration="12000" />
+      <workItem from="1603549792335" duration="1295000" />
+      <workItem from="1603960917095" duration="2947000" />
+      <workItem from="1603975178662" duration="2193000" />
+      <workItem from="1603977444875" duration="3576000" />
+      <workItem from="1604066766018" duration="3562000" />
+      <workItem from="1604073434190" duration="209000" />
+      <workItem from="1604073663724" duration="1409000" />
+      <workItem from="1604075094532" duration="519000" />
+      <workItem from="1604120319051" duration="1244000" />
+      <workItem from="1604121585394" duration="1997000" />
+      <workItem from="1604152998164" duration="49000" />
+      <workItem from="1604155446898" duration="3920000" />
+      <workItem from="1604324890937" duration="5704000" />
+      <workItem from="1604395763860" duration="3294000" />
+      <workItem from="1604412482456" duration="4422000" />
+      <workItem from="1604585159010" duration="767000" />
+      <workItem from="1604633988003" duration="380000" />
     </task>
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="230" y="71" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598353747711">
+    <state x="230" y="71" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1604158449251">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="230" y="71" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1549.831@0.0.1549.831" timestamp="1598353747711" />
+    <state x="230" y="71" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1549.831@0.0.1549.831" timestamp="1604158449251" />
     <state x="521" y="205" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1598352302891">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="521" y="205" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1549.831@0.0.1549.831" timestamp="1598352302891" />
-    <state x="559" y="94" key="#com.intellij.ide.util.MemberChooser" timestamp="1598761148742">
+    <state x="559" y="94" key="#com.intellij.ide.util.MemberChooser" timestamp="1604123297246">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="559" y="94" key="#com.intellij.ide.util.MemberChooser/0.0.1549.831@0.0.1549.831" timestamp="1598761148742" />
-    <state x="505" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1598412574378">
+    <state x="559" y="94" key="#com.intellij.ide.util.MemberChooser/0.0.1549.831@0.0.1549.831" timestamp="1604123297246" />
+    <state x="505" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1604398704542">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="505" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1549.831@0.0.1549.831" timestamp="1598412574378" />
-    <state width="1528" height="89" key="GridCell.Tab.0.bottom" timestamp="1601135052516">
+    <state x="505" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1549.831@0.0.1549.831" timestamp="1604398704542" />
+    <state x="497" y="108" key="FileChooserDialogImpl" timestamp="1604074220449">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state width="1528" height="89" key="GridCell.Tab.0.bottom/0.0.1549.831@0.0.1549.831" timestamp="1601135052516" />
-    <state width="1528" height="89" key="GridCell.Tab.0.center" timestamp="1601135052516">
+    <state x="497" y="108" key="FileChooserDialogImpl/0.0.1549.831@0.0.1549.831" timestamp="1604074220449" />
+    <state width="1528" height="77" key="GridCell.Tab.0.bottom" timestamp="1604121565707">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state width="1528" height="89" key="GridCell.Tab.0.center/0.0.1549.831@0.0.1549.831" timestamp="1601135052516" />
-    <state width="1528" height="89" key="GridCell.Tab.0.left" timestamp="1601135052516">
+    <state width="1528" height="77" key="GridCell.Tab.0.bottom/0.0.1549.831@0.0.1549.831" timestamp="1604121565707" />
+    <state width="1528" height="77" key="GridCell.Tab.0.center" timestamp="1604121565707">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state width="1528" height="89" key="GridCell.Tab.0.left/0.0.1549.831@0.0.1549.831" timestamp="1601135052516" />
-    <state width="1528" height="89" key="GridCell.Tab.0.right" timestamp="1601135052516">
+    <state width="1528" height="77" key="GridCell.Tab.0.center/0.0.1549.831@0.0.1549.831" timestamp="1604121565707" />
+    <state width="1528" height="77" key="GridCell.Tab.0.left" timestamp="1604121565707">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state width="1528" height="89" key="GridCell.Tab.0.right/0.0.1549.831@0.0.1549.831" timestamp="1601135052516" />
-    <state x="131" y="0" width="1170" height="707" key="SettingsEditor" timestamp="1601088680784">
+    <state width="1528" height="77" key="GridCell.Tab.0.left/0.0.1549.831@0.0.1549.831" timestamp="1604121565707" />
+    <state width="1528" height="77" key="GridCell.Tab.0.right" timestamp="1604121565707">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="131" y="0" width="1170" height="707" key="SettingsEditor/0.0.1549.831@0.0.1549.831" timestamp="1601088680784" />
-    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1601134747290">
+    <state width="1528" height="77" key="GridCell.Tab.0.right/0.0.1549.831@0.0.1549.831" timestamp="1604121565707" />
+    <state x="200" y="124" width="1170" height="707" key="SettingsEditor" timestamp="1604158473895">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1549.831@0.0.1549.831" timestamp="1601134747290" />
+    <state x="200" y="124" width="1170" height="707" key="SettingsEditor/0.0.1549.831@0.0.1549.831" timestamp="1604158473895" />
+    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1604413785164">
+      <screen x="0" y="0" width="1549" height="831" />
+    </state>
+    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1549.831@0.0.1549.831" timestamp="1604413785164" />
     <state x="474" y="0" width="600" height="831" key="find.popup" timestamp="1598268539707">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
@@ -185,20 +273,9 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="551" y="198" key="refactoring.ChangeSignatureDialog/0.0.1549.831@0.0.1549.831" timestamp="1599612059470" />
-    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup" timestamp="1601124499687">
+    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup" timestamp="1604156235279">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup/0.0.1549.831@0.0.1549.831" timestamp="1601124499687" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/common/BlockPos.h</url>
-          <line>66</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup/0.0.1549.831@0.0.1549.831" timestamp="1604156235279" />
   </component>
 </project>

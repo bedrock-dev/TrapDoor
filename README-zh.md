@@ -9,7 +9,7 @@ V0.2.0 **仅支持MCBE1.16.10.02正式版**
 
 `release`中的文件只是单纯的`dll`文件，你**需要下载一个dll注入器才能启动游戏**，dll注入器你可以前往[https://github.com/DarthTon/Xenos/releases/tag/2.3.2](https://github.com/DarthTon/Xenos/releases/tag/2.3.2) 下载。下载完后运行`Xenos64.exe`，剩下的看下图即可:
 
-![](./img/howto.png)
+![](img/howto.png)
 
 上面点`new`后会弹出窗口，选择服务端文件`bedrock_server.exe`即可。然后点`add`添加`dll`文件，最后点`Inject`启动服务器。
 

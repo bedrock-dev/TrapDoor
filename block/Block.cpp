@@ -9,89 +9,7 @@
 
 using namespace SymHook;
 
-
-
-
-
-
-//namespace block {
-//    std::vector<Vec3> posCache;
-//}
-
-/**
- * Hook 用铲子右击方块的函数
- * 老实说这里的功能蛮费的
- */
-
-
-//THook(
-//        void,
-//        MSSYM_B2QUA5useOnB1AE10ShovelItemB2AAA4EEBAB1UE14NAEAVItemStackB2AAA9AEAVActorB2AAA9VBlockPosB2AAA4EMMMB1AA1Z,
-//        void *a1,
-//        void *a2,
-//        void *hopperBlockActor,
-//        int *blockPos,
-//        float a4,
-//        float a5,
-//        float a6
-//) {
-//    Vec3 pos(blockPos[0], blockPos[1], blockPos[2]);
-//    BlockPos bp(blockPos[0], blockPos[1], blockPos[2]);
-//    //printf("%d %d %d\commandMap", blockPos[0], blockPos[1], blockPos[2]);
-//    //   villageHelper.POIBelong(&bp);
-//    if (enableMarkPos) {
-//        if (block::posCache.empty()) {
-//            block::posCache.emplace_back(pos);
-//            block::posCache.emplace_back(pos);
-//        } else {
-//            block::posCache[0] = block::posCache[1];
-//            block::posCache[1] = pos;
-//        }
-//        if (block::posCache[0] != block::posCache[1]) {
-//            gamePrintf("(%d,%d,%d),(%d,%d,%d):%.2f(%.2f),%d(%d)\n",
-//                       (int) block::posCache[0].x,
-//                       (int) block::posCache[0].y,
-//                       (int) block::posCache[0].z,
-//                       (int) block::posCache[1].x,
-//                       (int) block::posCache[1].y,
-//                       (int) block::posCache[1].z,
-//                       math::distance(block::posCache[0], block::posCache[1], false, true),
-//                       math::distance(block::posCache[0], block::posCache[1], false, false),
-//                       (int) math::distance(block::posCache[0], block::posCache[1], true, true),
-//                       (int) math::distance(block::posCache[0], block::posCache[1], true, false)
-//            );
-//            std::string str = "minecraft:redstone_wire_dust_particle";
-//        }
-//    } else {
-//        original(a1, a2, hopperBlockActor, blockPos, a4, a5, a6);
-//    }
-//}
-//
-//
-//
-////海绵放置
-//THook(
-//        void,
-//        MSSYM_B1QA7onPlaceB1AE11SpongeBlockB2AAE20UEBAXAEAVBlockSourceB2AAE12AEBVBlockPosB3AAAA1Z,
-//        void *b,
-//        void *bs,
-//        BlockPos * blockPos
-//) {
-//    void *block = SYM_CALL(
-//            void* (*)(void * , int, int, int),
-//            MSSYM_B1QA8getBlockB1AE11BlockSourceB2AAE13QEBAAEBVBlockB2AAA3HHHB1AA1Z, globalBlockSource,
-//            blockPos->x, blockPos->y - 1, blockPos->z
-//    );
-//    if (block) {
-//        for (int i = 0; i < 10; i++) {
-//            BlockPos p(blockPos->x, blockPos->y + i, blockPos->z);
-
-//        }
-//    } else {
-//        gamePrintf("can't get block");
-//    }
-//
-//}
+#include "tools/Particle.h"
 
 #include <vector>
 
@@ -172,6 +90,7 @@ void BlockSource::updateNeighborsAt(const BlockPos *pos) {
     );
 }
 
+
 THook(
         void,
         MSSYM_B1QE17updateNeighborsAtB1AE11BlockSourceB2AAE17QEAAXAEBVBlockPosB3AAAA1Z,
@@ -199,22 +118,63 @@ int BaseCircuitComponent::getVar2() {
 
 }
 
-void BaseCircuitComponent::printSource() {
+void BaseCircuitComponent::basePrint() {
     auto begin = (uint32_t *) *((uint64_t *) this + 1);
     auto end = (uint32_t *) *((uint64_t *) this + 2);
     int num = 0;
-
+    std::string particleType = "minecraft:silverfish_grief_emitter";
+    Vec3 vec3{};
     for (; begin != end; begin += 8) {
         auto val = (int *) begin;
         BlockPos pos = BlockPos(val[3], val[4], val[5]);
         auto comp = globalCircuitSceneGraph->getBaseCircuitComponent(&pos);
         if (comp) {
-            printf(" [%d %d %d]-> %d\n", pos.x, pos.y, pos.z, comp->getStrength());
+           // info(" (%d %d %d) <=> %d\n", pos.x, pos.y, pos.z, comp->getStrength());
+            vec3.x = (float) pos.x;
+            vec3.y = (float) pos.y + 0.7f;
+            vec3.z = (float) pos.z;
+            spawnParticle(vec3, particleType);
         }
         num++;
     }
-    gamePrintf("\nsignal:%d source: %d\n", getStrength(), num);
 }
+
+int BaseCircuitComponent::getPowerCount() {
+    return (int) *((int *) this + 20);
+}
+
+void BaseCircuitComponent::setAcceptHalfPulse() {
+    *((char *) this + 67) = 1;
+}
+
+int BaseCircuitComponent::getAcceptHalfPulse() {
+    return (int) *((char *) this + 67);
+}
+
+void BaseCircuitComponent::printRepeater() {
+    int *ptr = (int *) this;
+//    info("repeater: %d %d %d %d  s: %d", ptr[21], ptr[20], ptr[19], ptr[18], ((char *) this)[96]);
+}
+
+void BaseCircuitComponent::printTorch(BlockPos pos) {
+    int selfPowerCount = (int) *((int *) this + 20);
+    auto strength = (char) *((char *) this + 84);
+    bool flag;
+    int signal = SYM_CALL(
+            int(*)(BaseCircuitComponent * ,const BlockPos *pos,void *circuitSystem,bool *),
+            MSSYM_B1QE21FindStrongestStrengthB1AE22RedstoneTorchCapacitorB2AAE17AEAAHAEBVBlockPosB2AAE17AEAVCircuitSystemB2AAA3AEAB1UA1NB1AA1Z,
+            this, &pos,
+            globalCircuitSystem,
+            &flag
+    );
+//    info("torch: bc: %d s: %d hp: %d", selfPowerCount, strength, getHalfPulse());
+ //   info("%d %d", signal, flag);
+}
+
+int BaseCircuitComponent::getHalfPulse() {
+    return (int) *((char *) this + 85);
+}
+
 
 BaseCircuitComponent *CircuitSceneGraph::getBaseCircuitComponent(BlockPos *pos) {
     return SYM_CALL(
@@ -224,6 +184,26 @@ BaseCircuitComponent *CircuitSceneGraph::getBaseCircuitComponent(BlockPos *pos) 
     );
 }
 
+//
+//THook(
+//        int,
+//        MSSYM_B1QE21FindStrongestStrengthB1AE22RedstoneTorchCapacitorB2AAE17AEAAHAEBVBlockPosB2AAE17AEAVCircuitSystemB2AAA3AEAB1UA1NB1AA1Z,
+//        BaseCircuitComponent *component,
+//        BlockPos *pos,
+//        void *circuitSystem,
+//        bool * flag
+//) {
+//    if (circuitSystem != globalCircuitSystem) {
+//        dbg("init circuitSystem");
+//        globalCircuitSystem = circuitSystem;
+//    }
+//    int strength = original(component, pos, circuitSystem, flag);
+//    if (tick::tickStatus == TickStatus::Frozen || tick::tickStatus == TickStatus::Forward) {
+//        printf("[%d %d %d]: signal: %d, flag: %d \n", pos->x, pos->y, pos->z, strength, *flag);
+//    }
+//    return strength;
+//}
+
 THook(
         BaseCircuitComponent *,
         MSSYM_B1QE16getBaseComponentB1AE17CircuitSceneGraphB2AAE28QEAAPEAVBaseCircuitComponentB2AAE12AEBVBlockPosB3AAAA1Z,
@@ -231,20 +211,45 @@ THook(
         BlockPos * pos
 ) {
     if (graph && !globalCircuitSceneGraph) {
-        dbg("init graph");
         globalCircuitSceneGraph = graph;
     }
     return original(graph, pos);
 }
 
-THook(
-        void,
-        MSSYM_B1QE13setExtraBlockB1AE11BlockSourceB2AAA4QEAAB1UE13NAEBVBlockPosB2AAA9AEBVBlockB2AAA1HB1AA1Z,
-        BlockSource *source,
-        BlockPos *pos,
-        Block *block,
-        int flag
-) {
-    dbg("set extra block");
-    //no origin call()
-}
+//
+//THook(
+//        void,
+//        MSSYM_B1QE13setExtraBlockB1AE11BlockSourceB2AAA4QEAAB1UE13NAEBVBlockPosB2AAA9AEBVBlockB2AAA1HB1AA1Z,
+//        BlockSource *source,
+//        BlockPos *pos,
+//        Block *block,
+//        int flag
+//) {
+//    original(source, pos, block, flag);
+//    //no origin call()
+//}
+
+//
+//THook(
+//        void,
+//        MSSYM_B2QUA7setSeedB1AA6RandomB1AA4CoreB2AAA6AEAAXIB1AA1Z,
+//        void *random,
+//        unsigned int seed
+//) {
+//    if (globalPlayer) {
+//        printf("a: %p  seed: %u\n", random, seed);
+//    }
+//    if ((uint64_t) random == playerRand) {
+//        return original(random, particleViewDistance);
+//    } else {
+//        return original(random, seed);
+//    }
+//}
+//
+//THook(
+//        uint32_t,
+//        MSSYM_B2QUE12genRandInt32B1AA6RandomB1AA4CoreB2AAA7AEAAIXZ,
+//        void * random
+//) {
+//    return original(random);
+//}

@@ -10,6 +10,5 @@
 
 #include "SymHook.h"
 #include "common/AABB.h"
-#include "common/Vec3.h"
 
 #endif //PCH_H

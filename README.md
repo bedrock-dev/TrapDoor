@@ -12,7 +12,7 @@ This is a BDS-based server plugin which provides some useful functions to help p
 5. click `Inject` to start the server
 6. open you game , in Servers tab  click `add Server`, set Server address  to `127.0.0.1`,  port is dealut `19132`  then enjoy it.
 
-![](./img/howto.png)
+![](img/howto.png)
 
 
 ### Command list

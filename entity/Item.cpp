@@ -4,8 +4,10 @@
 
 #include "Item.h"
 #include <string>
-
 #include "common/Common.h"
+#include "tools/Message.h"
+#include "tools/Particle.h"
+#include "tools/MessageBuilder.h"
 
 std::string ItemStackBase::getItemName() {
     std::string name;
@@ -92,13 +94,14 @@ int getCapacitorState(unsigned int face, float x, float y, float z, bool powered
 //chest
 
 
+BlockPos redStonePosCache;
 
 THook(
         void,
         MSSYM_B1QA5useOnB1AA4ItemB2AAA4QEBAB1UE14NAEAVItemStackB2AAA9AEAVActorB2AAA7HHHEMMMB1AA1Z,
         void *item,
         ItemStackBase *itemStack,
-        void *actor,
+        Actor *player,
         int x,
         int y,
         int z,
@@ -108,9 +111,9 @@ THook(
         float dz
 ) {
     auto name = itemStack->getItemName();
-
+    auto blockSource = player->getBlockSource();
     if (name == "Cactus") {
-        auto block = globalBlockSource->getBlock(x, y, z);
+        auto block = blockSource->getBlock(x, y, z);
         auto blockName = block->getName();
         BlockPos pos(x, y, z);
         auto state = getNormalState(facing, dx, dy, dz, false);
@@ -123,8 +126,28 @@ THook(
         } else if (blockName == "minecraft:powered_repeater" || blockName == "minecraft:powered_comparator") {
             state = getCapacitorState(facing, dx, dy, dz, true);
         }
-        globalBlockSource->setBlock(&pos, block->getLegacy()->tryGetStateBlock(state));
+        blockSource->setBlock(&pos, block->getLegacy()->tryGetStateBlock(state));
+    } else if (name == "Stick") {
+        //todo
+//        auto block = blockSource->getBlock(x, y, z);
+//        auto blockName = block->getName();
+//        BlockPos pos(x, y, z);
+//        if (pos != redStonePosCache) {
+//            auto component = globalCircuitSceneGraph->getBaseCircuitComponent(&pos);
+//            if (component) {
+//                //  info("s: %d", component->getStrength());
+//                component->basePrint();
+//                //中继器特判
+//                if (blockName == "minecraft:unpowered_repeater" || blockName == "minecraft:powered_repeater") {
+//                    component->printRepeater();
+//                    //火把特判
+//                } else if (blockName == "minecraft:redstone_torch" || blockName == "minecraft:unlit_redstone_torch") {
+//                    component->printTorch(pos);
+//                }
+//            }
+//            redStonePosCache = pos;
+//        }
     }
-    original(item, itemStack, actor, x, y, z, facing, dx, dy, dz);
+    original(item, itemStack, player, x, y, z, facing, dx, dy, dz);
 }
 

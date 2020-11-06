@@ -1,13 +1,13 @@
 //
-// Created by xhy on 2020/8/24.
+// Created by xhy on 2020/10/22.
 //
 
-#ifndef TRAPDOOR_BLOCKPOS_H
-#define TRAPDOOR_BLOCKPOS_H
+#ifndef LIBMCBEMOD_BLOCKPOS_H
+#define LIBMCBEMOD_BLOCKPOS_H
 
+#include "Vec3.h"
 #include <iostream>
 #include <vector>
-#include "Vec3.h"
 
 struct BlockPos {
     int x = 0;
@@ -24,61 +24,22 @@ struct BlockPos {
 
     BlockPos(float _x, float _y, float _z) : x((int) _x), y((int) _y), z((int) _z) {}
 
-    bool operator==(const BlockPos &v) const {
-        return x == v.x && y == v.y && z == v.z;
-    }
+    bool operator==(const BlockPos &v) const;
 
-    bool operator!=(const BlockPos &v) const {
-        return x != v.x || y != v.y || z != v.z;
-    }
+    bool operator!=(const BlockPos &v) const;
 
-    bool operator<(const BlockPos &rhs) const {
-        if (x < rhs.x)
-            return true;
-        if (rhs.x < x)
-            return false;
-        if (y < rhs.y)
-            return true;
-        if (rhs.y < y)
-            return false;
-        return z < rhs.z;
-    }
+    bool operator<(const BlockPos &rhs) const;
 
+    float distanceTo(const BlockPos &blockPos) const;
 
-    float distanceTo(const BlockPos &blockPos) const {
-        return (float) ((blockPos.x - x) * (blockPos.x - x) +
-                        (blockPos.y - y) * (blockPos.y - y) +
-                        (blockPos.z - z) * (blockPos.z - z));
-    }
+    friend std::ostream &operator<<(std::ostream &os, const BlockPos &vec3);
 
-    friend std::ostream &operator<<(std::ostream &os, const BlockPos &vec3) {
-        os << "[" << vec3.x << "," << vec3.y << "," << vec3.z << "]";
-        return os;
-    }
+    Vec3 toVec3() const;
 
-    Vec3 toVec3() const {
-        return {x, y, z};
-    }
+    std::string toString() const;
 
-
-    std::string toString() const {
-        return "["
-               + std::to_string(x) + ","
-               + std::to_string(y) + ","
-               + std::to_string(z) + "]";
-    }
-
-    std::vector<BlockPos> getNeighbourPos() {
-        std::vector<BlockPos> list;
-        list.emplace_back(x+1,y,z);
-        list.emplace_back(x-1,y,z);
-        list.emplace_back(x,y+1,z);
-        list.emplace_back(x,y-1,z);
-        list.emplace_back(x,y,z+1);
-        list.emplace_back(x,y,z-1);
-        return list;
-    }
-
+    std::vector<BlockPos> getNeighbourPos();
 };
 
-#endif //TRAPDOOR_BLOCKPOS_H
+
+#endif //LIBMCBEMOD_BLOCKPOS_H

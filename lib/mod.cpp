@@ -1,6 +1,6 @@
 #include <cstdio>
 #include "pch.h"
-
+#include "commands/Shell.h"
 void mod_init() {
     HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
     DWORD dwMode;
@@ -18,6 +18,7 @@ void mod_init() {
                          "                |_|                            ";
     printf("%s\nTrapdoor V0.1.8-debug  \ngithub:https://github.com/hhhxiao/MCBEtoolSet\nLicense: GPL\n", banner);
     printf("build time: %s  %s\n", __DATE__, __TIME__);
+    initCommand();
 }
 
 void mod_exit() {

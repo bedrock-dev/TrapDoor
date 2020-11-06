@@ -4,18 +4,15 @@
 
 #include "Player.h"
 #include "lib/mod.h"
-#include "lib/pch.h"
 #include "block/Block.h"
-#include "tools/dbg.h"
 #include "common/Common.h"
-#include "tools/Message.h"
 #include <queue>
-#include "entity/Actor.h"
+#include "tools/MathTool.h"
+#include "tools/MessageBuilder.h"
 
 using namespace SymHook;
 
 MeasureManager measureManager;
-int piston_aux = 0;
 //player place block
 THook(
         int64_t,
@@ -27,37 +24,36 @@ THook(
         bool flag
 ) {
     auto name = block.getName();
-    if (name == "minecraft:warped_planks") {
-        measureManager.setPos1(pos);
-    } else if (name == "minecraft:crimson_planks") {
-        measureManager.setPos2(pos);
-    }
-    dbg(name);
+//    if (name == "minecraft:warped_planks") {
+//        measureManager.setPos1(pos);
+//    } else if (name == "minecraft:crimson_planks") {
+//        measureManager.setPos2(pos);
+//    }
+    //dbg(name);
     return original(self, player, block, pos, flag);
-
 }
 
 
 //player destroy block chained
-void chainDestroy(const BlockPos *pos, const std::string &blockName, int max) {
-    auto air = globalBlockSource->getBlock(*pos);
-    std::queue<BlockPos> destroyQueue;
-    destroyQueue.push(*pos);
-    int num = 0;
-    while (!destroyQueue.empty() && num < max) {
-        auto f = destroyQueue.front();
-        destroyQueue.pop();
-        std::vector<BlockPos> list = f.getNeighbourPos();
-        for (BlockPos position:list) {
-            auto block = globalBlockSource->getBlock(position);
-            if (block->getName() == blockName) {
-                destroyQueue.push(position);
-            }
-        }
-        globalBlockSource->setBlock(&f, air);
-        num++;
-    }
-}
+//void chainDestroy(const BlockPos *pos, const std::string &blockName, int max) {
+//    auto air = globalBlockSource->getBlock(*pos);
+//    std::queue<BlockPos> destroyQueue;
+//    destroyQueue.push(*pos);
+//    int num = 0;
+//    while (!destroyQueue.empty() && num < max) {
+//        auto f = destroyQueue.front();
+//        destroyQueue.pop();
+//        std::vector<BlockPos> list = f.getNeighbourPos();
+//        for (BlockPos position:list) {
+//            auto block = globalBlockSource->getBlock(position);
+//            if (block->getName() == blockName) {
+//                destroyQueue.push(position);
+//            }
+//        }
+//        globalBlockSource->setBlock(&f, air);
+//        num++;
+//    }
+//}
 
 
 
@@ -72,8 +68,8 @@ THook(
         int64_t a3,
         int a4
 ) {
-    Block *block = globalBlockSource->getBlock(*pos);
-    auto blockName = block->getName();
+//    Block *block = globalBlockSource->getBlock(*pos);
+//    auto blockName = block->getName();
     original(self, pos, a3, a4);
 //    if (blockName != "minecraft:air") {
 //        chainDestroy(pos, blockName, 20);
@@ -122,8 +118,8 @@ void MeasureManager::print() {
             .num(d3)
             .text(" (")
             .num(d4)
-            .text(")")
-            .send();
+            .text(")");
+    //  .send();
 
 }
 
@@ -133,6 +129,6 @@ void MeasureManager::sendSetInfo(int index) {
     builder.text("position ")
             .num(index)
             .text(" set to ")
-            .pos(p)
-            .send();
+            .pos(p);
+    //  .send();
 }

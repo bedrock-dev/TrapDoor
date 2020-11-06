@@ -7,7 +7,7 @@
 
 #include <string>
 #include "MathTool.h"
-#include "../lib/pch.h"
+#include "lib/pch.h"
 
 
 void spawnParticle(Vec3 p, std::string &type);

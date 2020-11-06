@@ -12,6 +12,7 @@
 #include "common/Vec3.h"
 #include "common/AABB.h"
 
+class Actor;
 
 class MessageBuilder {
 public:
@@ -44,7 +45,7 @@ public:
         if (std::is_arithmetic<T>()) {
             if (std::is_floating_point<T>()) {
                 char buffer[32];
-                sprintf(buffer, "%.2f", (double )x);
+                sprintf(buffer, "%.2f", (double) x);
                 std::string s(buffer);
                 sText(s, GREEN);
             } else {
@@ -60,7 +61,7 @@ public:
 
     std::string get();
 
-    void send();
+    void send(Actor *player);
 
 private:
     const static std::map<uint8_t, std::string> STYLE_MAP;

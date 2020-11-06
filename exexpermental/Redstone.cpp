@@ -3,11 +3,10 @@
 //
 
 #include "Redstone.h"
-#include "../common/Common.h"
-#include "../lib/pch.h"
-#include "../lib/SymHook.h"
+#include "common/Common.h"
+#include "lib/pch.h"
+#include "lib/SymHook.h"
 #include "block/Block.h"
-#include "tick/Tick.h"
 
 using namespace SymHook;
 //
@@ -55,6 +54,27 @@ using namespace SymHook;
 //
 //THook(
 //        void,
+//        MSSYM_B1QA8evaluateB1AE22RedstoneTorchCapacitorB2AAA4UEAAB1UE18NAEAVCircuitSystemB2AAE12AEBVBlockPosB3AAAA1Z,
+//        BaseCircuitComponent *self,
+//        void *circuitSystem,
+//        BlockPos * pos
+//) {
+//    std::string s;
+//    if (tick::tickStatus != TickStatus::Normal) {
+//        s += std::to_string(self->getHalfPulse());
+//        s += " -> ";
+//    }
+//    original(self, circuitSystem, pos);
+//    if (tick::tickStatus != TickStatus::Normal) {
+//        auto newVal = self->getHalfPulse();
+//        s += std::to_string(newVal);
+//        dbg(s);
+//    }
+//}
+
+
+//THook(
+//        void,
 //        MSSYM_B1QE11cacheValuesB1AE22RedstoneTorchCapacitorB2AAE22UEAAXAEAVCircuitSystemB2AAE12AEBVBlockPosB3AAAA1Z,
 //        BaseCircuitComponent *self,
 //        void *circuitSystem,
@@ -62,12 +82,12 @@ using namespace SymHook;
 //) {
 //    std::string s = pos->toString() + " [ i ] RedstoneTorchCapacitor ";
 //    if (tick::tickStatus != TickStatus::Normal) {
-//        s += std::to_string(self->getStrength());
+//        s += std::to_string(self->getHalfPulse());
 //        s += " -> ";
 //    }
 //    original(self, circuitSystem, pos);
 //    if (tick::tickStatus != TickStatus::Normal) {
-//        auto newVal = self->getStrength();
+//        auto newVal = self->getHalfPulse();
 //        s += std::to_string(newVal);
 //        dbg(s);
 //    }
@@ -136,15 +156,15 @@ using namespace SymHook;
 //    return i;
 //}
 
-THook(
-        void, MSSYM_B1QA8evaluateB1AE13CircuitSystemB2AAE20QEAAXPEAVBlockSourceB3AAAA1Z,
-        void *self,
-        BlockSource * bs
-) {
-    if (tick::tickStatus != TickStatus::Normal) {
-        dbg("redstone tick");
-    }
-    original(self, bs);
-}
-
+//THook(
+//        void, MSSYM_B1QA8evaluateB1AE13CircuitSystemB2AAE20QEAAXPEAVBlockSourceB3AAAA1Z,
+//        void *self,
+//        BlockSource * bs
+//) {
+//    if (tick::tickStatus != TickStatus::Normal) {
+//        dbg("redstone tick");
+//    }
+//    original(self, bs);
+//}
+//
 

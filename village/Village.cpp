@@ -5,7 +5,7 @@
 #include "common/Common.h"
 #include "tools/Message.h"
 #include "tools/Particle.h"
-#include "tools/MessageBuilder.h "
+#include "tools/MessageBuilder.h"
 
 using namespace SymHook;
 //village tick
@@ -148,13 +148,13 @@ namespace village {
                         .text(" b:")
                         .num(village->getBedPOICount())
                         .text(" s:")
-                        .num((int)village->canSpawnIronGolem())
+                        .num((int) village->canSpawnIronGolem())
                         .text(" ")
                         .aabb(aabb)
                         .text("\n");
             }
         }
-        builder.send();
+      //  builder.send();
     }
 }
 

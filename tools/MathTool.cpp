@@ -21,10 +21,5 @@ namespace math {
         return result;
     }
 
-    std::vector<point_pos> getViewPosList(Vec3 pos, Vec3 viewVector, float maxPos) {
-
-        return std::vector<point_pos>();
-
-    }
 
 }
