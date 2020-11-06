@@ -4,3 +4,5 @@ PDB.txt
 cvdump.exe
 PDB导出工具.exe
 *.txt
+.vscode
+build
