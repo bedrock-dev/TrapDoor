@@ -12,12 +12,9 @@
 #include <iostream>
 #include <vector>
 #include "ArgHolder.h"
-
 class Actor;
-
 enum class ArgType {
     INT,
-    FLOAT,
     BOOL,
     STR,
     NONE
@@ -26,14 +23,13 @@ enum class ArgType {
 class CommandNode {
     std::string name;
     std::map<std::string, CommandNode *> nextNode;
-    std::function<void(ArgHolder *)> work;
+    std::function<void(ArgHolder *, Actor *)> work;
     ArgType argType = ArgType::NONE;
 
-
 public:
-    explicit CommandNode(std::string name) : name(std::move(name)) {}
+    explicit CommandNode(std::string name);
 
-    CommandNode *execute(const std::function<void(ArgHolder *)> &task) {
+    CommandNode *execute(const std::function<void(ArgHolder *, Actor *)> &task) {
         this->work = task;
         return this;
     }

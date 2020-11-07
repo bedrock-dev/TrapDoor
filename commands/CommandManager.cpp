@@ -3,6 +3,7 @@
 //
 
 #include "CommandManager.h"
+#include "tools/Message.h"
 
 const std::string CommandManager::prefix = "./";
 
@@ -14,7 +15,7 @@ int CommandManager::parse(Actor *player, std::string cmd) {
     auto iter = this->commandList.find(tokens[0]);
     if (iter != commandList.end())
         return iter->second->parse(player, tokens, 1);
-    printf("can't find command \"%s\"", tokens[0].c_str());
+    error(player, "can't find command \"%s\",please type ./help for help", tokens[0].c_str());
     return -3;
 }
 
@@ -22,6 +23,7 @@ CommandNode *CommandManager::registerCmd(const std::string &cmd, ArgType type) {
     auto *rootNode = new CommandNode(cmd);
     rootNode->setArgType(type);
     commandList[cmd] = rootNode;
+    printf("register command     [%s]\n", cmd.c_str());
     return rootNode;
 }
 

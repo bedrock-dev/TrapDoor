@@ -5,6 +5,7 @@
 #include "GameTick.h"
 #include "level/Level.h"
 #include "block/Hopper.h"
+#include "commands/Shell.h"
 
 using namespace SymHook;
 
@@ -144,7 +145,8 @@ THook(
 ) {
     if (!globalLevel) {
         globalLevel = serverLevel;
-        printf("init global level\n");
+        initCommand();
+        printf("[Trapdoor ]init global level\n");
     }
 
 
@@ -159,7 +161,7 @@ THook(
                 lightExtraWork();
                 TIMER_END
                 if (tick::isMSPTing) {
-                    broadcastMsg("mspt: %lf ms", (double) timeReslut / 1000);
+                    broadcastMsg("mspt: %.3lf ms", (double) timeReslut / 1000);
                     tick::isMSPTing = false;
                 }
                 if (tick::isProfiling) {

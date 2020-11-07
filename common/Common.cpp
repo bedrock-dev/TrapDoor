@@ -21,7 +21,7 @@ bool enableExplosion = false;
 bool mobSpawnCounterStart = false;
 bool enableHopperCounter = false;
 int mobTickCounter = 0;
-
+int hopperTickLength = 50;
 std::set<PlayerSpace> &getPlayerSpace() {
     static std::set<PlayerSpace> playerSpaceList;
     return playerSpaceList;

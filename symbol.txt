@@ -79,6 +79,8 @@ Player::tickWorld
 ?getViewVector@Actor@@QEBA?AVVec3@@M@Z
 #获取实体tag
 ?getNameTag@Actor@@UEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+#设置玩家模式
+?setPlayerGameType@ServerPlayer@@UEAAXW4GameType@@@Z
 ################################方块信息###################################
 #染料右击方块
 ?_useOn@DyePowderItem@@EEBA_NAEAVItemStack@@AEAVActor@@VBlockPos@@EMMM@Z
@@ -121,6 +123,8 @@ Player::tickWorld
 ?setExtraBlock@BlockSource@@QEAA_NAEBVBlockPos@@AEBVBlock@@H@Z
 #获取具有特殊值的方块?
 ?tryGetStateFromLegacyData@BlockLegacy@@QEBAPEBVBlock@@G@Z
+#漏斗tick
+?_tick@HopperBlockActor@@AEAAXAEAVBlockSource@@H@Z
 ########################################村庄#######################################
 
 #村庄更新

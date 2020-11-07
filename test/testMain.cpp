@@ -5,10 +5,9 @@
 #include <iostream>
 #include "tools/dbg.h"
 #include <string>
+#include "commands/ArgHolder.h"
 
 int main() {
-    std::string s = "QAQ";
-    auto b = "ccc" + s;
-    std::cout<<b;
+
     return 0;
 }

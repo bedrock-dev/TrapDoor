@@ -20,6 +20,8 @@ public:
 
     std::string getNameTag();
 
+    void setGameMode(int mode);
+
     BlockSource *getBlockSource();
 
 };

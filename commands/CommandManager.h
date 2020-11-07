@@ -6,7 +6,7 @@
 #define COMMANDMANAGER_COMMANDMANAGER_H
 
 
-#define EXE(S) execute([](ArgHolder *holder){S})
+#define EXE(S) execute([](ArgHolder *holder,Actor *player){S})
 #define  ARG(arg, type, work) Arg(arg, ArgType::type)->EXE(work)
 
 #include <map>

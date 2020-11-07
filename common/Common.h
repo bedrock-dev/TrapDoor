@@ -34,6 +34,7 @@ extern bool mobSpawnCounterStart;
 extern bool enableBlockUpdate;
 extern bool enableHopperCounter;
 extern int mobTickCounter;
+extern int hopperTickLength;
 
 
 #endif //TRAPDOOR_COMMON_H

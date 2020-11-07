@@ -99,6 +99,10 @@ namespace SymHook{
 	// [符号] ?getNameTag@Actor@@UEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
 	constexpr RVA MSSYM_B1QE10getNameTagB1AA5ActorB2AAA8UEBAAEBVB2QDA5basicB1UA6stringB1AA2DUB2QDA4charB1UA6traitsB1AA1DB1AA3stdB2AAA1VB2QDA9allocatorB1AA1DB1AA12B2AAA3stdB2AAA2XZ = 0x00562BC0;
 
+	// [原型] public: virtual void __cdecl ServerPlayer::setPlayerGameType(enum GameType) __ptr64
+	// [符号] ?setPlayerGameType@ServerPlayer@@UEAAXW4GameType@@@Z
+	constexpr RVA MSSYM_B1QE17setPlayerGameTypeB1AE12ServerPlayerB2AAE15UEAAXW4GameTypeB3AAAA1Z = 0x004F1A20;
+
 	// [原型] private: virtual bool __cdecl DyePowderItem::_useOn(class ItemStack & __ptr64,class Actor & __ptr64,class BlockPos,unsigned char,float,float,float)const __ptr64
 	// [符号] ?_useOn@DyePowderItem@@EEBA_NAEAVItemStack@@AEAVActor@@VBlockPos@@EMMM@Z
 	constexpr RVA MSSYM_B2QUA5useOnB1AE13DyePowderItemB2AAA4EEBAB1UE14NAEAVItemStackB2AAA9AEAVActorB2AAA9VBlockPosB2AAA4EMMMB1AA1Z = 0x007D56D0;
@@ -170,6 +174,10 @@ namespace SymHook{
 	// [原型] public: class Block const * __ptr64 __cdecl BlockLegacy::tryGetStateFromLegacyData(unsigned short)const __ptr64
 	// [符号] ?tryGetStateFromLegacyData@BlockLegacy@@QEBAPEBVBlock@@G@Z
 	constexpr RVA MSSYM_B1QE25tryGetStateFromLegacyDataB1AE11BlockLegacyB2AAE13QEBAPEBVBlockB2AAA1GB1AA1Z = 0x008D8BF0;
+
+	// [原型] private: void __cdecl HopperBlockActor::_tick(class BlockSource & __ptr64,int) __ptr64
+	// [符号] ?_tick@HopperBlockActor@@AEAAXAEAVBlockSource@@H@Z
+	constexpr RVA MSSYM_B2QUA4tickB1AE16HopperBlockActorB2AAE20AEAAXAEAVBlockSourceB2AAA1HB1AA1Z = 0x008B7AA0;
 
 	// [原型] public: void __cdecl Village::tick(struct Tick,class BlockSource & __ptr64) __ptr64
 	// [符号] ?tick@Village@@QEAAXUTick@@AEAVBlockSource@@@Z

@@ -33,4 +33,7 @@ add_library(TrapDoor SHARED
         )
 
 
-add_executable(Test test/Test.cpp)
+add_executable(Test
+        test/testMain.cpp
+        commands/ArgHolder.cpp
+        )

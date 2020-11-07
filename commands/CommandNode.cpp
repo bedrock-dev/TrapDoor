@@ -18,14 +18,19 @@ bool isValidIntString(const std::string &str) {
     return std::all_of(str.begin(), str.end(), [](char c) { return '0' <= c && c <= '9'; });
 }
 
+CommandNode::CommandNode(std::string name) : name(std::move(name)),
+                                             work([&name](ArgHolder *holder, Actor *actor) {
+                                                 error(actor, "require a sub command behind %s", name.c_str());
+                                             }) {}
+
+
 int CommandNode::parse(Actor *player, const std::vector<std::string> &tokens, size_t idx) {
     bool executeNow = false;
     if (idx == tokens.size()) { //当前位置已经没tokens了
         executeNow = true;
         if (this->argType == ArgType::NONE) {
-            auto arg = integerArg(0);
-            this->work(arg);
-            delete arg;
+            ArgHolder holder(0);
+            this->work(&holder, player);
         } else {
             error(player, "require an parameter behind \"%s\"", tokens[idx - 1].c_str());
         }
@@ -35,10 +40,6 @@ int CommandNode::parse(Actor *player, const std::vector<std::string> &tokens, si
             case ArgType::INT:
                 executeNow = isValidIntString(tokens[idx]);
                 holder = integerArg(strtol(tokens[idx].c_str(), nullptr, 10));
-                break;
-            case ArgType::FLOAT:
-                executeNow = true;
-                holder = floatArg(strtof(tokens[idx].c_str(), nullptr));
                 break;
             case ArgType::BOOL:
                 executeNow =
@@ -54,7 +55,7 @@ int CommandNode::parse(Actor *player, const std::vector<std::string> &tokens, si
                 break;
         }
         if (executeNow) {
-            this->work(holder);
+            this->work(holder, player);
             delete holder;
         }
     }
@@ -64,7 +65,13 @@ int CommandNode::parse(Actor *player, const std::vector<std::string> &tokens, si
                 return node.second->parse(player, tokens, idx + 1);
             }
         }
-        error(player, "can't find sub command \"%s\"", tokens[idx].c_str());
+        std::string s = std::string("no sub command [ ") + tokens[idx] + " ]\n";
+        for (auto &node:this->nextNode) {
+            s += "[";
+            s += node.first;
+            s += "] ";
+        }
+        error(player, "%s", s.c_str());
     }
     return 0;
 }

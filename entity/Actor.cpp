@@ -46,6 +46,15 @@ BlockSource *Actor::getBlockSource() {
     return *((struct BlockSource **) this + 100);
 }
 
+void Actor::setGameMode(int mode) {
+    SYM_CALL(void(*)(Actor * , int),
+             MSSYM_B1QE17setPlayerGameTypeB1AE12ServerPlayerB2AAE15UEAAXW4GameTypeB3AAAA1Z,
+             this,
+             mode
+    );
+
+}
+
 
 std::string ActorDefinitionIdentifier::getName() {
     auto str = reinterpret_cast<std::string *>((char *) this + 32);

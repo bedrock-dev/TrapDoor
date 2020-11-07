@@ -8,26 +8,25 @@
 
 #include <string>
 #include <utility>
+
 using std::string;
-union ArgHolder {
+
+struct ArgHolder {
     int intVal = 0;
-    float floatVal;
     std::string strVal;
-    bool boolVal;
+    bool boolVal = true;
 public:
     explicit ArgHolder(int arg) : intVal(arg) {}
 
-    explicit ArgHolder(float arg) : floatVal(arg) {}
 
-    explicit ArgHolder(std::string arg) : strVal(std::move(arg)) {}
+    explicit ArgHolder(const char *arg) : strVal(arg) {}
 
     explicit ArgHolder(bool arg) : boolVal(arg) {}
 
-    ~ArgHolder() { strVal.~string(); };
+    explicit ArgHolder(std::string arg) : strVal(std::move(arg)) {}
+
 
     int getInt() const;
-
-    float getFloat() const;
 
 
     string getString() const;
@@ -37,8 +36,6 @@ public:
 };
 
 ArgHolder *integerArg(int val);
-
-ArgHolder *floatArg(float val);
 
 ArgHolder *strArg(const std::string &val);
 
