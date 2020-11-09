@@ -6,6 +6,7 @@
 #include "common/BlockPos.h"
 
 struct Block;
+struct Biome;
 
 struct BlockLegacy {
 
@@ -31,6 +32,7 @@ struct BlockSource {
 
     void updateNeighborsAt(const BlockPos *pos);
 
+    Biome *getBiome(const BlockPos *pos);
 
 };
 

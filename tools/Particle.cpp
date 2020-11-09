@@ -9,6 +9,7 @@
 using namespace SymHook;
 
 #include "entity/Actor.h"
+#include "level/Level.h"
 
 namespace particle {
 //    const ParticleType BALLOON_GAS = "minecraft:balloon_gas_particle";
@@ -16,9 +17,10 @@ namespace particle {
 }
 
 void spawnParticle(Vec3 p, std::string &type) {
-
-    //todo rewrite distance check
-    //   if (math::distance(p, *getPos(globalPlayer)) > particleViewDistance)return;
+    auto pos = p.toBlockPos();
+    auto player = globalLevel->getNearestPlayer(pos);
+    if (!player)return;
+    if (math::distance(p, *player->getPos()) > particleViewDistance)return;
     p.x += 0.5;
     p.y += 0.5;
     p.z += 0.5;
@@ -32,7 +34,6 @@ void spawnParticle(Vec3 p, std::string &type) {
 
 
 void spawnRectangleParticle(AABB aabb, std::string &type) {
-
     auto pointList = math::cut(aabb.p1.x, aabb.p2.x, (int) (aabb.p2.x - aabb.p1.x) / 3);
     for (auto i :pointList) {
         Vec3 point = {i, aabb.p1.y, aabb.p1.z};

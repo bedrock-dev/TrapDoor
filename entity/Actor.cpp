@@ -7,9 +7,11 @@
 #include "lib/mod.h"
 #include "lib/pch.h"
 #include "lib/SymHook.h"
+#include "tools/MessageBuilder.h"
 #include <map>
 #include <string>
 #include <block/Block.h>
+#include "level/Biome.h"
 
 using namespace SymHook;
 
@@ -53,6 +55,37 @@ void Actor::setGameMode(int mode) {
              mode
     );
 
+}
+
+void Actor::printInfo() {
+    MessageBuilder builder;
+    auto position = this->getPos()->toBlockPos();
+    auto chunkPos = position.toChunkPos();
+    auto inChunkOffset = position.InChunkOffset();
+    auto inSlimeChunk = chunkPos.isSlimeChunk();
+    Vec3 viewVec{};
+    this->getViewActor(&viewVec, 1);
+    builder.pos(position);
+    if (inSlimeChunk) {
+        builder.sText(chunkPos.toString(), COLOR::GREEN);
+    } else {
+        builder.sText(chunkPos.toString(), COLOR::WHITE);
+    }
+    builder.text(" ")
+            .text(inChunkOffset.toString())
+            .text("\n")
+            .vec3(viewVec)
+            .text("\n d:")
+            .num(this->getDimensionID());
+
+    auto biome = this->getBlockSource()->getBiome(&position);
+    auto name = biome->getBiomeName();
+    builder.text(biome->getBiomeName())
+            .text(" ").num(biome->getBiomeType()).send(this);
+}
+
+int Actor::getDimensionID() {
+    return *(reinterpret_cast<int *>(this) + 51);
 }
 
 

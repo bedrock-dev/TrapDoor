@@ -31,6 +31,7 @@ struct Vec3 {
     float distanceTo(const Vec3 &vec3) const;
 
     std::string toString() const;
+
     BlockPos toBlockPos() const;
 
 };

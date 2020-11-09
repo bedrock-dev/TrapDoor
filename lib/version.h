@@ -1,1 +1,3 @@
-const char version[] = "Trapdoor V0.1.8-debug";
+const char version[] = "Trapdoor V0.6.0-debug";
+const char developers[] = "hhhxiao OEOTYAN";
+const char credits[] = "";

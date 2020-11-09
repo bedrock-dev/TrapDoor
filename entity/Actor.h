@@ -24,6 +24,9 @@ public:
 
     BlockSource *getBlockSource();
 
+    void printInfo();
+
+    int getDimensionID();
 };
 
 class ActorDefinitionIdentifier {

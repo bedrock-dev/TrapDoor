@@ -10,7 +10,6 @@ const std::string CommandManager::prefix = "./";
 int CommandManager::parse(Actor *player, std::string cmd) {
     if (cmd.rfind(prefix, 0) != 0)return -1;
     auto tokens = tokenize(cmd);
-    printf("\n");
     if (tokens.empty())return -2;
     auto iter = this->commandList.find(tokens[0]);
     if (iter != commandList.end())

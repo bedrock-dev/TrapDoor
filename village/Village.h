@@ -3,6 +3,9 @@
 #include "lib/mod.h"
 #include "lib/SymHook.h"
 #include "common/BlockPos.h"
+
+class Actor;
+
 #include<set>
 
 namespace village {
@@ -22,6 +25,7 @@ namespace village {
         BlockPos getCenter();
 
         float getRadius();
+
         AABB getBounds();
     };
 
@@ -36,10 +40,10 @@ namespace village {
 
         void draw();
 
-        void list();
+        void list(Actor *actor);
     };
 
     void villageTask();
 
-    void listVillages();
+    void listVillages(Actor *player);
 }

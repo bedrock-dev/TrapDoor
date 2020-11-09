@@ -39,7 +39,6 @@ public:
 
     MessageBuilder &pos(const BlockPos &pos);
 
-
     template<typename T>
     MessageBuilder &num(T x) {
         if (std::is_arithmetic<T>()) {
@@ -58,6 +57,7 @@ public:
     MessageBuilder &vec3(const Vec3 &vec3);
 
     MessageBuilder &aabb(AABB aabb);
+
 
     std::string get();
 

@@ -138,6 +138,10 @@ void lightExtraWork() {
     hopperCounterManager.tick();
 }
 
+void heavyExtraWork() {
+    village::villageTask();
+}
+
 THook(
         void,
         MSSYM_B1QA4tickB1AE11ServerLevelB2AAA7UEAAXXZ,
@@ -159,6 +163,7 @@ THook(
                 TIMER_START
                 original(serverLevel);
                 lightExtraWork();
+                heavyExtraWork();
                 TIMER_END
                 if (tick::isMSPTing) {
                     broadcastMsg("mspt: %.3lf ms", (double) timeReslut / 1000);
@@ -176,12 +181,14 @@ THook(
             } else {
                 original(serverLevel);
                 lightExtraWork();
+                heavyExtraWork();
             }
             break;
         case tick::Slow:
             if (tick::slowDownCounter % tick::SlowDownTimes == 0) {
                 original(serverLevel);
                 lightExtraWork();
+                heavyExtraWork();
             }
             tick::slowDownCounter = (tick::slowDownCounter + 1) % tick::SlowDownTimes;
             break;
@@ -227,6 +234,8 @@ THook(
         MSSYM_B1QA4tickB1AA9DimensionB2AAA7UEAAXXZ,
         void * dim
 ) {
+
+    globalDimension = dim;
     if (tick::isProfiling) {
         TIMER_START
         original(dim);

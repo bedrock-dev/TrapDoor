@@ -179,6 +179,10 @@ namespace SymHook{
 	// [符号] ?_tick@HopperBlockActor@@AEAAXAEAVBlockSource@@H@Z
 	constexpr RVA MSSYM_B2QUA4tickB1AE16HopperBlockActorB2AAE20AEAAXAEAVBlockSourceB2AAA1HB1AA1Z = 0x008B7AA0;
 
+	// [原型] public: class Biome & __ptr64 __cdecl BlockSource::getBiome(class BlockPos const & __ptr64) __ptr64
+	// [符号] ?getBiome@BlockSource@@QEAAAEAVBiome@@AEBVBlockPos@@@Z
+	constexpr RVA MSSYM_B1QA8getBiomeB1AE11BlockSourceB2AAE13QEAAAEAVBiomeB2AAE12AEBVBlockPosB3AAAA1Z = 0x00A1CFE0;
+
 	// [原型] public: void __cdecl Village::tick(struct Tick,class BlockSource & __ptr64) __ptr64
 	// [符号] ?tick@Village@@QEAAXUTick@@AEAVBlockSource@@@Z
 	constexpr RVA MSSYM_B1QA4tickB1AA7VillageB2AAE10QEAAXUTickB2AAE15AEAVBlockSourceB3AAAA1Z = 0x00644680;
@@ -286,6 +290,10 @@ namespace SymHook{
 	// [原型] private: unsigned int __cdecl Core::Random::_genRandInt32(void) __ptr64
 	// [符号] ?_genRandInt32@Random@Core@@AEAAIXZ
 	constexpr RVA MSSYM_B2QUE12genRandInt32B1AA6RandomB1AA4CoreB2AAA7AEAAIXZ = 0x001B0070;
+
+	// [原型] public: enum VanillaBiomeTypes __cdecl Biome::getBiomeType(void)const __ptr64
+	// [符号] ?getBiomeType@Biome@@QEBA?AW4VanillaBiomeTypes@@XZ
+	constexpr RVA MSSYM_B1QE12getBiomeTypeB1AA5BiomeB2AAA4QEBAB1QE20AW4VanillaBiomeTypesB2AAA2XZ = 0x00840C80;
 
 }
 

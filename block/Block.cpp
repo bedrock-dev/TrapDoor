@@ -6,11 +6,11 @@
 #include "common/Vec3.h"
 #include "common/BlockPos.h"
 #include "tools/MathTool.h"
+#include "level/Biome.h"
 
 using namespace SymHook;
 
 #include "tools/Particle.h"
-
 #include <vector>
 
 BlockLegacy *Block::getLegacy() {
@@ -90,6 +90,16 @@ void BlockSource::updateNeighborsAt(const BlockPos *pos) {
     );
 }
 
+Biome *BlockSource::getBiome(const BlockPos *pos) {
+    return
+            SYM_CALL(
+                    Biome*(*)(BlockSource * , const BlockPos *),
+                    MSSYM_B1QA8getBiomeB1AE11BlockSourceB2AAE13QEAAAEAVBiomeB2AAE12AEBVBlockPosB3AAAA1Z,
+                    this,
+                    pos
+            );
+}
+
 
 THook(
         void,
@@ -129,7 +139,7 @@ void BaseCircuitComponent::basePrint() {
         BlockPos pos = BlockPos(val[3], val[4], val[5]);
         auto comp = globalCircuitSceneGraph->getBaseCircuitComponent(&pos);
         if (comp) {
-           // info(" (%d %d %d) <=> %d\n", pos.x, pos.y, pos.z, comp->getStrength());
+            // info(" (%d %d %d) <=> %d\n", pos.x, pos.y, pos.z, comp->getStrength());
             vec3.x = (float) pos.x;
             vec3.y = (float) pos.y + 0.7f;
             vec3.z = (float) pos.z;
@@ -168,7 +178,7 @@ void BaseCircuitComponent::printTorch(BlockPos pos) {
             &flag
     );
 //    info("torch: bc: %d s: %d hp: %d", selfPowerCount, strength, getHalfPulse());
- //   info("%d %d", signal, flag);
+    //   info("%d %d", signal, flag);
 }
 
 int BaseCircuitComponent::getHalfPulse() {

@@ -30,6 +30,7 @@ add_library(TrapDoor SHARED
         common/BlockPos.cpp
         common/Vec3.cpp
         entity/PlayerSpace.cpp
+        level/Biome.cpp
         )
 
 

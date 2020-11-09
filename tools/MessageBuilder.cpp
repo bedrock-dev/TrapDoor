@@ -81,7 +81,7 @@ MessageBuilder &MessageBuilder::sText(const std::string &s, uint8_t style) {
 }
 
 void MessageBuilder::send(Actor *actor) {
-    info(actor,get());
+    info(actor, get());
     //todo: rewrite
     // info(get());
 }

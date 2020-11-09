@@ -6,6 +6,7 @@
 #include "tools/Message.h"
 #include "tools/Particle.h"
 #include "tools/MessageBuilder.h"
+#include "entity/Player.h"
 
 using namespace SymHook;
 //village tick
@@ -93,7 +94,7 @@ namespace village {
     int villageInterval = 0;
 
     void villageTask() {
-        if (villageInterval % 15 == 0 && enableVillageShow) {
+        if (villageInterval % 15 == 0) {
             villageHelper.draw();
         }
         if (villageInterval % 100 == 0) {
@@ -102,8 +103,8 @@ namespace village {
         villageInterval = (villageInterval + 1) % 300;
     }
 
-    void listVillages() {
-        villageHelper.list();
+    void listVillages(Actor *player) {
+        villageHelper.list(player);
     }
 
     void VillageHelper::clear() {
@@ -127,7 +128,7 @@ namespace village {
         }
     }
 
-    void VillageHelper::list() {
+    void VillageHelper::list(Actor *player) {
         MessageBuilder builder;
         builder.text("here are all the ticking villages:\n");
         int i = 0;
@@ -154,7 +155,8 @@ namespace village {
                         .text("\n");
             }
         }
-      //  builder.send();
+        builder.send(player);
+        //  builder.send();
     }
 }
 
@@ -163,6 +165,7 @@ THook(
         void, MSSYM_B1QA4tickB1AA7VillageB2AAE10QEAAXUTickB2AAE15AEAVBlockSourceB3AAAA1Z,
         village::Village *vill, void *tick, void * blockSource
 ) {
+    //village tick
     original(vill, tick, blockSource);
     village::villageHelper.insert(vill);
 }

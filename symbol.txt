@@ -93,10 +93,8 @@ Player::tickWorld
 ?getBlock@BlockSource@@QEBAAEBVBlock@@HHH@Z
 #获取方块调试信息
 ?getName@Block@@QEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
-
 #getLegacyBlock
 ?getLegacyBlock@Block@@QEBAAEBVBlockLegacy@@XZ
-
 #放置方块
 ?setBlock@BlockSource@@QEAA_NHHHAEBVBlock@@H@Z
 #放置方块
@@ -125,6 +123,8 @@ Player::tickWorld
 ?tryGetStateFromLegacyData@BlockLegacy@@QEBAPEBVBlock@@G@Z
 #漏斗tick
 ?_tick@HopperBlockActor@@AEAAXAEAVBlockSource@@H@Z
+#获取群系
+?getBiome@BlockSource@@QEAAAEAVBiome@@AEBVBlockPos@@@Z
 ########################################村庄#######################################
 
 #村庄更新
@@ -198,3 +198,6 @@ Player::tickWorld
 ?_setSeed@Random@Core@@AEAAXI@Z
 #生成随机数
 ?_genRandInt32@Random@Core@@AEAAIXZ
+###################群系###################
+#获取群系类型
+?getBiomeType@Biome@@QEBA?AW4VanillaBiomeTypes@@XZ

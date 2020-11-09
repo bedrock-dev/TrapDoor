@@ -9,6 +9,18 @@
 #include <iostream>
 #include <vector>
 
+
+struct ChunkPos {
+    int x = 0;
+    int z = 0;
+
+    ChunkPos(int _x, int _z) : x(_x), z(_z) {}
+
+    std::string toString() const;
+
+    bool isSlimeChunk() const;
+};
+
 struct BlockPos {
     int x = 0;
     int y = 0;
@@ -39,6 +51,16 @@ struct BlockPos {
     std::string toString() const;
 
     std::vector<BlockPos> getNeighbourPos();
+
+    std::vector<BlockPos> getPlainNeighbourPos();
+
+    ChunkPos toChunkPos() const {
+        return {this->x / 16, this->z / 16};
+    }
+
+    ChunkPos InChunkOffset() const {
+        return {x % 16, z % 16};
+    }
 };
 
 

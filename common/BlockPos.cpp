@@ -3,6 +3,7 @@
 //
 
 #include "BlockPos.h"
+#include <random>
 
 bool BlockPos::operator==(const BlockPos &v) const {
     return x == v.x && y == v.y && z == v.z;
@@ -55,4 +56,26 @@ std::vector<BlockPos> BlockPos::getNeighbourPos() {
             {x,     y,     z + 1},
             {x,     y,     z - 1}
     };
+}
+
+std::vector<BlockPos> BlockPos::getPlainNeighbourPos() {
+    return {
+            {x + 1, y,     z},
+            {x - 1, y,     z},
+            {x,     y,     z + 1},
+            {x,     y,     z - 1}
+    };
+}
+
+std::string ChunkPos::toString() const {
+    return "["
+           + std::to_string(x) + ","
+           + std::to_string(z) + "]";
+}
+
+
+bool ChunkPos::isSlimeChunk() const {
+    auto seed = (x * 0x1f1f1f1fu) ^(uint32_t) z;
+    std::mt19937 mt(seed);
+    return mt() % 10 == 0;
 }

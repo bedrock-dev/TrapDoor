@@ -9,8 +9,31 @@
 #include <queue>
 #include "tools/MathTool.h"
 #include "tools/MessageBuilder.h"
+#include "level/Biome.h"
 
 using namespace SymHook;
+
+void showBiome(Actor *player, const BlockPos &pos, Block &block, int max) {
+    Biome *biome = player->getBlockSource()->getBiome(&pos);
+    std::string biomeName = biome->getBiomeName();
+    printf("%s", biomeName.c_str());
+    std::queue<BlockPos> placeQueue;
+    placeQueue.push(pos);
+    int num = 0;
+    while (!placeQueue.empty() && num < max) {
+        auto f = placeQueue.front();
+        placeQueue.pop();
+        std::vector<BlockPos> list = f.getPlainNeighbourPos();
+        for (BlockPos position:list) {
+            auto name = player->getBlockSource()->getBiome(&position)->getBiomeName();
+            if (name == biomeName) {
+                placeQueue.push(position);
+            }
+        }
+        player->getBlockSource()->setBlock(&f, &block);
+        num++;
+    }
+}
 
 MeasureManager measureManager;
 //player place block
@@ -18,42 +41,23 @@ THook(
         int64_t,
         MSSYM_B1QE21onBlockPlacedByPlayerB1AE34VanillaServerGameplayEventListenerB2AAA4UEAAB1QE14AW4EventResultB2AAE10AEAVPlayerB2AAA9AEBVBlockB2AAE12AEBVBlockPosB3AAUA1NB1AA1Z,
         void *self,
-        void *player,
+        Actor *player,
         Block &block,
         const BlockPos &pos,
         bool flag
 ) {
     auto name = block.getName();
+  //  showBiome(player, pos, block, 16384);
 //    if (name == "minecraft:warped_planks") {
 //        measureManager.setPos1(pos);
 //    } else if (name == "minecraft:crimson_planks") {
 //        measureManager.setPos2(pos);
 //    }
-    //dbg(name);
     return original(self, player, block, pos, flag);
 }
 
 
-//player destroy block chained
-//void chainDestroy(const BlockPos *pos, const std::string &blockName, int max) {
-//    auto air = globalBlockSource->getBlock(*pos);
-//    std::queue<BlockPos> destroyQueue;
-//    destroyQueue.push(*pos);
-//    int num = 0;
-//    while (!destroyQueue.empty() && num < max) {
-//        auto f = destroyQueue.front();
-//        destroyQueue.pop();
-//        std::vector<BlockPos> list = f.getNeighbourPos();
-//        for (BlockPos position:list) {
-//            auto block = globalBlockSource->getBlock(position);
-//            if (block->getName() == blockName) {
-//                destroyQueue.push(position);
-//            }
-//        }
-//        globalBlockSource->setBlock(&f, air);
-//        num++;
-//    }
-//}
+//chain call
 
 
 
