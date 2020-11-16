@@ -24,11 +24,10 @@ void spawnParticle(Vec3 p, std::string &type) {
     p.x += 0.5;
     p.y += 0.5;
     p.z += 0.5;
-    if ((!globalLevel || !globalDimension))return;
     SYM_CALL(
             void(*)(Level * , std::string, Vec3 *, void *),
             MSSYM_MD5_a2fdc6a066bbe9a360c9c9d76725a8fb,
-            globalLevel, type, &p, globalDimension
+            globalLevel, type, &p, player->getDimension()
     );
 }
 

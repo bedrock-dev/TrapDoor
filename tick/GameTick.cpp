@@ -5,7 +5,7 @@
 #include "GameTick.h"
 #include "level/Level.h"
 #include "block/Hopper.h"
-#include "commands/Shell.h"
+#include "commands/Command.h"
 
 using namespace SymHook;
 
@@ -235,7 +235,6 @@ THook(
         void * dim
 ) {
 
-    globalDimension = dim;
     if (tick::isProfiling) {
         TIMER_START
         original(dim);

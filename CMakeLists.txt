@@ -18,8 +18,8 @@ add_library(TrapDoor SHARED
         entity/Actor.cpp
         tick/GameTick.cpp
         level/Level.cpp
-        commands/Shell.cpp
-        commands/Shell.h
+        commands/Command.cpp
+        commands/Command.h
         commands/ArgHolder.cpp
         commands/CommandManager.cpp
         commands/CommandNode.cpp
@@ -31,6 +31,7 @@ add_library(TrapDoor SHARED
         common/Vec3.cpp
         entity/PlayerSpace.cpp
         level/Biome.cpp
+        level/Dimension.cpp
         )
 
 

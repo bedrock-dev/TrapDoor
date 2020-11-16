@@ -215,10 +215,6 @@ namespace SymHook{
 	// [符号] ?spawnMob@Spawner@@QEAAPEAVMob@@AEAVBlockSource@@AEBUActorDefinitionIdentifier@@PEAVActor@@AEBVVec3@@_N44@Z
 	constexpr RVA MSSYM_B1QA8spawnMobB1AA7SpawnerB2AAE11QEAAPEAVMobB2AAE15AEAVBlockSourceB2AAE29AEBUActorDefinitionIdentifierB2AAA9PEAVActorB2AAA8AEBVVec3B3AAUA3N44B1AA1Z = 0x00B39A30;
 
-	// [原型] public: static bool __cdecl Command::validRange(int,int,int,class CommandOutput & __ptr64)
-	// [符号] ?validRange@Command@@SA_NHHHAEAVCommandOutput@@@Z
-	constexpr RVA MSSYM_B1QE10validRangeB1AA7CommandB2AAA2SAB1UE21NHHHAEAVCommandOutputB3AAAA1Z = 0x0041A1E0;
-
 	// [原型] protected: bool __cdecl Hopper::_tryMoveInItem(class BlockSource & __ptr64,class Container & __ptr64,class ItemStack & __ptr64,int,int,int) __ptr64
 	// [符号] ?_tryMoveInItem@Hopper@@IEAA_NAEAVBlockSource@@AEAVContainer@@AEAVItemStack@@HHH@Z
 	constexpr RVA MSSYM_B2QUE13tryMoveInItemB1AA6HopperB2AAA4IEAAB1UE16NAEAVBlockSourceB2AAE13AEAVContainerB2AAE13AEAVItemStackB2AAA3HHHB1AA1Z = 0x006D0120;
@@ -294,6 +290,46 @@ namespace SymHook{
 	// [原型] public: enum VanillaBiomeTypes __cdecl Biome::getBiomeType(void)const __ptr64
 	// [符号] ?getBiomeType@Biome@@QEBA?AW4VanillaBiomeTypes@@XZ
 	constexpr RVA MSSYM_B1QE12getBiomeTypeB1AA5BiomeB2AAA4QEBAB1QE20AW4VanillaBiomeTypesB2AAA2XZ = 0x00840C80;
+
+	// [原型] public: virtual void __cdecl GrassBlock::tick(class BlockSource & __ptr64,class BlockPos const & __ptr64,class Random & __ptr64)const __ptr64
+	// [符号] ?tick@GrassBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@AEAVRandom@@@Z
+	constexpr RVA MSSYM_B1QA4tickB1AE10GrassBlockB2AAE20UEBAXAEAVBlockSourceB2AAE12AEBVBlockPosB2AAE10AEAVRandomB3AAAA1Z = 0x0093B500;
+
+	// [原型] public: class Dimension * __ptr64 __cdecl Level::getDimension(class AutomaticID<class Dimension,int>)const __ptr64
+	// [符号] ?getDimension@Level@@QEBAPEAVDimension@@V?$AutomaticID@VDimension@@H@@@Z
+	constexpr RVA MSSYM_B1QE12getDimensionB1AA5LevelB2AAE17QEBAPEAVDimensionB2AAA1VB2QDE11AutomaticIDB1AE10VDimensionB2AAA1HB3AAAA1Z = 0x00A72D50;
+
+	// [原型] public: unsigned __int64 __cdecl NetworkIdentifier::getHash(void)const __ptr64
+	// [符号] ?getHash@NetworkIdentifier@@QEBA_KXZ
+	constexpr RVA MSSYM_B1QA7getHashB1AE17NetworkIdentifierB2AAA4QEBAB1UA3KXZ = 0x00339FB0;
+
+	// [原型] public: virtual void __cdecl ServerNetworkHandler::handle(class NetworkIdentifier const & __ptr64,class CommandRequestPacket const & __ptr64) __ptr64
+	// [符号] ?handle@ServerNetworkHandler@@UEAAXAEBVNetworkIdentifier@@AEBVCommandRequestPacket@@@Z
+	constexpr RVA MSSYM_B1QA6handleB1AE20ServerNetworkHandlerB2AAE26UEAAXAEBVNetworkIdentifierB2AAE24AEBVCommandRequestPacketB3AAAA1Z = 0x003A03A0;
+
+	// [原型] public: virtual class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __cdecl AutomationPlayerCommandOrigin::getName(void)const __ptr64
+	// [符号] ?getName@AutomationPlayerCommandOrigin@@UEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+	constexpr RVA MSSYM_B1QA7getNameB1AE29AutomationPlayerCommandOriginB2AAA4UEBAB1QA2AVB2QDA5basicB1UA6stringB1AA2DUB2QDA4charB1UA6traitsB1AA1DB1AA3stdB2AAA1VB2QDA9allocatorB1AA1DB1AA12B2AAA3stdB2AAA2XZ = 0x0041EBA0;
+
+	// [原型] public: virtual enum CommandPermissionLevel __cdecl PlayerCommandOrigin::getPermissionsLevel(void)const __ptr64
+	// [符号] ?getPermissionsLevel@PlayerCommandOrigin@@UEBA?AW4CommandPermissionLevel@@XZ
+	constexpr RVA MSSYM_B1QE19getPermissionsLevelB1AE19PlayerCommandOriginB2AAA4UEBAB1QE25AW4CommandPermissionLevelB2AAA2XZ = 0x0041E2C0;
+
+	// [原型] public: void __cdecl CommandRegistry::registerCommand(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const & __ptr64,char const * __ptr64,enum CommandPermissionLevel,struct CommandFlag,struct CommandFlag) __ptr64
+	// [符号] ?registerCommand@CommandRegistry@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PEBDW4CommandPermissionLevel@@UCommandFlag@@3@Z
+	constexpr RVA MSSYM_MD5_8574de98358ff66b5a913417f44dd706 = 0x0042D260;
+
+	// [原型] public: struct MCRESULT __cdecl MinecraftCommands::executeCommand(class std::shared_ptr<class CommandContext>,bool)const __ptr64
+	// [符号] ?executeCommand@MinecraftCommands@@QEBA?AUMCRESULT@@V?$shared_ptr@VCommandContext@@@std@@_N@Z
+	constexpr RVA MSSYM_B1QE14executeCommandB1AE17MinecraftCommandsB2AAA4QEBAB1QE10AUMCRESULTB2AAA1VB2QDA6sharedB1UA3ptrB1AE15VCommandContextB3AAAA3stdB3AAUA1NB1AA1Z = 0x0045C120;
+
+	// [原型] public: class std::unique_ptr<class CommandContext,struct std::default_delete<class CommandContext> > __cdecl CommandRequestPacket::createCommandContext(class NetworkIdentifier const & __ptr64,class Level & __ptr64,int)const __ptr64
+	// [符号] ?createCommandContext@CommandRequestPacket@@QEBA?AV?$unique_ptr@VCommandContext@@U?$default_delete@VCommandContext@@@std@@@std@@AEBVNetworkIdentifier@@AEAVLevel@@H@Z
+	constexpr RVA MSSYM_MD5_607250778ae0b2889b9591dc98bd2cd0 = 0x0035C140;
+
+	// [原型] private: class std::unique_ptr<class Command,struct std::default_delete<class Command> > __cdecl CommandRegistry::createCommand(struct CommandRegistry::ParseToken const & __ptr64,class CommandOrigin const & __ptr64,int,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > & __ptr64,class std::vector<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class std::allocator<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > > > & __ptr64)const __ptr64
+	// [符号] ?createCommand@CommandRegistry@@AEBA?AV?$unique_ptr@VCommand@@U?$default_delete@VCommand@@@std@@@std@@AEBUParseToken@1@AEBVCommandOrigin@@HAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@3@AEAV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@3@@Z
+	constexpr RVA MSSYM_MD5_573632dacfa65053246fc05eeebd2c0e = 0x00425350;
 
 }
 

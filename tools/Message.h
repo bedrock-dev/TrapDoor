@@ -35,17 +35,17 @@ void gamePrintf(Actor *player, const std::string &prefix, const std::string &for
 
 template<typename ... Args>
 void waring(Actor *player, const std::string &format, Args ... args) {
-    gamePrintf(player, "§6[TD] ", format, args...);
+    gamePrintf(player, "§6", format, args...);
 }
 
 template<typename ... Args>
 void error(Actor *player, const std::string &format, Args ... args) {
-    gamePrintf(player, "§c[TD] ", format, args...);
+    gamePrintf(player, "§c", format, args...);
 }
 
 template<typename ... Args>
 void info(Actor *player, const std::string &format, Args ... args) {
-    gamePrintf(player, "[TD] ", format, args...);
+    gamePrintf(player, "", format, args...);
 }
 
 template<typename ... Args>

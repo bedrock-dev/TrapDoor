@@ -18,12 +18,19 @@
 std::vector<std::string> tokenize(std::string &commandString);
 
 class CommandManager {
-    const static std::string prefix;
     std::map<std::string, CommandNode *> commandList;
+
 public:
-    CommandNode *registerCmd(const std::string &cmd, ArgType type = ArgType::NONE);
+    CommandNode *registerCmd(const std::string &cmd,
+                             const std::string &description = "no description",
+                             CMD_LEVEL level = DEFAULT,
+                             ArgType type = ArgType::NONE);
 
     int parse(Actor *player, std::string cmd);
+
+    void printfHelpInfo(Actor *player);
+
+    bool findCommand(const std::string &cmd);
 };
 
 #endif //COMMANDMANAGER_COMMANDMANAGER_H

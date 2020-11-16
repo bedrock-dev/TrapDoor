@@ -7,6 +7,7 @@
 #include "common/BlockPos.h"
 #include "tools/MathTool.h"
 #include "level/Biome.h"
+#include "tick/GameTick.h"
 
 using namespace SymHook;
 
@@ -263,3 +264,18 @@ THook(
 //) {
 //    return original(random);
 //}
+
+
+//THook(
+//        void,
+//        MSSYM_B1QA4tickB1AE10GrassBlockB2AAE20UEBAXAEAVBlockSourceB2AAE12AEBVBlockPosB2AAE10AEAVRandomB3AAAA1Z,
+//        Block *block,
+//        BlockSource *blockSource,
+//        BlockPos *pos,
+//        void * random
+//) {
+//    if (tick::tickStatus != tick::Normal && tick::tickStatus != tick::Wrap) {
+//        printf("tick [%d %d %d]\n", pos->x, pos->y, pos->z);
+//    }
+//}
+

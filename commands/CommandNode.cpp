@@ -5,7 +5,9 @@
 #include "CommandNode.h"
 #include "tools/Message.h"
 #include <algorithm>
+#include <utility>
 #include "entity/Actor.h"
+
 
 CommandNode *Arg(const std::string &args, ArgType type) {
     auto *node = new CommandNode(args);
@@ -18,11 +20,19 @@ bool isValidIntString(const std::string &str) {
     return std::all_of(str.begin(), str.end(), [](char c) { return '0' <= c && c <= '9'; });
 }
 
-CommandNode::CommandNode(std::string name) : name(std::move(name)),
-                                             work([&name](ArgHolder *holder, Actor *actor) {
-                                                 error(actor, "require a sub command behind %s", name.c_str());
-                                             }) {}
+CommandNode::CommandNode(std::string name, std::string description, CMD_LEVEL level)
+        : name(std::move(name)),
+          work([&name](ArgHolder *holder, Actor *actor) {
+              error(actor, "require a sub command behind %s", name.c_str());
+          }),
+          description(std::move(description)),
+          permissionLevel(level) {
+}
 
+CommandNode::CommandNode(std::string name, CMD_LEVEL level) : CommandNode(
+        std::move(name), "no desc", level) {}
+
+CommandNode::CommandNode(std::string name) : CommandNode(std::move(name), DEFAULT) {}
 
 int CommandNode::parse(Actor *player, const std::vector<std::string> &tokens, size_t idx) {
     bool executeNow = false;
@@ -76,15 +86,39 @@ int CommandNode::parse(Actor *player, const std::vector<std::string> &tokens, si
     return 0;
 }
 
-void CommandNode::print(int idx) const {
-    std::string space(idx * 4, ' ');
-    std::cout << space << this->getName() << std::endl;
+void CommandNode::printHelpInfo(int idx, Actor *actor) const {
+    if (this->getName() == "?")return;
+    std::string space;
+    if (idx != 0) {
+        space = std::string(idx * 2, ' ');
+    }
+    space += this->getName();
+    space += " [";
+    switch (this->argType) {
+        case ArgType::NONE:
+            space += "none";
+            break;
+        case ArgType::INT:
+            space += "integer";
+            break;
+        case ArgType::BOOL:
+            space += "true/false";
+            break;
+        case ArgType::STR:
+            space += "string";
+            break;
+    }
+    info(actor, "%s] - %s\n", space.c_str(), this->getDescription().c_str());
     for (auto &node: this->nextNode) {
-        node.second->print(idx + 1);
+        node.second->printHelpInfo(idx + 1, actor);
     }
 }
 
 CommandNode *CommandNode::then(CommandNode *node) {
     this->nextNode[node->getName()] = node;
     return this;
+}
+
+std::string CommandNode::getDescription() const {
+    return this->description;
 }

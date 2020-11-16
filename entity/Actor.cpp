@@ -12,11 +12,20 @@
 #include <string>
 #include <block/Block.h>
 #include "level/Biome.h"
+#include "level/Level.h"
+#include "common/Common.h"
 
 using namespace SymHook;
 
 std::map<std::string, std::vector<Vec3>> mobCounterList;//NOLINT
 
+uint64_t NetworkIdentifier::getHash() {
+    return SYM_CALL(
+            uint64_t(*)(NetworkIdentifier * ),
+            MSSYM_B1QA7getHashB1AE17NetworkIdentifierB2AAA4QEBAB1UA3KXZ,
+            this
+    );
+}
 
 
 Vec3 *Actor::getPos() {
@@ -66,18 +75,21 @@ void Actor::printInfo() {
     Vec3 viewVec{};
     this->getViewActor(&viewVec, 1);
     builder.pos(position);
+    builder.text("   ");
     if (inSlimeChunk) {
         builder.sText(chunkPos.toString(), COLOR::GREEN);
     } else {
         builder.sText(chunkPos.toString(), COLOR::WHITE);
     }
-    builder.text(" ")
+    builder.text("\n")
             .text(inChunkOffset.toString())
             .text("\n")
             .vec3(viewVec)
             .text("\n d:")
-            .num(this->getDimensionID());
-
+            .num(this->getDimensionID())
+            .text(" ")
+            .text(this->getDimensionName())
+            .text("\n");
     auto biome = this->getBlockSource()->getBiome(&position);
     auto name = biome->getBiomeName();
     builder.text(biome->getBiomeName())
@@ -85,7 +97,25 @@ void Actor::printInfo() {
 }
 
 int Actor::getDimensionID() {
+
     return *(reinterpret_cast<int *>(this) + 51);
+}
+
+Dimension *Actor::getDimension() {
+    return globalLevel->getDimFromID(this->getDimensionID());
+}
+
+std::string Actor::getDimensionName() {
+    auto id = this->getDimensionID();
+    if (id == 0)return "Overworld";
+    if (id == 1)return "Nether";
+    if (id == 2)return "The end";
+    return "Unknown";
+}
+
+NetworkIdentifier *Actor::getClientID() {
+  //  ServerPlayer::isHostingPlaye
+    return reinterpret_cast<NetworkIdentifier *>((char *) this + 2432);
 }
 
 

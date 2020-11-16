@@ -17,34 +17,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b8a60db2-baf4-4087-8601-d054cc921b14" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/level/Biome.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/level/Biome.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/level/LevelChunk.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/level/LevelChunk.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/commands/Command.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/level/Dimension.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/level/Dimension.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/block/Block.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/block/Block.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/block/Block.h" beforeDir="false" afterPath="$PROJECT_DIR$/block/Block.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/commands/CommandManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/commands/CommandManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/Shell.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/commands/Shell.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/Shell.h" beforeDir="false" afterPath="$PROJECT_DIR$/commands/Shell.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/BlockPos.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/common/BlockPos.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/BlockPos.h" beforeDir="false" afterPath="$PROJECT_DIR$/common/BlockPos.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/Vec3.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/common/Vec3.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/Vec3.h" beforeDir="false" afterPath="$PROJECT_DIR$/common/Vec3.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dllmain.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/dllmain.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/CommandManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/commands/CommandManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/CommandNode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/commands/CommandNode.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/CommandNode.h" beforeDir="false" afterPath="$PROJECT_DIR$/commands/CommandNode.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/Shell.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/commands/Command.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/Shell.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/Common.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/common/Common.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/Common.h" beforeDir="false" afterPath="$PROJECT_DIR$/common/Common.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entity/Actor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Actor.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entity/Actor.h" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Actor.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entity/Player.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Player.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/level/Level.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/level/Level.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/level/Level.h" beforeDir="false" afterPath="$PROJECT_DIR$/level/Level.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/SymHook.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/SymHook.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/version.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/version.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/mod.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/mod.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/symbol.txt" beforeDir="false" afterPath="$PROJECT_DIR$/symbol.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tick/GameTick.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tick/GameTick.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/MessageBuilder.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tools/MessageBuilder.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/MessageBuilder.h" beforeDir="false" afterPath="$PROJECT_DIR$/tools/MessageBuilder.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/Message.h" beforeDir="false" afterPath="$PROJECT_DIR$/tools/Message.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tools/Particle.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tools/Particle.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/village/Village.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/village/Village.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/village/Village.h" beforeDir="false" afterPath="$PROJECT_DIR$/village/Village.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +78,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="CMakeSettings" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -99,11 +96,6 @@
       </method>
     </configuration>
     <configuration name="TrapDoor" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="TrapDoor" TARGET_NAME="TrapDoor" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -209,7 +201,21 @@
       <workItem from="1604737125509" duration="12153000" />
       <workItem from="1604802106949" duration="3565000" />
       <workItem from="1604828503754" duration="1969000" />
-      <workItem from="1604893351782" duration="5538000" />
+      <workItem from="1604893351782" duration="6370000" />
+      <workItem from="1605087798438" duration="1210000" />
+      <workItem from="1605264389665" duration="3292000" />
+      <workItem from="1605274459942" duration="1319000" />
+      <workItem from="1605278597080" duration="3045000" />
+      <workItem from="1605347221197" duration="13224000" />
+      <workItem from="1605402677763" duration="4295000" />
+      <workItem from="1605407841130" duration="1566000" />
+      <workItem from="1605433343374" duration="206000" />
+      <workItem from="1605433563730" duration="6024000" />
+      <workItem from="1605490788898" duration="542000" />
+      <workItem from="1605491351694" duration="106000" />
+      <workItem from="1605491471002" duration="155000" />
+      <workItem from="1605491644568" duration="301000" />
+      <workItem from="1605491960823" duration="1609000" />
     </task>
     <task id="LOCAL-00001" summary="1. 命令解释器投入使用，和switch case 彻底告别&#10;2. 支持游戏模式切换命令 ./gm mode n (n=3是观察模式)">
       <created>1604761522583</created>
@@ -218,14 +224,26 @@
       <option name="project" value="LOCAL" />
       <updated>1604761522583</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="1. 村庄显示回归&#10;2. 简单的F3(./dbg)">
+      <created>1604898980053</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1604898980053</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="1. 命令解释器投入使用，和switch case 彻底告别&#10;2. 支持游戏模式切换命令 ./gm mode n (n=3是观察模式)" />
-    <option name="LAST_COMMIT_MESSAGE" value="1. 命令解释器投入使用，和switch case 彻底告别&#10;2. 支持游戏模式切换命令 ./gm mode n (n=3是观察模式)" />
+    <MESSAGE value="1. 村庄显示回归&#10;2. 简单的F3(./dbg)" />
+    <option name="LAST_COMMIT_MESSAGE" value="1. 村庄显示回归&#10;2. 简单的F3(./dbg)" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="262" y="0" width="814" height="693" key="#Plugins" timestamp="1605491624905">
+      <screen x="0" y="0" width="1549" height="831" />
+    </state>
+    <state x="262" y="0" width="814" height="693" key="#Plugins/0.0.1549.831@0.0.1549.831" timestamp="1605491624905" />
     <state x="230" y="71" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1604158449251">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
@@ -242,10 +260,10 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="505" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1549.831@0.0.1549.831" timestamp="1604398704542" />
-    <state x="394" y="0" key="CommitChangelistDialog2" timestamp="1604761521442">
+    <state x="394" y="0" key="CommitChangelistDialog2" timestamp="1604898979262">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="394" y="0" key="CommitChangelistDialog2/0.0.1549.831@0.0.1549.831" timestamp="1604761521442" />
+    <state x="394" y="0" key="CommitChangelistDialog2/0.0.1549.831@0.0.1549.831" timestamp="1604898979262" />
     <state x="497" y="108" key="FileChooserDialogImpl" timestamp="1604074220449">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
@@ -270,18 +288,18 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="148" y="65" key="MergeDialog/0.0.1549.831@0.0.1549.831" timestamp="1604670663442" />
-    <state x="200" y="124" width="1170" height="707" key="SettingsEditor" timestamp="1604158473895">
+    <state x="200" y="124" width="1170" height="707" key="SettingsEditor" timestamp="1605491936868">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="200" y="124" width="1170" height="707" key="SettingsEditor/0.0.1549.831@0.0.1549.831" timestamp="1604158473895" />
-    <state x="367" y="148" key="Vcs.Push.Dialog.v2" timestamp="1604761528078">
+    <state x="200" y="124" width="1170" height="707" key="SettingsEditor/0.0.1549.831@0.0.1549.831" timestamp="1605491936868" />
+    <state x="367" y="148" key="Vcs.Push.Dialog.v2" timestamp="1604898985160">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="367" y="148" key="Vcs.Push.Dialog.v2/0.0.1549.831@0.0.1549.831" timestamp="1604761528078" />
-    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1604896224010">
+    <state x="367" y="148" key="Vcs.Push.Dialog.v2/0.0.1549.831@0.0.1549.831" timestamp="1604898985160" />
+    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1605436433454">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1549.831@0.0.1549.831" timestamp="1604896224010" />
+    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1549.831@0.0.1549.831" timestamp="1605436433454" />
     <state x="590" y="328" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1604898934302">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
@@ -294,9 +312,9 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="551" y="198" key="refactoring.ChangeSignatureDialog/0.0.1549.831@0.0.1549.831" timestamp="1599612059470" />
-    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup" timestamp="1604634483718">
+    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup" timestamp="1605494010805">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup/0.0.1549.831@0.0.1549.831" timestamp="1604634483718" />
+    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup/0.0.1549.831@0.0.1549.831" timestamp="1605494010805" />
   </component>
 </project>

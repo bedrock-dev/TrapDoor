@@ -7,6 +7,12 @@
 #include <vector>
 #include <string>
 
+struct NetworkIdentifier {
+    uint64_t getHash();
+};
+
+class Dimension;
+
 /**
  * todo: need rewrite
  */
@@ -27,6 +33,14 @@ public:
     void printInfo();
 
     int getDimensionID();
+
+    Dimension *getDimension();
+
+    std::string getDimensionName();
+
+    NetworkIdentifier *getClientID();
+
+
 };
 
 class ActorDefinitionIdentifier {

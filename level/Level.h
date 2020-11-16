@@ -11,7 +11,7 @@
 #include <functional>
 
 class BlockPos;
-
+class Dimension;
 class Actor;
 
 class Level {
@@ -21,6 +21,8 @@ public:
     void forEachPlayer(const std::function<void(Actor *)> &todo);
 
     Actor *getNearestPlayer(BlockPos &pos);
+
+    Dimension* getDimFromID(int id);
 };
 
 
