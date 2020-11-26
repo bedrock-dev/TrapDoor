@@ -62,10 +62,10 @@ void initCommand() {
             ->then(ARG("r", INT, { hopperCounterManager.resetChannel(player, holder->getInt()); }))
             ->then(ARG("p", INT, { hopperCounterManager.printChannel(player, holder->getInt()); }));
 
-    getCommandManager().registerCmd("o", "switch to observer mode")
+    getCommandManager().registerCmd("o", "switch to spectator mode")
             ->EXE({
                       player->setGameMode(3);
-                      info(player, "set gamemode to observer");
+					  info(player, "set gamemode to spectator");
                   });
 
     getCommandManager().registerCmd("s", "switch to survival mode")
@@ -74,10 +74,10 @@ void initCommand() {
                       info(player, "set gamemode to survival");
                   });
 
-    getCommandManager().registerCmd("c", "switch to create mode")
+    getCommandManager().registerCmd("c", "switch to creative mode")
             ->EXE({
                       player->setGameMode(1);
-                      info(player, "set gamemode to survival");
+					  info(player, "set gamemode to creative");
                   });
 
     getCommandManager().registerCmd("village", "list ticking villages & show center")
