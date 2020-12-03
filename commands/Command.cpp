@@ -67,10 +67,10 @@ void initCommand() {
             ->then(ARG("p", "print channel [num]", INT,
                        { hopperCounterManager.printChannel(player, holder->getInt()); }));
 
-    getCommandManager().registerCmd("o", "switch to observer mode", MEMBER)
+    getCommandManager().registerCmd("o", "switch to spectator mode")
             ->EXE({
                       player->setGameMode(3);
-                      info(player, "set gamemode to observer");
+                      info(player, "set gamemode to spectator");
                   });
 
     getCommandManager().registerCmd("s", "switch to survival mode", MEMBER)
@@ -79,10 +79,11 @@ void initCommand() {
                       info(player, "set gamemode to survival");
                   });
 
-    getCommandManager().registerCmd("c", "switch to create mode")
+    getCommandManager().registerCmd("c", "switch to creative mode")
             ->EXE({
                       player->setGameMode(1);
                       info(player, "set gamemode to creative");
+
                   });
 
     getCommandManager().registerCmd("vil", "village relative functions", MEMBER)
