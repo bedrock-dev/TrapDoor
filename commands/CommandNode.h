@@ -25,17 +25,20 @@ enum class ArgType {
 
 //这个枚举是根据观察原版命令注册过程得出的
 enum CMD_LEVEL {
-    DEFAULT = 0,    //不开作弊的时候普通玩家可以使用的的命令 /tell /say /list .etc
-    CHEAT = 1,      //开作弊的时候可以使用的命令 /fill /setblock .etc
-    OP = 2,         //op相关的指令 /op /deop..
-    BACKEND = 3,    //只能在服务器后台执行的指令 /save /stop .etc
-    DEVELOP = 4    //没有公开发表的指令 /change-settings
+    MEMBER = 0,
+    OP = 1,
+    BACK_EBD = 2,
+    DEVELOP = 3,
+    MOJANG = 4
 };
+
+
+std::string cmdLevelToStr(CMD_LEVEL level);
 
 class CommandNode {
     std::string name;
     std::string description;
-    CMD_LEVEL permissionLevel = DEFAULT;
+    CMD_LEVEL permissionLevel = OP;
     std::map<std::string, CommandNode *> nextNode;
     std::function<void(ArgHolder *, Actor *)> work;
     ArgType argType = ArgType::NONE;
@@ -54,12 +57,16 @@ public:
     }
 
 
-    std::string getName() const {
+    inline std::string getName() const {
         return this->name;
     }
 
-    void setArgType(ArgType type) {
+    inline void setArgType(ArgType type) {
         this->argType = type;
+    }
+
+    inline CMD_LEVEL getPermissionLevel() const {
+        return this->permissionLevel;
     }
 
     CommandNode *then(CommandNode *node);
@@ -69,9 +76,11 @@ public:
     std::string getDescription() const;
 
     int parse(Actor *player, const std::vector<std::string> &tokens, size_t idx);
+
+    void run(ArgHolder *holder, Actor *player);
 };
 
-CommandNode *Arg(const std::string &args, ArgType type = ArgType::NONE);
+CommandNode *Arg(const std::string &args, const std::string &desc, ArgType type = ArgType::NONE);
 
 bool isValidIntString(const std::string &str);
 

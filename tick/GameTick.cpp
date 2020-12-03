@@ -150,7 +150,7 @@ THook(
     if (!globalLevel) {
         globalLevel = serverLevel;
         initCommand();
-        printf("[Trapdoor ]init global level\n");
+        //   LOGF(getLogFile(), "init server level");
     }
 
 
@@ -166,7 +166,9 @@ THook(
                 heavyExtraWork();
                 TIMER_END
                 if (tick::isMSPTing) {
-                    broadcastMsg("mspt: %.3lf ms", (double) timeReslut / 1000);
+                    auto mspt = (double) timeReslut / 1000;
+                    int tps = mspt <= 50 ? 20 : (int) (1.0 / mspt);
+                    broadcastMsg("mspt: %.3lf ms,tps: %d", mspt, tps);
                     tick::isMSPTing = false;
                 }
                 if (tick::isProfiling) {

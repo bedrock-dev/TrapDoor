@@ -6,15 +6,13 @@
 #include "common/Vec3.h"
 #include <vector>
 #include <string>
-
+#include "commands/CommandNode.h"
 struct NetworkIdentifier {
     uint64_t getHash();
 };
 
 class Dimension;
-
 /**
- * todo: need rewrite
  */
 class BlockSource;
 
@@ -39,6 +37,8 @@ public:
     std::string getDimensionName();
 
     NetworkIdentifier *getClientID();
+
+    CMD_LEVEL getCommandLevel();
 
 
 };

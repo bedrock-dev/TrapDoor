@@ -20,8 +20,14 @@ struct Block {
 
     std::string getName();
 
+    int getVariant();
+
     bool isNotAir();
 };
+
+
+
+bool distanceLess(std::pair<int, int> p1, std::pair<int, int> p2, int dSQ);
 
 struct BlockSource {
     Block *getBlock(int x, int y, int z);
@@ -32,7 +38,10 @@ struct BlockSource {
 
     void updateNeighborsAt(const BlockPos *pos);
 
+    void updateNeighbors(BlockPos pos);
+
     Biome *getBiome(const BlockPos *pos);
+
 
 };
 
@@ -72,7 +81,6 @@ struct BaseCircuitComponent {
 struct CircuitSceneGraph {
     BaseCircuitComponent *getBaseCircuitComponent(BlockPos *pos);
 };
-
 
 
 

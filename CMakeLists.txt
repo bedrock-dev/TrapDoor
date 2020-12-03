@@ -1,19 +1,23 @@
 cmake_minimum_required(VERSION 3.17)
 project(TrapDoor)
-
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_FLAGS "/wd4819 /EHsc")
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+    add_compile_definitions(-O3 -Wall)
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+    add_compile_options(/wd4819 /EHsc)
+endif ()
 include_directories(.)
-add_library(TrapDoor SHARED
+
+add_library(Trapdoor SHARED
         dllmain.cpp
         tools/MathTool.cpp
-        tools/MessageBuilder.cpp
+        tools/MsgBuilder.cpp
         tools/Particle.cpp
         tools/Message.cpp
         lib/pch.cpp
-        lib/mod.cpp
         village/Village.cpp
-        common/Common.cpp
+        common/Trapdoor.cpp
+        common/ConfigManager.cpp
         spawn/Spawn.cpp
         entity/Actor.cpp
         tick/GameTick.cpp
@@ -29,13 +33,21 @@ add_library(TrapDoor SHARED
         entity/Player.cpp
         common/BlockPos.cpp
         common/Vec3.cpp
-        entity/PlayerSpace.cpp
+        entity/PlayerBuffer.cpp
         level/Biome.cpp
         level/Dimension.cpp
+        tools/json.hpp
+        tools/DirtyLogger.cpp
         )
 
+
+target_link_libraries(Trapdoor ${PROJECT_SOURCE_DIR}/lib/detours.lib)
 
 add_executable(Test
         test/testMain.cpp
-        commands/ArgHolder.cpp
+        tools/DirtyLogger.cpp
+        tools/json.hpp
+        common/ConfigManager.cpp
         )
+
+

@@ -6,15 +6,19 @@
 #include "tools/Message.h"
 #include "Command.h"
 
-
 int CommandManager::parse(Actor *player, std::string cmd) {
     auto tokens = tokenize(cmd);
-    if (tokens.empty())return -2;
+    if (tokens.empty())return -1;
     auto iter = this->commandList.find(tokens[0]);
     if (iter != commandList.end()) {
-        return iter->second->parse(player, tokens, 1);
+        auto level = iter->second->getPermissionLevel();
+        if (level <= player->getCommandLevel()) {
+            return iter->second->parse(player, tokens, 1);
+        } else {
+            error(player, "you have no permission to run this command");
+            return -2;
+        }
     }
-    //error(player, "can't find command \"%s\",please type ./help for help", tokens[0].c_str());
     return -3;
 }
 
@@ -25,7 +29,7 @@ CommandManager::registerCmd(const std::string &cmd, const std::string &descripti
     rootNode->setArgType(type);
     commandList["/" + cmd] = rootNode; //加个/方便查找
     //给根节点添加一个默认的?选项方便打印帮助信息
-    auto *helpNode = new CommandNode("?", "print help info", DEFAULT);
+    auto *helpNode = new CommandNode("?", "print help info", MEMBER);
     //打印帮助信息
     helpNode->execute([rootNode](ArgHolder *holder, Actor *player) {
         // dbg("print help info");
@@ -33,8 +37,8 @@ CommandManager::registerCmd(const std::string &cmd, const std::string &descripti
     });
     rootNode->then(helpNode);
     //注册命令到游戏中
-    regMCBECommand(cmd, description.c_str(), CMD_LEVEL::CHEAT);
-    printf("register command     [%s]\n", cmd.c_str());
+    regMCBECommand(cmd, description.c_str(), level);
+   // LOGF(getLogFile(), "register command [%s]\n", cmd.c_str());
     return rootNode;
 }
 

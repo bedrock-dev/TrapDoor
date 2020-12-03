@@ -9,25 +9,4 @@
 #include <vector>
 #include <set>
 
-class MeasureManager {
-    BlockPos pos1{};
-    bool pos1Valid = false;
-    BlockPos pos2{};
-    bool pos2Valid = false;
-public:
-    MeasureManager() = default;
-
-    void setPos1(BlockPos pos);
-
-
-    void setPos2(BlockPos pos);
-
-    void print();
-
-    void sendSetInfo(int index);
-
-};
-
-extern MeasureManager measureManager;
-
 #endif //TRAPDOOR_PLAYER_H

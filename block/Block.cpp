@@ -14,6 +14,7 @@ using namespace SymHook;
 #include "tools/Particle.h"
 #include <vector>
 
+
 BlockLegacy *Block::getLegacy() {
     return SYM_CALL(
             BlockLegacy*(*)(Block * block),
@@ -34,6 +35,12 @@ std::string Block::getName() {
 
 bool Block::isNotAir() {
     return this->getName() != "minecraft:air";
+}
+
+int Block::getVariant() {
+    //? asddddddddd
+    //! from BlockLegacy::getVariant(BlockLegacy *this, char *a2)
+    return reinterpret_cast<char *>(this)[8];
 }
 
 
@@ -101,6 +108,13 @@ Biome *BlockSource::getBiome(const BlockPos *pos) {
             );
 }
 
+void BlockSource::updateNeighbors(BlockPos pos) {
+    auto blockList = pos.getNeighbourPos();
+    for (auto &p:blockList) {
+        this->updateNeighborsAt(&p);
+    }
+}
+
 
 THook(
         void,
@@ -130,24 +144,24 @@ int BaseCircuitComponent::getVar2() {
 }
 
 void BaseCircuitComponent::basePrint() {
-    auto begin = (uint32_t *) *((uint64_t *) this + 1);
-    auto end = (uint32_t *) *((uint64_t *) this + 2);
-    int num = 0;
-    std::string particleType = "minecraft:silverfish_grief_emitter";
-    Vec3 vec3{};
-    for (; begin != end; begin += 8) {
-        auto val = (int *) begin;
-        BlockPos pos = BlockPos(val[3], val[4], val[5]);
-        auto comp = globalCircuitSceneGraph->getBaseCircuitComponent(&pos);
-        if (comp) {
-            // info(" (%d %d %d) <=> %d\n", pos.x, pos.y, pos.z, comp->getStrength());
-            vec3.x = (float) pos.x;
-            vec3.y = (float) pos.y + 0.7f;
-            vec3.z = (float) pos.z;
-            spawnParticle(vec3, particleType);
-        }
-        num++;
-    }
+//    auto begin = (uint32_t *) *((uint64_t *) this + 1);
+//    auto end = (uint32_t *) *((uint64_t *) this + 2);
+//    int num = 0;
+//    std::string particleType = "minecraft:silverfish_grief_emitter";
+//    Vec3 vec3{};
+//    for (; begin != end; begin += 8) {
+//        auto val = (int *) begin;
+//        BlockPos pos = BlockPos(val[3], val[4], val[5]);
+//        auto comp = globalCircuitSceneGraph->getBaseCircuitComponent(&pos);
+//        if (comp) {
+//            // info(" (%d %d %d) <=> %d\n", pos.x, pos.y, pos.z, comp->getStrength());
+//            vec3.x = (float) pos.x;
+//            vec3.y = (float) pos.y + 0.7f;
+//            vec3.z = (float) pos.z;
+//            spawnParticle(vec3, particleType);
+//        }
+//        num++;
+//    }
 }
 
 int BaseCircuitComponent::getPowerCount() {
@@ -157,6 +171,7 @@ int BaseCircuitComponent::getPowerCount() {
 void BaseCircuitComponent::setAcceptHalfPulse() {
     *((char *) this + 67) = 1;
 }
+
 
 int BaseCircuitComponent::getAcceptHalfPulse() {
     return (int) *((char *) this + 67);
@@ -182,6 +197,7 @@ void BaseCircuitComponent::printTorch(BlockPos pos) {
     //   info("%d %d", signal, flag);
 }
 
+
 int BaseCircuitComponent::getHalfPulse() {
     return (int) *((char *) this + 85);
 }
@@ -195,25 +211,6 @@ BaseCircuitComponent *CircuitSceneGraph::getBaseCircuitComponent(BlockPos *pos) 
     );
 }
 
-//
-//THook(
-//        int,
-//        MSSYM_B1QE21FindStrongestStrengthB1AE22RedstoneTorchCapacitorB2AAE17AEAAHAEBVBlockPosB2AAE17AEAVCircuitSystemB2AAA3AEAB1UA1NB1AA1Z,
-//        BaseCircuitComponent *component,
-//        BlockPos *pos,
-//        void *circuitSystem,
-//        bool * flag
-//) {
-//    if (circuitSystem != globalCircuitSystem) {
-//        dbg("init circuitSystem");
-//        globalCircuitSystem = circuitSystem;
-//    }
-//    int strength = original(component, pos, circuitSystem, flag);
-//    if (tick::tickStatus == TickStatus::Frozen || tick::tickStatus == TickStatus::Forward) {
-//        printf("[%d %d %d]: signal: %d, flag: %d \n", pos->x, pos->y, pos->z, strength, *flag);
-//    }
-//    return strength;
-//}
 
 THook(
         BaseCircuitComponent *,
@@ -221,61 +218,75 @@ THook(
         CircuitSceneGraph *graph,
         BlockPos * pos
 ) {
-    if (graph && !globalCircuitSceneGraph) {
-        globalCircuitSceneGraph = graph;
-    }
+//    if (graph && !globalCircuitSceneGraph) {
+//        globalCircuitSceneGraph = graph;
+//    }
     return original(graph, pos);
 }
 
-//
-//THook(
-//        void,
-//        MSSYM_B1QE13setExtraBlockB1AE11BlockSourceB2AAA4QEAAB1UE13NAEBVBlockPosB2AAA9AEBVBlockB2AAA1HB1AA1Z,
-//        BlockSource *source,
-//        BlockPos *pos,
-//        Block *block,
-//        int flag
-//) {
-//    original(source, pos, block, flag);
-//    //no origin call()
-//}
 
-//
-//THook(
-//        void,
-//        MSSYM_B2QUA7setSeedB1AA6RandomB1AA4CoreB2AAA6AEAAXIB1AA1Z,
-//        void *random,
-//        unsigned int seed
-//) {
-//    if (globalPlayer) {
-//        printf("a: %p  seed: %u\n", random, seed);
-//    }
-//    if ((uint64_t) random == playerRand) {
-//        return original(random, particleViewDistance);
-//    } else {
-//        return original(random, seed);
-//    }
-//}
-//
-//THook(
-//        uint32_t,
-//        MSSYM_B2QUE12genRandInt32B1AA6RandomB1AA4CoreB2AAA7AEAAIXZ,
-//        void * random
-//) {
-//    return original(random);
-//}
+void findMUl(const std::vector<std::pair<int, int>> &list, long long int maxDis2) {
+    size_t length = list.size();
+    for (int i = 0; i < length - 1; ++i) {
+        for (int j = i + 1; j < length; j++) {
+            long long int dx = list[i].first - list[j].first;
+            long long int dy = list[i].second - list[j].second;
+            long long int d2 = dx * dx + dy * dy;
+            if (d2 <= maxDis2) {
+                printf("p1 :[%d ~ %d]       p2:[%d %d]  ==> d: %.2f\n", list[i].first, list[i].second, list[j].first,
+                       list[j].second, sqrt(d2));
+            }
+        }
+    }
+
+}
 
 
-//THook(
-//        void,
-//        MSSYM_B1QA4tickB1AE10GrassBlockB2AAE20UEBAXAEAVBlockSourceB2AAE12AEBVBlockPosB2AAE10AEAVRandomB3AAAA1Z,
-//        Block *block,
-//        BlockSource *blockSource,
-//        BlockPos *pos,
-//        void * random
-//) {
-//    if (tick::tickStatus != tick::Normal && tick::tickStatus != tick::Wrap) {
-//        printf("tick [%d %d %d]\n", pos->x, pos->y, pos->z);
-//    }
-//}
+bool hasFindRandomScattered = false;
+
+THook(
+        bool,
+        MSSYM_B1QE14isFeatureChunkB1AE27RandomScatteredLargeFeatureB2AAA4MEAAB1UE16NAEBVBiomeSourceB2AAE10AEAVRandomB2AAE12AEBVChunkPosB2AAA1IB1AA1Z,
+        int32_t *structure,
+        char *biomeSource,
+        void *rand,
+        ChunkPos *pos,
+        unsigned int v3
+) {
+
+    bool result = original(structure, biomeSource, rand, pos, v3);
+    if (hasFindRandomScattered) return result;
+    printf("begin finder randomScattered\n");
+    int range = 1000;
+    int blockSize = range / 5 + 1;
+    ChunkPos p = {0, 0};
+    std::vector<std::pair<int, int>> list;
+    for (int i = -range; i < range; ++i) {
+        for (int j = -range; j < range; ++j) {
+            p.x = i;
+            p.z = j;
+            if (original(structure, biomeSource, rand, &p, v3)) {
+                Biome *biome = SYM_CALL(
+                        Biome*(*)(void * , int, int),
+                        MSSYM_B1QA8getBiomeB1AE16LayerBiomeSourceB2AAE13UEBAPEBVBiomeB2AAA2HHB1AA1Z,
+                        biomeSource,
+                        p.x * 16, p.z * 16
+                );
+                printf("(/tp %d ~ %d) == %d %s\n", 16 * p.x, 16 * p.z, biome->getBiomeType(), biome->getBiomeName().c_str());
+                //if (biome->getBiomeType() == 15) {
+                list.emplace_back(i * 16, j * 16);
+                //}
+            }
+        }
+    }
+
+    size_t length = list.size();
+    printf("%zu find begin cal ScatteredFeature distance...\n", length);
+    findMUl(list, 40000);
+    hasFindRandomScattered = true;
+    printf("finish finder random Scattered\n");
+    return result;
+}
+
+
 

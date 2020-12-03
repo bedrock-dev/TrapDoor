@@ -11,7 +11,9 @@
 #include <functional>
 
 class BlockPos;
+
 class Dimension;
+
 class Actor;
 
 class Level {
@@ -22,7 +24,7 @@ public:
 
     Actor *getNearestPlayer(BlockPos &pos);
 
-    Dimension* getDimFromID(int id);
+    Dimension *getDimFromID(int id);
 };
 
 

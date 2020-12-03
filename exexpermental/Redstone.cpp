@@ -3,7 +3,7 @@
 //
 
 #include "Redstone.h"
-#include "common/Common.h"
+#include "common/Trapdoor.h"
 #include "lib/pch.h"
 #include "lib/SymHook.h"
 #include "block/Block.h"

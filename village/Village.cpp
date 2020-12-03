@@ -2,10 +2,10 @@
 // Created by xhy on 2020/8/25.
 //
 #include "Village.h"
-#include "common/Common.h"
+#include "common/Trapdoor.h"
 #include "tools/Message.h"
 #include "tools/Particle.h"
-#include "tools/MessageBuilder.h"
+#include "tools/MsgBuilder.h"
 #include "entity/Player.h"
 
 using namespace SymHook;

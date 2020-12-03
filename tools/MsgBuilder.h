@@ -2,8 +2,8 @@
 // Created by xhy on 2020/8/24.
 //
 
-#ifndef TRAPDOOR_MESSAGEBUILDER_H
-#define TRAPDOOR_MESSAGEBUILDER_H
+#ifndef TRAPDOOR_MSGBUILDER_H
+#define TRAPDOOR_MSGBUILDER_H
 
 #include <map>
 #include <vector>
@@ -63,10 +63,15 @@ public:
 
     void send(Actor *player);
 
+    void operator+=(const std::string& str) {
+        this->text(str);
+    }
+
+
 private:
     const static std::map<uint8_t, std::string> STYLE_MAP;
     std::vector<std::string> messageBuffer;
 };
 
 typedef MessageBuilder COLOR;
-#endif //TRAPDOOR_MESSAGEBUILDER_H
+#endif //TRAPDOOR_MSGBUILDER_H

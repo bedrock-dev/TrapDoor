@@ -12,6 +12,8 @@
 #include "entity/Actor.h"
 #include "block/Hopper.h"
 #include "lib/version.h"
+#include "level/Dimension.h"
+#include "level/Level.h"
 
 using namespace SymHook;
 
@@ -19,10 +21,10 @@ using namespace SymHook;
 //注册命令
 void initCommand() {
 
-    getCommandManager().registerCmd("tick", "chang level tick speed", DEFAULT)
-            ->then(ARG("fz", NONE, { tick::freezeTick(); }))
+    getCommandManager().registerCmd("tick", "chang level tick speed")
+            ->then(ARG("fz", "freeze the world", NONE, { tick::freezeTick(); }))
 
-            ->then(ARG("slow", INT, {
+            ->then(ARG("slow", "slow the world run for [num] times", INT, {
                 auto slowTime = holder->getInt();
                 if (slowTime > 1 && slowTime <= 64) {
                     tick::slowTick(slowTime);
@@ -31,7 +33,7 @@ void initCommand() {
                 }
             }))
 
-            ->then(ARG("wrap", INT, {
+            ->then(ARG("acc", "accelerate the wold run for [num] times", INT, {
                 auto wrapTime = holder->getInt();
                 if (wrapTime > 1 && wrapTime <= 10) {
                     tick::wrapTick(wrapTime);
@@ -40,35 +42,37 @@ void initCommand() {
                 }
             }))
 
-            ->then(ARG("r", NONE, { tick::resetTick(); }))
+            ->then(ARG("r", "reset the world run to default", NONE, { tick::resetTick(); }))
 
-            ->then(ARG("fw", INT, { tick::forwardTick(holder->getInt()); }));
+            ->then(ARG("fw", "forward the world run for [num] ticks", INT, { tick::forwardTick(holder->getInt()); }));
 
     getCommandManager().registerCmd("prof", "ticking profiling")->EXE({ tick::profileWorld(player); });
 
-    getCommandManager().registerCmd("mspt", "show mspt & tps")->EXE({ tick::mspt(); });
+    getCommandManager().registerCmd("mspt", "show mspt & tps", MEMBER)->EXE({ tick::mspt(); });
     getCommandManager().registerCmd("func", "en/disable function")
-            ->then(ARG("hc", BOOL, {
+            ->then(ARG("hc", "enable/disable hopper counter", BOOL, {
                 enableHopperCounter = holder->getBool();
                 info(player, "set hopper to %d", enableHopperCounter);
             }))
-            ->then(ARG("exp", BOOL, {
+            ->then(ARG("exp", "enable/disable explosion", BOOL, {
                 enableExplosion = holder->getBool();
                 info(player, "set explosion to %d", enableExplosion);
             }));
 
 
-    getCommandManager().registerCmd("counter", "hopper counter mode")
-            ->then(ARG("r", INT, { hopperCounterManager.resetChannel(player, holder->getInt()); }))
-            ->then(ARG("p", INT, { hopperCounterManager.printChannel(player, holder->getInt()); }));
+    getCommandManager().registerCmd("counter", "hopper counter mode", MEMBER)
+            ->then(ARG("r", "reset channel [num]", INT,
+                       { hopperCounterManager.resetChannel(player, holder->getInt()); }))
+            ->then(ARG("p", "print channel [num]", INT,
+                       { hopperCounterManager.printChannel(player, holder->getInt()); }));
 
-    getCommandManager().registerCmd("o", "switch to observer mode")
+    getCommandManager().registerCmd("o", "switch to observer mode", MEMBER)
             ->EXE({
                       player->setGameMode(3);
                       info(player, "set gamemode to observer");
                   });
 
-    getCommandManager().registerCmd("s", "switch to survival mode")
+    getCommandManager().registerCmd("s", "switch to survival mode", MEMBER)
             ->EXE({
                       player->setGameMode(0);
                       info(player, "set gamemode to survival");
@@ -77,47 +81,50 @@ void initCommand() {
     getCommandManager().registerCmd("c", "switch to create mode")
             ->EXE({
                       player->setGameMode(1);
-                      info(player, "set gamemode to survival");
+                      info(player, "set gamemode to creative");
                   });
 
-    getCommandManager().registerCmd("village", "list ticking villages & show center")
-            ->then(ARG("list", NONE, { village::listVillages(player); }))
-            ->then(ARG("show", BOOL, {
-                enableVillageShow = holder->getBool();
-                info(player, "set village show to %d", enableVillageShow);
+    getCommandManager().registerCmd("vill", "village relative functions", MEMBER)
+            ->then(ARG("list", "list all ticking villages", NONE, { village::listVillages(player); }))
+            ->then(ARG("show", "show ticking villages bounds and center", BOOL, {
+                // enableVillageShow = holder->getBool();
+                info(player, "developing...");
             }));
 
 
     getCommandManager().registerCmd("cfg", "settings")
-            ->then(ARG("pvd", INT, {
+            ->then(ARG("pvd", "config particle view distance(default=128)", INT, {
                 particleViewDistance = holder->getInt();
                 info(player, "set particle view distance to %d", particleViewDistance);
             }));
 
 
-    getCommandManager().registerCmd("tr?", "show help")
+    getCommandManager().registerCmd("tr?", "show help", MEMBER)
             ->EXE({
                       getCommandManager().printfHelpInfo(player);
                   });
 
-    getCommandManager().registerCmd("dbg", "show some debug info")
+    getCommandManager().registerCmd("dbg", "show some debug info", MEMBER)
             ->EXE({
                       player->printInfo();
                   });
 
+    getCommandManager().registerCmd("spawn", "show some spawn info")
+            ->EXE({
+                      player->getDimension()->printBaseTypeLimit();
+                  });
 }
 
 // 调用下面的hook函数来吧自定义字符串和提示信息当作参数注入到游戏中
 void regMCBECommand(const std::string &command, const char *description, CMD_LEVEL level) {
-    if (!globalCommandRegistry)return;
+    if (!globalCommandRegistry) return;
     SYM_CALL(
             void(*)(void * cmdReg,const std::string&, const char*, char, char, char),
             MSSYM_MD5_8574de98358ff66b5a913417f44dd706,
             globalCommandRegistry,
-            command, description, level, 0, 0
+            command, description, level, 0, level
     );
 }
-
 
 
 //? hook: 命令注册过程，服务器的命令注册和命令执行是分开的，二者并不绑定，因此可以直接调用这个函数来获得基本的命令提示
@@ -132,10 +139,10 @@ THook(
         char flag2
 ) {
     int newLevel = commandLevel > OP ? OP : commandLevel;
-    original(commandRegistry, name, str, newLevel, flag1, flag2);
+    //  printf("%-20s  %d %d %d\n", name.c_str(), commandLevel, flag1, flag2);
+    original(commandRegistry, name, str, commandLevel, flag1, flag2);
     if (!globalCommandRegistry)globalCommandRegistry = commandRegistry;
 }
-
 
 
 // ? 这个函数用来处理BDS中的命令发送数据包

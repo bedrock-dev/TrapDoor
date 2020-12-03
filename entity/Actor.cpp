@@ -7,19 +7,24 @@
 #include "lib/mod.h"
 #include "lib/pch.h"
 #include "lib/SymHook.h"
-#include "tools/MessageBuilder.h"
+#include "lib/version.h"
+#include "tools/MsgBuilder.h"
 #include <map>
+#include "tools/Message.h"
 #include <string>
 #include <block/Block.h>
 #include "level/Biome.h"
 #include "level/Level.h"
-#include "common/Common.h"
+#include "common/Trapdoor.h"
+#include <bitset>
 
 using namespace SymHook;
+
 
 std::map<std::string, std::vector<Vec3>> mobCounterList;//NOLINT
 
 uint64_t NetworkIdentifier::getHash() {
+
     return SYM_CALL(
             uint64_t(*)(NetworkIdentifier * ),
             MSSYM_B1QA7getHashB1AE17NetworkIdentifierB2AAA4QEBAB1UA3KXZ,
@@ -63,38 +68,42 @@ void Actor::setGameMode(int mode) {
              this,
              mode
     );
-
 }
 
 void Actor::printInfo() {
     MessageBuilder builder;
-    auto position = this->getPos()->toBlockPos();
-    auto chunkPos = position.toChunkPos();
-    auto inChunkOffset = position.InChunkOffset();
+    auto position = this->getPos();
+    auto playerBlockPos = position->toBlockPos();
+    auto chunkPos = playerBlockPos.toChunkPos();
+    auto inChunkOffset = playerBlockPos.InChunkOffset();
     auto inSlimeChunk = chunkPos.isSlimeChunk();
     Vec3 viewVec{};
     this->getViewActor(&viewVec, 1);
-    builder.pos(position);
-    builder.text("   ");
-    if (inSlimeChunk) {
-        builder.sText(chunkPos.toString(), COLOR::GREEN);
-    } else {
-        builder.sText(chunkPos.toString(), COLOR::WHITE);
-    }
-    builder.text("\n")
-            .text(inChunkOffset.toString())
-            .text("\n")
-            .vec3(viewVec)
-            .text("\n d:")
-            .num(this->getDimensionID())
-            .text(" ")
-            .text(this->getDimensionName())
-            .text("\n");
-    auto biome = this->getBlockSource()->getBiome(&position);
+    auto biome = this->getBlockSource()->getBiome(&playerBlockPos);
     auto name = biome->getBiomeName();
-    builder.text(biome->getBiomeName())
-            .text(" ").num(biome->getBiomeType()).send(this);
+
+    std::string MinecraftVersion = stringFmt("Minecraft Bedrock(BDS) %s  (%s)\n\n", minecraftVersion,
+                                             trapDoorVersion);
+    std::string xyz = stringFmt("XYZ: %.2f / %.2f / %.2f\n", position->x, position->y, position->z);
+    std::string block = stringFmt("Block: %d %d %d\n", playerBlockPos.x, playerBlockPos.y, playerBlockPos.z);
+    std::string chunk = "Chunk: " + inChunkOffset.toString() + " in " + chunkPos.toString() + "\n";
+    std::string facing = "Facing: " + viewVec.toDirString();
+    facing += stringFmt("(%.2f / %.2f / %.2f)\n", viewVec.x, viewVec.y, viewVec.z);
+    std::string biomeString = stringFmt("Biome: minecraft:%s (%d)\n", name.c_str(), biome->getBiomeType());
+    std::string dimString = stringFmt("Dimension: %s (%d)\n", this->getDimensionName().c_str(), this->getDimensionID());
+
+    builder.text(MinecraftVersion)
+            .text(xyz)
+            .text(block);
+    if (inSlimeChunk) {
+        builder.sText(chunk, COLOR::GREEN);
+    } else {
+        builder.text(chunk);
+    }
+    builder.text(facing).text(biomeString).text(dimString)
+            .send(this);
 }
+
 
 int Actor::getDimensionID() {
 
@@ -114,8 +123,16 @@ std::string Actor::getDimensionName() {
 }
 
 NetworkIdentifier *Actor::getClientID() {
-  //  ServerPlayer::isHostingPlaye
+    //  ServerPlayer::isHostingPlaye
     return reinterpret_cast<NetworkIdentifier *>((char *) this + 2432);
+}
+
+CMD_LEVEL Actor::getCommandLevel() {
+    return SYM_CALL(
+            CMD_LEVEL(*)(Actor * ),
+            MSSYM_B1QE25getCommandPermissionLevelB1AA6PlayerB2AAA4UEBAB1QE25AW4CommandPermissionLevelB2AAA2XZ,
+            this
+    );
 }
 
 
@@ -237,26 +254,28 @@ std::string getActorName(void *actor) {
 //    }
 //}
 //spawn mob
-THook(
-        void,
-        MSSYM_B1QA8spawnMobB1AA7SpawnerB2AAE11QEAAPEAVMobB2AAE15AEAVBlockSourceB2AAE29AEBUActorDefinitionIdentifierB2AAA9PEAVActorB2AAA8AEBVVec3B3AAUA3N44B1AA1Z,
-        void *sp,
-        void *bs,
-        ActorDefinitionIdentifier *actorId,
-        void *actor,
-        Vec3 *pos,
-        bool a6,
-        bool a7,
-        bool a8
-) {
-    //printf("(%f, %f, %f)\n", pos->x, pos->y, pos->z);
-//    if (mobSpawnCounterStart && pos) {
-//        auto mobName = actorId->getName();
-//        Vec3 vec(pos->x, pos->y, pos->z);
-//        mobCounterList[mobName].emplace_back(vec);
-//    }
-    original(sp, bs, actorId, actor, pos, a6, a7, a8);
-}
+//THook(
+//        bool,
+//        MSSYM_B1QA8spawnMobB1AA7SpawnerB2AAE11QEAAPEAVMobB2AAE15AEAVBlockSourceB2AAE29AEBUActorDefinitionIdentifierB2AAA9PEAVActorB2AAA8AEBVVec3B3AAUA3N44B1AA1Z,
+//        void *sp,
+//        void *bs,
+//        ActorDefinitionIdentifier *actorId,
+//        void *actor,
+//        Vec3 *pos,
+//        bool a6,
+//        bool a7,
+//        bool a8
+//) {
+//   // printf("(%f, %f, %f) ==> %s\n", pos->x, pos->y, pos->z, actorId->getName().c_str());
+////    if (mobSpawnCounterStart && pos) {
+////        auto mobName = actorId->getName();
+////        Vec3 vec(pos->x, pos->y, pos->z);
+////        mobCounterList[mobName].emplace_back(vec);
+////    }
+//    return original(sp, bs, actorId, actor, pos, a6, a7, a8);
+//    //  return false;
+//}
+
 
 
 //THook(
@@ -274,15 +293,15 @@ THook(
 
 
 //set actor pos
-THook(
-        void,
-        MSSYM_B1QA6setPosB1AA5ActorB2AAE13UEAAXAEBVVec3B3AAAA1Z,
-        void *self,
-        Vec3 * pos
-) {
-//    if(self != globalPlayer){
-//        printf("set pos: (%f, %f, %f)\n", pos->x, pos->y, pos->z);
-//    }
-    original(self, pos);
-}
+//THook(
+//        void,
+//        MSSYM_B1QA6setPosB1AA5ActorB2AAE13UEAAXAEBVVec3B3AAAA1Z,
+//        void *self,
+//        Vec3 * pos
+//) {
+////    if(self != globalPlayer){
+////        printf("set pos: (%f, %f, %f)\n", pos->x, pos->y, pos->z);
+////    }
+//    original(self, pos);
+//}
 

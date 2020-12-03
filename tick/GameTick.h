@@ -13,7 +13,7 @@ typedef uint64_t Tick;
 #define TIMER_END auto elapsed = timer_clock::now() - start; long long timeReslut =  std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
 
 
-#include "common/Common.h"
+#include "common/Trapdoor.h"
 #include "lib/mod.h"
 #include "lib/SymHook.h"
 #include "village/Village.h"

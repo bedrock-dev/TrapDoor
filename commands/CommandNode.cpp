@@ -6,11 +6,10 @@
 #include "tools/Message.h"
 #include <algorithm>
 #include <utility>
-#include "entity/Actor.h"
+#include "tools/MsgBuilder.h"
 
-
-CommandNode *Arg(const std::string &args, ArgType type) {
-    auto *node = new CommandNode(args);
+CommandNode *Arg(const std::string &args, const std::string &desc, ArgType type) {
+    auto *node = new CommandNode(args, desc, OP);
     node->setArgType(type);
     return node;
 }
@@ -18,6 +17,23 @@ CommandNode *Arg(const std::string &args, ArgType type) {
 
 bool isValidIntString(const std::string &str) {
     return std::all_of(str.begin(), str.end(), [](char c) { return '0' <= c && c <= '9'; });
+}
+
+std::string cmdLevelToStr(CMD_LEVEL level) {
+    switch (level) {
+        case MEMBER:
+            return "member";
+        case OP:
+            return "ops";
+        case BACK_EBD:
+            return "back_end";
+        case DEVELOP:
+            return "develop";
+        case MOJANG:
+            return "mojang";
+        default:
+            return "unknown";
+    }
 }
 
 CommandNode::CommandNode(std::string name, std::string description, CMD_LEVEL level)
@@ -32,7 +48,7 @@ CommandNode::CommandNode(std::string name, std::string description, CMD_LEVEL le
 CommandNode::CommandNode(std::string name, CMD_LEVEL level) : CommandNode(
         std::move(name), "no desc", level) {}
 
-CommandNode::CommandNode(std::string name) : CommandNode(std::move(name), DEFAULT) {}
+CommandNode::CommandNode(std::string name) : CommandNode(std::move(name), OP) {}
 
 int CommandNode::parse(Actor *player, const std::vector<std::string> &tokens, size_t idx) {
     bool executeNow = false;
@@ -40,7 +56,7 @@ int CommandNode::parse(Actor *player, const std::vector<std::string> &tokens, si
         executeNow = true;
         if (this->argType == ArgType::NONE) {
             ArgHolder holder(0);
-            this->work(&holder, player);
+            this->run(&holder, player);
         } else {
             error(player, "require an parameter behind \"%s\"", tokens[idx - 1].c_str());
         }
@@ -65,7 +81,7 @@ int CommandNode::parse(Actor *player, const std::vector<std::string> &tokens, si
                 break;
         }
         if (executeNow) {
-            this->work(holder, player);
+            this->run(holder, player);
             delete holder;
         }
     }
@@ -88,27 +104,31 @@ int CommandNode::parse(Actor *player, const std::vector<std::string> &tokens, si
 
 void CommandNode::printHelpInfo(int idx, Actor *actor) const {
     if (this->getName() == "?")return;
-    std::string space;
+
+    MessageBuilder builder;
     if (idx != 0) {
-        space = std::string(idx * 2, ' ');
+        builder += std::string(idx * 4, ' ');
     }
-    space += this->getName();
-    space += " [";
+
+    builder.sText(this->getName(), COLOR::YELLOW | COLOR::BOLD);
+    builder += " [";
     switch (this->argType) {
         case ArgType::NONE:
-            space += "none";
+            builder += "none";
             break;
         case ArgType::INT:
-            space += "integer";
+            builder += "integer";
             break;
         case ArgType::BOOL:
-            space += "true/false";
+            builder += "true/false";
             break;
         case ArgType::STR:
-            space += "string";
+            builder += "string";
             break;
     }
-    info(actor, "%s] - %s\n", space.c_str(), this->getDescription().c_str());
+    builder += "] - ";
+    builder += this->getDescription();
+    builder.send(actor);
     for (auto &node: this->nextNode) {
         node.second->printHelpInfo(idx + 1, actor);
     }
@@ -121,4 +141,10 @@ CommandNode *CommandNode::then(CommandNode *node) {
 
 std::string CommandNode::getDescription() const {
     return this->description;
+}
+
+void CommandNode::run(ArgHolder *holder, Actor *player) {
+    if (!player)return;
+    this->work(holder, player);
+
 }

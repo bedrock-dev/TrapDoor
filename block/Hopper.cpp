@@ -5,9 +5,9 @@
 #include "Hopper.h"
 #include "entity/Item.h"
 #include "Block.h"
-#include "common/Common.h"
+#include "common/Trapdoor.h"
 #include "tools/Message.h"
-#include "tools/MessageBuilder.h"
+#include "tools/MsgBuilder.h"
 
 using namespace SymHook;
 const std::map<std::string, size_t> ChannelManager::BLOCK_NAME_CHANNEL_MAPPER = {//NOLINT

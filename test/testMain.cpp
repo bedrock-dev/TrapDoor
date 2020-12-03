@@ -5,9 +5,15 @@
 #include <iostream>
 #include "tools/dbg.h"
 #include <string>
-#include "commands/ArgHolder.h"
+#include <fstream>
+#include "tools/DirtyLogger.h"
+#include "common/ConfigManager.h"
+
+using json = nlohmann::json;
 
 int main() {
-
+    initLogger("QAQ", true);
+    ConfigManager manager;
+    manager.initialize("config.json");
     return 0;
 }

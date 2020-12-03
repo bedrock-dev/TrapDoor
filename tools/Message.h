@@ -8,10 +8,11 @@
 #include "lib/mod.h"
 #include "dbg.h"
 #include "lib/pch.h"
-#include "entity/Actor.h"
 #include "level/Level.h"
-#include "common/Common.h"
+#include "common/Trapdoor.h"
 #include <string>
+
+class Actor;
 
 void mcbe_sendMessage(std::string &s, Actor *player);
 

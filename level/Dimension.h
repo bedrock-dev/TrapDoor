@@ -7,7 +7,8 @@
 
 
 class Dimension {
-
+public:
+    void printBaseTypeLimit();
 };
 
 

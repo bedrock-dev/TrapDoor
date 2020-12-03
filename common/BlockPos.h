@@ -40,8 +40,6 @@ struct BlockPos {
 
     bool operator!=(const BlockPos &v) const;
 
-    bool operator<(const BlockPos &rhs) const;
-
     float distanceTo(const BlockPos &blockPos) const;
 
     friend std::ostream &operator<<(std::ostream &os, const BlockPos &vec3);
@@ -54,13 +52,12 @@ struct BlockPos {
 
     std::vector<BlockPos> getPlainNeighbourPos();
 
-    ChunkPos toChunkPos() const {
-        return {this->x / 16, this->z / 16};
-    }
+    ChunkPos toChunkPos() const;
 
-    ChunkPos InChunkOffset() const {
-        return {x % 16, z % 16};
-    }
+    ChunkPos InChunkOffset() const;
+
+
+    bool operator<(const BlockPos &rhs) const;
 };
 
 

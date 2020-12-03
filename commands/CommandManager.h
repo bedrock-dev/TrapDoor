@@ -7,7 +7,7 @@
 
 
 #define EXE(S) execute([](ArgHolder *holder,Actor *player){S})
-#define  ARG(arg, type, work) Arg(arg, ArgType::type)->EXE(work)
+#define  ARG(arg, desc, type, work) Arg(arg,desc,ArgType::type)->EXE(work)
 
 #include <map>
 #include <vector>
@@ -23,7 +23,7 @@ class CommandManager {
 public:
     CommandNode *registerCmd(const std::string &cmd,
                              const std::string &description = "no description",
-                             CMD_LEVEL level = DEFAULT,
+                             CMD_LEVEL level = OP,
                              ArgType type = ArgType::NONE);
 
     int parse(Actor *player, std::string cmd);

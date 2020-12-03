@@ -4,10 +4,11 @@
 
 #include "Item.h"
 #include <string>
-#include "common/Common.h"
+#include "common/Trapdoor.h"
 #include "tools/Message.h"
 #include "tools/Particle.h"
-#include "tools/MessageBuilder.h"
+#include "tools/MsgBuilder.h"
+#include "block/Block.h"
 
 std::string ItemStackBase::getItemName() {
     std::string name;
@@ -72,7 +73,6 @@ int getChestState(unsigned int face, float x, float y, float z) {
 }
 
 int getCapacitorState(unsigned int face, float x, float y, float z, bool powered) {
-
     if (face == 0 || face == 1) {
         int flag1 = x + z >= 1.0f ? 1 : 0;
         int flag2 = x >= z ? 1 : 0;
@@ -93,9 +93,7 @@ int getCapacitorState(unsigned int face, float x, float y, float z, bool powered
 //hopper
 //chest
 
-
-BlockPos redStonePosCache;
-
+//player right click block
 THook(
         void,
         MSSYM_B1QA5useOnB1AA4ItemB2AAA4QEBAB1UE14NAEAVItemStackB2AAA9AEAVActorB2AAA7HHHEMMMB1AA1Z,
@@ -114,25 +112,26 @@ THook(
     auto blockSource = player->getBlockSource();
     if (name == "Cactus") {
         auto block = blockSource->getBlock(x, y, z);
-        auto blockName = block->getName();
-        BlockPos pos(x, y, z);
-        auto state = getNormalState(facing, dx, dy, dz, false);
-        if (blockName == "minecraft:piston" || blockName == "minecraft:sticky_piston") {
-            state = getNormalState(facing, dx, dy, dz, true);
-        } else if (blockName == "minecraft::chest") {
-            state = getChestState(facing, dx, dy, dz);
-        } else if (blockName == "minecraft:unpowered_repeater" || blockName == "minecraft:unpowered_comparator") {
-            state = getCapacitorState(facing, dx, dy, dz, false);
-        } else if (blockName == "minecraft:powered_repeater" || blockName == "minecraft:powered_comparator") {
-            state = getCapacitorState(facing, dx, dy, dz, true);
-        }
-        blockSource->setBlock(&pos, block->getLegacy()->tryGetStateBlock(state));
+        printf("%d\n", block->getVariant());
+//        auto state = getNormalState(facing, dx, dy, dz, false);
+//        if (blockName == "minecraft:piston" || blockName == "minecraft:sticky_piston") {
+//            state = getNormalState(facing, dx, dy, dz, true);
+//        } else if (blockName == "minecraft::chest") {
+//            state = getChestState(facing, dx, dy, dz);
+//        } else if (blockName == "minecraft:unpowered_repeater" || blockName == "minecraft:unpowered_comparator") {
+//            state = getCapacitorState(facing, dx, dy, dz, false);
+//        } else if (blockName == "minecraft:powered_repeater" || blockName == "minecraft:powered_comparator") {
+//            state = getCapacitorState(facing, dx, dy, dz, true);
+//        }
+//        //设置方块状态并更新周围
+//        blockSource->setBlock(&pos, block->getLegacy()->tryGetStateBlock(state));
+//        blockSource->updateNeighbors(pos);
     } else if (name == "Stick") {
-        //todo
+//        //todo: rewrite
 //        auto block = blockSource->getBlock(x, y, z);
 //        auto blockName = block->getName();
 //        BlockPos pos(x, y, z);
-//        if (pos != redStonePosCache) {
+//        if (pos != getPlayerSpace()[player].rightPosition) {
 //            auto component = globalCircuitSceneGraph->getBaseCircuitComponent(&pos);
 //            if (component) {
 //                //  info("s: %d", component->getStrength());
@@ -145,7 +144,7 @@ THook(
 //                    component->printTorch(pos);
 //                }
 //            }
-//            redStonePosCache = pos;
+//            getPlayerSpace()[player].rightPosition = pos;
 //        }
     }
     original(item, itemStack, player, x, y, z, facing, dx, dy, dz);
