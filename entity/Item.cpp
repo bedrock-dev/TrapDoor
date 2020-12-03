@@ -111,8 +111,8 @@ THook(
     auto name = itemStack->getItemName();
     auto blockSource = player->getBlockSource();
     if (name == "Cactus") {
-        auto block = blockSource->getBlock(x, y, z);
-        printf("%d\n", block->getVariant());
+       // auto block = blockSource->getBlock(x, y, z);
+        //   printf("%d\n", block->getVariant());
 //        auto state = getNormalState(facing, dx, dy, dz, false);
 //        if (blockName == "minecraft:piston" || blockName == "minecraft:sticky_piston") {
 //            state = getNormalState(facing, dx, dy, dz, true);

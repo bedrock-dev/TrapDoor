@@ -24,7 +24,6 @@ using namespace SymHook;
 std::map<std::string, std::vector<Vec3>> mobCounterList;//NOLINT
 
 uint64_t NetworkIdentifier::getHash() {
-
     return SYM_CALL(
             uint64_t(*)(NetworkIdentifier * ),
             MSSYM_B1QA7getHashB1AE17NetworkIdentifierB2AAA4QEBAB1UA3KXZ,
@@ -123,7 +122,7 @@ std::string Actor::getDimensionName() {
 }
 
 NetworkIdentifier *Actor::getClientID() {
-    //  ServerPlayer::isHostingPlaye
+    //  ServerPlayer::isHostingPlayer
     return reinterpret_cast<NetworkIdentifier *>((char *) this + 2432);
 }
 

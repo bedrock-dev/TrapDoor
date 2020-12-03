@@ -15,7 +15,7 @@ void *globalCircuitSystem = nullptr;
 Level *globalLevel = nullptr;
 
 //粒子效果配置(性能配置)
-int particleViewDistance = 128;
+int particleViewDistance = 1024;
 uint64_t playerRand = 0;
 bool enableMarkPos = false;
 bool enableVillageShow = false;
@@ -33,8 +33,7 @@ CommandManager &getCommandManager() {
     return commandManager;
 }
 
-
-bool Trapdoor::initialize() {
-
-    return true;
-}
+//bool Trapdoor::initialize() {
+//
+//    return true;
+//}

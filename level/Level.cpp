@@ -9,10 +9,12 @@
 #include "lib/mod.h"
 #include "lib/pch.h"
 #include "lib/SymHook.h"
+#include "tools/DirtyLogger.h"
 
 using namespace SymHook;
 
 void Level::forEachPlayer(const std::function<void(Actor *)> &todo) {
+    //!硬编码
     auto begin = (uint64_t *) *((uint64_t *) this + 11);
     auto end = (uint64_t *) *((uint64_t *) this + 12);
     while (begin != end) {
@@ -33,6 +35,9 @@ Actor *Level::getNearestPlayer(BlockPos &pos) {
             nearest = player;
         }
     });
+//    if (!nearest) {
+//        L_DEBUG("can not find a player");
+//    }
     return nearest;
 }
 

@@ -5,6 +5,8 @@
 #include "Dimension.h"
 #include <cstdio>
 
+
+//打印维度上限，目前没屌用
 void Dimension::printBaseTypeLimit() {
     //from Spawner::_popCapAllows
     char *dim = reinterpret_cast<char *>(this);

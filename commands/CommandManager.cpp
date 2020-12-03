@@ -4,6 +4,7 @@
 
 #include "CommandManager.h"
 #include "tools/Message.h"
+#include "tools/DirtyLogger.h"
 #include "Command.h"
 
 int CommandManager::parse(Actor *player, std::string cmd) {
@@ -37,8 +38,9 @@ CommandManager::registerCmd(const std::string &cmd, const std::string &descripti
     });
     rootNode->then(helpNode);
     //注册命令到游戏中
+    L_INFO("register command %s", cmd.c_str());
     regMCBECommand(cmd, description.c_str(), level);
-   // LOGF(getLogFile(), "register command [%s]\n", cmd.c_str());
+    // LOGF(getLogFile(), "register command [%s]\n", cmd.c_str());
     return rootNode;
 }
 

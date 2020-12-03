@@ -21,7 +21,7 @@ THook(
         const BlockPos &pos,
         bool flag
 ) {
-    auto name = block.getName();
+  //  auto name = block.getName();
     //  showBiome(player, pos, block, 16384);
 //    if (name == "minecraft:warped_planks") {
 //        measureManager.setPos1(pos);

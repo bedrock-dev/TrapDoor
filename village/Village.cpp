@@ -93,6 +93,7 @@ namespace village {
 
     int villageInterval = 0;
 
+
     void villageTask() {
         if (villageInterval % 15 == 0) {
             villageHelper.draw();
@@ -169,3 +170,4 @@ THook(
     original(vill, tick, blockSource);
     village::villageHelper.insert(vill);
 }
+

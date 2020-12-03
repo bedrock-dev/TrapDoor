@@ -17,63 +17,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b8a60db2-baf4-4087-8601-d054cc921b14" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/GrepConsole.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/ConfigManager.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/ConfigManager.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/entity/PlayerBuffer.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/entity/PlayerBuffer.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tools/DirtyLogger.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tools/DirtyLogger.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tools/json.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/block/Block.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/block/Block.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/block/Block.h" beforeDir="false" afterPath="$PROJECT_DIR$/block/Block.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/block/Hopper.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/block/Hopper.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/commands/Command.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/commands/Command.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/Command.h" beforeDir="false" afterPath="$PROJECT_DIR$/commands/Command.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/commands/CommandManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/commands/CommandManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/CommandManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/commands/CommandManager.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/CommandNode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/commands/CommandNode.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/CommandNode.h" beforeDir="false" afterPath="$PROJECT_DIR$/commands/CommandNode.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/BlockPos.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/common/BlockPos.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/BlockPos.h" beforeDir="false" afterPath="$PROJECT_DIR$/common/BlockPos.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/Common.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/common/Trapdoor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/Common.h" beforeDir="false" afterPath="$PROJECT_DIR$/common/Trapdoor.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/Vec3.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/common/Vec3.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/Vec3.h" beforeDir="false" afterPath="$PROJECT_DIR$/common/Vec3.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dllmain.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/dllmain.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/ConfigManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/common/ConfigManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/Trapdoor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/common/Trapdoor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/Trapdoor.h" beforeDir="false" afterPath="$PROJECT_DIR$/common/Trapdoor.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entity/Actor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Actor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/Actor.h" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Actor.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entity/Item.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Item.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entity/Player.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Player.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/Player.h" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Player.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/PlayerSpace.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/PlayerSpace.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/exexpermental/Redstone.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/exexpermental/Redstone.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/level/Dimension.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/level/Dimension.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/level/Dimension.h" beforeDir="false" afterPath="$PROJECT_DIR$/level/Dimension.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/level/Level.h" beforeDir="false" afterPath="$PROJECT_DIR$/level/Level.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/SymHook.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/SymHook.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/detver.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/detver.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/framework.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/mod.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/mod.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/mod.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pch.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pch.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pch.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pch.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/version.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/version.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spawn/Spawn.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/spawn/Spawn.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spawn/Spawn.h" beforeDir="false" afterPath="$PROJECT_DIR$/spawn/Spawn.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symbol.txt" beforeDir="false" afterPath="$PROJECT_DIR$/symbol.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/testMain.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/testMain.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/level/Level.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/level/Level.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tick/GameTick.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tick/GameTick.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tick/GameTick.h" beforeDir="false" afterPath="$PROJECT_DIR$/tick/GameTick.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/DirtyLogger.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tools/DirtyLogger.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tools/Message.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tools/Message.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/Message.h" beforeDir="false" afterPath="$PROJECT_DIR$/tools/Message.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/MessageBuilder.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tools/MsgBuilder.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/MessageBuilder.h" beforeDir="false" afterPath="$PROJECT_DIR$/tools/MsgBuilder.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tools/Particle.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tools/Particle.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/village/Village.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/village/Village.cpp" afterDir="false" />
     </list>
@@ -130,18 +90,18 @@
       <recent name="C:\Users\xhy\dev\TrapDoor\tools" />
     </key>
   </component>
-  <component name="RunManager" selected="CMake Application.Test">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="CMake Application.Trapdoor">
     <configuration name="Test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="TrapDoor" TARGET_NAME="Test" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="TrapDoor" RUN_TARGET_NAME="Test">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="Trapdoor" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="TrapDoor" TARGET_NAME="Trapdoor" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -298,6 +258,7 @@
       <workItem from="1606906678135" duration="79000" />
       <workItem from="1606906772675" duration="108000" />
       <workItem from="1606906896030" duration="5892000" />
+      <workItem from="1607004411845" duration="3519000" />
     </task>
     <task id="LOCAL-00001" summary="1. 命令解释器投入使用，和switch case 彻底告别&#10;2. 支持游戏模式切换命令 ./gm mode n (n=3是观察模式)">
       <created>1604761522583</created>
@@ -334,10 +295,10 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="230" y="71" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1549.831@0.0.1549.831" timestamp="1604158449251" />
-    <state x="521" y="205" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1598352302891">
+    <state x="502" y="216" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1607005714356">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="521" y="205" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1549.831@0.0.1549.831" timestamp="1598352302891" />
+    <state x="502" y="216" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1549.831@0.0.1549.831" timestamp="1607005714356" />
     <state x="559" y="94" key="#com.intellij.ide.util.MemberChooser" timestamp="1606013575784">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
@@ -390,10 +351,6 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="590" y="328" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1549.831@0.0.1549.831" timestamp="1604898934302" />
-    <state x="474" y="0" width="600" height="831" key="find.popup" timestamp="1598268539707">
-      <screen x="0" y="0" width="1549" height="831" />
-    </state>
-    <state x="474" y="0" width="600" height="831" key="find.popup/0.0.1549.831@0.0.1549.831" timestamp="1598268539707" />
     <state x="551" y="198" key="refactoring.ChangeSignatureDialog" timestamp="1599612059470">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
@@ -402,16 +359,5 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="437" y="152" width="672" height="678" key="search.everywhere.popup/0.0.1549.831@0.0.1549.831" timestamp="1606920369541" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/level/Biome.h</url>
-          <line>13</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

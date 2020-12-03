@@ -8,7 +8,7 @@
 
 FILE *logger = nullptr;
 
-LOG_LEVEL log_level = LOG_LEVEL::LOG_INFO;
+LOG_LEVEL log_level = LOG_LEVEL::LOG_DEBUG;
 
 void initLogger(const std::string &logFileName, bool useStdout) {
     //? this is not a waring
@@ -16,6 +16,8 @@ void initLogger(const std::string &logFileName, bool useStdout) {
         logger = stdout;
     } else {
         logger = fopen(logFileName.c_str(), "a+");
+        L_INFO("\n-------------------------TRAPDOOR LOG FILE---------------------------\n "
+               "-----------------------------init BDS------------------------------- \n");
         if (!logger)logger = stderr;
     }
 }
@@ -53,5 +55,6 @@ void logInfo(LOG_LEVEL logLevel, const char *functionName, const char *fmt, ...)
     fprintf(logger, "(%s) ", functionName);
     vfprintf(logger, fmt, args);
     fprintf(logger, "\n");
+    fflush(logger);
 }
 

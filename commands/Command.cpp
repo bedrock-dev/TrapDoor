@@ -33,6 +33,7 @@ void initCommand() {
                 }
             }))
 
+
             ->then(ARG("acc", "accelerate the wold run for [num] times", INT, {
                 auto wrapTime = holder->getInt();
                 if (wrapTime > 1 && wrapTime <= 10) {
@@ -84,13 +85,12 @@ void initCommand() {
                       info(player, "set gamemode to creative");
                   });
 
-    getCommandManager().registerCmd("vill", "village relative functions", MEMBER)
+    getCommandManager().registerCmd("vil", "village relative functions", MEMBER)
             ->then(ARG("list", "list all ticking villages", NONE, { village::listVillages(player); }))
             ->then(ARG("show", "show ticking villages bounds and center", BOOL, {
-                // enableVillageShow = holder->getBool();
-                info(player, "developing...");
+                enableVillageShow = holder->getBool();
+                // info(player, "developing...");
             }));
-
 
     getCommandManager().registerCmd("cfg", "settings")
             ->then(ARG("pvd", "config particle view distance(default=128)", INT, {
@@ -162,12 +162,14 @@ THook(
         }
     });
     if (!source) {
+        L_DEBUG("can't not find valid player");
         original(handler, id, packet);
         return;
     }
 
     //! 这是一处强制转换
     std::string commandString(reinterpret_cast<char *>(packet) + 40);
+    L_DEBUG("player %s execute command %s", source->getNameTag().c_str(), commandString.c_str());
     //截获命令数据包，获取命令字符串，如果是插件自定义的命令就直接处理，屏蔽原版，如果不是自定义命令就转发给原版去处理
     if (getCommandManager().findCommand(commandString)) {
         //解析自定义命令

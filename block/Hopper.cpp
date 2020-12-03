@@ -66,6 +66,7 @@ THook(
         auto nearestPlayer = globalLevel->getNearestPlayer(pos);
         if (!nearestPlayer) {
             original(hopperActor, index, itemStack);
+            L_DEBUG("can't find a valid player");
             return;
         }
         auto blockSource = nearestPlayer->getBlockSource();
@@ -82,7 +83,6 @@ THook(
             }
         } else {
             original(hopperActor, index, itemStack);
-
         }
     } else {
         original(hopperActor, index, itemStack);
@@ -105,6 +105,7 @@ void CounterChannel::print(Actor *actor) {
         num += i.second;
     }
     if (this->tick == 0 || num == 0) {
+        L_DEBUG("tick = %d num = %d", tick, num);
         info(actor, "no data in this channel");
         return;
     }

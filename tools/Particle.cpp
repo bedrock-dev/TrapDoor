@@ -19,8 +19,10 @@ namespace particle {
 void spawnParticle(Vec3 p, std::string &type) {
     auto pos = p.toBlockPos();
     auto player = globalLevel->getNearestPlayer(pos);
-    if (!player)return;
-    if (math::distance(p, *player->getPos()) > particleViewDistance)return;
+    if (!player) {
+        return;
+    }
+ //   if (math::distance(p, *player->getPos()) > particleViewDistance)return;
     p.x += 0.5;
     p.y += 0.5;
     p.z += 0.5;

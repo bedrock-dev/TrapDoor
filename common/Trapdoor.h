@@ -20,13 +20,13 @@ class Actor;
 
 class PlayerBuffer;
 
-class Trapdoor {
-    Level *level = nullptr;
-    CommandManager *manager{};
-    ConfigManager *configManager{};
-public:
-    bool initialize();
-};
+//class Trapdoor {
+//    Level *level = nullptr;
+//    CommandManager *manager{};
+//    ConfigManager *configManager{};
+//public:
+//    bool initialize();
+//};
 
 extern void *globalSpawner; //全局刷怪器对象
 extern void *globalCommandRegistry;

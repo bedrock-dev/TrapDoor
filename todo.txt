@@ -1,0 +1,10 @@
+# TODO
+[X] 修复和完善仙人掌转方块
+[X] 完善权限管理
+[X] 完善右键点击api
+[X] 把Block.cpp中的BlockSource和BlockLegay类拆分成独立的源文件
+[O] 日志系统
+[X] 配置文件
+[X] 修复村庄显示bug
+[X] 把数据包交互排除在frozen状态之外
+[x] 中文支持

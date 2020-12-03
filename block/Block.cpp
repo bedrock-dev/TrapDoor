@@ -37,8 +37,8 @@ bool Block::isNotAir() {
     return this->getName() != "minecraft:air";
 }
 
+//获取特殊值
 int Block::getVariant() {
-    //? asddddddddd
     //! from BlockLegacy::getVariant(BlockLegacy *this, char *a2)
     return reinterpret_cast<char *>(this)[8];
 }
@@ -116,13 +116,13 @@ void BlockSource::updateNeighbors(BlockPos pos) {
 }
 
 
-THook(
-        void,
-        MSSYM_B1QE17updateNeighborsAtB1AE11BlockSourceB2AAE17QEAAXAEBVBlockPosB3AAAA1Z,
-        BlockSource *self, const BlockPos *pos
-) {
-    original(self, pos);
-}
+//THook(
+//        void,
+//        MSSYM_B1QE17updateNeighborsAtB1AE11BlockSourceB2AAE17QEAAXAEBVBlockPosB3AAAA1Z,
+//        BlockSource *self, const BlockPos *pos
+//) {
+//    original(self, pos);
+//}
 //explosion enable
 THook(
         void,
@@ -224,69 +224,6 @@ THook(
     return original(graph, pos);
 }
 
-
-void findMUl(const std::vector<std::pair<int, int>> &list, long long int maxDis2) {
-    size_t length = list.size();
-    for (int i = 0; i < length - 1; ++i) {
-        for (int j = i + 1; j < length; j++) {
-            long long int dx = list[i].first - list[j].first;
-            long long int dy = list[i].second - list[j].second;
-            long long int d2 = dx * dx + dy * dy;
-            if (d2 <= maxDis2) {
-                printf("p1 :[%d ~ %d]       p2:[%d %d]  ==> d: %.2f\n", list[i].first, list[i].second, list[j].first,
-                       list[j].second, sqrt(d2));
-            }
-        }
-    }
-
-}
-
-
-bool hasFindRandomScattered = false;
-
-THook(
-        bool,
-        MSSYM_B1QE14isFeatureChunkB1AE27RandomScatteredLargeFeatureB2AAA4MEAAB1UE16NAEBVBiomeSourceB2AAE10AEAVRandomB2AAE12AEBVChunkPosB2AAA1IB1AA1Z,
-        int32_t *structure,
-        char *biomeSource,
-        void *rand,
-        ChunkPos *pos,
-        unsigned int v3
-) {
-
-    bool result = original(structure, biomeSource, rand, pos, v3);
-    if (hasFindRandomScattered) return result;
-    printf("begin finder randomScattered\n");
-    int range = 1000;
-    int blockSize = range / 5 + 1;
-    ChunkPos p = {0, 0};
-    std::vector<std::pair<int, int>> list;
-    for (int i = -range; i < range; ++i) {
-        for (int j = -range; j < range; ++j) {
-            p.x = i;
-            p.z = j;
-            if (original(structure, biomeSource, rand, &p, v3)) {
-                Biome *biome = SYM_CALL(
-                        Biome*(*)(void * , int, int),
-                        MSSYM_B1QA8getBiomeB1AE16LayerBiomeSourceB2AAE13UEBAPEBVBiomeB2AAA2HHB1AA1Z,
-                        biomeSource,
-                        p.x * 16, p.z * 16
-                );
-                printf("(/tp %d ~ %d) == %d %s\n", 16 * p.x, 16 * p.z, biome->getBiomeType(), biome->getBiomeName().c_str());
-                //if (biome->getBiomeType() == 15) {
-                list.emplace_back(i * 16, j * 16);
-                //}
-            }
-        }
-    }
-
-    size_t length = list.size();
-    printf("%zu find begin cal ScatteredFeature distance...\n", length);
-    findMUl(list, 40000);
-    hasFindRandomScattered = true;
-    printf("finish finder random Scattered\n");
-    return result;
-}
-
+//! 多联查找功能已经迁移到单独的插件，这里已删除此代码
 
 

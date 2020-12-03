@@ -36,6 +36,7 @@ namespace tick {
             // info("world has frozen");
             if (tickStatus != WorldTickStatus::Frozen) {
                 tickStatus = WorldTickStatus::Frozen;
+                L_DEBUG("freeze world");
                 broadcastMsg("world has frozen!");
             } else {
                 broadcastMsg("it's in frozen state now");
@@ -46,6 +47,7 @@ namespace tick {
     void resetTick() {
         if (tickStatus != WorldTickStatus::Normal) {
             tickStatus = WorldTickStatus::Normal;
+            L_DEBUG("reset world");
         }
         broadcastMsg("world has reset to normal status");
     }
@@ -54,6 +56,7 @@ namespace tick {
         if (tickStatus == WorldTickStatus::Normal) {
             broadcastMsg("world begin warp");
             tickStatus = WorldTickStatus::Wrap;
+            L_DEBUG("begin wrap world %d", speed);
             wrapSpeed = speed;
         } else {
             broadcastMsg("this command can only be run in normal mode");
@@ -66,6 +69,7 @@ namespace tick {
             lastTickStats = tickStatus;
             tickStatus = WorldTickStatus::Forward;
             broadcastMsg("forwarding start");
+            L_DEBUG("begin forward %s tick", tickNum);
         } else {
             broadcastMsg("this command can't be run in slow or wrap mode");
         }
@@ -74,6 +78,7 @@ namespace tick {
     void slowTick(size_t slowSpeed) {
         if (tickStatus == WorldTickStatus::Normal) {
             broadcastMsg("world has slowed %d times\n", slowSpeed);
+            L_DEBUG("slow world %d times", slowSpeed);
             tickStatus = WorldTickStatus::Slow;
             SlowDownTimes = slowSpeed;
         } else {
@@ -82,7 +87,6 @@ namespace tick {
     }
 
     void profileWorld(Actor *player) {
-
         if (isProfiling) {
             waring(player, "another profiling is running");
             return;
@@ -90,12 +94,14 @@ namespace tick {
         if (tickStatus != WorldTickStatus::Normal) {
             waring(player, "you are not in normal mode,the result may be wrong");
         }
+        L_DEBUG("begin profiling");
         info(player, "start profiling...");
         isProfiling = true;
         currentProfileRound = 50;
     }
 
     void sendProfileInfo() {
+        L_DEBUG("end profiling");
         broadcastMsg(
                 "mpst:            §2%.3f\n" \
                "    §r redstone:             §2%.3f\n" \
@@ -134,10 +140,12 @@ namespace tick {
 }
 
 
+//所有情况下都执行
 void lightExtraWork() {
     hopperCounterManager.tick();
 }
 
+//加速和快进的时候不会执行
 void heavyExtraWork() {
     village::villageTask();
 }
