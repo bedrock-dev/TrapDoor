@@ -17,25 +17,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b8a60db2-baf4-4087-8601-d054cc921b14" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/block/Block.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/block/Block.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/block/Hopper.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/block/Hopper.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/commands/Command.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/commands/Command.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/CommandManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/commands/CommandManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/ConfigManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/common/ConfigManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/Trapdoor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/common/Trapdoor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/Trapdoor.h" beforeDir="false" afterPath="$PROJECT_DIR$/common/Trapdoor.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/Actor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Actor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/Item.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Item.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/Player.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Player.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/level/Dimension.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/level/Dimension.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/level/Level.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/level/Level.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tick/GameTick.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tick/GameTick.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/DirtyLogger.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tools/DirtyLogger.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dllmain.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/dllmain.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/testMain.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/testMain.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tools/Message.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tools/Message.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/Particle.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tools/Particle.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/village/Village.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/village/Village.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/Message.h" beforeDir="false" afterPath="$PROJECT_DIR$/tools/Message.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -258,7 +246,9 @@
       <workItem from="1606906678135" duration="79000" />
       <workItem from="1606906772675" duration="108000" />
       <workItem from="1606906896030" duration="5892000" />
-      <workItem from="1607004411845" duration="3519000" />
+      <workItem from="1607004411845" duration="3938000" />
+      <workItem from="1607089817058" duration="2942000" />
+      <workItem from="1607092847152" duration="1473000" />
     </task>
     <task id="LOCAL-00001" summary="1. 命令解释器投入使用，和switch case 彻底告别&#10;2. 支持游戏模式切换命令 ./gm mode n (n=3是观察模式)">
       <created>1604761522583</created>
@@ -315,22 +305,22 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="497" y="108" key="FileChooserDialogImpl/0.0.1549.831@0.0.1549.831" timestamp="1606644181264" />
-    <state width="1528" height="371" key="GridCell.Tab.0.bottom" timestamp="1606922372814">
+    <state width="1513" height="2" key="GridCell.Tab.0.bottom" timestamp="1607092826859">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state width="1528" height="371" key="GridCell.Tab.0.bottom/0.0.1549.831@0.0.1549.831" timestamp="1606922372814" />
-    <state width="1528" height="371" key="GridCell.Tab.0.center" timestamp="1606922372814">
+    <state width="1513" height="2" key="GridCell.Tab.0.bottom/0.0.1549.831@0.0.1549.831" timestamp="1607092826859" />
+    <state width="1513" height="2" key="GridCell.Tab.0.center" timestamp="1607092826859">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state width="1528" height="371" key="GridCell.Tab.0.center/0.0.1549.831@0.0.1549.831" timestamp="1606922372814" />
-    <state width="1528" height="371" key="GridCell.Tab.0.left" timestamp="1606922372814">
+    <state width="1513" height="2" key="GridCell.Tab.0.center/0.0.1549.831@0.0.1549.831" timestamp="1607092826859" />
+    <state width="1513" height="2" key="GridCell.Tab.0.left" timestamp="1607092826858">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state width="1528" height="371" key="GridCell.Tab.0.left/0.0.1549.831@0.0.1549.831" timestamp="1606922372814" />
-    <state width="1528" height="371" key="GridCell.Tab.0.right" timestamp="1606922372814">
+    <state width="1513" height="2" key="GridCell.Tab.0.left/0.0.1549.831@0.0.1549.831" timestamp="1607092826858" />
+    <state width="1513" height="2" key="GridCell.Tab.0.right" timestamp="1607092826859">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state width="1528" height="371" key="GridCell.Tab.0.right/0.0.1549.831@0.0.1549.831" timestamp="1606922372814" />
+    <state width="1513" height="2" key="GridCell.Tab.0.right/0.0.1549.831@0.0.1549.831" timestamp="1607092826859" />
     <state x="148" y="65" key="MergeDialog" timestamp="1604670663442">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
@@ -343,10 +333,10 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="367" y="148" key="Vcs.Push.Dialog.v2/0.0.1549.831@0.0.1549.831" timestamp="1604898985160" />
-    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1606907337637">
+    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1607090949319">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1549.831@0.0.1549.831" timestamp="1606907337637" />
+    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1549.831@0.0.1549.831" timestamp="1607090949319" />
     <state x="590" y="328" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1604898934302">
       <screen x="0" y="0" width="1549" height="831" />
     </state>

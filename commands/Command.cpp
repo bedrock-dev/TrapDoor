@@ -21,7 +21,7 @@ using namespace SymHook;
 //注册命令
 void initCommand() {
 
-    getCommandManager().registerCmd("tick", "chang level tick speed")
+    getCommandManager().registerCmd("tick", "改变世界运行状态")
             ->then(ARG("fz", "freeze the world", NONE, { tick::freezeTick(); }))
 
             ->then(ARG("slow", "slow the world run for [num] times", INT, {
@@ -34,7 +34,7 @@ void initCommand() {
             }))
 
 
-            ->then(ARG("acc", "accelerate the wold run for [num] times", INT, {
+            ->then(ARG("acc", "加速世界运行[num]倍速", INT, {
                 auto wrapTime = holder->getInt();
                 if (wrapTime > 1 && wrapTime <= 10) {
                     tick::wrapTick(wrapTime);
@@ -43,9 +43,9 @@ void initCommand() {
                 }
             }))
 
-            ->then(ARG("r", "reset the world run to default", NONE, { tick::resetTick(); }))
+            ->then(ARG("r", "重置世界运行", NONE, { tick::resetTick(); }))
 
-            ->then(ARG("fw", "forward the world run for [num] ticks", INT, { tick::forwardTick(holder->getInt()); }));
+            ->then(ARG("fw", "世界运行步进[num] gt", INT, { tick::forwardTick(holder->getInt()); }));
 
     getCommandManager().registerCmd("prof", "ticking profiling")->EXE({ tick::profileWorld(player); });
 
@@ -86,14 +86,14 @@ void initCommand() {
 
                   });
 
-    getCommandManager().registerCmd("vil", "village relative functions", MEMBER)
+    getCommandManager().registerCmd("village", "村庄相关功能", MEMBER)
             ->then(ARG("list", "list all ticking villages", NONE, { village::listVillages(player); }))
             ->then(ARG("show", "show ticking villages bounds and center", BOOL, {
                 enableVillageShow = holder->getBool();
                 // info(player, "developing...");
             }));
 
-    getCommandManager().registerCmd("cfg", "settings")
+    getCommandManager().registerCmd("cfg", "设置")
             ->then(ARG("pvd", "config particle view distance(default=128)", INT, {
                 particleViewDistance = holder->getInt();
                 info(player, "set particle view distance to %d", particleViewDistance);
@@ -152,7 +152,7 @@ THook(
         MSSYM_B1QA6handleB1AE20ServerNetworkHandlerB2AAE26UEAAXAEBVNetworkIdentifierB2AAE24AEBVCommandRequestPacketB3AAAA1Z,
         void *handler,
         NetworkIdentifier *id,
-        void * packet
+        void * commandPacket
 ) {
     //根据玩家的网络id值来寻找发送命令的玩家
     Actor *source = nullptr;
@@ -164,20 +164,20 @@ THook(
     });
     if (!source) {
         L_DEBUG("can't not find valid player");
-        original(handler, id, packet);
+        original(handler, id, commandPacket);
         return;
     }
 
     //! 这是一处强制转换
-    std::string commandString(reinterpret_cast<char *>(packet) + 40);
-    L_DEBUG("player %s execute command %s", source->getNameTag().c_str(), commandString.c_str());
+    auto *commandString = reinterpret_cast<std::string *>((char *) commandPacket + 40);
+    L_DEBUG("player %s execute command %s", source->getNameTag().c_str(), commandString->c_str());
     //截获命令数据包，获取命令字符串，如果是插件自定义的命令就直接处理，屏蔽原版，如果不是自定义命令就转发给原版去处理
-    if (getCommandManager().findCommand(commandString)) {
+    if (getCommandManager().findCommand(*commandString)) {
         //解析自定义命令
-        getCommandManager().parse(source, commandString);
+        getCommandManager().parse(source, *commandString);
     } else {
         //转发给原版
-        original(handler, id, packet);
+        original(handler, id, commandPacket);
     }
 
 }

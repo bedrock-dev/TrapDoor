@@ -4,7 +4,7 @@ set(CMAKE_CXX_STANDARD 17)
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     add_compile_definitions(-O3 -Wall)
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
-    add_compile_options(/wd4819 /EHsc)
+    add_compile_options(/wd4828 /wd4819 /EHsc /utf-8)
 endif ()
 include_directories(.)
 

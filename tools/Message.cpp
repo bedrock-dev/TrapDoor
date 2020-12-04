@@ -23,3 +23,19 @@ void mcbe_sendMessage(std::string &s, Actor *player) {
 }
 
 
+std::string gbkToUtf8(const char *src_str) {
+    int len = MultiByteToWideChar(CP_ACP, 0, src_str, -1, nullptr, 0);
+    auto *wstr = new wchar_t[len + 1];
+    memset(wstr, 0, len + 1);
+    MultiByteToWideChar(CP_ACP, 0, src_str, -1, wstr, len);
+    len = WideCharToMultiByte(CP_UTF8, 0, wstr, -1, nullptr, 0, nullptr, nullptr);
+    char *str = new char[len + 1];
+    memset(str, 0, len + 1);
+    WideCharToMultiByte(CP_UTF8, 0, wstr, -1, str, len, nullptr, nullptr);
+    std::string strTemp(str);
+    delete[] wstr;
+    delete[] str;
+    return strTemp;
+}
+
+

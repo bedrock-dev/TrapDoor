@@ -12,8 +12,13 @@
 using json = nlohmann::json;
 
 int main() {
-    initLogger("QAQ", true);
-    ConfigManager manager;
-    manager.initialize("config.json");
+    char *str = new char[12];
+    for (int i = 0; i < 12; ++i) {
+        str[i] = 'a';
+    }
+    str[11] = 0;
+    std::string s(str);
+    delete [] str;
+    std::cout<<s;
     return 0;
 }

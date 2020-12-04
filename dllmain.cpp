@@ -6,7 +6,8 @@
 #define DBG_MACRO_NO_WARNING
 
 void mod_init() {
-    initLogger("trapdoor.log", false);
+    system("chcp 65001");
+    initLogger("trapdoor.log", true);
     HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
     DWORD dwMode;
     GetConsoleMode(hOutput, &dwMode);
