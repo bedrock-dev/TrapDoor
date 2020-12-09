@@ -253,3 +253,20 @@ Player::tickWorld
 
 #获取群系2
 ?getBiome@FixedBiomeSource@@UEBAPEBVBiome@@HH@Z
+
+
+###########################背包##############################
+#获取玩家背包
+?getSupplies@Player@@QEAAAEAVPlayerInventory@@XZ
+#获取背包内的某个元素
+?getItem@PlayerInventory@@QEBAAEBVItemStack@@HW4ContainerID@@@Z
+#获取某个背包的大小
+?getContainerSize@PlayerInventory@@QEBAHW4ContainerID@@@Z
+#设置某个背包内的东西
+?setItem@PlayerInventory@@QEAAXHAEBVItemStack@@W4ContainerID@@_N@Z
+#设置为空
+?setNull@ItemStackBase@@UEAAXXZ
+#清空某个槽
+?clearSlot@FillingContainer@@UEAAXH@Z
+#获取手持槽的位置
+?getSelectedSlot@PlayerInventory@@QEBA?AUSlotData@1@XZ

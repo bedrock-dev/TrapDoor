@@ -12,13 +12,14 @@
 using json = nlohmann::json;
 
 int main() {
-    char *str = new char[12];
-    for (int i = 0; i < 12; ++i) {
-        str[i] = 'a';
-    }
-    str[11] = 0;
-    std::string s(str);
-    delete [] str;
-    std::cout<<s;
+
+    std::map<int, int> m;
+    auto a =  m.operator[](1);
+    m[1] = 2;
+    std::cout << a<<std::endl;
+    std::cout<<m.size();
     return 0;
 }
+
+
+

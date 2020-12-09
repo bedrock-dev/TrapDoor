@@ -20,101 +20,97 @@ using namespace SymHook;
 
 //注册命令
 void initCommand() {
-	getCommandManager()
-		.registerCmd("tick", "改变时间流速")
-		->then(ARG("fz", "冻结时间", NONE, { tick::freezeTick(); }))
 
-		->then(ARG("slow", "将时间放慢到原来的 1/N", INT,
-				   {
-					   auto slowTime = holder->getInt();
-					   if (slowTime > 1 && slowTime <= 64) {
-						   tick::slowTick(slowTime);
-					   } else {
-						   error(player, "数值必须在 2-64 之中");
-					   }
-				   }))
+    getCommandManager().registerCmd("tick", "改变世界运行状态")
+            ->then(ARG("fz", "freeze the world", NONE, { tick::freezeTick(); }))
 
-		->then(ARG("acc", "将时间加快到原来的 N 倍", INT,
-				   {
-					   auto wrapTime = holder->getInt();
-					   if (wrapTime > 1 && wrapTime <= 10) {
-						   tick::wrapTick(wrapTime);
-					   } else {
-						   error(player, "数值必须在 2-10 之中");
-					   }
-				   }))
+            ->then(ARG("slow", "slow the world run for [num] times", INT, {
+                auto slowTime = holder->getInt();
+                if (slowTime > 1 && slowTime <= 64) {
+                    tick::slowTick(slowTime);
+                } else {
+                    error(player, "number must in [2-64]");
+                }
+            }))
 
-		->then(ARG("r", "重置时间流速", NONE, { tick::resetTick(); }))
 
-		->then(ARG("fw", "时间前进 N 个游戏刻", INT,
-				   { tick::forwardTick(holder->getInt()); }));
+            ->then(ARG("acc", "加速世界运行[num]倍速", INT, {
+                auto wrapTime = holder->getInt();
+                if (wrapTime > 1 && wrapTime <= 10) {
+                    tick::wrapTick(wrapTime);
+                } else {
+                    error(player, "number must in [2-10]");
+                }
+            }))
 
-	getCommandManager().registerCmd("prof", "性能分析")->EXE({ tick::profileWorld(player); });
+            ->then(ARG("r", "重置世界运行", NONE, { tick::resetTick(); }))
 
-    getCommandManager().registerCmd("mspt", "显示 mspt 与 tps", MEMBER)->EXE({ tick::mspt(); });
-	getCommandManager()
-		.registerCmd("func", "启用/禁用功能")
-		->then(ARG("hc", "启用/禁用漏斗计数器", BOOL,
-				   {
-					   enableHopperCounter = holder->getBool();
-					   info(player, "%s漏斗计数器",
-							enableHopperCounter ? "启用" : "禁用");
-				   }))
-		->then(ARG("exp", "启用/禁用爆炸", BOOL, {
-			enableExplosion = holder->getBool();
-			info(player, "%s爆炸", enableExplosion ? "启用" : "禁用");
-		}));
+            ->then(ARG("fw", "世界运行步进[num] gt", INT, { tick::forwardTick(holder->getInt()); }));
 
-	getCommandManager()
-		.registerCmd("counter", "漏斗计数器频道", MEMBER)
-		->then(ARG(
-			"r", "重置频道 N", INT,
-			{ hopperCounterManager.resetChannel(player, holder->getInt()); }))
-		->then(ARG("p", "输出频道 N", INT, {
-			hopperCounterManager.printChannel(player, holder->getInt());
-		}));
+    getCommandManager().registerCmd("prof", "ticking profiling")->EXE({ tick::profileWorld(player); });
 
-	getCommandManager().registerCmd("o", "切换至旁观模式")
+    getCommandManager().registerCmd("mspt", "show mspt & tps", MEMBER)->EXE({ tick::mspt(); });
+    getCommandManager().registerCmd("func", "en/disable function")
+            ->then(ARG("hc", "enable/disable hopper counter", BOOL, {
+                enableHopperCounter = holder->getBool();
+                info(player, "set hopper to %d", enableHopperCounter);
+            }))
+            ->then(ARG("exp", "enable/disable explosion", BOOL, {
+                enableExplosion = holder->getBool();
+                info(player, "set explosion to %d", enableExplosion);
+            }));
+
+
+    getCommandManager().registerCmd("counter", "hopper counter mode", MEMBER)
+            ->then(ARG("r", "reset channel [num]", INT,
+                       { hopperCounterManager.resetChannel(player, holder->getInt()); }))
+            ->then(ARG("p", "print channel [num]", INT,
+                       { hopperCounterManager.printChannel(player, holder->getInt()); }));
+
+    getCommandManager().registerCmd("o", "switch to spectator mode")
             ->EXE({
                       player->setGameMode(3);
-                      info(player, "游戏模式已切换为旁观");
+                      info(player, "set gamemode to spectator");
                   });
 
-	getCommandManager().registerCmd("s", "切换至生存模式", MEMBER)->EXE({
-		player->setGameMode(0);
-		info(player, "游戏模式已切换为生存");
-	});
+    getCommandManager().registerCmd("s", "switch to survival mode", MEMBER)
+            ->EXE({
+                      player->setGameMode(0);
+                      info(player, "set gamemode to survival");
+                  });
 
-	getCommandManager().registerCmd("c", "切换至创造模式")->EXE({
-		player->setGameMode(1);
-		info(player, "游戏模式已切换为创造");
-	});
+    getCommandManager().registerCmd("c", "switch to creative mode")
+            ->EXE({
+                      player->setGameMode(1);
+                      info(player, "set gamemode to creative");
 
-	getCommandManager().registerCmd("village", "村庄相关功能", MEMBER)
-            ->then(ARG("list", "列出所有加载的村庄", NONE, { village::listVillages(player); }))
-            ->then(ARG("show", "显示加载村庄的边界及其中心", BOOL, {
+                  });
+
+    getCommandManager().registerCmd("village", "村庄相关功能", MEMBER)
+            ->then(ARG("list", "list all ticking villages", NONE, { village::listVillages(player); }))
+            ->then(ARG("show", "show ticking villages bounds and center", BOOL, {
                 enableVillageShow = holder->getBool();
                 // info(player, "developing...");
             }));
 
     getCommandManager().registerCmd("cfg", "设置")
-            ->then(ARG("pvd", "设置粒子显示半径", INT, {
+            ->then(ARG("pvd", "config particle view distance(default=128)", INT, {
                 particleViewDistance = holder->getInt();
-                info(player, "将粒子显示半径设置为 %d", particleViewDistance);
+                info(player, "set particle view distance to %d", particleViewDistance);
             }));
 
 
-    getCommandManager().registerCmd("tr?", "帮助", MEMBER)
+    getCommandManager().registerCmd("tr?", "show help", MEMBER)
             ->EXE({
                       getCommandManager().printfHelpInfo(player);
                   });
 
-    getCommandManager().registerCmd("dbg", "显示测试信息", MEMBER)
+    getCommandManager().registerCmd("dbg", "show some debug info", MEMBER)
             ->EXE({
                       player->printInfo();
                   });
 
-    getCommandManager().registerCmd("spawn", "显示刷怪信息")
+    getCommandManager().registerCmd("spawn", "show some spawn info")
             ->EXE({
                       player->getDimension()->printBaseTypeLimit();
                   });
@@ -167,7 +163,7 @@ THook(
         }
     });
     if (!source) {
-        L_DEBUG("找不到有效玩家");
+        L_DEBUG("can't not find valid player");
         original(handler, id, commandPacket);
         return;
     }

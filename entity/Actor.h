@@ -7,11 +7,16 @@
 #include <vector>
 #include <string>
 #include "commands/CommandNode.h"
+
+class PlayerInventory;
+
+
 struct NetworkIdentifier {
     uint64_t getHash();
 };
 
 class Dimension;
+
 /**
  */
 class BlockSource;
@@ -40,7 +45,9 @@ public:
 
     CMD_LEVEL getCommandLevel();
 
+    PlayerInventory *getPlayerInventory();
 
+    unsigned int getSelectSlot();
 };
 
 class ActorDefinitionIdentifier {

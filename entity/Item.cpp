@@ -9,6 +9,8 @@
 #include "tools/Particle.h"
 #include "tools/MsgBuilder.h"
 #include "block/Block.h"
+#include "entity/PlayerBuffer.h"
+#include "common/RightClickManager.h"
 
 std::string ItemStackBase::getItemName() {
     std::string name;
@@ -22,6 +24,19 @@ std::string ItemStackBase::getItemName() {
 
 int ItemStackBase::getNum() {
     return (int) *((unsigned char *) this + 34);
+}
+
+
+void ItemStackBase::setNull() {
+    SYM_CALL(
+            void(*)(ItemStackBase * ),
+            MSSYM_B1QA7setNullB1AE13ItemStackBaseB2AAA7UEAAXXZ,
+            this
+    );
+}
+
+void ItemStackBase::forceSetNum(int num) {
+    *((unsigned char *) this + 34) = num;
 }
 
 /**
@@ -93,7 +108,10 @@ int getCapacitorState(unsigned int face, float x, float y, float z, bool powered
 //hopper
 //chest
 
-//player right click block
+
+
+
+//玩家右键触发的东西
 THook(
         void,
         MSSYM_B1QA5useOnB1AA4ItemB2AAA4QEBAB1UE14NAEAVItemStackB2AAA9AEAVActorB2AAA7HHHEMMMB1AA1Z,
@@ -108,11 +126,27 @@ THook(
         float dy,
         float dz
 ) {
+
+    RightClickCache targetCache{dx, dy, dz, x, y, z};
     auto name = itemStack->getItemName();
-    auto blockSource = player->getBlockSource();
-    if (name == "Cactus") {
-       // auto block = blockSource->getBlock(x, y, z);
-        //   printf("%d\n", block->getVariant());
+    auto &playerCache = getPlayerBuffer()[player->getNameTag()].rightClickCache;
+    //下面用一个简单的缓存 + 判定消除重复点击
+    if (playerCache != targetCache) {
+
+       // const BlockPos pos(x, y, z);
+      //  const Vec3 vec3(dx, dy, dz);
+        //响应右键事件
+     //   getRightClickManager().run(player, itemStack->getItemName(), pos, facing, vec3);
+
+
+        playerCache = targetCache;
+    }
+    original(item, itemStack, player, x, y, z, facing, dx, dy, dz);
+
+
+    //  if (name == "Cactus") {
+    // auto block = blockSource->getBlock(x, y, z);
+    //   printf("%d\n", block->getVariant());
 //        auto state = getNormalState(facing, dx, dy, dz, false);
 //        if (blockName == "minecraft:piston" || blockName == "minecraft:sticky_piston") {
 //            state = getNormalState(facing, dx, dy, dz, true);
@@ -126,7 +160,9 @@ THook(
 //        //设置方块状态并更新周围
 //        blockSource->setBlock(&pos, block->getLegacy()->tryGetStateBlock(state));
 //        blockSource->updateNeighbors(pos);
-    } else if (name == "Stick") {
+//}
+
+//else if (name == "Stick") {
 //        //todo: rewrite
 //        auto block = blockSource->getBlock(x, y, z);
 //        auto blockName = block->getName();
@@ -146,7 +182,6 @@ THook(
 //            }
 //            getPlayerSpace()[player].rightPosition = pos;
 //        }
-    }
-    original(item, itemStack, player, x, y, z, facing, dx, dy, dz);
+// }
 }
 

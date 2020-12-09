@@ -158,6 +158,7 @@ THook(
     if (!globalLevel) {
         globalLevel = serverLevel;
         initCommand();
+        initRightClickManager();
         //   LOGF(getLogFile(), "init server level");
     }
 

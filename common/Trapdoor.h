@@ -20,13 +20,7 @@ class Actor;
 
 class PlayerBuffer;
 
-//class Trapdoor {
-//    Level *level = nullptr;
-//    CommandManager *manager{};
-//    ConfigManager *configManager{};
-//public:
-//    bool initialize();
-//};
+class RightClickManager;
 
 extern void *globalSpawner; //全局刷怪器对象
 extern void *globalCommandRegistry;
@@ -36,6 +30,11 @@ extern void *globalCircuitSystem;
 extern Level *globalLevel;
 
 CommandManager &getCommandManager();
+
+std::map<std::string, PlayerBuffer> &getPlayerBuffer();
+
+
+RightClickManager &getRightClickManager();
 
 //粒子效果配置(性能配置)
 extern int particleViewDistance;
@@ -48,6 +47,8 @@ extern bool enableBlockUpdate;
 extern bool enableHopperCounter;
 extern int mobTickCounter;
 extern int hopperTickLength;
+
+void initRightClickManager();
 
 
 #endif //TRAPDOOR_TRAPDOOR_H

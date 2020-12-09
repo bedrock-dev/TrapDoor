@@ -17,13 +17,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b8a60db2-baf4-4087-8601-d054cc921b14" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/common/RightClickManager.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/RightClickManager.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/entity/PlayerInventory.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/entity/PlayerInventory.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README-zh.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/commands/Command.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/commands/Command.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dllmain.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/dllmain.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/Trapdoor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/common/Trapdoor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/Trapdoor.h" beforeDir="false" afterPath="$PROJECT_DIR$/common/Trapdoor.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/Actor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Actor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/Actor.h" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Actor.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/Item.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Item.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/Item.h" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Item.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/PlayerBuffer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/entity/PlayerBuffer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/PlayerBuffer.h" beforeDir="false" afterPath="$PROJECT_DIR$/entity/PlayerBuffer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/SymHook.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/SymHook.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symbol.txt" beforeDir="false" afterPath="$PROJECT_DIR$/symbol.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/testMain.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/testMain.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/Message.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tools/Message.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/Message.h" beforeDir="false" afterPath="$PROJECT_DIR$/tools/Message.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tick/GameTick.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tick/GameTick.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -248,7 +262,13 @@
       <workItem from="1606906896030" duration="5892000" />
       <workItem from="1607004411845" duration="3938000" />
       <workItem from="1607089817058" duration="2942000" />
-      <workItem from="1607092847152" duration="1473000" />
+      <workItem from="1607092847152" duration="4966000" />
+      <workItem from="1607161130911" duration="2852000" />
+      <workItem from="1607177952227" duration="4000" />
+      <workItem from="1607335157891" duration="629000" />
+      <workItem from="1607432203933" duration="34000" />
+      <workItem from="1607432535758" duration="7714000" />
+      <workItem from="1607475885824" duration="468000" />
     </task>
     <task id="LOCAL-00001" summary="1. 命令解释器投入使用，和switch case 彻底告别&#10;2. 支持游戏模式切换命令 ./gm mode n (n=3是观察模式)">
       <created>1604761522583</created>
@@ -289,10 +309,10 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="502" y="216" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1549.831@0.0.1549.831" timestamp="1607005714356" />
-    <state x="559" y="94" key="#com.intellij.ide.util.MemberChooser" timestamp="1606013575784">
+    <state x="559" y="94" key="#com.intellij.ide.util.MemberChooser" timestamp="1607097458013">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="559" y="94" key="#com.intellij.ide.util.MemberChooser/0.0.1549.831@0.0.1549.831" timestamp="1606013575784" />
+    <state x="559" y="94" key="#com.intellij.ide.util.MemberChooser/0.0.1549.831@0.0.1549.831" timestamp="1607097458013" />
     <state x="505" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1606918752604">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
@@ -305,26 +325,26 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="497" y="108" key="FileChooserDialogImpl/0.0.1549.831@0.0.1549.831" timestamp="1606644181264" />
-    <state width="1513" height="2" key="GridCell.Tab.0.bottom" timestamp="1607092826859">
+    <state width="1528" height="57" key="GridCell.Tab.0.bottom" timestamp="1607163997547">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state width="1513" height="2" key="GridCell.Tab.0.bottom/0.0.1549.831@0.0.1549.831" timestamp="1607092826859" />
-    <state width="1513" height="2" key="GridCell.Tab.0.center" timestamp="1607092826859">
+    <state width="1528" height="57" key="GridCell.Tab.0.bottom/0.0.1549.831@0.0.1549.831" timestamp="1607163997547" />
+    <state width="1528" height="57" key="GridCell.Tab.0.center" timestamp="1607163997547">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state width="1513" height="2" key="GridCell.Tab.0.center/0.0.1549.831@0.0.1549.831" timestamp="1607092826859" />
-    <state width="1513" height="2" key="GridCell.Tab.0.left" timestamp="1607092826858">
+    <state width="1528" height="57" key="GridCell.Tab.0.center/0.0.1549.831@0.0.1549.831" timestamp="1607163997547" />
+    <state width="1528" height="57" key="GridCell.Tab.0.left" timestamp="1607163997547">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state width="1513" height="2" key="GridCell.Tab.0.left/0.0.1549.831@0.0.1549.831" timestamp="1607092826858" />
-    <state width="1513" height="2" key="GridCell.Tab.0.right" timestamp="1607092826859">
+    <state width="1528" height="57" key="GridCell.Tab.0.left/0.0.1549.831@0.0.1549.831" timestamp="1607163997547" />
+    <state width="1528" height="57" key="GridCell.Tab.0.right" timestamp="1607163997547">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state width="1513" height="2" key="GridCell.Tab.0.right/0.0.1549.831@0.0.1549.831" timestamp="1607092826859" />
-    <state x="148" y="65" key="MergeDialog" timestamp="1604670663442">
+    <state width="1528" height="57" key="GridCell.Tab.0.right/0.0.1549.831@0.0.1549.831" timestamp="1607163997547" />
+    <state x="148" y="65" key="MergeDialog" timestamp="1607476059593">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="148" y="65" key="MergeDialog/0.0.1549.831@0.0.1549.831" timestamp="1604670663442" />
+    <state x="148" y="65" key="MergeDialog/0.0.1549.831@0.0.1549.831" timestamp="1607476059593" />
     <state x="190" y="115" width="1170" height="707" key="SettingsEditor" timestamp="1606906964545">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
@@ -333,21 +353,21 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="367" y="148" key="Vcs.Push.Dialog.v2/0.0.1549.831@0.0.1549.831" timestamp="1604898985160" />
-    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1607090949319">
+    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1607439887677">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1549.831@0.0.1549.831" timestamp="1607090949319" />
-    <state x="590" y="328" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1604898934302">
+    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1549.831@0.0.1549.831" timestamp="1607439887677" />
+    <state x="590" y="328" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607476081383">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="590" y="328" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1549.831@0.0.1549.831" timestamp="1604898934302" />
+    <state x="590" y="328" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1549.831@0.0.1549.831" timestamp="1607476081383" />
     <state x="551" y="198" key="refactoring.ChangeSignatureDialog" timestamp="1599612059470">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="551" y="198" key="refactoring.ChangeSignatureDialog/0.0.1549.831@0.0.1549.831" timestamp="1599612059470" />
-    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup" timestamp="1606920369541">
+    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup" timestamp="1607433275291">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup/0.0.1549.831@0.0.1549.831" timestamp="1606920369541" />
+    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup/0.0.1549.831@0.0.1549.831" timestamp="1607433275291" />
   </component>
 </project>

@@ -38,6 +38,9 @@ add_library(Trapdoor SHARED
         level/Dimension.cpp
         tools/json.hpp
         tools/DirtyLogger.cpp
+        common/RightClickManager.cpp
+
+        entity/PlayerInventory.cpp
         )
 
 

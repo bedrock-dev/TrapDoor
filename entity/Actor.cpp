@@ -18,6 +18,8 @@
 #include "common/Trapdoor.h"
 #include <bitset>
 
+#include "PlayerInventory.h"
+
 using namespace SymHook;
 
 
@@ -132,6 +134,18 @@ CMD_LEVEL Actor::getCommandLevel() {
             MSSYM_B1QE25getCommandPermissionLevelB1AA6PlayerB2AAA4UEBAB1QE25AW4CommandPermissionLevelB2AAA2XZ,
             this
     );
+}
+
+PlayerInventory *Actor::getPlayerInventory() {
+    return SYM_CALL(
+            PlayerInventory*(*)(Actor * ),
+            MSSYM_B1QE11getSuppliesB1AA6PlayerB2AAE23QEAAAEAVPlayerInventoryB2AAA2XZ,
+            this
+    );
+}
+
+unsigned int Actor::getSelectSlot() {
+    return *(unsigned int *) reinterpret_cast<char *>(this + 168);
 }
 
 

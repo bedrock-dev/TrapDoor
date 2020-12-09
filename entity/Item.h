@@ -14,6 +14,8 @@ using namespace SymHook;
 struct ItemStackBase{
     std::string getItemName();
     int getNum();
+    void setNull();
+    void forceSetNum(int num);
 };
 
 
