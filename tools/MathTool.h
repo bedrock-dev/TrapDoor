@@ -5,8 +5,8 @@
 #ifndef TRAPDOOR_MATHTOOL_H
 #define TRAPDOOR_MATHTOOL_H
 
-#include "common/Vec3.h"
-#include "common/BlockPos.h"
+#include "graphics/Vec3.h"
+#include "graphics/BlockPos.h"
 #include <cmath>
 #include <vector>
 

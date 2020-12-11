@@ -3,7 +3,7 @@
 #include "lib/mod.h"
 #include "lib/SymHook.h"
 #include <vector>
-#include "common/BlockPos.h"
+#include "graphics/BlockPos.h"
 
 struct Block;
 struct Biome;

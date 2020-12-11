@@ -3,8 +3,8 @@
 //
 #include "Block.h"
 #include "tools/Message.h"
-#include "common/Vec3.h"
-#include "common/BlockPos.h"
+#include "graphics/Vec3.h"
+#include "graphics/BlockPos.h"
 #include "tools/MathTool.h"
 #include "level/Biome.h"
 #include "tick/GameTick.h"

@@ -3,7 +3,7 @@
 #ifndef TRAPDOOR_ACTOR_H
 #define TRAPDOOR_ACTOR_H
 
-#include "common/Vec3.h"
+#include "graphics/Vec3.h"
 #include <vector>
 #include <string>
 #include "commands/CommandNode.h"

@@ -9,17 +9,36 @@
 #include <iostream>
 #include <vector>
 
+struct BlockPos;
 
-struct ChunkPos {
+enum class FACING {
+    NEG_Y = 0,
+    POS_Y = 1,
+    NEG_Z = 2,
+    POS_Z = 3,
+    NEG_X = 4,
+    POS_X = 5,
+};
+
+
+std::string facingToString(FACING facing);
+
+std::string facingToDirString(FACING facing);
+
+BlockPos facingToBlockPos(FACING facing);
+
+struct BlockPos2 {
     int x = 0;
     int z = 0;
 
-    ChunkPos(int _x, int _z) : x(_x), z(_z) {}
+    BlockPos2(int _x, int _z) : x(_x), z(_z) {}
 
     std::string toString() const;
 
     bool isSlimeChunk() const;
 };
+
+typedef BlockPos2 ChunkPos;
 
 struct BlockPos {
     int x = 0;
@@ -52,10 +71,11 @@ struct BlockPos {
 
     std::vector<BlockPos> getPlainNeighbourPos();
 
-    ChunkPos toChunkPos() const;
+    BlockPos2 toChunkPos() const;
 
-    ChunkPos InChunkOffset() const;
+    BlockPos2 InChunkOffset() const;
 
+    int operator*(const BlockPos &pos) const;
 
     bool operator<(const BlockPos &rhs) const;
 };

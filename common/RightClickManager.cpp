@@ -5,7 +5,7 @@
 #include "RightClickManager.h"
 
 void RightClickManager::registerRightClickBackEvent(const std::string &itemName,
-                                                    const RightClickManager::RightClickCallBack &callBack) {
+                                                    const RightClickManager::RightClickCallBack &&callBack) {
     this->callBackList.insert({itemName, callBack});
 }
 

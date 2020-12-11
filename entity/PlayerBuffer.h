@@ -5,7 +5,7 @@
 #ifndef TRAPDOOR_PLAYERBUFFER_H
 #define TRAPDOOR_PLAYERBUFFER_H
 
-#include "common/BlockPos.h"
+#include "graphics/BlockPos.h"
 #include "Actor.h"
 #include "Player.h"
 

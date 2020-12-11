@@ -8,9 +8,9 @@
 #include <map>
 #include <vector>
 #include <string>
-#include "common/BlockPos.h"
-#include "common/Vec3.h"
-#include "common/AABB.h"
+#include "graphics/BlockPos.h"
+#include "graphics/Vec3.h"
+#include "graphics/AABB.h"
 
 class Actor;
 

@@ -2,7 +2,7 @@
 
 #include "lib/mod.h"
 #include "lib/SymHook.h"
-#include "common/BlockPos.h"
+#include "graphics/BlockPos.h"
 
 class Actor;
 

@@ -7,8 +7,8 @@
 #include "commands/CommandManager.h"
 #include <map>
 #include "RightClickManager.h"
-#include "Vec3.h"
-#include "BlockPos.h"
+#include "graphics/Vec3.h"
+#include "graphics/BlockPos.h"
 #include "entity/PlayerBuffer.h"
 
 void *globalSpawner = nullptr; //全局刷怪器对象

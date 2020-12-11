@@ -5,43 +5,7 @@
 #include "Vec3.h"
 #include "BlockPos.h"
 
-std::string facingToString(FACING facing) {
-    switch (facing) {
-        case FACING::POS_X:
-            return "+x";
-        case FACING::NEG_X:
-            return "-x";
-        case FACING::POS_Y:
-            return "+y";
-        case FACING::POS_Z:
-            return "+z";
-        case FACING::NEG_Y:
-            return "-y";
-        case FACING::NEG_Z:
-            return "-z";
-        default:
-            return "unknown";
-    }
-}
 
-std::string facingToDirString(FACING facing) {
-    switch (facing) {
-        case FACING::POS_X:
-            return "west";
-        case FACING::NEG_X:
-            return "east";
-        case FACING::POS_Y:
-            return "up";
-        case FACING::POS_Z:
-            return "south";
-        case FACING::NEG_Y:
-            return "down";
-        case FACING::NEG_Z:
-            return "north";
-        default:
-            return "unknown";
-    }
-}
 
 Vec3::Vec3(int _x) : Vec3(_x, _x, _x) {}
 

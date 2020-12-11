@@ -9,19 +9,8 @@
 
 struct BlockPos;
 
-enum class FACING {
-    POS_X,
-    POS_Y,
-    POS_Z,
-    NEG_X,
-    NEG_Y,
-    NEG_Z
-};
 
 
-std::string facingToString(FACING facing);
-
-std::string facingToDirString(FACING facing);
 
 struct Vec3 {
     float x;

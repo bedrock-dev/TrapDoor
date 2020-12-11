@@ -24,9 +24,8 @@ public:
                                const Vec3 &)> RightClickCallBack;
 private:
     std::map<std::string, RightClickCallBack> callBackList;
-
 public:
-    void registerRightClickBackEvent(const std::string &itemName, const RightClickCallBack &callBack);
+    void registerRightClickBackEvent(const std::string &itemName, const RightClickCallBack &&callBack);
     void run(Actor *player, const std::string &itemName, const BlockPos &pos, unsigned int face, const Vec3 &offset);
 };
 

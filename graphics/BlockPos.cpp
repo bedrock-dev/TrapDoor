@@ -55,7 +55,7 @@ std::vector<BlockPos> BlockPos::getPlainNeighbourPos() {
     };
 }
 
-ChunkPos BlockPos::InChunkOffset() const {
+BlockPos2 BlockPos::InChunkOffset() const {
     auto newX = x % 16;
     auto newZ = z % 16;
     if (newX < 0)newX += 16;
@@ -63,7 +63,7 @@ ChunkPos BlockPos::InChunkOffset() const {
     return {newX, newZ};
 }
 
-ChunkPos BlockPos::toChunkPos() const {
+BlockPos2 BlockPos::toChunkPos() const {
     return {this->x / 16, this->z / 16};
 }
 
@@ -79,15 +79,75 @@ bool BlockPos::operator<(const BlockPos &rhs) const {
     return z < rhs.z;
 }
 
-std::string ChunkPos::toString() const {
+int BlockPos::operator*(const BlockPos &pos) const {
+    return this->x * pos.x + this->y * pos.y + this->z * pos.z;
+}
+
+
+std::string BlockPos2::toString() const {
     return "["
            + std::to_string(x) + ","
            + std::to_string(z) + "]";
 }
 
 
-bool ChunkPos::isSlimeChunk() const {
+bool BlockPos2::isSlimeChunk() const {
     auto seed = (x * 0x1f1f1f1fu) ^(uint32_t) z;
     std::mt19937 mt(seed);
     return mt() % 10 == 0;
+}
+
+std::string facingToString(FACING facing) {
+    switch (facing) {
+        case FACING::POS_X:
+            return "+x";
+        case FACING::NEG_X:
+            return "-x";
+        case FACING::POS_Y:
+            return "+y";
+        case FACING::POS_Z:
+            return "+z";
+        case FACING::NEG_Y:
+            return "-y";
+        case FACING::NEG_Z:
+            return "-z";
+        default:
+            return "unknown";
+    }
+}
+
+std::string facingToDirString(FACING facing) {
+    switch (facing) {
+        case FACING::POS_X:
+            return "west";
+        case FACING::NEG_X:
+            return "east";
+        case FACING::POS_Y:
+            return "up";
+        case FACING::POS_Z:
+            return "south";
+        case FACING::NEG_Y:
+            return "down";
+        case FACING::NEG_Z:
+            return "north";
+        default:
+            return "unknown";
+    }
+}
+
+BlockPos facingToBlockPos(FACING facing) {
+    switch (facing) {
+        case FACING::NEG_Y:
+            return {0, -1, 0};
+        case FACING::POS_Y:
+            return {0, 1, 0};
+        case FACING::NEG_Z:
+            return {0, 0, -1};
+        case FACING::POS_Z:
+            return {0, 0, 1};
+        case FACING::NEG_X:
+            return {-1, 0, 0};
+        case FACING::POS_X:
+            return {1, 0, 0};
+    }
 }

@@ -8,6 +8,6 @@
 #include "./detours.h"
 #include "./detver.h"
 #include "SymHook.h"
-#include "common/AABB.h"
+#include "graphics/AABB.h"
 
 #endif //PCH_H

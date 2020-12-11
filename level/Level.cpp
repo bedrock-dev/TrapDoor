@@ -4,7 +4,7 @@
 
 #include "Level.h"
 #include "entity/Actor.h"
-#include "common/BlockPos.h"
+#include "graphics/BlockPos.h"
 #include "Dimension.h"
 #include "lib/mod.h"
 #include "lib/pch.h"

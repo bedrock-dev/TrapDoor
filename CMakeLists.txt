@@ -12,7 +12,7 @@ add_library(Trapdoor SHARED
         dllmain.cpp
         tools/MathTool.cpp
         tools/MsgBuilder.cpp
-        tools/Particle.cpp
+        graphics/Particle.cpp
         tools/Message.cpp
         lib/pch.cpp
         village/Village.cpp
@@ -31,18 +31,17 @@ add_library(Trapdoor SHARED
         entity/Item.cpp
         block/Hopper.cpp
         entity/Player.cpp
-        common/BlockPos.cpp
-        common/Vec3.cpp
+        graphics/BlockPos.cpp
+        graphics/Vec3.cpp
         entity/PlayerBuffer.cpp
         level/Biome.cpp
         level/Dimension.cpp
         tools/json.hpp
         tools/DirtyLogger.cpp
         common/RightClickManager.cpp
-
         entity/PlayerInventory.cpp
+        graphics/Drawable.cpp
         )
-
 
 target_link_libraries(Trapdoor ${PROJECT_SOURCE_DIR}/lib/detours.lib)
 

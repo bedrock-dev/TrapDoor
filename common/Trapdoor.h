@@ -33,7 +33,6 @@ CommandManager &getCommandManager();
 
 std::map<std::string, PlayerBuffer> &getPlayerBuffer();
 
-
 RightClickManager &getRightClickManager();
 
 //粒子效果配置(性能配置)

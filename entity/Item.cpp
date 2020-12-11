@@ -39,6 +39,7 @@ void ItemStackBase::forceSetNum(int num) {
     *((unsigned char *) this + 34) = num;
 }
 
+
 /**
  * minecraft:sticky_piston
  *minecraft:piston
@@ -128,22 +129,20 @@ THook(
 ) {
 
     RightClickCache targetCache{dx, dy, dz, x, y, z};
-    auto name = itemStack->getItemName();
     auto &playerCache = getPlayerBuffer()[player->getNameTag()].rightClickCache;
     //下面用一个简单的缓存 + 判定消除重复点击
     if (playerCache != targetCache) {
-
-       // const BlockPos pos(x, y, z);
-      //  const Vec3 vec3(dx, dy, dz);
         //响应右键事件
-     //   getRightClickManager().run(player, itemStack->getItemName(), pos, facing, vec3);
+//        const BlockPos pos(x, y, z);
+//        const Vec3 vec3(dx, dy, dz);
+//        getRightClickManager().run(player, itemStack->getItemName(), pos, facing, vec3);
+//        playerCache = targetCache;
 
-
-        playerCache = targetCache;
+        if (itemStack->getItemName() == "Cactus") {
+            printf("you right click face %d\n", facing);
+        }
     }
     original(item, itemStack, player, x, y, z, facing, dx, dy, dz);
-
-
     //  if (name == "Cactus") {
     // auto block = blockSource->getBlock(x, y, z);
     //   printf("%d\n", block->getVariant());
