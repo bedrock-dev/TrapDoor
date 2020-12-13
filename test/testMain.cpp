@@ -8,16 +8,13 @@
 #include <fstream>
 #include "tools/DirtyLogger.h"
 #include "common/ConfigManager.h"
+#include "graphics/Graphics.h"
 
 using json = nlohmann::json;
 
 int main() {
 
-    std::map<int, int> m;
-    auto a =  m.operator[](1);
-    m[1] = 2;
-    std::cout << a<<std::endl;
-    std::cout<<m.size();
+    graphics::drawLine({12,3,12},FACING::NEG_X,5,graphics::COLOR::WHITE);
     return 0;
 }
 

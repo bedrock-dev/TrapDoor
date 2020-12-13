@@ -11,7 +11,7 @@
 
 using namespace SymHook;
 
-#include "tools/Particle.h"
+#include "graphics/Particle.h"
 #include <vector>
 
 

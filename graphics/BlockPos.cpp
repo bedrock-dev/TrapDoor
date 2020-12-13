@@ -4,6 +4,8 @@
 
 #include "BlockPos.h"
 #include <random>
+#include "Vec3.h"
+#include <string>
 
 bool BlockPos::operator==(const BlockPos &v) const {
     return x == v.x && y == v.y && z == v.z;
@@ -14,9 +16,9 @@ bool BlockPos::operator!=(const BlockPos &v) const {
 }
 
 float BlockPos::distanceTo(const BlockPos &blockPos) const {
-    return (float) ((blockPos.x - x) * (blockPos.x - x) +
-                    (blockPos.y - y) * (blockPos.y - y) +
-                    (blockPos.z - z) * (blockPos.z - z));
+    return (float) sqrt((blockPos.x - x) * (blockPos.x - x) +
+                        (blockPos.y - y) * (blockPos.y - y) +
+                        (blockPos.z - z) * (blockPos.z - z));
 }
 
 std::ostream &operator<<(std::ostream &os, const BlockPos &vec3) {
@@ -149,5 +151,43 @@ BlockPos facingToBlockPos(FACING facing) {
             return {-1, 0, 0};
         case FACING::POS_X:
             return {1, 0, 0};
+    }
+    return {0, 0, 0};
+}
+
+bool facingIsPos(FACING facing) {
+    return facing == FACING::POS_X || facing == FACING::POS_Y || facing == FACING::POS_Z;
+}
+
+bool facingIsNeg(FACING facing) {
+    return facing == FACING::NEG_X || facing == FACING::NEG_Y || facing == FACING::NEG_Z;
+}
+
+bool facingIsX(FACING facing) {
+    return facing == FACING::POS_X || facing == FACING::NEG_X;
+}
+
+bool facingIsY(FACING facing) {
+    return facing == FACING::POS_Y || facing == FACING::NEG_Y;
+}
+
+bool facingIsZ(FACING facing) {
+    return facing == FACING::POS_Z || facing == FACING::NEG_Z;
+}
+
+FACING invFacing(FACING facing) {
+    switch (facing) {
+        case FACING::NEG_Y:
+            return FACING::POS_Y;
+        case FACING::POS_Y:
+            return FACING::NEG_Y;
+        case FACING::NEG_Z:
+            return FACING::POS_Z;
+        case FACING::POS_Z:
+            return FACING::NEG_Z;
+        case FACING::NEG_X:
+            return FACING::POS_X;
+        case FACING::POS_X:
+            return FACING::NEG_X;
     }
 }

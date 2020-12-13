@@ -40,7 +40,7 @@ add_library(Trapdoor SHARED
         tools/DirtyLogger.cpp
         common/RightClickManager.cpp
         entity/PlayerInventory.cpp
-        graphics/Drawable.cpp
+        graphics/Graphics.cpp
         )
 
 target_link_libraries(Trapdoor ${PROJECT_SOURCE_DIR}/lib/detours.lib)
@@ -50,6 +50,9 @@ add_executable(Test
         tools/DirtyLogger.cpp
         tools/json.hpp
         common/ConfigManager.cpp
+        graphics/Vec3.cpp
+        graphics/BlockPos.cpp
+        graphics/Graphics.cpp
         )
 
 

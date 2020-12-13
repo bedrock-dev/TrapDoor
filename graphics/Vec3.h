@@ -30,9 +30,10 @@ struct Vec3 {
     bool operator==(const Vec3 &v) const;
 
     bool operator!=(const Vec3 &v) const;
-
+    bool operator<(const Vec3 &v) const;
+    Vec3 operator+(const Vec3 &v)const;
+    Vec3 operator-(const Vec3 &v)const;
     float distanceTo(const Vec3 &vec3) const;
-
     std::string toString() const;
 
     BlockPos toBlockPos() const;

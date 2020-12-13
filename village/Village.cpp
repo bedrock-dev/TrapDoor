@@ -4,7 +4,7 @@
 #include "Village.h"
 #include "common/Trapdoor.h"
 #include "tools/Message.h"
-#include "tools/Particle.h"
+#include "graphics/Particle.h"
 #include "tools/MsgBuilder.h"
 #include "entity/Player.h"
 
@@ -78,6 +78,7 @@ namespace village {
         Vec3 p2 = {*((float *) this + BOUND_OFFSET),
                    *((float *) this + BOUND_OFFSET + 1),
                    *((float *) this + BOUND_OFFSET + 2)};
+
         AABB aabb(p2, p1);
         return aabb;
     }
@@ -93,15 +94,14 @@ namespace village {
 
     int villageInterval = 0;
 
-
     void villageTask() {
-        if (villageInterval % 15 == 0) {
+        if (villageInterval % 40 == 0) {
             villageHelper.draw();
         }
         if (villageInterval % 100 == 0) {
             villageHelper.clear();
         }
-        villageInterval = (villageInterval + 1) % 300;
+        villageInterval = (villageInterval + 1) % 200;
     }
 
     void listVillages(Actor *player) {
@@ -118,12 +118,13 @@ namespace village {
 
     void VillageHelper::draw() {
         if (enableVillageShow) {
-            std::string borderParticleType = "minecraft:dragon_breath_trail";
             std::string centerParticleType = "minecraft:heart_particle";
             for (auto village:villageList) {
                 if (village) {
-                    spawnRectangleParticle(village->getBounds(), borderParticleType);
-                    spawnParticle(village->getCenter().toVec3(), centerParticleType);
+                    auto center = village->getCenter().toVec3() + Vec3(0.5f, 0.8f, 0.5f);
+                    auto bounds = village->getBounds();
+                    spawnRectangleParticle(bounds);
+                    spawnParticle(center, centerParticleType);
                 }
             }
         }

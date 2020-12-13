@@ -5,12 +5,11 @@
 #ifndef LIBMCBEMOD_BLOCKPOS_H
 #define LIBMCBEMOD_BLOCKPOS_H
 
-#include "Vec3.h"
 #include <iostream>
 #include <vector>
 
 struct BlockPos;
-
+struct Vec3;
 enum class FACING {
     NEG_Y = 0,
     POS_Y = 1,
@@ -20,6 +19,17 @@ enum class FACING {
     POS_X = 5,
 };
 
+bool facingIsPos(FACING facing);
+
+bool facingIsNeg(FACING facing);
+
+bool facingIsX(FACING facing);
+
+bool facingIsY(FACING facing);
+
+bool facingIsZ(FACING facing);
+
+FACING invFacing(FACING facing);
 
 std::string facingToString(FACING facing);
 
@@ -30,11 +40,8 @@ BlockPos facingToBlockPos(FACING facing);
 struct BlockPos2 {
     int x = 0;
     int z = 0;
-
     BlockPos2(int _x, int _z) : x(_x), z(_z) {}
-
     std::string toString() const;
-
     bool isSlimeChunk() const;
 };
 

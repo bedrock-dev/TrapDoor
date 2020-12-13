@@ -6,16 +6,16 @@
 #include "BlockPos.h"
 
 
-
 Vec3::Vec3(int _x) : Vec3(_x, _x, _x) {}
 
 Vec3::Vec3(float _x) : Vec3(_x, _x, _x) {}
 
 float Vec3::distanceTo(const Vec3 &vec3) const {
-    return (vec3.x - x) * (vec3.x - x) +
-           (vec3.y - y) * (vec3.y - y) +
-           (vec3.z - z) * (vec3.z - z);
+    return sqrt((vec3.x - x) * (vec3.x - x) +
+                (vec3.y - y) * (vec3.y - y) +
+                (vec3.z - z) * (vec3.z - z));
 }
+
 
 std::string Vec3::toString() const {
     char buffer[64];
@@ -51,4 +51,24 @@ std::string Vec3::toDirString() const {
         s += ")";
     }
     return s;
+}
+
+bool Vec3::operator<(const Vec3 &rhs) const {
+    if (x < rhs.x)
+        return true;
+    if (rhs.x < x)
+        return false;
+    if (y < rhs.y)
+        return true;
+    if (rhs.y < y)
+        return false;
+    return z < rhs.z;
+}
+
+Vec3 Vec3::operator+(const Vec3 &v) const {
+    return {this->x + v.x, this->y + v.y, this->z + v.z};
+}
+
+Vec3 Vec3::operator-(const Vec3 &v) const {
+    return {this->x - v.x, this->y - v.y, this->z - v.z};
 }

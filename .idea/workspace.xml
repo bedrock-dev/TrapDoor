@@ -17,32 +17,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b8a60db2-baf4-4087-8601-d054cc921b14" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/graphics/Drawable.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/Drawable.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/Graphics.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/Graphics.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/block/Block.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/block/Block.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/block/Block.h" beforeDir="false" afterPath="$PROJECT_DIR$/block/Block.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/AABB.h" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/AABB.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/BlockPos.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/BlockPos.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/BlockPos.h" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/BlockPos.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/RightClickManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/common/RightClickManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/RightClickManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/common/RightClickManager.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/Trapdoor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/common/Trapdoor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/Trapdoor.h" beforeDir="false" afterPath="$PROJECT_DIR$/common/Trapdoor.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/Vec3.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/Vec3.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/Vec3.h" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/Vec3.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/Actor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Actor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/Actor.h" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Actor.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dllmain.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/dllmain.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entity/Item.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Item.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/Player.h" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Player.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/PlayerBuffer.h" beforeDir="false" afterPath="$PROJECT_DIR$/entity/PlayerBuffer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/level/Level.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/level/Level.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pch.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pch.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/MathTool.h" beforeDir="false" afterPath="$PROJECT_DIR$/tools/MathTool.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/MsgBuilder.h" beforeDir="false" afterPath="$PROJECT_DIR$/tools/MsgBuilder.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/Particle.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/Particle.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/village/Village.h" beforeDir="false" afterPath="$PROJECT_DIR$/village/Village.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/BlockPos.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/BlockPos.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/BlockPos.h" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/BlockPos.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/Drawable.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/Drawable.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/Particle.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/Particle.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/Vec3.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/Vec3.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/Vec3.h" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/Vec3.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/testMain.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/testMain.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/todo.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/Particle.h" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/Particle.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/village/Village.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/village/Village.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,12 +75,9 @@
     <property name="add_unversioned_files" value="true&#10;C:/Users/xhy/dev/TrapDoor/cmake-build-release/QAQ.log" />
     <property name="cf.first.check.clang-format" value="false" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop/MCBEMulStructureFinder" />
-    <property name="settings.editor.selected.configurable" value="GrepConsole" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\xhy\dev\TrapDoor\tools" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\xhy\dev\TrapDoor\graphics" />
       <recent name="C:\Users\xhy\dev\TrapDoor\cmake-build-release" />
@@ -96,13 +85,11 @@
       <recent name="C:\Users\xhy\dev\TrapDoor\src" />
       <recent name="C:\Users\xhy\dev\TrapDoor\lib" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\xhy\dev\TrapDoor\tools" />
+    </key>
   </component>
   <component name="RunManager" selected="CMake Application.Trapdoor">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="TrapDoor" TARGET_NAME="Test" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="TrapDoor" RUN_TARGET_NAME="Test">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -274,6 +261,10 @@
       <workItem from="1607432203933" duration="34000" />
       <workItem from="1607432535758" duration="7714000" />
       <workItem from="1607475885824" duration="468000" />
+      <workItem from="1607738034551" duration="5788000" />
+      <workItem from="1607782484584" duration="844000" />
+      <workItem from="1607825536164" duration="2840000" />
+      <workItem from="1607851836556" duration="3167000" />
     </task>
     <task id="LOCAL-00001" summary="1. 命令解释器投入使用，和switch case 彻底告别&#10;2. 支持游戏模式切换命令 ./gm mode n (n=3是观察模式)">
       <created>1604761522583</created>
@@ -330,38 +321,58 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="497" y="108" key="FileChooserDialogImpl/0.0.1549.831@0.0.1549.831" timestamp="1606644181264" />
-    <state width="1528" height="57" key="GridCell.Tab.0.bottom" timestamp="1607163997547">
+    <state x="317" y="74" key="GrepConsoleSettings" timestamp="1607826756109">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state width="1528" height="57" key="GridCell.Tab.0.bottom/0.0.1549.831@0.0.1549.831" timestamp="1607163997547" />
-    <state width="1528" height="57" key="GridCell.Tab.0.center" timestamp="1607163997547">
+    <state x="317" y="74" key="GrepConsoleSettings/0.0.1549.831@0.0.1549.831" timestamp="1607826756109" />
+    <state width="1528" height="264" key="GridCell.Tab.0.bottom" timestamp="1607743832932">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state width="1528" height="57" key="GridCell.Tab.0.center/0.0.1549.831@0.0.1549.831" timestamp="1607163997547" />
-    <state width="1528" height="57" key="GridCell.Tab.0.left" timestamp="1607163997547">
+    <state width="1528" height="264" key="GridCell.Tab.0.bottom/0.0.1549.831@0.0.1549.831" timestamp="1607743832932" />
+    <state width="1528" height="264" key="GridCell.Tab.0.center" timestamp="1607743832932">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state width="1528" height="57" key="GridCell.Tab.0.left/0.0.1549.831@0.0.1549.831" timestamp="1607163997547" />
-    <state width="1528" height="57" key="GridCell.Tab.0.right" timestamp="1607163997547">
+    <state width="1528" height="264" key="GridCell.Tab.0.center/0.0.1549.831@0.0.1549.831" timestamp="1607743832932" />
+    <state width="1528" height="264" key="GridCell.Tab.0.left" timestamp="1607743832932">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state width="1528" height="57" key="GridCell.Tab.0.right/0.0.1549.831@0.0.1549.831" timestamp="1607163997547" />
+    <state width="1528" height="264" key="GridCell.Tab.0.left/0.0.1549.831@0.0.1549.831" timestamp="1607743832932" />
+    <state width="1528" height="264" key="GridCell.Tab.0.right" timestamp="1607743832932">
+      <screen x="0" y="0" width="1549" height="831" />
+    </state>
+    <state width="1528" height="264" key="GridCell.Tab.0.right/0.0.1549.831@0.0.1549.831" timestamp="1607743832932" />
+    <state width="1528" height="264" key="GridCell.Tab.1.bottom" timestamp="1607743832933">
+      <screen x="0" y="0" width="1549" height="831" />
+    </state>
+    <state width="1528" height="264" key="GridCell.Tab.1.bottom/0.0.1549.831@0.0.1549.831" timestamp="1607743832933" />
+    <state width="1528" height="264" key="GridCell.Tab.1.center" timestamp="1607743832932">
+      <screen x="0" y="0" width="1549" height="831" />
+    </state>
+    <state width="1528" height="264" key="GridCell.Tab.1.center/0.0.1549.831@0.0.1549.831" timestamp="1607743832932" />
+    <state width="1528" height="264" key="GridCell.Tab.1.left" timestamp="1607743832932">
+      <screen x="0" y="0" width="1549" height="831" />
+    </state>
+    <state width="1528" height="264" key="GridCell.Tab.1.left/0.0.1549.831@0.0.1549.831" timestamp="1607743832932" />
+    <state width="1528" height="264" key="GridCell.Tab.1.right" timestamp="1607743832933">
+      <screen x="0" y="0" width="1549" height="831" />
+    </state>
+    <state width="1528" height="264" key="GridCell.Tab.1.right/0.0.1549.831@0.0.1549.831" timestamp="1607743832933" />
     <state x="148" y="65" key="MergeDialog" timestamp="1607476059593">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="148" y="65" key="MergeDialog/0.0.1549.831@0.0.1549.831" timestamp="1607476059593" />
-    <state x="190" y="115" width="1170" height="707" key="SettingsEditor" timestamp="1606906964545">
+    <state x="190" y="115" width="1170" height="707" key="SettingsEditor" timestamp="1607825575225">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="190" y="115" width="1170" height="707" key="SettingsEditor/0.0.1549.831@0.0.1549.831" timestamp="1606906964545" />
+    <state x="190" y="115" width="1170" height="707" key="SettingsEditor/0.0.1549.831@0.0.1549.831" timestamp="1607825575225" />
     <state x="367" y="148" key="Vcs.Push.Dialog.v2" timestamp="1604898985160">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="367" y="148" key="Vcs.Push.Dialog.v2/0.0.1549.831@0.0.1549.831" timestamp="1604898985160" />
-    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1607700267871">
+    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1607826827748">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1549.831@0.0.1549.831" timestamp="1607700267871" />
+    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1549.831@0.0.1549.831" timestamp="1607826827748" />
     <state x="590" y="328" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607476081383">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
@@ -370,9 +381,9 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="551" y="198" key="refactoring.ChangeSignatureDialog/0.0.1549.831@0.0.1549.831" timestamp="1599612059470" />
-    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup" timestamp="1607700847028">
+    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup" timestamp="1607828119452">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup/0.0.1549.831@0.0.1549.831" timestamp="1607700847028" />
+    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup/0.0.1549.831@0.0.1549.831" timestamp="1607828119452" />
   </component>
 </project>

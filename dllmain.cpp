@@ -7,7 +7,7 @@
 
 void mod_init() {
     system("chcp 65001");
-    initLogger("trapdoor.log", true);
+    initLogger("trapdoor.log", false);
     HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
     DWORD dwMode;
     GetConsoleMode(hOutput, &dwMode);

@@ -6,7 +6,7 @@
 #include <string>
 #include "common/Trapdoor.h"
 #include "tools/Message.h"
-#include "tools/Particle.h"
+#include "graphics/Particle.h"
 #include "tools/MsgBuilder.h"
 #include "block/Block.h"
 #include "entity/PlayerBuffer.h"
