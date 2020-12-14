@@ -1,15 +1,5 @@
-# TrapDoor 
 
-```
-  _______                  _
- |__   __|                | |
-    | |_ __ __ _ _ __   __| | ___   ___  _ __
-    | | '__/ _` | '_ \ / _` |/ _ \ / _ \| '__|
-    | | | | (_| | |_) | (_| | (_) | (_) | |
-    |_|_|  \__,_| .__/ \__,_|\___/ \___/|_|
-                | |
-                |_|
-```
+![](img/logo.png)
 
 ### 这是什么
 
@@ -45,11 +35,11 @@ Trapdoor的功能还在持续开发中,目前又如下功能和特色:
 
 ### 如何使用
 
-1. 下载dll注入器
+####  1. 下载dll注入器
 
 `release`中的文件只是单纯的`dll`文件，你**下载一个dll注入器才能启动游戏**，dll注入器你可以前往[https://github.com/DarthTon/Xenos/releases/tag/2.3.2](https://github.com/DarthTon/Xenos/releases/tag/2.3.2) 下载。
 
-2. 注入dll 并启动游戏
+#### 2. 注入dll 并启动游戏
 
 下载完后运行`Xenos64.exe`，剩下的看下图即可:
 
@@ -59,7 +49,7 @@ Trapdoor的功能还在持续开发中,目前又如下功能和特色:
 
 使用其它的注入器请自行探索用法,这里不再赘述。
 
-3. 如果你是运行的本地服务端(使用localhost连接)，那么请务必开启`Minecraft`的回环访问，用`powershell`运行如下命令即可:
+#### 3.  如果你是运行的本地服务端(使用localhost连接)，那么请务必开启`Minecraft`的回环访问，用`powershell`运行如下命令即可:
 
    ```powershell
    CheckNetIsolation.exe LoopbackExempt –a –p=S-1-15-2-1958404141-86561845-1752920682-3514627264-368642714-62675701-73352043
@@ -94,7 +84,7 @@ Trapdoor的功能还在持续开发中,目前又如下功能和特色:
 >
 > 村庄边界的格式: `center,radius,workded/population golem,bedPOI canSpawnGolem,bounds `边界矩形框两个对角线的坐标，中心是矩形框的中心，`radius`是村庄半径,`worked`是工作过的村民数,`population`是当前村庄的村民数,`goldem`是属于该村庄的铁傀儡数，`bedPOI`是村庄拥有(已和村民绑定的)床的数量。
 
-### 刷怪
+#### 刷怪
 
 > 这个功能在1.16.4版本中暂时被移除了
 
@@ -103,7 +93,7 @@ Trapdoor的功能还在持续开发中,目前又如下功能和特色:
 - `/actor p`打印统计结果，第一行是计时器经过的时间，第二行是各种生物的数量，第三行是刷怪点到玩家的距离(玩家打本条指令时的距离)分布(这一条好像数据有问题)，后面是每一行是每一个`y`值的刷怪数量
 - `/actor info`列出一些刷怪信息，目前只有全局生物数量(大于小于200就不刷怪的那个数量)，如有更新会添加
 
-### 漏斗计数器
+#### 漏斗计数器
 
 > 这个功能完全抄`carpet`的
 
@@ -117,7 +107,7 @@ Trapdoor的功能还在持续开发中,目前又如下功能和特色:
 
 在你用`/func hc true`后，放在这些矿物块上的漏斗会变成无尽的漏斗，所有吸入的东西都没了，但是数据会保留下来.你可以用`/counter p channel`来查看这些漏斗吸收的物品数据,包括每种物品的个数和吸入平均速率。用`./counter reset channel`来重置某个频道的所有漏斗。`channel`选填`[0-4]`,如果你想增加频道,请修改`block/Hopper.cpp`中的`HOPPER_CHANNEL_MAP`,然含重新编译即可
 
-### 游戏模式
+#### 游戏模式
 
 `trapdoor`提供了三个切换模式的快捷指令
 
@@ -125,7 +115,7 @@ Trapdoor的功能还在持续开发中,目前又如下功能和特色:
 - `/c`切换为创造模式
 - `/o`切换为观察者模式
 
-### 测距
+#### 测距
 
 > 这个功能在1.16.4版本中暂时被移除了
 
@@ -149,7 +139,7 @@ Trapdoor的功能还在持续开发中,目前又如下功能和特色:
 
 欢迎提出`issue` ,作者在考虑后会采用或者解决
 
-也欢迎pr,目前没有解决的问题在`todo.list`中(疯狂暗示).
+本项目目前还是个beta版，功能不够完善，代码也不够整洁和规范，还有很大的改进空间，欢迎您的pr,目前没有解决的问题在`todo.list`中(疯狂暗示).
 
 ### license 
 GPL
@@ -163,7 +153,12 @@ GPL
 - [https://github.com/microsoft/Detours](https://github.com/microsoft/Detours)
 
 - [https://github.com/zhkj-liuxiaohua/MCMODDLL-CPP]( https://github.com/zhkj-liuxiaohua/MCMODDLL-CPP )
+
 - [https://github.com/nlohmann/json](https://github.com/nlohmann/json)
+
+- [https://github.com/DarthTon/Xenos](https://github.com/DarthTon/Xenos) 
+
+  #### 2. 注入dll 并启动游戏
 
 感谢人员
 
