@@ -7,11 +7,11 @@
 
 #include <string>
 
+#include "Graphics.h"
 #include "lib/pch.h"
 
+void spawnParticle(Vec3 p, std::string& type);
 
-void spawnParticle(Vec3 p, std::string &type);
-
-void spawnRectangleParticle(const AABB &aabb);
-
-#endif //TRAPDOOR_PARTICLE_H
+void spawnRectangleParticle(const AABB& aabb);
+void spawnRectangleParticleColor(const AABB& aabb, graphics::COLOR color);
+#endif	// TRAPDOOR_PARTICLE_H
