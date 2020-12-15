@@ -148,10 +148,8 @@ Player::tickWorld
 #?getDelayEnd@ActorSpawnRuleGroup@@QEBAHV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
 #处理上限
 ?_handlePopulationCap@Spawner@@AEAAHPEBVMobSpawnerData@@AEBVSpawnConditions@@H@Z
-
-
-
-
+#结构刷怪
+?_spawnStructureMob@Spawner@@AEAAXAEAVBlockSource@@AEBVBlockPos@@AEBUHardcodedSpawningArea@LevelChunk@@AEBVSpawnConditions@@@Z
 
 
 

@@ -23,7 +23,7 @@ private:
     json configJson;
     std::map<std::string, CommandConfig> commandList;
     std::map<std::string, bool> functionList;
-    std::map<std::string, std::string> parricleNameList;
+    std::map<std::string, std::string> particleNameList;
     size_t particleShowFrequency = 1;
 
 public:

@@ -6,17 +6,19 @@
 #include <string>
 #include "common/Trapdoor.h"
 #include "tools/Message.h"
-#include "graphics/Particle.h"
 #include "tools/MsgBuilder.h"
 #include "block/Block.h"
 #include "entity/PlayerBuffer.h"
-#include "common/RightClickManager.h"
+#include "lib/mod.h"
+#include "lib/SymHook.h"
+
+using namespace SymHook;
 
 std::string ItemStackBase::getItemName() {
     std::string name;
     SYM_CALL(
             void(*)(ItemStackBase * , std::string *),
-            MSSYM_B1QA7getNameB1AE13ItemStackBaseB2AAA4QEBAB1QA2AVB2QDA5basicB1UA6stringB1AA2DUB2QDA4charB1UA6traitsB1AA1DB1AA3stdB2AAA1VB2QDA9allocatorB1AA1DB1AA12B2AAA3stdB2AAA2XZ,
+            SymHook::MSSYM_B1QA7getNameB1AE13ItemStackBaseB2AAA4QEBAB1QA2AVB2QDA5basicB1UA6stringB1AA2DUB2QDA4charB1UA6traitsB1AA1DB1AA3stdB2AAA1VB2QDA9allocatorB1AA1DB1AA12B2AAA3stdB2AAA2XZ,
             this, &name
     );
     return name;
@@ -30,15 +32,10 @@ int ItemStackBase::getNum() {
 void ItemStackBase::setNull() {
     SYM_CALL(
             void(*)(ItemStackBase * ),
-            MSSYM_B1QA7setNullB1AE13ItemStackBaseB2AAA7UEAAXXZ,
+            SymHook::MSSYM_B1QA7setNullB1AE13ItemStackBaseB2AAA7UEAAXXZ,
             this
     );
 }
-
-void ItemStackBase::forceSetNum(int num) {
-    *((unsigned char *) this + 34) = num;
-}
-
 
 /**
  * minecraft:sticky_piston

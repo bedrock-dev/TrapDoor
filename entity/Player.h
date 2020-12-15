@@ -5,8 +5,4 @@
 #ifndef TRAPDOOR_PLAYER_H
 #define TRAPDOOR_PLAYER_H
 
-#include "graphics/BlockPos.h"
-#include <vector>
-#include <set>
-
 #endif //TRAPDOOR_PLAYER_H

@@ -26,7 +26,7 @@ void Level::forEachPlayer(const std::function<void(Actor *)> &todo) {
 
 Actor *Level::getNearestPlayer(BlockPos &pos) {
     Actor *nearest = nullptr;
-    float minDistance = 1024;
+    float minDistance = 256;
     this->forEachPlayer([&pos, &minDistance, &nearest](Actor *player) {
         BlockPos p(player->getPos()->x, player->getPos()->y, player->getPos()->z);
         auto d = p.distanceTo(pos);

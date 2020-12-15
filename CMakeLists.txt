@@ -10,7 +10,6 @@ include_directories(.)
 
 add_library(Trapdoor SHARED
         dllmain.cpp
-        tools/MathTool.cpp
         tools/MsgBuilder.cpp
         graphics/Particle.cpp
         tools/Message.cpp

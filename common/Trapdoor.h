@@ -18,6 +18,8 @@ class CircuitSceneGraph;
 
 class Actor;
 
+class BoundingBox;
+
 class PlayerBuffer;
 
 class RightClickManager;
@@ -35,6 +37,7 @@ std::map<std::string, PlayerBuffer> &getPlayerBuffer();
 
 RightClickManager &getRightClickManager();
 
+std::set<BoundingBox>& getHardcodedSpawnAreas();
 //粒子效果配置(性能配置)
 extern int particleViewDistance;
 extern bool enableMarkPos;
@@ -44,10 +47,27 @@ extern bool enableExplosion;
 extern bool mobSpawnCounterStart;
 extern bool enableBlockUpdate;
 extern bool enableHopperCounter;
+extern bool enableHsaShow;
 extern int mobTickCounter;
 extern int hopperTickLength;
 
 void initRightClickManager();
+
+namespace trapdoor {
+    class TrapdoorMod {
+        //todo: put all the global variable here;
+    private:
+        Level *globalLevel;
+    public:
+        Level *getLevel();
+
+        void setLevel(Level *level);
+    };
+}
+
+//临时的函数
+
+void  showHsa();
 
 
 #endif //TRAPDOOR_TRAPDOOR_H

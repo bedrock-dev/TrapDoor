@@ -2,14 +2,13 @@
 // Created by xhy on 2020/8/29.
 //
 
-#include "Player.h"
-#include "lib/mod.h"
+
+
+#include "lib/pch.h"
+#include <cstdint>
+#include "Actor.h"
+#include "graphics/BlockPos.h"
 #include "block/Block.h"
-#include "common/Trapdoor.h"
-#include <queue>
-
-#include "level/Biome.h"
-
 using namespace SymHook;
 //player place block
 THook(
@@ -21,19 +20,8 @@ THook(
         const BlockPos &pos,
         bool flag
 ) {
-  //  auto name = block.getName();
-    //  showBiome(player, pos, block, 16384);
-//    if (name == "minecraft:warped_planks") {
-//        measureManager.setPos1(pos);
-//    } else if (name == "minecraft:crimson_planks") {
-//        measureManager.setPos2(pos);
-//    }
     return original(self, player, block, pos, flag);
 }
-
-
-//chain call
-
 
 
 

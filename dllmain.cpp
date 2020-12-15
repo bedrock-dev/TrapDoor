@@ -2,10 +2,12 @@
 #include  "lib/pch.h"
 #include "lib/version.h"
 #include "tools/DirtyLogger.h"
+#include "common/Trapdoor.h"
 
 #define DBG_MACRO_NO_WARNING
 
 void mod_init() {
+
     system("chcp 65001");
     initLogger("trapdoor.log", false);
     HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);

@@ -82,6 +82,7 @@ struct BlockPos {
 
     BlockPos2 InChunkOffset() const;
 
+
     int operator*(const BlockPos &pos) const;
 
     bool operator<(const BlockPos &rhs) const;

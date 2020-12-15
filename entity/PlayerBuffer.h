@@ -2,8 +2,8 @@
 // Created by xhy on 2020/10/31.
 //
 
-#ifndef TRAPDOOR_PLAYERBUFFER_H
-#define TRAPDOOR_PLAYERBUFFER_H
+#ifndef TRAPDOOR_PLAYER_BUFFER_H
+#define TRAPDOOR_PLAYER_BUFFER_H
 
 #include "graphics/BlockPos.h"
 #include "Actor.h"
@@ -30,4 +30,4 @@ struct PlayerBuffer {
 };
 
 
-#endif //TRAPDOOR_PLAYERBUFFER_H
+#endif //TRAPDOOR_PLAYER_BUFFER_H

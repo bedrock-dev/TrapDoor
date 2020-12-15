@@ -148,6 +148,7 @@ void lightExtraWork() {
 //加速和快进的时候不会执行
 void heavyExtraWork() {
     village::villageTask();
+    showHsa();
 }
 
 THook(

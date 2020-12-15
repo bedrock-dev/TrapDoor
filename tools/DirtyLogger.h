@@ -17,14 +17,10 @@ enum class LOG_LEVEL {
 };
 
 
-extern FILE *logger;
-extern LOG_LEVEL log_level;
-
 void initLogger(const std::string &logFileName, bool useStdout);
 
 void setLogLevel(LOG_LEVEL level);
 
 void logInfo(LOG_LEVEL logLevel, const char *functionName, const char *fmt, ...);
-
 
 #endif //TRAPDOOR_DIRTYLOGGER_H

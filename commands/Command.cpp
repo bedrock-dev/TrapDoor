@@ -114,7 +114,16 @@ void initCommand() {
             ->EXE({
                       player->getDimension()->printBaseTypeLimit();
                   });
+
+    getCommandManager().registerCmd("hsa", "show or list  nearset hsa")
+            ->then(ARG("list", "list nearest hsa", NONE, {}))
+            ->then(ARG("show", "show hsa", BOOL, {
+                enableHsaShow = holder->getBool();
+                // enableVillageShow = holder->getBool();
+                info(player, "set hsa show to %d",enableHsaShow);
+            }));
 }
+
 
 // 调用下面的hook函数来吧自定义字符串和提示信息当作参数注入到游戏中
 void regMCBECommand(const std::string &command, const char *description, CMD_LEVEL level) {

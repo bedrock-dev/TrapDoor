@@ -1,15 +1,19 @@
 //
+// 一个简单的日志类 ，仅仅是简单的信息按照格式写入文件中，没有任何性能和可靠性保证
 // Created by xhy on 2020/12/2.
 //
 
 #include <cstdarg>
-#include "DirtyLogger.h"
 #include <ctime>
 
-FILE *logger = nullptr;
+#include "DirtyLogger.h"
 
-LOG_LEVEL log_level = LOG_LEVEL::LOG_DEBUG;
 
+static LOG_LEVEL logLevel = LOG_LEVEL::LOG_DEBUG;
+
+static FILE *logger = nullptr;
+
+//初始化日志，不然不能使用
 void initLogger(const std::string &logFileName, bool useStdout) {
     //? this is not a waring
     if (useStdout) {
@@ -22,12 +26,10 @@ void initLogger(const std::string &logFileName, bool useStdout) {
     }
 }
 
-void setLogLevel(LOG_LEVEL level) {
-    log_level = level;
-}
+//向日志里面打印信息
 
 void logInfo(LOG_LEVEL logLevel, const char *functionName, const char *fmt, ...) {
-    if (logLevel < log_level) return;
+    if (logLevel < logLevel) return;
     va_list args;
             va_start(args, fmt);
     time_t rawTime;
@@ -57,4 +59,9 @@ void logInfo(LOG_LEVEL logLevel, const char *functionName, const char *fmt, ...)
     fprintf(logger, "\n");
     fflush(logger);
 }
+
+void setLogLevel(LOG_LEVEL log_level) {
+    logLevel = log_level;
+}
+
 

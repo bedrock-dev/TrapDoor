@@ -17,6 +17,7 @@ Trapdoor的功能还在持续开发中,目前又如下功能和特色:
 - 服务器性能分析，支持`mspt`和`tps`的计算以及各种更新的CPU占用，帮助你快速定位服务器卡顿原因
 - 显示以及可视化村庄的相关信息，包括中心，边界，当前傀儡数和上限铁傀儡数，以及当前人口数和床数等等
 - 仙人掌转方块(目前已经阉割，等待重写)
+- 结构刷怪区域(HardcodedSpawnArea)的可视化
 - 红石电路的信号源可视化，帮你快速掌握红石电路的本质
 - 女巫小屋和海底神殿的多联查找(现已独立成独立的插件[https://github.com/hhhxiao/MCBEMulStructureFinder](https://github.com/hhhxiao/MCBEMulStructureFinder))
 - 类似JE的`f3`功能，显示视角，区块坐标，史莱姆区块，群系，维度等等信息

@@ -57,8 +57,6 @@ void broadcastMsg(const std::string &format, Args ... args) {
     });
 }
 
-//from  https://blog.csdn.net/u012234115/article/details/83186386
-std::string gbkToUtf8(const char *src_str);
 
 
 #endif //TRAPDOOR_MESSAGE_H

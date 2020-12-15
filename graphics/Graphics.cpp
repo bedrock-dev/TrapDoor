@@ -14,7 +14,7 @@ std::map<float, int> graphics::binSplit(float start, float end) {
 		length -= 256;
 		auto point = static_cast<float>(128.0 + start);
 		start += 256.0;
-		lengthMap.insert({point, defaultLength});
+		lengthMap.insert({point, 256});
 	}
 
 	for (auto defaultLength = 256; defaultLength >= 1; defaultLength /= 2) {

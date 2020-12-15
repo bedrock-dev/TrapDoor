@@ -10,6 +10,8 @@
 #include "graphics/Vec3.h"
 #include "graphics/BlockPos.h"
 #include "entity/PlayerBuffer.h"
+#include "graphics/AABB.h"
+#include "graphics/Particle.h"
 
 void *globalSpawner = nullptr; //全局刷怪器对象
 void *globalVillageManager = nullptr; //全局村庄管理器对象
@@ -28,6 +30,7 @@ bool enableExtraTickWork = true;
 bool enableExplosion = false;
 bool mobSpawnCounterStart = false;
 bool enableHopperCounter = false;
+bool enableHsaShow = false;
 int mobTickCounter = 0;
 int hopperTickLength = 50;
 
@@ -47,6 +50,7 @@ RightClickManager &getRightClickManager() {
     return rightClickManager;
 }
 
+
 void initRightClickManager() {
 //    auto &manager = getRightClickManager();
 //    manager.registerRightClickBackEvent("Cactus",
@@ -58,11 +62,37 @@ void initRightClickManager() {
 //                                                          }));
 }
 
+std::set<BoundingBox> &getHardcodedSpawnAreas() {
+    static std::set<BoundingBox> hsaList;
+    return hsaList;
+}
+
+int showHsaFreq = 0;
+
+void showHsa() {
+    if (!enableHsaShow)return;
+    showHsaFreq++;
+    if (showHsaFreq == 40) {
+        auto &hsaList = getHardcodedSpawnAreas();
+        auto num = hsaList.size();
+       // printf("total %llu\n", num);
+        for (const auto &hsa:hsaList) {
+            spawnRectangleParticle(hsa.getSpwawnArea());
+        }
+        showHsaFreq = 0;
+    }
+
+}
 
 
+namespace trapdoor {
+    Level *TrapdoorMod::getLevel() {
+        return this->globalLevel;
+    }
+
+    void TrapdoorMod::setLevel(Level *level) {
+        this->globalLevel = level;
+    }
 
 
-//bool Trapdoor::initialize() {
-//
-//    return true;
-//}
+}

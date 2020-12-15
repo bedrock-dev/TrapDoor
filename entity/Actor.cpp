@@ -2,25 +2,17 @@
 // Created by xhy on 2020/8/25.
 //
 
+#include <bitset>
+#include <map>
+
 #include "Actor.h"
-#include "tools/MathTool.h"
 #include "lib/mod.h"
-#include "lib/pch.h"
-#include "lib/SymHook.h"
 #include "lib/version.h"
 #include "tools/MsgBuilder.h"
-#include <map>
 #include "tools/Message.h"
-#include <string>
-#include <block/Block.h>
+#include "block/Block.h"
 #include "level/Biome.h"
-#include "level/Level.h"
-#include "common/Trapdoor.h"
-#include <bitset>
-
 #include "PlayerInventory.h"
-
-using namespace SymHook;
 
 
 std::map<std::string, std::vector<Vec3>> mobCounterList;//NOLINT
@@ -28,7 +20,7 @@ std::map<std::string, std::vector<Vec3>> mobCounterList;//NOLINT
 uint64_t NetworkIdentifier::getHash() {
     return SYM_CALL(
             uint64_t(*)(NetworkIdentifier * ),
-            MSSYM_B1QA7getHashB1AE17NetworkIdentifierB2AAA4QEBAB1UA3KXZ,
+            SymHook::MSSYM_B1QA7getHashB1AE17NetworkIdentifierB2AAA4QEBAB1UA3KXZ,
             this
     );
 }
@@ -37,7 +29,7 @@ uint64_t NetworkIdentifier::getHash() {
 Vec3 *Actor::getPos() {
     return SYM_CALL(
             Vec3*(*)(void * ),
-            MSSYM_B1QA6getPosB1AA5ActorB2AAE12UEBAAEBVVec3B2AAA2XZ,
+            SymHook::MSSYM_B1QA6getPosB1AA5ActorB2AAE12UEBAAEBVVec3B2AAA2XZ,
             this
     );
 }
@@ -45,7 +37,7 @@ Vec3 *Actor::getPos() {
 void Actor::getViewActor(Vec3 *vec3, float val) {
     SYM_CALL(
             Vec3*(*)(Actor * , Vec3 *, float),
-            MSSYM_B1QE13getViewVectorB1AA5ActorB2AAA4QEBAB1QA6AVVec3B2AAA1MB1AA1Z,
+            SymHook::MSSYM_B1QE13getViewVectorB1AA5ActorB2AAA4QEBAB1QA6AVVec3B2AAA1MB1AA1Z,
             this, vec3, val
     );
 }
@@ -53,7 +45,7 @@ void Actor::getViewActor(Vec3 *vec3, float val) {
 
 std::string Actor::getNameTag() {
     return *SYM_CALL(std::string *(*)(Actor * ),
-                     MSSYM_B1QE10getNameTagB1AA5ActorB2AAA8UEBAAEBVB2QDA5basicB1UA6stringB1AA2DUB2QDA4charB1UA6traitsB1AA1DB1AA3stdB2AAA1VB2QDA9allocatorB1AA1DB1AA12B2AAA3stdB2AAA2XZ,
+                     SymHook::MSSYM_B1QE10getNameTagB1AA5ActorB2AAA8UEBAAEBVB2QDA5basicB1UA6stringB1AA2DUB2QDA4charB1UA6traitsB1AA1DB1AA3stdB2AAA1VB2QDA9allocatorB1AA1DB1AA12B2AAA3stdB2AAA2XZ,
                      this
     );
 }
@@ -65,7 +57,7 @@ BlockSource *Actor::getBlockSource() {
 
 void Actor::setGameMode(int mode) {
     SYM_CALL(void(*)(Actor * , int),
-             MSSYM_B1QE17setPlayerGameTypeB1AE12ServerPlayerB2AAE15UEAAXW4GameTypeB3AAAA1Z,
+             SymHook::MSSYM_B1QE17setPlayerGameTypeB1AE12ServerPlayerB2AAE15UEAAXW4GameTypeB3AAAA1Z,
              this,
              mode
     );
@@ -115,6 +107,7 @@ Dimension *Actor::getDimension() {
     return globalLevel->getDimFromID(this->getDimensionID());
 }
 
+
 std::string Actor::getDimensionName() {
     auto id = this->getDimensionID();
     if (id == 0)return "Overworld";
@@ -131,7 +124,7 @@ NetworkIdentifier *Actor::getClientID() {
 CMD_LEVEL Actor::getCommandLevel() {
     return SYM_CALL(
             CMD_LEVEL(*)(Actor * ),
-            MSSYM_B1QE25getCommandPermissionLevelB1AA6PlayerB2AAA4UEBAB1QE25AW4CommandPermissionLevelB2AAA2XZ,
+            SymHook::MSSYM_B1QE25getCommandPermissionLevelB1AA6PlayerB2AAA4UEBAB1QE25AW4CommandPermissionLevelB2AAA2XZ,
             this
     );
 }
@@ -139,7 +132,7 @@ CMD_LEVEL Actor::getCommandLevel() {
 PlayerInventory *Actor::getPlayerInventory() {
     return SYM_CALL(
             PlayerInventory*(*)(Actor * ),
-            MSSYM_B1QE11getSuppliesB1AA6PlayerB2AAE23QEAAAEAVPlayerInventoryB2AAA2XZ,
+            SymHook::MSSYM_B1QE11getSuppliesB1AA6PlayerB2AAE23QEAAAEAVPlayerInventoryB2AAA2XZ,
             this
     );
 }
@@ -158,7 +151,7 @@ std::vector<std::string> getActorText(void *actor) {
     std::vector<std::string> info;
     if (!actor)return info;
     SYM_CALL(void(*)(void * , std::vector<std::string> &),
-             MSSYM_MD5_f04fad6bac034f1e861181d3580320f2,
+             SymHook::MSSYM_MD5_f04fad6bac034f1e861181d3580320f2,
              actor, info);
     return info;
 }
@@ -167,6 +160,7 @@ std::vector<std::string> getActorText(void *actor) {
 std::string getActorName(void *actor) {
     return actor ? getActorText(actor)[0].substr(13) : "null";
 }
+
 
 //攻击实体
 //THook(

@@ -5,7 +5,6 @@
 #include "tools/Message.h"
 #include "graphics/Vec3.h"
 #include "graphics/BlockPos.h"
-#include "tools/MathTool.h"
 #include "level/Biome.h"
 #include "tick/GameTick.h"
 
