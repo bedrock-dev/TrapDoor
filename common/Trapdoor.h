@@ -1,7 +1,11 @@
 //
 // Created by xhy on 2020/8/25.
 //
-
+/*
+ * todo 1.把所有的全局变量塞到TrapdoorMod对象中，以后通过唯一的mod对象访问
+ * todo 这大概要2021年再做了。咕咕咕
+ *
+ */
 #ifndef TRAPDOOR_TRAPDOOR_H
 #define TRAPDOOR_TRAPDOOR_H
 

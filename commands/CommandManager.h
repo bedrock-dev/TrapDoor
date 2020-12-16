@@ -26,10 +26,13 @@ public:
                              CMD_LEVEL level = OP,
                              ArgType type = ArgType::NONE);
 
+    //解析命令
     int parse(Actor *player, std::string cmd);
 
+    //打印帮助信息
     void printfHelpInfo(Actor *player);
 
+    //在当前命令列表里面查找命令
     bool findCommand(const std::string &cmd);
 };
 

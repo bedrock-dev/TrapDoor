@@ -15,7 +15,7 @@ CommandNode *Arg(const std::string &args, const std::string &desc, ArgType type)
 }
 
 
-bool isValidIntString(const std::string &str) {
+static bool isValidIntString(const std::string &str) {
     return std::all_of(str.begin(), str.end(), [](char c) { return '0' <= c && c <= '9'; });
 }
 

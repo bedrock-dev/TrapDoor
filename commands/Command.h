@@ -8,8 +8,10 @@
 #include "CommandNode.h"
 #include <string>
 
+//初始化命令
 void initCommand();
 
+//注册mcbe命令,说白了就是给一级指令加tab功能
 void regMCBECommand(const std::string &command, const char *description, CMD_LEVEL level);
 
 #endif //TRAPDOOR_COMMAND_H

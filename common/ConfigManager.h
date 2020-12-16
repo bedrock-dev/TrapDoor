@@ -17,7 +17,12 @@ struct CommandConfig {
     int permissionLevel;
 };
 
-
+/*
+ * todo
+ * 开发中，请无视
+ *
+ *
+ */
 class ConfigManager {
 private:
     json configJson;

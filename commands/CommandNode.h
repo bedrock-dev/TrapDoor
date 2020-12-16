@@ -35,6 +35,14 @@ enum CMD_LEVEL {
 
 std::string cmdLevelToStr(CMD_LEVEL level);
 
+/*
+ * 命令节点
+ * 存储当前命令节点的命令名
+ * 描述信息(方便生成帮助信息)
+ * 命令等级(暂未实装)
+ * 行为
+ * 下一级命令节点等等
+ */
 class CommandNode {
     std::string name;
     std::string description;
@@ -81,7 +89,5 @@ public:
 };
 
 CommandNode *Arg(const std::string &args, const std::string &desc, ArgType type = ArgType::NONE);
-
-bool isValidIntString(const std::string &str);
 
 #endif //COMMANDMANAGER_COMMANDNODE_H

@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.17)
-project(TrapDoor)
+set(DllName Trapdoor)
+Set(MinecraftVersion 1.16.4)
+set(buildType debug)
+set(OutputName  ${DllName}-${MinecraftVersion}-${buildType})
+project(Trapdoor)
 set(CMAKE_CXX_STANDARD 17)
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     add_compile_definitions(-O3 -Wall)
@@ -8,7 +12,7 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
 endif ()
 include_directories(.)
 
-add_library(Trapdoor SHARED
+add_library(${PROJECT_NAME} SHARED
         dllmain.cpp
         tools/MsgBuilder.cpp
         graphics/Particle.cpp
@@ -40,18 +44,9 @@ add_library(Trapdoor SHARED
         common/RightClickManager.cpp
         entity/PlayerInventory.cpp
         graphics/Graphics.cpp
-        )
+        block/BlockLegacy.cpp block/BlockLegacy.h block/BlockSource.cpp block/BlockSource.h)
 
-target_link_libraries(Trapdoor ${PROJECT_SOURCE_DIR}/lib/detours.lib)
+target_link_libraries(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/lib/detours.lib)
 
-add_executable(Test
-        test/testMain.cpp
-        tools/DirtyLogger.cpp
-        tools/json.hpp
-        common/ConfigManager.cpp
-        graphics/Vec3.cpp
-        graphics/BlockPos.cpp
-        graphics/Graphics.cpp
-        )
 
 

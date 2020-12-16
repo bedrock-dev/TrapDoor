@@ -4,60 +4,48 @@
 #include "lib/SymHook.h"
 #include <vector>
 #include "graphics/BlockPos.h"
+#include "block/BlockLegacy.h"
 
-struct Block;
 struct Biome;
+class BlockLegacy;
 
-struct BlockLegacy {
+/*
+ * 方块接口
+ */
+class Block {
+public:
 
-    std::string getDebugText();
-
-    Block *tryGetStateBlock(unsigned short state);
-};
-
-struct Block {
+    // 获取方块legacy
     BlockLegacy *getLegacy();
 
+    //获取方块名称(和item返回的名称不一样，不知道Mojang怎么想的)
     std::string getName();
 
+    //获取特殊值
     int getVariant();
 
-    bool isNotAir();
+    //是否是空气
+    bool isAir();
+};
+
+/*
+ * 方块实体接口
+ */
+class BlockActor {
+public:
+    //获取位置
+    BlockPos *getPosition();
+    //获取方块对象
+    Block *getBlock();
 };
 
 
 
-bool distanceLess(std::pair<int, int> p1, std::pair<int, int> p2, int dSQ);
-
-struct BlockSource {
-    Block *getBlock(int x, int y, int z);
-
-    Block *getBlock(const BlockPos &);
-
-    void setBlock(BlockPos *, Block *block);
-
-    void updateNeighborsAt(const BlockPos *pos);
-
-    void updateNeighbors(BlockPos pos);
-
-    Biome *getBiome(const BlockPos *pos);
-
-
-};
-
-
-struct BlockActor {
-    BlockPos *getPosition() {
-        return reinterpret_cast<BlockPos *>(reinterpret_cast<VA>(this) + 44);
-    }
-
-//
-    Block *getBlock() {
-        return *reinterpret_cast<Block **>(reinterpret_cast<VA>(this) + 16);
-    }
-};
-
-struct BaseCircuitComponent {
+/*
+ * 红石组件接口
+ */
+class BaseCircuitComponent {
+public:
     int getStrength();
 
     int getVar2();
@@ -78,7 +66,8 @@ struct BaseCircuitComponent {
 };
 
 
-struct CircuitSceneGraph {
+class CircuitSceneGraph {
+public:
     BaseCircuitComponent *getBaseCircuitComponent(BlockPos *pos);
 };
 

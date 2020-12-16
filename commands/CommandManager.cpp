@@ -44,7 +44,7 @@ CommandManager::registerCmd(const std::string &cmd, const std::string &descripti
     return rootNode;
 }
 
-bool CommandManager::findCommand(const string &cmd) {
+bool CommandManager::findCommand(const std::string &cmd) {
     std::string buff(cmd);
     auto tokens = tokenize(buff);
     if (tokens.empty())return false;

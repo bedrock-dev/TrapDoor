@@ -6,12 +6,13 @@
 #define TRAPDOOR_ITEM_H
 
 
-
-
 #include <string>
+
 struct ItemStackBase {
     std::string getItemName();
+
     int getNum();
+
     void setNull();
 };
 

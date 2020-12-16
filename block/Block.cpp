@@ -3,14 +3,10 @@
 //
 #include "Block.h"
 #include "tools/Message.h"
-#include "graphics/Vec3.h"
-#include "graphics/BlockPos.h"
 #include "level/Biome.h"
-#include "tick/GameTick.h"
 
 using namespace SymHook;
 
-#include "graphics/Particle.h"
 #include <vector>
 
 
@@ -32,8 +28,9 @@ std::string Block::getName() {
     return debugStr.erase(0, 6);
 }
 
-bool Block::isNotAir() {
-    return this->getName() != "minecraft:air";
+
+bool Block::isAir() {
+    return this->getName() == "minecraft:air";
 }
 
 //获取特殊值
@@ -43,86 +40,6 @@ int Block::getVariant() {
 }
 
 
-std::string BlockLegacy::getDebugText() {
-    std::vector<std::string> vector;
-    SYM_CALL(
-            void(*)(BlockLegacy * , std::vector<std::string> &),
-            MSSYM_MD5_794b421b4bf67101f7418cd0d78bad83,
-            this, vector
-    );
-    int i = 0;
-    for (const auto &str:vector) {
-        printf("%d: %s ", i, str.c_str());
-        ++i;
-    }
-    printf("\n");
-    return std::string("text");
-}
-
-Block *BlockLegacy::tryGetStateBlock(unsigned short state) {
-    return SYM_CALL(
-            Block *(*)(BlockLegacy * , unsigned short),
-            MSSYM_B1QE25tryGetStateFromLegacyDataB1AE11BlockLegacyB2AAE13QEBAPEBVBlockB2AAA1GB1AA1Z,
-            this, state
-    );
-}
-
-Block *BlockSource::getBlock(int x, int y, int z) {
-    return SYM_CALL(
-            Block* (*)(void * , int, int, int),
-            MSSYM_B1QA8getBlockB1AE11BlockSourceB2AAE13QEBAAEBVBlockB2AAA3HHHB1AA1Z, this,
-            x, y, z
-    );
-}
-
-Block *BlockSource::getBlock(const BlockPos &blockPos) {
-    return getBlock(blockPos.x, blockPos.y, blockPos.z);
-}
-
-void BlockSource::setBlock(BlockPos *blockPos, Block *block) {
-    SYM_CALL(
-            void(*)(void * , BlockPos *, void *, int, void *),
-            MSSYM_B1QA8setBlockB1AE11BlockSourceB2AAA4QEAAB1UE13NAEBVBlockPosB2AAA9AEBVBlockB2AAE26HPEBUActorBlockSyncMessageB3AAAA1Z,
-            this, blockPos, block, 3, nullptr
-    );
-    // this->updateNeighborsAt(blockPos);
-}
-
-void BlockSource::updateNeighborsAt(const BlockPos *pos) {
-//    dbg("update");
-    SYM_CALL(
-            void(*)(BlockSource * self,const BlockPos *pos),
-            MSSYM_B1QE17updateNeighborsAtB1AE11BlockSourceB2AAE17QEAAXAEBVBlockPosB3AAAA1Z,
-            this, pos
-    );
-}
-
-Biome *BlockSource::getBiome(const BlockPos *pos) {
-    return
-            SYM_CALL(
-                    Biome*(*)(BlockSource * , const BlockPos *),
-                    MSSYM_B1QA8getBiomeB1AE11BlockSourceB2AAE13QEAAAEAVBiomeB2AAE12AEBVBlockPosB3AAAA1Z,
-                    this,
-                    pos
-            );
-}
-
-void BlockSource::updateNeighbors(BlockPos pos) {
-    auto blockList = pos.getNeighbourPos();
-    for (auto &p:blockList) {
-        this->updateNeighborsAt(&p);
-    }
-}
-
-
-//THook(
-//        void,
-//        MSSYM_B1QE17updateNeighborsAtB1AE11BlockSourceB2AAE17QEAAXAEBVBlockPosB3AAAA1Z,
-//        BlockSource *self, const BlockPos *pos
-//) {
-//    original(self, pos);
-//}
-//explosion enable
 THook(
         void,
         MSSYM_B1QA7explodeB1AA9ExplosionB2AAA7QEAAXXZ,
@@ -223,6 +140,12 @@ THook(
     return original(graph, pos);
 }
 
-//! 多联查找功能已经迁移到单独的插件，这里已删除此代码
+
+BlockPos *BlockActor::getPosition() {
+    return reinterpret_cast<BlockPos *>(reinterpret_cast<VA>(this) + 44);
+}
 
 
+Block *BlockActor::getBlock() {
+    return *reinterpret_cast<Block **>(reinterpret_cast<VA>(this) + 16);
+}

@@ -17,7 +17,7 @@ class Vec3;
 #define RIGHT_CLICK_EVENT(S)  [](Actor *player, const std::string &itemName, const BlockPos &pos,\
 unsigned int face, const Vec3 &offset) {S}
 
-
+//右键注册，开发中，请无视
 class RightClickManager {
 public:
     typedef std::function<void(Actor *, const std::string &, const BlockPos &, unsigned int,

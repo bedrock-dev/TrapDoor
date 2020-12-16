@@ -9,15 +9,16 @@
 #include <string>
 #include <utility>
 
-using std::string;
-
+/*
+ * 用来承载命令行玩家参数的结构体，本来打算用union的，结果发现有bug，就算了，
+ * 浪费点内存问题不大.jpg
+ */
 struct ArgHolder {
     int intVal = 0;
     std::string strVal;
     bool boolVal = true;
 public:
     explicit ArgHolder(int arg) : intVal(arg) {}
-
 
     explicit ArgHolder(const char *arg) : strVal(arg) {}
 
@@ -28,8 +29,7 @@ public:
 
     int getInt() const;
 
-
-    string getString() const;
+    std::string getString() const;
 
     bool getBool() const;
 

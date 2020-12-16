@@ -14,7 +14,7 @@ using json = nlohmann::json;
 
 int main() {
 
-    graphics::drawLine({12,3,12},FACING::NEG_X,5,graphics::COLOR::WHITE);
+   // graphics::drawLine({12,3,12},FACING::NEG_X,5,graphics::COLOR::WHITE);
     return 0;
 }
 

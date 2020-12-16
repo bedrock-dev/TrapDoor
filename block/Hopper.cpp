@@ -2,12 +2,13 @@
 // Created by xhy on 2020/8/29.
 //
 
-#include "Hopper.h"
 #include "entity/Item.h"
-#include "Block.h"
+#include "block/Block.h"
 #include "common/Trapdoor.h"
 #include "tools/Message.h"
 #include "tools/MsgBuilder.h"
+#include "block/BlockSource.h"
+#include "Hopper.h"
 
 using namespace SymHook;
 const std::map<std::string, size_t> ChannelManager::BLOCK_NAME_CHANNEL_MAPPER = {//NOLINT
@@ -18,16 +19,14 @@ const std::map<std::string, size_t> ChannelManager::BLOCK_NAME_CHANNEL_MAPPER = 
         {"minecraft:lapis_block",   4}
 };
 
-void ChannelManager::printAll() {
-//    for (auto channel:this->channels) {
-//        channel.print();
-//    }
-}
+ChannelManager hopperCounterManager; //NOLINT
+
+
 
 void ChannelManager::tick() {
     if (!enableHopperCounter)return;
-    for (auto &i:channels) {
-        i.t();
+    for (auto &channel :channels) {
+        channel.t();
     }
 }
 
@@ -48,7 +47,6 @@ void ChannelManager::resetChannel(Actor *player, size_t channel) {
     }
 }
 
-ChannelManager hopperCounterManager; //NOLINT
 
 THook(
         void,

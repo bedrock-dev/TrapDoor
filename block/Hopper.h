@@ -21,7 +21,7 @@
 
 class Actor;
 
-
+//漏斗计数器频道
 class CounterChannel {
     const size_t channel;
     std::map<std::string, size_t> counterList;
@@ -40,7 +40,7 @@ public:
     }
 };
 
-
+//漏斗频道管理器
 class ChannelManager {
     std::vector<CounterChannel> channels;
 public:
@@ -51,17 +51,20 @@ public:
             channels.emplace_back(i);
     }
 
+
     inline CounterChannel &getChannel(const int &ch) {
         return channels[ch];
     }
 
+
+    //更新计数器
     void tick();
 
-    void printAll();
+    //打印某个频道
+    void printChannel(Actor *player, size_t channel);
 
-    void printChannel(Actor *player , size_t channel);
-
-    void resetChannel(Actor *player,size_t channel);
+    //重置某个频道
+    void resetChannel(Actor *player, size_t channel);
 };
 
 extern ChannelManager hopperCounterManager;

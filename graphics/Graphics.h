@@ -9,6 +9,7 @@
 #include "BlockPos.h"
 #include <vector>
 #include <map>
+
 namespace graphics {
     enum class COLOR {
         WHITE,
@@ -18,11 +19,7 @@ namespace graphics {
         GREEN
     };
 
-    std::string getLineParticleType(int length, FACING direction, COLOR color);
-
-    std::map<float,int> binSplit(float start, float end);
-
-    void drawLine(const Vec3 &originPoint, FACING direction, float length,COLOR color);
+    void drawLine(const Vec3 &originPoint, FACING direction, float length, COLOR color);
 
 }
 
