@@ -1,4 +1,25 @@
 
+
+
+
+
+
+# 代码重构中...(code is in refactoring...)
+
+
+```
+  _  _    ___  _  _   
+ | || |  / _ \| || |  
+ | || |_| | | | || |_ 
+ |__   _| | | |__   _|
+    | | | |_| |  | |  
+    |_|  \___/   |_|  
+                      
+                      
+```
+
+
+
 ![](img/logo.png)
 
 ### 这是什么
@@ -158,8 +179,6 @@ GPL
 - [https://github.com/nlohmann/json](https://github.com/nlohmann/json)
 
 - [https://github.com/DarthTon/Xenos](https://github.com/DarthTon/Xenos) 
-
-  #### 2. 注入dll 并启动游戏
 
 感谢人员
 
