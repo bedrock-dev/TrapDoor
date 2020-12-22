@@ -104,7 +104,7 @@ Trapdoor的功能还在持续开发中,目前又如下功能和特色:
 
 > 注意`list`是列出**在ticking的村庄，不是所有在加载区块内的村庄都会加载**，这个指令能直观地告诉你玩家在某个挂机点的时候刷帖机的核心数到底是多少，有多少个村子在有效更新。
 >
-> 村庄边界的格式: `center,radius,workded/population golem,bedPOI canSpawnGolem,bounds `边界矩形框两个对角线的坐标，中心是矩形框的中心，`radius`是村庄半径,`worked`是工作过的村民数,`population`是当前村庄的村民数,`goldem`是属于该村庄的铁傀儡数，`bedPOI`是村庄拥有(已和村民绑定的)床的数量。
+> 村庄边界的格式: `center,radius,workded/population golem,bedPOI canSpawnGolem,bounds `边界矩形框两个对角线的坐标，中心是矩形框的中心，`radius`是村庄半径,`worked`是工作过的村民数,`population`是当前村庄的村民数,`goldem`是属于该村庄的铁傀儡数，`bedPOI`是村庄拥有(已和村民绑定的)床的数量。**为了达到良好的显示效果，请使用最新版的插件，并加载材质包**
 
 #### 刷怪
 
@@ -142,6 +142,11 @@ Trapdoor的功能还在持续开发中,目前又如下功能和特色:
 > 这个功能在1.16.4版本中暂时被移除了
 
 在你使用`./func pm true`后，1.16新增的两种地狱菌类的木板会作为测距点，你挨个放置这两个方块的时候屏幕会显示这两个点之间欧式距离和曼哈顿距离，括号内的数据是忽略`y`的平面数据。
+#### 显示HSA(HardCodedSpawnArea)
+
+> ！这个功能有~~不太~~(比较)严重的BUG，显示的矩形框会串维度，如果你在某个地方发现了一堆黄色的框，请不要在意
+
+使用 `/hsa show true/false` 来开启或者关闭HSA的显示，如果点位过多可能会造成卡顿，尤其是手机用户，请谨慎使用
 
 #### 其它
 
@@ -166,11 +171,12 @@ Trapdoor的功能还在持续开发中,目前又如下功能和特色:
 ### license 
 GPL
 
-### Credit
+### Credits
 
+#### Minecfart
 感谢`mojang`提供的[Minecraft](https://www.minecraft.net/zh-hans)游戏
 
-下面是使用的第三方库
+#### 第三方库
 
 - [https://github.com/microsoft/Detours](https://github.com/microsoft/Detours)
 
@@ -180,9 +186,19 @@ GPL
 
 - [https://github.com/DarthTon/Xenos](https://github.com/DarthTon/Xenos) 
 
-感谢人员
-
+#### 开发者
 - Player
 - [OEOTYAN](https://github.com/OEOTYAN)
+#### 特别感谢
+提供可读性极强的BDS源码的Player
 
-
+#### 玩家
+感谢下面的玩家提供的优秀建议与反馈的bug:
+- 木月酸与云龙碱
+- 莵道三室戸
+- orange_31 
+- SAC_Official
+- panda4994万岁
+- 梵蒂冈_273
+- OEOTYAN
+- Origin 0110
