@@ -3,9 +3,9 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/PDB.txt" charset="GBK" />
     <file url="file://$PROJECT_DIR$/SymHook.h" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/api/lib/SymHook.h" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/api/lib/mod.cpp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/api/tools/dbg.h" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/bedrock_server的PDB符号信息.txt" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/lib/SymHook.h" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/lib/mod.cpp" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/tools/dbg.h" charset="UTF-8" />
   </component>
 </project>
