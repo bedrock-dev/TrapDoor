@@ -42,7 +42,7 @@ add_library(${MOD_API_NAME} STATIC
         api/tools/Message.cpp
         api/tools/MsgBuilder.cpp
         api/world/LevelChunk.cpp
-        )
+        api/tools/emumTools.h)
 target_include_directories(${MOD_API_NAME}
         PUBLIC
         api
@@ -52,6 +52,7 @@ target_include_directories(${MOD_API_NAME}
         api/graphics
         api/world
         api/lib
+        api/tools
         )
 
 target_link_libraries(${MOD_API_NAME} ${PROJECT_SOURCE_DIR}/api/lib/detours.lib)
@@ -88,49 +89,13 @@ target_include_directories(
         api/graphics
         api/world
         api/lib
-
+        api/tools
 )
 
 
 target_link_libraries(${MOD_NAME} ${MOD_API_NAME})
 
-#add_library(${PROJECT_NAME} SHARED
-#        dllmain.cpp
-#        api/tools/MsgBuilder.cpp
-#        api/graphics/Particle.cpp
-#        api/tools/Message.cpp
-#        api/lib/pch.cpp
-#        mod/village/Village.cpp
-#        api/BDSMod.cpp
-#        mod/common/ConfigManager.cpp
-#        mod/spawn/Spawn.cpp
-#        api/entity/Actor.cpp
-#        mod/tick/GameTick.cpp
-#        api/level/Level.cpp
-#        api/commands/Command.cpp
-#        api/commands/Command.h
-#        api/commands/ArgHolder.cpp
-#        api/commands/CommandManager.cpp
-#        api/commands/CommandNode.cpp
-#        api/block/Block.cpp
-#        api/entity/Item.cpp
-#        mod/Hopper.cpp
-#        api/entity/Player.cpp
-#        api/graphics/BlockPos.cpp
-#        api/graphics/Vec3.cpp
-#        api/entity/PlayerBuffer.cpp
-#        api/level/Biome.cpp
-#        api/level/Dimension.cpp
-#        api/tools/json.hpp
-#        api/tools/DirtyLogger.cpp
-#        mod/common/RightClickManager.cpp
-#        api/entity/PlayerInventory.cpp
-#        api/graphics/Graphics.cpp
-#        api/block/BlockLegacy.cpp api/block/BlockLegacy.h api/block/BlockSource.cpp api/block/BlockSource.h mod/Trapdoor.cpp mod/Trapdoor.h)
-#
-#target_link_libraries(${PROJECT_NAME} api/lib/detours.lib)
-#
-#add_executable(ConfigTest mod/common/ConfigManager.cpp api/tools/DirtyLogger.cpp test/testMain.cpp)
-
-
-
+add_executable(
+        TempText
+        test/testMain.cpp
+)

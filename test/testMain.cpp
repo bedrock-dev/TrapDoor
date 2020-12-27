@@ -5,16 +5,14 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "tools/DirtyLogger.h"
-#include "common/ConfigManager.h"
+#include <cstdarg>
+#include <cstdio>
 
-using json = nlohmann::json;
+
+
 
 int main() {
-    initLogger("trapdoor.log", true);
-    ConfigManager configManager;
-    configManager.initialize("config.json");
-    // graphics::drawLine({12,3,12},FACING::NEG_X,5,graphics::COLOR::WHITE);
+    std::cout << format("QAQ %d %d %.3f", 1, 2, 1.2);
     return 0;
 }
 

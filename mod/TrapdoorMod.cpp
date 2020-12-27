@@ -17,8 +17,9 @@ namespace mod {
         this->hopperChannelManager.tick();
     }
 
+    //这个函数会在初始化Level对象后执行
     void TrapdoorMod::initialize() {
-        // this->registerCommands();
+        //todo
     }
 
     void TrapdoorMod::registerCommands() {
@@ -35,9 +36,9 @@ namespace mod {
         commandManager.registerCmd("func", "en/disable function")
                 ->then(ARG("hc", "开启/关闭漏斗计数器", BOOL, {
                     this->hopperChannelManager.setAble(holder->getBool());
+                    info(player, "set hoppercounter to %d", holder->getBool());
                 }));
         //exp command
-
 
         //漏斗计数器
         commandManager.registerCmd("counter", "漏斗计数器相关功能", MEMBER)
@@ -69,15 +70,14 @@ namespace mod {
                       });
 
 
-//        commandManager.registerCmd("village", "村庄相关功能", MEMBER)
-//                ->
-//                        then(ARG("list", "list all ticking villages", NONE, { village::listVillages(player); }))
-//                ->
-//                        then(ARG("show", "show ticking villages bounds and center", BOOL, {
-//                    enableVillageShow = holder->getBool();
-//                    // info(player, "developing...");
-//                }));
-
+        commandManager.registerCmd("village", "村庄相关功能", MEMBER)
+                ->then(ARG("list", "list all ticking villages", NONE, {
+                    this->villageHelper.list(player);
+                }))
+                ->then(ARG("show", "显示村庄边框和中心", BOOL, {
+                    this->villageHelper.setVillageShowAble(holder->getBool());
+                    info(player, "设置村庄显示为 %d", holder->getBool());
+                }));
 
 //        commandManager.registerCmd("cfg", "设置")
 //                ->

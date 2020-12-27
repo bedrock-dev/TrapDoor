@@ -29,9 +29,9 @@ namespace mod {
     class CounterChannel {
         const size_t channel;
         std::map<std::string, size_t> counterList;
-        unsigned long long tick;
+        Tick gameTick = 0;
     public:
-        explicit CounterChannel(size_t ch) : channel(ch), tick(0) {}
+        explicit CounterChannel(size_t ch) : channel(ch), gameTick(0) {}
 
         void reset();
 
@@ -39,13 +39,14 @@ namespace mod {
 
         void add(const std::string &itemName, size_t num);
 
-        inline void t() {
-            ++tick;
+        inline void tick() {
+            ++gameTick;
         }
     };
 
 //漏斗频道管理器
     class HopperChannelManager {
+
         std::vector<CounterChannel> channels;
         bool enable = true;
     public:
@@ -62,6 +63,8 @@ namespace mod {
 
         //更新计数器
         void tick();
+
+        inline bool isEnable() const { return this->enable; }
 
         inline void setAble(bool able) { this->enable = able; }
 

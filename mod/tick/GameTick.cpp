@@ -12,7 +12,7 @@
 
 namespace mod::tick {
     using trapdoor::broadcastMsg;
-    using trapdoor::waring;
+    using trapdoor::warning;
     using trapdoor::error;
     using trapdoor::info;
     namespace {
@@ -129,11 +129,11 @@ namespace mod::tick {
 
     void profileWorld(trapdoor::Actor *player) {
         if (isProfiling) {
-            trapdoor::waring(player, "another profiling is running");
+            trapdoor::warning(player, "another profiling is running");
             return;
         }
         if (tickStatus != WorldTickStatus::Normal) {
-            trapdoor::waring(player, "you are not in normal mode,the result may be wrong");
+            trapdoor::warning(player, "you are not in normal mode,the result may be wrong");
         }
         L_DEBUG("begin profiling");
         info(player, "start profiling...");
@@ -165,10 +165,10 @@ THook(
     }
     if (!trapdoor::bdsMod->getLevel()) {
         trapdoor::bdsMod->setLevel(serverLevel);
-        trapdoor::bdsMod->getMod<mod::TrapdoorMod>()->initialize();
+        trapdoor::bdsMod->asInstance<mod::TrapdoorMod>()->initialize();
     }
 
-    auto modInstance = trapdoor::bdsMod->getMod<mod::TrapdoorMod>();
+    auto modInstance = trapdoor::bdsMod->asInstance<mod::TrapdoorMod>();
 
     switch (mod::tick::tickStatus) {
         case mod::tick::Frozen:
@@ -202,6 +202,8 @@ THook(
                 modInstance->heavyTick();
             }
             break;
+
+
         case mod::tick::Slow:
             if (mod::tick::slowDownCounter % mod::tick::SlowDownTimes == 0) {
                 original(serverLevel);

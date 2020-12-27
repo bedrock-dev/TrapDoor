@@ -1,10 +1,12 @@
+Trapdoor
 GPL License
 Copyright (c) 2020 hhhxiao
 
 
-
-
-
+tinyFormat https://github.com/c42f/tinyformat
+For minimum license-related fuss, tinyformat.h is distributed under the boost
+software license, version 1.0. (Summary: you must keep the license text on all
+source copies, but don't have to mention tinyformat when distributing binaries.)
 
 MIT License
 

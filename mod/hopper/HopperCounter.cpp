@@ -27,8 +27,10 @@ namespace mod {
     };
 
     void HopperChannelManager::tick() {
-        for (auto &channel :channels) {
-            channel.t();
+        if (this->enable) {
+            for (auto &channel :channels) {
+                channel.tick();
+            }
         }
     }
 
@@ -55,43 +57,26 @@ namespace mod {
     }
 
     void CounterChannel::reset() {
-        tick = 0;
+        gameTick = 0;
         counterList.clear();
     }
 
     void CounterChannel::print(Actor *actor) {
-
-        int num = 0;
+        int n = 0;
         for (const auto &i:this->counterList) {
-            num += i.second;
+            n += i.second;
         }
-        if (this->tick == 0 || num == 0) {
-            L_DEBUG("tick = %d num = %d", tick, num);
+
+        if (this->gameTick == 0 || n == 0) {
+            L_DEBUG("tick = %d num = %d", gameTick, n);
             info(actor, "no data in this channel");
             return;
         }
-//        std::vector<uint8_t> color = {
-//                COLOR::AQUA,
-//                COLOR::GREEN,
-//                COLOR::WHITE,
-//                COLOR::GOLD,
-//                COLOR::BLUE
-//        };
         trapdoor::MessageBuilder builder;
-        builder.text("channel ")
-                .text(std::to_string(this->channel))
-                .text("\n")
-                .num(tick).text("  gt (")
-                .num((float) tick / 1200.0)
-                .text(" min)\n----------\n");
+        builder.textF("channel %d  total %d items in %d gt(%.2f min)\n-------\n", channel, n, gameTick,
+                      gameTick / 1200.0);
         for (const auto &i:counterList) {
-            builder.text(i.first)
-                    .text(":        ")
-                    .num(i.second)
-                    .text("  (")
-                    .num((float) i.second * 72000 / (float) tick)
-                    .text("/h)\n");
-            // sendBroadcastMessgae("%s: %zu(%.2f/h)\n", i.first.c_str(), i.second, (float) i.second * 72000 / (float) tick);
+            builder.textF("%-30s        %-10d(%.2f/h)\n", i.first.c_str(), i.second, i.second * 1.0 / gameTick * 72000);
         }
         builder.send(actor);
     }
@@ -107,6 +92,14 @@ THook(
 ) {
 
 
+    auto modInstance = trapdoor::bdsMod->asInstance<mod::TrapdoorMod>();
+    if (!modInstance->getHopperChannelManager().isEnable()) {
+        original(hopperActor, index, itemStack);
+        return;
+    }
+
+
+
     auto real_this = reinterpret_cast<void *>(reinterpret_cast<VA>(hopperActor) - 208);
     auto blockPos = reinterpret_cast<trapdoor::BlockActor *>(real_this)->getPosition();
     std::string itemName = itemStack->getItemName();
@@ -119,16 +112,14 @@ THook(
         L_DEBUG("can't find a valid player");
         return;
     }
+
     auto blockSource = nearestPlayer->getBlockSource();
     auto block = blockSource->getBlock(blockPos->x, blockPos->y - 1, blockPos->z);
     std::string blockName = block->getName();
-    //find channel
-    // dbg(blockName);
     auto result = mod::HopperChannelManager::BLOCK_NAME_CHANNEL_MAPPER.find(blockName);
     if (result != mod::HopperChannelManager::BLOCK_NAME_CHANNEL_MAPPER.end()) {
         if (!itemName.empty()) {
-            trapdoor::bdsMod->getMod<mod::TrapdoorMod>()
-                    ->getHopperChannelManager().getChannel(result->second).add(itemName, stackNum);
+            modInstance->getHopperChannelManager().getChannel(result->second).add(itemName, stackNum);
         } else {
             original(hopperActor, index, itemStack);
         }

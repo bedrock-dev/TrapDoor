@@ -5,6 +5,7 @@
 #include "MsgBuilder.h"
 #include "Message.h"
 #include "entity/Actor.h"
+
 namespace trapdoor {
     const uint8_t MessageBuilder::BLACK = 0x0;
     const uint8_t MessageBuilder::DARK_READ = 0x4;
@@ -44,7 +45,6 @@ namespace trapdoor {
         return *this;
     }
 
-
     MessageBuilder &MessageBuilder::pos(const BlockPos &pos) {
         return this->sText(pos.toString(), AQUA | BOLD);
     }
@@ -66,6 +66,7 @@ namespace trapdoor {
         return s;
     }
 
+
     MessageBuilder &MessageBuilder::sText(const std::string &s, uint8_t style) {
         auto fontColor = style & 0x0fu;
         auto fontStyle = style & 0xf0u;
@@ -81,7 +82,7 @@ namespace trapdoor {
     }
 
     void MessageBuilder::send(Actor *actor) {
-        info(actor, get());
+        info(actor, get().c_str());
         //todo: rewrite
         // info(get());
     }

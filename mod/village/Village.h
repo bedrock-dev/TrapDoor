@@ -34,7 +34,7 @@ namespace mod {
         size_t gameTick = 0;
     public:
 
-        inline void setVillageAble(bool able) { enableShow = able; };
+        inline void setVillageShowAble(bool able) { enableShow = able; };
 
         VillageHelper() = default;
 

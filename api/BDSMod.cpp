@@ -12,10 +12,6 @@ namespace trapdoor {
     void initializeMod(BDSMod *BDSMod) {
         L_INFO("create BDS mod instance");
         trapdoor::bdsMod = BDSMod;
-        L_ERROR("error info");
-//        L_INFO("info ");
-//        L_ERROR("warning");
-//        L_DEBUG("debug info");
     }
 
     Level *BDSMod::getLevel() {

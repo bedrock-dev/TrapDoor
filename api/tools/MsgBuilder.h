@@ -11,6 +11,8 @@
 #include "graphics/BlockPos.h"
 #include "graphics/Vec3.h"
 #include "graphics/AABB.h"
+#include "Message.h"
+#include <cstdarg>
 
 namespace trapdoor {
     class Actor;
@@ -35,6 +37,19 @@ namespace trapdoor {
 
 
         MessageBuilder &text(const std::string &s);
+
+
+        template<typename ...Args>
+        MessageBuilder &textF(const std::string &format, Args ...args) {
+            this->text(trapdoor::format(format, args...));
+            return *this;
+        }
+
+        template<typename ...Args>
+        MessageBuilder &sTextF(uint8_t style, const std::string &format, Args ...args) {
+            this->sText(trapdoor::format(format, args...), style);
+            return *this;
+        }
 
         MessageBuilder &sText(const std::string &s, uint8_t style);
 
@@ -73,6 +88,7 @@ namespace trapdoor {
         const static std::map<uint8_t, std::string> STYLE_MAP;
         std::vector<std::string> messageBuffer;
     };
+
     typedef MessageBuilder MSG_COLOR;
 }
 #endif //TRAPDOOR_MSGBUILDER_H

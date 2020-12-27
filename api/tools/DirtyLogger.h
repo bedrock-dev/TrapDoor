@@ -18,10 +18,12 @@ namespace trapdoor {
     };
 
 
-    void initLogger(const std::string &logFileName, bool useStdout);
+    void initLogger(const std::string &logFileName, bool useStdout, bool printTime = true, bool printFunction = true);
 
     void setLogLevel(LOG_LEVEL level);
 
     void logInfo(LOG_LEVEL logLevel, const char *functionName, const char *fmt, ...);
+
+
 }
 #endif //TRAPDOOR_DIRTYLOGGER_H

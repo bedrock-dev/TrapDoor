@@ -52,8 +52,10 @@ namespace trapdoor {
 
         unsigned int getSelectSlot();
 
-        Level* getLevel();
+        Level *getLevel();
     };
+
+
 
 /**
  * 实体标签

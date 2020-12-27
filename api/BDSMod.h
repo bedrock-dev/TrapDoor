@@ -15,6 +15,7 @@
 #include "commands/CommandManager.h"
 #include "world/Level.h"
 
+typedef size_t Tick;
 namespace trapdoor {
 
 
@@ -37,9 +38,9 @@ namespace trapdoor {
 
         virtual void registerCommands();
 
-        template<typename M>
-        M *getMod() {
-            return reinterpret_cast<M *>(this);
+        template<typename Mod>
+        Mod *asInstance() {
+            return reinterpret_cast<Mod *>(this);
         }
     };
 

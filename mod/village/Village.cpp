@@ -61,8 +61,8 @@ namespace mod {
         auto workedNum = getWorkedVillagerNum();
         auto golemNum = getIronGolemNum();
         auto bedNum = getBedPOICount();
-        int max = 20 > population ? 20 : population;
-        return (float) workedNum > population * 0.75 && golemNum < population / 10 && bedNum > max;
+        int maxValue = 20 > population ? 20 : population;
+        return (float) workedNum > population * 0.75 && golemNum < population / 10 && bedNum > maxValue;
     }
 
     //get village center
@@ -77,15 +77,7 @@ namespace mod {
     //get village bounds
     //todo rewrite this
     trapdoor::AABB Village::getBounds() {
-        trapdoor::Vec3 p1 = {*((float *) this + BOUND_OFFSET + 3),
-                             *((float *) this + BOUND_OFFSET + 4),
-                             *((float *) this + BOUND_OFFSET + 5)};
-        trapdoor::Vec3 p2 = {*((float *) this + BOUND_OFFSET),
-                             *((float *) this + BOUND_OFFSET + 1),
-                             *((float *) this + BOUND_OFFSET + 2)};
-
-        trapdoor::AABB aabb(p2, p1);
-        return aabb;
+        return *reinterpret_cast<trapdoor::AABB *>((float *) this + BOUND_OFFSET);
     }
 
     //get village radius
@@ -155,7 +147,6 @@ namespace mod {
             //todo clear village and draw village;
             this->draw();
             this->clear();
-            //villageHelper.clear();
         }
         this->gameTick = (this->gameTick + 1) % 80;
     }
@@ -167,7 +158,7 @@ THook(
 ) {
     //village tick
     original(vill, tick, blockSource);
-    trapdoor::bdsMod->getMod<mod::TrapdoorMod>()->getVillageHelper().insert(vill);
+    trapdoor::bdsMod->asInstance<mod::TrapdoorMod>()->getVillageHelper().insert(vill);
     // village::villageHelper.insert(vill);
 }
 

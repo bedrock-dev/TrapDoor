@@ -9,6 +9,7 @@
 #include "lib/mod.h"
 #include "lib/SymHook.h"
 #include "tools/DirtyLogger.h"
+
 namespace trapdoor {
     using namespace SymHook;
 
@@ -25,7 +26,7 @@ namespace trapdoor {
 
     Actor *Level::getNearestPlayer(BlockPos &pos) {
         Actor *nearest = nullptr;
-        float minDistance = 256;
+        float minDistance = 512;
         this->forEachPlayer([&pos, &minDistance, &nearest](Actor *player) {
             BlockPos p(player->getPos()->x, player->getPos()->y, player->getPos()->z);
             auto d = p.distanceTo(pos);

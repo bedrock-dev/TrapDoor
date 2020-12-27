@@ -14,13 +14,18 @@ namespace trapdoor {
         LOG_LEVEL logLevel = LOG_LEVEL::LOG_DEBUG;
 
         FILE *logger = nullptr;
+        bool loggerPrintTime = true;
+        bool loggerPrintFunctionName = true;
     }
 
 //初始化日志，不然不能使用
 
 
 
-    void initLogger(const std::string &logFileName, bool useStdout) {
+    void
+    initLogger(const std::string &logFileName, bool useStdout, bool printTime, bool printFunctionName) {
+        loggerPrintFunctionName = printFunctionName;
+        loggerPrintTime = printTime;
         //? this is not a waring
         if (useStdout) {
             logger = stdout;
@@ -41,9 +46,12 @@ namespace trapdoor {
         time_t rawTime;
         time(&rawTime);
         struct tm *t = localtime(&rawTime);
-        fprintf(logger, "[%.2d-%.2d %.2d:%.2d:%.2d ", t->tm_mon + 1, t->tm_mday, t->tm_hour,
-                t->tm_min,
-                t->tm_sec);
+        if (loggerPrintTime) {
+            fprintf(logger, "[%.2d-%.2d %.2d:%.2d:%.2d ", t->tm_mon + 1, t->tm_mday, t->tm_hour,
+                    t->tm_min,
+                    t->tm_sec);
+        }
+
         switch (logLevel) {
             case LOG_LEVEL::LOG_ERROR:
                 fprintf(logger, "ERROR] ");
@@ -65,8 +73,9 @@ namespace trapdoor {
 //        if (functionLength >= 20) {
 //            functionName += 17;
 //        }
-
-        fprintf(logger, "(%s) ", functionName);
+        if (loggerPrintFunctionName) {
+            fprintf(logger, "(%s) ", functionName);
+        }
         vfprintf(logger, fmt, args);
         fprintf(logger, "\n");
         fflush(logger);
