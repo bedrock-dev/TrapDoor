@@ -9,6 +9,7 @@
 
 #include <cstdio>
 #include <functional>
+
 namespace trapdoor {
     class BlockPos;
 
@@ -22,9 +23,15 @@ namespace trapdoor {
 
         void forEachPlayer(const std::function<void(Actor *)> &todo);
 
+
         Actor *getNearestPlayer(BlockPos &pos);
 
+
+        Actor *getNearestDimensionPlayer(const BlockPos &pos, int dimID);
+
+
         Dimension *getDimFromID(int id);
+
     };
 }
 

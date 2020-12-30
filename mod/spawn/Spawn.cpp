@@ -15,22 +15,7 @@ int getMobCount(void *sp) {
     return *(reinterpret_cast<UINT32 *>(sp) + 48);
 }
 
-THook(
-        void,
-        MSSYM_B2QUE17spawnStructureMobB1AA7SpawnerB2AAE20AEAAXAEAVBlockSourceB2AAE12AEBVBlockPosB2AAE25AEBUHardcodedSpawningAreaB1AE10LevelChunkB2AAE19AEBVSpawnConditionsB3AAAA1Z,
-        void *spawner,
-        void *blockSource,
-        void *blockPos,
-        BoundingBox *hsa,
-        void * spawnconditions
-) {
-    auto min = hsa->minPos;
-    auto max = hsa->maxPos;
-    auto &globalHsaList = getHardcodedSpawnAreas();
-    globalHsaList.insert({min, max});
-   // printf("%d %d %d -- %d,%d %d\n", min.x, min.y, min.z, max.x, max.y, max.z);
-    original(spawner, blockSource, blockPos, hsa, spawnconditions);
-}
+
 
 
 //THook(

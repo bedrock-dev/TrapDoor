@@ -56,7 +56,6 @@ namespace trapdoor {
     };
 
 
-
 /**
  * 实体标签
  * todo: 重写这个结构，因为已经知道这个东西的具体结构，因此不再需要reinterrupt了

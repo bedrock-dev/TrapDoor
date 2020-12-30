@@ -16,6 +16,11 @@ namespace trapdoor {
             p1 = _p1;
             p2 = _p2;
         }
+
+        Vec3 getCenter() const {
+            return (p1 + p2) * 0.5;
+        }
+
     };
 
     struct BoundingBox {

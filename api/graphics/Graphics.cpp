@@ -32,7 +32,7 @@ namespace trapdoor {
 
     static std::string getLineParticleType(int length,
                                            FACING direction,
-                                           COLOR color) {
+                                           GRAPHIC_COLOR color) {
         std::string str = "trapdoor:line";
         str += std::to_string(length);
         switch (direction) {
@@ -57,19 +57,19 @@ namespace trapdoor {
         }
 
         switch (color) {
-            case COLOR::WHITE:
+            case GRAPHIC_COLOR::WHITE:
                 str += "W";
                 break;
-            case COLOR::RED:
+            case GRAPHIC_COLOR::RED:
                 str += "R";
                 break;
-            case COLOR::YELLOW:
+            case GRAPHIC_COLOR::YELLOW:
                 str += "Y";
                 break;
-            case COLOR::BLUE:
+            case GRAPHIC_COLOR::BLUE:
                 str += "B";
                 break;
-            case COLOR::GREEN:
+            case GRAPHIC_COLOR::GREEN:
                 str += "G";
                 break;
         }
@@ -79,7 +79,7 @@ namespace trapdoor {
     void drawLine(const Vec3 &originPoint,
                   FACING direction,
                   float length,
-                  COLOR color) {
+                  GRAPHIC_COLOR color, int dimType) {
         if (length <= 0)
             return;
         float start = 0, end = 0;
@@ -128,13 +128,12 @@ namespace trapdoor {
         }
 
         for (auto points : positionList) {
-            // if (points.second == 8) {
             auto particleType =
                     getLineParticleType(points.second, direction, color);
             auto particleTypeInv =
                     getLineParticleType(points.second, invFacing(direction), color);
-            spawnParticle(points.first, particleType);
-            spawnParticle(points.first, particleTypeInv);
+            spawnParticle(points.first, particleType, dimType);
+            spawnParticle(points.first, particleTypeInv, dimType);
         }
     }
 

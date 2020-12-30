@@ -17,8 +17,6 @@
 
 typedef size_t Tick;
 namespace trapdoor {
-
-
     class BDSMod {
     protected:
         typedef void CommandRegistry;

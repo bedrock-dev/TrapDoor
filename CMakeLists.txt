@@ -42,7 +42,7 @@ add_library(${MOD_API_NAME} STATIC
         api/tools/Message.cpp
         api/tools/MsgBuilder.cpp
         api/world/LevelChunk.cpp
-        api/tools/emumTools.h)
+        api/tools/enumTools.h)
 target_include_directories(${MOD_API_NAME}
         PUBLIC
         api
@@ -69,12 +69,12 @@ add_library(${MOD_NAME}
         mod/config/RightClickManager.cpp
         mod/village/Village.cpp
         mod/tick/GameTick.cpp
+        mod/spawn/HsaManager.cpp
         )
 
 target_include_directories(
         ${MOD_NAME}
         PUBLIC
-
         mod
         mod/config
         mod/hopper
@@ -98,4 +98,4 @@ target_link_libraries(${MOD_NAME} ${MOD_API_NAME})
 add_executable(
         TempText
         test/testMain.cpp
-)
+        api/tools/enumTools.h)

@@ -7,12 +7,11 @@
 #include <fstream>
 #include <cstdarg>
 #include <cstdio>
-
-
+#include "../api/tools/enumTools.h"
 
 
 int main() {
-    std::cout << format("QAQ %d %d %.3f", 1, 2, 1.2);
+    
     return 0;
 }
 

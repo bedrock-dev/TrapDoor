@@ -8,6 +8,7 @@
 #include "entity/Player.h"
 #include "TrapdoorMod.h"
 #include "BDSMod.h"
+#include "graphics/Graphics.h"
 
 using namespace SymHook;
 //village tick
@@ -66,12 +67,8 @@ namespace mod {
     }
 
     //get village center
-    trapdoor::BlockPos Village::getCenter() {
-        return {
-                (*((float *) this + BOUND_OFFSET + 3) + *((float *) this + BOUND_OFFSET)) / 2,
-                (*((float *) this + BOUND_OFFSET + 4) + *((float *) this + BOUND_OFFSET + 1)) / 2,
-                (*((float *) this + BOUND_OFFSET + 5) + *((float *) this + BOUND_OFFSET + 2)) / 2,
-        };
+    trapdoor::Vec3 Village::getCenter() {
+        return this->getBounds().getCenter();
     }
 
     //get village bounds
@@ -93,34 +90,39 @@ namespace mod {
         villageList.clear();
     }
 
-    void VillageHelper::insert(Village *village) {
-        villageList.insert(village);
+    void VillageHelper::insert(const VillageWithColor &vw) {
+        villageList.insert(vw);
     }
 
     void VillageHelper::draw() {
         if (this->enableShow) {
             std::string centerParticleType = "minecraft:heart_particle";
-            for (auto village:villageList) {
+            for (auto vw:villageList) {
+                auto village = vw.village;
                 if (village) {
-                    auto center = village->getCenter().toVec3() + trapdoor::Vec3(0.5f, 0.8f, 0.5f);
+                    auto center = village->getCenter() + trapdoor::Vec3(0.5f, 0.8f, 0.5f);
                     auto bounds = village->getBounds();
-                    spawnRectangleParticle(bounds);
+                    trapdoor::AABB spawnArea = {center + trapdoor::Vec3(3, 8, 3), center - trapdoor::Vec3(3, 8, 3)};
+                    spawnRectangleParticle(bounds, trapdoor::GRAPHIC_COLOR::WHITE);
+                    trapdoor::spawnRectangleParticle(spawnArea, trapdoor::GRAPHIC_COLOR::GREEN);
                     spawnParticle(center, centerParticleType);
                 }
             }
         }
     }
 
+
     void VillageHelper::list(trapdoor::Actor *player) {
         trapdoor::MessageBuilder builder;
         builder.text("here are all the ticking villages:\n");
         int i = 0;
-        for (auto village : villageList) {
+        for (auto vw : villageList) {
+            auto village = vw.village;
             if (village) {
                 i++;
                 auto aabb = village->getBounds();
                 builder.num(i).text(": ")
-                        .pos(village->getCenter())
+                        .pos(village->getCenter().toBlockPos())
                         .text("r")
                         .num(village->getRadius())
                         .text(" p")
@@ -150,6 +152,15 @@ namespace mod {
         }
         this->gameTick = (this->gameTick + 1) % 80;
     }
+
+    bool VillageWithColor::operator<(const VillageWithColor &rhs) const {
+        return this->village < rhs.village;
+    }
+
+    //todo: repair this bug
+    void VillageWithColor::setRandomColor() {
+        this->color = static_cast<trapdoor::GRAPHIC_COLOR>(rand() % 5);
+    }
 }
 
 THook(
@@ -158,7 +169,9 @@ THook(
 ) {
     //village tick
     original(vill, tick, blockSource);
-    trapdoor::bdsMod->asInstance<mod::TrapdoorMod>()->getVillageHelper().insert(vill);
+    mod::VillageWithColor vw{vill, trapdoor::GRAPHIC_COLOR::WHITE};
+    vw.setRandomColor();
+    trapdoor::bdsMod->asInstance<mod::TrapdoorMod>()->getVillageHelper().insert(vw);
     // village::villageHelper.insert(vill);
 }
 

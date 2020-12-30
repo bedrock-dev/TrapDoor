@@ -11,10 +11,9 @@
 #include "AABB.h"
 
 namespace trapdoor {
-    void spawnParticle(Vec3 p, std::string &type);
+    void spawnParticle(Vec3 p, std::string &type, int dimType = 0);
 
-    void spawnRectangleParticle(const AABB &aabb);
+    void spawnRectangleParticle(const AABB &aabb, GRAPHIC_COLOR color, int dimType = 0);
 
-    void spawnRectangleParticleColor(const AABB &aabb, trapdoor::COLOR color);
 }
 #endif    // TRAPDOOR_PARTICLE_H

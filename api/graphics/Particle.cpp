@@ -16,14 +16,14 @@
 namespace trapdoor {
     using namespace SymHook;
 
-    void spawnParticle(Vec3 p, std::string &type) {
+    void spawnParticle(Vec3 p, std::string &type, int dimType) {
         auto pos = p.toBlockPos();
         auto level = trapdoor::bdsMod->getLevel();
         if (!level) {
             L_ERROR("level is null");
             return;
         }
-        auto player = level->getNearestPlayer(pos);
+        auto player = level->getNearestDimensionPlayer(pos, dimType);
         if (!player) {
             return;
         }
@@ -34,50 +34,28 @@ namespace trapdoor {
     }
 
 
-    void spawnRectangleParticle(const AABB &aabb) {
+    void spawnRectangleParticle(const AABB &aabb, GRAPHIC_COLOR color, int dimType) {
         auto p1 = aabb.p1, p2 = aabb.p2;
         auto dx = p2.x - p1.x;
         auto dy = p2.y - p1.y;
         auto dz = p2.z - p1.z;
-        drawLine(p1, FACING::POS_X, dx, COLOR::RED);
-        drawLine(p1, FACING::POS_Y, dy, COLOR::GREEN);
-        drawLine(p1, FACING::POS_Z, dz, COLOR::BLUE);
+        drawLine(p1, FACING::POS_X, dx, color, dimType);
+        drawLine(p1, FACING::POS_Y, dy, color, dimType);
+        drawLine(p1, FACING::POS_Z, dz, color, dimType);
         Vec3 p3{p2.x, p1.y, p2.z};
-        drawLine(p3, FACING::NEG_X, dx, COLOR::WHITE);
-        drawLine(p3, FACING::POS_Y, dy, COLOR::WHITE);
-        drawLine(p3, FACING::NEG_Z, dz, COLOR::WHITE);
+        drawLine(p3, FACING::NEG_X, dx, color, dimType);
+        drawLine(p3, FACING::POS_Y, dy, color, dimType);
+        drawLine(p3, FACING::NEG_Z, dz, color, dimType);
         Vec3 p4{p2.x, p2.y, p1.z};
-        drawLine(p4, FACING::NEG_X, dx, COLOR::WHITE);
-        drawLine(p4, FACING::NEG_Y, dy, COLOR::WHITE);
-        drawLine(p4, FACING::POS_Z, dz, COLOR::WHITE);
+        drawLine(p4, FACING::NEG_X, dx, color, dimType);
+        drawLine(p4, FACING::NEG_Y, dy, color, dimType);
+        drawLine(p4, FACING::POS_Z, dz, color, dimType);
 
         Vec3 p5{p1.x, p2.y, p2.z};
-        drawLine(p5, FACING::POS_X, dx, COLOR::WHITE);
-        drawLine(p5, FACING::NEG_Y, dy, COLOR::WHITE);
-        drawLine(p5, FACING::NEG_Z, dz, COLOR::WHITE);
+        drawLine(p5, FACING::POS_X, dx, color, dimType);
+        drawLine(p5, FACING::NEG_Y, dy, color, dimType);
+        drawLine(p5, FACING::NEG_Z, dz, color, dimType);
     }
 
-    void spawnRectangleParticleColor(const AABB &aabb, COLOR color) {
-        auto p1 = aabb.p1, p2 = aabb.p2;
-        auto dx = p2.x - p1.x;
-        auto dy = p2.y - p1.y;
-        auto dz = p2.z - p1.z;
-        drawLine(p1, FACING::POS_X, dx, color);
-        drawLine(p1, FACING::POS_Y, dy, color);
-        drawLine(p1, FACING::POS_Z, dz, color);
 
-        Vec3 p3{p2.x, p1.y, p2.z};
-        drawLine(p3, FACING::NEG_X, dx, color);
-        drawLine(p3, FACING::POS_Y, dy, color);
-        drawLine(p3, FACING::NEG_Z, dz, color);
-        Vec3 p4{p2.x, p2.y, p1.z};
-        drawLine(p4, FACING::NEG_X, dx, color);
-        drawLine(p4, FACING::NEG_Y, dy, color);
-        drawLine(p4, FACING::POS_Z, dz, color);
-
-        Vec3 p5{p1.x, p2.y, p2.z};
-        drawLine(p5, FACING::POS_X, dx, color);
-        drawLine(p5, FACING::NEG_Y, dy, color);
-        drawLine(p5, FACING::NEG_Z, dz, color);
-    }
 }

@@ -11,6 +11,7 @@
 namespace mod {
     void TrapdoorMod::heavyTick() {
         this->villageHelper.tick();
+        this->hsaManager.tick();
     }
 
     void TrapdoorMod::lightTick() {
@@ -28,6 +29,7 @@ namespace mod {
         if (!this->commandRegistry) {
             L_ERROR("fail to register command!![commandRegistry is null ptr]");
         }
+
         using namespace trapdoor;
         this->registerTickCommand();
         commandManager.registerCmd("prof", "ticking profiling")->EXE({ tick::profileWorld(player); });
@@ -54,24 +56,24 @@ namespace mod {
         commandManager.registerCmd("o", "switch to spectator mode")
                 ->EXE({
                           player->setGameMode(3);
-                          info(player, "set gamemode to spectator");
+                          broadcastMsg("设置玩家[%s]为观察者模式", player->getNameTag().c_str());
                       });
 
         commandManager.registerCmd("s", "switch to survival mode", MEMBER)
                 ->EXE({
                           player->setGameMode(0);
-                          info(player, "set gamemode to survival");
+                          broadcastMsg("设置玩家[%s]为生存模式", player->getNameTag().c_str());
                       });
 
         commandManager.registerCmd("c", "switch to creative mode")
                 ->EXE({
                           player->setGameMode(1);
-                          info(player, "set gamemode to creative");
+                          broadcastMsg("设置玩家[%s]为创造者模式", player->getNameTag().c_str());
                       });
 
 
         commandManager.registerCmd("village", "村庄相关功能", MEMBER)
-                ->then(ARG("list", "list all ticking villages", NONE, {
+                ->then(ARG("list", "显示所有正在加载的村庄", NONE, {
                     this->villageHelper.list(player);
                 }))
                 ->then(ARG("show", "显示村庄边框和中心", BOOL, {
@@ -85,19 +87,27 @@ namespace mod {
 //                    particleViewDistance = holder->getInt();
 //                    info(player, "set particle view distance to %d", particleViewDistance);
 //                }));
-        commandManager.registerCmd("tr?", "show help", MEMBER)
+
+        commandManager.registerCmd("td?", "显示帮助", MEMBER)
                 ->EXE({ this->commandManager.printfHelpInfo(player); });
 
 
-        commandManager.registerCmd("dbg", "show some debug info", MEMBER)
+        commandManager.registerCmd("dbg", "显示一些调试信息", MEMBER)
                 ->EXE({ player->printInfo(); });
 
 
         commandManager.registerCmd("hsa", "show or list  nearset hsa")
-                ->then(ARG("list", "list nearest hsa", NONE, {}))
+                ->then(ARG("clear", "清空hsa缓存", NONE, {
+                    hsaManager.clear();
+                    broadcastMsg("hsa缓存已经清空");
+                }))
+                ->then(ARG("list", "list nearest hsa", NONE, {
+                    hsaManager.list(player);
+                }))
                 ->then(ARG("show", "show hsa", BOOL, {
                     //enableHsaShow = holder->getBool();
                     // enableVillageShow = holder->getBool();
+                    hsaManager.setAble(holder->getBool());
                     info(player, "set hsa show to %d", holder->getBool());
                 }));
     }

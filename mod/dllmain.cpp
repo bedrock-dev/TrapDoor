@@ -19,14 +19,13 @@ void initConsole() {
 
 trapdoor::BDSMod *createBDSModInstance() {
     return new mod::TrapdoorMod();
-
 }
 
 
 void mod_init() {
     initConsole();
     trapdoor::initLogger("trapdoor.log", true, false, false);
-    auto *mod = new mod::TrapdoorMod();
+    auto *mod = createBDSModInstance();
     trapdoor::initializeMod(mod);
     mod::TrapdoorMod::printCopyRightInfo();
 }

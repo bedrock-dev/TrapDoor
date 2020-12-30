@@ -14,6 +14,7 @@
 #include "world/Biome.h"
 #include "PlayerInventory.h"
 #include "block/BlockSource.h"
+#include "Dimension.h"
 
 
 namespace trapdoor {

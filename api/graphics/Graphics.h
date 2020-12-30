@@ -11,16 +11,15 @@
 #include <map>
 
 namespace trapdoor {
-    enum class COLOR {
-        WHITE,
-        RED,
-        YELLOW,
-        BLUE,
-        GREEN
+    enum class GRAPHIC_COLOR {
+        WHITE = 0,
+        RED = 1,
+        YELLOW = 2,
+        BLUE = 3,
+        GREEN = 4
     };
 
-    void drawLine(const Vec3 &originPoint, FACING direction, float length, COLOR color);
-
+    void drawLine(const Vec3 &originPoint, FACING direction, float length, GRAPHIC_COLOR color, int dimType = 0);
 }
 
 

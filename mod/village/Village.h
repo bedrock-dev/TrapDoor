@@ -6,10 +6,14 @@
 #include "entity/Actor.h"
 #include "graphics/BlockPos.h"
 #include "graphics/AABB.h"
+#include "graphics/Vec3.h"
+#include "graphics/Graphics.h"
 #include<set>
 
 
 namespace mod {
+
+
     class Village {
     public:
         int getPopulation();
@@ -22,25 +26,40 @@ namespace mod {
 
         bool canSpawnIronGolem();
 
-        trapdoor::BlockPos getCenter();
+        trapdoor::Vec3 getCenter();
 
         float getRadius();
 
         trapdoor::AABB getBounds();
     };
 
+
+    class VillageWithColor {
+    public:
+        Village *village;
+        trapdoor::GRAPHIC_COLOR color;
+
+        bool operator<(const VillageWithColor &rhs) const;
+
+        void setRandomColor();
+    };
+
+
     class VillageHelper {
+
+
         bool enableShow = false;
         size_t gameTick = 0;
     public:
+
 
         inline void setVillageShowAble(bool able) { enableShow = able; };
 
         VillageHelper() = default;
 
-        std::set<Village *> villageList;
+        std::set<VillageWithColor> villageList;
 
-        void insert(Village *village);
+        void insert(const VillageWithColor &vw);
 
         void clear();
 

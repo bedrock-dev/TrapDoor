@@ -72,4 +72,8 @@ namespace trapdoor {
     Vec3 Vec3::operator-(const Vec3 &v) const {
         return {this->x - v.x, this->y - v.y, this->z - v.z};
     }
+
+    Vec3 Vec3::operator*(float times) const {
+        return {x * times, y * times, z * times};
+    }
 }
