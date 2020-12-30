@@ -52,8 +52,15 @@ Player::tickWorld
 #?tick@Village@@QEAAXUTick@@AEAVBlockSource@@@Z
 #维度更新红石
 ?tickRedstone@Dimension@@UEAAXXZ
+#世界实体更新
+?tickEntities@Level@@QEAAXXZ
+#实体体系统更新
+?tick@EntitySystems@@QEAAXAEAVEntityRegistry@@@Z
 
-
+方块实体更新
+?tick@BlockActor@@UEAAXAEAVBlockSource@@@Z
+实体更新
+?tick@Actor@@QEAA_NAEAVBlockSource@@@Z
 
 #############################实体信息#######################################
 #获取实体调试信息

@@ -70,6 +70,9 @@ add_library(${MOD_NAME}
         mod/village/Village.cpp
         mod/tick/GameTick.cpp
         mod/spawn/HsaManager.cpp
+        mod/tick/SimpleProfiler.cpp
+        mod/tick/ActorProfiler.cpp
+        mod/tick/BlockActorProfiler.cpp
         )
 
 target_include_directories(

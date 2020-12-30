@@ -18,33 +18,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b8a60db2-baf4-4087-8601-d054cc921b14" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/mod/spawn/HsaManager.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mod/spawn/HsaManager.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mod/tick/ActorProfiler.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mod/tick/ActorProfiler.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mod/tick/BlockActorProfiler.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mod/tick/BlockActorProfiler.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mod/tick/SimpleProfiler.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mod/tick/SimpleProfiler.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/BDSMod.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/BDSMod.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/entity/Actor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/entity/Actor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/entity/Actor.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/entity/Actor.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/graphics/AABB.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/graphics/AABB.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/graphics/Graphics.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/graphics/Graphics.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/graphics/Graphics.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/graphics/Graphics.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/graphics/Particle.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/graphics/Particle.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/graphics/Particle.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/graphics/Particle.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/graphics/Vec3.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/graphics/Vec3.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/graphics/Vec3.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/graphics/Vec3.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/lib/SymHook.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/lib/SymHook.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/tools/emumTools.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/tools/enumTools.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/world/Dimension.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/world/Dimension.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/world/Level.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/world/Level.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/world/Level.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/world/Level.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/tools/MsgBuilder.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/tools/MsgBuilder.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/tools/MsgBuilder.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/tools/MsgBuilder.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mod/TrapdoorMod.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/TrapdoorMod.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/TrapdoorMod.h" beforeDir="false" afterPath="$PROJECT_DIR$/mod/TrapdoorMod.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mod/dllmain.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/dllmain.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/spawn/Spawn.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/spawn/Spawn.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/tick/GameTick.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/tick/GameTick.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mod/tick/GameTick.h" beforeDir="false" afterPath="$PROJECT_DIR$/mod/tick/GameTick.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/village/Village.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/village/Village.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/village/Village.h" beforeDir="false" afterPath="$PROJECT_DIR$/mod/village/Village.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/testMain.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/testMain.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symbol.txt" beforeDir="false" afterPath="$PROJECT_DIR$/symbol.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,8 +111,8 @@
     </configuration>
     <list>
       <item itemvalue="CMake Application.TempText" />
-      <item itemvalue="CMake Application.trapdoor-mod" />
       <item itemvalue="CMake Application.trapDoorAPI" />
+      <item itemvalue="CMake Application.trapdoor-mod" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -310,7 +299,9 @@
       <workItem from="1609159934745" duration="102000" />
       <workItem from="1609179057672" duration="197000" />
       <workItem from="1609302042479" duration="211000" />
-      <workItem from="1609302330550" duration="9743000" />
+      <workItem from="1609302330550" duration="9796000" />
+      <workItem from="1609315787530" duration="4000" />
+      <workItem from="1609320172921" duration="10968000" />
     </task>
     <task id="LOCAL-00001" summary="1. 命令解释器投入使用，和switch case 彻底告别&#10;2. 支持游戏模式切换命令 ./gm mode n (n=3是观察模式)">
       <created>1604761522583</created>
@@ -419,10 +410,10 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="367" y="148" key="Vcs.Push.Dialog.v2/0.0.1549.831@0.0.1549.831" timestamp="1604898985160" />
-    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1609310998942">
+    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1609330221648">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1549.831@0.0.1549.831" timestamp="1609310998942" />
+    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1549.831@0.0.1549.831" timestamp="1609330221648" />
     <state x="590" y="328" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1608084984788">
       <screen x="0" y="0" width="1549" height="831" />
     </state>

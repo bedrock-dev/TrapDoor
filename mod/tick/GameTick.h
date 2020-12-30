@@ -5,12 +5,8 @@
 #ifndef TRAPDOOR_GAMETICK_H
 #define TRAPDOOR_GAMETICK_H
 
-#include <chrono>
 
-typedef std::chrono::high_resolution_clock timer_clock;
-#define TIMER_START auto start = timer_clock::now();
-#define TIMER_END auto elapsed = timer_clock::now() - start; long long timeReslut =  std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
-
+#include "SimpleProfiler.h"
 #include "lib/mod.h"
 #include "lib/SymHook.h"
 #include "village/Village.h"
@@ -42,6 +38,7 @@ namespace mod::tick {
 
     void profileWorld(trapdoor::Actor *player);
 
+    void profileEntities(trapdoor::Actor *player);
     void mspt();
 }
 

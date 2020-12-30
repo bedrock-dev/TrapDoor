@@ -7,6 +7,7 @@
 #include "commands/Command.h"
 #include "tick/GameTick.h"
 #include "tools/DirtyLogger.h"
+#include "tick/ActorProfiler.h"
 
 namespace mod {
     void TrapdoorMod::heavyTick() {
@@ -16,6 +17,8 @@ namespace mod {
 
     void TrapdoorMod::lightTick() {
         this->hopperChannelManager.tick();
+
+
     }
 
     //这个函数会在初始化Level对象后执行
@@ -32,7 +35,11 @@ namespace mod {
 
         using namespace trapdoor;
         this->registerTickCommand();
-        commandManager.registerCmd("prof", "ticking profiling")->EXE({ tick::profileWorld(player); });
+        commandManager.registerCmd("prof", "ticking profiling")
+                ->then(ARG("actor", "显示详细的实体更新时间", NONE, {
+                    tick::profileEntities(player);
+                }))
+                ->EXE({ tick::profileWorld(player); });
         commandManager.registerCmd("mspt", "show mspt & tps", MEMBER)->EXE({ tick::mspt(); });
         //功能开关命令
         commandManager.registerCmd("func", "en/disable function")

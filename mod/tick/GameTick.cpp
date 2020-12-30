@@ -9,6 +9,7 @@
 #include "entity/Actor.h"
 #include "BDSMod.h"
 #include "TrapdoorMod.h"
+#include "ActorProfiler.h"
 
 namespace mod::tick {
     using trapdoor::broadcastMsg;
@@ -18,57 +19,29 @@ namespace mod::tick {
     namespace {
         WorldTickStatus tickStatus = WorldTickStatus::Normal;
         WorldTickStatus lastTickStats = WorldTickStatus::Normal;
+
+        mod::SimpleProfiler gameProfiler;
         size_t wrapSpeed = 1;
         int SlowDownTimes = 1;  //slow down time
         int slowDownCounter = 0; //slow down counter
         int forwardTickNum = 0; //forward tick num
-        bool isProfiling = false;
         bool isMSPTing = false;
-        int currentProfileRound = 0;
 
-        long long redstoneTickTime = 0;
-        long long playerTickTime = 0;
-        long long levelTickTime = 0;
-        long long dimTickTime = 0;
-        long long chunkTickTime = 0;
-        long long randTickTime = 0;
-        long long blockEntityTickTime = 0;
-        long long spawnerTickTime = 0;
-
-        void sendProfileInfo() {
-            L_DEBUG("end profiling");
-            broadcastMsg(
-                    "mpst:            §2%.3f\n" \
-               "    §r redstone:             §2%.3f\n" \
-               "    §r chunk & village:      §2%.3f\n" \
-               "    §r player:               §2%.3f\n" \
-               "        §r chunk tick:           §2%.3f\n" \
-               "            §r random tick & env:     §2%.3f\n" \
-               "            §r blockEntities:   §2%.3f\n" \
-               "            §r (de)spawn:       §2%.3f",
-                    (double) levelTickTime / 50000,
-                    (double) redstoneTickTime / 50000,
-                    (double) dimTickTime / 50000,
-                    (double) playerTickTime / 50000,
-                    (double) chunkTickTime / 50000,
-                    (double) randTickTime / 50000,
-                    (double) blockEntityTickTime / 50000,
-                    (double) spawnerTickTime / 50000
-            );
-
+        mod::ActorProfiler &getActorProfiler() {
+            static mod::ActorProfiler actorProfiler;
+            return actorProfiler;
         }
 
-        void resetProfileCounter() {
-            redstoneTickTime = 0;
-            playerTickTime = 0;
-            levelTickTime = 0;
-            dimTickTime = 0;
-            chunkTickTime = 0;
-            randTickTime = 0;
-            blockEntityTickTime = 0;
-            spawnerTickTime = 0;
+        void staticWork() {
+            if (mod::tick::getActorProfiler().inProfiling) {
+                auto &actorProfiler = mod::tick::getActorProfiler();
+                actorProfiler.currentRound--;
+                if (actorProfiler.currentRound == 0) {
+                    actorProfiler.print();
+                    actorProfiler.reset();
+                }
+            }
         }
-
     }
 
     void freezeTick() {
@@ -127,20 +100,21 @@ namespace mod::tick {
         }
     }
 
+
     void profileWorld(trapdoor::Actor *player) {
-        if (isProfiling) {
+        if (gameProfiler.inProfiling) {
             trapdoor::warning(player, "another profiling is running");
             return;
         }
+
         if (tickStatus != WorldTickStatus::Normal) {
             trapdoor::warning(player, "you are not in normal mode,the result may be wrong");
         }
         L_DEBUG("begin profiling");
         info(player, "start profiling...");
-        isProfiling = true;
-        currentProfileRound = 50;
+        gameProfiler.inProfiling = true;
+        gameProfiler.currentRound = gameProfiler.totalRound;
     }
-
 
     void mspt() {
         tick::isMSPTing = true;
@@ -149,17 +123,32 @@ namespace mod::tick {
     WorldTickStatus getTickStatus() {
         return tickStatus;
     }
+
+    void profileEntities(trapdoor::Actor *player) {
+        if (getActorProfiler().inProfiling) {
+            trapdoor::warning(player, "another profiling is running");
+            return;
+        }
+
+        if (tick::getTickStatus() != tick::WorldTickStatus::Normal) {
+            trapdoor::warning(player, "you are not in normal mode,the result may be wrong");
+        }
+        L_DEBUG("begin profiling");
+        info(player, "start entities profiling...");
+        getActorProfiler().inProfiling = true;
+        getActorProfiler().currentRound = getActorProfiler().totalRound;
+    }
 }
 
-
 using namespace SymHook;
-
 
 THook(
         void,
         MSSYM_B1QA4tickB1AE11ServerLevelB2AAA7UEAAXXZ,
         trapdoor::Level * serverLevel
 ) {
+
+
     if (!trapdoor::bdsMod) {
         L_ERROR("mod is nullptr");
     }
@@ -175,11 +164,12 @@ THook(
             return;
         case mod::tick::Normal:
 
-            if (mod::tick::isProfiling || mod::tick::isMSPTing) {
+            if (mod::tick::gameProfiler.inProfiling || mod::tick::isMSPTing) {
                 TIMER_START
                 original(serverLevel);
                 modInstance->lightTick();
                 modInstance->heavyTick();
+                mod::tick::staticWork();
                 TIMER_END
                 if (mod::tick::isMSPTing) {
                     auto mspt = (double) timeReslut / 1000;
@@ -187,19 +177,20 @@ THook(
                     trapdoor::broadcastMsg("mspt: %.3lf ms tps: %d", mspt, tps);
                     mod::tick::isMSPTing = false;
                 }
-                if (mod::tick::isProfiling) {
-                    mod::tick::levelTickTime += timeReslut;
-                    mod::tick::currentProfileRound--;
-                    if (mod::tick::currentProfileRound == 0) {
-                        mod::tick::isProfiling = false;
-                        mod::tick::sendProfileInfo();
-                        mod::tick::resetProfileCounter();
+                if (mod::tick::gameProfiler.inProfiling) {
+                    mod::tick::gameProfiler.serverLevelTickTime += timeReslut;
+                    mod::tick::gameProfiler.currentRound--;
+                    if (mod::tick::gameProfiler.currentRound == 0) {
+                        mod::tick::gameProfiler.inProfiling = false;
+                        mod::tick::gameProfiler.print();
+                        mod::tick::gameProfiler.reset();
                     }
                 }
             } else {
                 original(serverLevel);
                 modInstance->lightTick();
                 modInstance->heavyTick();
+                mod::tick::staticWork();
             }
             break;
 
@@ -238,14 +229,6 @@ THook(
         void * tick
 ) {
     original(p, tick);
-    if (mod::tick::isProfiling) {
-        TIMER_START
-        original(p, tick);
-        TIMER_END
-        mod::tick::playerTickTime += timeReslut;
-    } else {
-        original(p, tick);
-    }
 }
 
 //Dimension::tick
@@ -254,16 +237,14 @@ THook(
         MSSYM_B1QA4tickB1AA9DimensionB2AAA7UEAAXXZ,
         void * dim
 ) {
-    if (mod::tick::isProfiling) {
+    if (mod::tick::gameProfiler.inProfiling) {
         TIMER_START
         original(dim);
-
         TIMER_END
-        mod::tick::dimTickTime += timeReslut;
+        mod::tick::gameProfiler.dimensionTickTime += timeReslut;
     } else {
         original(dim);
     }
-
 }
 //LevelChunk::tick
 THook(
@@ -273,11 +254,12 @@ THook(
         trapdoor::BlockSource *blockSource,
         Tick * tick
 ) {
-    if (mod::tick::isProfiling) {
+    if (mod::tick::gameProfiler.inProfiling) {
         TIMER_START
         original(levelChunk, blockSource, tick);
         TIMER_END
-        mod::tick::chunkTickTime += timeReslut;
+        mod::tick::gameProfiler.chunkTickTime += timeReslut;
+        mod::tick::gameProfiler.tickChunkNum++;
     } else {
         original(levelChunk, blockSource, tick);
     }
@@ -293,11 +275,11 @@ THook(
         int a4
 ) {
 
-    if (mod::tick::isProfiling) {
+    if (mod::tick::gameProfiler.inProfiling) {
         TIMER_START
         original(levelChunk, blockSource, a3, a4);
         TIMER_END
-        mod::tick::randTickTime += timeReslut;
+        mod::tick::gameProfiler.chunkRandomTickTime += timeReslut;
     } else {
         original(levelChunk, blockSource, a3, a4);
     }
@@ -313,11 +295,11 @@ THook(
         void *levelChunk,
         void * blockSource
 ) {
-    if (mod::tick::isProfiling) {
+    if (mod::tick::gameProfiler.inProfiling) {
         TIMER_START
         original(levelChunk, blockSource);
         TIMER_END
-        mod::tick::blockEntityTickTime += timeReslut;
+        mod::tick::gameProfiler.chunkBlockEntityTickTime += timeReslut;
     } else {
         original(levelChunk, blockSource);
     }
@@ -332,30 +314,37 @@ THook(
         void * chunk
 ) {
 //    if (!globalSpawner)globalSpawner = swr;
-    if (mod::tick::isProfiling) {
-        TIMER_START
-        original(swr, blockSource, chunk);
-        TIMER_END
-        mod::tick::spawnerTickTime += timeReslut;
-    } else {
-        original(swr, blockSource, chunk);
-    }
+    original(swr, blockSource, chunk);
+//    if (mod::tick::isProfiling) {
+//        TIMER_START
+//        original(swr, blockSource, chunk);
+//        TIMER_END
+//        mod::tick::spawnerTickTime += timeReslut;
+//    } else {
+//    }
 
 }
 
 //BlockTickingQueue::pendingTicks
 //the server will crash if hook this function
-//THook(
-//        void,
-//        MSSYM_B1QE16tickPendingTicksB1AE17BlockTickingQueueB2AAA4QEAAB1UE16NAEAVBlockSourceB2AAA8AEBUTickB2AAA1HB1UA1NB1AA1Z,
-//        void *queue,
-//        void *source,
-//        int flag,
-//        bool a1
-//) {
-//    original(queue, source, flag, a1);
-//
-//}
+THook(
+        void,
+        MSSYM_B1QE16tickPendingTicksB1AE17BlockTickingQueueB2AAA4QEAAB1UE16NAEAVBlockSourceB2AAA8AEBUTickB2AAA1HB1UA1NB1AA1Z,
+        void *queue,
+        trapdoor::BlockSource *source,
+        const int *until,
+        int max,
+        bool instalTick
+) {
+    if (mod::tick::gameProfiler.inProfiling) {
+        TIMER_START
+        original(queue, source, until, max, instalTick);
+        TIMER_END
+        mod::tick::gameProfiler.chunkPendingTickTime += timeReslut;
+    } else {
+        original(queue, source, until, max, instalTick);
+    }
+}
 
 //Dimension::tick
 THook(
@@ -363,15 +352,14 @@ THook(
         MSSYM_B1QE12tickRedstoneB1AA9DimensionB2AAA7UEAAXXZ,
         void * dim
 ) {
-    if (mod::tick::isProfiling) {
+    if (mod::tick::gameProfiler.inProfiling) {
         TIMER_START
         original(dim);
         TIMER_END
-        mod::tick::redstoneTickTime += timeReslut;
+        mod::tick::gameProfiler.redstoneTickTime += timeReslut;
     } else {
         original(dim);
     }
-
     // auto v1 = *((int *) globalDimension + 69);
     // auto v2 = *((int *) globalDimension + 68);
     // printf("69%d 68%d\n", v1, v2);
@@ -379,3 +367,37 @@ THook(
 }
 
 
+THook(
+        void,
+        MSSYM_B1QA4tickB1AE13EntitySystemsB2AAE23QEAAXAEAVEntityRegistryB3AAAA1Z,
+        void *entitySystem,
+        void * registry
+) {
+    if (mod::tick::gameProfiler.inProfiling) {
+        TIMER_START
+        original(entitySystem, registry);
+        TIMER_END
+        mod::tick::gameProfiler.levelEntitySystemTickTime += timeReslut;
+    } else {
+        original(entitySystem, registry);
+    }
+}
+
+THook(
+        void,
+        MSSYM_B1QA4tickB1AA5ActorB2AAA4QEAAB1UE16NAEAVBlockSourceB3AAAA1Z,
+        trapdoor::Actor *actor,
+        trapdoor::BlockSource * blockSource
+) {
+
+    if (mod::tick::getActorProfiler().inProfiling) {
+        auto &profiler = mod::tick::getActorProfiler();
+        TIMER_START
+        original(actor, blockSource);
+        TIMER_END
+        auto name = trapdoor::getActorName(actor);
+        profiler.entitiesTickingList[name] += timeReslut;
+    } else {
+        original(actor, blockSource);
+    }
+}

@@ -79,6 +79,8 @@ namespace trapdoor {
 
         void send(Actor *player);
 
+        void broadcast();
+
         void operator+=(const std::string &str) {
             this->text(str);
         }

@@ -82,9 +82,13 @@ namespace trapdoor {
     }
 
     void MessageBuilder::send(Actor *actor) {
-        info(actor, get().c_str());
+        info(actor, get());
         //todo: rewrite
         // info(get());
+    }
+
+    void MessageBuilder::broadcast() {
+        broadcastMsg(this->get());
     }
 }
 
