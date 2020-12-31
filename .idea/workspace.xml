@@ -17,23 +17,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b8a60db2-baf4-4087-8601-d054cc921b14" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/commands/Command.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/commands/Command.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/commands/Command.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/commands/Command.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/commands/CommandManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/commands/CommandManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/commands/CommandManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/commands/CommandManager.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/commands/CommandNode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/commands/CommandNode.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/commands/CommandNode.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/commands/CommandNode.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/entity/Actor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/entity/Actor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/entity/Actor.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/entity/Actor.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/TrapdoorMod.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/TrapdoorMod.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/TrapdoorMod.h" beforeDir="false" afterPath="$PROJECT_DIR$/mod/TrapdoorMod.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/config/ConfigManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/config/ConfigManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/config/ConfigManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/mod/config/ConfigManager.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/dllmain.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/dllmain.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/todo.txt" afterDir="false" />
-    </list>
+    <list default="true" id="b8a60db2-baf4-4087-8601-d054cc921b14" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -300,7 +284,7 @@
       <workItem from="1609340191300" duration="828000" />
       <workItem from="1609381255238" duration="4575000" />
       <workItem from="1609401543343" duration="2000" />
-      <workItem from="1609407338188" duration="5174000" />
+      <workItem from="1609407338188" duration="5521000" />
     </task>
     <task id="LOCAL-00001" summary="1. 命令解释器投入使用，和switch case 彻底告别&#10;2. 支持游戏模式切换命令 ./gm mode n (n=3是观察模式)">
       <created>1604761522583</created>
@@ -414,9 +398,10 @@
     </state>
     <state x="562" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824@0.0.1536.824" timestamp="1609410976848" />
     <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1549.831@0.0.1549.831" timestamp="1609330221648" />
-    <state x="590" y="328" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1609333107462">
-      <screen x="0" y="0" width="1549" height="831" />
+    <state x="585" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1609412788614">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="585" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1609412788614" />
     <state x="590" y="328" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1549.831@0.0.1549.831" timestamp="1609333107462" />
     <state x="432" y="189" key="run.anything.popup" timestamp="1609069828347">
       <screen x="0" y="0" width="1549" height="831" />
