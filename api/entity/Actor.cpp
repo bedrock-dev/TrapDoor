@@ -126,9 +126,9 @@ namespace trapdoor {
         return reinterpret_cast<NetworkIdentifier *>((char *) this + 2432);
     }
 
-    CMD_LEVEL Actor::getCommandLevel() {
+    PlayerPermissionLevel Actor::getCommandLevel() {
         return SYM_CALL(
-                CMD_LEVEL(*)(Actor * ),
+                PlayerPermissionLevel(*)(Actor * ),
                 SymHook::MSSYM_B1QE25getCommandPermissionLevelB1AA6PlayerB2AAA4UEBAB1QE25AW4CommandPermissionLevelB2AAA2XZ,
                 this
         );

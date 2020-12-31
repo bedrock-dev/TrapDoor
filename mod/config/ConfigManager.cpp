@@ -4,9 +4,12 @@
 
 #include "ConfigManager.h"
 #include "tools/DirtyLogger.h"
+#include "commands/CommandManager.h"
 #include <iostream>
 
 namespace mod {
+
+
     bool ConfigManager::initialize(const std::string &configFIleName) {
         L_INFO("config manager developing");
         if (!this->readConfigFile(configFIleName))return false;
@@ -18,13 +21,14 @@ namespace mod {
 
     bool ConfigManager::readCommandConfig() {
         auto commandConfigs = this->configJson["commands"];
-        CommandConfig tempConfig{true, 3, false};
+        trapdoor::CommandConfig tempConfig;
         try {
             for (const auto &i :commandConfigs.items()) {
                 const auto &value = i.value();
                 tempConfig.enable = value["enable"].get<bool>();
-                tempConfig.permissionLevel = value["permissionLevel"].get<int>();
+                tempConfig.permissionLevel = static_cast<trapdoor::CommandPermissionLevel>(value["permissionLevel"].get<int>());
                 tempConfig.survival = value["survival"].get<bool>();
+                tempConfig.needCheat = value["needCheat"].get<bool>();
                 this->commandsConfig.insert({i.key(), tempConfig});
             }
         } catch (const std::exception &e) {
@@ -38,7 +42,7 @@ namespace mod {
         return this->functionConfig;
     }
 
-    const std::map<std::string, ConfigManager::CommandConfig> &ConfigManager::getCommandsConfig() {
+    std::map<std::string, trapdoor::CommandConfig> &ConfigManager::getCommandsConfig() {
         return this->commandsConfig;
     }
 

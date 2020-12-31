@@ -12,46 +12,25 @@
 namespace trapdoor {
     CommandNode *Arg(const std::string &args, const std::string &desc, ArgType type) {
 
-        auto *node = new CommandNode(args, desc, OP);
+        auto *node = new CommandNode(args, desc);
         node->setArgType(type);
         return node;
     }
-
 
     static bool isValidIntString(const std::string &str) {
         return std::all_of(str.begin(), str.end(), [](char c) { return '0' <= c && c <= '9'; });
     }
 
-    std::string cmdLevelToStr(CMD_LEVEL level) {
-        switch (level) {
-            case MEMBER:
-                return "member";
-            case OP:
-                return "ops";
-            case BACK_EBD:
-                return "back_end";
-            case DEVELOP:
-                return "develop";
-            case MOJANG:
-                return "mojang";
-            default:
-                return "unknown";
-        }
-    }
 
-    CommandNode::CommandNode(std::string name, std::string description, CMD_LEVEL level)
+    CommandNode::CommandNode(std::string name, std::string description)
             : name(std::move(name)),
               work([&name](ArgHolder *holder, Actor *actor) {
                   error(actor, "require a sub command behind %s", name.c_str());
               }),
-              description(std::move(description)),
-              permissionLevel(level) {
-    }
+              description(std::move(description)) {}
 
-    CommandNode::CommandNode(std::string name, CMD_LEVEL level) : CommandNode(
-            std::move(name), "no desc", level) {}
 
-    CommandNode::CommandNode(std::string name) : CommandNode(std::move(name), OP) {}
+    CommandNode::CommandNode(std::string name) : CommandNode(std::move(name), "no desc") {}
 
     int CommandNode::parse(Actor *player, const std::vector<std::string> &tokens, size_t idx) {
         bool executeNow = false;
@@ -150,6 +129,25 @@ namespace trapdoor {
         if (!player)return;
         this->work(holder, player);
 
+    }
+
+    const char *commandPermissionLevelToStr(CommandPermissionLevel level) {
+        switch (level) {
+            case Any:
+                return "any";
+            case GameMasters:
+                return "GameMaster";
+            case Admin:
+                return "Admin";
+            case Host:
+                return "host";
+            case Owner:
+                return "Owner";
+            case Internal:
+                return "Internal";
+            default:
+                return "Unknown";
+        }
     }
 
 }
