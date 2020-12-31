@@ -27,25 +27,23 @@ namespace trapdoor {
         if (tokens.empty())return -1;
         auto iter = this->commandList.find(tokens[0]);
         if (iter != commandList.end()) {
-            auto level = iter->second->getPermissionLevel();
-            if (level <= player->getCommandLevel()) {
-                return iter->second->parse(player, tokens, 1);
-            } else {
-                error(player, "you have no permission to run this command");
+            if (!this->checkCommandPermission(tokens[0], player)) {
                 return -2;
             }
+            return iter->second->parse(player, tokens, 1);
         }
         return -3;
     }
 
     CommandNode *
-    CommandManager::registerCmd(const std::string &cmd, const std::string &description, CMD_LEVEL level, ArgType type) {
+    CommandManager::registerCmd(const std::string &cmd, const std::string &description, CommandPermissionLevel level,
+                                ArgType type) {
         //创建当前命令的根节点
-        auto *rootNode = new CommandNode(cmd, description, level);
+        auto *rootNode = new CommandNode(cmd, description);
         rootNode->setArgType(type);
         commandList["/" + cmd] = rootNode; //加个/方便查找
         //给根节点添加一个默认的?选项方便打印帮助信息
-        auto *helpNode = new CommandNode("?", "print help info", MEMBER);
+        auto *helpNode = new CommandNode("?", "print help info");
         //打印帮助信息
         helpNode->execute([rootNode](ArgHolder *holder, Actor *player) {
             // dbg("print help info");
@@ -54,7 +52,7 @@ namespace trapdoor {
         rootNode->then(helpNode);
         //注册命令到游戏中
         L_INFO("register command %s", cmd.c_str());
-        regMCBECommand(cmd, description.c_str(), level);
+        regMCBECommand(cmd, description.c_str(), level, true);
         // LOGF(getLogFile(), "register command [%s]\n", cmd.c_str());
         return rootNode;
     }
@@ -72,5 +70,42 @@ namespace trapdoor {
         }
     }
 
+    bool CommandManager::checkCommandPermission(const std::string &command, Actor *player) {
+        auto cmdCfg = this->commandConfigList.find(command);
+        if (cmdCfg == commandConfigList.end()) {
+            L_WARNING("command %s was not config", command.c_str());
+            error(player, "这个命令没有被配置，请联系腐竹");
+            return false;
+        }
+        //todo game mode check
 
+        if (!cmdCfg->second.enable) {
+            error(player, "该服务器未启用该指令,请联系腐竹");
+            return false;
+        }
+
+        //todo level cheat check;
+
+        auto playerLevel = static_cast<int>(player->getCommandLevel());
+        auto commandLevel = static_cast<int>(cmdCfg->second.permissionLevel);
+        if (playerLevel < commandLevel) {
+            L_INFO("server reject the execute of command [%s] for player %s", command.c_str(),
+                   player->getNameTag().c_str());
+            error(player, "你没有权限执行该命令[你的等级:%d < 命令等级:%d]", playerLevel, commandLevel);
+            return false;
+        }
+        return true;
+    }
+
+    void CommandManager::setCommandConfig(std::map<std::string, CommandConfig> &cmdConfigList) {
+        //  this->commandConfigList = std::map<std::string, CommandConfig>(cmdConfigList.begin(), cmdConfigList.end());
+        this->commandConfigList = cmdConfigList;
+        L_INFO("here are all the command info");
+        for (const auto &item:this->commandConfigList) {
+            L_INFO("%-10s enable:%d  level:%d", item.first.c_str(),
+                   item.second.enable,
+                   item.second.permissionLevel
+            );
+        }
+    }
 }

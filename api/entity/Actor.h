@@ -46,7 +46,7 @@ namespace trapdoor {
 
         NetworkIdentifier *getClientID();
 
-        CMD_LEVEL getCommandLevel();
+        PlayerPermissionLevel getCommandLevel();
 
         PlayerInventory *getPlayerInventory();
 
@@ -54,6 +54,8 @@ namespace trapdoor {
 
         Level *getLevel();
     };
+
+
 
 
 /**

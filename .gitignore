@@ -8,3 +8,5 @@ PDB导出工具.exe
 .idea
 build
 include/
+api/math/
+doc/

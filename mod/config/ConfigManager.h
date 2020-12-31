@@ -8,6 +8,7 @@
 #include "tools/json.hpp"
 #include <fstream>
 #include "tools/DirtyLogger.h"
+#include "commands/CommandManager.h"
 #include <map>
 
 
@@ -24,11 +25,7 @@ namespace mod {
     class ConfigManager {
     public:
         //命令配置选项
-        struct CommandConfig {
-            bool enable = true; //是否启用
-            int permissionLevel = 2; //权限等级
-            bool survival = false; //生存中是否可用
-        };
+
         struct FunctionConfig {
             bool hopperCounter = true;
             bool explosion = true;
@@ -47,7 +44,7 @@ namespace mod {
     private:
 
         json configJson;
-        std::map<std::string, CommandConfig> commandsConfig;
+        std::map<std::string, trapdoor::CommandConfig> commandsConfig;
         FunctionConfig functionConfig;
         ParticleConfig particleConfig;
 
@@ -63,7 +60,7 @@ namespace mod {
 
         const FunctionConfig &getFunctionConfig();
 
-        const std::map<std::string, CommandConfig> &getCommandsConfig();
+        std::map<std::string, trapdoor::CommandConfig> &getCommandsConfig();
 
         const ParticleConfig &getParticleConfig();
 

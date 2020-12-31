@@ -9,6 +9,7 @@
 #include "village/Village.h"
 #include "hopper/HopperCounter.h"
 #include "spawn/HsaManager.h"
+#include "config/ConfigManager.h"
 
 namespace mod {
     class TrapdoorMod : public trapdoor::BDSMod {
@@ -16,6 +17,7 @@ namespace mod {
         HopperChannelManager hopperChannelManager;
         VillageHelper villageHelper;
         HsaManager hsaManager;
+        ConfigManager configManager;
 
     public:
         void initialize();

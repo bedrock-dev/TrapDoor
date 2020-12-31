@@ -9,8 +9,9 @@
 #include <string>
 
 //初始化命令
-namespace trapdoor{
+namespace trapdoor {
 //注册mcbe命令,说白了就是给一级指令加tab功能
-void regMCBECommand(const std::string &command, const char *description, CMD_LEVEL level);
+    void
+    regMCBECommand(const std::string &command, const char *description, CommandPermissionLevel level, bool cheat);
 }
 #endif //TRAPDOOR_COMMAND_H
