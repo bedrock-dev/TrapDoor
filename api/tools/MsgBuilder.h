@@ -60,11 +60,11 @@ namespace trapdoor {
             if (std::is_arithmetic<T>()) {
                 if (std::is_floating_point<T>()) {
                     char buffer[32];
-                    sprintf(buffer, "%.2f", (double) x);
+                    sprintf(buffer, "%.3f", (double) x);
                     std::string s(buffer);
-                    sText(s, GREEN);
+                    sText(s, GREEN | BOLD);
                 } else {
-                    sText(std::to_string(x), GREEN);
+                    sText(std::to_string(x), GREEN | BOLD);
                 }
             }
             return *this;

@@ -46,8 +46,6 @@ namespace mod {
 
 
     class VillageHelper {
-
-
         bool enableShow = false;
         size_t gameTick = 0;
     public:

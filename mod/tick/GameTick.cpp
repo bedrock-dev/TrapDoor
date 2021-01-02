@@ -32,7 +32,11 @@ namespace mod::tick {
             return actorProfiler;
         }
 
+        /*
+         * 这个函数也是每gt执行一次的，但是不经过 TrapdoorMod,因此用static 来表示
+         */
         void staticWork() {
+            //实体性能分析的更新
             if (mod::tick::getActorProfiler().inProfiling) {
                 auto &actorProfiler = mod::tick::getActorProfiler();
                 actorProfiler.currentRound--;
@@ -126,7 +130,7 @@ namespace mod::tick {
 
     void profileEntities(trapdoor::Actor *player) {
         if (getActorProfiler().inProfiling) {
-            trapdoor::warning(player, "another profiling is running");
+            trapdoor::warning(player, "another profiling is in running");
             return;
         }
 
@@ -383,20 +387,23 @@ THook(
     }
 }
 
+
+
+//实体性能分析的钩子函数
 THook(
         void,
         MSSYM_B1QA4tickB1AA5ActorB2AAA4QEAAB1UE16NAEAVBlockSourceB3AAAA1Z,
         trapdoor::Actor *actor,
         trapdoor::BlockSource * blockSource
 ) {
-
     if (mod::tick::getActorProfiler().inProfiling) {
         auto &profiler = mod::tick::getActorProfiler();
         TIMER_START
         original(actor, blockSource);
         TIMER_END
-        auto name = trapdoor::getActorName(actor);
-        profiler.entitiesTickingList[name] += timeReslut;
+        auto name = actor->getActorId();
+        profiler.entitiesTickingList[name].time += timeReslut;
+        profiler.entitiesTickingList[name].count++;
     } else {
         original(actor, blockSource);
     }

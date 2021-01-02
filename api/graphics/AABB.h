@@ -40,6 +40,10 @@ namespace trapdoor {
             return {minPoint, maxPoint};
         }
 
+        AABB toAABB() const {
+            return {minPos.toVec3(), maxPos.toVec3() + Vec3(1, 1, 1)};
+        }
+
         bool operator<(const BoundingBox &rhs) const {
             if (minPos < rhs.minPos)
                 return true;
@@ -48,10 +52,7 @@ namespace trapdoor {
             return maxPos < rhs.maxPos;
         }
 
-        AABB toAABB() const {
-            Vec3 one(1, 1, 1);
-            return {minPos.toVec3(), maxPos.toVec3() + one};
-        }
+
     };
 }
 

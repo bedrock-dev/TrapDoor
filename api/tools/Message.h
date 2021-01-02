@@ -51,7 +51,7 @@ namespace trapdoor {
 
     template<typename ... Args>
     void broadcastMsg(const std::string &fmt, Args... args) {
-        auto msg = "[server] "+format(fmt, args...);
+        auto msg = "[server] " + format(fmt, args...);
         trapdoor::bdsMod->getLevel()->forEachPlayer([&msg](Actor *player) {
             mcbe_sendMessage(msg, player);
         });

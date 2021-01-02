@@ -97,6 +97,7 @@ namespace trapdoor {
         return true;
     }
 
+
     void CommandManager::setCommandConfig(std::map<std::string, CommandConfig> &cmdConfigList) {
         //  this->commandConfigList = std::map<std::string, CommandConfig>(cmdConfigList.begin(), cmdConfigList.end());
         this->commandConfigList = cmdConfigList;

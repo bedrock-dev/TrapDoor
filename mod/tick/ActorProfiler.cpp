@@ -7,6 +7,7 @@
 #include "tools/MsgBuilder.h"
 #include "GameTick.h"
 #include "tools/DirtyLogger.h"
+#include <algorithm>
 
 namespace mod {
 
@@ -33,16 +34,33 @@ namespace mod {
         getActorProfiler().currentRound = getActorProfiler().totalRound;
     }
 
+
     void ActorProfiler::print() const {
         trapdoor::MessageBuilder builder;
         microsecond_t totalTime = 0;
+        size_t entityNum = 0;
         auto rounds = static_cast<float >(this->totalRound * 1000);
+        //统计总量
         for (const auto &item:this->entitiesTickingList) {
-            totalTime += item.second;
+            totalTime += item.second.time;
+            entityNum += item.second.count;
         }
-        builder.textF("-- Entities profiler %.3fms --\n", totalTime / rounds);
-        for (const auto &item:this->entitiesTickingList) {
-            builder.textF("%s:     %.3fms\n", item.first.c_str(), item.second / rounds);
+        builder.sTextF(trapdoor::MessageBuilder::BOLD | trapdoor::MessageBuilder::AQUA,
+
+                       "\n- %.3fms(%d) --\n", totalTime / rounds, entityNum / this->totalRound);
+        //排序
+        std::vector<std::pair<std::string, ActorProfilerInfo>> info(entitiesTickingList.begin(),
+                                                                    entitiesTickingList.end());
+        //输出前num个
+        std::sort(info.begin(), info.end(), [](const std::pair<std::string, ActorProfilerInfo> &i1,
+                                               const std::pair<std::string, ActorProfilerInfo> &i2
+        ) {
+            return i1.second.time > i2.second.time;
+        });
+        for (auto &item : info) {
+            builder.textF(" - %s       ", item.first.c_str())
+                    .sTextF(trapdoor::MessageBuilder::GREEN, "%.3fms/(%d)\n",
+                            item.second.time / rounds, item.second.count / this->totalRound);
         }
         builder.broadcast();
     }

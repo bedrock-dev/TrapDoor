@@ -157,8 +157,8 @@ Player::tickWorld
 ?_handlePopulationCap@Spawner@@AEAAHPEBVMobSpawnerData@@AEBVSpawnConditions@@H@Z
 #结构刷怪
 ?_spawnStructureMob@Spawner@@AEAAXAEAVBlockSource@@AEBVBlockPos@@AEBUHardcodedSpawningArea@LevelChunk@@AEBVSpawnConditions@@@Z
-
-
+#寻找同y的刷怪点
+?findNextSpawnBlockUnder@Spawner@@SA_NAEBVBlockSource@@AEAVBlockPos@@W4MaterialType@@W4SpawnBlockRequirements@@@Z
 
 
 
@@ -275,3 +275,13 @@ Player::tickWorld
 ?clearSlot@FillingContainer@@UEAAXH@Z
 #获取手持槽的位置
 ?getSelectedSlot@PlayerInventory@@QEBA?AUSlotData@1@XZ
+
+
+#获取某点的亮度
+?getRawBrightness@BlockSource@@QEBA?AUBrightness@@AEBVBlockPos@@_N1@Z
+#获取某点的材料
+?getMaterial@BlockSource@@QEBAAEBVMaterial@@HHH@Z
+#获取区块对象
+?getChunk@BlockSource@@QEBAPEAVLevelChunk@@AEBVChunkPos@@@Z
+#获取刷怪类型
+?getMobToSpawn@BlockLegacy@@UEBAPEBVMobSpawnerData@@AEBVSpawnConditions@@AEAVBlockSource@@@Z

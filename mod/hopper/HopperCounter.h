@@ -46,9 +46,8 @@ namespace mod {
 
 //漏斗频道管理器
     class HopperChannelManager {
-
         std::vector<CounterChannel> channels;
-        bool enable = true;
+        bool enable = false;
     public:
         static const std::map<std::string, size_t> BLOCK_NAME_CHANNEL_MAPPER;
 

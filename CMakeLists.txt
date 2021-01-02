@@ -42,7 +42,8 @@ add_library(${MOD_API_NAME} STATIC
         api/tools/Message.cpp
         api/tools/MsgBuilder.cpp
         api/world/LevelChunk.cpp
-        api/tools/enumTools.h)
+        api/tools/enumTools.h
+        )
 target_include_directories(${MOD_API_NAME}
         PUBLIC
         api
@@ -73,6 +74,8 @@ add_library(${MOD_NAME}
         mod/tick/SimpleProfiler.cpp
         mod/tick/ActorProfiler.cpp
         mod/tick/BlockActorProfiler.cpp
+        mod/spawn/SpawnHelper.cpp
+        mod/spawn/SpawnAnalyzer.cpp
         )
 
 target_include_directories(
@@ -93,6 +96,8 @@ target_include_directories(
         api/world
         api/lib
         api/tools
+        api/event
+
 )
 
 

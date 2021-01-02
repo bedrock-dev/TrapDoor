@@ -40,4 +40,11 @@ namespace trapdoor {
     }
 
 
+
+    std::map<std::string, PlayerBuffer> &BDSMod::getPlayerBuffer() {
+        return this->playerCache;
+    }
+
+
+
 }

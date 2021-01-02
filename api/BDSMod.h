@@ -14,6 +14,7 @@
 #include <string>
 #include "commands/CommandManager.h"
 #include "world/Level.h"
+#include "PlayerBuffer.h"
 
 typedef size_t Tick;
 namespace trapdoor {
@@ -23,6 +24,7 @@ namespace trapdoor {
         Level *serverLevel{};
         CommandRegistry *commandRegistry{};
         CommandManager commandManager;
+        std::map<std::string, PlayerBuffer> playerCache;
     public:
         Level *getLevel();
 
@@ -35,6 +37,16 @@ namespace trapdoor {
         CommandManager &getCommandManager();
 
         virtual void registerCommands();
+
+
+
+
+        virtual void useOnHook(Actor *player, const std::string &itemName, const BlockPos &pos,
+                               unsigned int facing,
+                               const Vec3 &) = 0;
+
+
+        std::map<std::string, PlayerBuffer> &getPlayerBuffer();
 
         template<typename Mod>
         Mod *asInstance() {

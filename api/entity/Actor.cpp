@@ -15,6 +15,7 @@
 #include "PlayerInventory.h"
 #include "block/BlockSource.h"
 #include "Dimension.h"
+#include "tools/DirtyLogger.h"
 
 
 namespace trapdoor {
@@ -150,25 +151,24 @@ namespace trapdoor {
         return bdsMod->getLevel();
     }
 
+    std::string Actor::getActorId() {
+        std::vector<std::string> info;
+        SYM_CALL(void(*)(void * , std::vector<std::string> &),
+                 SymHook::MSSYM_MD5_f04fad6bac034f1e861181d3580320f2,
+                 this, info);
+        if (info.empty())return "null";
+        std::string name = info[0];
+        name.erase(0, 23); //remove:Entity:minecraft
+        name.pop_back();
+        name.pop_back(); //remove <>
+        return name;
+    }
 
     std::string ActorDefinitionIdentifier::getName() {
         auto str = reinterpret_cast<std::string *>((char *) this + 32);
         return std::string(*str);
     }
 
-    std::vector<std::string> getActorText(void *actor) {
-        std::vector<std::string> info;
-        if (!actor)return info;
-        SYM_CALL(void(*)(void * , std::vector<std::string> &),
-                 SymHook::MSSYM_MD5_f04fad6bac034f1e861181d3580320f2,
-                 actor, info);
-        return info;
-    }
-
-
-    std::string getActorName(void *actor) {
-        return actor ? getActorText(actor)[0].substr(13) : "null";
-    }
 }
 
 
@@ -201,27 +201,7 @@ namespace trapdoor {
 //    }
 //}
 //spawn mob
-//THook(
-//        bool,
-//        MSSYM_B1QA8spawnMobB1AA7SpawnerB2AAE11QEAAPEAVMobB2AAE15AEAVBlockSourceB2AAE29AEBUActorDefinitionIdentifierB2AAA9PEAVActorB2AAA8AEBVVec3B3AAUA3N44B1AA1Z,
-//        void *sp,
-//        void *bs,
-//        ActorDefinitionIdentifier *actorId,
-//        void *actor,
-//        Vec3 *pos,
-//        bool a6,
-//        bool a7,
-//        bool a8
-//) {
-//   // printf("(%f, %f, %f) ==> %s\n", pos->x, pos->y, pos->z, actorId->getName().c_str());
-////    if (mobSpawnCounterStart && pos) {
-////        auto mobName = actorId->getName();
-////        Vec3 vec(pos->x, pos->y, pos->z);
-////        mobCounterList[mobName].emplace_back(vec);
-////    }
-//    return original(sp, bs, actorId, actor, pos, a6, a7, a8);
-//    //  return false;
-//}
+
 
 
 

@@ -10,6 +10,8 @@
 #include "hopper/HopperCounter.h"
 #include "spawn/HsaManager.h"
 #include "config/ConfigManager.h"
+#include "spawn/SpawnHelper.h"
+#include "spawn/SpawnAnalyzer.h"
 
 namespace mod {
     class TrapdoorMod : public trapdoor::BDSMod {
@@ -18,26 +20,34 @@ namespace mod {
         VillageHelper villageHelper;
         HsaManager hsaManager;
         ConfigManager configManager;
+        SpawnHelper spawnHelper;
+        SpawnAnalyzer spawnAnalyzer;
+
+        void registerTickCommand();
 
     public:
+        static void printCopyRightInfo();
+
         void initialize();
 
+
+        void registerCommands() override;
+
+        void useOnHook(Actor *player, const std::string &itemName, const BlockPos &pos, unsigned int facing,
+                       const Vec3 &) override;
+
+        void heavyTick();
+
+        void lightTick();
+
+        //get functions
         inline HopperChannelManager &getHopperChannelManager() { return this->hopperChannelManager; }
 
         inline VillageHelper &getVillageHelper() { return this->villageHelper; }
 
         inline HsaManager &getHsaManager() { return this->hsaManager; }
 
-        void registerCommands() override;
-
-        void registerTickCommand();
-
-        static void printCopyRightInfo();
-
-        void heavyTick();
-
-        void lightTick();
-
+        inline SpawnAnalyzer &getSpawnAnalyzer() { return this->spawnAnalyzer; }
     };
 
 }

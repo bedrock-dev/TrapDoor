@@ -22,6 +22,7 @@ namespace trapdoor {
             if (player)todo(player);
             ++begin;
         }
+        //  foreach_vector<Actor *>(this, 11, 12, todo);
     }
 
     Actor *Level::getNearestPlayer(BlockPos &pos) {

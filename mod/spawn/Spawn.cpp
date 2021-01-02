@@ -2,18 +2,14 @@
 // Created by xhy on 2020/8/25.
 //
 
-#include "Spawn.h"
-#include "mod/tick/GameTick.h"
-#include "api/level/Dimension.h"
-#include "api/graphics/AABB.h"
-#include "common/Trapdoor.h"
 
-using namespace SymHook;
 
-int getMobCount(void *sp) {
-    if (!sp)return -1;
-    return *(reinterpret_cast<UINT32 *>(sp) + 48);
-}
+//using namespace SymHook;
+
+//int getMobCount(void *sp) {
+//    if (!sp)return -1;
+//    return *(reinterpret_cast<UINT32 *>(sp) + 48);
+//}
 
 
 
@@ -156,26 +152,3 @@ int getMobCount(void *sp) {
 //}
 
 
-BlockPos *SpawnConditions::position() {
-    return reinterpret_cast<BlockPos *>(CHAR(this) + 20);
-}
-
-bool SpawnConditions::isInWater() {
-    return *(CHAR(this) + 1) == 1;
-}
-
-int SpawnConditions::bright() {
-    return *reinterpret_cast<int *>((CHAR(this) + 16));
-}
-
-bool SpawnConditions::isInLava() {
-    return *(CHAR(this) + 2) == 1;
-}
-
-bool SpawnConditions::isSurface() {
-    return *(CHAR(this)) == 1;
-}
-
-bool SpawnConditions::isUnderGround() {
-    return *(CHAR(this) + 3) == 1;
-}

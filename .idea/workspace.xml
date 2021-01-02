@@ -17,7 +17,47 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b8a60db2-baf4-4087-8601-d054cc921b14" name="Default Changelist" comment="" />
+    <list default="true" id="b8a60db2-baf4-4087-8601-d054cc921b14" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/mod/spawn/SpawnAnalyzer.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mod/spawn/SpawnAnalyzer.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mod/spawn/SpawnHelper.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mod/spawn/SpawnHelper.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TrapDoorAPI_0.1_1.16.4.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/BDSMod.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/BDSMod.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/BDSMod.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/BDSMod.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/block/Block.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/block/Block.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/block/BlockSource.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/block/BlockSource.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/block/BlockSource.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/block/BlockSource.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/commands/CommandManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/commands/CommandManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/entity/Actor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/entity/Actor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/entity/Actor.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/entity/Actor.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/entity/Item.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/entity/Item.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/entity/PlayerBuffer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/entity/PlayerBuffer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/entity/PlayerBuffer.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/entity/PlayerBuffer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/graphics/AABB.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/graphics/AABB.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/lib/SymHook.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/lib/SymHook.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/tools/Message.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/tools/Message.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/tools/MsgBuilder.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/tools/MsgBuilder.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/world/Level.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/world/Level.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exexpermental/Redstone.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/exexpermental/Redstone.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exexpermental/Redstone.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/exexpermental/Redstone.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/TrapdoorMod.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/TrapdoorMod.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/TrapdoorMod.h" beforeDir="false" afterPath="$PROJECT_DIR$/mod/TrapdoorMod.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/hopper/HopperCounter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/hopper/HopperCounter.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/hopper/HopperCounter.h" beforeDir="false" afterPath="$PROJECT_DIR$/mod/hopper/HopperCounter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/spawn/Spawn.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/spawn/Spawn.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/spawn/Spawn.h" beforeDir="false" afterPath="$PROJECT_DIR$/mod/spawn/Spawn.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/tick/ActorProfiler.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/tick/ActorProfiler.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/tick/ActorProfiler.h" beforeDir="false" afterPath="$PROJECT_DIR$/mod/tick/ActorProfiler.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/tick/GameTick.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/tick/GameTick.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/tick/SimpleProfiler.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/tick/SimpleProfiler.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/village/Village.h" beforeDir="false" afterPath="$PROJECT_DIR$/mod/village/Village.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symbol.txt" beforeDir="false" afterPath="$PROJECT_DIR$/symbol.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/testMain.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/testMain.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trapDoorAPI_0.1_1.16.4.lib" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -57,18 +97,18 @@
     <property name="add_unversioned_files" value="$PROJECT_DIR$/cmake-build-release/config.json&#10;true&#10;C:/Users/xhy/dev/TrapDoor/cmake-build-release/QAQ.log" />
     <property name="cf.first.check.clang-format" value="false" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop/MCBEMulStructureFinder" />
-    <property name="settings.editor.selected.configurable" value="CPPToolchains" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\xhy\dev\TrapDoor\tools" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\xhy\dev\TrapDoor\api" />
       <recent name="C:\Users\xhy\dev\TrapDoor\api\tools" />
       <recent name="C:\Users\xhy\dev\TrapDoor\mod\hopper" />
       <recent name="C:\Users\xhy\dev\TrapDoor\mod" />
-      <recent name="C:\Users\xhy\dev\TrapDoor\api" />
       <recent name="C:\Users\xhy\dev\TrapDoor\api\block" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\xhy\dev\TrapDoor\tools" />
     </key>
   </component>
   <component name="RunManager" selected="CMake Application.trapdoor-mod">
@@ -285,6 +325,14 @@
       <workItem from="1609381255238" duration="4575000" />
       <workItem from="1609401543343" duration="2000" />
       <workItem from="1609407338188" duration="5521000" />
+      <workItem from="1609422266237" duration="5309000" />
+      <workItem from="1609464344552" duration="7047000" />
+      <workItem from="1609485034472" duration="4000" />
+      <workItem from="1609495708199" duration="8904000" />
+      <workItem from="1609505643421" duration="3000" />
+      <workItem from="1609508565481" duration="737000" />
+      <workItem from="1609553353002" duration="55000" />
+      <workItem from="1609591587501" duration="8838000" />
     </task>
     <task id="LOCAL-00001" summary="1. 命令解释器投入使用，和switch case 彻底告别&#10;2. 支持游戏模式切换命令 ./gm mode n (n=3是观察模式)">
       <created>1604761522583</created>
@@ -329,10 +377,10 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="559" y="94" key="#com.intellij.ide.util.MemberChooser/0.0.1549.831@0.0.1549.831" timestamp="1609071769158" />
-    <state x="505" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1609064779893">
+    <state x="505" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1609470107196">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="505" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1549.831@0.0.1549.831" timestamp="1609064779893" />
+    <state x="505" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1549.831@0.0.1549.831" timestamp="1609470107196" />
     <state x="394" y="0" key="CommitChangelistDialog2" timestamp="1604898979262">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
@@ -349,22 +397,22 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="317" y="74" key="GrepConsoleSettings/0.0.1549.831@0.0.1549.831" timestamp="1607826756109" />
-    <state width="1528" height="2" key="GridCell.Tab.0.bottom" timestamp="1609072091770">
+    <state width="1528" height="139" key="GridCell.Tab.0.bottom" timestamp="1609600442830">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state width="1528" height="2" key="GridCell.Tab.0.bottom/0.0.1549.831@0.0.1549.831" timestamp="1609072091770" />
-    <state width="1528" height="2" key="GridCell.Tab.0.center" timestamp="1609072091770">
+    <state width="1528" height="139" key="GridCell.Tab.0.bottom/0.0.1549.831@0.0.1549.831" timestamp="1609600442830" />
+    <state width="1528" height="139" key="GridCell.Tab.0.center" timestamp="1609600442829">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state width="1528" height="2" key="GridCell.Tab.0.center/0.0.1549.831@0.0.1549.831" timestamp="1609072091770" />
-    <state width="1528" height="2" key="GridCell.Tab.0.left" timestamp="1609072091770">
+    <state width="1528" height="139" key="GridCell.Tab.0.center/0.0.1549.831@0.0.1549.831" timestamp="1609600442829" />
+    <state width="1528" height="139" key="GridCell.Tab.0.left" timestamp="1609600442829">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state width="1528" height="2" key="GridCell.Tab.0.left/0.0.1549.831@0.0.1549.831" timestamp="1609072091770" />
-    <state width="1528" height="2" key="GridCell.Tab.0.right" timestamp="1609072091770">
+    <state width="1528" height="139" key="GridCell.Tab.0.left/0.0.1549.831@0.0.1549.831" timestamp="1609600442829" />
+    <state width="1528" height="139" key="GridCell.Tab.0.right" timestamp="1609600442830">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state width="1528" height="2" key="GridCell.Tab.0.right/0.0.1549.831@0.0.1549.831" timestamp="1609072091770" />
+    <state width="1528" height="139" key="GridCell.Tab.0.right/0.0.1549.831@0.0.1549.831" timestamp="1609600442830" />
     <state width="1528" height="264" key="GridCell.Tab.1.bottom" timestamp="1607743832933">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
@@ -385,31 +433,36 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="123" y="0" key="MergeDialog/0.0.1549.831@0.0.1549.831" timestamp="1608043427868" />
-    <state x="142" y="90" width="1270" height="707" key="SettingsEditor" timestamp="1609306109509">
+    <state x="202" y="106" width="1270" height="707" key="SettingsEditor" timestamp="1609591761310">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="142" y="90" width="1270" height="707" key="SettingsEditor/0.0.1549.831@0.0.1549.831" timestamp="1609306109509" />
+    <state x="202" y="106" width="1270" height="707" key="SettingsEditor/0.0.1549.831@0.0.1549.831" timestamp="1609591761310" />
     <state x="367" y="148" key="Vcs.Push.Dialog.v2" timestamp="1604898985160">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="367" y="148" key="Vcs.Push.Dialog.v2/0.0.1549.831@0.0.1549.831" timestamp="1604898985160" />
-    <state x="562" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1609410976848">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1609599535016">
+      <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="562" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824@0.0.1536.824" timestamp="1609410976848" />
-    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1549.831@0.0.1549.831" timestamp="1609330221648" />
+    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1549.831@0.0.1549.831" timestamp="1609599535016" />
+    <state x="703" y="23" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1609421229670" />
     <state x="585" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1609412788614">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="585" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1609412788614" />
     <state x="590" y="328" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1549.831@0.0.1549.831" timestamp="1609333107462" />
-    <state x="432" y="189" key="run.anything.popup" timestamp="1609069828347">
+    <state x="551" y="197" key="refactoring.ChangeSignatureDialog" timestamp="1609426037113">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="432" y="189" key="run.anything.popup/0.0.1549.831@0.0.1549.831" timestamp="1609069828347" />
-    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup" timestamp="1609312216577">
+    <state x="551" y="197" key="refactoring.ChangeSignatureDialog/0.0.1549.831@0.0.1549.831" timestamp="1609426037113" />
+    <state x="432" y="189" key="run.anything.popup" timestamp="1609496683980">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup/0.0.1549.831@0.0.1549.831" timestamp="1609312216577" />
+    <state x="432" y="189" key="run.anything.popup/0.0.1549.831@0.0.1549.831" timestamp="1609496683980" />
+    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup" timestamp="1609496393056">
+      <screen x="0" y="0" width="1549" height="831" />
+    </state>
+    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup/0.0.1549.831@0.0.1549.831" timestamp="1609496393056" />
   </component>
 </project>

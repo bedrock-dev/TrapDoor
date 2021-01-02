@@ -52,10 +52,10 @@ namespace trapdoor {
 
         unsigned int getSelectSlot();
 
+        std::string  getActorId();
+
         Level *getLevel();
     };
-
-
 
 
 /**
@@ -74,16 +74,6 @@ namespace trapdoor {
     std::string actorIDtoString(char *actorID);
 
     std::vector<std::string> getActorText(void *actor);
-
-
-//todo 这里的刷怪统计要重写，放到Spawn里面
-    void sendMobInfo();
-
-    void startSpawnCounter();
-
-    void endSpawnerCounter();
-
-    void spawnAnalysis(std::string &type);
 
     std::string getActorName(void *actor);
 }

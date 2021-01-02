@@ -23,12 +23,10 @@ namespace trapdoor {
         bool operator!=(const RightClickCache &rhs) const;
     };
 
-
 //这个结构专门存储玩家个人相关的缓存信息(相当于玩家的一个私人空间)
     struct PlayerBuffer {
         RightClickCache rightClickCache; //玩家右键缓存，作为右键检测使用
     };
-
 }
 
 

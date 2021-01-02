@@ -13,10 +13,14 @@
 namespace mod {
     class ActorProfiler {
     public:
+        struct ActorProfilerInfo {
+            microsecond_t time = 0;
+            size_t count = 0;
+        };
         bool inProfiling = false;
         size_t totalRound = 100;
         size_t currentRound = 0;
-        std::map<std::string, microsecond_t> entitiesTickingList;
+        std::map<std::string, ActorProfilerInfo> entitiesTickingList;
 
         void print() const;
 

@@ -25,16 +25,15 @@ namespace mod {
         trapdoor::MessageBuilder builder;
         builder.textF("Total mspt:    %.3fms   TPS:  %d\n", serverLevelTickTime / rounds, tps)
                 .textF("Redstone:    %.3fms\n", redstoneTickTime / rounds)
-                .textF("entitySystem:    %.3fms\n", levelEntitySystemTickTime / rounds)
-                .textF("Chunk (un)load and village:    %.3fms\n", dimensionTickTime / rounds)
-                .textF("total %zu chunks in ticking:    %.3fms\n", tickChunkNum / totalRound,
+                .textF("EntitySystem:    %.3fms\n", levelEntitySystemTickTime / rounds)
+                .textF("Chunk (un)load and village:    %.3fms\n------------------------\n", dimensionTickTime / rounds)
+                .textF("Total %zu chunks in ticking, use %.3fms\n", tickChunkNum / totalRound,
                        chunkTickTime / rounds)
-                .textF("    block entity:    %.3fms\n", chunkBlockEntityTickTime / rounds)
-                .textF("    random tick:    %.3fms\n", chunkRandomTickTime / rounds)
-                .textF("     pending tick:     %.3f/%.3fms\n", chunkRandomPendingTickTime / rounds,
+                .textF("- Block entity:    %.3fms\n", chunkBlockEntityTickTime / rounds)
+                .textF("- Random tick:    %.3fms\n", chunkRandomTickTime / rounds)
+                .textF("- pending tick:     %.3f/%.3fms\n", chunkRandomPendingTickTime / rounds,
                        chunkPendingTickTime / rounds)
                 .broadcast();
     }
 }
-
 

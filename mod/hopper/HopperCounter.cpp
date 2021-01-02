@@ -73,14 +73,14 @@ namespace mod {
             return;
         }
         trapdoor::MessageBuilder builder;
-        builder.textF("channel %d  total %d items in %d gt(%.2f min)\n-------\n", channel, n, gameTick,
-                      gameTick / 1200.0);
+        builder.sTextF(trapdoor::MessageBuilder::BOLD, "channel %d\n", channel)
+                .num(n).text("  items in ").num(gameTick).text(" gt(").num(gameTick / 1200.0).text("min)\n");
         for (const auto &i:counterList) {
-            builder.textF("%-30s        %-10d(%.2f/h)\n", i.first.c_str(), i.second, i.second * 1.0 / gameTick * 72000);
+            builder.text(i.first).text("    ").num(i.second).text("(").num(i.second * 1.0 / gameTick * 72000).text(
+                    "min)\n");
         }
         builder.send(actor);
     }
-
 }
 
 THook(
@@ -99,7 +99,6 @@ THook(
     }
 
 
-
     auto real_this = reinterpret_cast<void *>(reinterpret_cast<VA>(hopperActor) - 208);
     auto blockPos = reinterpret_cast<trapdoor::BlockActor *>(real_this)->getPosition();
     std::string itemName = itemStack->getItemName();
@@ -109,7 +108,7 @@ THook(
     auto nearestPlayer = trapdoor::bdsMod->getLevel()->getNearestPlayer(pos);
     if (!nearestPlayer) {
         original(hopperActor, index, itemStack);
-        L_DEBUG("can't find a valid player");
+        //  L_DEBUG("can't find a valid player");
         return;
     }
 

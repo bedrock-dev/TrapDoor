@@ -10,6 +10,8 @@
 #include "PlayerBuffer.h"
 #include "lib/mod.h"
 #include "lib/SymHook.h"
+#include "tools/DirtyLogger.h"
+
 
 namespace trapdoor {
     using namespace SymHook;
@@ -110,74 +112,72 @@ namespace trapdoor {
 //
 //
 ////玩家右键触发的东西
-//THook(
-//        void,
-//        MSSYM_B1QA5useOnB1AA4ItemB2AAA4QEBAB1UE14NAEAVItemStackB2AAA9AEAVActorB2AAA7HHHEMMMB1AA1Z,
-//        void *item,
-//        ItemStackBase *itemStack,
-//        Actor *player,
-//        int x,
-//        int y,
-//        int z,
-//        unsigned int facing,
-//        float dx,
-//        float dy,
-//        float dz
-//) {
-//
-//    RightClickCache targetCache{dx, dy, dz, x, y, z};
-//  //  auto &playerCache = getPlayerBuffer()[player->getNameTag()].rightClickCache;
-//    //下面用一个简单的缓存 + 判定消除重复点击
-////    if (playerCache != targetCache) {
-////        //响应右键事件
-//////        const BlockPos pos(x, y, z);
-//////        const Vec3 vec3(dx, dy, dz);
-//////        getRightClickManager().run(player, itemStack->getItemName(), pos, facing, vec3);
-//////        playerCache = targetCache;
-////
-////        if (itemStack->getItemName() == "Cactus") {
-////            printf("you right click face %d\n", facing);
-////        }
-////    }
-//    original(item, itemStack, player, x, y, z, facing, dx, dy, dz);
-//    //  if (name == "Cactus") {
-//    // auto block = blockSource->getBlock(x, y, z);
-//    //   printf("%d\n", block->getVariant());
-////        auto state = getNormalState(facing, dx, dy, dz, false);
-////        if (blockName == "minecraft:piston" || blockName == "minecraft:sticky_piston") {
-////            state = getNormalState(facing, dx, dy, dz, true);
-////        } else if (blockName == "minecraft::chest") {
-////            state = getChestState(facing, dx, dy, dz);
-////        } else if (blockName == "minecraft:unpowered_repeater" || blockName == "minecraft:unpowered_comparator") {
-////            state = getCapacitorState(facing, dx, dy, dz, false);
-////        } else if (blockName == "minecraft:powered_repeater" || blockName == "minecraft:powered_comparator") {
-////            state = getCapacitorState(facing, dx, dy, dz, true);
-////        }
-////        //设置方块状态并更新周围
-////        blockSource->setBlock(&pos, block->getLegacy()->tryGetStateBlock(state));
-////        blockSource->updateNeighbors(pos);
-////}
-//
-////else if (name == "Stick") {
-////        //todo: rewrite
-////        auto block = blockSource->getBlock(x, y, z);
-////        auto blockName = block->getName();
-////        BlockPos pos(x, y, z);
-////        if (pos != getPlayerSpace()[player].rightPosition) {
-////            auto component = globalCircuitSceneGraph->getBaseCircuitComponent(&pos);
-////            if (component) {
-////                //  info("s: %d", component->getStrength());
-////                component->basePrint();
-////                //中继器特判
-////                if (blockName == "minecraft:unpowered_repeater" || blockName == "minecraft:powered_repeater") {
-////                    component->printRepeater();
-////                    //火把特判
-////                } else if (blockName == "minecraft:redstone_torch" || blockName == "minecraft:unlit_redstone_torch") {
-////                    component->printTorch(pos);
-////                }
-////            }
-////            getPlayerSpace()[player].rightPosition = pos;
-////        }
-//// }
+using namespace SymHook;
+
+THook(
+        void,
+        MSSYM_B1QA5useOnB1AA4ItemB2AAA4QEBAB1UE14NAEAVItemStackB2AAA9AEAVActorB2AAA7HHHEMMMB1AA1Z,
+        void *item,
+        trapdoor::ItemStackBase *itemStack,
+        trapdoor::Actor *player,
+        int x,
+        int y,
+        int z,
+        unsigned int facing,
+        float dx,
+        float dy,
+        float dz
+) {
+
+    trapdoor::RightClickCache targetCache{dx, dy, dz, x, y, z};
+    auto &playerCache = trapdoor::bdsMod->getPlayerBuffer()[player->getNameTag()].rightClickCache;
+    //下面用一个简单的缓存 + 判定消除重复点击
+    if (playerCache != targetCache) {
+        //响应右键事件
+        const trapdoor::BlockPos pos(x, y, z);
+        const trapdoor::Vec3 vec3(dx, dy, dz);
+        trapdoor::bdsMod->useOnHook(player, itemStack->getItemName(), pos, facing, vec3);
+        playerCache = targetCache;
+    }
+    original(item, itemStack, player, x, y, z, facing, dx, dy, dz);
+    //  if (name == "Cactus") {
+    // auto block = blockSource->getBlock(x, y, z);
+    //   printf("%d\n", block->getVariant());
+//        auto state = getNormalState(facing, dx, dy, dz, false);
+//        if (blockName == "minecraft:piston" || blockName == "minecraft:sticky_piston") {
+//            state = getNormalState(facing, dx, dy, dz, true);
+//        } else if (blockName == "minecraft::chest") {
+//            state = getChestState(facing, dx, dy, dz);
+//        } else if (blockName == "minecraft:unpowered_repeater" || blockName == "minecraft:unpowered_comparator") {
+//            state = getCapacitorState(facing, dx, dy, dz, false);
+//        } else if (blockName == "minecraft:powered_repeater" || blockName == "minecraft:powered_comparator") {
+//            state = getCapacitorState(facing, dx, dy, dz, true);
+//        }
+//        //设置方块状态并更新周围
+//        blockSource->setBlock(&pos, block->getLegacy()->tryGetStateBlock(state));
+//        blockSource->updateNeighbors(pos);
 //}
+
+//else if (name == "Stick") {
+//        //todo: rewrite
+//        auto block = blockSource->getBlock(x, y, z);
+//        auto blockName = block->getName();
+//        BlockPos pos(x, y, z);
+//        if (pos != getPlayerSpace()[player].rightPosition) {
+//            auto component = globalCircuitSceneGraph->getBaseCircuitComponent(&pos);
+//            if (component) {
+//                //  info("s: %d", component->getStrength());
+//                component->basePrint();
+//                //中继器特判
+//                if (blockName == "minecraft:unpowered_repeater" || blockName == "minecraft:powered_repeater") {
+//                    component->printRepeater();
+//                    //火把特判
+//                } else if (blockName == "minecraft:redstone_torch" || blockName == "minecraft:unlit_redstone_torch") {
+//                    component->printTorch(pos);
+//                }
+//            }
+//            getPlayerSpace()[player].rightPosition = pos;
+//        }
+// }
+}
 

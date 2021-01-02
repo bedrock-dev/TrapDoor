@@ -17,6 +17,10 @@ namespace trapdoor {
 
     class Biome;
 
+
+    class LevelChunk;
+
+
     class BlockSource {
     public:
         //获取某个位置的方块对象
@@ -38,6 +42,12 @@ namespace trapdoor {
 
         //获取某个位置的群系
         Biome *getBiome(const BlockPos *pos);
+
+        uint8_t getRawBrightness(const BlockPos *pos);
+
+        int getMaterial(const BlockPos *pos);
+
+        LevelChunk* getLevelChunk(const ChunkPos &chunkPos);
 
     };
 
