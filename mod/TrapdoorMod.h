@@ -51,10 +51,7 @@ namespace mod {
 
         inline SpawnAnalyzer &getSpawnAnalyzer() { return this->spawnAnalyzer; }
 
-
     };
-
-
 }
 
 

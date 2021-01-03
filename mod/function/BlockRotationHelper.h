@@ -11,12 +11,13 @@
 
 namespace mod {
     class BlockRotationHelper {
-        bool enable = true; //暂时默认开启
+        bool enable = false;
+
+    public:
         inline bool inEnable() const { return this->enable; }
 
         inline void setAble(bool able) { this->enable = able; }
 
-    public:
         void rotate(trapdoor::BlockPos &pos, trapdoor::BlockSource *blockSource) const;
 
     };
