@@ -16,7 +16,6 @@ namespace mod {
 
         inline void setAble(bool able) { this->enable = able; }
 
-        void rotateSlabBlock(); //这个函数写半砖右键
     public:
         void rotate(trapdoor::BlockPos &pos, trapdoor::BlockSource *blockSource) const;
 
