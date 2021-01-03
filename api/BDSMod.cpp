@@ -39,12 +39,9 @@ namespace trapdoor {
         L_INFO("begin register command");
     }
 
-
-
     std::map<std::string, PlayerBuffer> &BDSMod::getPlayerBuffer() {
         return this->playerCache;
     }
-
 
 
 }

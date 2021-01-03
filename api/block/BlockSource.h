@@ -5,10 +5,6 @@
 #ifndef TRAPDOOR_BLOCKSOURCE_H
 #define TRAPDOOR_BLOCKSOURCE_H
 
-#include "graphics/BlockPos.h"
-
-
-
 /*
  * 和世界交互的句柄，几乎所有行为都要经过这个东西，每个实体都有一份
  */
@@ -17,6 +13,7 @@ namespace trapdoor {
 
     class Biome;
 
+    class BlockPos;
 
     class LevelChunk;
 
@@ -47,7 +44,7 @@ namespace trapdoor {
 
         int getMaterial(const BlockPos *pos);
 
-        LevelChunk* getLevelChunk(const ChunkPos &chunkPos);
+        LevelChunk *getLevelChunk(const ChunkPos &chunkPos);
 
     };
 

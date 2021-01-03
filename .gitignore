@@ -11,4 +11,5 @@ include/
 api/math/
 doc/
 .idea/workspace.xml
+test
 

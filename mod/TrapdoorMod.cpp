@@ -58,13 +58,16 @@ namespace mod {
         commandManager.registerCmd("func", "开启/关闭部分功能")
                 ->then(ARG("hc", "开启/关闭漏斗计数器", BOOL, {
                     this->hopperChannelManager.setAble(holder->getBool());
-                    info(player, "设置刷怪指示 为 %d", holder->getBool());
+                    info(player, "设置漏斗计数器为 %d", holder->getBool());
                 }))
                 ->then(ARG("sh", "开启/关闭刷怪指示", BOOL, {
                     this->spawnHelper.setAble(holder->getBool());
-                    info(player, "设置刷怪指示为 to %d", holder->getBool());
-                })
-                );
+                    info(player, "设置刷怪指示为 %d", holder->getBool());
+                }))
+                ->then(ARG("cr", "开启/关闭仙人掌转方块", BOOL, {
+                    this->rotationHelper.setAble(holder->getBool());
+                    info(player, "设置仙人掌转方块为 %d", holder->getBool());
+                }));
 //exp command
 
 //漏斗计数器
@@ -199,7 +202,7 @@ namespace mod {
     }
 
 
-    void TrapdoorMod::useOnHook(Actor *player, const std::string &itemName, const BlockPos &pos, unsigned int facing,
+    void TrapdoorMod::useOnHook(Actor *player, const std::string &itemName, BlockPos &pos, unsigned int facing,
                                 const Vec3 &) {
         //  L_DEBUG("%s", itemName.c_str());
         //取消注释这一行可以看到右击地面的是什么东西
@@ -209,6 +212,8 @@ namespace mod {
             this->spawnHelper.printSpawnProbability(player, pos, 0);
         } else if (itemName == "Leather") {
             this->spawnHelper.printSpawnProbability(player, pos, 15);
+        } else if (itemName == "Cactus") {
+            this->rotationHelper.rotate(pos, player->getBlockSource());
         }
     }
 }

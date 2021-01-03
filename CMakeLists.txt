@@ -64,10 +64,9 @@ add_library(${MOD_NAME}
         SHARED
         mod/dllmain.cpp
         mod/TrapdoorMod.cpp
-        mod/single/Explosion.cpp
+        mod/function/Explosion.cpp
         mod/hopper/HopperCounter.cpp
         mod/config/ConfigManager.cpp
-        mod/config/RightClickManager.cpp
         mod/village/Village.cpp
         mod/tick/GameTick.cpp
         mod/spawn/HsaManager.cpp
@@ -76,6 +75,7 @@ add_library(${MOD_NAME}
         mod/tick/BlockActorProfiler.cpp
         mod/spawn/SpawnHelper.cpp
         mod/spawn/SpawnAnalyzer.cpp
+        mod/function/BlockRotationHelper.cpp
         )
 
 target_include_directories(
@@ -85,7 +85,7 @@ target_include_directories(
         mod/config
         mod/hopper
         mod/spawn
-        mod/single
+        mod/function
         mod/village
         mod/tick
         api

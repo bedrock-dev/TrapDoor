@@ -46,7 +46,12 @@ namespace trapdoor {
         bool findCommand(const std::string &cmd);
 
         bool checkCommandPermission(const std::string &command, Actor *player);
+
+        static void runVanillaCommand(const std::string &command);
     };
+
 }
+
+typedef trapdoor::CommandManager CommandManager;
 
 #endif //COMMANDMANAGER_COMMANDMANAGER_H

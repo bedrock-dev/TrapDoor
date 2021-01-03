@@ -56,7 +56,7 @@ namespace trapdoor {
     }
 
     BlockSource *Actor::getBlockSource() {
-        //from Player::tickWorld
+        //!from Player::tickWorld
         return *((struct BlockSource **) this + 100);
     }
 

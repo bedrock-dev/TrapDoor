@@ -12,6 +12,7 @@
 #include "config/ConfigManager.h"
 #include "spawn/SpawnHelper.h"
 #include "spawn/SpawnAnalyzer.h"
+#include "function/BlockRotationHelper.h"
 
 namespace mod {
     class TrapdoorMod : public trapdoor::BDSMod {
@@ -22,6 +23,7 @@ namespace mod {
         ConfigManager configManager;
         SpawnHelper spawnHelper;
         SpawnAnalyzer spawnAnalyzer;
+        BlockRotationHelper rotationHelper;
 
         void registerTickCommand();
 
@@ -33,7 +35,7 @@ namespace mod {
 
         void registerCommands() override;
 
-        void useOnHook(Actor *player, const std::string &itemName, const BlockPos &pos, unsigned int facing,
+        void useOnHook(Actor *player, const std::string &itemName, BlockPos &pos, unsigned int facing,
                        const Vec3 &) override;
 
         void heavyTick();
@@ -48,8 +50,8 @@ namespace mod {
         inline HsaManager &getHsaManager() { return this->hsaManager; }
 
         inline SpawnAnalyzer &getSpawnAnalyzer() { return this->spawnAnalyzer; }
-    };
 
+    };
 }
 
 
