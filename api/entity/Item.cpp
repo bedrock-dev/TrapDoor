@@ -134,7 +134,7 @@ THook(
     //下面用一个简单的缓存 + 判定消除重复点击
     if (playerCache != targetCache) {
         //响应右键事件
-        const trapdoor::BlockPos pos(x, y, z);
+        trapdoor::BlockPos pos(x, y, z);
         const trapdoor::Vec3 vec3(dx, dy, dz);
         trapdoor::bdsMod->useOnHook(player, itemStack->getItemName(), pos, facing, vec3);
         playerCache = targetCache;

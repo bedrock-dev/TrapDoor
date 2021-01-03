@@ -7,12 +7,13 @@
 
 #include <string>
 
-class Block;
 
 /*
  * 所有方块的父类
  */
 namespace trapdoor {
+    class Block;
+
     class BlockLegacy {
     public:
         //获取调试信息

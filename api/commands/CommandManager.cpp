@@ -109,4 +109,9 @@ namespace trapdoor {
             );
         }
     }
+
+    void CommandManager::runVanillaCommand(const std::string &command) {
+        //todo
+    }
+
 }

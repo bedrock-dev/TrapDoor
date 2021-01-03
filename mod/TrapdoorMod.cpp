@@ -199,7 +199,7 @@ namespace mod {
     }
 
 
-    void TrapdoorMod::useOnHook(Actor *player, const std::string &itemName, const BlockPos &pos, unsigned int facing,
+    void TrapdoorMod::useOnHook(Actor *player, const std::string &itemName, BlockPos &pos, unsigned int facing,
                                 const Vec3 &) {
         //  L_DEBUG("%s", itemName.c_str());
         //取消注释这一行可以看到右击地面的是什么东西
@@ -209,6 +209,8 @@ namespace mod {
             this->spawnHelper.printSpawnProbability(player, pos, 0);
         } else if (itemName == "Leather") {
             this->spawnHelper.printSpawnProbability(player, pos, 15);
+        } else if (itemName == "Cactus") {
+            this->rotationHelper.rotate(pos, player->getBlockSource());
         }
     }
 }

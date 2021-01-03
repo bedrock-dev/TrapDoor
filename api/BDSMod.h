@@ -39,9 +39,7 @@ namespace trapdoor {
         virtual void registerCommands();
 
 
-
-
-        virtual void useOnHook(Actor *player, const std::string &itemName, const BlockPos &pos,
+        virtual void useOnHook(Actor *player, const std::string &itemName, BlockPos &pos,
                                unsigned int facing,
                                const Vec3 &) = 0;
 
