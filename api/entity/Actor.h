@@ -52,7 +52,9 @@ namespace trapdoor {
 
         unsigned int getSelectSlot();
 
-        std::string  getActorId();
+        BlockPos getStandPosition();
+
+        std::string getActorId();
 
         Level *getLevel();
     };

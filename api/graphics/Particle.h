@@ -18,6 +18,8 @@ namespace trapdoor {
 
     void spawnChunkSurfaceParticle(const ChunkPos &pos, int dimID);
 
+    void spawnSlimeChunkParticle(const ChunkPos&pos);
+
     void spawnLineParticle(const Vec3 &p, FACING facing, float length, GRAPHIC_COLOR color, int dimType = 0);
 }
 #endif    // TRAPDOOR_PARTICLE_H

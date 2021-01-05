@@ -72,7 +72,7 @@ add_library(${MOD_NAME}
         mod/spawn/SpawnAnalyzer.cpp
         mod/function/BlockRotationHelper.cpp
         mod/player/PlayerFunction.cpp
-        )
+        mod/player/SimpleBuilder.cpp mod/player/SimpleBuilder.h mod/spawn/SlimeChunkHelper.cpp mod/spawn/SlimeChunkHelper.h)
 
 target_include_directories(
         ${MOD_NAME}

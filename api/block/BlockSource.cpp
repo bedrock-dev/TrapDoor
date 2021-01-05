@@ -87,7 +87,4 @@ namespace trapdoor {
                 );
     }
 
-    LevelChunk *BlockSource::getLevelChunk(const ChunkPos &chunkPos) {
-        return nullptr;
-    }
 }

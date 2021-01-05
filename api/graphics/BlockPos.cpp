@@ -102,6 +102,14 @@ namespace trapdoor {
         return mt() % 10 == 0;
     }
 
+    bool BlockPos2::operator<(const BlockPos2 &rhs) const {
+        if (x < rhs.x)
+            return true;
+        if (rhs.x < x)
+            return false;
+        return z < rhs.z;
+    }
+
     std::string facingToString(FACING facing) {
         switch (facing) {
             case FACING::POS_X:

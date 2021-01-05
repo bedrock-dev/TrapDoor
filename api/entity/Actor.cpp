@@ -164,6 +164,11 @@ namespace trapdoor {
         return name;
     }
 
+    BlockPos Actor::getStandPosition() {
+        auto headPos = this->getPos()->toBlockPos();
+        return {headPos.x, headPos.y - 2, headPos.z};
+    }
+
     std::string ActorDefinitionIdentifier::getName() {
         auto str = reinterpret_cast<std::string *>((char *) this + 32);
         return std::string(*str);

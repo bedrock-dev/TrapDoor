@@ -14,7 +14,6 @@ namespace trapdoor {
  * 方块接口
  */
     class BlockLegacy;
-
     class Block {
     public:
         // 获取方块legacy

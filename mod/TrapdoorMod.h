@@ -14,6 +14,8 @@
 #include "spawn/SpawnAnalyzer.h"
 #include "function/BlockRotationHelper.h"
 #include "player/PlayerFunction.h"
+#include "player/SimpleBuilder.h"
+#include "SlimeChunkHelper.h"
 
 namespace mod {
 
@@ -27,6 +29,8 @@ namespace mod {
         SpawnAnalyzer spawnAnalyzer;
         BlockRotationHelper rotationHelper;
         PlayerFunction playerFunctions;
+        SimpleBuilder simpleBuilder;
+        SlimeChunkHelper slimeChunkHelper;
 
         void registerTickCommand();
 
@@ -34,7 +38,6 @@ namespace mod {
         static void printCopyRightInfo();
 
         void initialize();
-
 
         void registerCommands() override;
 
