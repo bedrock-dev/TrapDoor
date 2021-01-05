@@ -13,8 +13,10 @@
 #include "spawn/SpawnHelper.h"
 #include "spawn/SpawnAnalyzer.h"
 #include "function/BlockRotationHelper.h"
+#include "player/PlayerFunction.h"
 
 namespace mod {
+
     class TrapdoorMod : public trapdoor::BDSMod {
     private:
         HopperChannelManager hopperChannelManager;
@@ -24,6 +26,7 @@ namespace mod {
         SpawnHelper spawnHelper;
         SpawnAnalyzer spawnAnalyzer;
         BlockRotationHelper rotationHelper;
+        PlayerFunction playerFunctions;
 
         void registerTickCommand();
 

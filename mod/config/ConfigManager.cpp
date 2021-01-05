@@ -14,8 +14,8 @@ namespace mod {
         L_INFO("config manager developing");
         if (!this->readConfigFile(configFIleName))return false;
         if (!this->readCommandConfig())return false;
-        if (!this->readFunctionConfig())return false;
-        if (!this->readParticleConfig())return false;
+//        if (!this->readFunctionConfig())return false;
+//        if (!this->readParticleConfig())return false;
         return true;
     }
 
@@ -101,7 +101,6 @@ namespace mod {
 
 
     void ConfigManager::printAllConfig() const {
-
 
     }
 

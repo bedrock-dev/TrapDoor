@@ -27,6 +27,7 @@ namespace mod {
                 .textF("Redstone:    %.3fms\n", redstoneTickTime / rounds)
                 .textF("EntitySystem:    %.3fms\n", levelEntitySystemTickTime / rounds)
                 .textF("Chunk (un)load and village:    %.3fms\n------------------------\n", dimensionTickTime / rounds)
+                        // .textF("Trapdoor: %.3fms", trapdoorModTickTime / rounds)
                 .textF("Total %zu chunks in ticking, use %.3fms\n", tickChunkNum / totalRound,
                        chunkTickTime / rounds)
                 .textF("- Block entity:    %.3fms\n", chunkBlockEntityTickTime / rounds)

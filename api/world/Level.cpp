@@ -52,9 +52,9 @@ namespace trapdoor {
     Actor *Level::getNearestDimensionPlayer(const BlockPos &pos, int dimID) {
         Actor *nearest = nullptr;
         float minDistance = 512;
-        this->forEachPlayer([&pos, dimID, &minDistance, &nearest](Actor *player) {
+        this->forEachPlayer([&nearest, &pos, &dimID, &minDistance](Actor *player) {
             if (player->getDimensionID() == dimID) {
-                BlockPos p(player->getPos()->x, player->getPos()->y, player->getPos()->z);
+                BlockPos p = player->getPos()->toBlockPos();
                 auto d = p.distanceTo(pos);
                 if (d < minDistance) {
                     minDistance = d;

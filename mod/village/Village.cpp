@@ -9,8 +9,10 @@
 #include "TrapdoorMod.h"
 #include "BDSMod.h"
 #include "graphics/Graphics.h"
+#include <random>
 
 using namespace SymHook;
+
 //village tick
 
 namespace mod {
@@ -102,9 +104,10 @@ namespace mod {
                 if (village) {
                     auto center = village->getCenter() + trapdoor::Vec3(0.5f, 0.8f, 0.5f);
                     auto bounds = village->getBounds();
-                    trapdoor::AABB spawnArea = {center + trapdoor::Vec3(3, 8, 3), center - trapdoor::Vec3(3, 8, 3)};
-                    spawnRectangleParticle(bounds, trapdoor::GRAPHIC_COLOR::WHITE);
-                    trapdoor::spawnRectangleParticle(spawnArea, trapdoor::GRAPHIC_COLOR::GREEN);
+                    trapdoor::AABB spawnArea = {bounds.p1 - trapdoor::Vec3(64, 64, 64),
+                                                bounds.p2 + trapdoor::Vec3(64, 64, 64)};
+                    spawnRectangleParticle(bounds, vw.color);
+                    trapdoor::spawnRectangleParticle(spawnArea, vw.color);
                     spawnParticle(center, centerParticleType);
                 }
             }
@@ -159,7 +162,17 @@ namespace mod {
 
     //todo: repair this bug
     void VillageWithColor::setRandomColor() {
-        this->color = static_cast<trapdoor::GRAPHIC_COLOR>(rand() % 5);
+        using COLOR = trapdoor::GRAPHIC_COLOR;
+        static COLOR colorList[5] = {
+                COLOR::WHITE,
+                COLOR::GREEN,
+                COLOR::RED,
+                COLOR::BLUE,
+                COLOR::YELLOW
+        };
+        // static std::random_device rd;
+        // static std::mt19937 gen(rd());
+        //    this->color = colorList[rand() % 5];
     }
 }
 
@@ -169,8 +182,7 @@ THook(
 ) {
     //village tick
     original(vill, tick, blockSource);
-    mod::VillageWithColor vw{vill, trapdoor::GRAPHIC_COLOR::WHITE};
-    vw.setRandomColor();
+    mod::VillageWithColor vw{vill, trapdoor::GRAPHIC_COLOR::GREEN};
     trapdoor::bdsMod->asInstance<mod::TrapdoorMod>()->getVillageHelper().insert(vw);
     // village::villageHelper.insert(vill);
 }

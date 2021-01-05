@@ -15,5 +15,9 @@ namespace trapdoor {
 
     void spawnRectangleParticle(const AABB &aabb, GRAPHIC_COLOR color, int dimType = 0);
 
+
+    void spawnChunkSurfaceParticle(const ChunkPos &pos, int dimID);
+
+    void spawnLineParticle(const Vec3 &p, FACING facing, float length, GRAPHIC_COLOR color, int dimType = 0);
 }
 #endif    // TRAPDOOR_PARTICLE_H

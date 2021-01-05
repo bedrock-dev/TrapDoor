@@ -67,7 +67,9 @@ namespace trapdoor {
     }
 
     BlockPos2 BlockPos::toChunkPos() const {
-        return {this->x / 16, this->z / 16};
+        auto cx = x < 0 ? x - 15 : x;
+        auto cz = z < 0 ? z - 15 : z;
+        return {cx / 16, cz / 16};
     }
 
     bool BlockPos::operator<(const BlockPos &rhs) const {
@@ -190,7 +192,10 @@ namespace trapdoor {
                 return FACING::POS_X;
             case FACING::POS_X:
                 return FACING::NEG_X;
+            default:
+                return FACING::POS_X;
         }
+
     }
 }
 

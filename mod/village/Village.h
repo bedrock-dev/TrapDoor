@@ -49,8 +49,6 @@ namespace mod {
         bool enableShow = false;
         size_t gameTick = 0;
     public:
-
-
         inline void setVillageShowAble(bool able) { enableShow = able; };
 
         VillageHelper() = default;

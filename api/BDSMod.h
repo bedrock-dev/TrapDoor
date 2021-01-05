@@ -19,6 +19,11 @@
 typedef size_t Tick;
 namespace trapdoor {
     class BDSMod {
+    public:
+        struct ModConfig {
+            size_t particleViewDistance = 128;
+            bool particlePerformanceMode = false;
+        };
     protected:
         typedef void CommandRegistry;
         Level *serverLevel{};
@@ -26,6 +31,10 @@ namespace trapdoor {
         CommandManager commandManager;
         std::map<std::string, PlayerBuffer> playerCache;
     public:
+
+
+        ModConfig config;
+
         Level *getLevel();
 
         void setLevel(Level *level);
@@ -50,6 +59,11 @@ namespace trapdoor {
         Mod *asInstance() {
             return reinterpret_cast<Mod *>(this);
         }
+
+        ModConfig &getCfg() { return this->config; }
+
+    public:
+
     };
 
     void initializeMod(BDSMod *bdsMod);

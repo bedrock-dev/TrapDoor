@@ -36,7 +36,17 @@ namespace trapdoor {
     }
 
     void BDSMod::registerCommands() {
+        if (!this->commandRegistry) {
+            L_ERROR("fail to register command!![commandRegistry is null ptr]");
+        }
         L_INFO("begin register command");
+        getCommandManager().registerCmd("apicfg")
+                ->then(ARG("pvd", "设置例子可见距离", INT, {
+                    this->getCfg().particleViewDistance = holder->getInt();
+                }))
+                ->then(ARG("pm", "牺牲一定显示效果减少显示卡顿", BOOL, {
+                    this->getCfg().particlePerformanceMode = holder->getBool();
+                }));
     }
 
     std::map<std::string, PlayerBuffer> &BDSMod::getPlayerBuffer() {

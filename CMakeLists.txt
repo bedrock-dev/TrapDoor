@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 3.17)
 set(DllName mod)
-Set(MinecraftVersion 1.16.4)
-set(buildType debug)
 set(OutputName ${DllName}-${MinecraftVersion}-${buildType})
 project(mod)
 set(CMAKE_CXX_STANDARD 17)
@@ -10,10 +8,7 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
 else ()
     message(this project don't support GNU gcc or clang,please use MSVC instead)
 endif ()
-
-
 set(MOD_API_NAME trapDoorAPI)
-
 
 add_library(${MOD_API_NAME} STATIC
         api/BDSMod.cpp
@@ -76,6 +71,7 @@ add_library(${MOD_NAME}
         mod/spawn/SpawnHelper.cpp
         mod/spawn/SpawnAnalyzer.cpp
         mod/function/BlockRotationHelper.cpp
+        mod/player/PlayerFunction.cpp
         )
 
 target_include_directories(
@@ -88,6 +84,7 @@ target_include_directories(
         mod/function
         mod/village
         mod/tick
+        mod/player
         api
         api/block
         api/commands
@@ -96,8 +93,6 @@ target_include_directories(
         api/world
         api/lib
         api/tools
-        api/event
-
 )
 
 
@@ -105,5 +100,4 @@ target_link_libraries(${MOD_NAME} ${MOD_API_NAME})
 
 add_executable(
         TempText
-        test/testMain.cpp
-        api/tools/enumTools.h)
+        test/testMain.cpp)

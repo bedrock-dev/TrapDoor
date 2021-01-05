@@ -6,6 +6,7 @@
 #include "Graphics.h"
 #include "Particle.h"
 #include "Vec3.h"
+#include "BDSMod.h"
 
 namespace trapdoor {
     static std::map<float, int> binSplit(float start, float end) {
@@ -133,7 +134,8 @@ namespace trapdoor {
             auto particleTypeInv =
                     getLineParticleType(points.second, invFacing(direction), color);
             spawnParticle(points.first, particleType, dimType);
-            spawnParticle(points.first, particleTypeInv, dimType);
+            if (!bdsMod->getCfg().particlePerformanceMode)
+                spawnParticle(points.first, particleTypeInv, dimType);
         }
     }
 

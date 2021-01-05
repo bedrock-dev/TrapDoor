@@ -3,26 +3,22 @@
 //
 
 #include "TrapdoorMod.h"
-
 #include "commands/CommandManager.h"
-
 #include "commands/Command.h"
-
 #include "tick/GameTick.h"
-
 #include "tools/DirtyLogger.h"
-
 #include "tick/ActorProfiler.h"
-
 #include "block/BlockSource.h"
-
 #include "graphics/BlockPos.h"
+#include "player/PlayerFunction.h"
 
 namespace mod {
     void TrapdoorMod::heavyTick() {
+
         this->villageHelper.tick();
         this->hsaManager.tick();
         this->spawnHelper.tick();
+        this->playerFunctions.tick();
     }
 
     void TrapdoorMod::lightTick() {
@@ -40,11 +36,8 @@ namespace mod {
     void TrapdoorMod::registerCommands() {
         using namespace trapdoor;
         BDSMod::registerCommands();
-        if (!this->commandRegistry) {
-            L_ERROR("fail to register command!![commandRegistry is null ptr]");
-        }
 
-        using namespace trapdoor;
+
         this->registerTickCommand();
         commandManager.registerCmd("prof", "ticking profiling")
                 ->then(ARG("actor", "显示详细的实体更新时间", NONE, {
@@ -67,6 +60,10 @@ namespace mod {
                 ->then(ARG("cr", "开启/关闭仙人掌转方块", BOOL, {
                     this->rotationHelper.setAble(holder->getBool());
                     info(player, "设置仙人掌转方块为 %d", holder->getBool());
+                }))
+                ->then(ARG("cs", "开启/关闭区块显示", BOOL, {
+                    //  this->playerFunctions.setAble(player->getNameTag(), holder->getBool());
+                    info(player, "该功能检修中");
                 }));
 //exp command
 
@@ -78,7 +75,6 @@ namespace mod {
                 ->then(Arg("p", "打印频道信息 [num]", ArgType::INT)->execute([this](ArgHolder *holder, Actor *player) {
                     this->hopperChannelManager.printChannel(player, holder->getInt());
                 }));
-
 
 //便捷模式切换
         commandManager.registerCmd("o", "switch to spectator mode")

@@ -27,7 +27,9 @@ namespace trapdoor {
         if (!player) {
             return;
         }
-        //  if (p.distanceTo(*player->getPos()) > static_cast<float>(particleViewDistance))return;
+        //  L_DEBUG("spawn particle@ %.2f %.2f %.2f", p.x, p.y, p.z);
+        auto maxDist = trapdoor::bdsMod->getCfg().particleViewDistance;
+        if (p.distanceTo(*player->getPos()) > static_cast<float>(maxDist))return;
         SYM_CALL(void(*)(Level * , std::string, Vec3 *, void *),
                  MSSYM_MD5_a2fdc6a066bbe9a360c9c9d76725a8fb, level, type, &p,
                  player->getDimension());
@@ -57,5 +59,24 @@ namespace trapdoor {
         drawLine(p5, FACING::NEG_Z, dz, color, dimType);
     }
 
+    void spawnLineParticle(const Vec3 &p, FACING facing, float length, GRAPHIC_COLOR color, int dimType) {
+        drawLine(p, facing, length, color, dimType);
+    }
 
+
+    void spawnChunkSurfaceParticle(const ChunkPos &p, int dimID) {
+        //chunkp/m chunkslimep/m
+        bool isSlime = p.isSlimeChunk();
+        std::string pName2 = isSlime ? "trapdoor:chunkslimep" : "trapdoor:chunkp";
+        std::string pName1 = isSlime ? "trapdoor:chunkslimem" : "trapdoor:chunkm";
+        ChunkPos pos{p.x * 16, p.z * 16};
+        Vec3 p1{pos.x, 128, pos.z + 8};
+        Vec3 p2{pos.x + 16, 128, pos.z + 8};
+        Vec3 p3{pos.x + 8, 128, pos.z};
+        Vec3 p4{pos.x + 8, 128, pos.z + 16};
+        spawnParticle(p1, pName1, dimID);
+        spawnParticle(p2, pName1, dimID);
+        spawnParticle(p3, pName2, dimID);
+        spawnParticle(p4, pName2, dimID);
+    }
 }
