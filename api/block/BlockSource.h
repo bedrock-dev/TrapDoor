@@ -44,7 +44,7 @@ namespace trapdoor {
 
         int getMaterial(const BlockPos *pos);
 
-        LevelChunk *getLevelChunk(const ChunkPos &chunkPos);
+       // LevelChunk *getLevelChunk(const ChunkPos &chunkPos);
 
     };
 

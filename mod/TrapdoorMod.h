@@ -14,6 +14,7 @@
 #include "spawn/SpawnAnalyzer.h"
 #include "function/BlockRotationHelper.h"
 #include "player/PlayerFunction.h"
+#include "player/SimpleBuilder.h"
 
 namespace mod {
 
@@ -27,6 +28,7 @@ namespace mod {
         SpawnAnalyzer spawnAnalyzer;
         BlockRotationHelper rotationHelper;
         PlayerFunction playerFunctions;
+        SimpleBuilder simpleBuilder;
 
         void registerTickCommand();
 

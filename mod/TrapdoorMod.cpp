@@ -144,6 +144,20 @@ namespace mod {
                 ->then(ARG("p", "打印数据", NONE, {
                     this->getSpawnAnalyzer().printSimpleData(player);
                 }));
+
+        commandManager.registerCmd("draw", "简单建造")
+                ->then(ARG("ci", "画圆", INT, {
+                    auto radius = holder->getInt();
+                    bool hollow = holder->getInt() < 0;
+                    if (radius < 0)radius = -radius;
+                    this->simpleBuilder.buildCircle(player, radius, hollow);
+                }))
+                ->then(ARG("sp", "画圆", INT, {
+                    auto radius = holder->getInt();
+                    bool hollow = holder->getInt() < 0;
+                    if (radius < 0)radius = -radius;
+                    this->simpleBuilder.buildSphere(player, radius, hollow);
+                }));
     }
 
 
@@ -212,4 +226,5 @@ namespace mod {
             this->rotationHelper.rotate(pos, player->getBlockSource());
         }
     }
+
 }
