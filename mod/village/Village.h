@@ -26,9 +26,14 @@ namespace mod {
 
         bool canSpawnIronGolem();
 
+
         trapdoor::Vec3 getCenter();
 
         float getRadius();
+
+        trapdoor::AABB getPOIRange();
+
+        trapdoor::AABB getGolemSpawnArea();
 
         trapdoor::AABB getBounds();
     };
@@ -46,10 +51,19 @@ namespace mod {
 
 
     class VillageHelper {
-        bool enableShow = false;
+        bool showBounds = false; //村庄边界
+        bool showPOIRange = false; //poi查询范围
+        bool showGolemSpawnArea = false; //铁傀儡刷出范围
+        bool showVillageCenter = false; //显示村庄中心
         size_t gameTick = 0;
     public:
-        inline void setVillageShowAble(bool able) { enableShow = able; };
+        inline void setShowBound(bool able) { showBounds = able; }
+
+        inline void setShowPOIRange(bool able) { showPOIRange = able; }
+
+        inline void setShowGolemSpawnArea(bool able) { showGolemSpawnArea = able; }
+
+        inline void setShowVillageCenter(bool able) { showVillageCenter = able; }
 
         VillageHelper() = default;
 

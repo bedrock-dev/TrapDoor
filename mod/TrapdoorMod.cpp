@@ -100,9 +100,21 @@ namespace mod {
                 ->then(ARG("list", "显示所有正在加载的村庄", NONE, {
                     this->villageHelper.list(player);
                 }))
-                ->then(ARG("show", "显示村庄边框和中心", BOOL, {
-                    this->villageHelper.setVillageShowAble(holder->getBool());
-                    info(player, "设置村庄显示为 %d", holder->getBool());
+                ->then(ARG("b", "显示村庄边框", BOOL, {
+                    this->villageHelper.setShowBound(holder->getBool());
+                    info(player, "设置村庄边框显示为 %d", holder->getBool());
+                }))
+                ->then(ARG("p", "显示POI查询范围", BOOL, {
+                    this->villageHelper.setShowPOIRange(holder->getBool());
+                    info(player, "设置村庄边框显示为 %d", holder->getBool());
+                }))
+                ->then(ARG("s", "显示铁傀儡刷新区域", BOOL, {
+                    this->villageHelper.setShowGolemSpawnArea(holder->getBool());
+                    info(player, "设置村庄边框显示为 %d", holder->getBool());
+                }))
+                ->then(ARG("c", "显示村庄中心", BOOL, {
+                    this->villageHelper.setShowVillageCenter(holder->getBool());
+                    info(player, "设置村庄边框显示为 %d", holder->getBool());
                 }));
 
 //        commandManager.registerCmd("cfg", "设置")
