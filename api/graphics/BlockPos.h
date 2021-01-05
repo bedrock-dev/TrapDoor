@@ -49,6 +49,8 @@ namespace trapdoor {
         std::string toString() const;
 
         bool isSlimeChunk() const;
+
+        bool operator<(const BlockPos2 &rhs) const;
     };
 
     typedef BlockPos2 ChunkPos;

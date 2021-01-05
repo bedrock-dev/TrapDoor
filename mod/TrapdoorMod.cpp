@@ -19,6 +19,7 @@ namespace mod {
         this->hsaManager.tick();
         this->spawnHelper.tick();
         this->playerFunctions.tick();
+        this->slimeChunkHelper.tick();
     }
 
     void TrapdoorMod::lightTick() {
@@ -62,11 +63,28 @@ namespace mod {
                     info(player, "设置仙人掌转方块为 %d", holder->getBool());
                 }))
                 ->then(ARG("cs", "开启/关闭区块显示", BOOL, {
-                    //  this->playerFunctions.setAble(player->getNameTag(), holder->getBool());
-                    info(player, "该功能检修中");
+                    this->playerFunctions.setAble(player->getNameTag(), holder->getBool());
+                    info(player, "设置你的区块显示为 %d", holder->getBool());
                 }));
-//exp command
 
+        commandManager.registerCmd("slime")
+                ->then(ARG("show", "显示史莱姆区块", BOOL, {
+                    this->slimeChunkHelper.setAble(holder->getBool());
+                    this->slimeChunkHelper.updateChunkPosList();
+                    this->slimeChunkHelper.draw();
+                    broadcastMsg("已经开启史莱姆区块显示");
+                }))
+                ->then(ARG("c", "清除缓存并重新绘制", NONE, {
+                    this->slimeChunkHelper.updateChunkPosList();
+                    this->slimeChunkHelper.draw();
+                    broadcastMsg("已经清除史莱姆区块缓存");
+                }))
+                ->then(ARG("r", "设置显示半径", INT, {
+                    this->slimeChunkHelper.setRadius(holder->getInt());
+                    this->slimeChunkHelper.updateChunkPosList();
+                    this->slimeChunkHelper.draw();
+                    broadcastMsg("已经清除史莱姆区块缓存");
+                }));
 //漏斗计数器
         commandManager.registerCmd("counter", "漏斗计数器相关功能")
                 ->then(Arg("r", "重置频道 [num]", ArgType::INT)->execute([this](ArgHolder *holder, Actor *player) {

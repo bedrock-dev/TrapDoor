@@ -28,7 +28,7 @@ namespace mod {
         if (!this->enable)return;
         trapdoor::BlockPos standPos = player->getStandPosition();
         auto block = player->getBlockSource()->getBlock(standPos.x, standPos.y, standPos.z);
-        //在这里写画球
+        //在这里写
 
     }
 }
