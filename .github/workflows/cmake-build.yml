@@ -50,7 +50,8 @@ jobs:
       with:
         tag_name: ${{ github.ref }}
         release_name: Release ${{ github.ref }}
-        body: ${{ steps.changelog.outputs.changelog }}
+        draft: false
+        prerelease: false
     
     - name: Upload Release Asset
       id: upload-release-asset 
@@ -59,9 +60,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./my-artifact.zip
-          asset_name: my-artifact.zip
-          asset_content_type: application/zip
+          asset_path: ${{github.workspace}}/build/Debug/trapdoor-mod.dll
+          asset_name: trapdoor-mod.dll
+          asset_content_type: application/dll
         
 #     - name: Test
 #       working-directory: ${{github.workspace}}/build
