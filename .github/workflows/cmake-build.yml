@@ -34,13 +34,13 @@ jobs:
       # and build directories, but this is only available with CMake 3.13 and higher.  
       # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
       #在这个目录下执行cmake构建vs工程
-      run: cmake -G"Visual Studio 16 2019" -DCMAKE_BUILD_TYPE=Release ${{github.workspace}}
+      run: cmake ${{github.workspace}} -DCMAKE_BUILD_TYPE=Release
 
     - name: Build
       working-directory: ${{github.workspace}}/build
       shell: powershell
       # Execute the build.  You can specify a specific target with "--target <NAME>"
-      run: cmake --build . --config $BUILD_TYPE
+      run: cmake --build . --config Release
     
     - name: Create Release
       id: create_release
