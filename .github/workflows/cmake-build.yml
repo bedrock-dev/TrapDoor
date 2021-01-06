@@ -41,7 +41,15 @@ jobs:
       shell: powershell
       # Execute the build.  You can specify a specific target with "--target <NAME>"
       run: cmake --build . --config $BUILD_TYPE
-
+    
+    - name: Create release
+      id: create_release
+      uses: actions/create-release@v1
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: ${{ steps.changelog.outputs.changelog }}
+        
 #     - name: Test
 #       working-directory: ${{github.workspace}}/build
 #       shell: powershell
