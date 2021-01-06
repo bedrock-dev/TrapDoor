@@ -18,8 +18,9 @@ namespace trapdoor {
     }
 
     static bool isValidIntString(const std::string &str) {
-        return std::all_of(str.begin(), str.end(), [](char c) { return '0' <= c && c <= '9'; });
-    }
+		return std::all_of(str.begin(), str.end(),
+        [](char c) { return ('0' <= c && c <= '9') || c=='-'; });
+	}
 
 
     CommandNode::CommandNode(std::string name, std::string description)
