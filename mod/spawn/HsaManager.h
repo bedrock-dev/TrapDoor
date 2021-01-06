@@ -37,7 +37,11 @@ namespace mod {
 
         bool findHsa(const HsaInfo &hsaInfo);
 
-        inline void clear() { this->hsaList.clear(); }
+        inline int clear() {
+            int num = this->hsaList.size();
+            this->hsaList.clear();
+            return num;
+        }
 
         void list(trapdoor::Actor *player);
 

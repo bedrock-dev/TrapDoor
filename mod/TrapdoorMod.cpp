@@ -40,7 +40,6 @@ namespace mod {
         using namespace trapdoor;
         BDSMod::registerCommands();
 
-
         this->registerTickCommand();
         commandManager.registerCmd("prof", "ticking profiling")
                 ->then(ARG("actor", "显示详细的实体更新时间", NONE, {
@@ -137,13 +136,6 @@ namespace mod {
                     info(player, "设置村庄边框显示为 %d", holder->getBool());
                 }));
 
-//        commandManager.registerCmd("cfg", "设置")
-//                ->
-//                        then(ARG("pvd", "config particle view distance(default=128)", INT, {
-//                    particleViewDistance = holder->getInt();
-//                    info(player, "set particle view distance to %d", particleViewDistance);
-//                }));
-
         commandManager.registerCmd("td?", "显示帮助")
                 ->EXE({
                           this->commandManager.printfHelpInfo(player);
@@ -155,8 +147,8 @@ namespace mod {
 
         commandManager.registerCmd("hsa", "hsa显示相关")
                 ->then(ARG("clear", "清空hsa缓存", NONE, {
-                    hsaManager.clear();
-                    broadcastMsg("hsa缓存已经清空");
+                    auto num = hsaManager.clear();
+                    broadcastMsg("一共 %d 个hsa区域被清空", num);
                 }))
                 ->then(ARG("list", "list nearest hsa", NONE, {
                     hsaManager.list(player);
