@@ -23,7 +23,6 @@ add_library(${MOD_API_NAME} STATIC
         api/entity/Item.cpp
         api/entity/PlayerInventory.cpp
         api/entity/PlayerBuffer.cpp
-        api/entity/Player.cpp
         api/graphics/Particle.cpp
         api/graphics/AABB.h
         api/graphics/BlockPos.cpp
@@ -52,7 +51,7 @@ target_include_directories(${MOD_API_NAME}
         )
 
 target_link_libraries(${MOD_API_NAME} ${PROJECT_SOURCE_DIR}/api/lib/detours.lib)
-
+target_link_libraries(${MOD_API_NAME} ${PROJECT_SOURCE_DIR}/api/lib/sqlite3.lib)
 
 set(MOD_NAME trapdoor-mod)
 add_library(${MOD_NAME}
@@ -72,7 +71,11 @@ add_library(${MOD_NAME}
         mod/spawn/SpawnAnalyzer.cpp
         mod/function/BlockRotationHelper.cpp
         mod/player/PlayerFunction.cpp
-        mod/player/SimpleBuilder.cpp mod/player/SimpleBuilder.h mod/spawn/SlimeChunkHelper.cpp mod/spawn/SlimeChunkHelper.h)
+        mod/player/SimpleBuilder.cpp
+        mod/spawn/SlimeChunkHelper.cpp
+        mod/player/PlayerStatisticManager.cpp
+        mod/player/Player.cpp
+        )
 
 target_include_directories(
         ${MOD_NAME}
