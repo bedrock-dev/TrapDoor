@@ -5,7 +5,7 @@
 #include "tools/Message.h"
 #include "graphics/Particle.h"
 #include "tools/MsgBuilder.h"
-#include "entity/Player.h"
+#include "player/Player.h"
 #include "TrapdoorMod.h"
 #include "BDSMod.h"
 #include "graphics/Graphics.h"

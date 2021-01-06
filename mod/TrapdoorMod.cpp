@@ -11,6 +11,7 @@
 #include "block/BlockSource.h"
 #include "graphics/BlockPos.h"
 #include "player/PlayerFunction.h"
+#include "player/PlayerStatisticManager.h"
 
 namespace mod {
     void TrapdoorMod::heavyTick() {
@@ -31,6 +32,7 @@ namespace mod {
     void TrapdoorMod::initialize() {
         this->configManager.initialize("trapdoor-config.json");
         this->commandManager.setCommandConfig(this->configManager.getCommandsConfig());
+        this->playerStatisticManager.init("trapdoor.db");
     }
 
 
