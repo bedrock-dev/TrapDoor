@@ -76,7 +76,7 @@ namespace trapdoor {
                             MSSYM_B1QE15getSelectedSlotB1AE15PlayerInventoryB2AAA4QEBAB1QE10AUSlotDataB1AA11B1AA2XZ,
                             this
         );
-
+        //这个api是有问题的
         return *(int *) (ptr + 4);
     }
 

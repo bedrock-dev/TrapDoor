@@ -15,7 +15,6 @@ namespace trapdoor {
 //注册命令
     using namespace SymHook;
 
-
 // 调用下面的hook函数来吧自定义字符串和提示信息当作参数注入到游戏中
 // 注释这个函数一级指令就没提示了
     void
