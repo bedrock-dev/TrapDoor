@@ -34,7 +34,7 @@ jobs:
       # and build directories, but this is only available with CMake 3.13 and higher.  
       # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
       #在这个目录下执行cmake构建vs工程
-      run: cmake ${{github.workspace}} -DCMAKE_BUILD_TYPE=Release
+      run: cmake -DCMAKE_BUILD_TYPE=Release ${{github.workspace}}
 
     - name: Build
       working-directory: ${{github.workspace}}/build
@@ -60,7 +60,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{github.workspace}}/build/Debug/trapdoor-mod.dll
+          asset_path: ${{github.workspace}}/build/Release/trapdoor-mod.dll
           asset_name: trapdoor-mod.dll
           asset_content_type: application/dll
         
