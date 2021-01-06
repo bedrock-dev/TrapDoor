@@ -1,6 +1,9 @@
 name: CMake
 
-on: [push]
+on:
+  push:
+    branches: 
+      - 1.16.4-main
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
@@ -40,8 +43,30 @@ jobs:
       working-directory: ${{github.workspace}}/build
       shell: powershell
       # Execute the build.  You can specify a specific target with "--target <NAME>"
-      run: cmake --build . --config $BUILD_TYPE
-
+      run: cmake --build . --config Release
+    
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+         
+    - name: Upload Release Asset
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{github.workspace}}/build/Release/trapdoor-mod.dll
+          asset_name: trapdoor-mod.dll
+          asset_content_type: application/dll
+        
 #     - name: Test
 #       working-directory: ${{github.workspace}}/build
 #       shell: powershell
