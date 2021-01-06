@@ -7,7 +7,6 @@
 
 #include "graphics/BlockPos.h"
 #include "Actor.h"
-#include "Player.h"
 
 namespace trapdoor {
     struct RightClickCache {

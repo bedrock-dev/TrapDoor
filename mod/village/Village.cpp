@@ -5,7 +5,7 @@
 #include "tools/Message.h"
 #include "graphics/Particle.h"
 #include "tools/MsgBuilder.h"
-#include "entity/Player.h"
+#include "player/Player.h"
 #include "TrapdoorMod.h"
 #include "BDSMod.h"
 #include "graphics/Graphics.h"
@@ -88,6 +88,16 @@ namespace mod {
         );
     }
 
+    trapdoor::AABB Village::getPOIRange() {
+        auto bounds = this->getBounds();
+        return trapdoor::AABB(bounds.p1 - Vec3(64, 64, 64), bounds.p2 + Vec3(64, 64, 64));
+    }
+
+    trapdoor::AABB Village::getGolemSpawnArea() {
+        auto center = this->getCenter();
+        return trapdoor::AABB(center - Vec3(8, 3, 8), center + Vec3(8, 3, 8));
+    }
+
     void VillageHelper::clear() {
         villageList.clear();
     }
@@ -97,19 +107,18 @@ namespace mod {
     }
 
     void VillageHelper::draw() {
-        if (this->enableShow) {
-            std::string centerParticleType = "minecraft:heart_particle";
-            for (auto vw:villageList) {
-                auto village = vw.village;
-                if (village) {
-                    auto center = village->getCenter() + trapdoor::Vec3(0.5f, 0.8f, 0.5f);
-                    auto bounds = village->getBounds();
-                    trapdoor::AABB spawnArea = {bounds.p1 - trapdoor::Vec3(64, 64, 64),
-                                                bounds.p2 + trapdoor::Vec3(64, 64, 64)};
-                    spawnRectangleParticle(bounds, vw.color);
-                    trapdoor::spawnRectangleParticle(spawnArea, vw.color);
-                    spawnParticle(center, centerParticleType);
-                }
+        std::string centerParticleType = "minecraft:heart_particle";
+        for (auto vw:villageList) {
+            auto village = vw.village;
+            if (village) {
+                if (this->showBounds)
+                    trapdoor::spawnRectangleParticle(village->getBounds(), trapdoor::GRAPHIC_COLOR::BLUE);
+                if (this->showVillageCenter)
+                    trapdoor::spawnParticle(village->getCenter() + Vec3(0.5f, 0.9f, 0.5f), centerParticleType);
+                if (this->showGolemSpawnArea)
+                    trapdoor::spawnRectangleParticle(village->getGolemSpawnArea(), trapdoor::GRAPHIC_COLOR::GREEN);
+                if (this->showPOIRange)
+                    trapdoor::spawnRectangleParticle(village->getPOIRange(), trapdoor::GRAPHIC_COLOR::YELLOW);
             }
         }
     }
@@ -126,9 +135,9 @@ namespace mod {
                 auto aabb = village->getBounds();
                 builder.num(i).text(": ")
                         .pos(village->getCenter().toBlockPos())
-                        .text("r")
+                        .text("r:")
                         .num(village->getRadius())
-                        .text(" p")
+                        .text(" p:")
                         .num(village->getWorkedVillagerNum())
                         .text("/")
                         .num(village->getPopulation())
@@ -138,9 +147,11 @@ namespace mod {
                         .num(village->getBedPOICount())
                         .text(" s:")
                         .num((int) village->canSpawnIronGolem())
-                        .text(" ")
-                        .aabb(aabb)
-                        .text("\n");
+                        .text(" [")
+                        .pos(aabb.p1.toBlockPos())
+                        .text("-")
+                        .pos(aabb.p2.toBlockPos())
+                        .text("]\n");
             }
         }
         builder.send(player);

@@ -144,7 +144,9 @@ namespace trapdoor {
     }
 
     unsigned int Actor::getSelectSlot() {
-        return *(unsigned int *) reinterpret_cast<char *>(this + 168);
+        //这个api是有问题的
+        return 0;
+        //  return *(unsigned int *) reinterpret_cast<char *>(this + 168);
     }
 
     Level *Actor::getLevel() {
@@ -207,33 +209,4 @@ namespace trapdoor {
 //}
 //spawn mob
 
-
-
-
-//THook(
-//        void,
-//        MSSYM_MD5_4ad35b002b3931f6af40cb4fe59053ef,
-//        void *self,
-//        void *actorID,
-//        void *actor,
-//        Vec3 *pos,
-//        int flag
-//) {
-//    // printf("   constructor (%f, %f, %f)\n", pos->x, pos->y, pos->z);
-//    original(self, actorID, actor, pos, flag);
-//}
-
-
-//set actor pos
-//THook(
-//        void,
-//        MSSYM_B1QA6setPosB1AA5ActorB2AAE13UEAAXAEBVVec3B3AAAA1Z,
-//        void *self,
-//        Vec3 * pos
-//) {
-////    if(self != globalPlayer){
-////        printf("set pos: (%f, %f, %f)\n", pos->x, pos->y, pos->z);
-////    }
-//    original(self, pos);
-//}
 

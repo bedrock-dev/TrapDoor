@@ -43,6 +43,10 @@ namespace trapdoor {
         return reinterpret_cast<char *>(this)[8];
     }
 
+
+
+
+
     //获取能量等级
     int BaseCircuitComponent::getStrength() {
         return *((uint32_t *) this + 13);

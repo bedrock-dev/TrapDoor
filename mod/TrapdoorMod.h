@@ -15,6 +15,8 @@
 #include "function/BlockRotationHelper.h"
 #include "player/PlayerFunction.h"
 #include "player/SimpleBuilder.h"
+#include "SlimeChunkHelper.h"
+#include "player/PlayerStatisticManager.h"
 
 namespace mod {
 
@@ -29,6 +31,8 @@ namespace mod {
         BlockRotationHelper rotationHelper;
         PlayerFunction playerFunctions;
         SimpleBuilder simpleBuilder;
+        SlimeChunkHelper slimeChunkHelper;
+        PlayerStatisticManager playerStatisticManager;
 
         void registerTickCommand();
 
@@ -36,7 +40,6 @@ namespace mod {
         static void printCopyRightInfo();
 
         void initialize();
-
 
         void registerCommands() override;
 
@@ -56,8 +59,8 @@ namespace mod {
 
         inline SpawnAnalyzer &getSpawnAnalyzer() { return this->spawnAnalyzer; }
 
+        inline PlayerStatisticManager &getPlayerStatisticManager() { return this->playerStatisticManager; }
     };
 }
-
 
 #endif //MOD_TRAPDOORMOD_H
