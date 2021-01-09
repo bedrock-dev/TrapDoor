@@ -11,9 +11,10 @@
 namespace mod {
     class SimpleBuilder {
         size_t maxCircleRadius = 32;
-        bool enable = true;
-
+        bool enable = false;
     public:
+        inline void setAble(bool able) { this->enable = able; }
+
         void buildSphere(trapdoor::Actor *player, size_t size, bool hollow) const;
 
         void buildCircle(trapdoor::Actor *player, size_t size, bool hollow) const;

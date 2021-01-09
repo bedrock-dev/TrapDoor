@@ -285,3 +285,7 @@ Player::tickWorld
 ?getChunk@BlockSource@@QEBAPEAVLevelChunk@@AEBVChunkPos@@@Z
 #获取刷怪类型
 ?getMobToSpawn@BlockLegacy@@UEBAPEBVMobSpawnerData@@AEBVSpawnConditions@@AEAVBlockSource@@@Z
+
+
+?_sendHerdEvents@Spawner@@AEBAXAEBUMobSpawnHerdInfo@@AEAV?$vector@PEAVMob@@V?$allocator@PEAVMob@@@std@@@std@@@Z
+

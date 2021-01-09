@@ -18,12 +18,10 @@ namespace mod {
         NetherFortress
     };
 
-
     struct HsaInfo {
         StructureType type = PillagerOutpost;
         BoundingBox boundingBox{};
         int dimensionID = 0;
-
         bool operator<(const HsaInfo &rhs) const;
     };
 
@@ -35,6 +33,8 @@ namespace mod {
     public:
         inline void insert(HsaInfo info) { this->hsaList.insert(info); }
 
+        inline bool isAble() const { return this->enable; }
+
         bool findHsa(const HsaInfo &hsaInfo);
 
         inline int clear() {
@@ -43,7 +43,7 @@ namespace mod {
             return num;
         }
 
-        void list(trapdoor::Actor *player);
+        static void list(trapdoor::Actor *player);
 
         inline void setAble(bool able) { this->enable = able; };
 

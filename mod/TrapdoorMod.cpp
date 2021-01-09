@@ -51,21 +51,29 @@ namespace mod {
         commandManager.registerCmd("mspt", "show mspt & tps")->EXE({ tick::mspt(); });
 //功能开关命令
         commandManager.registerCmd("func", "开启/关闭部分功能")
-                ->then(ARG("hc", "开启/关闭漏斗计数器", BOOL, {
+                ->then(ARG("hopper", "开启/关闭漏斗计数器", BOOL, {
                     this->hopperChannelManager.setAble(holder->getBool());
                     info(player, "设置漏斗计数器为 %d", holder->getBool());
                 }))
-                ->then(ARG("sh", "开启/关闭刷怪指示", BOOL, {
-                    this->spawnHelper.setAble(holder->getBool());
-                    info(player, "设置刷怪指示为 %d", holder->getBool());
+                ->then(ARG("spawn", "开启/关闭刷怪指示", BOOL, {
+                 //   this->spawnHelper.setAble(holder->getBool());
+                    info(player, "该功能维护中");
                 }))
-                ->then(ARG("cr", "开启/关闭仙人掌转方块", BOOL, {
+                ->then(ARG("cactus", "开启/关闭仙人掌转方块", BOOL, {
                     this->rotationHelper.setAble(holder->getBool());
                     info(player, "设置仙人掌转方块为 %d", holder->getBool());
                 }))
-                ->then(ARG("cs", "开启/关闭区块显示", BOOL, {
+                ->then(ARG("chunk", "开启/关闭区块显示", BOOL, {
                     this->playerFunctions.setAble(player->getNameTag(), holder->getBool());
                     info(player, "设置你的区块显示为 %d", holder->getBool());
+                }))
+                ->then(ARG("build", "开启/关闭区块draw命令", BOOL, {
+                    this->simpleBuilder.setAble(holder->getBool());
+                    info(player, "设置简单建造为 %d", holder->getBool());
+                }))
+                ->then(ARG("stat", "开启/关闭玩家行为统计", BOOL, {
+                    this->simpleBuilder.setAble(holder->getBool());
+                    info(player, "设置玩家行为统计为 %d", holder->getBool());
                 }));
 
         commandManager.registerCmd("slime")
@@ -176,7 +184,7 @@ namespace mod {
                     if (radius < 0)radius = -radius;
                     this->simpleBuilder.buildCircle(player, radius, hollow);
                 }))
-                ->then(ARG("sp", "画圆", INT, {
+                ->then(ARG("sp", "画球", INT, {
                     auto radius = holder->getInt();
                     bool hollow = holder->getInt() < 0;
                     if (radius < 0)radius = -radius;
