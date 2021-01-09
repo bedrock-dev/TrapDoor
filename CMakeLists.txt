@@ -1,6 +1,4 @@
 cmake_minimum_required(VERSION 3.17)
-set(DllName mod)
-set(OutputName ${DllName}-${MinecraftVersion}-${buildType})
 project(mod)
 set(CMAKE_CXX_STANDARD 17)
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
