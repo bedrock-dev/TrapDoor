@@ -32,8 +32,8 @@ namespace trapdoor {
     }
 
     BlockPos Vec3::toBlockPos() const {
-        return {x, y, z};
-    }
+		return {x < 0 ? x - 1 : x, z < 0 ? z - 1 : z, z < 0 ? z - 1 : z};
+	}
 
     std::string Vec3::toDirString() const {
         FACING fx = this->x > 0 ? FACING::POS_X : FACING::NEG_X;
