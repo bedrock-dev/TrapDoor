@@ -19,11 +19,11 @@ using namespace SymHook;
 
 namespace mod {
     const std::map<std::string, size_t> HopperChannelManager::BLOCK_NAME_CHANNEL_MAPPER = {//NOLINT
-            {"minecraft:diamond_block", 0},
-            {"minecraft:emerald_block", 1},
-            {"minecraft:iron_block",    2},
-            {"minecraft:gold_block",    3},
-            {"minecraft:lapis_block",   4}
+            {"minecraft:diamond_block", 0}, //钻石
+            {"minecraft:emerald_block", 1}, //绿宝石
+            {"minecraft:iron_block",    2},  //铁
+            {"minecraft:gold_block",    3}, //金子
+            {"minecraft:lapis_block",   4} //青金石
     };
 
     void HopperChannelManager::tick() {
@@ -33,7 +33,6 @@ namespace mod {
             }
         }
     }
-
     void HopperChannelManager::printChannel(Actor *player, size_t channel) {
         if (channel < 0 || channel > 4) {
             error(player, "this channel do not exist");
@@ -50,7 +49,6 @@ namespace mod {
             trapdoor::broadcastMsg("channel[%zu] reset", channel);
         }
     }
-
 
     void CounterChannel::add(const std::string &itemName, size_t num) {
         counterList[itemName] += num;

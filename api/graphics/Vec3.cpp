@@ -30,7 +30,7 @@ namespace trapdoor {
     bool Vec3::operator==(const Vec3 &v) const {
         return x == v.x && y == v.y && z == v.z;
     }
-
+  
 	BlockPos Vec3::toBlockPos() const {
 		auto cx = x < 0 ? x - 1 : x;
 		auto cy = y < 0 ? y - 1 : y;

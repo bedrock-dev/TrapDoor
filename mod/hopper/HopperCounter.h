@@ -11,7 +11,6 @@
 //[..or\entity\Player.cpp:29 (_hook)] name = "name: minecraft:gold_block" (std::string)
 //[..or\entity\Player.cpp:29 (_hook)] name = "name: minecraft:lapis_block"
 
-
 #include "lib/mod.h"
 #include <map>
 #include <array>

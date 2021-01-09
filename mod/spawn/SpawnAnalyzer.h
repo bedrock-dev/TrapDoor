@@ -46,7 +46,6 @@ namespace mod {
 
     private:
         std::vector<MobSpawnInfo> spawnData;
-
     };
 }
 

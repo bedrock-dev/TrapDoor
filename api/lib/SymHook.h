@@ -438,6 +438,10 @@ namespace SymHook {
     // [原型] public: class LevelChunk * __ptr64 __cdecl BlockSource::getChunk(class ChunkPos const & __ptr64)const __ptr64
     // [符号] ?getChunk@BlockSource@@QEBAPEAVLevelChunk@@AEBVChunkPos@@@Z
     constexpr RVA MSSYM_B1QA8getChunkB1AE11BlockSourceB2AAE18QEBAPEAVLevelChunkB2AAE12AEBVChunkPosB3AAAA1Z = 0x00A15AE0;
+    // [原型] private: void __cdecl Spawner::_sendHerdEvents(struct MobSpawnHerdInfo const & __ptr64,class std::vector<class Mob * __ptr64,class std::allocator<class Mob * __ptr64> > & __ptr64)const __ptr64
+    // [符号] ?_sendHerdEvents@Spawner@@AEBAXAEBUMobSpawnHerdInfo@@AEAV?$vector@PEAVMob@@V?$allocator@PEAVMob@@@std@@@std@@@Z
+    constexpr RVA MSSYM_B2QUE14sendHerdEventsB1AA7SpawnerB2AAE25AEBAXAEBUMobSpawnHerdInfoB2AAA4AEAVB2QDA6vectorB1AA7PEAVMobB2AAA1VB2QDA9allocatorB1AA7PEAVMobB3AAAA3stdB3AAAA3stdB3AAAA1Z = 0x00B3C0F0;
+
 }
 
 // 文件结束

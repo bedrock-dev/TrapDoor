@@ -7,7 +7,6 @@
 
 #include "Actor.h"
 #include "lib/mod.h"
-#include "lib/version.h"
 #include "tools/MsgBuilder.h"
 #include "tools/Message.h"
 #include "block/Block.h"
@@ -80,8 +79,8 @@ namespace trapdoor {
         auto biome = this->getBlockSource()->getBiome(&playerBlockPos);
         auto name = biome->getBiomeName();
 
-        std::string MinecraftVersion = format("Minecraft Bedrock(BDS) %s  (%s)\n\n", minecraftVersion,
-                                              trapDoorVersion);
+//        std::string MinecraftVersion = format("Minecraft Bedrock(BDS) %s  (%s)\n\n", minecraftVersion,
+//                                              trapDoorVersion);
         std::string xyz = format("XYZ: %.2f / %.2f / %.2f\n", position->x, position->y, position->z);
         std::string block = format("Block: %d %d %d\n", playerBlockPos.x, playerBlockPos.y, playerBlockPos.z);
         std::string chunk = "Chunk: " + inChunkOffset.toString() + " in " + chunkPos.toString() + "\n";
@@ -91,8 +90,8 @@ namespace trapdoor {
         std::string dimString = format("Dimension: %s (%d)\n", this->getDimensionName().c_str(),
                                        this->getDimensionID());
 
-        builder.text(MinecraftVersion)
-                .text(xyz)
+
+        builder.text(xyz)
                 .text(block);
         if (inSlimeChunk) {
             builder.sText(chunk, MSG_COLOR::GREEN);

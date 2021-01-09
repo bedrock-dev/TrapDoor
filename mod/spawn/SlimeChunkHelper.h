@@ -18,7 +18,6 @@ namespace mod {
     public:
         inline void setAble(bool able) { this->enable = able; }
 
-
         void updateChunkPosList();
 
         void tick();

@@ -8,8 +8,6 @@
 #include <iostream>
 
 namespace mod {
-
-
     bool ConfigManager::initialize(const std::string &configFIleName) {
         L_INFO("config manager developing");
         if (!this->readConfigFile(configFIleName))return false;

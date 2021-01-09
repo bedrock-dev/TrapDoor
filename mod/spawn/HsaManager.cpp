@@ -113,6 +113,7 @@ namespace mod {
 }  // namespace mod
 using namespace SymHook;
 
+//HSA collector
 THook(
 	void,
 	MSSYM_B2QUE17spawnStructureMobB1AA7SpawnerB2AAE20AEAAXAEAVBlockSourceB2AAE12AEBVBlockPosB2AAE25AEBUHardcodedSpawningAreaB1AE10LevelChunkB2AAE19AEBVSpawnConditionsB3AAAA1Z,
@@ -125,7 +126,6 @@ THook(
 	original(spawner, blockSource, blockPos, hsa, spawnconditions);
 	auto modInstance = trapdoor::bdsMod->asInstance<mod::TrapdoorMod>();
 	auto& hsaManager = modInstance->getHsaManager();
-
 	mod::HsaInfo info;
 	info.boundingBox = {hsa->minPos, hsa->maxPos};
 	//已有了就不加入了//为了节省一下群系计算时间？

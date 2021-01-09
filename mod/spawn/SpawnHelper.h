@@ -14,7 +14,7 @@
 namespace mod {
 
 
-    //这个结构的代码不要动，顺序也别动
+    //! 这个结构的代码不要动，顺序也别动
     struct SpawnConditions {
         bool isOnSurface = false;
         bool isInWater = false;
@@ -26,11 +26,9 @@ namespace mod {
         trapdoor::BlockPos pos{};
     };
 
-
     struct MobSpawnRules {
 
     };
-
     struct MobSpawnData {
         MobSpawnRules *getSpawnRules();
 

@@ -21,12 +21,10 @@ namespace mod {
 
 
     namespace {
-        void buildSpawnConditions(const trapdoor::BlockPos *pos, const trapdoor::BlockSource *source) {
-
-        }
     }
 
     void SpawnHelper::tick() {
+        if(!this->enable)return;
         if (gameTick % 40 == 0) {
             this->draw();
         }
@@ -46,6 +44,7 @@ namespace mod {
     }
 
     void SpawnHelper::updateVerticalSpawnPositions(const trapdoor::BlockPos &pos, trapdoor::Actor *player) {
+        return;
         if (!this->enable)return;
         this->verticalSpawnPositions.clear();
         auto dim = player->getDimensionID();
@@ -59,6 +58,7 @@ namespace mod {
 
 
     void SpawnHelper::printSpawnProbability(trapdoor::Actor *player, const trapdoor::BlockPos &pos, uint32_t bright) {
+        return;
         if (!this->enable)return;
         auto dim = player->getDimensionID();
         int maxY = dim != 1 ? 255 : 127;
@@ -115,25 +115,26 @@ namespace mod {
 
 
     void findNextSpawnPosition(trapdoor::BlockSource *source, trapdoor::BlockPos *pos, unsigned int material) {
-        using namespace SymHook;
-        SYM_CALL(
-                void(*)(trapdoor::BlockSource * , trapdoor::BlockPos *, unsigned int),
-                MSSYM_B1QE23findNextSpawnBlockUnderB1AA7SpawnerB2AAA2SAB1UE16NAEBVBlockSourceB2AAE12AEAVBlockPosB2AAE14W4MaterialTypeB2AAE24W4SpawnBlockRequirementsB3AAAA1Z,
-                source, pos, material
-        );
+//        using namespace SymHook;
+//        SYM_CALL(
+//                void(*)(trapdoor::BlockSource * , trapdoor::BlockPos *, unsigned int),
+//                MSSYM_B1QE23findNextSpawnBlockUnderB1AA7SpawnerB2AAA2SAB1UE16NAEBVBlockSourceB2AAE12AEAVBlockPosB2AAE14W4MaterialTypeB2AAE24W4SpawnBlockRequirementsB3AAAA1Z,
+//                source, pos, material
+//        );
     }
 
     MobSpawnData *
     getMobToSpawn(trapdoor::BlockLegacy *legacy, const SpawnConditions &spawnConditions,
                   trapdoor::BlockSource *blockSource) {
-        using namespace SymHook;
-        return SYM_CALL(
-                MobSpawnData*(*)(trapdoor::BlockLegacy * ,const SpawnConditions&, trapdoor::BlockSource*source),
-                MSSYM_B1QE13getMobToSpawnB1AE11BlockLegacyB2AAE22UEBAPEBVMobSpawnerDataB2AAE19AEBVSpawnConditionsB2AAE15AEAVBlockSourceB3AAAA1Z,
-                legacy,
-                spawnConditions,
-                blockSource
-        );
+//        using namespace SymHook;
+//        return SYM_CALL(
+//                MobSpawnData*(*)(trapdoor::BlockLegacy * ,const SpawnConditions&, trapdoor::BlockSource*source),
+//                MSSYM_B1QE13getMobToSpawnB1AE11BlockLegacyB2AAE22UEBAPEBVMobSpawnerDataB2AAE19AEBVSpawnConditionsB2AAE15AEAVBlockSourceB3AAAA1Z,
+//                legacy,
+//                spawnConditions,
+//                blockSource
+//        );
+        return nullptr;
     }
 
     MobSpawnRules *MobSpawnData::getSpawnRules() {
@@ -147,4 +148,17 @@ namespace mod {
     }
 }
 
+using namespace SymHook;
+
+THook(
+        void,
+        MSSYM_B2QUE14sendHerdEventsB1AA7SpawnerB2AAE25AEBAXAEBUMobSpawnHerdInfoB2AAA4AEAVB2QDA6vectorB1AA7PEAVMobB2AAA1VB2QDA9allocatorB1AA7PEAVMobB3AAAA3stdB3AAAA3stdB3AAAA1Z,
+        void *spawner,
+        void *herdInfo,
+        void * mobList
+) {
+    if (spawner && herdInfo && mobList) {
+        original(spawner, herdInfo, mobList);
+    }
+}
 
