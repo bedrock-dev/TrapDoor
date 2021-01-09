@@ -3,15 +3,15 @@
 //
 
 #include "TrapdoorMod.h"
-#include "block/BlockSource.h"
-#include "commands/Command.h"
 #include "commands/CommandManager.h"
+#include "commands/Command.h"
+#include "tick/GameTick.h"
+#include "tools/DirtyLogger.h"
+#include "tick/ActorProfiler.h"
+#include "block/BlockSource.h"
 #include "graphics/BlockPos.h"
 #include "player/PlayerFunction.h"
 #include "player/PlayerStatisticManager.h"
-#include "tick/ActorProfiler.h"
-#include "tick/GameTick.h"
-#include "tools/DirtyLogger.h"
 
 namespace mod {
 	void TrapdoorMod::heavyTick() {
