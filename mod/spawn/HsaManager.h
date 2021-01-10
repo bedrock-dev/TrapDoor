@@ -5,50 +5,51 @@
 #ifndef MOD_HSAMANAGER_H
 #define MOD_HSAMANAGER_H
 
-#include "graphics/AABB.h"
-#include  <set>
+#include <set>
 #include "BDSMod.h"
+#include "graphics/AABB.h"
 
 namespace mod {
-    using namespace trapdoor;
-    enum StructureType {
-        SwampHut,
-        OceanMonument,
-        PillagerOutpost,
-        NetherFortress
-    };
+	using namespace trapdoor;
+	enum StructureType {
+		SwampHut,
+		OceanMonument,
+		PillagerOutpost,
+		NetherFortress
+	};
 
-    struct HsaInfo {
-        StructureType type = PillagerOutpost;
-        BoundingBox boundingBox{};
-        int dimensionID = 0;
-        bool operator<(const HsaInfo &rhs) const;
-    };
+	struct HsaInfo {
+		StructureType type = PillagerOutpost;
+		BoundingBox boundingBox{};
+		int dimensionID = 0;
 
+		bool operator<(const HsaInfo& rhs) const;
+	};
 
-    class HsaManager {
-        bool enable;
-        std::set<HsaInfo> hsaList;
-        Tick gameTick;
-    public:
-        inline void insert(HsaInfo info) { this->hsaList.insert(info); }
+	class HsaManager {
+		bool enable;
+		std::set<HsaInfo> hsaList;
+		Tick gameTick;
 
-        inline bool isAble() const { return this->enable; }
+	   public:
+		inline void insert(HsaInfo info) { this->hsaList.insert(info); }
 
-        bool findHsa(const HsaInfo &hsaInfo);
+		bool findHsa(const HsaInfo& hsaInfo);
+		trapdoor::BlockPos findB(trapdoor::Actor* player);
+		void draw(trapdoor::Actor* player);
 
-        inline int clear() {
-            int num = this->hsaList.size();
-            this->hsaList.clear();
-            return num;
-        }
+		inline int clear() {
+			int num = this->hsaList.size();
+			this->hsaList.clear();
+			return num;
+		}
 
-        static void list(trapdoor::Actor *player);
+		void list(trapdoor::Actor* player);
 
-        inline void setAble(bool able) { this->enable = able; };
+		inline void setAble(bool able) { this->enable = able; };
 
-        void tick();
-    };
-}
+		void tick();
+	};
+}  // namespace mod
 
-#endif //MOD_HSAMANAGER_H
+#endif	// MOD_HSAMANAGER_H

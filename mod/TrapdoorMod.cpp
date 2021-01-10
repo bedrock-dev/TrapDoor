@@ -184,28 +184,24 @@ namespace mod {
                     // this->getSpawnAnalyzer().printSimpleData(player);
                 }));
 
-        commandManager.registerCmd("draw", "简单建造")
-                ->then(ARG("ci", "画圆", INT, {
-                    auto radius = holder->getInt();
-                    bool hollow = holder->getInt() < 0;
-                    if (radius < 0)radius = -radius;
-                    this->simpleBuilder.buildCircle(player, radius, hollow);
-                }))
-                ->then(ARG("sp", "画球", INT, {
-                    auto radius = holder->getInt();
-                    bool hollow = holder->getInt() < 0;
-                    if (radius < 0)radius = -radius;
-                    this->simpleBuilder.buildSphere(player, radius, hollow);
-                }));
-
-        commandManager.registerCmd("backup", "备份")
-                ->then(ARG("b", "备份当前存档", NONE, {
-                    mod::backup(player);
-                }))
-                ->then(ARG("l", "列出所有已存在的备份", NONE, {
-                    mod::listAllBackups(player);
-                }));
-    }
+		commandManager.registerCmd("draw", "简单建造")
+			->then(ARG("ci", "画圆", INT,
+					   {
+						   auto radius = holder->getInt();
+						   bool hollow = holder->getInt() < 0;
+						   if (radius < 0)
+							   radius = -radius;
+						   this->simpleBuilder.buildCircle(player, radius,
+														   hollow);
+					   }))
+			->then(ARG("sp", "画圆", INT, {
+				auto radius = holder->getInt();
+				bool hollow = holder->getInt() < 0;
+				if (radius < 0)
+					radius = -radius;
+				this->simpleBuilder.buildSphere(player, radius, hollow);
+			}));
+	}
 
     void TrapdoorMod::registerTickCommand() {
         using namespace trapdoor;
@@ -238,39 +234,44 @@ namespace mod {
 
     }
 
-    void TrapdoorMod::printCopyRightInfo() {
-        const char *banner =
-                "\n"
-                "  _______                  _                   \n"
-                " |__   __|                | |                  \n"
-                "    | |_ __ __ _ _ __   __| | ___   ___  _ __  \n"
-                "    | | '__/ _` | '_ \\ / _` |/ _ \\ / _ \\| '__| \n"
-                "    | | | | (_| | |_) | (_| | (_) | (_) | |    \n"
-                "    |_|_|  \\__,_| .__/ \\__,_|\\___/ \\___/|_|    \n"
-                "                | |                            \n"
-                "                |_|                            ";
-        printf(
-                "%s\n  "
-                "\ngithub:https://github.com/hhhxiao/TrapDoor\nLicense: GPL\n",
-                banner);
-        printf("build time:     %s      %s\n-----------------------------------------------\n", __DATE__, __TIME__);
-        fflush(stdout);
-    }
+	void TrapdoorMod::printCopyRightInfo() {
+		const char* banner =
+			"\n"
+			"  _______                  _                   \n"
+			" |__   __|                | |                  \n"
+			"    | |_ __ __ _ _ __   __| | ___   ___  _ __  \n"
+			"    | | '__/ _` | '_ \\ / _` |/ _ \\ / _ \\| '__| \n"
+			"    | | | | (_| | |_) | (_| | (_) | (_) | |    \n"
+			"    |_|_|  \\__,_| .__/ \\__,_|\\___/ \\___/|_|    \n"
+			"                | |                            \n"
+			"                |_|                            ";
+		printf(
+			"%s\n  "
+			"\ngithub:https://github.com/hhhxiao/TrapDoor\nLicense: GPL\n",
+			banner);
+		printf(
+			"build time:     %s      "
+			"%s\n-----------------------------------------------\n",
+			__DATE__, __TIME__);
+		fflush(stdout);
+	}
 
-
-    void TrapdoorMod::useOnHook(Actor *player, const std::string &itemName, BlockPos &pos, unsigned int facing,
-                                const Vec3 &) {
-        //  L_DEBUG("%s", itemName.c_str());
-        //取消注释这一行可以看到右击地面的是什么东西
-        if (itemName == "Bone" && this->spawnHelper.isEnable()) {
-            spawnHelper.updateVerticalSpawnPositions(pos, player);
-        } else if (itemName == "Gunpowder") {
-            this->spawnHelper.printSpawnProbability(player, pos, 0);
-        } else if (itemName == "Leather") {
-            this->spawnHelper.printSpawnProbability(player, pos, 15);
-        } else if (itemName == "Cactus") {
-            this->rotationHelper.rotate(pos, player->getBlockSource());
-        }
-    }
+	void TrapdoorMod::useOnHook(Actor* player,
+								const std::string& itemName,
+								BlockPos& pos,
+								unsigned int facing,
+								const Vec3&) {
+		//  L_DEBUG("%s", itemName.c_str());
+		//取消注释这一行可以看到右击地面的是什么东西
+		if (itemName == "Bone" && this->spawnHelper.isEnable()) {
+			spawnHelper.updateVerticalSpawnPositions(pos, player);
+		} else if (itemName == "Gunpowder") {
+			this->spawnHelper.printSpawnProbability(player, pos, 0);
+		} else if (itemName == "Leather") {
+			this->spawnHelper.printSpawnProbability(player, pos, 15);
+		} else if (itemName == "Cactus") {
+			this->rotationHelper.rotate(pos, player->getBlockSource());
+		}
+	}
 
 }
