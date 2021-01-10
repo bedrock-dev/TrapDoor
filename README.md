@@ -155,7 +155,7 @@ GPL
 #### Minecfart
 感谢`mojang`提供的[Minecraft](https://www.minecraft.net/zh-hans)游戏
 
-#### 第三方库
+#### 第三方库或者代码
 
 - [https://github.com/microsoft/Detours](https://github.com/microsoft/Detours)
 
@@ -165,6 +165,9 @@ GPL
 
 - [https://github.com/DarthTon/Xenos](https://github.com/DarthTon/Xenos) 
 
+- [sqlite](https://www.sqlite.org/index.html)
+
+- [https://github.com/progschj/ThreadPool](https://github.com/progschj/ThreadPool)
 #### 开发者
 - Player
 - [OEOTYAN](https://github.com/OEOTYAN)

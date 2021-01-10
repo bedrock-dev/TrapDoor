@@ -33,6 +33,7 @@ add_library(${MOD_API_NAME} STATIC
         api/tools/DirtyLogger.cpp
         api/tools/Message.cpp
         api/tools/MsgBuilder.cpp
+        api/tools/ThreadPool.h
         api/world/LevelChunk.cpp
         api/tools/enumTools.h
         )
@@ -73,7 +74,7 @@ add_library(${MOD_NAME}
         mod/spawn/SlimeChunkHelper.cpp
         mod/player/PlayerStatisticManager.cpp
         mod/player/Player.cpp
-        )
+        mod/function/BackupHelper.cpp mod/function/BackupHelper.h)
 
 target_include_directories(
         ${MOD_NAME}

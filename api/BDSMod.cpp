@@ -53,5 +53,9 @@ namespace trapdoor {
         return this->playerCache;
     }
 
+    void BDSMod::initialize() {
+        L_INFO("init thread pool");
+        this->threadPool = new ThreadPool(std::thread::hardware_concurrency());
+    }
 
 }

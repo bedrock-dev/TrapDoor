@@ -15,13 +15,14 @@
 #include "commands/CommandManager.h"
 #include "world/Level.h"
 #include "PlayerBuffer.h"
+#include "tools/ThreadPool.h"
 
 typedef size_t Tick;
 namespace trapdoor {
     class BDSMod {
     public:
         struct ModConfig {
-            size_t particleViewDistance = 128;
+            size_t particleViewDistance = 256;
             bool particlePerformanceMode = false;
         };
     protected:
@@ -30,10 +31,9 @@ namespace trapdoor {
         CommandRegistry *commandRegistry{};
         CommandManager commandManager;
         std::map<std::string, PlayerBuffer> playerCache;
-    public:
-
-
+        ThreadPool *threadPool = nullptr;
         ModConfig config;
+    public:
 
         Level *getLevel();
 
@@ -43,7 +43,11 @@ namespace trapdoor {
 
         void setCommandRegistry(CommandRegistry *registry);
 
+        virtual void initialize();
+
         CommandManager &getCommandManager();
+
+        inline ThreadPool *getThreadPool() { return this->threadPool; }
 
         virtual void registerCommands();
 

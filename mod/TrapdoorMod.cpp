@@ -12,6 +12,7 @@
 #include "graphics/BlockPos.h"
 #include "player/PlayerFunction.h"
 #include "player/PlayerStatisticManager.h"
+#include "function/BackupHelper.h"
 
 namespace mod {
     void TrapdoorMod::heavyTick() {
@@ -30,9 +31,11 @@ namespace mod {
 
 //这个函数会在初始化Level对象后执行
     void TrapdoorMod::initialize() {
+        BDSMod::initialize();
         this->configManager.initialize("trapdoor-config.json");
         this->commandManager.setCommandConfig(this->configManager.getCommandsConfig());
         this->playerStatisticManager.init("trapdoor.db");
+        mod::initBackup();
     }
 
 
@@ -168,13 +171,17 @@ namespace mod {
 
         commandManager.registerCmd("spawncounter", "刷怪分析器")
                 ->then(ARG("s", "开始统计", NONE, {
-                    this->getSpawnAnalyzer().start(player);
+                    info(player, "该功能维护中");
+                    // this->getSpawnAnalyzer().start(player);
                 }))
                 ->then(ARG("e", "结束统计", NONE, {
-                    this->getSpawnAnalyzer().end(player);
+
+                    info(player, "该功能维护中");
+                    //this->getSpawnAnalyzer().end(player);
                 }))
                 ->then(ARG("p", "打印数据", NONE, {
-                    this->getSpawnAnalyzer().printSimpleData(player);
+                    info(player, "该功能维护中");
+                    // this->getSpawnAnalyzer().printSimpleData(player);
                 }));
 
         commandManager.registerCmd("draw", "简单建造")
@@ -190,8 +197,15 @@ namespace mod {
                     if (radius < 0)radius = -radius;
                     this->simpleBuilder.buildSphere(player, radius, hollow);
                 }));
-    }
 
+        commandManager.registerCmd("backup", "备份")
+                ->then(ARG("b", "备份当前存档", NONE, {
+                    mod::backup(player);
+                }))
+                ->then(ARG("l", "列出所有已存在的备份", NONE, {
+                    mod::listAllBackups(player);
+                }));
+    }
 
     void TrapdoorMod::registerTickCommand() {
         using namespace trapdoor;
