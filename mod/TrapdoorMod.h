@@ -39,7 +39,7 @@ namespace mod {
     public:
         static void printCopyRightInfo();
 
-        void initialize();
+        void initialize() override;
 
         void registerCommands() override;
 
