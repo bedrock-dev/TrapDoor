@@ -56,7 +56,7 @@ namespace mod {
                     info(player, "设置漏斗计数器为 %d", holder->getBool());
                 }))
                 ->then(ARG("spawn", "开启/关闭刷怪指示", BOOL, {
-                 //   this->spawnHelper.setAble(holder->getBool());
+                    //   this->spawnHelper.setAble(holder->getBool());
                     info(player, "该功能维护中");
                 }))
                 ->then(ARG("cactus", "开启/关闭仙人掌转方块", BOOL, {
