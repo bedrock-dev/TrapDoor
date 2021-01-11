@@ -13,8 +13,9 @@ namespace mod {
 
     void listAllBackups(trapdoor::Actor *player);
 
-
     void initBackup();
+
+    void restore(trapdoor::Actor *player, int index = 0);
 }
 
 #endif //MOD_BACKUPHELPER_H

@@ -221,6 +221,7 @@ THook(
                 original(serverLevel);
                 modInstance->lightTick();
             }
+            modInstance->heavyTick();
             break;
     }
 }

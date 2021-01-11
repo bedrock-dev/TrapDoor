@@ -38,19 +38,15 @@ namespace mod {
         mod::initBackup();
     }
 
-
     void TrapdoorMod::registerCommands() {
         using namespace trapdoor;
         BDSMod::registerCommands();
-
         this->registerTickCommand();
         commandManager.registerCmd("prof", "ticking profiling")
                 ->then(ARG("actor", "显示详细的实体更新时间", NONE, {
                     tick::profileEntities(player);
                 }))
-                ->EXE({
-                          tick::profileWorld(player);
-                      });
+                ->EXE({ tick::profileWorld(player); });
         commandManager.registerCmd("mspt", "show mspt & tps")->EXE({ tick::mspt(); });
 //功能开关命令
         commandManager.registerCmd("func", "开启/关闭部分功能")
@@ -59,16 +55,12 @@ namespace mod {
                     info(player, "设置漏斗计数器为 %d", holder->getBool());
                 }))
                 ->then(ARG("spawn", "开启/关闭刷怪指示", BOOL, {
-                    //   this->spawnHelper.setAble(holder->getBool());
-                    info(player, "该功能维护中");
+                    this->spawnHelper.setAble(holder->getBool());
+                    info(player, "设置刷怪指示器为 %d", holder->getBool());
                 }))
                 ->then(ARG("cactus", "开启/关闭仙人掌转方块", BOOL, {
                     this->rotationHelper.setAble(holder->getBool());
                     info(player, "设置仙人掌转方块为 %d", holder->getBool());
-                }))
-                ->then(ARG("chunk", "开启/关闭区块显示", BOOL, {
-                    this->playerFunctions.setAble(player->getNameTag(), holder->getBool());
-                    info(player, "设置你的区块显示为 %d", holder->getBool());
                 }))
                 ->then(ARG("build", "开启/关闭区块draw命令", BOOL, {
                     this->simpleBuilder.setAble(holder->getBool());
@@ -107,19 +99,19 @@ namespace mod {
                 }));
 
 //便捷模式切换
-        commandManager.registerCmd("o", "switch to spectator mode")
+        commandManager.registerCmd("o", "切换到观察者模式")
                 ->EXE({
-                          player->setGameMode(3);
+                          player->setGameMode(4);
                           broadcastMsg("设置玩家[%s]为观察者模式", player->getNameTag().c_str());
                       });
 
-        commandManager.registerCmd("s", "switch to survival mode")
+        commandManager.registerCmd("s", "切换到生存模式")
                 ->EXE({
                           player->setGameMode(0);
                           broadcastMsg("设置玩家[%s]为生存模式", player->getNameTag().c_str());
                       });
 
-        commandManager.registerCmd("c", "switch to creative mode")
+        commandManager.registerCmd("c", "切换到创造模式")
                 ->EXE({
                           player->setGameMode(1);
                           broadcastMsg("设置玩家[%s]为创造者模式", player->getNameTag().c_str());
@@ -152,7 +144,6 @@ namespace mod {
                           this->commandManager.printfHelpInfo(player);
                       });
 
-
         commandManager.registerCmd("dbg", "显示一些调试信息")
                 ->EXE({ player->printInfo(); });
 
@@ -161,12 +152,12 @@ namespace mod {
                     auto num = hsaManager.clear();
                     broadcastMsg("一共 %d 个hsa区域被清空", num);
                 }))
-                ->then(ARG("list", "list nearest hsa", NONE, {
+                ->then(ARG("list", "列出目前所有的hsa", NONE, {
                     hsaManager.list(player);
                 }))
-                ->then(ARG("show", "show hsa", BOOL, {
+                ->then(ARG("show", "开启hsa显示", BOOL, {
                     hsaManager.setAble(holder->getBool());
-                    info(player, "set hsa show to %d", holder->getBool());
+                    info(player, "设置HSA显示为 %d", holder->getBool());
                 }))
                 ->then(ARG("find", "find the best pos", NONE,
                            {
@@ -174,20 +165,20 @@ namespace mod {
                            }))
                 ->then(ARG("draw", "draw hsa", NONE, { hsaManager.draw(player); }));
 
-        commandManager.registerCmd("spawncounter", "刷怪分析器")
-                ->then(ARG("s", "开始统计", NONE, {
-                    info(player, "该功能维护中");
-                    // this->getSpawnAnalyzer().start(player);
-                }))
-                ->then(ARG("e", "结束统计", NONE, {
-
-                    info(player, "该功能维护中");
-                    //this->getSpawnAnalyzer().end(player);
-                }))
-                ->then(ARG("p", "打印数据", NONE, {
-                    info(player, "该功能维护中");
-                    // this->getSpawnAnalyzer().printSimpleData(player);
-                }));
+//        commandManager.registerCmd("spawncounter", "刷怪分析器")
+//                ->then(ARG("s", "开始统计", NONE, {
+//                    info(player, "该功能维护中");
+//                    // this->getSpawnAnalyzer().start(player);
+//                }))
+//                ->then(ARG("e", "结束统计", NONE, {
+//
+//                    info(player, "该功能维护中");
+//                    //this->getSpawnAnalyzer().end(player);
+//                }))
+//                ->then(ARG("p", "打印数据", NONE, {
+//                    info(player, "该功能维护中");
+//                    // this->getSpawnAnalyzer().printSimpleData(player);
+//                }));
 
         commandManager.registerCmd("draw", "简单建造")
                 ->then(ARG("ci", "画圆", INT,
@@ -199,13 +190,36 @@ namespace mod {
                                this->simpleBuilder.buildCircle(player, radius,
                                                                hollow);
                            }))
-                ->then(ARG("sp", "画圆", INT, {
+                ->then(ARG("sp", "画球体", INT, {
                     auto radius = holder->getInt();
                     bool hollow = holder->getInt() < 0;
                     if (radius < 0)
                         radius = -radius;
                     this->simpleBuilder.buildSphere(player, radius, hollow);
                 }));
+
+
+        commandManager.registerCmd("backup", "备份相关功能")
+                ->then(ARG("b", "创建备份", NONE, {
+                    info(player, "开发中");
+                    //mod::backup(player);
+                }))
+                ->then(ARG("l", "创建备份", NONE, {
+                    mod::listAllBackups(player);
+                }))
+                ->then(ARG("r", "恢复备份", INT, {
+                    mod::restore(player, holder->getInt());
+                }))
+                ->then(ARG("crash", "崩服", NONE, {
+                    *((char *) (0)) = 0;
+                }));
+
+        commandManager.registerCmd("self", "玩家个人功能")
+                ->then(ARG("chunk", "区块显示", BOOL, {
+                    this->playerFunctions.setAble(player->getNameTag(), holder->getBool());
+                    info(player, "设置你的区块显示为 %d", holder->getBool());
+                }));
+
     }
 
     void TrapdoorMod::registerTickCommand() {
