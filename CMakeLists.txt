@@ -8,6 +8,7 @@ else ()
 endif ()
 set(MOD_API_NAME trapDoorAPI)
 
+
 add_library(${MOD_API_NAME} STATIC
         api/BDSMod.cpp
         api/block/Block.cpp
@@ -96,9 +97,5 @@ target_include_directories(
         api/tools
 )
 
-
 target_link_libraries(${MOD_NAME} ${MOD_API_NAME})
 
-add_executable(
-        TempText
-        test/testMain.cpp)

@@ -32,11 +32,12 @@ namespace mod {
 //这个函数会在初始化Level对象后执行
     void TrapdoorMod::initialize() {
         BDSMod::initialize();
-        this->configManager.initialize("trapdoor-config.json");
         this->commandManager.setCommandConfig(this->configManager.getCommandsConfig());
         this->playerStatisticManager.init("trapdoor.db");
         mod::initBackup();
+        L_INFO("==== trapdoor init finish  ====");
     }
+
 
     void TrapdoorMod::registerCommands() {
         using namespace trapdoor;
@@ -290,6 +291,19 @@ namespace mod {
             this->spawnHelper.printSpawnProbability(player, pos, 15);
         } else if (itemName == "Cactus") {
             this->rotationHelper.rotate(pos, player->getBlockSource());
+        }
+    }
+
+
+    CommandPermissionLevel
+    TrapdoorMod::resetVanillaCommandLevel(const std::string &name, CommandPermissionLevel oldLevel) {
+        auto lowLevelConfig = this->configManager.getLowLevelCommands();
+        if (lowLevelConfig.find(name) != lowLevelConfig.end()) {
+            L_INFO("set command %s level to Admin", name.c_str());
+            return CommandPermissionLevel::GameMasters;
+        } else {
+            // printf("not find: %s\n", name.c_str());
+            return oldLevel;
         }
     }
 }

@@ -8,16 +8,19 @@
 #include <iostream>
 
 namespace mod {
-    bool ConfigManager::initialize(const std::string &configFIleName) {
-        L_INFO("config manager developing");
-        if (!this->readConfigFile(configFIleName))return false;
+    bool ConfigManager::initialize(const std::string &configFileName) {
+        L_INFO("init config");
+        if (!this->readConfigFile(configFileName))return false;
         if (!this->readCommandConfig())return false;
+        if (!this->readLowLevelVanillaCommands())return false;
 //        if (!this->readFunctionConfig())return false;
 //        if (!this->readParticleConfig())return false;
+        this->printAllConfig();
         return true;
     }
 
     bool ConfigManager::readCommandConfig() {
+        L_INFO("begin read command permission info");
         auto commandConfigs = this->configJson["commands"];
         trapdoor::CommandConfig tempConfig;
         try {
@@ -99,11 +102,27 @@ namespace mod {
 
 
     void ConfigManager::printAllConfig() const {
-
+        L_INFO("here are the all low level commands:");
+        for (const auto &item:this->lowerLevelVanillaCommands) {
+            L_INFO("%s", item.c_str());
+        }
     }
 
     const ConfigManager::ParticleConfig &ConfigManager::getParticleConfig() {
         return this->particleConfig;
+    }
+
+    bool ConfigManager::readLowLevelVanillaCommands() {
+        L_INFO("begin read low level vanilla command info");
+        try {
+            auto lowLevelVanillaCommandsConfig = this->configJson["lowLevelVanillaCommands"];
+            for (const auto &i:lowLevelVanillaCommandsConfig) {
+                this->lowerLevelVanillaCommands.insert(i.get<std::string>());
+            }
+        } catch (std::exception &e) {
+            L_ERROR("%s", e.what());
+        }
+        return true;
     }
 
 }

@@ -11,6 +11,7 @@
 #include "commands/CommandManager.h"
 #include "tools/noncopyable .h"
 #include <map>
+#include <set>
 
 
 namespace mod {
@@ -39,6 +40,8 @@ namespace mod {
 
         json configJson;
         std::map<std::string, trapdoor::CommandConfig> commandsConfig;
+        std::set<std::string> lowerLevelVanillaCommands;
+
         FunctionConfig functionConfig;
         ParticleConfig particleConfig;
 
@@ -50,6 +53,8 @@ namespace mod {
 
         bool readParticleConfig();
 
+        bool readLowLevelVanillaCommands();
+
     public:
 
         const FunctionConfig &getFunctionConfig();
@@ -58,9 +63,11 @@ namespace mod {
 
         const ParticleConfig &getParticleConfig();
 
-        bool initialize(const std::string &configFIleName);
+        bool initialize(const std::string &configFileName);
 
         void printAllConfig() const;
+
+        const std::set<std::string> &getLowLevelCommands() const { return this->lowerLevelVanillaCommands; }
     };
 }
 

@@ -99,9 +99,8 @@ namespace trapdoor {
 
 
     void CommandManager::setCommandConfig(std::map<std::string, CommandConfig> &cmdConfigList) {
-        //  this->commandConfigList = std::map<std::string, CommandConfig>(cmdConfigList.begin(), cmdConfigList.end());
         this->commandConfigList = cmdConfigList;
-        L_INFO("here are all the command info");
+        L_INFO("init command permission info");
         for (const auto &item:this->commandConfigList) {
             L_INFO("%-10s enable:%d  level:%d", item.first.c_str(),
                    item.second.enable,

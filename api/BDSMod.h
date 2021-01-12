@@ -57,6 +57,8 @@ namespace trapdoor {
                                unsigned int facing,
                                const Vec3 &) = 0;
 
+        virtual CommandPermissionLevel
+        resetVanillaCommandLevel(const std::string &name, CommandPermissionLevel oldLevel) { return oldLevel; }
 
         std::map<std::string, PlayerBuffer> &getPlayerBuffer();
 

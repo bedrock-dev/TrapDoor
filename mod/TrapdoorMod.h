@@ -46,9 +46,16 @@ namespace mod {
         void useOnHook(Actor *player, const std::string &itemName, BlockPos &pos, unsigned int facing,
                        const Vec3 &) override;
 
+        CommandPermissionLevel
+        resetVanillaCommandLevel(const std::string &name, CommandPermissionLevel oldLevel) override;
+
         void heavyTick();
 
         void lightTick();
+
+        inline void readConfigFile(const std::string &configFileName) {
+            this->configManager.initialize("trapdoor-config.json");
+        }
 
         //get functions
         inline HopperChannelManager &getHopperChannelManager() { return this->hopperChannelManager; }

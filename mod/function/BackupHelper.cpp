@@ -11,6 +11,8 @@
 #include "tick/SimpleProfiler.h"
 #include <filesystem>
 #include <MsgBuilder.h>
+#include "tools/DirtyLogger.h"
+
 namespace mod {
 
     namespace {
@@ -28,6 +30,7 @@ namespace mod {
     }
 
     void initBackup() {
+        L_INFO("create backup folder");
         std::filesystem::create_directory("trapdoor-backup");
         //往当前目录写入backup.ps1
     }

@@ -19,6 +19,7 @@ namespace trapdoor {
     }
 
     void BDSMod::setCommandRegistry(void *registry) {
+        L_INFO("set commandRegistry");
         this->commandRegistry = registry;
     }
 
@@ -54,6 +55,7 @@ namespace trapdoor {
     }
 
     void BDSMod::initialize() {
+        L_INFO("==== trapdoor mod begin init ====");
         L_INFO("init thread pool");
         this->threadPool = new ThreadPool(std::thread::hardware_concurrency());
     }
