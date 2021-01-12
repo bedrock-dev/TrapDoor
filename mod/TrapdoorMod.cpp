@@ -202,8 +202,7 @@ namespace mod {
 
         commandManager.registerCmd("backup", "备份相关功能")
                 ->then(ARG("b", "创建备份", NONE, {
-                    info(player, "开发中");
-                    //mod::backup(player);
+                    mod::backup(player);
                 }))
                 ->then(ARG("l", "创建备份", NONE, {
                     mod::listAllBackups(player);
@@ -299,7 +298,7 @@ namespace mod {
     TrapdoorMod::resetVanillaCommandLevel(const std::string &name, CommandPermissionLevel oldLevel) {
         auto lowLevelConfig = this->configManager.getLowLevelCommands();
         if (lowLevelConfig.find(name) != lowLevelConfig.end()) {
-            L_INFO("set command %s level to Admin", name.c_str());
+            L_INFO("set command %s level to gameMaster", name.c_str());
             return CommandPermissionLevel::GameMasters;
         } else {
             // printf("not find: %s\n", name.c_str());
