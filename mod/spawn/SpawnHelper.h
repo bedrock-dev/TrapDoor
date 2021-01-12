@@ -10,7 +10,7 @@
 #include "entity/Actor.h"
 #include "block/BlockLegacy.h"
 #include "block/Block.h"
-
+#include "tools/noncopyable .h"
 namespace mod {
 
 
@@ -35,7 +35,7 @@ namespace mod {
         trapdoor::ActorDefinitionIdentifier *getActorID();
     };
 
-    class SpawnHelper {
+    class SpawnHelper :noncopyable {
         std::vector<trapdoor::BlockPos> verticalSpawnPositions;
         bool enable = false;
         unsigned long long gameTick;

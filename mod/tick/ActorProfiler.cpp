@@ -8,7 +8,7 @@
 #include "GameTick.h"
 #include "tools/DirtyLogger.h"
 #include <algorithm>
-
+#include "tools/noncopyable .h"
 namespace mod {
 
     namespace {

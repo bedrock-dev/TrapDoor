@@ -11,7 +11,6 @@
 #include "tick/SimpleProfiler.h"
 #include <filesystem>
 #include <MsgBuilder.h>
-
 namespace mod {
 
     namespace {

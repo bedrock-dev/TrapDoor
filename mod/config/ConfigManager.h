@@ -9,19 +9,14 @@
 #include <fstream>
 #include "tools/DirtyLogger.h"
 #include "commands/CommandManager.h"
+#include "tools/noncopyable .h"
 #include <map>
 
 
-/*
- * todo
- * 开发中，请无视
- *
- *
- */
 namespace mod {
     using json = nlohmann::json;
 
-    class ConfigManager {
+    class ConfigManager : public noncopyable {
     public:
         //命令配置选项
 
@@ -63,11 +58,9 @@ namespace mod {
 
         const ParticleConfig &getParticleConfig();
 
-
         bool initialize(const std::string &configFIleName);
 
         void printAllConfig() const;
-
     };
 }
 

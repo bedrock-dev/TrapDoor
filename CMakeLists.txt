@@ -35,8 +35,7 @@ add_library(${MOD_API_NAME} STATIC
         api/tools/MsgBuilder.cpp
         api/tools/ThreadPool.h
         api/world/LevelChunk.cpp
-        api/tools/enumTools.h
-        )
+        "api/tools/noncopyable .h")
 target_include_directories(${MOD_API_NAME}
         PUBLIC
         api

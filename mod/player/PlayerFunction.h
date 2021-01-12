@@ -8,13 +8,13 @@
 #include <map>
 #include <string>
 #include "entity/Actor.h"
-
+#include "tools/noncopyable .h"
 namespace mod {
     struct PlayerData {
         bool enableChunkBoundsShow = false;
     };
 
-    class PlayerFunction {
+    class PlayerFunction:noncopyable {
         std::map<std::string, bool> enables;
         unsigned long long gameTick = 0;
 

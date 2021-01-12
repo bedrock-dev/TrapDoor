@@ -17,7 +17,7 @@
 #include <vector>
 #include "entity/Actor.h"
 #include "block/Block.h"
-
+#include "tools/noncopyable .h"
 //漏斗计数器频道
 namespace mod {
 
@@ -44,7 +44,7 @@ namespace mod {
     };
 
 //漏斗频道管理器
-    class HopperChannelManager {
+    class HopperChannelManager : noncopyable {
         std::vector<CounterChannel> channels;
         bool enable = false;
     public:

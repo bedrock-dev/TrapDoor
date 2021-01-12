@@ -9,7 +9,7 @@
 #include "graphics/Vec3.h"
 #include "graphics/Graphics.h"
 #include<set>
-
+#include "tools/noncopyable .h"
 
 namespace mod {
 
@@ -49,8 +49,7 @@ namespace mod {
         void setRandomColor();
     };
 
-
-    class VillageHelper {
+    class VillageHelper:noncopyable {
         bool showBounds = false; //村庄边界
         bool showPOIRange = false; //poi查询范围
         bool showGolemSpawnArea = false; //铁傀儡刷出范围

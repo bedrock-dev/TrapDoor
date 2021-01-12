@@ -7,6 +7,7 @@
 
 #include <chrono>
 #include "entity/Actor.h"
+#include "tools/noncopyable .h"
 
 typedef std::chrono::high_resolution_clock timer_clock;
 #define TIMER_START auto start = timer_clock::now();
@@ -15,7 +16,7 @@ typedef std::chrono::high_resolution_clock timer_clock;
 namespace mod {
     typedef long long microsecond_t;
 
-    class SimpleProfiler {
+    class SimpleProfiler : noncopyable {
     public:
         microsecond_t serverLevelTickTime = 0; //mspt
         microsecond_t redstoneTickTime = 0; //红石更新

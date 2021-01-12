@@ -16,10 +16,11 @@
 #include "world/Level.h"
 #include "PlayerBuffer.h"
 #include "tools/ThreadPool.h"
+#include "tools/noncopyable .h"
 
 typedef size_t Tick;
 namespace trapdoor {
-    class BDSMod {
+    class BDSMod : public noncopyable {
     public:
         struct ModConfig {
             size_t particleViewDistance = 256;

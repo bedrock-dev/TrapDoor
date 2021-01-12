@@ -49,4 +49,5 @@ namespace trapdoor {
 }
 
 
+typedef trapdoor::Vec3 Vec3;
 #endif //LIBMCBEMOD_VEC3_H
