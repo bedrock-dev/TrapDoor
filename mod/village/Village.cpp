@@ -107,18 +107,18 @@ namespace mod {
     }
 
     void VillageHelper::draw() {
-        std::string centerParticleType = "minecraft:heart_particle";
         for (auto vw:villageList) {
             auto village = vw.village;
             if (village) {
                 if (this->showBounds)
-                    trapdoor::spawnRectangleParticle(village->getBounds(), trapdoor::GRAPHIC_COLOR::BLUE);
+                    trapdoor::spawnRectangleParticle(village->getBounds(), villageHelperConfig.boundColor);
                 if (this->showVillageCenter)
-                    trapdoor::spawnParticle(village->getCenter() + Vec3(0.5f, 0.9f, 0.5f), centerParticleType);
+                    trapdoor::spawnParticle(village->getCenter() + Vec3(0.5f, 0.9f, 0.5f),
+                                            villageHelperConfig.centerParticle);
                 if (this->showGolemSpawnArea)
-                    trapdoor::spawnRectangleParticle(village->getGolemSpawnArea(), trapdoor::GRAPHIC_COLOR::GREEN);
+                    trapdoor::spawnRectangleParticle(village->getGolemSpawnArea(), villageHelperConfig.spawnColor);
                 if (this->showPOIRange)
-                    trapdoor::spawnRectangleParticle(village->getPOIRange(), trapdoor::GRAPHIC_COLOR::YELLOW);
+                    trapdoor::spawnRectangleParticle(village->getPOIRange(), villageHelperConfig.poiQueryColor);
             }
         }
     }

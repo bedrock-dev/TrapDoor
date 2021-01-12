@@ -67,6 +67,8 @@ namespace mod {
         inline SpawnAnalyzer &getSpawnAnalyzer() { return this->spawnAnalyzer; }
 
         inline PlayerStatisticManager &getPlayerStatisticManager() { return this->playerStatisticManager; }
+
+        inline std::string getLevelName() { return this->configManager.getServerConfig().levelName; }
     };
 }
 

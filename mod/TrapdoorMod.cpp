@@ -35,9 +35,9 @@ namespace mod {
         this->commandManager.setCommandConfig(this->configManager.getCommandsConfig());
         this->playerStatisticManager.init("trapdoor.db");
         mod::initBackup();
+        this->villageHelper.setConfig(this->configManager.getVillageConfig());
         L_INFO("==== trapdoor init finish  ====");
     }
-
 
     void TrapdoorMod::registerCommands() {
         using namespace trapdoor;

@@ -49,7 +49,15 @@ namespace mod {
         void setRandomColor();
     };
 
-    class VillageHelper:noncopyable {
+    struct VillageHelperConfig {
+        trapdoor::GRAPHIC_COLOR boundColor = GRAPH_COLOR::BLUE;
+        trapdoor::GRAPHIC_COLOR spawnColor = GRAPH_COLOR::GREEN;
+        trapdoor::GRAPHIC_COLOR poiQueryColor = GRAPH_COLOR::WHITE;
+        std::string centerParticle = "minecraft:heart_particle";
+    };
+
+    class VillageHelper : noncopyable {
+        VillageHelperConfig villageHelperConfig;
         bool showBounds = false; //村庄边界
         bool showPOIRange = false; //poi查询范围
         bool showGolemSpawnArea = false; //铁傀儡刷出范围
@@ -75,6 +83,10 @@ namespace mod {
         void draw();
 
         void list(trapdoor::Actor *actor);
+
+        inline void setConfig(const VillageHelperConfig &config) {
+            this->villageHelperConfig = config;
+        }
 
         void tick();
     };

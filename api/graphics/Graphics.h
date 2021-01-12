@@ -21,6 +21,6 @@ namespace trapdoor {
 
     void drawLine(const Vec3 &originPoint, FACING direction, float length, GRAPHIC_COLOR color, int dimType = 0);
 }
-
+typedef trapdoor::GRAPHIC_COLOR GRAPH_COLOR;
 
 #endif //TRAPDOOR_GRAPHICS_H

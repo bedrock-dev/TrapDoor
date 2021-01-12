@@ -12,7 +12,7 @@
 #include "tools/noncopyable .h"
 #include <map>
 #include <set>
-
+#include "Village.h"
 
 namespace mod {
     using json = nlohmann::json;
@@ -36,6 +36,9 @@ namespace mod {
             bool performanceMode = false;
         };
 
+        struct ServerConfig {
+            std::string levelName;
+        };
     private:
 
         json configJson;
@@ -44,6 +47,8 @@ namespace mod {
 
         FunctionConfig functionConfig;
         ParticleConfig particleConfig;
+        VillageHelperConfig villageHelperConfig;
+        ServerConfig serverConfig;
 
         bool readCommandConfig();
 
@@ -54,6 +59,10 @@ namespace mod {
         bool readParticleConfig();
 
         bool readLowLevelVanillaCommands();
+
+        bool readServerConfig();
+
+        bool readVillageConfig();
 
     public:
 
@@ -67,7 +76,12 @@ namespace mod {
 
         void printAllConfig() const;
 
-        const std::set<std::string> &getLowLevelCommands() const { return this->lowerLevelVanillaCommands; }
+        inline const std::set<std::string> &getLowLevelCommands() const { return this->lowerLevelVanillaCommands; }
+
+        inline const VillageHelperConfig &getVillageConfig() const { return this->villageHelperConfig; }
+
+        inline const ServerConfig &getServerConfig() const { return this->serverConfig; }
+
     };
 }
 
