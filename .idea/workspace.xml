@@ -13,20 +13,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3eb519fb-7465-437d-86d7-42a97e7c56eb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/GrepConsole.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/code-comments.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/graphics/Graphics.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/graphics/Graphics.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/TrapdoorMod.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/TrapdoorMod.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/TrapdoorMod.h" beforeDir="false" afterPath="$PROJECT_DIR$/mod/TrapdoorMod.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/config/ConfigManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/config/ConfigManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/config/ConfigManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/mod/config/ConfigManager.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/village/Village.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/village/Village.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/village/Village.h" beforeDir="false" afterPath="$PROJECT_DIR$/mod/village/Village.h" afterDir="false" />
-    </list>
+    <list default="true" id="3eb519fb-7465-437d-86d7-42a97e7c56eb" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -85,7 +72,7 @@
       <option name="presentableId" value="Default" />
       <updated>1610412403756</updated>
       <workItem from="1610412407261" duration="763000" />
-      <workItem from="1610443690806" duration="4335000" />
+      <workItem from="1610443690806" duration="4717000" />
     </task>
     <servers />
   </component>

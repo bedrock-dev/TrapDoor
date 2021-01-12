@@ -13,6 +13,8 @@
 #include <MsgBuilder.h>
 #include <fstream>
 #include "tools/DirtyLogger.h"
+#include "TrapdoorMod.h"
+#include "BDSMod.h"
 
 namespace mod {
 
@@ -24,13 +26,16 @@ namespace mod {
 
         void writeBackupScript() {
             std::ofstream out("backup.ps1");
-            out << R"(
+            auto levelName = trapdoor::bdsMod->asInstance<mod::TrapdoorMod>()->getLevelName();
+            std::string backupScript = trapdoor::format(R"(
 $Date =  $(get-date -f yyyy-MM-dd)+" "+$(get-date -f HH-mm-ss)
-$SourcePath = "worlds/Bedrock level"
+$SourcePath = "worlds/%s"
 $Destination = "trapdoor-backup\$Date"
 New-Item -Path "trapdoor-backup" -Name "$Date" -ItemType "directory" | Out-Null
 Copy-Item -Path $SourcePath -Destination "$Destination" -Recurse | Out-Null
-                )";
+                )", levelName.c_str()
+            );
+            out << backupScript;
             out.close();
         }
 
