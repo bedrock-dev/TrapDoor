@@ -74,12 +74,15 @@ add_library(${MOD_NAME}
         mod/spawn/SlimeChunkHelper.cpp
         mod/player/PlayerStatisticManager.cpp
         mod/player/Player.cpp
-        mod/function/BackupHelper.cpp mod/function/BackupHelper.h)
+        mod/function/BackupHelper.cpp mod/function/BackupHelper.h
+        mod/os/process_stat.cpp
+        )
 
 target_include_directories(
         ${MOD_NAME}
         PUBLIC
         mod
+        mod/os
         mod/config
         mod/hopper
         mod/spawn

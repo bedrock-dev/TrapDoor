@@ -101,6 +101,8 @@ Copy-Item -Path $SourcePath -Destination "$Destination" -Recurse | Out-Null
     }
 
     void restore(trapdoor::Actor *player, int index) {
+        trapdoor::warning(player, "咕咕咕");
+        return;
         namespace fs = std::filesystem;
         auto backupList = getAllBackups(player);
         if (index < 0 || index >= backupList.size() || backupList.empty()) {

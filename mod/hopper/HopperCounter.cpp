@@ -74,7 +74,7 @@ namespace mod {
         builder.sTextF(trapdoor::MessageBuilder::BOLD, "channel %d\n", channel)
                 .num(n).text("  items in ").num(gameTick).text(" gt(").num(gameTick / 1200.0).text("min)\n");
         for (const auto &i:counterList) {
-            builder.text(i.first).text("    ").num(i.second).text("(").num(i.second * 1.0 / gameTick * 72000).text(
+            builder.textF(" - ").text(i.first).text("    ").num(i.second).text("(").num(i.second * 1.0 / gameTick * 72000).text(
                     "min)\n");
         }
         builder.send(actor);

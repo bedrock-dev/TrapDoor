@@ -36,8 +36,6 @@ namespace trapdoor {
 
         BlockSource *getBlockSource();
 
-        void printInfo();
-
         int getDimensionID();
 
         Dimension *getDimension();

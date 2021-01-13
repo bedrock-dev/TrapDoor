@@ -67,40 +67,7 @@ namespace trapdoor {
         );
     }
 
-    void Actor::printInfo() {
-        MessageBuilder builder;
-        auto position = this->getPos();
-        auto playerBlockPos = position->toBlockPos();
-        auto chunkPos = playerBlockPos.toChunkPos();
-        auto inChunkOffset = playerBlockPos.InChunkOffset();
-        auto inSlimeChunk = chunkPos.isSlimeChunk();
-        Vec3 viewVec{};
-        this->getViewActor(&viewVec, 1);
-        auto biome = this->getBlockSource()->getBiome(&playerBlockPos);
-        auto name = biome->getBiomeName();
 
-//        std::string MinecraftVersion = format("Minecraft Bedrock(BDS) %s  (%s)\n\n", minecraftVersion,
-//                                              trapDoorVersion);
-        std::string xyz = format("XYZ: %.2f / %.2f / %.2f\n", position->x, position->y, position->z);
-        std::string block = format("Block: %d %d %d\n", playerBlockPos.x, playerBlockPos.y, playerBlockPos.z);
-        std::string chunk = "Chunk: " + inChunkOffset.toString() + " in " + chunkPos.toString() + "\n";
-        std::string facing = "Facing: " + viewVec.toDirString();
-        facing += format("(%.2f / %.2f / %.2f)\n", viewVec.x, viewVec.y, viewVec.z);
-        std::string biomeString = format("Biome: minecraft:%s (%d)\n", name.c_str(), biome->getBiomeType());
-        std::string dimString = format("Dimension: %s (%d)\n", this->getDimensionName().c_str(),
-                                       this->getDimensionID());
-
-
-        builder.text(xyz)
-                .text(block);
-        if (inSlimeChunk) {
-            builder.sText(chunk, MSG_COLOR::GREEN);
-        } else {
-            builder.text(chunk);
-        }
-        builder.text(facing).text(biomeString).text(dimString)
-                .send(this);
-    }
 
 
     int Actor::getDimensionID() {

@@ -42,7 +42,7 @@ namespace trapdoor {
         }
         L_INFO("begin register command");
         getCommandManager().registerCmd("apicfg")
-                ->then(ARG("pvd", "设置例子可见距离", INT, {
+                ->then(ARG("pvd", "设置粒子可见距离", INT, {
                     this->getCfg().particleViewDistance = holder->getInt();
                 }))
                 ->then(ARG("pm", "牺牲一定显示效果减少显示卡顿", BOOL, {

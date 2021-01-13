@@ -35,9 +35,7 @@ THook(
 
     return original(self, player, block, pos, flag);
 }
-
 //player destroy block
-
 
 THook(
         void,

@@ -20,6 +20,11 @@
 
 namespace mod {
 
+    struct ModInfo {
+        const std::string minecraftVersion = "1.16.4.02";
+        const std::string modVersion = "trapdoor-0.9.12";
+    };
+
     class TrapdoorMod : public trapdoor::BDSMod {
     private:
         HopperChannelManager hopperChannelManager;
@@ -36,8 +41,13 @@ namespace mod {
 
         void registerTickCommand();
 
+
+    public:
+        ModInfo modeInfo;
     public:
         static void printCopyRightInfo();
+
+        static void printOSInfo(trapdoor::Actor *player);
 
         void initialize() override;
 
