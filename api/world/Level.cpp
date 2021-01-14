@@ -14,9 +14,9 @@ namespace trapdoor {
     using namespace SymHook;
 
     void Level::forEachPlayer(const std::function<void(Actor *)> &todo) {
-        //!硬编码
-        auto begin = (uint64_t *) *((uint64_t *) this + 11);
-        auto end = (uint64_t *) *((uint64_t *) this + 12);
+        //!硬编码 from void  Level::forEachPlayer(__int64 *a1, __int64 a2)
+        auto begin = (uint64_t *) *((uint64_t *) this + 13);
+        auto end = (uint64_t *) *((uint64_t *) this + 14);
         while (begin != end) {
             auto *player = (Actor *) (*begin);
             if (player)todo(player);

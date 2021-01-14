@@ -376,21 +376,21 @@ THook(
 }
 
 
-THook(
-        void,
-        MSSYM_B1QA4tickB1AE13EntitySystemsB2AAE23QEAAXAEAVEntityRegistryB3AAAA1Z,
-        void *entitySystem,
-        void * registry
-) {
-    if (mod::tick::gameProfiler.inProfiling) {
-        TIMER_START
-        original(entitySystem, registry);
-        TIMER_END
-        mod::tick::gameProfiler.levelEntitySystemTickTime += timeReslut;
-    } else {
-        original(entitySystem, registry);
-    }
-}
+//THook(
+//        void,
+//        MSSYM_B1QA4tickB1AE13EntitySystemsB2AAE23QEAAXAEAVEntityRegistryB3AAAA1Z,
+//        void *entitySystem,
+//        void * registry
+//) {
+//    if (mod::tick::gameProfiler.inProfiling) {
+//        TIMER_START
+//        original(entitySystem, registry);
+//        TIMER_END
+//        mod::tick::gameProfiler.levelEntitySystemTickTime += timeReslut;
+//    } else {
+//        original(entitySystem, registry);
+//    }
+//}
 
 
 
