@@ -61,6 +61,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/hhhxiao"><img src="https://avatars0.githubusercontent.com/u/33011851?v=4?s=100" width="100px;" alt=""/><br /><sub><b>AgNO3</b></sub></a><br /><a href="https://github.com/hhhxiao/TrapDoor/commits?author=hhhxiao" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/OEOTYAN"><img src="https://avatars2.githubusercontent.com/u/58554322?v=4?s=100" width="100px;" alt=""/><br /><sub><b>OEOTYAN</b></sub></a><br /><a href="https://github.com/hhhxiao/TrapDoor/commits?author=OEOTYAN" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/xiaohengying"><img src="https://avatars2.githubusercontent.com/u/44132837?v=4?s=100" width="100px;" alt=""/><br /><sub><b>xiaohengying</b></sub></a><br /><a href="https://github.com/hhhxiao/TrapDoor/commits?author=xiaohengying" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/quizhizhe"><img src="https://avatars1.githubusercontent.com/u/42761326?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Qiuzhizhe</b></sub></a><br /><a href="https://github.com/hhhxiao/TrapDoor/commits?author=quizhizhe" title="Code">💻</a></td>
   </tr>
 </table>
 
