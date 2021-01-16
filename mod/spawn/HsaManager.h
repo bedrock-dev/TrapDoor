@@ -30,7 +30,7 @@ namespace mod {
     class HsaManager : noncopyable {
         bool enable;
         std::set<HsaInfo> hsaList;
-        Tick gameTick;
+        size_t gameTick;
 
     public:
         inline void insert(HsaInfo info) { this->hsaList.insert(info); }

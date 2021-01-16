@@ -144,17 +144,4 @@ namespace mod {
     }
 }
 
-using namespace SymHook;
-
-THook(
-        void,
-        MSSYM_B2QUE14sendHerdEventsB1AA7SpawnerB2AAE25AEBAXAEBUMobSpawnHerdInfoB2AAA4AEAVB2QDA6vectorB1AA7PEAVMobB2AAA1VB2QDA9allocatorB1AA7PEAVMobB3AAAA3stdB3AAAA3stdB3AAAA1Z,
-        void *spawner,
-        void *herdInfo,
-        void * mobList
-) {
-    if (spawner && herdInfo && mobList) {
-        original(spawner, herdInfo, mobList);
-    }
-}
 

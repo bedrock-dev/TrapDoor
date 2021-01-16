@@ -17,6 +17,8 @@ namespace trapdoor {
 
     class Actor;
 
+    class ActorUniqueID;
+
     class Level {
     public:
         Level() = delete;
@@ -32,6 +34,7 @@ namespace trapdoor {
 
         Dimension *getDimFromID(int id);
 
+        Actor *fetchEntity(const trapdoor::ActorUniqueID &id, bool b);
     };
 }
 

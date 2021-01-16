@@ -14,16 +14,21 @@
 using namespace SymHook;
 
 //village tick
+#include "POIInstance.h"
+#include "graphics/BlockPos.h"
+#include <vector>
+#include <array>
+#include "BDSMod.h"
+#include "world/Level.h"
+#include "entity/Actor.h"
+#include "tools/MsgBuilder.h"
 
 namespace mod {
-
-
     namespace {
         const size_t BOUND_OFFSET = 104;
         const size_t POPULATION_OFFSET = 22;
         const size_t GOLEM_NUM_OFFSET = 30;
     }
-
 
     //get village population
     int Village::getPopulation() {
@@ -74,7 +79,6 @@ namespace mod {
     }
 
     //get village bounds
-    //todo rewrite this
     trapdoor::AABB Village::getBounds() {
         return *reinterpret_cast<trapdoor::AABB *>((float *) this + BOUND_OFFSET);
     }
@@ -98,6 +102,125 @@ namespace mod {
         return trapdoor::AABB(center - Vec3(8, 3, 8), center + Vec3(8, 3, 8));
     }
 
+    void Village::printAllPOIs() {
+    }
+
+    void Village::showVillagerStatus() {
+        auto *map = reinterpret_cast<std::unordered_map<trapdoor::ActorUniqueID,
+                std::vector<std::weak_ptr<mod::POIInstance>>, trapdoor::ActorUniqueIDHash> *>((char *) this + 96);
+        std::string m = "BMJ";
+        for (auto &villager:*map) {
+            auto actor = trapdoor::bdsMod->fetchEntity(villager.first.uid, false);
+            if (actor) {
+                trapdoor::MessageBuilder builder;
+                for (int index = 0; index < villager.second.size(); ++index) {
+                    auto poi = villager.second[index].lock();
+                    if (poi) {
+                        builder.sTextF(MSG_COLOR::GREEN, " %c ", m[index]);
+                    } else {
+                        builder.sTextF(MSG_COLOR::RED, " %c ", m[index]);
+                    }
+                }
+                actor->setNameTag(builder.get());
+            }
+        }
+        //  this->showTimeStamp();
+    }
+
+    void Village::showTimeStamp() {
+        auto *dwellerList = reinterpret_cast<std::array<std::unordered_map<trapdoor::ActorUniqueID,
+                uint64_t, trapdoor::ActorUniqueIDHash>, 4> * >((char *) this + 152);
+        for (int i = 1; i < 4; i++) {
+            auto dwellers = dwellerList->operator[](i);
+            for (const auto &d:dwellers) {
+                auto actor = trapdoor::bdsMod->fetchEntity(d.first.uid, false);
+                if (actor) {
+                    actor->setNameTag(std::to_string(d.second));
+                }
+            }
+        }
+    }
+
+    std::string Village::getDebugInfo() {
+        using namespace trapdoor;
+        trapdoor::MessageBuilder builder;
+        auto pos = this->getCenter().toBlockPos();
+        auto minPos = this->getBounds().p1.toBlockPos();
+        auto maxPos = this->getBounds().p2.toBlockPos();
+        builder.text("Village: ").pos(pos)
+                .text("\n- Bounds: ").pos(minPos).text(" , ").pos(maxPos).text("\n")
+                .text("- Radius: ").num(this->getRadius()).text("\n")
+                .text("Dweller: ").sTextF(MSG_COLOR::GREEN, "%d / %d %d\n", getWorkedVillagerNum(), getPopulation(),
+                                          getIronGolemNum())
+                .text("POIS:\n      Bed          |          Work|\n");
+        auto *map = reinterpret_cast<std::unordered_map<trapdoor::ActorUniqueID,
+                std::vector<std::weak_ptr<mod::POIInstance>>, trapdoor::ActorUniqueIDHash> *>((char *) this + 96);
+        bool existAlarm = false;
+        for (auto &villager:*map) {
+            for (int index = 0; index < villager.second.size(); ++index) {
+                if (index == 0) {
+                    builder.text("|");
+                }
+
+                auto poi = villager.second[index].lock();
+                if (index == 1) {
+                    if (poi)existAlarm = true;
+                    continue;
+                }
+                if (poi) {
+                    builder.sTextF(MSG_COLOR::WHITE, " %-4d  %-4d  %-4d ", poi->poiPos.x, poi->poiPos.y,
+                                   poi->poiPos.z).text("|");
+                } else {
+                    builder.sText("       (null)        ", MSG_COLOR::GRAY).text("|");
+                }
+                if (index == 2) {
+                    builder.text("\n");
+                }
+            }
+        }
+        builder.textF("Alarm:  %d", existAlarm);
+        return builder.get();
+    }
+
+    bool Village::printVillagerInfo(trapdoor::Actor *player, trapdoor::Actor *v) {
+        auto *map = reinterpret_cast<std::unordered_map<trapdoor::ActorUniqueID,
+                std::vector<std::weak_ptr<mod::POIInstance>>, trapdoor::ActorUniqueIDHash> *>((char *) this + 96);
+        for (auto &villager:*map) {
+            auto actor = trapdoor::bdsMod->fetchEntity(villager.first.uid, false);
+            if (actor && v && actor == v) {
+                trapdoor::MessageBuilder builder;
+                auto center = this->getCenter().toBlockPos();
+                builder.textF("center: [%d %d %d]\n", center.x, center.y, center.z);
+                auto bed = villager.second[0].lock();
+                auto alarm = villager.second[1].lock();
+                auto work = villager.second[2].lock();
+                if (bed) {
+                    builder.text("Bed position: ").pos(bed->poiPos);
+                }
+                if (alarm) {
+                    builder.text("\nAlarm position: ").pos(alarm->poiPos);
+                }
+                if (work) {
+                    builder.text("\nWork position: ").pos(work->poiPos);
+                }
+                builder.send(player);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void Village::removeAllTags() {
+        auto *map = reinterpret_cast<std::unordered_map<trapdoor::ActorUniqueID,
+                std::vector<std::weak_ptr<mod::POIInstance>>, trapdoor::ActorUniqueIDHash> *>((char *) this + 96);
+        for (auto &villager:*map) {
+            auto actor = trapdoor::bdsMod->fetchEntity(villager.first.uid, false);
+            if (actor && actor->getNameTag().size() > 1) {
+                actor->setNameTag("");
+            }
+        }
+    }
+
     void VillageHelper::clear() {
         villageList.clear();
     }
@@ -119,6 +242,8 @@ namespace mod {
                     trapdoor::spawnRectangleParticle(village->getGolemSpawnArea(), villageHelperConfig.spawnColor);
                 if (this->showPOIRange)
                     trapdoor::spawnRectangleParticle(village->getPOIRange(), villageHelperConfig.poiQueryColor);
+                if (this->showDwellerStatus)
+                    this->showVillagerStatus();
             }
         }
     }
@@ -167,23 +292,59 @@ namespace mod {
         this->gameTick = (this->gameTick + 1) % 80;
     }
 
-    bool VillageWithColor::operator<(const VillageWithColor &rhs) const {
-        return this->village < rhs.village;
+    void VillageHelper::test() {
     }
 
-    //todo: repair this bug
-    void VillageWithColor::setRandomColor() {
-        using COLOR = trapdoor::GRAPHIC_COLOR;
-        static COLOR colorList[5] = {
-                COLOR::WHITE,
-                COLOR::GREEN,
-                COLOR::RED,
-                COLOR::BLUE,
-                COLOR::YELLOW
-        };
-        // static std::random_device rd;
-        // static std::mt19937 gen(rd());
-        //    this->color = colorList[rand() % 5];
+    void VillageHelper::showVillagerStatus() {
+        for (auto village:this->villageList) {
+            village.village->showVillagerStatus();
+        }
+    }
+
+    void VillageHelper::printNearestVillageInfo(trapdoor::Actor *player, const Vec3 &pos) {
+        mod::Village *target = nullptr;
+        float maxDistance = 1024;
+        for (auto village:this->villageList) {
+            auto dis = village.village->getCenter().distanceTo(pos);
+            if (dis < maxDistance) {
+                target = village.village;
+                maxDistance = dis;
+            }
+        }
+        if (target) {
+            trapdoor::info(player, target->getDebugInfo());
+        } else {
+            trapdoor::warning(player, "附近没有村庄");
+        }
+    }
+
+    void VillageHelper::printDwellerInfo(trapdoor::Actor *player, trapdoor::Actor *actor) {
+
+        //试图获取居民组件
+        auto component = getDwellerComponentFromActor(actor);
+        if (!component) {
+            trapdoor::warning(player, "该实体不是居民(或不属于任何村庄)");
+        } else {
+            if (actor->getActorId() == "villager_v2") {
+                for (auto villages:this->villageList) {
+                    if (villages.village->printVillagerInfo(player, actor))return;
+                }
+                trapdoor::warning(player, "这个村民不属于任何村庄");
+            } else {
+                auto center = component->getVillageCenter(actor);
+                trapdoor::info(player, "[ %d  %d  %d]", center->x, center->y, center->z);
+            }
+        }
+    }
+
+    void VillageHelper::removeAllNameTag() {
+        for (auto vill:this->villageList) {
+            vill.village->removeAllTags();
+        }
+    }
+
+    bool VillageWithColor::operator<(const VillageWithColor &rhs) const {
+        return this->village < rhs.village;
     }
 }
 

@@ -63,4 +63,12 @@ namespace trapdoor {
         });
         return nearest;
     }
+
+    Actor *Level::fetchEntity(const trapdoor::ActorUniqueID &id, bool b) {
+        return SYM_CALL(
+                Actor*(*)(Level * ,const trapdoor::ActorUniqueID &, bool),
+                MSSYM_B1QE11fetchEntityB1AA5LevelB2AAE13QEBAPEAVActorB2AAE14UActorUniqueIDB3AAUA1NB1AA1Z,
+                this, id, b
+        );
+    }
 }

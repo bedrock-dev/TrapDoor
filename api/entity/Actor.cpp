@@ -68,8 +68,6 @@ namespace trapdoor {
     }
 
 
-
-
     int Actor::getDimensionID() {
 
         return *(reinterpret_cast<int *>(this) + 51);
@@ -137,6 +135,16 @@ namespace trapdoor {
         return {headPos.x, headPos.y - 2, headPos.z};
     }
 
+    void Actor::setNameTag(const std::string &name) {
+        SYM_CALL(
+                void(*)(void * actor,
+                const std::string &str),
+                MSSYM_B1QE10setNameTagB1AA5ActorB2AAA9UEAAXAEBVB2QDA5basicB1UA6stringB1AA2DUB2QDA4charB1UA6traitsB1AA1DB1AA3stdB2AAA1VB2QDA9allocatorB1AA1DB1AA12B2AAA3stdB3AAAA1Z,
+                this,
+                name
+        );
+    }
+
     std::string ActorDefinitionIdentifier::getName() {
         auto str = reinterpret_cast<std::string *>((char *) this + 32);
         return std::string(*str);
@@ -145,34 +153,23 @@ namespace trapdoor {
 }
 
 
-//攻击实体
-//THook(
-//        void,
-//        MSSYM_B1QA6attackB1AA6PlayerB2AAA4UEAAB1UE10NAEAVActorB3AAAA1Z,
-//        void *p1,
-//        void * p2
-//) {
-//    if (p1 && p2) {
-//        // if (getActorName(p2) == "minecraft:villager_v2<>") {
-//        original(p1, p2);
-//        if (p2) {
-//            std::string infoText;
-//            //获取实体信息并设置命名牌
-//            SYM_CALL(void(*)(void * mob, std::string &),
-//                     MSSYM_B1QE14buildDebugInfoB1AA3MobB2AAA9UEBAXAEAVB2QDA5basicB1UA6stringB1AA2DUB2QDA4charB1UA6traitsB1AA1DB1AA3stdB2AAA1VB2QDA9allocatorB1AA1DB1AA12B2AAA3stdB3AAAA1Z,
-//                     p2, infoText
-//            );
-//
-//            SYM_CALL(
-//                    void(*)(void * actor,
-//                    const std::string &str),
-//                    MSSYM_B1QE10setNameTagB1AA5ActorB2AAA9UEAAXAEBVB2QDA5basicB1UA6stringB1AA2DUB2QDA4charB1UA6traitsB1AA1DB1AA3stdB2AAA1VB2QDA9allocatorB1AA1DB1AA12B2AAA3stdB3AAAA1Z,
-//                    p2,
-//                    infoText
-//            );
-//        }
-//    }
-//}
+using namespace SymHook;
+
+THook(
+        void,
+        MSSYM_B1QA6attackB1AA6PlayerB2AAA4UEAAB1UE10NAEAVActorB3AAAA1Z,
+        trapdoor::Actor *p1,
+        trapdoor::Actor * p2
+) {
+    if (p2) {
+        auto result = trapdoor::bdsMod->attackEntityHook(p1, p2);
+        if (result) {
+            original(p1, p2);
+        }
+    } else {
+        original(p1, p2);
+    }
+}
 //spawn mob
 
 

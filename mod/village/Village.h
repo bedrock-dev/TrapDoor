@@ -4,8 +4,8 @@
 #include "lib/SymHook.h"
 #include "graphics/BlockPos.h"
 #include "entity/Actor.h"
-#include "graphics/BlockPos.h"
 #include "graphics/AABB.h"
+#include "world/Level.h"
 #include "graphics/Vec3.h"
 #include "graphics/Graphics.h"
 #include<set>
@@ -26,7 +26,6 @@ namespace mod {
 
         bool canSpawnIronGolem();
 
-
         trapdoor::Vec3 getCenter();
 
         float getRadius();
@@ -36,17 +35,31 @@ namespace mod {
         trapdoor::AABB getGolemSpawnArea();
 
         trapdoor::AABB getBounds();
+
+        void printAllPOIs();
+
+        void showVillagerStatus();
+
+        void showTimeStamp();
+
+        std::string getDebugInfo();
+
+
+        bool printVillagerInfo(trapdoor::Actor *player, trapdoor::Actor *actor);
+
+        void removeAllTags();
+
+        //  std::array<std::unordered_map<trapdoor::ActorUniqueID,uint64_t ,&
     };
 
 
+    //这个其实蛮冗余的，懒得删了
     class VillageWithColor {
     public:
         Village *village;
         trapdoor::GRAPHIC_COLOR color;
 
         bool operator<(const VillageWithColor &rhs) const;
-
-        void setRandomColor();
     };
 
     struct VillageHelperConfig {
@@ -62,6 +75,7 @@ namespace mod {
         bool showPOIRange = false; //poi查询范围
         bool showGolemSpawnArea = false; //铁傀儡刷出范围
         bool showVillageCenter = false; //显示村庄中心
+        bool showDwellerStatus = false;
         size_t gameTick = 0;
     public:
         inline void setShowBound(bool able) { showBounds = able; }
@@ -71,6 +85,14 @@ namespace mod {
         inline void setShowGolemSpawnArea(bool able) { showGolemSpawnArea = able; }
 
         inline void setShowVillageCenter(bool able) { showVillageCenter = able; }
+
+        inline void setShowDwellerStatus(bool able) {
+            showDwellerStatus = able;
+            //关闭头顶显示后移除所有的命名
+            if (!able)this->removeAllNameTag();
+        }
+
+        inline bool getShowDwellerStatus() const { return showDwellerStatus; }
 
         VillageHelper() = default;
 
@@ -82,13 +104,23 @@ namespace mod {
 
         void draw();
 
+        void showVillagerStatus();
+
         void list(trapdoor::Actor *actor);
+
+        void test();
+
+        void printNearestVillageInfo(trapdoor::Actor *player, const trapdoor::Vec3 &pos);
 
         inline void setConfig(const VillageHelperConfig &config) {
             this->villageHelperConfig = config;
         }
 
         void tick();
+
+        void printDwellerInfo(trapdoor::Actor *player, trapdoor::Actor *actor);
+
+        void removeAllNameTag();
     };
 
 }
