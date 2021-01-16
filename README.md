@@ -59,6 +59,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://github.com/hhhxiao"><img src="https://avatars0.githubusercontent.com/u/33011851?v=4?s=100" width="100px;" alt=""/><br /><sub><b>AgNO3</b></sub></a><br /><a href="https://github.com/hhhxiao/TrapDoor/commits?author=hhhxiao" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/OEOTYAN"><img src="https://avatars2.githubusercontent.com/u/58554322?v=4?s=100" width="100px;" alt=""/><br /><sub><b>OEOTYAN</b></sub></a><br /><a href="https://github.com/hhhxiao/TrapDoor/commits?author=OEOTYAN" title="Code">💻</a></td>
   </tr>
 </table>
 
