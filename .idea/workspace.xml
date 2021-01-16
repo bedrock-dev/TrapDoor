@@ -15,11 +15,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3eb519fb-7465-437d-86d7-42a97e7c56eb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/entity/Actor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/entity/Actor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/entity/Actor.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/entity/Actor.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/TrapdoorMod.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/TrapdoorMod.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/spawn/SpawnHelper.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/spawn/SpawnHelper.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/spawn/SpawnHelper.h" beforeDir="false" afterPath="$PROJECT_DIR$/mod/spawn/SpawnHelper.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +38,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_MARK_IGNORED_FILES_AS_EXCLUDED" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -89,7 +85,7 @@
       <workItem from="1610679874650" duration="1649000" />
       <workItem from="1610681580263" duration="9888000" />
       <workItem from="1610771437009" duration="4136000" />
-      <workItem from="1610792317316" duration="1289000" />
+      <workItem from="1610792317316" duration="3284000" />
     </task>
     <servers />
   </component>
