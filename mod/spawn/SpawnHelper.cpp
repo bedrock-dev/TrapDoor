@@ -35,11 +35,11 @@ namespace mod {
         if (!this->enable)return;
         if (!verticalSpawnPositions.empty()) {
             trapdoor::BoundingBox boundingBox{verticalSpawnPositions[0], verticalSpawnPositions[0]};
-            trapdoor::spawnRectangleParticle(boundingBox.toAABB(), trapdoor::GRAPHIC_COLOR::GREEN);
+            trapdoor::spawnRectangleParticle(boundingBox.toAABB(), trapdoor::GRAPHIC_COLOR::GREEN, dimensionID);
         }
         for (auto i = 1; i < verticalSpawnPositions.size(); i++) {
             trapdoor::BoundingBox boundingBox{verticalSpawnPositions[i], verticalSpawnPositions[i]};
-            trapdoor::spawnRectangleParticle(boundingBox.toAABB(), trapdoor::GRAPHIC_COLOR::RED);
+            trapdoor::spawnRectangleParticle(boundingBox.toAABB(), trapdoor::GRAPHIC_COLOR::RED, dimensionID);
         }
     }
 
@@ -47,16 +47,20 @@ namespace mod {
         if (!this->enable)return;
         this->verticalSpawnPositions.clear();
         auto dim = player->getDimensionID();
+        this->dimensionID = dim;
         int maxY = dim != 1 ? 255 : 127;
         trapdoor::BlockPos topPos = {pos.x, maxY, pos.z};
-        while (topPos.y > 0) {
+        do {
             findNextSpawnPosition(player->getBlockSource(), &topPos, 41);
-            this->verticalSpawnPositions.emplace_back(topPos.x, topPos.y, topPos.z);
-        }
+            //   L_INFO("find pos %d %d %d", topPos.x, topPos.y, topPos.z);
+            if (topPos.y > 0)
+                this->verticalSpawnPositions.emplace_back(topPos.x, topPos.y, topPos.z);
+        } while (topPos.y > 0);
     }
 
 
-    void SpawnHelper::printSpawnProbability(trapdoor::Actor *player, const trapdoor::BlockPos &pos, uint32_t bright) {
+    void
+    SpawnHelper::printSpawnProbability(trapdoor::Actor *player, const trapdoor::BlockPos &pos, uint32_t bright) const {
         if (!this->enable)return;
         auto dim = player->getDimensionID();
         int maxY = dim != 1 ? 255 : 127;

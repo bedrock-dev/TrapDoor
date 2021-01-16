@@ -15,8 +15,6 @@
 #include "block/BlockSource.h"
 #include "Dimension.h"
 #include "tools/DirtyLogger.h"
-
-
 namespace trapdoor {
 
     using namespace SymHook;
@@ -108,7 +106,7 @@ namespace trapdoor {
     }
 
     unsigned int Actor::getSelectSlot() {
-        //这个api是有问题的
+        //!这个api是有问题的
         return 0;
         //  return *(unsigned int *) reinterpret_cast<char *>(this + 168);
     }

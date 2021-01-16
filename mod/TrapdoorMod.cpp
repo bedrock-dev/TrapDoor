@@ -142,7 +142,7 @@ namespace mod {
                     this->villageHelper.setShowVillageCenter(holder->getBool());
                     info(player, "设置村庄边框显示为 %d", holder->getBool());
                 }))
-                ->then(ARG("v", "村民头顶添加绑定信息，左键获取详细信息", BOOL, {
+                ->then(ARG("v", "显示村民信息", BOOL, {
                     this->villageHelper.setShowDwellerStatus(holder->getBool());
                     info(player, "设置显示村民信息为 %d", holder->getBool());
                 }))
