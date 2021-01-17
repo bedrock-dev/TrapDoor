@@ -7,6 +7,7 @@
 #include "block/BlockSource.h"
 #include "entity/Actor.h"
 #include "graphics/BlockPos.h"
+#include "tools/DirtyLogger.h"
 
 namespace mod {
     void SimpleBuilder::buildCircle(trapdoor::Actor *player,
@@ -18,6 +19,7 @@ namespace mod {
         auto block = player->getBlockSource()->getBlock(standPos.x, standPos.y,
                                                         standPos.z);
         trapdoor::BlockPos pos = standPos;
+      //  printf("%d %d %d %s", pos.x,pos.y,pos.z, block->getName().c_str());
         float R = radius;
         R += 0.5;
         int X, Y, p;

@@ -4,8 +4,13 @@
 
 #include "BDSMod.h"
 #include "tools/DirtyLogger.h"
+#include "entity/Actor.h"
+#include "SymHook.h"
+#include "lib/mod.h"
 
 namespace trapdoor {
+
+
     //全局模组对象
     BDSMod *bdsMod = nullptr;
 
@@ -58,6 +63,16 @@ namespace trapdoor {
         L_INFO("==== trapdoor mod begin init ====");
         L_INFO("init thread pool");
         this->threadPool = new ThreadPool(std::thread::hardware_concurrency());
+    }
+
+    trapdoor::Actor *BDSMod::fetchEntity(int64_t id, bool b) {
+        using namespace SymHook;
+        return SYM_CALL(
+                Actor * (*)(Level * ,
+                int64_t, bool),
+                MSSYM_B1QE11fetchEntityB1AA5LevelB2AAE13QEBAPEAVActorB2AAE14UActorUniqueIDB3AAUA1NB1AA1Z,
+                this->getLevel(), id, b
+        );
     }
 
 }

@@ -28,7 +28,7 @@ namespace mod {
     class CounterChannel {
         const size_t channel;
         std::map<std::string, size_t> counterList;
-        Tick gameTick = 0;
+        size_t gameTick = 0;
     public:
         explicit CounterChannel(size_t ch) : channel(ch), gameTick(0) {}
 

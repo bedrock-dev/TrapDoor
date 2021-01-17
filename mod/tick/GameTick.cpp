@@ -257,7 +257,7 @@ THook(
         MSSYM_B1QA4tickB1AE10LevelChunkB2AAE20QEAAXAEAVBlockSourceB2AAA8AEBUTickB3AAAA1Z,
         void *levelChunk,
         trapdoor::BlockSource *blockSource,
-        Tick * tick
+        size_t * tick
 ) {
     if (mod::tick::gameProfiler.inProfiling) {
         TIMER_START

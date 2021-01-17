@@ -141,6 +141,18 @@ namespace mod {
                 ->then(ARG("c", "显示村庄中心", BOOL, {
                     this->villageHelper.setShowVillageCenter(holder->getBool());
                     info(player, "设置村庄边框显示为 %d", holder->getBool());
+                }))
+                ->then(ARG("v", "显示村民信息", BOOL, {
+                    this->villageHelper.setShowDwellerStatus(holder->getBool());
+                    info(player, "设置显示村民信息为 %d", holder->getBool());
+                }))
+                ->then(ARG("n", "显示最近村庄的详细信息", NONE, {
+                    this->villageHelper.printNearestVillageInfo(player, *player->getPos());
+                }))
+
+                ->then(ARG("test", "???", NONE, {
+                    trapdoor::warning(player, "you are not developer");
+                    //   this->villageHelper.test();
                 }));
 
         commandManager.registerCmd("td?", "显示帮助")
@@ -272,7 +284,7 @@ namespace mod {
                                 BlockPos &pos,
                                 unsigned int facing,
                                 const Vec3 &) {
-       // L_INFO("%s", itemName.c_str());
+        // L_INFO("%s", itemName.c_str());
         //取消注释这一行可以看到右击地面的是什么东西
         if (itemName == "Bone" && this->spawnHelper.isEnable()) {
             spawnHelper.updateVerticalSpawnPositions(pos, player);
@@ -313,4 +325,21 @@ namespace mod {
                 .text("Read/Write: ").num(ioRead >> 10u).text("/").num(ioWrite >> 10u).text(" KB").send(player);
     }
 
+    /*
+     * 实体攻击接口
+    @ return 返回false会阻止掉血,返回true会正常掉血
+     @ entity1 进行攻击的实体
+     @entity2 被攻击的实体
+    */
+    bool TrapdoorMod::attackEntityHook(Actor *entity1, Actor *entity2) {
+        if (entity1->getActorId() != "player")return true;  //非玩家攻击直接忽略
+        //开了居民村庄中心显示
+        if (villageHelper.getShowDwellerStatus() &&
+            (entity2->getActorId() == "iron_golem" || entity2->getActorId() == "villager_v2")) {
+            villageHelper.printDwellerInfo(entity1, entity2);
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
