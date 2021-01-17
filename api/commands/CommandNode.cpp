@@ -18,9 +18,9 @@ namespace trapdoor {
     }
 
     static bool isValidIntString(const std::string &str) {
-		return std::all_of(str.begin(), str.end(),
-        [](char c) { return ('0' <= c && c <= '9') || c=='-'; });
-	}
+        return std::all_of(str.begin(), str.end(),
+                           [](char c) { return ('0' <= c && c <= '9') || c == '-'; });
+    }
 
 
     CommandNode::CommandNode(std::string name, std::string description)
@@ -41,7 +41,7 @@ namespace trapdoor {
                 ArgHolder holder(0);
                 this->run(&holder, player);
             } else {
-                error(player, "require an parameter behind \"%s\"", tokens[idx - 1].c_str());
+                error(player, "\"%s\"后面少一个参数", tokens[idx - 1].c_str());
             }
         } else if (idx == tokens.size() - 1) { //当前是最后一个token
             ArgHolder *holder = nullptr;
@@ -74,7 +74,7 @@ namespace trapdoor {
                     return node.second->parse(player, tokens, idx + 1);
                 }
             }
-            std::string s = std::string("no sub command [ ") + tokens[idx] + " ]\n";
+            std::string s = std::string("没有这个命令 [ ") + tokens[idx] + " ]\n";
             for (auto &node:this->nextNode) {
                 s += "[";
                 s += node.first;

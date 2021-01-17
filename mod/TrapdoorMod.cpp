@@ -45,7 +45,9 @@ namespace mod {
     void TrapdoorMod::registerCommands() {
         using namespace trapdoor;
         BDSMod::registerCommands();
+      //tick
         this->registerTickCommand();
+        //性能分析
         commandManager.registerCmd("prof", "游戏性能分析")
                 ->then(ARG("actor", "实体更新性能分析", NONE, {
                     tick::profileEntities(player);
@@ -75,12 +77,13 @@ namespace mod {
                     info(player, "设置玩家行为统计为 %d", holder->getBool());
                 }));
 
-        commandManager.registerCmd("slime")
+        //史莱姆显示
+        commandManager.registerCmd("slime", "史莱姆区块相关")
                 ->then(ARG("show", "显示史莱姆区块", BOOL, {
                     this->slimeChunkHelper.setAble(holder->getBool());
-                    this->slimeChunkHelper.updateChunkPosList();
-                    this->slimeChunkHelper.draw();
-                    broadcastMsg("已经开启史莱姆区块显示");
+                    //    this->slimeChunkHelper.updateChunkPosList();
+                    //   this->slimeChunkHelper.draw();
+                    broadcastMsg("设置史莱姆区块显示为 %d", holder->getBool());
                 }))
                 ->then(ARG("c", "清除缓存并重新绘制", NONE, {
                     this->slimeChunkHelper.updateChunkPosList();
@@ -121,7 +124,7 @@ namespace mod {
                           broadcastMsg("设置玩家[%s]为创造者模式", player->getNameTag().c_str());
                       });
 
-
+//村庄
         commandManager.registerCmd("village", "村庄相关功能")
                 ->then(ARG("list", "显示所有正在加载的村庄", NONE, {
                     this->villageHelper.list(player);
@@ -208,6 +211,7 @@ namespace mod {
                     mod::restore(player, holder->getInt());
                 }))
                 ->then(ARG("crash", "崩服", NONE, {
+                   //这种指令的存在真的好吗
                     *((char *) (0)) = 0;
                 }));
 

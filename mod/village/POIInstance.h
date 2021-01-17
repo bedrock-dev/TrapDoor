@@ -19,6 +19,7 @@ namespace mod {
         Count = 3
     };
 
+    //!这个类不要做任何修改
     class POIInstance {
     public:
         char gap[0x80];
@@ -32,6 +33,7 @@ namespace mod {
         int16_t arriveFailureCount = 0;  //到达失败的次数
         bool useBoundingBox = true; //?
     };
+
 
     class DwellerComponent {
     public:

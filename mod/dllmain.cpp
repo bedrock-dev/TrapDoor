@@ -23,7 +23,8 @@ trapdoor::BDSMod *createBDSModInstance() {
 
 void mod_init() {
     initConsole();
-    trapdoor::initLogger("trapdoor.log", false, true, true);
+    trapdoor::initLogger("trapdoor.log");
+    //trapdoor::setDevMode(true);
     mod::TrapdoorMod::printCopyRightInfo();
     auto *mod = createBDSModInstance();
     mod->asInstance<mod::TrapdoorMod>()->readConfigFile("trapdoor-config.json");

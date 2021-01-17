@@ -29,7 +29,7 @@ namespace mod {
     }
 
     bool ConfigManager::initialize(const std::string &configFileName) {
-        L_INFO("init config");
+        L_INFO("begin read config file %s", configFileName.c_str());
         if (!this->readConfigFile(configFileName))return false;
         if (!this->readCommandConfig())return false;
         if (!this->readLowLevelVanillaCommands())return false;
@@ -56,7 +56,7 @@ namespace mod {
                 this->commandsConfig.insert({i.key(), tempConfig});
             }
         } catch (const std::exception &e) {
-            L_ERROR("%s", e.what());
+            L_ERROR("error read command config : %s", e.what());
             return false;
         }
         return true;
@@ -127,7 +127,7 @@ namespace mod {
     void ConfigManager::printAllConfig() const {
         L_INFO("here are the all low level commands:");
         for (const auto &item:this->lowerLevelVanillaCommands) {
-            L_INFO("%s", item.c_str());
+            L_INFO("- %s", item.c_str());
         }
     }
 
@@ -143,7 +143,7 @@ namespace mod {
                 this->lowerLevelVanillaCommands.insert(i.get<std::string>());
             }
         } catch (std::exception &e) {
-            L_ERROR("%s", e.what());
+            L_ERROR("error read low level vanilla command info : %s", e.what());
             return false;
         }
         return true;
@@ -157,7 +157,7 @@ namespace mod {
             this->serverConfig.levelName = config["levelName"].get<std::string>();
             L_INFO("read level name  as :%s", serverConfig.levelName.c_str());
         } catch (std::exception &e) {
-            L_ERROR("%s", e.what());
+            L_ERROR("can not read server config : %s", e.what());
             return false;
         }
         return true;
@@ -185,7 +185,7 @@ namespace mod {
                    centerParticle.c_str()
             );
         } catch (std::exception &e) {
-            L_ERROR("%s", e.what());
+            L_ERROR("can not read village config : %s", e.what());
             return false;
         }
         return true;
