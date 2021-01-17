@@ -9,12 +9,13 @@
 
 namespace mod {
     void SlimeChunkHelper::tick() {
+        constexpr int frequency = 100;
         if (!this->enable)return;
-        if (gameTick % 2000 == 0) {
+        if (gameTick % frequency == 0) {
             this->updateChunkPosList();
             this->draw();
         }
-        this->gameTick = (this->gameTick + 1) % 2000;
+        this->gameTick = (this->gameTick + 1) % frequency;
     }
 
     void SlimeChunkHelper::updateChunkPosList() {

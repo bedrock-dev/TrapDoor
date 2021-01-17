@@ -46,11 +46,11 @@ namespace trapdoor {
             L_ERROR("fail to register command!![commandRegistry is null ptr]");
         }
         L_INFO("begin register command");
-        getCommandManager().registerCmd("apicfg")
+        getCommandManager().registerCmd("apicfg","部分设置")
                 ->then(ARG("pvd", "设置粒子可见距离", INT, {
                     this->getCfg().particleViewDistance = holder->getInt();
                 }))
-                ->then(ARG("pm", "牺牲一定显示效果减少显示卡顿", BOOL, {
+                ->then(ARG("pm", "牺牲一定显示效果减少部分显示卡顿", BOOL, {
                     this->getCfg().particlePerformanceMode = holder->getBool();
                 }));
     }
