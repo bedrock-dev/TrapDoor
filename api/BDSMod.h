@@ -16,10 +16,29 @@
 #include "world/Level.h"
 #include "PlayerBuffer.h"
 #include "tools/ThreadPool.h"
+#include "tools/noncopyable .h"
 
-typedef size_t Tick;
 namespace trapdoor {
-    class BDSMod {
+    class Tick {
+    public:
+        uint64_t tick;
+
+        uint64_t operator%(size_t num) const { return tick % num; }
+
+        bool operator<(const Tick &rhs) const {
+            return tick < rhs.tick;
+        }
+
+        size_t getTimeStamp() { return this->tick; }
+
+        bool operator==(const Tick &rhs) const {
+            return tick == rhs.tick;
+        }
+
+    };
+
+
+    class BDSMod : public noncopyable {
     public:
         struct ModConfig {
             size_t particleViewDistance = 256;
@@ -56,6 +75,10 @@ namespace trapdoor {
                                unsigned int facing,
                                const Vec3 &) = 0;
 
+        virtual bool attackEntityHook(Actor *player, Actor *entity) = 0;
+
+        virtual CommandPermissionLevel
+        resetVanillaCommandLevel(const std::string &name, CommandPermissionLevel oldLevel) { return oldLevel; }
 
         std::map<std::string, PlayerBuffer> &getPlayerBuffer();
 
@@ -67,7 +90,7 @@ namespace trapdoor {
         ModConfig &getCfg() { return this->config; }
 
     public:
-
+        trapdoor::Actor *fetchEntity(int64_t id, bool b);
     };
 
     void initializeMod(BDSMod *bdsMod);

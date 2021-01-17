@@ -7,7 +7,6 @@
 #include <fstream>
 #include <cstdarg>
 #include <cstdio>
-#include "../api/tools/enumTools.h"
 
 
 int main() {

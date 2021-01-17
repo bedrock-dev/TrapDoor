@@ -10,9 +10,9 @@
 #include "entity/Actor.h"
 #include "block/BlockLegacy.h"
 #include "block/Block.h"
+#include "tools/noncopyable .h"
 
 namespace mod {
-
 
     //! 这个结构的代码不要动，顺序也别动
     struct SpawnConditions {
@@ -29,15 +29,17 @@ namespace mod {
     struct MobSpawnRules {
 
     };
+
     struct MobSpawnData {
         MobSpawnRules *getSpawnRules();
 
         trapdoor::ActorDefinitionIdentifier *getActorID();
     };
 
-    class SpawnHelper {
+    class SpawnHelper : noncopyable {
         std::vector<trapdoor::BlockPos> verticalSpawnPositions;
         bool enable = false;
+        int dimensionID = 0;
         unsigned long long gameTick;
     public:
         inline void setAble(bool able) { this->enable = able; }
@@ -50,8 +52,7 @@ namespace mod {
 
         void updateVerticalSpawnPositions(const trapdoor::BlockPos &pos, trapdoor::Actor *player);
 
-        void printSpawnProbability(trapdoor::Actor *player, const trapdoor::BlockPos &pos, uint32_t bright);
-
+        void printSpawnProbability(trapdoor::Actor *player, const trapdoor::BlockPos &pos, uint32_t bright) const;
 
     };
 

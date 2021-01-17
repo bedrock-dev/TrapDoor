@@ -7,9 +7,9 @@
 
 #include "entity/Actor.h"
 #include "block/BlockSource.h"
-
+#include "tools/noncopyable .h"
 namespace mod {
-    class SimpleBuilder {
+    class SimpleBuilder:noncopyable {
         size_t maxCircleRadius = 32;
         bool enable = false;
     public:

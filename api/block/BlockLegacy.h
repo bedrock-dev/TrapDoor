@@ -24,5 +24,6 @@ namespace trapdoor {
 
     };
 }
+typedef trapdoor::BlockLegacy BlockLegacy;
 
 #endif //TRAPDOOR_BLOCKLEGACY_H

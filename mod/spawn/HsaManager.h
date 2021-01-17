@@ -8,48 +8,51 @@
 #include <set>
 #include "BDSMod.h"
 #include "graphics/AABB.h"
+#include "tools/noncopyable .h"
 
 namespace mod {
-	using namespace trapdoor;
-	enum StructureType {
-		SwampHut,
-		OceanMonument,
-		PillagerOutpost,
-		NetherFortress
-	};
+    using namespace trapdoor;
+    enum StructureType {
+        SwampHut,
+        OceanMonument,
+        PillagerOutpost,
+        NetherFortress
+    };
 
-	struct HsaInfo {
-		StructureType type = PillagerOutpost;
-		BoundingBox boundingBox{};
-		int dimensionID = 0;
+    struct HsaInfo {
+        StructureType type = PillagerOutpost;
+        BoundingBox boundingBox{};
+        int dimensionID = 0;
 
-		bool operator<(const HsaInfo& rhs) const;
-	};
+        bool operator<(const HsaInfo &rhs) const;
+    };
 
-	class HsaManager {
-		bool enable;
-		std::set<HsaInfo> hsaList;
-		Tick gameTick;
+    class HsaManager : noncopyable {
+        bool enable;
+        std::set<HsaInfo> hsaList;
+        size_t gameTick;
 
-	   public:
-		inline void insert(HsaInfo info) { this->hsaList.insert(info); }
+    public:
+        inline void insert(HsaInfo info) { this->hsaList.insert(info); }
 
-		bool findHsa(const HsaInfo& hsaInfo);
-		trapdoor::BlockPos findB(trapdoor::Actor* player);
-		void draw(trapdoor::Actor* player);
+        bool findHsa(const HsaInfo &hsaInfo);
 
-		inline int clear() {
-			int num = this->hsaList.size();
-			this->hsaList.clear();
-			return num;
-		}
+        trapdoor::BlockPos findB(trapdoor::Actor *player);
 
-		void list(trapdoor::Actor* player);
+        void draw(trapdoor::Actor *player);
 
-		inline void setAble(bool able) { this->enable = able; };
+        inline int clear() {
+            int num = this->hsaList.size();
+            this->hsaList.clear();
+            return num;
+        }
 
-		void tick();
-	};
+        void list(trapdoor::Actor *player);
+
+        inline void setAble(bool able) { this->enable = able; };
+
+        void tick();
+    };
 }  // namespace mod
 
-#endif	// MOD_HSAMANAGER_H
+#endif    // MOD_HSAMANAGER_H

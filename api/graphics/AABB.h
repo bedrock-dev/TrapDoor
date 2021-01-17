@@ -55,5 +55,6 @@ namespace trapdoor {
 
     };
 }
-
+typedef trapdoor::AABB AABB;
+typedef trapdoor::BoundingBox BoundingBox;
 #endif    // TRAPDOOR_AABB_H

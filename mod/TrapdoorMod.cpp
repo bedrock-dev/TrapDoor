@@ -13,6 +13,8 @@
 #include "player/PlayerFunction.h"
 #include "player/PlayerStatisticManager.h"
 #include "function/BackupHelper.h"
+#include "os/process_stat.h"
+#include "tools/MsgBuilder.h"
 
 namespace mod {
     void TrapdoorMod::heavyTick() {
@@ -32,26 +34,24 @@ namespace mod {
 //这个函数会在初始化Level对象后执行
     void TrapdoorMod::initialize() {
         BDSMod::initialize();
-        this->configManager.initialize("trapdoor-config.json");
         this->commandManager.setCommandConfig(this->configManager.getCommandsConfig());
         this->playerStatisticManager.init("trapdoor.db");
         mod::initBackup();
+        this->villageHelper.setConfig(this->configManager.getVillageConfig());
+        get_cpu_usage();
+        L_INFO("==== trapdoor init finish  ====\n Server Start");
     }
-
 
     void TrapdoorMod::registerCommands() {
         using namespace trapdoor;
         BDSMod::registerCommands();
-
         this->registerTickCommand();
-        commandManager.registerCmd("prof", "ticking profiling")
-                ->then(ARG("actor", "显示详细的实体更新时间", NONE, {
+        commandManager.registerCmd("prof", "游戏性能分析")
+                ->then(ARG("actor", "实体更新性能分析", NONE, {
                     tick::profileEntities(player);
                 }))
-                ->EXE({
-                          tick::profileWorld(player);
-                      });
-        commandManager.registerCmd("mspt", "show mspt & tps")->EXE({ tick::mspt(); });
+                ->EXE({ tick::profileWorld(player); });
+        commandManager.registerCmd("mspt", "展示MSPT和TPS")->EXE({ tick::mspt(); });
 //功能开关命令
         commandManager.registerCmd("func", "开启/关闭部分功能")
                 ->then(ARG("hopper", "开启/关闭漏斗计数器", BOOL, {
@@ -59,18 +59,14 @@ namespace mod {
                     info(player, "设置漏斗计数器为 %d", holder->getBool());
                 }))
                 ->then(ARG("spawn", "开启/关闭刷怪指示", BOOL, {
-                    //   this->spawnHelper.setAble(holder->getBool());
-                    info(player, "该功能维护中");
+                    this->spawnHelper.setAble(holder->getBool());
+                    info(player, "设置刷怪指示器为 %d", holder->getBool());
                 }))
-                ->then(ARG("cactus", "开启/关闭仙人掌转方块", BOOL, {
+                ->then(ARG("rotate", "开启/关闭转方块", BOOL, {
                     this->rotationHelper.setAble(holder->getBool());
                     info(player, "设置仙人掌转方块为 %d", holder->getBool());
                 }))
-                ->then(ARG("chunk", "开启/关闭区块显示", BOOL, {
-                    this->playerFunctions.setAble(player->getNameTag(), holder->getBool());
-                    info(player, "设置你的区块显示为 %d", holder->getBool());
-                }))
-                ->then(ARG("build", "开启/关闭区块draw命令", BOOL, {
+                ->then(ARG("draw", "开启/关闭区块draw命令", BOOL, {
                     this->simpleBuilder.setAble(holder->getBool());
                     info(player, "设置简单建造为 %d", holder->getBool());
                 }))
@@ -107,19 +103,19 @@ namespace mod {
                 }));
 
 //便捷模式切换
-        commandManager.registerCmd("o", "switch to spectator mode")
+        commandManager.registerCmd("o", "切换到观察者模式")
                 ->EXE({
-                          player->setGameMode(3);
+                          player->setGameMode(4);
                           broadcastMsg("设置玩家[%s]为观察者模式", player->getNameTag().c_str());
                       });
 
-        commandManager.registerCmd("s", "switch to survival mode")
+        commandManager.registerCmd("s", "切换到生存模式")
                 ->EXE({
                           player->setGameMode(0);
                           broadcastMsg("设置玩家[%s]为生存模式", player->getNameTag().c_str());
                       });
 
-        commandManager.registerCmd("c", "switch to creative mode")
+        commandManager.registerCmd("c", "切换到创造模式")
                 ->EXE({
                           player->setGameMode(1);
                           broadcastMsg("设置玩家[%s]为创造者模式", player->getNameTag().c_str());
@@ -145,28 +141,35 @@ namespace mod {
                 ->then(ARG("c", "显示村庄中心", BOOL, {
                     this->villageHelper.setShowVillageCenter(holder->getBool());
                     info(player, "设置村庄边框显示为 %d", holder->getBool());
+                }))
+                ->then(ARG("v", "显示村民信息", BOOL, {
+                    this->villageHelper.setShowDwellerStatus(holder->getBool());
+                    info(player, "设置显示村民信息为 %d", holder->getBool());
+                }))
+                ->then(ARG("n", "显示最近村庄的详细信息", NONE, {
+                    this->villageHelper.printNearestVillageInfo(player, *player->getPos());
+                }))
+
+                ->then(ARG("test", "???", NONE, {
+                    trapdoor::warning(player, "you are not developer");
+                    //   this->villageHelper.test();
                 }));
 
         commandManager.registerCmd("td?", "显示帮助")
                 ->EXE({
                           this->commandManager.printfHelpInfo(player);
                       });
-
-
-        commandManager.registerCmd("dbg", "显示一些调试信息")
-                ->EXE({ player->printInfo(); });
-
         commandManager.registerCmd("hsa", "hsa显示相关")
                 ->then(ARG("clear", "清空hsa缓存", NONE, {
                     auto num = hsaManager.clear();
                     broadcastMsg("一共 %d 个hsa区域被清空", num);
                 }))
-                ->then(ARG("list", "list nearest hsa", NONE, {
+                ->then(ARG("list", "列出目前所有的hsa", NONE, {
                     hsaManager.list(player);
                 }))
-                ->then(ARG("show", "show hsa", BOOL, {
+                ->then(ARG("show", "开启hsa显示", BOOL, {
                     hsaManager.setAble(holder->getBool());
-                    info(player, "set hsa show to %d", holder->getBool());
+                    info(player, "设置HSA显示为 %d", holder->getBool());
                 }))
                 ->then(ARG("find", "find the best pos", NONE,
                            {
@@ -174,20 +177,6 @@ namespace mod {
                            }))
                 ->then(ARG("draw", "draw hsa", NONE, { hsaManager.draw(player); }));
 
-        commandManager.registerCmd("spawncounter", "刷怪分析器")
-                ->then(ARG("s", "开始统计", NONE, {
-                    info(player, "该功能维护中");
-                    // this->getSpawnAnalyzer().start(player);
-                }))
-                ->then(ARG("e", "结束统计", NONE, {
-
-                    info(player, "该功能维护中");
-                    //this->getSpawnAnalyzer().end(player);
-                }))
-                ->then(ARG("p", "打印数据", NONE, {
-                    info(player, "该功能维护中");
-                    // this->getSpawnAnalyzer().printSimpleData(player);
-                }));
 
         commandManager.registerCmd("draw", "简单建造")
                 ->then(ARG("ci", "画圆", INT,
@@ -199,13 +188,42 @@ namespace mod {
                                this->simpleBuilder.buildCircle(player, radius,
                                                                hollow);
                            }))
-                ->then(ARG("sp", "画圆", INT, {
+                ->then(ARG("sp", "画球体", INT, {
                     auto radius = holder->getInt();
                     bool hollow = holder->getInt() < 0;
                     if (radius < 0)
                         radius = -radius;
                     this->simpleBuilder.buildSphere(player, radius, hollow);
                 }));
+
+
+        commandManager.registerCmd("backup", "备份相关功能")
+                ->then(ARG("b", "创建备份", NONE, {
+                    mod::backup(player);
+                }))
+                ->then(ARG("l", "列出(最新的)备份", NONE, {
+                    mod::listAllBackups(player);
+                }))
+                ->then(ARG("r", "恢复备份", INT, {
+                    mod::restore(player, holder->getInt());
+                }))
+                ->then(ARG("crash", "崩服", NONE, {
+                    *((char *) (0)) = 0;
+                }));
+
+        commandManager.registerCmd("self", "玩家个人功能")
+                ->then(ARG("chunk", "区块显示", BOOL, {
+                    this->playerFunctions.setShowChunkAble(player->getNameTag(), holder->getBool());
+                    info(player, "设置你的区块显示为 %d", holder->getBool());
+                }))
+                ->then(ARG("me", "测量", BOOL, {
+                    this->playerFunctions.getMeasureData(player->getNameTag()).enableMeasure = holder->getBool();
+                    info(player, "设置你的测量开启/关闭 %d", holder->getBool());
+                }))
+                ->EXE({ PlayerFunction::printInfo(player); });
+
+        commandManager.registerCmd("os", "显示服务器信息")
+                ->EXE({ TrapdoorMod::printOSInfo(player); });
     }
 
     void TrapdoorMod::registerTickCommand() {
@@ -266,7 +284,7 @@ namespace mod {
                                 BlockPos &pos,
                                 unsigned int facing,
                                 const Vec3 &) {
-        //  L_DEBUG("%s", itemName.c_str());
+        // L_INFO("%s", itemName.c_str());
         //取消注释这一行可以看到右击地面的是什么东西
         if (itemName == "Bone" && this->spawnHelper.isEnable()) {
             spawnHelper.updateVerticalSpawnPositions(pos, player);
@@ -276,6 +294,52 @@ namespace mod {
             this->spawnHelper.printSpawnProbability(player, pos, 15);
         } else if (itemName == "Cactus") {
             this->rotationHelper.rotate(pos, player->getBlockSource());
+        } else if (itemName == "Wooden Sword") {
+            this->playerFunctions.getMeasureData(player->getNameTag()).setPosition1(pos, player);
+        } else if (itemName == "Stone Sword") {
+            this->playerFunctions.getMeasureData(player->getNameTag()).setPosition2(pos, player);
+        }
+    }
+
+
+    CommandPermissionLevel
+    TrapdoorMod::resetVanillaCommandLevel(const std::string &name, CommandPermissionLevel oldLevel) {
+        auto lowLevelConfig = this->configManager.getLowLevelCommands();
+        if (lowLevelConfig.find(name) != lowLevelConfig.end()) {
+            L_INFO("set command %s level to gameMaster", name.c_str());
+            return CommandPermissionLevel::GameMasters;
+        } else {
+            return oldLevel;
+        }
+    }
+
+
+    void TrapdoorMod::printOSInfo(trapdoor::Actor *player) {
+        int CPUUsage = get_cpu_usage();
+        uint64_t memory, virtualMemory, ioRead, ioWrite;
+        get_memory_usage(&memory, &virtualMemory);
+        get_io_bytes(&ioRead, &ioWrite);
+        trapdoor::MessageBuilder builder;
+        builder.text("CPU ").num(CPUUsage).text("%%%%\n")
+                .text("Mem  ").num(memory >> 20u).text(" MB  VMem:").num(virtualMemory >> 20u).text(" MB\n")
+                .text("Read/Write: ").num(ioRead >> 10u).text("/").num(ioWrite >> 10u).text(" KB").send(player);
+    }
+
+    /*
+     * 实体攻击接口
+    @ return 返回false会阻止掉血,返回true会正常掉血
+     @ entity1 进行攻击的实体
+     @entity2 被攻击的实体
+    */
+    bool TrapdoorMod::attackEntityHook(Actor *entity1, Actor *entity2) {
+        if (entity1->getActorId() != "player")return true;  //非玩家攻击直接忽略
+        //开了居民村庄中心显示
+        if (villageHelper.getShowDwellerStatus() &&
+            (entity2->getActorId() == "iron_golem" || entity2->getActorId() == "villager_v2")) {
+            villageHelper.printDwellerInfo(entity1, entity2);
+            return false;
+        } else {
+            return true;
         }
     }
 }

@@ -206,4 +206,5 @@ namespace trapdoor {
 
     }
 }
-
+typedef trapdoor::BlockPos BlockPos;
+typedef trapdoor::BlockPos2 BlockPos2;

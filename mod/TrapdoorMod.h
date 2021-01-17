@@ -20,6 +20,11 @@
 
 namespace mod {
 
+    struct ModInfo {
+        const std::string minecraftVersion = "1.16.4.02";
+        const std::string modVersion = "trapdoor-0.9.16";
+    };
+
     class TrapdoorMod : public trapdoor::BDSMod {
     private:
         HopperChannelManager hopperChannelManager;
@@ -36,8 +41,13 @@ namespace mod {
 
         void registerTickCommand();
 
+
+    public:
+        ModInfo modeInfo;
     public:
         static void printCopyRightInfo();
+
+        static void printOSInfo(trapdoor::Actor *player);
 
         void initialize() override;
 
@@ -46,9 +56,18 @@ namespace mod {
         void useOnHook(Actor *player, const std::string &itemName, BlockPos &pos, unsigned int facing,
                        const Vec3 &) override;
 
+        CommandPermissionLevel
+        resetVanillaCommandLevel(const std::string &name, CommandPermissionLevel oldLevel) override;
+
         void heavyTick();
 
         void lightTick();
+
+        inline void readConfigFile(const std::string &configFileName) {
+            this->configManager.initialize("trapdoor-config.json");
+        }
+
+        bool attackEntityHook(Actor *entity1, Actor *entit2) override;
 
         //get functions
         inline HopperChannelManager &getHopperChannelManager() { return this->hopperChannelManager; }
@@ -60,6 +79,11 @@ namespace mod {
         inline SpawnAnalyzer &getSpawnAnalyzer() { return this->spawnAnalyzer; }
 
         inline PlayerStatisticManager &getPlayerStatisticManager() { return this->playerStatisticManager; }
+
+        inline std::string getLevelName() { return this->configManager.getServerConfig().levelName; }
+
+
+
     };
 }
 

@@ -19,6 +19,7 @@ namespace trapdoor {
 // 注释这个函数一级指令就没提示了
     void
     regMCBECommand(const std::string &command, const char *description, CommandPermissionLevel level, bool noCheat) {
+
         if (!trapdoor::bdsMod) {
             L_ERROR("get a nullptr of trapdoor::mod");
             return;
@@ -36,10 +37,6 @@ namespace trapdoor {
                 command, description, level, None, cheatOption
         );
     }
-
-    //todo
-
-
 }
 //? hook: 命令注册过程，服务器的命令注册和命令执行是分开的，二者并不绑定，因此可以直接调用这个函数来获得基本的命令提示
 using namespace SymHook;
@@ -54,11 +51,9 @@ THook(
         trapdoor::CommandFlag1 flag1,
         trapdoor::CommandFlag2 flag2
 ) {
-//    //   int newLevel = commandLevel > OP ? OP : commandLevel;
-//    L_INFO("%-30s   :%-10s  %-10s %-10s", name.c_str(), commandPermissionLevelToStr(level),
-//           CommandFlag1ToStr(flag1),
-//           CommandFlag2ToStr(flag2), flag2);
-    original(commandRegistry, name, str, level, flag1, flag2);
+
+    auto newLevel = trapdoor::bdsMod->resetVanillaCommandLevel(name, level);
+    original(commandRegistry, name, str, newLevel, flag1, flag2);
     //没有创建模组实例
     if (!trapdoor::bdsMod) {
         L_ERROR("get a nullptr of trapdoor::mod");

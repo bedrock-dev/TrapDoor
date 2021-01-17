@@ -76,6 +76,11 @@ namespace trapdoor {
         if (loggerPrintFunctionName) {
             fprintf(logger, "(%s) ", functionName);
         }
+        if (level == LOG_LEVEL::LOG_INFO) {
+            vfprintf(stdout, fmt, args);
+            fprintf(stdout, "\n");
+            fflush(stdout);
+        }
         vfprintf(logger, fmt, args);
         fprintf(logger, "\n");
         fflush(logger);

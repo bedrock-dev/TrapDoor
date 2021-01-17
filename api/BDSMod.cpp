@@ -4,8 +4,13 @@
 
 #include "BDSMod.h"
 #include "tools/DirtyLogger.h"
+#include "entity/Actor.h"
+#include "SymHook.h"
+#include "lib/mod.h"
 
 namespace trapdoor {
+
+
     //全局模组对象
     BDSMod *bdsMod = nullptr;
 
@@ -19,6 +24,7 @@ namespace trapdoor {
     }
 
     void BDSMod::setCommandRegistry(void *registry) {
+        L_INFO("set commandRegistry");
         this->commandRegistry = registry;
     }
 
@@ -41,7 +47,7 @@ namespace trapdoor {
         }
         L_INFO("begin register command");
         getCommandManager().registerCmd("apicfg")
-                ->then(ARG("pvd", "设置例子可见距离", INT, {
+                ->then(ARG("pvd", "设置粒子可见距离", INT, {
                     this->getCfg().particleViewDistance = holder->getInt();
                 }))
                 ->then(ARG("pm", "牺牲一定显示效果减少显示卡顿", BOOL, {
@@ -54,8 +60,19 @@ namespace trapdoor {
     }
 
     void BDSMod::initialize() {
+        L_INFO("==== trapdoor mod begin init ====");
         L_INFO("init thread pool");
         this->threadPool = new ThreadPool(std::thread::hardware_concurrency());
+    }
+
+    trapdoor::Actor *BDSMod::fetchEntity(int64_t id, bool b) {
+        using namespace SymHook;
+        return SYM_CALL(
+                Actor * (*)(Level * ,
+                int64_t, bool),
+                MSSYM_B1QE11fetchEntityB1AA5LevelB2AAE13QEBAPEAVActorB2AAE14UActorUniqueIDB3AAUA1NB1AA1Z,
+                this->getLevel(), id, b
+        );
     }
 
 }

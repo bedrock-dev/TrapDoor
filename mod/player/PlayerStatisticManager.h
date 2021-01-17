@@ -8,10 +8,11 @@
 #include "lib/sqlite3.h"
 #include <string>
 #include "graphics/BlockPos.h"
+#include "tools/noncopyable .h"
 
 namespace mod {
 
-    class PlayerStatisticManager {
+    class PlayerStatisticManager : noncopyable {
         sqlite3 *db = nullptr;
         bool enable = true;
 

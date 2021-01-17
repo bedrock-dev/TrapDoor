@@ -8,6 +8,7 @@ else ()
 endif ()
 set(MOD_API_NAME trapDoorAPI)
 
+
 add_library(${MOD_API_NAME} STATIC
         api/BDSMod.cpp
         api/block/Block.cpp
@@ -35,8 +36,7 @@ add_library(${MOD_API_NAME} STATIC
         api/tools/MsgBuilder.cpp
         api/tools/ThreadPool.h
         api/world/LevelChunk.cpp
-        api/tools/enumTools.h
-        )
+        "api/tools/noncopyable .h")
 target_include_directories(${MOD_API_NAME}
         PUBLIC
         api
@@ -74,12 +74,16 @@ add_library(${MOD_NAME}
         mod/spawn/SlimeChunkHelper.cpp
         mod/player/PlayerStatisticManager.cpp
         mod/player/Player.cpp
-        mod/function/BackupHelper.cpp mod/function/BackupHelper.h)
+        mod/function/BackupHelper.cpp
+        mod/os/process_stat.cpp
+        mod/village/POIInstance.cpp
+        )
 
 target_include_directories(
         ${MOD_NAME}
         PUBLIC
         mod
+        mod/os
         mod/config
         mod/hopper
         mod/spawn
@@ -97,9 +101,5 @@ target_include_directories(
         api/tools
 )
 
-
 target_link_libraries(${MOD_NAME} ${MOD_API_NAME})
 
-add_executable(
-        TempText
-        test/testMain.cpp)
