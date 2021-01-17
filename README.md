@@ -11,7 +11,7 @@ Trapdoor是一个为 Minecraft Bedrock Edition 服务的，基于原版服务端
 
 ## Credits
 
-### Minecfart
+### Minecraft
 
 感谢`mojang`提供的[Minecraft](https://www.minecraft.net/zh-hans)游戏
 

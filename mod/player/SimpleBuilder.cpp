@@ -6,6 +6,7 @@
 #include "block/Block.h"
 #include "block/BlockSource.h"
 #include "entity/Actor.h"
+#include "tools/Message.h"
 #include "graphics/BlockPos.h"
 #include "tools/DirtyLogger.h"
 
@@ -13,9 +14,11 @@ namespace mod {
     void SimpleBuilder::buildCircle(trapdoor::Actor *player,
                                     size_t radius,
                                     bool hollow) const {
-        if (!this->enable)
-            return;
-        trapdoor::BlockPos standPos = player->getStandPosition();
+		if (!this->enable) {
+			info(player, "build未开启");
+			return;
+		}
+		trapdoor::BlockPos standPos = player->getStandPosition();
         auto block = player->getBlockSource()->getBlock(standPos.x, standPos.y,
                                                         standPos.z);
         trapdoor::BlockPos pos = standPos;
@@ -88,8 +91,10 @@ namespace mod {
     void SimpleBuilder::buildSphere(trapdoor::Actor *player,
                                     size_t radius,
                                     bool hollow) const {
-        if (!this->enable)
-            return;
+        if (!this->enable){
+			info(player, "build未开启");
+			return;
+		}
         trapdoor::BlockPos standPos = player->getStandPosition();
         auto block = player->getBlockSource()->getBlock(standPos.x, standPos.y,
                                                         standPos.z);

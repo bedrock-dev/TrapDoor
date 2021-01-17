@@ -71,7 +71,7 @@ namespace mod {
                     info(player, "设置简单建造为 %d", holder->getBool());
                 }))
                 ->then(ARG("stat", "开启/关闭玩家行为统计", BOOL, {
-                    this->simpleBuilder.setAble(holder->getBool());
+                    this->playerStatisticManager.setAble(holder->getBool());
                     info(player, "设置玩家行为统计为 %d", holder->getBool());
                 }));
 
