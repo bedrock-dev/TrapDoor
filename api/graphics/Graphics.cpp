@@ -9,73 +9,77 @@
 #include "BDSMod.h"
 
 namespace trapdoor {
-    static std::map<float, int> binSplit(float start, float end) {
-        std::map<float, int> lengthMap;
-        int length = static_cast<int>(end - start);
-        while (length >= 512) {
-            length -= 256;
-            auto point = static_cast<float>(128.0 + start);
-            start += 256.0;
-            lengthMap.insert({point, 256});
-        }
 
-        for (auto defaultLength = 256; defaultLength >= 1; defaultLength /= 2) {
-            if (length >= defaultLength) {
-                length -= defaultLength;
-                auto point = static_cast<float>(0.5 * defaultLength + start);
-                start += defaultLength;
-                lengthMap.insert({point, defaultLength});
+    namespace {
+        //把整数进行二进制分割，获取粒子的生成坐标
+        std::map<float, int> binSplit(float start, float end) {
+            std::map<float, int> lengthMap;
+            int length = static_cast<int>(end - start);
+            while (length >= 512) {
+                length -= 256;
+                auto point = static_cast<float>(128.0 + start);
+                start += 256.0;
+                lengthMap.insert({point, 256});
             }
+
+            for (auto defaultLength = 256; defaultLength >= 1; defaultLength /= 2) {
+                if (length >= defaultLength) {
+                    length -= defaultLength;
+                    auto point = static_cast<float>(0.5 * defaultLength + start);
+                    start += defaultLength;
+                    lengthMap.insert({point, defaultLength});
+                }
+            }
+            return lengthMap;
         }
-        return lengthMap;
+
+        std::string getLineParticleType(int length,
+                                        FACING direction,
+                                        GRAPHIC_COLOR color) {
+            std::string str = "trapdoor:line";
+            str += std::to_string(length);
+            switch (direction) {
+                case FACING::NEG_Y:
+                    str += "Yp";
+                    break;
+                case FACING::POS_Y:
+                    str += "Ym";
+                    break;
+                case FACING::NEG_Z:
+                    str += "Zp";
+                    break;
+                case FACING::POS_Z:
+                    str += "Zm";
+                    break;
+                case FACING::NEG_X:
+                    str += "Xp";
+                    break;
+                case FACING::POS_X:
+                    str += "Xm";
+                    break;
+            }
+
+            switch (color) {
+                case GRAPHIC_COLOR::WHITE:
+                    str += "W";
+                    break;
+                case GRAPHIC_COLOR::RED:
+                    str += "R";
+                    break;
+                case GRAPHIC_COLOR::YELLOW:
+                    str += "Y";
+                    break;
+                case GRAPHIC_COLOR::BLUE:
+                    str += "B";
+                    break;
+                case GRAPHIC_COLOR::GREEN:
+                    str += "G";
+                    break;
+            }
+            return str;
+        }
     }
 
-
-    static std::string getLineParticleType(int length,
-                                           FACING direction,
-                                           GRAPHIC_COLOR color) {
-        std::string str = "trapdoor:line";
-        str += std::to_string(length);
-        switch (direction) {
-            case FACING::NEG_Y:
-                str += "Yp";
-                break;
-            case FACING::POS_Y:
-                str += "Ym";
-                break;
-            case FACING::NEG_Z:
-                str += "Zp";
-                break;
-            case FACING::POS_Z:
-                str += "Zm";
-                break;
-            case FACING::NEG_X:
-                str += "Xp";
-                break;
-            case FACING::POS_X:
-                str += "Xm";
-                break;
-        }
-
-        switch (color) {
-            case GRAPHIC_COLOR::WHITE:
-                str += "W";
-                break;
-            case GRAPHIC_COLOR::RED:
-                str += "R";
-                break;
-            case GRAPHIC_COLOR::YELLOW:
-                str += "Y";
-                break;
-            case GRAPHIC_COLOR::BLUE:
-                str += "B";
-                break;
-            case GRAPHIC_COLOR::GREEN:
-                str += "G";
-                break;
-        }
-        return str;
-    }
 
     void drawLine(const Vec3 &originPoint,
                   FACING direction,
@@ -138,6 +142,4 @@ namespace trapdoor {
                 spawnParticle(points.first, particleTypeInv, dimType);
         }
     }
-
-
 }

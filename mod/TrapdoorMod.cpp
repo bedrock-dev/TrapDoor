@@ -45,7 +45,7 @@ namespace mod {
     void TrapdoorMod::registerCommands() {
         using namespace trapdoor;
         BDSMod::registerCommands();
-      //tick
+        //tick
         this->registerTickCommand();
         //性能分析
         commandManager.registerCmd("prof", "游戏性能分析")
@@ -197,6 +197,14 @@ namespace mod {
                     if (radius < 0)
                         radius = -radius;
                     this->simpleBuilder.buildSphere(player, radius, hollow);
+                }))
+                ->then(ARG("mr", "设置最大半径", INT, {
+                    auto radius = holder->getInt();
+                    if (radius < 0) {
+                        error(player, "参数不合法(必须>=1)");
+                    } else {
+                        this->simpleBuilder.setMaxRadius(radius);
+                    }
                 }));
 
 
@@ -211,7 +219,7 @@ namespace mod {
                     mod::restore(player, holder->getInt());
                 }))
                 ->then(ARG("crash", "崩服", NONE, {
-                   //这种指令的存在真的好吗
+                    //这种指令的存在真的好吗
                     *((char *) (0)) = 0;
                 }));
 

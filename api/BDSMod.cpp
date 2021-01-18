@@ -46,7 +46,7 @@ namespace trapdoor {
             L_ERROR("fail to register command!![commandRegistry is null ptr]");
         }
         L_INFO("begin register command");
-        getCommandManager().registerCmd("apicfg","部分设置")
+        getCommandManager().registerCmd("apicfg", "部分设置")
                 ->then(ARG("pvd", "设置粒子可见距离", INT, {
                     this->getCfg().particleViewDistance = holder->getInt();
                 }))

@@ -8,7 +8,6 @@
 /// 时间转换
 static uint64_t file_time_2_utc(const FILETIME *ftime) {
     LARGE_INTEGER li;
-
     assert(ftime);
     li.LowPart = ftime->dwLowDateTime;
     li.HighPart = ftime->dwHighDateTime;

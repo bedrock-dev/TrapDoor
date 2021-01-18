@@ -41,7 +41,7 @@ namespace trapdoor {
 }
 
 using namespace SymHook;
-
+//右键代理类
 THook(
         void,
         MSSYM_B1QA5useOnB1AA4ItemB2AAA4QEBAB1UE14NAEAVItemStackB2AAA9AEAVActorB2AAA7HHHEMMMB1AA1Z,

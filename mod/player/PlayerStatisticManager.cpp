@@ -40,7 +40,6 @@ namespace mod {
                                                    PlayerStatisticManager::PLAYER_ACTION playerAction, int dim,
                                                    const std::string &msg) {
 
-
         auto sql = trapdoor::format(
                 "insert into player_acton(player_id,action_type,action_dim,action_p_x,action_p_y,action_p_z,action_string)\n"
                 "        VALUES ('%s', %d,%d,%d,%d,%d, '%s')",

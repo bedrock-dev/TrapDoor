@@ -104,15 +104,5 @@ namespace trapdoor {
     public:
         std::string getName();
     };
-
-/*
- *todo 下面的一堆东西甚至没有OOP化，全部要重写
-*/
-
-    std::string actorIDtoString(char *actorID);
-
-    std::vector<std::string> getActorText(void *actor);
-
-    std::string getActorName(void *actor);
 }
 #endif

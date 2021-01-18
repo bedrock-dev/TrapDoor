@@ -21,12 +21,15 @@ namespace trapdoor {
     struct CommandConfig {
         bool enable = true; //是否启用
         CommandPermissionLevel permissionLevel = Admin; //权限等级
+        //下面两个还没启用，主要是还没获取游戏模式的接口（设置游戏模式的都有了）
         bool needCheat = false;
         bool survival = false; //生存中是否可用
     };
 
     class CommandManager {
+        //命令列表
         std::map<std::string, CommandNode *> commandList;
+        //命令配置文件列表
         std::map<std::string, CommandConfig> commandConfigList;
     public:
         CommandNode *registerCmd(const std::string &cmd,
@@ -37,6 +40,7 @@ namespace trapdoor {
         //解析命令
         int parse(Actor *player, std::string cmd);
 
+        //设置命令配置
         void setCommandConfig(std::map<std::string, CommandConfig> &cmdConfigList);
 
         //打印帮助信息
@@ -45,8 +49,10 @@ namespace trapdoor {
         //在当前命令列表里面查找命令
         bool findCommand(const std::string &cmd);
 
+        //检查权限等级
         bool checkCommandPermission(const std::string &command, Actor *player);
 
+        //执行原版命令(还没做)
         static void runVanillaCommand(const std::string &command);
     };
 

@@ -51,8 +51,6 @@ namespace trapdoor {
                 return false;
             return maxPos < rhs.maxPos;
         }
-
-
     };
 }
 typedef trapdoor::AABB AABB;
