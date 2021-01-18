@@ -11,7 +11,7 @@ namespace trapdoor {
               z == rhs.z))
             return false;
         auto distance2 = (dx - rhs.dx) * (dx - rhs.dx) + (dy - rhs.dy) * (dy - rhs.dy) + (dz - rhs.dz) * (dz - rhs.dz);
-        return distance2 < 0.0001f;
+        return distance2 < 0.01f;
     }
 
     bool RightClickCache::operator!=(const RightClickCache &rhs) const {

@@ -295,8 +295,8 @@ namespace mod {
                                 const std::string &itemName,
                                 BlockPos &pos,
                                 unsigned int facing,
-                                const Vec3 &) {
-        // L_INFO("%s", itemName.c_str());
+                                const Vec3 & v) {
+   //     L_INFO("%.2f %.2f %.2f", v.x,v.y,v.z , itemName.c_str());
         //取消注释这一行可以看到右击地面的是什么东西
         if (itemName == "Bone" && this->spawnHelper.isEnable()) {
             spawnHelper.updateVerticalSpawnPositions(pos, player);

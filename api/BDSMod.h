@@ -19,23 +19,7 @@
 #include "tools/noncopyable .h"
 
 namespace trapdoor {
-    class Tick {
-    public:
-        uint64_t tick;
 
-        uint64_t operator%(size_t num) const { return tick % num; }
-
-        bool operator<(const Tick &rhs) const {
-            return tick < rhs.tick;
-        }
-
-        size_t getTimeStamp() { return this->tick; }
-
-        bool operator==(const Tick &rhs) const {
-            return tick == rhs.tick;
-        }
-
-    };
 
 
     class BDSMod : public noncopyable {

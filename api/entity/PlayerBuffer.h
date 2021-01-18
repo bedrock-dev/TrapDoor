@@ -16,7 +16,9 @@ namespace trapdoor {
         int x = 0;
         int y = 0;
         int z = 0;
+
         bool operator==(const RightClickCache &rhs) const;
+
         bool operator!=(const RightClickCache &rhs) const;
     };
 

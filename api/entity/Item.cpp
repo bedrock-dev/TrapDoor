@@ -57,7 +57,11 @@ THook(
         float dz
 ) {
 
+
+    L_INFO("%.2f %.2f %.2f,tick =  %llu", dx, dy, dz, trapdoor::bdsMod->getLevel()->getGameTick());
+
     trapdoor::RightClickCache targetCache{dx, dy, dz, x, y, z};
+
     auto &playerCache = trapdoor::bdsMod->getPlayerBuffer()[player->getNameTag()].rightClickCache;
     //下面用一个简单的缓存 + 判定消除重复点击
     if (playerCache != targetCache) {
