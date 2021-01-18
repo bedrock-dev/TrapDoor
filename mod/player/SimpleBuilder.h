@@ -11,7 +11,7 @@
 
 namespace mod {
     class SimpleBuilder : noncopyable {
-        size_t maxCircleRadius = 128;
+        size_t maxCircleRadius = 30000000;
         bool enable = false;
     public:
         inline void setAble(bool able) { this->enable = able; }

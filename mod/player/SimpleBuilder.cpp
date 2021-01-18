@@ -19,8 +19,8 @@ namespace mod {
             return;
         }
         if (radius > this->maxCircleRadius) {
-            info(player, "半径过大(必须<= 128)");
-            return;
+			info(player, "半径过大(必须<= 30000000)");
+			return;
         }
         trapdoor::BlockPos standPos = player->getStandPosition();
         auto block = player->getBlockSource()->getBlock(standPos.x, standPos.y,
@@ -100,8 +100,8 @@ namespace mod {
             return;
         }
         if (radius > this->maxCircleRadius) {
-            info(player, "半径过大(必须<= 128)");
-            return;
+			info(player, "半径过大(必须<= 30000000)");
+			return;
         }
         trapdoor::BlockPos standPos = player->getStandPosition();
         auto block = player->getBlockSource()->getBlock(standPos.x, standPos.y,
