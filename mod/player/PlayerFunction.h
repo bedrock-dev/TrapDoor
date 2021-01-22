@@ -39,7 +39,10 @@ namespace mod {
 
     public:
         inline void setShowChunkAble(const std::string &playerName, bool able) { enableShowChunk[playerName] = able; }
-        inline void setRedstoneHelperAble(const std::string &playerName, bool able) { enableRedstoneHelper[playerName] = able; }
+
+        inline void
+        setRedstoneHelperAble(const std::string &playerName, bool able) { enableRedstoneHelper[playerName] = able; }
+
         MeasureData &getMeasureData(const std::string &playerName) { return playerMeasureData[playerName]; }
 
         void tick();

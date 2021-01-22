@@ -75,7 +75,7 @@ namespace mod {
     }
 
     void PlayerFunction::printRedstoneInfo(trapdoor::Actor *player, BlockPos &pos) {
-        if (!this->enableShowChunk[player->getNameTag()])return;
+        if (!this->enableRedstoneHelper[player->getNameTag()])return;
         auto graph = player->getDimension()->getGraph();
         auto component = graph->getBaseCircuitComponent(&pos);
         if (!component) {

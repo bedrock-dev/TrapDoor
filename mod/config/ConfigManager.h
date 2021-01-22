@@ -91,7 +91,7 @@ namespace mod {
 
         inline const ServerConfig &getServerConfig() const { return this->serverConfig; }
 
-        inline const SelfEnableConfig &getSelfEnbaleConfig() const { return this->selfEnableConfig; }
+        inline const SelfEnableConfig &getSelfEnableConfig() const { return this->selfEnableConfig; }
     };
 }
 

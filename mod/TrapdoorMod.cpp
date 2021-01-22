@@ -245,15 +245,15 @@ namespace mod {
 
         commandManager.registerCmd("self", "玩家个人功能")
                 ->then(ARG("chunk", "区块显示", BOOL, {
-                    if (!configManager.getSelfEnbaleConfig().enableChunkShow) {
+                    if (!configManager.getSelfEnableConfig().enableChunkShow) {
                         error(player, "该功能已被关闭，请联系服主");
                         return;
                     }
                     this->playerFunctions.setShowChunkAble(player->getNameTag(), holder->getBool());
                     info(player, "设置你的区块显示为 %d", holder->getBool());
                 }))
-                ->then(ARG("me", "测量", BOOL, {
-                    if (!configManager.getSelfEnbaleConfig().enableDistanceMeasure) {
+                ->then(ARG("me", "信号源显示", BOOL, {
+                    if (!configManager.getSelfEnableConfig().enableDistanceMeasure) {
                         error(player, "该功能已被关闭，请联系服主");
                         return;
                     }
@@ -261,12 +261,12 @@ namespace mod {
                     info(player, "设置你的测量开启/关闭 %d", holder->getBool());
                 }))
                 ->then(ARG("rs", "测量", BOOL, {
-                    if (!configManager.getSelfEnbaleConfig().enableRedstoneStick) {
+                    if (!configManager.getSelfEnableConfig().enableRedstoneStick) {
                         error(player, "该功能已被关闭，请联系服主");
                         return;
                     }
                     this->playerFunctions.setRedstoneHelperAble(player->getNameTag(), holder->getBool());
-                    info(player, "设置你的信号源提 示开启/关闭 %d", holder->getBool());
+                    info(player, "设置你的信号源提示开启/关闭 %d", holder->getBool());
                 }))
 
                 ->EXE({ PlayerFunction::printInfo(player); });

@@ -27,7 +27,7 @@ namespace trapdoor {
     //打印信号源等信息
     void BaseCircuitComponent::basePrint(CircuitSceneGraph *graph, trapdoor::Actor *player) {
         MessageBuilder builder;
-        builder.text("1Signal: ").num(this->getStrength());
+        builder.text("Signal: ").num(this->getStrength());
         auto begin = (uint32_t *) *((uint64_t *) this + 1);
         auto end = (uint32_t *) *((uint64_t *) this + 2);
         int num = 0;
@@ -40,7 +40,7 @@ namespace trapdoor {
             if (comp) {
                 builder.text("\n - ").pos(pos).text(" <==> ").num(comp->getStrength());
                 vec3.x = (float) pos.x + 0.5f;
-                vec3.y = (float) pos.y + 1.7f;
+                vec3.y = (float) pos.y + 0.7f;
                 vec3.z = (float) pos.z + 0.5f;
                 spawnParticle(vec3, particleType, player->getDimensionID());
             }
@@ -108,8 +108,7 @@ namespace trapdoor {
 
 using namespace SymHook;
 //初始化电路图
-bool temp = false;
-
+//这个函数没用了
 THook(
         trapdoor::BaseCircuitComponent
         *,
@@ -117,11 +116,5 @@ THook(
         trapdoor::CircuitSceneGraph *graph,
         trapdoor::BlockPos * pos
 ) {
-
-    if (!temp) {
-        L_DEBUG("%p", graph);
-        temp = true;
-    }
-
     return original(graph, pos);
 }
