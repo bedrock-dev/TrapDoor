@@ -52,7 +52,7 @@ namespace trapdoor {
         });
         rootNode->then(helpNode);
         //注册命令到游戏中
-        L_INFO("register command %s with description %s", cmd.c_str(), description.c_str());
+        L_INFO("register command %s", cmd.c_str());
         regMCBECommand(cmd, description.c_str(), level, true);
         return rootNode;
     }
@@ -63,6 +63,7 @@ namespace trapdoor {
         if (tokens.empty())return false;
         return this->commandList.find(tokens[0]) != this->commandList.end();
     }
+
 //递归打印命令帮助
     void CommandManager::printfHelpInfo(Actor *actor) {
         for (const auto &cmd :this->commandList) {
@@ -90,7 +91,7 @@ namespace trapdoor {
         auto commandLevel = static_cast<int>(cmdCfg->second.permissionLevel);
         if (playerLevel < commandLevel) {
             L_DEBUG("server reject the execute of command [%s] for player %s", command.c_str(),
-                   player->getNameTag().c_str());
+                    player->getNameTag().c_str());
             error(player, "你没有权限执行该命令[你的等级:%d < 命令等级:%d]", playerLevel, commandLevel);
             return false;
         }
@@ -100,13 +101,8 @@ namespace trapdoor {
 
     void CommandManager::setCommandConfig(std::map<std::string, CommandConfig> &cmdConfigList) {
         this->commandConfigList = cmdConfigList;
-        L_INFO("init command permission info");
-        for (const auto &item:this->commandConfigList) {
-            L_INFO("%-10s enable:%d  level:%d", item.first.c_str(),
-                   item.second.enable,
-                   item.second.permissionLevel
-            );
-        }
+        L_INFO("set command permission info");
+
     }
 
     void CommandManager::runVanillaCommand(const std::string &command) {

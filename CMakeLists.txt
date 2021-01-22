@@ -14,6 +14,7 @@ add_library(${MOD_API_NAME} STATIC
         api/block/Block.cpp
         api/block/BlockLegacy.cpp
         api/block/BlockSource.cpp
+        api/block/CircuitComponent.cpp
         api/commands/CommandNode.cpp
         api/commands/Command.cpp
         api/commands/CommandManager.cpp

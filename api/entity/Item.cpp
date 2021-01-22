@@ -58,7 +58,7 @@ THook(
 ) {
 
 
-    L_INFO("%.2f %.2f %.2f,tick =  %llu", dx, dy, dz, trapdoor::bdsMod->getLevel()->getGameTick());
+  //  L_INFO("%.2f %.2f %.2f,tick =  %llu", dx, dy, dz, trapdoor::bdsMod->getLevel()->getGameTick());
 
     trapdoor::RightClickCache targetCache{dx, dy, dz, x, y, z};
 

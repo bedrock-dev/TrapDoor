@@ -14,7 +14,7 @@ namespace mod {
 
     class PlayerStatisticManager : noncopyable {
         sqlite3 *db = nullptr;
-        bool enable = true;
+        bool enable = false;
 
         int executeSQL(const std::string &sql);
 

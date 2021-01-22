@@ -54,6 +54,7 @@ namespace trapdoor {
 
         Actor *fetchEntity(const trapdoor::ActorUniqueID &id, bool b);
 
+
         uint64_t getGameTick();
     };
 }

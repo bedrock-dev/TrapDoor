@@ -21,7 +21,6 @@
 namespace trapdoor {
 
 
-
     class BDSMod : public noncopyable {
     public:
         struct ModConfig {

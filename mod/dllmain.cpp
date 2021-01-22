@@ -26,7 +26,7 @@ trapdoor::BDSMod *createBDSModInstance() {
 void mod_init() {
     initConsole();
     trapdoor::initLogger("trapdoor.log"); //初始化日志
-    //trapdoor::setDevMode(true);
+    trapdoor::setDevMode(true);
     mod::TrapdoorMod::printCopyRightInfo(); //打印日志
     auto *mod = createBDSModInstance();
     mod->asInstance<mod::TrapdoorMod>()->readConfigFile("trapdoor-config.json"); //读取配置文件

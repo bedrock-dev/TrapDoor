@@ -57,22 +57,42 @@ namespace mod {
 //功能开关命令
         commandManager.registerCmd("func", "开启/关闭部分功能")
                 ->then(ARG("hopper", "开启/关闭漏斗计数器", BOOL, {
+                    if (!this->configManager.getFunctionConfig().hopperCounter) {
+                        error(player, "该功能已被关闭，请联系服主");
+                        return;
+                    }
                     this->hopperChannelManager.setAble(holder->getBool());
                     info(player, "设置漏斗计数器为 %d", holder->getBool());
                 }))
                 ->then(ARG("spawn", "开启/关闭刷怪指示", BOOL, {
+                    if (!this->configManager.getFunctionConfig().spawnHelper) {
+                        error(player, "该功能已被关闭，请联系服主");
+                        return;
+                    }
                     this->spawnHelper.setAble(holder->getBool());
                     info(player, "设置刷怪指示器为 %d", holder->getBool());
                 }))
                 ->then(ARG("rotate", "开启/关闭转方块", BOOL, {
+                    if (!configManager.getFunctionConfig().cactusRotation) {
+                        error(player, "该功能已被关闭，请联系服主");
+                        return;
+                    }
                     this->rotationHelper.setAble(holder->getBool());
                     info(player, "设置仙人掌转方块为 %d", holder->getBool());
                 }))
                 ->then(ARG("draw", "开启/关闭区块draw命令", BOOL, {
+                    if (!configManager.getFunctionConfig().simpleDraw) {
+                        error(player, "该功能已被关闭，请联系服主");
+                        return;
+                    }
                     this->simpleBuilder.setAble(holder->getBool());
                     info(player, "设置简单建造为 %d", holder->getBool());
                 }))
                 ->then(ARG("stat", "开启/关闭玩家行为统计", BOOL, {
+                    if (!configManager.getFunctionConfig().playerStat) {
+                        error(player, "该功能已被关闭，请联系服主");
+                        return;
+                    }
                     this->playerStatisticManager.setAble(holder->getBool());
                     info(player, "设置玩家行为统计为 %d", holder->getBool());
                 }));
@@ -225,13 +245,30 @@ namespace mod {
 
         commandManager.registerCmd("self", "玩家个人功能")
                 ->then(ARG("chunk", "区块显示", BOOL, {
+                    if (!configManager.getSelfEnbaleConfig().enableChunkShow) {
+                        error(player, "该功能已被关闭，请联系服主");
+                        return;
+                    }
                     this->playerFunctions.setShowChunkAble(player->getNameTag(), holder->getBool());
                     info(player, "设置你的区块显示为 %d", holder->getBool());
                 }))
                 ->then(ARG("me", "测量", BOOL, {
+                    if (!configManager.getSelfEnbaleConfig().enableDistanceMeasure) {
+                        error(player, "该功能已被关闭，请联系服主");
+                        return;
+                    }
                     this->playerFunctions.getMeasureData(player->getNameTag()).enableMeasure = holder->getBool();
                     info(player, "设置你的测量开启/关闭 %d", holder->getBool());
                 }))
+                ->then(ARG("rs", "测量", BOOL, {
+                    if (!configManager.getSelfEnbaleConfig().enableRedstoneStick) {
+                        error(player, "该功能已被关闭，请联系服主");
+                        return;
+                    }
+                    this->playerFunctions.setRedstoneHelperAble(player->getNameTag(), holder->getBool());
+                    info(player, "设置你的信号源提 示开启/关闭 %d", holder->getBool());
+                }))
+
                 ->EXE({ PlayerFunction::printInfo(player); });
 
         commandManager.registerCmd("os", "显示服务器信息")
@@ -257,7 +294,7 @@ namespace mod {
                     if (wrapTime > 1 && wrapTime <= 10) {
                         tick::wrapTick(wrapTime);
                     } else {
-                        error(player, "number must in [2-10]");
+                        error(player, "倍数必须在 [2-10] 之间");
                     }
                 }))
                 ->then(ARG("r", "重置世界运行", NONE, {
@@ -291,12 +328,13 @@ namespace mod {
         fflush(stdout);
     }
 
+
     void TrapdoorMod::useOnHook(Actor *player,
                                 const std::string &itemName,
                                 BlockPos &pos,
                                 unsigned int facing,
-                                const Vec3 & v) {
-   //     L_INFO("%.2f %.2f %.2f", v.x,v.y,v.z , itemName.c_str());
+                                const Vec3 &v) {
+        //     L_INFO("%.2f %.2f %.2f", v.x,v.y,v.z , itemName.c_str());
         //取消注释这一行可以看到右击地面的是什么东西
         if (itemName == "Bone" && this->spawnHelper.isEnable()) {
             spawnHelper.updateVerticalSpawnPositions(pos, player);
@@ -310,6 +348,8 @@ namespace mod {
             this->playerFunctions.getMeasureData(player->getNameTag()).setPosition1(pos, player);
         } else if (itemName == "Stone Sword") {
             this->playerFunctions.getMeasureData(player->getNameTag()).setPosition2(pos, player);
+        } else if (itemName == "Stick") {
+            this->playerFunctions.printRedstoneInfo(player, pos);
         }
     }
 

@@ -4,7 +4,6 @@
 
 #include "BDSMod.h"
 #include "tools/DirtyLogger.h"
-#include "entity/Actor.h"
 #include "SymHook.h"
 #include "lib/mod.h"
 

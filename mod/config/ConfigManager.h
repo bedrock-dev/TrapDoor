@@ -19,15 +19,20 @@ namespace mod {
 
     class ConfigManager : public noncopyable {
     public:
-        //命令配置选项
+        //命令配置选项结构体
+        struct FunctionEnableConfig {
+            bool hopperCounter = true; //漏斗计数器
+            bool explosion = true;  //爆炸破坏地形
+            bool spawnHelper = true; //刷怪指示器
+            bool cactusRotation = false; //仙人掌转方块
+            bool playerStat = false; //玩家行为统计
+            bool simpleDraw = true; //画圆
+        };
 
-        struct FunctionConfig {
-            bool hopperCounter = true;
-            bool explosion = true;
-            bool cactusRotation = false;
-            bool playerSelection = false;
-            bool redstoneStick = true;
-            bool lowerCommandLevel = false;
+        struct SelfEnableConfig {
+            bool enableChunkShow = true;   //区块显示
+            bool enableDistanceMeasure = true; //距离测量
+            bool enableRedstoneStick = true; //信号源提示
         };
 
         struct ParticleConfig {
@@ -45,10 +50,11 @@ namespace mod {
         std::map<std::string, trapdoor::CommandConfig> commandsConfig;
         std::set<std::string> lowerLevelVanillaCommands;
 
-        FunctionConfig functionConfig;
+        FunctionEnableConfig functionConfig;
         ParticleConfig particleConfig;
         VillageHelperConfig villageHelperConfig;
         ServerConfig serverConfig;
+        SelfEnableConfig selfEnableConfig;
 
         bool readCommandConfig();
 
@@ -56,7 +62,10 @@ namespace mod {
 
         bool readFunctionConfig();
 
+        bool readSelfConfig();
+
         bool readParticleConfig();
+
 
         bool readLowLevelVanillaCommands();
 
@@ -66,11 +75,11 @@ namespace mod {
 
     public:
 
-        const FunctionConfig &getFunctionConfig();
+        inline const FunctionEnableConfig &getFunctionConfig() { return this->functionConfig; }
 
-        std::map<std::string, trapdoor::CommandConfig> &getCommandsConfig();
+        inline std::map<std::string, trapdoor::CommandConfig> &getCommandsConfig() { return this->commandsConfig; }
 
-        const ParticleConfig &getParticleConfig();
+        inline const ParticleConfig &getParticleConfig() { return this->particleConfig; }
 
         bool initialize(const std::string &configFileName);
 
@@ -82,6 +91,7 @@ namespace mod {
 
         inline const ServerConfig &getServerConfig() const { return this->serverConfig; }
 
+        inline const SelfEnableConfig &getSelfEnbaleConfig() const { return this->selfEnableConfig; }
     };
 }
 

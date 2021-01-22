@@ -41,35 +41,6 @@ namespace trapdoor {
         //获取方块对象
         Block *getBlock();
     };
-
-/*
- * 红石组件接口
- */
-    class BaseCircuitComponent {
-    public:
-        int getStrength();
-
-        int getVar2();
-
-        int getPowerCount();
-
-        int getAcceptHalfPulse();
-
-        int getHalfPulse();
-
-        void basePrint();
-
-        void printRepeater();
-
-        void printTorch(BlockPos blockPos);
-    };
-
-    //红石电路图组件
-    class CircuitSceneGraph {
-    public:
-        BaseCircuitComponent *getBaseCircuitComponent(BlockPos *pos);
-    };
-
 }
 typedef trapdoor::Block Block;
 typedef trapdoor::BlockActor BlockActor;
