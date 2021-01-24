@@ -64,6 +64,7 @@ namespace mod {
                    name.find("glazed_terracotta") != std::string::npos) {
             auto newState = (variant % 8 + 1) % 6 + (variant / 8) * 8;
             auto newBlock = block->getLegacy()->tryGetStateBlock(newState);
+            //blockSource->setBlock(&pos, blockSource->getBlock(pos + trapdoor::BlockPos(0, 1, 0)));
             blockSource->setBlock(&pos, newBlock);
         } else if (name.find("rail") != std::string::npos) {
             auto newState = (variant + 1) % 10;
@@ -100,17 +101,5 @@ namespace mod {
             auto newBlock = block->getLegacy()->tryGetStateBlock(newState);
             blockSource->setBlock(&pos, newBlock);
         }
-
-        //在这里根据不同的方块进行不同的旋转操作
-        /**
-         * if(name == "**slab")
-         * this.rotatSlab(); //参数转发过去
-         */
-
-        //下面是一个改变状态的例子
-        //        auto newState = (variant + 1) % 16;
-        //        auto newBlock =
-        //        block->getLegacy()->tryGetStateBlock(newState);
-        //        blockSource->setBlock(&pos, newBlock);
     }
 }  // namespace mod
