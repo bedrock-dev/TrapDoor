@@ -32,7 +32,7 @@ namespace trapdoor {
 //向日志里面打印信息
 //如果是开发者模式就打印所有日志，无视日志等级
     void logInfo(LOG_LEVEL level, const char *functionName, const char *fmt, ...) {
-  //      if (logLevel > level && !devMode) return;
+        if (logLevel > level && !devMode) return;
         switch (level) {
             case LOG_LEVEL::LOG_DEBUG:
                 setColor(10); //green
@@ -54,29 +54,29 @@ namespace trapdoor {
         time_t rawTime;
         time(&rawTime);
         struct tm *t = localtime(&rawTime);
-      //  fprintf(logger, "[%.2d-%.2d %.2d:%.2d:%.2d]", t->tm_mon + 1, t->tm_mday, t->tm_hour, t->tm_min, t->tm_sec);
-//        switch (logLevel) {
-//            case LOG_LEVEL::LOG_ERROR:
-//                fprintf(logger, "[ERROR] ");
-//                break;
-//            case LOG_LEVEL::LOG_DEBUG:
-//                fprintf(logger, "[DEBUG] ");
-//                break;
-//            case LOG_LEVEL::LOG_INFO:
-//                fprintf(logger, "[INFO] ");
-//                break;
-//            case LOG_LEVEL::LOG_WARNING:
-//                fprintf(logger, "[WARN] ");
-//                break;
-//            case LOG_LEVEL::NO_LOG:
-//                break;
-//        }
+        fprintf(logger, "[%.2d-%.2d %.2d:%.2d:%.2d]", t->tm_mon + 1, t->tm_mday, t->tm_hour, t->tm_min, t->tm_sec);
+        switch (logLevel) {
+            case LOG_LEVEL::LOG_ERROR:
+                fprintf(logger, "[ERROR] ");
+                break;
+            case LOG_LEVEL::LOG_DEBUG:
+                fprintf(logger, "[DEBUG] ");
+                break;
+            case LOG_LEVEL::LOG_INFO:
+                fprintf(logger, "[INFO] ");
+                break;
+            case LOG_LEVEL::LOG_WARNING:
+                fprintf(logger, "[WARN] ");
+                break;
+            case LOG_LEVEL::NO_LOG:
+                break;
+        }
 
         fprintf(logger, "(%s) ", functionName);
         //输出到桌面(桌面输出不需要输出时间和函数名称)
-//        vfprintf(stdout, fmt, args);
-//        fprintf(stdout, "\n");
-//        fflush(stdout);
+        vfprintf(stdout, fmt, args);
+        fprintf(stdout, "\n");
+        fflush(stdout);
         //输出到日志文件
         vfprintf(logger, fmt, args);
         fprintf(logger, "\n");
@@ -88,7 +88,7 @@ namespace trapdoor {
     }
 
     void setDevMode(bool useDevMode) {
-            devMode = useDevMode;
+        devMode = useDevMode;
     }
 }
 
