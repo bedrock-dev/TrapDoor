@@ -15,6 +15,7 @@
 #include "function/BackupHelper.h"
 #include "os/process_stat.h"
 #include "tools/MsgBuilder.h"
+#include "block/Block.h"
 
 namespace mod {
     void TrapdoorMod::heavyTick() {
@@ -132,6 +133,12 @@ namespace mod {
                           broadcastMsg("设置玩家[%s]为观察者模式", player->getNameTag().c_str());
                       });
 
+//        commandManager.registerCmd("o", "test")
+//                ->then(ARG("s", "cc", INT, {
+//                    player->setGameMode(holder->getInt());
+//                    broadcastMsg("设置玩家[%s]为模式 %d", player->getNameTag().c_str(), holder->getInt());
+//                }));
+
         commandManager.registerCmd("s", "切换到生存模式")
                 ->EXE({
                           player->setGameMode(0);
@@ -143,6 +150,7 @@ namespace mod {
                           player->setGameMode(1);
                           broadcastMsg("设置玩家[%s]为创造者模式", player->getNameTag().c_str());
                       });
+
 
 //村庄
         commandManager.registerCmd("village", "村庄相关功能")
@@ -268,7 +276,6 @@ namespace mod {
                     this->playerFunctions.setRedstoneHelperAble(player->getNameTag(), holder->getBool());
                     info(player, "设置你的信号源提示开启/关闭 %d", holder->getBool());
                 }))
-
                 ->EXE({ PlayerFunction::printInfo(player); });
 
         commandManager.registerCmd("os", "显示服务器信息")

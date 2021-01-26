@@ -7,6 +7,7 @@
 #include "lib/mod.h"
 #include "lib/SymHook.h"
 #include "block/BlockLegacy.h"
+#include "tools/DirtyLogger.h"
 
 namespace trapdoor {
     using namespace SymHook;
@@ -44,9 +45,6 @@ namespace trapdoor {
     }
 
 
-
-
-
     //获取方块实体的位置
     BlockPos *BlockActor::getPosition() {
         return reinterpret_cast<BlockPos *>(reinterpret_cast<VA>(this) + 44);
@@ -57,4 +55,28 @@ namespace trapdoor {
     Block *BlockActor::getBlock() {
         return *reinterpret_cast<Block **>(reinterpret_cast<VA>(this) + 16);
     }
+
+    Block *BlockPalette::getBlock(unsigned int type) {
+        return SYM_CALL(
+                trapdoor::Block*(*)(trapdoor::BlockPalette * , unsigned int *),
+                SymHook::MSSYM_B1QA8getBlockB1AE12BlockPaletteB2AAE13QEBAAEBVBlockB2AAA4AEBIB1AA1Z,
+                this,
+                &type
+        );
+    }
+}
+
+using namespace SymHook;
+
+THook(
+        void,
+        MSSYM_B1QA8getBlockB1AE12BlockPaletteB2AAE13QEBAAEBVBlockB2AAA4AEBIB1AA1Z,
+        trapdoor::BlockPalette *palette,
+        size_t * id
+) {
+    if (trapdoor::bdsMod && !trapdoor::bdsMod->getPalette()) {
+        trapdoor::bdsMod->setBlockPalette(palette);
+        L_INFO("set block palette");
+    }
+    original(palette, id);
 }

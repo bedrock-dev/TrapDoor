@@ -6,7 +6,7 @@
 #define TRAPDOOR_LEVEL_H
 
 #include <vector>
-
+#include "block/Block.h"
 #include <cstdio>
 #include <functional>
 
@@ -18,6 +18,9 @@ namespace trapdoor {
     class Actor;
 
     class ActorUniqueID;
+
+
+
 
     class Tick {
     public:
@@ -38,6 +41,9 @@ namespace trapdoor {
     };
 
     class Level {
+    private:
+        BlockPalette *getGlobalPalette();
+
     public:
         Level() = delete;
 

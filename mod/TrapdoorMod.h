@@ -44,6 +44,8 @@ namespace mod {
 
     public:
         ModInfo modeInfo;
+
+
     public:
         static void printCopyRightInfo();
 
