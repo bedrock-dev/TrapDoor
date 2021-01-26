@@ -13,13 +13,11 @@
 
 namespace trapdoor {
 //注册命令
-    using namespace SymHook;
-
 // 调用下面的hook函数来吧自定义字符串和提示信息当作参数注入到游戏中
 // 注释这个函数一级指令就没提示了
     void
     regMCBECommand(const std::string &command, const char *description, CommandPermissionLevel level, bool noCheat) {
-
+        using namespace SymHook;
         if (!trapdoor::bdsMod) {
             L_ERROR("get a nullptr of trapdoor::mod");
             return;
@@ -38,6 +36,8 @@ namespace trapdoor {
         );
     }
 }
+
+
 //? hook: 命令注册过程，服务器的命令注册和命令执行是分开的，二者并不绑定，因此可以直接调用这个函数来获得基本的命令提示
 using namespace SymHook;
 
@@ -51,7 +51,7 @@ THook(
         trapdoor::CommandFlag1 flag1,
         trapdoor::CommandFlag2 flag2
 ) {
-
+    //这里是重新定义权限等级的，可以降低命令等级到游戏内执行
     auto newLevel = trapdoor::bdsMod->resetVanillaCommandLevel(name, level);
     original(commandRegistry, name, str, newLevel, flag1, flag2);
     //没有创建模组实例
@@ -67,9 +67,6 @@ THook(
     }
 }
 
-
-
-
 //这个函数用来处理BDS中的命令发送数据包,也就是命令接口
 THook(
         void,
@@ -79,6 +76,7 @@ THook(
         void * commandPacket
 ) {
 
+    //找到发送命令的玩家
     trapdoor::Actor *source = nullptr;
     trapdoor::bdsMod->getLevel()->forEachPlayer([&id, &source](trapdoor::Actor *player) {
         if (player->getClientID()->getHash() == id->getHash()) {
@@ -87,6 +85,8 @@ THook(
         }
     });
 
+
+    //找不到就直接返回
     if (!source) {
         L_DEBUG("can't not find valid player");
         original(handler, id, commandPacket);
@@ -102,7 +102,7 @@ THook(
         //解析命令
         commandManager.parse(source, *commandString);
     } else {
-        //转发给原版
+        //不是trapdoor的命令，转发给原版
         original(handler, id, commandPacket);
     }
 }

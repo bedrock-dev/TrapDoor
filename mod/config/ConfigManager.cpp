@@ -13,7 +13,6 @@
 namespace mod {
     namespace {
 
-
         trapdoor::GRAPHIC_COLOR str2color(std::string &color) {
             if (color == "red") {
                 return GRAPH_COLOR::RED;
@@ -29,14 +28,14 @@ namespace mod {
     }
 
     bool ConfigManager::initialize(const std::string &configFileName) {
-        L_INFO("init config");
+        L_INFO("begin read config file %s", configFileName.c_str());
         if (!this->readConfigFile(configFileName))return false;
         if (!this->readCommandConfig())return false;
         if (!this->readLowLevelVanillaCommands())return false;
         if (!this->readServerConfig())return false;
         if (!this->readVillageConfig())return false;
-//        if (!this->readFunctionConfig())return false;
-//        if (!this->readParticleConfig())return false;
+        if (!this->readFunctionConfig())return false;
+        if (!this->readSelfConfig())return false;
         this->printAllConfig();
         return true;
     }
@@ -55,26 +54,26 @@ namespace mod {
                 // tempConfig.needCheat = value["needCheat"].get<bool>();
                 this->commandsConfig.insert({i.key(), tempConfig});
             }
+
+            for (const auto &item:this->commandsConfig) {
+                L_INFO(" - %-10s enable:%d  level:%d", item.first.c_str(),
+                       item.second.enable,
+                       item.second.permissionLevel
+                );
+            }
+            L_INFO("read command permission info successfully\n");
         } catch (const std::exception &e) {
-            L_ERROR("%s", e.what());
+            L_ERROR("error read command config : %s", e.what());
             return false;
         }
         return true;
-    }
-
-    const ConfigManager::FunctionConfig &ConfigManager::getFunctionConfig() {
-        return this->functionConfig;
-    }
-
-    std::map<std::string, trapdoor::CommandConfig> &ConfigManager::getCommandsConfig() {
-        return this->commandsConfig;
     }
 
     bool ConfigManager::readConfigFile(const std::string &configFileName) {
         try {
             std::ifstream i(configFileName);
             i >> this->configJson;
-            L_INFO("read config file %s successfully", configFileName.c_str());
+            L_INFO("read config file %s successfully\n", configFileName.c_str());
             return true;
         } catch (std::exception &e) {
             L_ERROR("can not read config file %s ", configFileName.c_str());
@@ -84,16 +83,19 @@ namespace mod {
 
 
     bool ConfigManager::readFunctionConfig() {
+        L_INFO("begin read function config");
         try {
-            auto funcConfig = this->configJson["function"];
-            this->functionConfig.cactusRotation = funcConfig["cactusRotation"].get<bool>();
-            this->functionConfig.explosion = funcConfig["explosion"].get<bool>();
+            auto funcConfig = this->configJson["functionsEnable"];
             this->functionConfig.hopperCounter = funcConfig["hopperCounter"].get<bool>();
-            this->functionConfig.playerSelection = funcConfig["playerSelection"].get<bool>();
-            this->functionConfig.redstoneStick = funcConfig["redstoneStick"].get<bool>();
-            this->functionConfig.lowerCommandLevel = funcConfig["lowerCommandLevel"].get<bool>();
+            this->functionConfig.explosion = funcConfig["explosion"].get<bool>();
+            this->functionConfig.spawnHelper = funcConfig["spawnHelper"].get<bool>();
+            this->functionConfig.cactusRotation = funcConfig["cactusRotate"].get<bool>();
+            this->functionConfig.simpleDraw = funcConfig["simpleDraw"].get<bool>();
+            this->functionConfig.playerStat = funcConfig["playerStat"].get<bool>();
+
+            L_INFO("read function config successfully\n");
         } catch (std::exception &e) {
-            L_ERROR("%s", e.what());
+            L_ERROR("can not read function config： %s", e.what());
             return false;
         }
         return true;
@@ -125,15 +127,9 @@ namespace mod {
 
 
     void ConfigManager::printAllConfig() const {
-        L_INFO("here are the all low level commands:");
-        for (const auto &item:this->lowerLevelVanillaCommands) {
-            L_INFO("%s", item.c_str());
-        }
+
     }
 
-    const ConfigManager::ParticleConfig &ConfigManager::getParticleConfig() {
-        return this->particleConfig;
-    }
 
     bool ConfigManager::readLowLevelVanillaCommands() {
         L_INFO("begin read low level vanilla command info");
@@ -142,8 +138,13 @@ namespace mod {
             for (const auto &i:lowLevelVanillaCommandsConfig) {
                 this->lowerLevelVanillaCommands.insert(i.get<std::string>());
             }
+            L_INFO("here are the all low level commands:");
+            for (const auto &item:this->lowerLevelVanillaCommands) {
+                L_INFO("- %s", item.c_str());
+            }
+            L_INFO("read low level vanilla commands successfully\n");
         } catch (std::exception &e) {
-            L_ERROR("%s", e.what());
+            L_ERROR("error read low level vanilla command info : %s", e.what());
             return false;
         }
         return true;
@@ -155,9 +156,9 @@ namespace mod {
             auto config = this->configJson["server"];
             //以后可能会有其它配置项
             this->serverConfig.levelName = config["levelName"].get<std::string>();
-            L_INFO("read level name  as :%s", serverConfig.levelName.c_str());
+            L_INFO(" - levelMame : %s\nread server info successfully\n", serverConfig.levelName.c_str());
         } catch (std::exception &e) {
-            L_ERROR("%s", e.what());
+            L_ERROR("can not read server config : %s", e.what());
             return false;
         }
         return true;
@@ -178,14 +179,30 @@ namespace mod {
                     str2color(poiQuery),
                     centerParticle
             };
-            L_INFO("bound color: %s, spawn color: %s, poiQueryColor: %s,center:%s",
+            L_INFO(" - bound color: %s\n - spawn color: %s\n - poiQueryColor: %s\n - center:%s",
                    boundColor.c_str(),
                    spawnColor.c_str(),
                    poiQuery.c_str(),
                    centerParticle.c_str()
             );
+            L_INFO("read village color successfully\n");
         } catch (std::exception &e) {
-            L_ERROR("%s", e.what());
+            L_ERROR("can not read village config : %s", e.what());
+            return false;
+        }
+        return true;
+    }
+
+    bool ConfigManager::readSelfConfig() {
+        L_INFO("begin read self command config");
+        try {
+            auto funcConfig = this->configJson["selfEnable"];
+            this->selfEnableConfig.enableChunkShow = funcConfig["chunkShow"].get<bool>();
+            this->selfEnableConfig.enableDistanceMeasure = funcConfig["distanceMeasure"].get<bool>();
+            this->selfEnableConfig.enableRedstoneStick = funcConfig["redstoneStick"].get<bool>();
+            L_INFO("read self command config successfully\n");
+        } catch (std::exception &e) {
+            L_ERROR("can not read self config: %s", e.what());
             return false;
         }
         return true;

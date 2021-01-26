@@ -88,6 +88,10 @@ namespace trapdoor {
         return this->x * pos.x + this->y * pos.y + this->z * pos.z;
     }
 
+    BlockPos BlockPos::operator+(const BlockPos &pos) const {
+        return {x + pos.x, y + pos.y, z + pos.z};
+    }
+
 
     std::string BlockPos2::toString() const {
         return "["

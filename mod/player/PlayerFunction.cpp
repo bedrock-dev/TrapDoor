@@ -11,6 +11,8 @@
 #include "tools/Message.h"
 #include "tools/MsgBuilder.h"
 #include "world/Biome.h"
+#include "block/CircuitComponent.h"
+#include "world/Dimension.h"
 
 namespace mod {
     void PlayerFunction::tick() {
@@ -72,6 +74,17 @@ namespace mod {
                 .send(player);
     }
 
+    void PlayerFunction::printRedstoneInfo(trapdoor::Actor *player, BlockPos &pos) {
+        if (!this->enableRedstoneHelper[player->getNameTag()])return;
+        auto graph = player->getDimension()->getGraph();
+        auto component = graph->getBaseCircuitComponent(&pos);
+        if (!component) {
+            trapdoor::warning(player, "这不是一个红石原件");
+            return;
+        }
+        component->basePrint(graph, player);
+    }
+
     void MeasureData::setPosition2(const BlockPos &pos, trapdoor::Actor *player) {
         if (!this->enableMeasure)return;
         this->pos2 = pos;
@@ -104,5 +117,7 @@ namespace mod {
                     .num(distance3).text(" ").num(distance4).send(player);
         }
     }
+
+
 }
 

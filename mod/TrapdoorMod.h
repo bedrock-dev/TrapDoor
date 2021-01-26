@@ -22,7 +22,7 @@ namespace mod {
 
     struct ModInfo {
         const std::string minecraftVersion = "1.16.4.02";
-        const std::string modVersion = "trapdoor-0.9.12";
+        const std::string modVersion = "trapdoor-0.9.20";
     };
 
     class TrapdoorMod : public trapdoor::BDSMod {
@@ -44,6 +44,8 @@ namespace mod {
 
     public:
         ModInfo modeInfo;
+
+
     public:
         static void printCopyRightInfo();
 
@@ -64,10 +66,10 @@ namespace mod {
         void lightTick();
 
         inline void readConfigFile(const std::string &configFileName) {
-            this->configManager.initialize("trapdoor-config.json");
+            this->configManager.initialize(configFileName);
         }
 
-        bool attackEntityHook(Actor *entity1, Actor *entit2) override;
+        bool attackEntityHook(Actor *entity1, Actor *entity2) override;
 
         //get functions
         inline HopperChannelManager &getHopperChannelManager() { return this->hopperChannelManager; }
@@ -81,7 +83,6 @@ namespace mod {
         inline PlayerStatisticManager &getPlayerStatisticManager() { return this->playerStatisticManager; }
 
         inline std::string getLevelName() { return this->configManager.getServerConfig().levelName; }
-
 
 
     };

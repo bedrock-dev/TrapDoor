@@ -9,6 +9,7 @@
 #include "lib/mod.h"
 #include "lib/SymHook.h"
 #include "tools/DirtyLogger.h"
+#include "Block.h"
 
 namespace trapdoor {
     using namespace SymHook;
@@ -71,4 +72,18 @@ namespace trapdoor {
                 this, id, b
         );
     }
+
+    uint64_t Level::getGameTick() {
+        return *SYM_CALL(uint64_t*(*)(Level * ),
+                         MSSYM_B1QE14getCurrentTickB1AA5LevelB2AAE12QEBAAEBUTickB2AAA2XZ, this);
+    }
+
+    BlockPalette *Level::getGlobalPalette() {
+        //from EnderMan::getCarryingBlock
+        //*(v5 + 2000)
+        auto p = *(BlockPalette **) ((char *) (this) + 250);
+        printf("%p %p\n", p, &p);
+        return nullptr;
+    }
+
 }

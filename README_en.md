@@ -1,22 +1,21 @@
 ![](img/logo.png)
-简体中文 |[English](./README_en.md)
+[简体中文] (./README.md)|English
 
-## 这是什么
+## What's this
 
-Trapdoor是一个为 Minecraft Bedrock Edition 服务的，基于原版服务端(BDS)的，致力于为原版玩家探索游戏机制服务的插件(或者mod)
-,该插件的功能很大程度上参考了JE的[carpet](https://github.com/gnembon/fabric-carpet) 模组。
+Trapdoor is a dll plugin(mod) used for BDS,which porvides rich functions for survival players.It's similar to je's carpet mod.
 
-## 安装和使用教程
+## Install & Usage
 
-[Trapdoor Wiki](https://github.com/hhhxiao/TrapDoor/wiki)
+[Chinese Trapdoor Wiki](https://github.com/hhhxiao/TrapDoor/wiki)
 
 ## Credits
 
 ### Minecraft
 
-感谢`mojang`提供的[Minecraft](https://www.minecraft.net/zh-hans)游戏
+[Minecraft](https://www.minecraft.net/zh-hans)
 
-### 第三方库或者代码
+### 3rd-party libs or codes
 
 - [https://github.com/microsoft/Detours](https://github.com/microsoft/Detours)
 
@@ -30,13 +29,13 @@ Trapdoor是一个为 Minecraft Bedrock Edition 服务的，基于原版服务端
 
 - [https://github.com/progschj/ThreadPool](https://github.com/progschj/ThreadPool)
 
-### 特别感谢
+### Special
 
-提供可读性极强的BDS源码的Player
+Special thanks to Player for providing readable source code
 
-### 玩家
+### Players
 
-感谢下面的玩家提供的优秀建议与反馈的bug:
+thanks for  the follow game players who make suggestions and feedback bugs:
 
 - 木月酸与云龙碱
 - 莵道三室戸
@@ -47,7 +46,7 @@ Trapdoor是一个为 Minecraft Bedrock Edition 服务的，基于原版服务端
 - OEOTYAN
 - Origin 0110
 
-## 代码贡献者
+## Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->

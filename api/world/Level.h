@@ -6,7 +6,7 @@
 #define TRAPDOOR_LEVEL_H
 
 #include <vector>
-
+#include "block/Block.h"
 #include <cstdio>
 #include <functional>
 
@@ -19,7 +19,31 @@ namespace trapdoor {
 
     class ActorUniqueID;
 
+
+
+
+    class Tick {
+    public:
+        uint64_t tick;
+
+        uint64_t operator%(size_t num) const { return tick % num; }
+
+        bool operator<(const Tick &rhs) const {
+            return tick < rhs.tick;
+        }
+
+        inline uint64_t getTimeStamp() const { return this->tick; }
+
+        bool operator==(const Tick &rhs) const {
+            return tick == rhs.tick;
+        }
+
+    };
+
     class Level {
+    private:
+        BlockPalette *getGlobalPalette();
+
     public:
         Level() = delete;
 
@@ -35,6 +59,9 @@ namespace trapdoor {
         Dimension *getDimFromID(int id);
 
         Actor *fetchEntity(const trapdoor::ActorUniqueID &id, bool b);
+
+
+        uint64_t getGameTick();
     };
 }
 

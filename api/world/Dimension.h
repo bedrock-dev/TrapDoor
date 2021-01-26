@@ -5,6 +5,8 @@
 #ifndef TRAPDOOR_DIMENSION_H
 #define TRAPDOOR_DIMENSION_H
 
+#include "block/CircuitComponent.h"
+
 namespace trapdoor {
 
     enum DimensionType {
@@ -16,7 +18,11 @@ namespace trapdoor {
     class Dimension {
     public:
         void printBaseTypeLimit();
+
+        CircuitSceneGraph *getGraph();
     };
+
+
 }
 
 #endif //TRAPDOOR_DIMENSION_H

@@ -19,23 +19,6 @@
 #include "tools/noncopyable .h"
 
 namespace trapdoor {
-    class Tick {
-    public:
-        uint64_t tick;
-
-        uint64_t operator%(size_t num) const { return tick % num; }
-
-        bool operator<(const Tick &rhs) const {
-            return tick < rhs.tick;
-        }
-
-        size_t getTimeStamp() { return this->tick; }
-
-        bool operator==(const Tick &rhs) const {
-            return tick == rhs.tick;
-        }
-
-    };
 
 
     class BDSMod : public noncopyable {
@@ -52,11 +35,16 @@ namespace trapdoor {
         std::map<std::string, PlayerBuffer> playerCache;
         ThreadPool *threadPool = nullptr;
         ModConfig config;
+        BlockPalette *palette;
     public:
 
         Level *getLevel();
 
+        inline BlockPalette *getPalette() { return this->palette; }
+
         void setLevel(Level *level);
+
+        inline void setBlockPalette(BlockPalette *p) { this->palette = p; }
 
         CommandRegistry *getCommandRegistry();
 

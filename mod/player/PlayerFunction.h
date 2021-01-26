@@ -10,6 +10,9 @@
 #include "entity/Actor.h"
 #include "tools/noncopyable .h"
 #include "graphics/BlockPos.h"
+#include "block/BlockSource.h"
+#include "block/CircuitComponent.h"
+#include "world/Dimension.h"
 
 namespace mod {
     struct MeasureData {
@@ -28,6 +31,7 @@ namespace mod {
 
     class PlayerFunction : noncopyable {
         std::map<std::string, bool> enableShowChunk;
+        std::map<std::string, bool> enableRedstoneHelper;
         std::map<std::string, MeasureData> playerMeasureData;
         unsigned long long gameTick = 0;
 
@@ -36,12 +40,19 @@ namespace mod {
     public:
         inline void setShowChunkAble(const std::string &playerName, bool able) { enableShowChunk[playerName] = able; }
 
+        inline void
+        setRedstoneHelperAble(const std::string &playerName, bool able) { enableRedstoneHelper[playerName] = able; }
+
         MeasureData &getMeasureData(const std::string &playerName) { return playerMeasureData[playerName]; }
 
         void tick();
 
         static void printInfo(trapdoor::Actor *player);
+
+        void printRedstoneInfo(trapdoor::Actor *player, trapdoor::BlockPos &pos);
+
     };
+
 
 }
 

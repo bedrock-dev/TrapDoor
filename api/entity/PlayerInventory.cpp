@@ -77,6 +77,7 @@ namespace trapdoor {
                             this
         );
         //这个api是有问题的
+        //return 0;
         return *(int *) (ptr + 4);
     }
 

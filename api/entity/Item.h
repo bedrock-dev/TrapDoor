@@ -8,6 +8,7 @@
 
 #include <string>
 
+#include "Block.h"
 
 namespace trapdoor {
     struct ItemStackBase {
@@ -16,6 +17,7 @@ namespace trapdoor {
         int getNum();
 
         void setNull();
+
     };
 }
 
