@@ -15,6 +15,16 @@
   <component name="ChangeListManager">
     <list default="true" id="3eb519fb-7465-437d-86d7-42a97e7c56eb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/block/Block.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/block/Block.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/block/Block.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/block/Block.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/block/CircuitComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/block/CircuitComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/lib/SymHook.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/lib/SymHook.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/world/Dimension.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/world/Dimension.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/world/Level.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/world/Level.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/TrapdoorMod.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/TrapdoorMod.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/TrapdoorMod.h" beforeDir="false" afterPath="$PROJECT_DIR$/mod/TrapdoorMod.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/spawn/SpawnHelper.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/spawn/SpawnHelper.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/village/POIInstance.h" beforeDir="false" afterPath="$PROJECT_DIR$/mod/village/POIInstance.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +35,9 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release" />
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="1.16.4" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -41,7 +54,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="add_unversioned_files" value="$PROJECT_DIR$/version/symbol-1164.txt" />
+    <property name="add_unversioned_files" value="$PROJECT_DIR$/version/symbol-1164.txt&#10;C:/Users/xhy/dev/TrapDoor/version/symbol-116201.txt" />
     <property name="cf.first.check.clang-format" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
@@ -52,9 +65,9 @@
     </key>
   </component>
   <component name="RunManager" selected="CMake Application.trapdoor-mod">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="trapDoorAPI" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="mod" TARGET_NAME="trapDoorAPI" CONFIG_NAME="Debug">
@@ -86,6 +99,7 @@
       <workItem from="1610503943412" duration="5072000" />
       <workItem from="1610590311798" duration="553000" />
       <workItem from="1610590886592" duration="2628000" />
+      <workItem from="1611715278738" duration="4571000" />
     </task>
     <servers />
   </component>

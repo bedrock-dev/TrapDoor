@@ -41,6 +41,7 @@ namespace mod {
 
         void registerTickCommand();
 
+        void initFunctionEnable();
 
     public:
         ModInfo modeInfo;

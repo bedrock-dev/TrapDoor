@@ -75,14 +75,15 @@ namespace trapdoor {
 
     uint64_t Level::getGameTick() {
         return *SYM_CALL(uint64_t*(*)(Level * ),
-                         MSSYM_B1QE14getCurrentTickB1AA5LevelB2AAE12QEBAAEBUTickB2AAA2XZ, this);
+                         MSSYM_B1QE20getCurrentServerTickB1AA5LevelB2AAA4UEBAB1QA6BUTickB2AAA2XZ, this);
     }
 
     BlockPalette *Level::getGlobalPalette() {
+        //todo
         //from EnderMan::getCarryingBlock
         //*(v5 + 2000)
-        auto p = *(BlockPalette **) ((char *) (this) + 250);
-        printf("%p %p\n", p, &p);
+//        auto p = *(BlockPalette **) ((char *) (this) + 250);
+//        printf("%p %p\n", p, &p);
         return nullptr;
     }
 

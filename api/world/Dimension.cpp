@@ -21,7 +21,7 @@ namespace trapdoor {
     CircuitSceneGraph *Dimension::getGraph() {
         //这种代码真的写的人瘆得慌
         //from Dimension::tickRedstone(Dimension *this)
-        uint64_t *circuitSystem = reinterpret_cast<uint64_t *>(this) + 33;
+        uint64_t *circuitSystem = reinterpret_cast<uint64_t *>(this) + 35;
         return reinterpret_cast<CircuitSceneGraph *> (*circuitSystem + 8);
     }
 }

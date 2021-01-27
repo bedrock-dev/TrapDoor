@@ -423,6 +423,14 @@ namespace SymHook{
 	// [符号] ?getVillageCenter@DwellerComponent@@QEBA?AVBlockPos@@AEBVActor@@@Z
 	constexpr RVA MSSYM_B1QE16getVillageCenterB1AE16DwellerComponentB2AAA4QEBAB1QE10AVBlockPosB2AAA9AEBVActorB3AAAA1Z = 0x009CE220;
 
+	// [原型] public: virtual struct Tick const __cdecl Level::getCurrentServerTick(void)const __ptr64
+	// [符号] ?getCurrentServerTick@Level@@UEBA?BUTick@@XZ
+	constexpr RVA MSSYM_B1QE20getCurrentServerTickB1AA5LevelB2AAA4UEBAB1QA6BUTickB2AAA2XZ = 0x012D4D90;
+
+	// [原型] public: class Block const & __ptr64 __cdecl BlockPalette::getBlock(unsigned int const & __ptr64)const __ptr64
+	// [符号] ?getBlock@BlockPalette@@QEBAAEBVBlock@@AEBI@Z
+	constexpr RVA MSSYM_B1QA8getBlockB1AE12BlockPaletteB2AAE13QEBAAEBVBlockB2AAA4AEBIB1AA1Z = 0x0126D7F0;
+
 }
 
 // 文件结束
