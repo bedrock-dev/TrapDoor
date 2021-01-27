@@ -13,19 +13,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3eb519fb-7465-437d-86d7-42a97e7c56eb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/block/Block.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/block/Block.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/block/Block.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/block/Block.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/block/CircuitComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/block/CircuitComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/lib/SymHook.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/lib/SymHook.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/world/Dimension.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/world/Dimension.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/world/Level.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/world/Level.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/TrapdoorMod.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/TrapdoorMod.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/TrapdoorMod.h" beforeDir="false" afterPath="$PROJECT_DIR$/mod/TrapdoorMod.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/spawn/SpawnHelper.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/spawn/SpawnHelper.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/village/POIInstance.h" beforeDir="false" afterPath="$PROJECT_DIR$/mod/village/POIInstance.h" afterDir="false" />
-    </list>
+    <list default="true" id="3eb519fb-7465-437d-86d7-42a97e7c56eb" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -99,7 +87,7 @@
       <workItem from="1610503943412" duration="5072000" />
       <workItem from="1610590311798" duration="553000" />
       <workItem from="1610590886592" duration="2628000" />
-      <workItem from="1611715278738" duration="4571000" />
+      <workItem from="1611715278738" duration="5493000" />
     </task>
     <servers />
   </component>

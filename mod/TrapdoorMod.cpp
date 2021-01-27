@@ -388,5 +388,6 @@ namespace mod {
         this->rotationHelper.setAble(functionCfg.cactusRotation);
         this->playerStatisticManager.setAble(functionCfg.playerStat);
         this->simpleBuilder.setAble(functionCfg.simpleDraw);
+        this->hopperChannelManager.setAble(functionCfg.hopperCounter);
     }
 }
