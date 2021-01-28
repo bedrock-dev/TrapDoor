@@ -21,12 +21,10 @@ namespace mod {
 
 
     namespace {
-        void buildSpawnConditions(const trapdoor::BlockPos *pos, const trapdoor::BlockSource *source) {
-
-        }
     }
 
     void SpawnHelper::tick() {
+        if (!this->enable)return;
         if (gameTick % 40 == 0) {
             this->draw();
         }
@@ -37,11 +35,11 @@ namespace mod {
         if (!this->enable)return;
         if (!verticalSpawnPositions.empty()) {
             trapdoor::BoundingBox boundingBox{verticalSpawnPositions[0], verticalSpawnPositions[0]};
-            trapdoor::spawnRectangleParticle(boundingBox.toAABB(), trapdoor::GRAPHIC_COLOR::GREEN);
+            trapdoor::spawnRectangleParticle(boundingBox.toAABB(), trapdoor::GRAPHIC_COLOR::GREEN, dimensionID);
         }
         for (auto i = 1; i < verticalSpawnPositions.size(); i++) {
             trapdoor::BoundingBox boundingBox{verticalSpawnPositions[i], verticalSpawnPositions[i]};
-            trapdoor::spawnRectangleParticle(boundingBox.toAABB(), trapdoor::GRAPHIC_COLOR::RED);
+            trapdoor::spawnRectangleParticle(boundingBox.toAABB(), trapdoor::GRAPHIC_COLOR::RED, dimensionID);
         }
     }
 
@@ -49,16 +47,20 @@ namespace mod {
         if (!this->enable)return;
         this->verticalSpawnPositions.clear();
         auto dim = player->getDimensionID();
+        this->dimensionID = dim;
         int maxY = dim != 1 ? 255 : 127;
         trapdoor::BlockPos topPos = {pos.x, maxY, pos.z};
-        while (topPos.y > 0) {
+        do {
             findNextSpawnPosition(player->getBlockSource(), &topPos, 41);
-            this->verticalSpawnPositions.emplace_back(topPos.x, topPos.y, topPos.z);
-        }
+            //   L_INFO("find pos %d %d %d", topPos.x, topPos.y, topPos.z);
+            if (topPos.y > 0)
+                this->verticalSpawnPositions.emplace_back(topPos.x, topPos.y, topPos.z);
+        } while (topPos.y > 0);
     }
 
 
-    void SpawnHelper::printSpawnProbability(trapdoor::Actor *player, const trapdoor::BlockPos &pos, uint32_t bright) {
+    void
+    SpawnHelper::printSpawnProbability(trapdoor::Actor *player, const trapdoor::BlockPos &pos, uint32_t bright) const {
         if (!this->enable)return;
         auto dim = player->getDimensionID();
         int maxY = dim != 1 ? 255 : 127;
@@ -75,7 +77,7 @@ namespace mod {
             isSurface = false;
         }
         if (!hasFound) {
-            trapdoor::warning(player, "pos %d %d %d  is not valid spawn position ", pos.x, pos.y, pos.z);
+            trapdoor::warning(player, "pos [%d %d %d]  is not valid spawn position ", pos.x, pos.y, pos.z);
             return;
         }
 
@@ -108,7 +110,6 @@ namespace mod {
         builder.text(" --\n");
         for (const auto &mob:spawnMap) {
             builder.text(mob.first).text("    ").num(mob.second * 100 / totalCount).text("%%%%\n");
-            // builder.textF("-%s     %.2f %%%%\n", mob.first.c_str(), mob.second * 100.0 / totalCount);
         }
         builder.send(player);
     }

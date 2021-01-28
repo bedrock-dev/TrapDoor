@@ -108,36 +108,35 @@ namespace mod {
 
 using namespace SymHook;
 
-THook(
-        bool,
-        MSSYM_B1QA8spawnMobB1AA7SpawnerB2AAE11QEAAPEAVMobB2AAE15AEAVBlockSourceB2AAE29AEBUActorDefinitionIdentifierB2AAA9PEAVActorB2AAA8AEBVVec3B3AAUA3N44B1AA1Z,
-        void *spawner,
-        trapdoor::BlockSource *bs,
-        trapdoor::ActorDefinitionIdentifier *actorId,
-        trapdoor::Actor *actor,
-        trapdoor::Vec3 *pos,
-        bool naturalSpawn,
-        bool surface,
-        bool fromSpawner
-) {
-    if (!naturalSpawn) {
-        return original(spawner, bs, actorId, actor, pos, naturalSpawn, surface, fromSpawner);
-    } else {
-        auto success = original(spawner, bs, actorId, actor, pos, naturalSpawn, surface, fromSpawner);
 
-        auto modInstance = trapdoor::bdsMod->asInstance<mod::TrapdoorMod>();
-        if (modInstance->getSpawnAnalyzer().isRunning()) {
-            mod::SpawnAnalyzer::MobSpawnInfo info{
-                    modInstance->getSpawnAnalyzer().getTick(),
-                    actorId->getName(),
-                    {pos->x, pos->y, pos->z},
-                    surface,
-                    success
-            };
-            modInstance->getSpawnAnalyzer().addMobData(info);
-        }
-        return success;
-    }
-}
-
+//THook(
+//        bool,
+//        MSSYM_B1QA8spawnMobB1AA7SpawnerB2AAE11QEAAPEAVMobB2AAE15AEAVBlockSourceB2AAE29AEBUActorDefinitionIdentifierB2AAA9PEAVActorB2AAA8AEBVVec3B3AAUA3N44B1AA1Z,
+//        void *spawner,
+//        trapdoor::BlockSource *bs,
+//        trapdoor::ActorDefinitionIdentifier *actorId,
+//        trapdoor::Actor *actor,
+//        trapdoor::Vec3 *pos,
+//        bool naturalSpawn,
+//        bool surface,
+//        bool fromSpawner
+//) {
+//    if (!naturalSpawn || fromSpawner) {
+//        return original(spawner, bs, actorId, actor, pos, naturalSpawn, surface, fromSpawner);
+//    } else {
+//        auto success = original(spawner, bs, actorId, actor, pos, naturalSpawn, surface, fromSpawner);
+//        auto modInstance = trapdoor::bdsMod->asInstance<mod::TrapdoorMod>();
+//        if (modInstance->getSpawnAnalyzer().isRunning()) {
+//            mod::SpawnAnalyzer::MobSpawnInfo info{
+//                    modInstance->getSpawnAnalyzer().getTick(),
+//                    actorId->getName(),
+//                    {pos->x, pos->y, pos->z},
+//                    surface,
+//                    success
+//            };
+//            modInstance->getSpawnAnalyzer().addMobData(info);
+//        }
+//        return success;
+//    }
+//}
 

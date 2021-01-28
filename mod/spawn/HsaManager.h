@@ -5,9 +5,10 @@
 #ifndef MOD_HSAMANAGER_H
 #define MOD_HSAMANAGER_H
 
-#include "graphics/AABB.h"
-#include  <set>
+#include <set>
 #include "BDSMod.h"
+#include "graphics/AABB.h"
+#include "tools/noncopyable .h"
 
 namespace mod {
     using namespace trapdoor;
@@ -18,7 +19,6 @@ namespace mod {
         NetherFortress
     };
 
-
     struct HsaInfo {
         StructureType type = PillagerOutpost;
         BoundingBox boundingBox{};
@@ -27,17 +27,25 @@ namespace mod {
         bool operator<(const HsaInfo &rhs) const;
     };
 
-
-    class HsaManager {
+    class HsaManager : noncopyable {
         bool enable;
         std::set<HsaInfo> hsaList;
-        Tick gameTick;
+        size_t gameTick;
+
     public:
         inline void insert(HsaInfo info) { this->hsaList.insert(info); }
 
         bool findHsa(const HsaInfo &hsaInfo);
 
-        inline void clear() { this->hsaList.clear(); }
+        trapdoor::BlockPos findB(trapdoor::Actor *player);
+
+        void draw(trapdoor::Actor *player);
+
+        inline int clear() {
+            int num = this->hsaList.size();
+            this->hsaList.clear();
+            return num;
+        }
 
         void list(trapdoor::Actor *player);
 
@@ -45,6 +53,6 @@ namespace mod {
 
         void tick();
     };
-}
+}  // namespace mod
 
-#endif //MOD_HSAMANAGER_H
+#endif    // MOD_HSAMANAGER_H

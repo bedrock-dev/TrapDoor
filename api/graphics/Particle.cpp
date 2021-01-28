@@ -84,10 +84,8 @@ namespace trapdoor {
     void spawnSlimeChunkParticle(const ChunkPos &p) {
         float x = static_cast<float>(p.x) * 16.0f;
         float z = static_cast<float>(p.z) * 16.0f;
-
         Vec3 p1{x + 0.01f, 0.0f, z + 8.0f};
         Vec3 p2{x + 15.99f, 0.0f, z + 8.0f};
-
         Vec3 p3{x + 8.0f, 0.0f, z + 0.01f};
         Vec3 p4{x + 8.0f, 0.0f, z + 15.99f};
         Vec3 top{x + 8.0f, 128.0f, z + 8.0f};

@@ -5,13 +5,11 @@
 #include "CommandManager.h"
 #include "tools/Message.h"
 #include "tools/DirtyLogger.h"
-#include "ArgHolder.h"
 #include "Command.h"
-#include "entity/Actor.h"
-
 
 namespace trapdoor {
     namespace {
+        //字符串转为tokens列表
         std::vector<std::string> tokenize(std::string &commandString) {
             std::vector<std::string> tokens;
             std::stringstream str(commandString);
@@ -22,19 +20,23 @@ namespace trapdoor {
         }
     }
 
+    //解析玩家命令字符串
     int CommandManager::parse(Actor *player, std::string cmd) {
         auto tokens = tokenize(cmd);
         if (tokens.empty())return -1;
         auto iter = this->commandList.find(tokens[0]);
         if (iter != commandList.end()) {
+            //这里进行权限检查
             if (!this->checkCommandPermission(tokens[0], player)) {
                 return -2;
             }
+            //检查通过转发给命令解析器
             return iter->second->parse(player, tokens, 1);
         }
         return -3;
     }
 
+    //注册命令
     CommandNode *
     CommandManager::registerCmd(const std::string &cmd, const std::string &description, CommandPermissionLevel level,
                                 ArgType type) {
@@ -46,14 +48,12 @@ namespace trapdoor {
         auto *helpNode = new CommandNode("?", "print help info");
         //打印帮助信息
         helpNode->execute([rootNode](ArgHolder *holder, Actor *player) {
-            // dbg("print help info");
             rootNode->printHelpInfo(0, player);
         });
         rootNode->then(helpNode);
         //注册命令到游戏中
         L_INFO("register command %s", cmd.c_str());
         regMCBECommand(cmd, description.c_str(), level, true);
-        // LOGF(getLogFile(), "register command [%s]\n", cmd.c_str());
         return rootNode;
     }
 
@@ -64,6 +64,7 @@ namespace trapdoor {
         return this->commandList.find(tokens[0]) != this->commandList.end();
     }
 
+//递归打印命令帮助
     void CommandManager::printfHelpInfo(Actor *actor) {
         for (const auto &cmd :this->commandList) {
             cmd.second->printHelpInfo(0, actor);
@@ -89,8 +90,8 @@ namespace trapdoor {
         auto playerLevel = static_cast<int>(player->getCommandLevel());
         auto commandLevel = static_cast<int>(cmdCfg->second.permissionLevel);
         if (playerLevel < commandLevel) {
-            L_INFO("server reject the execute of command [%s] for player %s", command.c_str(),
-                   player->getNameTag().c_str());
+            L_DEBUG("server reject the execute of command [%s] for player %s", command.c_str(),
+                    player->getNameTag().c_str());
             error(player, "你没有权限执行该命令[你的等级:%d < 命令等级:%d]", playerLevel, commandLevel);
             return false;
         }
@@ -99,15 +100,9 @@ namespace trapdoor {
 
 
     void CommandManager::setCommandConfig(std::map<std::string, CommandConfig> &cmdConfigList) {
-        //  this->commandConfigList = std::map<std::string, CommandConfig>(cmdConfigList.begin(), cmdConfigList.end());
         this->commandConfigList = cmdConfigList;
-        L_INFO("here are all the command info");
-        for (const auto &item:this->commandConfigList) {
-            L_INFO("%-10s enable:%d  level:%d", item.first.c_str(),
-                   item.second.enable,
-                   item.second.permissionLevel
-            );
-        }
+        L_INFO("set command permission info");
+
     }
 
     void CommandManager::runVanillaCommand(const std::string &command) {

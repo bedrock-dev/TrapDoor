@@ -8,9 +8,10 @@
 
 #include "graphics/BlockPos.h"
 #include "block/BlockSource.h"
+#include "tools/noncopyable .h"
 
 namespace mod {
-    class BlockRotationHelper {
+    class BlockRotationHelper : noncopyable {
         bool enable = false;
 
     public:
@@ -22,6 +23,5 @@ namespace mod {
 
     };
 }
-
 
 #endif //MOD_BLOCKROTATIONHELPER_H

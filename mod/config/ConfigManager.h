@@ -9,30 +9,30 @@
 #include <fstream>
 #include "tools/DirtyLogger.h"
 #include "commands/CommandManager.h"
+#include "tools/noncopyable .h"
 #include <map>
+#include <set>
+#include "Village.h"
 
-
-
-/*
- * todo
- * 开发中，请无视
- *
- *
- */
 namespace mod {
     using json = nlohmann::json;
 
-    class ConfigManager {
+    class ConfigManager : public noncopyable {
     public:
-        //命令配置选项
+        //命令配置选项结构体
+        struct FunctionEnableConfig {
+            bool hopperCounter = true; //漏斗计数器
+            bool explosion = true;  //爆炸破坏地形
+            bool spawnHelper = true; //刷怪指示器
+            bool cactusRotation = false; //仙人掌转方块
+            bool playerStat = false; //玩家行为统计
+            bool simpleDraw = true; //画圆
+        };
 
-        struct FunctionConfig {
-            bool hopperCounter = true;
-            bool explosion = true;
-            bool cactusRotation = false;
-            bool playerSelection = false;
-            bool redstoneStick = true;
-            bool lowerCommandLevel = false;
+        struct SelfEnableConfig {
+            bool enableChunkShow = true;   //区块显示
+            bool enableDistanceMeasure = true; //距离测量
+            bool enableRedstoneStick = true; //信号源提示
         };
 
         struct ParticleConfig {
@@ -41,12 +41,20 @@ namespace mod {
             bool performanceMode = false;
         };
 
+        struct ServerConfig {
+            std::string levelName;
+        };
     private:
 
         json configJson;
         std::map<std::string, trapdoor::CommandConfig> commandsConfig;
-        FunctionConfig functionConfig;
+        std::set<std::string> lowerLevelVanillaCommands;
+
+        FunctionEnableConfig functionConfig;
         ParticleConfig particleConfig;
+        VillageHelperConfig villageHelperConfig;
+        ServerConfig serverConfig;
+        SelfEnableConfig selfEnableConfig;
 
         bool readCommandConfig();
 
@@ -54,21 +62,36 @@ namespace mod {
 
         bool readFunctionConfig();
 
+        bool readSelfConfig();
+
         bool readParticleConfig();
+
+
+        bool readLowLevelVanillaCommands();
+
+        bool readServerConfig();
+
+        bool readVillageConfig();
 
     public:
 
-        const FunctionConfig &getFunctionConfig();
+        inline const FunctionEnableConfig &getFunctionConfig() { return this->functionConfig; }
 
-        std::map<std::string, trapdoor::CommandConfig> &getCommandsConfig();
+        inline std::map<std::string, trapdoor::CommandConfig> &getCommandsConfig() { return this->commandsConfig; }
 
-        const ParticleConfig &getParticleConfig();
+        inline const ParticleConfig &getParticleConfig() { return this->particleConfig; }
 
-
-        bool initialize(const std::string &configFIleName);
+        bool initialize(const std::string &configFileName);
 
         void printAllConfig() const;
 
+        inline const std::set<std::string> &getLowLevelCommands() const { return this->lowerLevelVanillaCommands; }
+
+        inline const VillageHelperConfig &getVillageConfig() const { return this->villageHelperConfig; }
+
+        inline const ServerConfig &getServerConfig() const { return this->serverConfig; }
+
+        inline const SelfEnableConfig &getSelfEnableConfig() const { return this->selfEnableConfig; }
     };
 }
 

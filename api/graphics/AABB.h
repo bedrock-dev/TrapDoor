@@ -51,9 +51,8 @@ namespace trapdoor {
                 return false;
             return maxPos < rhs.maxPos;
         }
-
-
     };
 }
-
+typedef trapdoor::AABB AABB;
+typedef trapdoor::BoundingBox BoundingBox;
 #endif    // TRAPDOOR_AABB_H

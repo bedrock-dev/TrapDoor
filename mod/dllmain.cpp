@@ -1,12 +1,13 @@
-// dllmain.cpp : 定义 DLL 应用程序的入口点。
 #include <Windows.h>
 #include "tools/DirtyLogger.h"
 #include "BDSMod.h"
 #include "TrapdoorMod.h"
 
 
+/*
+ * 设置所有输出为utf8,设置支持彩色输出
+ */
 void initConsole() {
-    //support uft8
     system("chcp 65001");
     //enable colorful output
     HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -21,17 +22,18 @@ trapdoor::BDSMod *createBDSModInstance() {
     return new mod::TrapdoorMod();
 }
 
+//dll注入初始化
 void mod_init() {
     initConsole();
-    // trapdoor::initLogger("trapdoor.log", false, true, true);
-    trapdoor::initLogger("trapdoor.log", true, false, false);
+    trapdoor::initLogger("trapdoor.log"); //初始化日志
+   // trapdoor::setDevMode(true);
+    mod::TrapdoorMod::printCopyRightInfo(); //打印日志
     auto *mod = createBDSModInstance();
+    mod->asInstance<mod::TrapdoorMod>()->readConfigFile("trapdoor-config.json"); //读取配置文件
     trapdoor::initializeMod(mod);
-    mod::TrapdoorMod::printCopyRightInfo();
 }
 
 void mod_exit() {}
-
 BOOL APIENTRY DllMain(HMODULE hModule,
                       DWORD ul_reason_for_call,
                       LPVOID lpReserved

@@ -12,16 +12,16 @@ namespace trapdoor {
     using namespace SymHook;
 
     Block *BlockSource::getBlock(int x, int y, int z) {
-        return SYM_CALL(
-                Block* (*)(void * , int, int, int),
-                MSSYM_B1QA8getBlockB1AE11BlockSourceB2AAE13QEBAAEBVBlockB2AAA3HHHB1AA1Z, this,
-                x, y, z
-        );
+        return getBlock({x, y, z});
     }
 
 
     Block *BlockSource::getBlock(const BlockPos &blockPos) {
-        return getBlock(blockPos.x, blockPos.y, blockPos.z);
+        return SYM_CALL(
+                Block* (*)(void * ,const BlockPos &),
+                MSSYM_B1QA8getBlockB1AE11BlockSourceB2AAE13QEBAAEBVBlockB2AAE12AEBVBlockPosB3AAAA1Z, this,
+                blockPos
+        );
     }
 
     void BlockSource::setBlock(BlockPos *blockPos, Block *block) {

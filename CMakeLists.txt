@@ -1,6 +1,4 @@
 cmake_minimum_required(VERSION 3.17)
-set(DllName mod)
-set(OutputName ${DllName}-${MinecraftVersion}-${buildType})
 project(mod)
 set(CMAKE_CXX_STANDARD 17)
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
@@ -10,11 +8,13 @@ else ()
 endif ()
 set(MOD_API_NAME trapDoorAPI)
 
+
 add_library(${MOD_API_NAME} STATIC
         api/BDSMod.cpp
         api/block/Block.cpp
         api/block/BlockLegacy.cpp
         api/block/BlockSource.cpp
+        api/block/CircuitComponent.cpp
         api/commands/CommandNode.cpp
         api/commands/Command.cpp
         api/commands/CommandManager.cpp
@@ -23,7 +23,6 @@ add_library(${MOD_API_NAME} STATIC
         api/entity/Item.cpp
         api/entity/PlayerInventory.cpp
         api/entity/PlayerBuffer.cpp
-        api/entity/Player.cpp
         api/graphics/Particle.cpp
         api/graphics/AABB.h
         api/graphics/BlockPos.cpp
@@ -36,9 +35,9 @@ add_library(${MOD_API_NAME} STATIC
         api/tools/DirtyLogger.cpp
         api/tools/Message.cpp
         api/tools/MsgBuilder.cpp
+        api/tools/ThreadPool.h
         api/world/LevelChunk.cpp
-        api/tools/enumTools.h
-        )
+        "api/tools/noncopyable .h")
 target_include_directories(${MOD_API_NAME}
         PUBLIC
         api
@@ -52,7 +51,7 @@ target_include_directories(${MOD_API_NAME}
         )
 
 target_link_libraries(${MOD_API_NAME} ${PROJECT_SOURCE_DIR}/api/lib/detours.lib)
-
+target_link_libraries(${MOD_API_NAME} ${PROJECT_SOURCE_DIR}/api/lib/sqlite3.lib)
 
 set(MOD_NAME trapdoor-mod)
 add_library(${MOD_NAME}
@@ -72,12 +71,20 @@ add_library(${MOD_NAME}
         mod/spawn/SpawnAnalyzer.cpp
         mod/function/BlockRotationHelper.cpp
         mod/player/PlayerFunction.cpp
-        mod/player/SimpleBuilder.cpp mod/player/SimpleBuilder.h mod/spawn/SlimeChunkHelper.cpp mod/spawn/SlimeChunkHelper.h)
+        mod/player/SimpleBuilder.cpp
+        mod/spawn/SlimeChunkHelper.cpp
+        mod/player/PlayerStatisticManager.cpp
+        mod/player/Player.cpp
+        mod/function/BackupHelper.cpp
+        mod/os/process_stat.cpp
+        mod/village/POIInstance.cpp
+        )
 
 target_include_directories(
         ${MOD_NAME}
         PUBLIC
         mod
+        mod/os
         mod/config
         mod/hopper
         mod/spawn
@@ -95,9 +102,5 @@ target_include_directories(
         api/tools
 )
 
-
 target_link_libraries(${MOD_NAME} ${MOD_API_NAME})
 
-add_executable(
-        TempText
-        test/testMain.cpp)

@@ -28,7 +28,7 @@ namespace trapdoor {
 
     template<typename ...Args>
     void gamePrintf(Actor *player, const std::string &prefix, const std::string &fmt, Args ...args) {
-        const std::string message = format(fmt, args...);
+        const std::string message = prefix + format(fmt, args...);
         mcbe_sendMessage(message, player);
     }
 

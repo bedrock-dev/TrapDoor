@@ -7,17 +7,17 @@
 
 #include "graphics/BlockPos.h"
 #include <set>
+#include "tools/noncopyable .h"
 
 namespace mod {
 
-    class SlimeChunkHelper {
+    class SlimeChunkHelper : noncopyable {
         int showRadius = 5;
         bool enable = false;
         size_t gameTick = 0;
         std::set<trapdoor::ChunkPos> posList;
     public:
         inline void setAble(bool able) { this->enable = able; }
-
 
         void updateChunkPosList();
 

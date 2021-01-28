@@ -221,6 +221,7 @@ THook(
                 original(serverLevel);
                 modInstance->lightTick();
             }
+            modInstance->heavyTick();
             break;
     }
 }
@@ -256,7 +257,7 @@ THook(
         MSSYM_B1QA4tickB1AE10LevelChunkB2AAE20QEAAXAEAVBlockSourceB2AAA8AEBUTickB3AAAA1Z,
         void *levelChunk,
         trapdoor::BlockSource *blockSource,
-        Tick * tick
+        size_t * tick
 ) {
     if (mod::tick::gameProfiler.inProfiling) {
         TIMER_START
@@ -309,25 +310,29 @@ THook(
     }
 }
 
-//mob actor Spawner::tick
-THook(
-        void,
-        MSSYM_B1QA4tickB1AA7SpawnerB2AAE20QEAAXAEAVBlockSourceB2AAE14AEBVLevelChunkB3AAAA1Z,
-        void *swr,
-        void *blockSource,
-        void * chunk
-) {
-//    if (!globalSpawner)globalSpawner = swr;
-    original(swr, blockSource, chunk);
-//    if (mod::tick::isProfiling) {
-//        TIMER_START
-//        original(swr, blockSource, chunk);
-//        TIMER_END
-//        mod::tick::spawnerTickTime += timeReslut;
-//    } else {
+////mob actor Spawner::tick
+//THook(
+//        void,
+//        MSSYM_B1QA4tickB1AA7SpawnerB2AAE20QEAAXAEAVBlockSourceB2AAE14AEBVLevelChunkB3AAAA1Z,
+//        void *swr,
+//        void *blockSource,
+//        void * chunk
+//) {
+////    if (!globalSpawner)globalSpawner = swr;
+//    if (!swr) {
+//        printf("spawner.tick --> spawner is nullptr");
+//        return;
 //    }
-
-}
+//    original(swr, blockSource, chunk);
+////    if (mod::tick::isProfiling) {
+////        TIMER_START
+////        original(swr, blockSource, chunk);
+////        TIMER_END
+////        mod::tick::spawnerTickTime += timeReslut;
+////    } else {
+////    }
+//
+//}
 
 //BlockTickingQueue::pendingTicks
 //the server will crash if hook this function

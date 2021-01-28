@@ -7,7 +7,6 @@
 
 #include "Actor.h"
 #include "lib/mod.h"
-#include "lib/version.h"
 #include "tools/MsgBuilder.h"
 #include "tools/Message.h"
 #include "block/Block.h"
@@ -16,8 +15,6 @@
 #include "block/BlockSource.h"
 #include "Dimension.h"
 #include "tools/DirtyLogger.h"
-
-
 namespace trapdoor {
 
     using namespace SymHook;
@@ -68,41 +65,6 @@ namespace trapdoor {
         );
     }
 
-    void Actor::printInfo() {
-        MessageBuilder builder;
-        auto position = this->getPos();
-        auto playerBlockPos = position->toBlockPos();
-        auto chunkPos = playerBlockPos.toChunkPos();
-        auto inChunkOffset = playerBlockPos.InChunkOffset();
-        auto inSlimeChunk = chunkPos.isSlimeChunk();
-        Vec3 viewVec{};
-        this->getViewActor(&viewVec, 1);
-        auto biome = this->getBlockSource()->getBiome(&playerBlockPos);
-        auto name = biome->getBiomeName();
-
-        std::string MinecraftVersion = format("Minecraft Bedrock(BDS) %s  (%s)\n\n", minecraftVersion,
-                                              trapDoorVersion);
-        std::string xyz = format("XYZ: %.2f / %.2f / %.2f\n", position->x, position->y, position->z);
-        std::string block = format("Block: %d %d %d\n", playerBlockPos.x, playerBlockPos.y, playerBlockPos.z);
-        std::string chunk = "Chunk: " + inChunkOffset.toString() + " in " + chunkPos.toString() + "\n";
-        std::string facing = "Facing: " + viewVec.toDirString();
-        facing += format("(%.2f / %.2f / %.2f)\n", viewVec.x, viewVec.y, viewVec.z);
-        std::string biomeString = format("Biome: minecraft:%s (%d)\n", name.c_str(), biome->getBiomeType());
-        std::string dimString = format("Dimension: %s (%d)\n", this->getDimensionName().c_str(),
-                                       this->getDimensionID());
-
-        builder.text(MinecraftVersion)
-                .text(xyz)
-                .text(block);
-        if (inSlimeChunk) {
-            builder.sText(chunk, MSG_COLOR::GREEN);
-        } else {
-            builder.text(chunk);
-        }
-        builder.text(facing).text(biomeString).text(dimString)
-                .send(this);
-    }
-
 
     int Actor::getDimensionID() {
 
@@ -144,7 +106,7 @@ namespace trapdoor {
     }
 
     unsigned int Actor::getSelectSlot() {
-        //这个api是有问题的
+        //!这个api是有问题的
         return 0;
         //  return *(unsigned int *) reinterpret_cast<char *>(this + 168);
     }
@@ -171,6 +133,16 @@ namespace trapdoor {
         return {headPos.x, headPos.y - 2, headPos.z};
     }
 
+    void Actor::setNameTag(const std::string &name) {
+        SYM_CALL(
+                void(*)(void * actor,
+                const std::string &str),
+                MSSYM_B1QE10setNameTagB1AA5ActorB2AAA9UEAAXAEBVB2QDA5basicB1UA6stringB1AA2DUB2QDA4charB1UA6traitsB1AA1DB1AA3stdB2AAA1VB2QDA9allocatorB1AA1DB1AA12B2AAA3stdB3AAAA1Z,
+                this,
+                name
+        );
+    }
+
     std::string ActorDefinitionIdentifier::getName() {
         auto str = reinterpret_cast<std::string *>((char *) this + 32);
         return std::string(*str);
@@ -179,34 +151,23 @@ namespace trapdoor {
 }
 
 
-//攻击实体
-//THook(
-//        void,
-//        MSSYM_B1QA6attackB1AA6PlayerB2AAA4UEAAB1UE10NAEAVActorB3AAAA1Z,
-//        void *p1,
-//        void * p2
-//) {
-//    if (p1 && p2) {
-//        // if (getActorName(p2) == "minecraft:villager_v2<>") {
-//        original(p1, p2);
-//        if (p2) {
-//            std::string infoText;
-//            //获取实体信息并设置命名牌
-//            SYM_CALL(void(*)(void * mob, std::string &),
-//                     MSSYM_B1QE14buildDebugInfoB1AA3MobB2AAA9UEBAXAEAVB2QDA5basicB1UA6stringB1AA2DUB2QDA4charB1UA6traitsB1AA1DB1AA3stdB2AAA1VB2QDA9allocatorB1AA1DB1AA12B2AAA3stdB3AAAA1Z,
-//                     p2, infoText
-//            );
-//
-//            SYM_CALL(
-//                    void(*)(void * actor,
-//                    const std::string &str),
-//                    MSSYM_B1QE10setNameTagB1AA5ActorB2AAA9UEAAXAEBVB2QDA5basicB1UA6stringB1AA2DUB2QDA4charB1UA6traitsB1AA1DB1AA3stdB2AAA1VB2QDA9allocatorB1AA1DB1AA12B2AAA3stdB3AAAA1Z,
-//                    p2,
-//                    infoText
-//            );
-//        }
-//    }
-//}
+using namespace SymHook;
+
+THook(
+        void,
+        MSSYM_B1QA6attackB1AA6PlayerB2AAA4UEAAB1UE10NAEAVActorB3AAAA1Z,
+        trapdoor::Actor *p1,
+        trapdoor::Actor * p2
+) {
+    if (p2) {
+        auto result = trapdoor::bdsMod->attackEntityHook(p1, p2);
+        if (result) {
+            original(p1, p2);
+        }
+    } else {
+        original(p1, p2);
+    }
+}
 //spawn mob
 
 

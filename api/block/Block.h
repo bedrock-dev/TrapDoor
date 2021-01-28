@@ -10,10 +10,17 @@ struct Biome;
 
 
 namespace trapdoor {
+    enum BlockType : size_t {
+        Air = 0,
+        Dirt = 4
+    };
+
 /*
  * 方块接口
+ *
  */
     class BlockLegacy;
+
     class Block {
     public:
         // 获取方块legacy
@@ -29,6 +36,7 @@ namespace trapdoor {
         bool isAir();
     };
 
+
 /*
  * 方块实体接口
  */
@@ -41,34 +49,11 @@ namespace trapdoor {
         Block *getBlock();
     };
 
-/*
- * 红石组件接口
- */
-    class BaseCircuitComponent {
+    class BlockPalette {
     public:
-        int getStrength();
-
-        int getVar2();
-
-        int getPowerCount();
-
-        int getAcceptHalfPulse();
-
-        int getHalfPulse();
-
-        void basePrint();
-
-        void printRepeater();
-
-        void printTorch(BlockPos blockPos);
+        Block *getBlock(unsigned int type);
     };
-
-    //红石电路图组件
-    class CircuitSceneGraph {
-    public:
-        BaseCircuitComponent *getBaseCircuitComponent(BlockPos *pos);
-    };
-
 }
-
-
+typedef trapdoor::Block Block;
+typedef trapdoor::BlockActor BlockActor;
+typedef trapdoor::BlockType BlockType;

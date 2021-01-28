@@ -16,8 +16,14 @@
 #include "player/PlayerFunction.h"
 #include "player/SimpleBuilder.h"
 #include "SlimeChunkHelper.h"
+#include "player/PlayerStatisticManager.h"
 
 namespace mod {
+
+    struct ModInfo {
+        const std::string minecraftVersion = "1.16.4.02";
+        const std::string modVersion = "trapdoor-0.9.20";
+    };
 
     class TrapdoorMod : public trapdoor::BDSMod {
     private:
@@ -31,22 +37,39 @@ namespace mod {
         PlayerFunction playerFunctions;
         SimpleBuilder simpleBuilder;
         SlimeChunkHelper slimeChunkHelper;
+        PlayerStatisticManager playerStatisticManager;
 
         void registerTickCommand();
+
+
+    public:
+        ModInfo modeInfo;
+
 
     public:
         static void printCopyRightInfo();
 
-        void initialize();
+        static void printOSInfo(trapdoor::Actor *player);
+
+        void initialize() override;
 
         void registerCommands() override;
 
         void useOnHook(Actor *player, const std::string &itemName, BlockPos &pos, unsigned int facing,
                        const Vec3 &) override;
 
+        CommandPermissionLevel
+        resetVanillaCommandLevel(const std::string &name, CommandPermissionLevel oldLevel) override;
+
         void heavyTick();
 
         void lightTick();
+
+        inline void readConfigFile(const std::string &configFileName) {
+            this->configManager.initialize(configFileName);
+        }
+
+        bool attackEntityHook(Actor *entity1, Actor *entity2) override;
 
         //get functions
         inline HopperChannelManager &getHopperChannelManager() { return this->hopperChannelManager; }
@@ -57,8 +80,12 @@ namespace mod {
 
         inline SpawnAnalyzer &getSpawnAnalyzer() { return this->spawnAnalyzer; }
 
+        inline PlayerStatisticManager &getPlayerStatisticManager() { return this->playerStatisticManager; }
+
+        inline std::string getLevelName() { return this->configManager.getServerConfig().levelName; }
+
+
     };
 }
-
 
 #endif //MOD_TRAPDOORMOD_H

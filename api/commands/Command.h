@@ -10,7 +10,7 @@
 
 //初始化命令
 namespace trapdoor {
-//注册mcbe命令,说白了就是给一级指令加tab功能
+//注册mcbe命令,说白了就是给一级指令加tab功能,这个注释也不影响啥
     void
     regMCBECommand(const std::string &command, const char *description, CommandPermissionLevel level, bool cheat);
 }

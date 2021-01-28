@@ -14,15 +14,12 @@
 #include <vector>
 #include "ArgHolder.h"
 
-
 enum class ArgType {
     INT,
     BOOL,
     STR,
     NONE
 };
-
-//这个枚举是根据观察原版命令注册过程得出的
 
 
 /*
@@ -35,7 +32,6 @@ enum class ArgType {
  */
 namespace trapdoor {
     class Actor;
-
     enum PlayerPermissionLevel {
         Visitor = 0,
         Member = 1,
@@ -90,7 +86,7 @@ namespace trapdoor {
     class CommandNode {
         std::string name;
         std::string description;
-        std::map<std::string, CommandNode *> nextNode;
+        std::map<std::string, CommandNode *> nextNodes;
         std::function<void(ArgHolder *, Actor *)> work;
         ArgType argType = ArgType::NONE;
 
@@ -98,7 +94,6 @@ namespace trapdoor {
         explicit CommandNode(std::string name);
 
         CommandNode(std::string name, std::string description);
-
 
         CommandNode *execute(const std::function<void(ArgHolder *, Actor *)> &task) {
             this->work = task;
@@ -112,7 +107,6 @@ namespace trapdoor {
         inline void setArgType(ArgType type) {
             this->argType = type;
         }
-
 
         CommandNode *then(CommandNode *node);
 

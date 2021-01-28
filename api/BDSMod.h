@@ -15,13 +15,16 @@
 #include "commands/CommandManager.h"
 #include "world/Level.h"
 #include "PlayerBuffer.h"
+#include "tools/ThreadPool.h"
+#include "tools/noncopyable .h"
 
-typedef size_t Tick;
 namespace trapdoor {
-    class BDSMod {
+
+
+    class BDSMod : public noncopyable {
     public:
         struct ModConfig {
-            size_t particleViewDistance = 128;
+            size_t particleViewDistance = 256;
             bool particlePerformanceMode = false;
         };
     protected:
@@ -30,20 +33,28 @@ namespace trapdoor {
         CommandRegistry *commandRegistry{};
         CommandManager commandManager;
         std::map<std::string, PlayerBuffer> playerCache;
-    public:
-
-
+        ThreadPool *threadPool = nullptr;
         ModConfig config;
+        BlockPalette *palette;
+    public:
 
         Level *getLevel();
 
+        inline BlockPalette *getPalette() { return this->palette; }
+
         void setLevel(Level *level);
+
+        inline void setBlockPalette(BlockPalette *p) { this->palette = p; }
 
         CommandRegistry *getCommandRegistry();
 
         void setCommandRegistry(CommandRegistry *registry);
 
+        virtual void initialize();
+
         CommandManager &getCommandManager();
+
+        inline ThreadPool *getThreadPool() { return this->threadPool; }
 
         virtual void registerCommands();
 
@@ -52,6 +63,10 @@ namespace trapdoor {
                                unsigned int facing,
                                const Vec3 &) = 0;
 
+        virtual bool attackEntityHook(Actor *player, Actor *entity) = 0;
+
+        virtual CommandPermissionLevel
+        resetVanillaCommandLevel(const std::string &name, CommandPermissionLevel oldLevel) { return oldLevel; }
 
         std::map<std::string, PlayerBuffer> &getPlayerBuffer();
 
@@ -63,7 +78,7 @@ namespace trapdoor {
         ModConfig &getCfg() { return this->config; }
 
     public:
-
+        trapdoor::Actor *fetchEntity(int64_t id, bool b);
     };
 
     void initializeMod(BDSMod *bdsMod);

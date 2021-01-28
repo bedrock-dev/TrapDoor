@@ -10,10 +10,12 @@
 #include <utility>
 
 /*
- * 用来承载命令行玩家参数的结构体，本来打算用union的，结果发现有bug，就算了，
+ * @author hhhxiao
+ * 用来承载命令行参数
  * 浪费点内存问题不大.jpg
  */
 namespace trapdoor {
+    //本来想用union的，可以减少一些内存，但是非基本类型可能会炸，用char[]又不好控制最大长度，还不如直接struct
     struct ArgHolder {
         int intVal = 0;
         std::string strVal;
@@ -35,6 +37,7 @@ namespace trapdoor {
 
     };
 
+    //y1s1下面这三个方法都可以不要了，懒得换了
     ArgHolder *integerArg(int val);
 
     ArgHolder *strArg(const std::string &val);

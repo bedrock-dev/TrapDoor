@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
       <config projectName="mod" targetName="trapDoorAPI" />
       <config projectName="mod" targetName="trapdoor-mod" />
-      <config projectName="mod" targetName="TempText" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true">
     <configurations>
-      <configuration PROFILE_NAME="Release" CONFIG_NAME="Release" TOOLCHAIN_NAME="Visual Studio" />
-      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" ENABLED="true" />
+      <configuration PROFILE_NAME="Release" CONFIG_NAME="Release" ENABLED="true" />
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b8a60db2-baf4-4087-8601-d054cc921b14" name="Default Changelist" comment="" />
+    <list default="true" id="3eb519fb-7465-437d-86d7-42a97e7c56eb" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/README_en.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/tools/DirtyLogger.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/tools/DirtyLogger.cpp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,68 +28,51 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release" />
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="HTML File" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="MacroExpansionManager">
-    <option name="directoryName" value="hpu6xq9p" />
+    <option name="directoryName" value="2tx54099" />
   </component>
-  <component name="NamedScopeManager">
-    <scope name="Trapdoor" pattern="!file:cvdump.exe&amp;&amp;!file:PDB导出工具.exe" />
-  </component>
-  <component name="ProjectId" id="1gPeI5asxovqHB8dxz0p5WrKTOo" />
+  <component name="ProjectId" id="1mwlBmbVlt3Xirz7vT4RlkvsRba" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="ASKED_MARK_IGNORED_FILES_AS_EXCLUDED" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="add_unversioned_files" value="true" />
     <property name="cf.first.check.clang-format" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/MCBEMulStructureFinder" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\xhy\dev\TrapDoor\tools" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\xhy\dev\TrapDoor\api" />
-      <recent name="C:\Users\xhy\dev\TrapDoor\api\tools" />
-      <recent name="C:\Users\xhy\dev\TrapDoor\mod\hopper" />
-      <recent name="C:\Users\xhy\dev\TrapDoor\mod" />
-      <recent name="C:\Users\xhy\dev\TrapDoor\api\block" />
+      <recent name="C:\Users\xhy\dev\TrapDoor\mod\os" />
     </key>
   </component>
   <component name="RunManager" selected="CMake Application.trapdoor-mod">
-    <configuration name="TempText" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="mod" TARGET_NAME="TempText" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="mod" RUN_TARGET_NAME="TempText">
+    <configuration name="trapDoorAPI" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="mod" TARGET_NAME="trapDoorAPI" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="trapDoorAPI" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="mod" TARGET_NAME="trapDoorAPI" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="trapdoor-mod" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="mod" TARGET_NAME="trapdoor-mod" CONFIG_NAME="Release">
+    <configuration name="trapdoor-mod" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="mod" TARGET_NAME="trapdoor-mod" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="CMake Application.TempText" />
       <item itemvalue="CMake Application.trapDoorAPI" />
       <item itemvalue="CMake Application.trapdoor-mod" />
     </list>
@@ -96,339 +80,41 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b8a60db2-baf4-4087-8601-d054cc921b14" name="Default Changelist" comment="" />
-      <created>1598020571838</created>
+      <changelist id="3eb519fb-7465-437d-86d7-42a97e7c56eb" name="Default Changelist" comment="" />
+      <created>1610412403756</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1598020571838</updated>
-      <workItem from="1598020573393" duration="1070000" />
-      <workItem from="1598176793077" duration="3728000" />
-      <workItem from="1598195757806" duration="72000" />
-      <workItem from="1598196168118" duration="2630000" />
-      <workItem from="1598259610836" duration="550000" />
-      <workItem from="1598260189183" duration="4193000" />
-      <workItem from="1598265278595" duration="6506000" />
-      <workItem from="1598276860521" duration="4683000" />
-      <workItem from="1598326484129" duration="15729000" />
-      <workItem from="1598412456190" duration="3199000" />
-      <workItem from="1598418022397" duration="2259000" />
-      <workItem from="1598514432355" duration="5175000" />
-      <workItem from="1598521390317" duration="173000" />
-      <workItem from="1598521618674" duration="1407000" />
-      <workItem from="1598622995586" duration="2019000" />
-      <workItem from="1598625042098" duration="1256000" />
-      <workItem from="1598672111255" duration="2455000" />
-      <workItem from="1598684291948" duration="2278000" />
-      <workItem from="1598707116298" duration="9300000" />
-      <workItem from="1598757984538" duration="1484000" />
-      <workItem from="1598759491016" duration="14504000" />
-      <workItem from="1598803820857" duration="1994000" />
-      <workItem from="1598844087783" duration="244000" />
-      <workItem from="1598844346299" duration="2653000" />
-      <workItem from="1598847023619" duration="6596000" />
-      <workItem from="1598882098597" duration="819000" />
-      <workItem from="1599120150487" duration="5000" />
-      <workItem from="1599303670743" duration="1995000" />
-      <workItem from="1599305714147" duration="3175000" />
-      <workItem from="1599309523775" duration="10000" />
-      <workItem from="1599574242974" duration="4201000" />
-      <workItem from="1599580713065" duration="1883000" />
-      <workItem from="1599611150639" duration="5328000" />
-      <workItem from="1599876409162" duration="3000" />
-      <workItem from="1599878675523" duration="3372000" />
-      <workItem from="1599890105833" duration="669000" />
-      <workItem from="1599891688880" duration="128000" />
-      <workItem from="1599891834605" duration="1646000" />
-      <workItem from="1600072811552" duration="1081000" />
-      <workItem from="1600400315652" duration="7000" />
-      <workItem from="1600786938702" duration="3062000" />
-      <workItem from="1601001168642" duration="437000" />
-      <workItem from="1601049320962" duration="2615000" />
-      <workItem from="1601087505213" duration="1261000" />
-      <workItem from="1601093604381" duration="3000" />
-      <workItem from="1601113047540" duration="3503000" />
-      <workItem from="1601117410686" duration="11094000" />
-      <workItem from="1601476067976" duration="13000" />
-      <workItem from="1601649156356" duration="967000" />
-      <workItem from="1601652843663" duration="3000" />
-      <workItem from="1601778937029" duration="1428000" />
-      <workItem from="1601803703236" duration="14000" />
-      <workItem from="1601804062553" duration="533000" />
-      <workItem from="1601821312139" duration="1665000" />
-      <workItem from="1601864960055" duration="1353000" />
-      <workItem from="1601892360181" duration="1369000" />
-      <workItem from="1601977782985" duration="1050000" />
-      <workItem from="1602255539364" duration="875000" />
-      <workItem from="1602404828415" duration="1364000" />
-      <workItem from="1602478592336" duration="2426000" />
-      <workItem from="1602511487668" duration="1060000" />
-      <workItem from="1603354207555" duration="2818000" />
-      <workItem from="1603375773615" duration="2622000" />
-      <workItem from="1603445313750" duration="38000" />
-      <workItem from="1603463654873" duration="1655000" />
-      <workItem from="1603501517426" duration="4000" />
-      <workItem from="1603502231349" duration="12000" />
-      <workItem from="1603549792335" duration="1295000" />
-      <workItem from="1603960917095" duration="2947000" />
-      <workItem from="1603975178662" duration="2193000" />
-      <workItem from="1603977444875" duration="3576000" />
-      <workItem from="1604066766018" duration="3562000" />
-      <workItem from="1604073434190" duration="209000" />
-      <workItem from="1604073663724" duration="1409000" />
-      <workItem from="1604075094532" duration="519000" />
-      <workItem from="1604120319051" duration="1244000" />
-      <workItem from="1604121585394" duration="1997000" />
-      <workItem from="1604152998164" duration="49000" />
-      <workItem from="1604155446898" duration="3920000" />
-      <workItem from="1604324890937" duration="5704000" />
-      <workItem from="1604395763860" duration="3294000" />
-      <workItem from="1604412482456" duration="4422000" />
-      <workItem from="1604585159010" duration="767000" />
-      <workItem from="1604633988003" duration="2910000" />
-      <workItem from="1604670617669" duration="2754000" />
-      <workItem from="1604737125509" duration="12153000" />
-      <workItem from="1604802106949" duration="3565000" />
-      <workItem from="1604828503754" duration="1969000" />
-      <workItem from="1604893351782" duration="6370000" />
-      <workItem from="1605087798438" duration="1210000" />
-      <workItem from="1605264389665" duration="3292000" />
-      <workItem from="1605274459942" duration="1319000" />
-      <workItem from="1605278597080" duration="3045000" />
-      <workItem from="1605347221197" duration="13224000" />
-      <workItem from="1605402677763" duration="4295000" />
-      <workItem from="1605407841130" duration="1566000" />
-      <workItem from="1605433343374" duration="206000" />
-      <workItem from="1605433563730" duration="6024000" />
-      <workItem from="1605490788898" duration="542000" />
-      <workItem from="1605491351694" duration="106000" />
-      <workItem from="1605491471002" duration="155000" />
-      <workItem from="1605491644568" duration="301000" />
-      <workItem from="1605491960823" duration="2189000" />
-      <workItem from="1605494786057" duration="3000" />
-      <workItem from="1605489854233" duration="696000" />
-      <workItem from="1605605865193" duration="2993000" />
-      <workItem from="1605609436757" duration="572000" />
-      <workItem from="1605610266597" duration="178000" />
-      <workItem from="1605622250676" duration="381000" />
-      <workItem from="1605664190544" duration="4000" />
-      <workItem from="1605664324856" duration="3088000" />
-      <workItem from="1605693720306" duration="1879000" />
-      <workItem from="1605754329521" duration="4454000" />
-      <workItem from="1605795565884" duration="2623000" />
-      <workItem from="1605879546633" duration="5905000" />
-      <workItem from="1605924279270" duration="8474000" />
-      <workItem from="1605967831670" duration="1287000" />
-      <workItem from="1606013234168" duration="4295000" />
-      <workItem from="1606130707084" duration="3000" />
-      <workItem from="1606270120748" duration="2644000" />
-      <workItem from="1606286426508" duration="12657000" />
-      <workItem from="1606398542804" duration="7000" />
-      <workItem from="1606399243121" duration="1337000" />
-      <workItem from="1606402440945" duration="798000" />
-      <workItem from="1606403287432" duration="3347000" />
-      <workItem from="1606407588422" duration="5000" />
-      <workItem from="1606437318720" duration="1235000" />
-      <workItem from="1606439158376" duration="912000" />
-      <workItem from="1606481608749" duration="5678000" />
-      <workItem from="1606489719413" duration="4000" />
-      <workItem from="1606572698233" duration="700000" />
-      <workItem from="1606574570953" duration="1450000" />
-      <workItem from="1606576684831" duration="212000" />
-      <workItem from="1606642820370" duration="838000" />
-      <workItem from="1606901203815" duration="4126000" />
-      <workItem from="1606906182870" duration="471000" />
-      <workItem from="1606906678135" duration="79000" />
-      <workItem from="1606906772675" duration="108000" />
-      <workItem from="1606906896030" duration="5892000" />
-      <workItem from="1607004411845" duration="3938000" />
-      <workItem from="1607089817058" duration="2942000" />
-      <workItem from="1607092847152" duration="4966000" />
-      <workItem from="1607161130911" duration="2852000" />
-      <workItem from="1607177952227" duration="4000" />
-      <workItem from="1607335157891" duration="629000" />
-      <workItem from="1607432203933" duration="34000" />
-      <workItem from="1607432535758" duration="7714000" />
-      <workItem from="1607475885824" duration="468000" />
-      <workItem from="1607738034551" duration="5788000" />
-      <workItem from="1607782484584" duration="844000" />
-      <workItem from="1607825536164" duration="2840000" />
-      <workItem from="1607851836556" duration="3167000" />
-      <workItem from="1607935330043" duration="8000" />
-      <workItem from="1607936263192" duration="5649000" />
-      <workItem from="1608038523450" duration="5518000" />
-      <workItem from="1608084975303" duration="2264000" />
-      <workItem from="1608112143261" duration="3113000" />
-      <workItem from="1608115287061" duration="124000" />
-      <workItem from="1608127495418" duration="4010000" />
-      <workItem from="1608285339139" duration="7228000" />
-      <workItem from="1608385567298" duration="4517000" />
-      <workItem from="1608431188413" duration="5969000" />
-      <workItem from="1608630078563" duration="3576000" />
-      <workItem from="1608718812717" duration="5214000" />
-      <workItem from="1608808026805" duration="3418000" />
-      <workItem from="1608817154432" duration="90000" />
-      <workItem from="1608821886058" duration="365000" />
-      <workItem from="1608877006069" duration="3334000" />
-      <workItem from="1608881923687" duration="5273000" />
-      <workItem from="1609062686390" duration="9373000" />
-      <workItem from="1609079289346" duration="20000" />
-      <workItem from="1609081425728" duration="546000" />
-      <workItem from="1609152183666" duration="7000" />
-      <workItem from="1609159934745" duration="102000" />
-      <workItem from="1609179057672" duration="197000" />
-      <workItem from="1609302042479" duration="211000" />
-      <workItem from="1609302330550" duration="9796000" />
-      <workItem from="1609315787530" duration="4000" />
-      <workItem from="1609320172921" duration="11095000" />
-      <workItem from="1609333087457" duration="36000" />
-      <workItem from="1609340191300" duration="828000" />
-      <workItem from="1609381255238" duration="4575000" />
-      <workItem from="1609401543343" duration="2000" />
-      <workItem from="1609407338188" duration="5521000" />
-      <workItem from="1609422266237" duration="5309000" />
-      <workItem from="1609464344552" duration="7047000" />
-      <workItem from="1609485034472" duration="4000" />
-      <workItem from="1609495708199" duration="8904000" />
-      <workItem from="1609505643421" duration="3000" />
-      <workItem from="1609508565481" duration="737000" />
-      <workItem from="1609553353002" duration="55000" />
-      <workItem from="1609591587501" duration="8838000" />
-      <workItem from="1609601058828" duration="354000" />
+      <updated>1610412403756</updated>
+      <workItem from="1610412407261" duration="763000" />
+      <workItem from="1610443690806" duration="8587000" />
+      <workItem from="1610462949807" duration="89000" />
+      <workItem from="1610503943412" duration="5072000" />
+      <workItem from="1610597594484" duration="6318000" />
+      <workItem from="1610606975208" duration="928000" />
+      <workItem from="1610607925929" duration="5653000" />
+      <workItem from="1610615094593" duration="4210000" />
+      <workItem from="1610679874650" duration="1649000" />
+      <workItem from="1610681580263" duration="9888000" />
+      <workItem from="1610771437009" duration="4136000" />
+      <workItem from="1610792317316" duration="3717000" />
+      <workItem from="1610809860357" duration="7000" />
+      <workItem from="1610869702211" duration="831000" />
+      <workItem from="1610881047225" duration="1110000" />
+      <workItem from="1610892184305" duration="15000" />
+      <workItem from="1610947459665" duration="4101000" />
+      <workItem from="1610963268673" duration="4161000" />
+      <workItem from="1610976855828" duration="610000" />
+      <workItem from="1611120886893" duration="7700000" />
+      <workItem from="1611205321111" duration="4489000" />
+      <workItem from="1611285100935" duration="3057000" />
+      <workItem from="1611387130792" duration="34000" />
+      <workItem from="1611459407434" duration="3013000" />
+      <workItem from="1611466274225" duration="8000" />
+      <workItem from="1611492172893" duration="1397000" />
+      <workItem from="1611565367634" duration="7361000" />
+      <workItem from="1611573279360" duration="633000" />
+      <workItem from="1611630006006" duration="438000" />
     </task>
-    <task id="LOCAL-00001" summary="1. 命令解释器投入使用，和switch case 彻底告别&#10;2. 支持游戏模式切换命令 ./gm mode n (n=3是观察模式)">
-      <created>1604761522583</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1604761522583</updated>
-    </task>
-    <task id="LOCAL-00002" summary="1. 村庄显示回归&#10;2. 简单的F3(./dbg)">
-      <created>1604898980053</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1604898980053</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
     <servers />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="1. 命令解释器投入使用，和switch case 彻底告别&#10;2. 支持游戏模式切换命令 ./gm mode n (n=3是观察模式)" />
-    <MESSAGE value="1. 村庄显示回归&#10;2. 简单的F3(./dbg)" />
-    <option name="LAST_COMMIT_MESSAGE" value="1. 村庄显示回归&#10;2. 简单的F3(./dbg)" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="161" y="174" width="1164" height="612" key="#Log_Highlighting_(ideolog)" timestamp="1606906613472">
-      <screen x="0" y="0" width="1549" height="831" />
-    </state>
-    <state x="161" y="174" width="1164" height="612" key="#Log_Highlighting_(ideolog)/0.0.1549.831@0.0.1549.831" timestamp="1606906613472" />
-    <state x="262" y="0" width="814" height="693" key="#Plugins" timestamp="1606906163562">
-      <screen x="0" y="0" width="1549" height="831" />
-    </state>
-    <state x="262" y="0" width="814" height="693" key="#Plugins/0.0.1549.831@0.0.1549.831" timestamp="1606906163562" />
-    <state x="230" y="71" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1608130527133">
-      <screen x="0" y="0" width="1549" height="831" />
-    </state>
-    <state x="230" y="71" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1549.831@0.0.1549.831" timestamp="1608130527133" />
-    <state x="502" y="216" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1607005714356">
-      <screen x="0" y="0" width="1549" height="831" />
-    </state>
-    <state x="502" y="216" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1549.831@0.0.1549.831" timestamp="1607005714356" />
-    <state x="559" y="94" key="#com.intellij.ide.util.MemberChooser" timestamp="1609071769158">
-      <screen x="0" y="0" width="1549" height="831" />
-    </state>
-    <state x="559" y="94" key="#com.intellij.ide.util.MemberChooser/0.0.1549.831@0.0.1549.831" timestamp="1609071769158" />
-    <state x="505" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1609470107196">
-      <screen x="0" y="0" width="1549" height="831" />
-    </state>
-    <state x="505" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1549.831@0.0.1549.831" timestamp="1609470107196" />
-    <state x="394" y="0" key="CommitChangelistDialog2" timestamp="1604898979262">
-      <screen x="0" y="0" width="1549" height="831" />
-    </state>
-    <state x="394" y="0" key="CommitChangelistDialog2/0.0.1549.831@0.0.1549.831" timestamp="1604898979262" />
-    <state x="93" y="93" width="1363" height="645" key="DiffContextDialog" timestamp="1608085520286">
-      <screen x="0" y="0" width="1549" height="831" />
-    </state>
-    <state x="93" y="93" width="1363" height="645" key="DiffContextDialog/0.0.1549.831@0.0.1549.831" timestamp="1608085520286" />
-    <state x="566" y="230" key="FileChooserDialogImpl" timestamp="1608115256885">
-      <screen x="0" y="0" width="1549" height="831" />
-    </state>
-    <state x="566" y="230" key="FileChooserDialogImpl/0.0.1549.831@0.0.1549.831" timestamp="1608115256885" />
-    <state x="317" y="74" key="GrepConsoleSettings" timestamp="1607826756109">
-      <screen x="0" y="0" width="1549" height="831" />
-    </state>
-    <state x="317" y="74" key="GrepConsoleSettings/0.0.1549.831@0.0.1549.831" timestamp="1607826756109" />
-    <state width="1528" height="139" key="GridCell.Tab.0.bottom" timestamp="1609600442830">
-      <screen x="0" y="0" width="1549" height="831" />
-    </state>
-    <state width="1528" height="139" key="GridCell.Tab.0.bottom/0.0.1549.831@0.0.1549.831" timestamp="1609600442830" />
-    <state width="1528" height="139" key="GridCell.Tab.0.center" timestamp="1609600442829">
-      <screen x="0" y="0" width="1549" height="831" />
-    </state>
-    <state width="1528" height="139" key="GridCell.Tab.0.center/0.0.1549.831@0.0.1549.831" timestamp="1609600442829" />
-    <state width="1528" height="139" key="GridCell.Tab.0.left" timestamp="1609600442829">
-      <screen x="0" y="0" width="1549" height="831" />
-    </state>
-    <state width="1528" height="139" key="GridCell.Tab.0.left/0.0.1549.831@0.0.1549.831" timestamp="1609600442829" />
-    <state width="1528" height="139" key="GridCell.Tab.0.right" timestamp="1609600442830">
-      <screen x="0" y="0" width="1549" height="831" />
-    </state>
-    <state width="1528" height="139" key="GridCell.Tab.0.right/0.0.1549.831@0.0.1549.831" timestamp="1609600442830" />
-    <state width="1528" height="264" key="GridCell.Tab.1.bottom" timestamp="1607743832933">
-      <screen x="0" y="0" width="1549" height="831" />
-    </state>
-    <state width="1528" height="264" key="GridCell.Tab.1.bottom/0.0.1549.831@0.0.1549.831" timestamp="1607743832933" />
-    <state width="1528" height="264" key="GridCell.Tab.1.center" timestamp="1607743832932">
-      <screen x="0" y="0" width="1549" height="831" />
-    </state>
-    <state width="1528" height="264" key="GridCell.Tab.1.center/0.0.1549.831@0.0.1549.831" timestamp="1607743832932" />
-    <state width="1528" height="264" key="GridCell.Tab.1.left" timestamp="1607743832932">
-      <screen x="0" y="0" width="1549" height="831" />
-    </state>
-    <state width="1528" height="264" key="GridCell.Tab.1.left/0.0.1549.831@0.0.1549.831" timestamp="1607743832932" />
-    <state width="1528" height="264" key="GridCell.Tab.1.right" timestamp="1607743832933">
-      <screen x="0" y="0" width="1549" height="831" />
-    </state>
-    <state width="1528" height="264" key="GridCell.Tab.1.right/0.0.1549.831@0.0.1549.831" timestamp="1607743832933" />
-    <state x="123" y="0" key="MergeDialog" timestamp="1608043427868">
-      <screen x="0" y="0" width="1549" height="831" />
-    </state>
-    <state x="123" y="0" key="MergeDialog/0.0.1549.831@0.0.1549.831" timestamp="1608043427868" />
-    <state x="202" y="106" width="1270" height="707" key="SettingsEditor" timestamp="1609591761310">
-      <screen x="0" y="0" width="1549" height="831" />
-    </state>
-    <state x="202" y="106" width="1270" height="707" key="SettingsEditor/0.0.1549.831@0.0.1549.831" timestamp="1609591761310" />
-    <state x="367" y="148" key="Vcs.Push.Dialog.v2" timestamp="1604898985160">
-      <screen x="0" y="0" width="1549" height="831" />
-    </state>
-    <state x="367" y="148" key="Vcs.Push.Dialog.v2/0.0.1549.831@0.0.1549.831" timestamp="1604898985160" />
-    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1609599535016">
-      <screen x="0" y="0" width="1549" height="831" />
-    </state>
-    <state x="562" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824@0.0.1536.824" timestamp="1609410976848" />
-<<<<<<< HEAD
-    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1549.831@0.0.1549.831" timestamp="1609599535016" />
-    <state x="703" y="23" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1609421229670" />
-    <state x="585" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1609412788614">
-=======
-    <state x="567" y="18" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1549.831@0.0.1549.831" timestamp="1609330221648" />
-    <state x="585" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1609413560288">
->>>>>>> 553ac5f0378561c43d234cc651d0f21a88003290
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="585" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1609413560288" />
-    <state x="590" y="328" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1549.831@0.0.1549.831" timestamp="1609333107462" />
-    <state x="551" y="197" key="refactoring.ChangeSignatureDialog" timestamp="1609426037113">
-      <screen x="0" y="0" width="1549" height="831" />
-    </state>
-    <state x="551" y="197" key="refactoring.ChangeSignatureDialog/0.0.1549.831@0.0.1549.831" timestamp="1609426037113" />
-    <state x="432" y="189" key="run.anything.popup" timestamp="1609496683980">
-      <screen x="0" y="0" width="1549" height="831" />
-    </state>
-    <state x="432" y="189" key="run.anything.popup/0.0.1549.831@0.0.1549.831" timestamp="1609496683980" />
-    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup" timestamp="1609496393056">
-      <screen x="0" y="0" width="1549" height="831" />
-    </state>
-    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup/0.0.1549.831@0.0.1549.831" timestamp="1609496393056" />
   </component>
 </project>

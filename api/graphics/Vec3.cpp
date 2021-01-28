@@ -30,12 +30,15 @@ namespace trapdoor {
     bool Vec3::operator==(const Vec3 &v) const {
         return x == v.x && y == v.y && z == v.z;
     }
+  
+	BlockPos Vec3::toBlockPos() const {
+		auto cx = x < 0 ? x - 1 : x;
+		auto cy = y < 0 ? y - 1 : y;
+		auto cz = z < 0 ? z - 1 : z;
+		return {cx, cy, cz};
+	}
 
-    BlockPos Vec3::toBlockPos() const {
-        return {x, y, z};
-    }
-
-    std::string Vec3::toDirString() const {
+	std::string Vec3::toDirString() const {
         FACING fx = this->x > 0 ? FACING::POS_X : FACING::NEG_X;
         FACING fz = this->x > 0 ? FACING::POS_Z : FACING::NEG_Z;
         std::string s;

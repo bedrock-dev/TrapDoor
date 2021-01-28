@@ -95,6 +95,8 @@ namespace trapdoor {
 
         int operator*(const BlockPos &pos) const;
 
+        BlockPos operator+(const BlockPos &pos) const;
+
         bool operator<(const BlockPos &rhs) const;
     };
 

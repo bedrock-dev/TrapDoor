@@ -8,7 +8,7 @@
 #include "GameTick.h"
 #include "tools/DirtyLogger.h"
 #include <algorithm>
-
+#include "tools/noncopyable .h"
 namespace mod {
 
     namespace {
@@ -21,15 +21,15 @@ namespace mod {
 
     void profileEntities(trapdoor::Actor *player) {
         if (getActorProfiler().inProfiling) {
-            trapdoor::warning(player, "another profiling is running");
+            trapdoor::warning(player, "该指令运行中");
             return;
         }
 
         if (tick::getTickStatus() != tick::WorldTickStatus::Normal) {
-            trapdoor::warning(player, "you are not in normal mode,the result may be wrong");
+            trapdoor::warning(player, "现在游戏并没有处在正常模式，测量结果可能不准确");
         }
-        L_DEBUG("begin profiling");
-        info(player, "start profiling...");
+        L_DEBUG("begin actor profiling");
+        info(player, "开始测试");
         getActorProfiler().inProfiling = true;
         getActorProfiler().currentRound = getActorProfiler().totalRound;
     }
