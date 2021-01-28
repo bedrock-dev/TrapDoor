@@ -3,7 +3,7 @@ name: CMake
 on:
   push:
     branches: 
-      - 1.16.4-main
+      - 1.16.4
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
