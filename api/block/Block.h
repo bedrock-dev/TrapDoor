@@ -11,8 +11,8 @@ struct Biome;
 
 namespace trapdoor {
     enum BlockType : size_t {
-        Air = 0,
-        Dirt = 4
+//        Air = 0,
+//        Dirt = 4
     };
 
 /*

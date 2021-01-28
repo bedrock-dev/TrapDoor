@@ -6,19 +6,14 @@
       <config projectName="mod" targetName="trapdoor-mod" />
     </generated>
   </component>
-  <component name="CMakeSettings" AUTO_RELOAD="true">
+  <component name="CMakeSettings">
     <configurations>
       <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" ENABLED="true" />
       <configuration PROFILE_NAME="Release" CONFIG_NAME="Release" ENABLED="true" />
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3eb519fb-7465-437d-86d7-42a97e7c56eb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/README_en.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/tools/DirtyLogger.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/tools/DirtyLogger.cpp" afterDir="false" />
-    </list>
+    <list default="true" id="3eb519fb-7465-437d-86d7-42a97e7c56eb" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,16 +23,11 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release" />
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="1.16.4" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="GitSEFilterConfiguration">
-    <file-type-list>
-      <filtered-out-file-type name="LOCAL_BRANCH" />
-      <filtered-out-file-type name="REMOTE_BRANCH" />
-      <filtered-out-file-type name="TAG" />
-      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
-    </file-type-list>
   </component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="2tx54099" />
@@ -49,19 +39,25 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="ASKED_MARK_IGNORED_FILES_AS_EXCLUDED" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="add_unversioned_files" value="$PROJECT_DIR$/version/symbol-1164.txt&#10;C:/Users/xhy/dev/TrapDoor/version/symbol-116201.txt" />
     <property name="cf.first.check.clang-format" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\xhy\dev\TrapDoor\version" />
       <recent name="C:\Users\xhy\dev\TrapDoor\mod\os" />
     </key>
   </component>
   <component name="RunManager" selected="CMake Application.trapdoor-mod">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="trapDoorAPI" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="mod" TARGET_NAME="trapDoorAPI" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -89,31 +85,9 @@
       <workItem from="1610443690806" duration="8587000" />
       <workItem from="1610462949807" duration="89000" />
       <workItem from="1610503943412" duration="5072000" />
-      <workItem from="1610597594484" duration="6318000" />
-      <workItem from="1610606975208" duration="928000" />
-      <workItem from="1610607925929" duration="5653000" />
-      <workItem from="1610615094593" duration="4210000" />
-      <workItem from="1610679874650" duration="1649000" />
-      <workItem from="1610681580263" duration="9888000" />
-      <workItem from="1610771437009" duration="4136000" />
-      <workItem from="1610792317316" duration="3717000" />
-      <workItem from="1610809860357" duration="7000" />
-      <workItem from="1610869702211" duration="831000" />
-      <workItem from="1610881047225" duration="1110000" />
-      <workItem from="1610892184305" duration="15000" />
-      <workItem from="1610947459665" duration="4101000" />
-      <workItem from="1610963268673" duration="4161000" />
-      <workItem from="1610976855828" duration="610000" />
-      <workItem from="1611120886893" duration="7700000" />
-      <workItem from="1611205321111" duration="4489000" />
-      <workItem from="1611285100935" duration="3057000" />
-      <workItem from="1611387130792" duration="34000" />
-      <workItem from="1611459407434" duration="3013000" />
-      <workItem from="1611466274225" duration="8000" />
-      <workItem from="1611492172893" duration="1397000" />
-      <workItem from="1611565367634" duration="7361000" />
-      <workItem from="1611573279360" duration="633000" />
-      <workItem from="1611630006006" duration="438000" />
+      <workItem from="1610590311798" duration="553000" />
+      <workItem from="1610590886592" duration="2628000" />
+      <workItem from="1611715278738" duration="5493000" />
     </task>
     <servers />
   </component>

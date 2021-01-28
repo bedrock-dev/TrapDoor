@@ -8,7 +8,6 @@ else ()
 endif ()
 set(MOD_API_NAME trapDoorAPI)
 
-
 add_library(${MOD_API_NAME} STATIC
         api/BDSMod.cpp
         api/block/Block.cpp
@@ -52,6 +51,8 @@ target_include_directories(${MOD_API_NAME}
 
 target_link_libraries(${MOD_API_NAME} ${PROJECT_SOURCE_DIR}/api/lib/detours.lib)
 target_link_libraries(${MOD_API_NAME} ${PROJECT_SOURCE_DIR}/api/lib/sqlite3.lib)
+
+
 
 set(MOD_NAME trapdoor-mod)
 add_library(${MOD_NAME}

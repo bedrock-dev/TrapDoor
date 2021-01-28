@@ -15,9 +15,9 @@ namespace trapdoor {
     using namespace SymHook;
 
     void Level::forEachPlayer(const std::function<void(Actor *)> &todo) {
-        //!硬编码
-        auto begin = (uint64_t *) *((uint64_t *) this + 11);
-        auto end = (uint64_t *) *((uint64_t *) this + 12);
+        //!硬编码 from void  Level::forEachPlayer(__int64 *a1, __int64 a2)
+        auto begin = (uint64_t *) *((uint64_t *) this + 13);
+        auto end = (uint64_t *) *((uint64_t *) this + 14);
         while (begin != end) {
             auto *player = (Actor *) (*begin);
             if (player)todo(player);
@@ -75,14 +75,15 @@ namespace trapdoor {
 
     uint64_t Level::getGameTick() {
         return *SYM_CALL(uint64_t*(*)(Level * ),
-                         MSSYM_B1QE14getCurrentTickB1AA5LevelB2AAE12QEBAAEBUTickB2AAA2XZ, this);
+                         MSSYM_B1QE20getCurrentServerTickB1AA5LevelB2AAA4UEBAB1QA6BUTickB2AAA2XZ, this);
     }
 
     BlockPalette *Level::getGlobalPalette() {
+        //todo
         //from EnderMan::getCarryingBlock
         //*(v5 + 2000)
-        auto p = *(BlockPalette **) ((char *) (this) + 250);
-        printf("%p %p\n", p, &p);
+//        auto p = *(BlockPalette **) ((char *) (this) + 250);
+//        printf("%p %p\n", p, &p);
         return nullptr;
     }
 

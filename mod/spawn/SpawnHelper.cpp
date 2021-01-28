@@ -52,7 +52,7 @@ namespace mod {
         trapdoor::BlockPos topPos = {pos.x, maxY, pos.z};
         do {
             findNextSpawnPosition(player->getBlockSource(), &topPos, 41);
-            //   L_INFO("find pos %d %d %d", topPos.x, topPos.y, topPos.z);
+       //     L_DEBUG("find pos %d %d %d", topPos.x, topPos.y, topPos.z);
             if (topPos.y > 0)
                 this->verticalSpawnPositions.emplace_back(topPos.x, topPos.y, topPos.z);
         } while (topPos.y > 0);
@@ -63,12 +63,13 @@ namespace mod {
     SpawnHelper::printSpawnProbability(trapdoor::Actor *player, const trapdoor::BlockPos &pos, uint32_t bright) const {
         if (!this->enable)return;
         auto dim = player->getDimensionID();
-        int maxY = dim != 1 ? 255 : 127;
+        const int maxY = dim != 1 ? 255 : 127;
         trapdoor::BlockPos topPos = {pos.x, maxY, pos.z};
         bool isSurface = true;
         bool hasFound = false;
         while (topPos.y > 0) {
             findNextSpawnPosition(player->getBlockSource(), &topPos, 41);
+         //   L_INFO("find pos %d %d %d", topPos.x, topPos.y, topPos.z);
             if (topPos.y == pos.y) {
                 // L_INFO("pos %d %d %d  is valid spawn position surface: %d", pos.x, pos.y, pos.z, isSurface);
                 hasFound = true;
@@ -92,7 +93,7 @@ namespace mod {
         auto *bs = player->getBlockSource();
         auto *block = bs->getBlock(pos);
         std::map<std::string, int> spawnMap;
-        for (int i = 0; i < 200; ++i) {
+        for (int i = 0; i < 400; ++i) {
             auto mobData = getMobToSpawn(block->getLegacy(), conditions, bs);
             if (mobData)
                 spawnMap[mobData->getActorID()->getName()]++;
@@ -109,7 +110,7 @@ namespace mod {
         }
         builder.text(" --\n");
         for (const auto &mob:spawnMap) {
-            builder.text(mob.first).text("    ").num(mob.second * 100 / totalCount).text("%%%%\n");
+            builder.text(" - ").text(mob.first).text("    ").num(mob.second * 100 / totalCount).text("%%%%\n");
         }
         builder.send(player);
     }

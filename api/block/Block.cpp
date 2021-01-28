@@ -68,15 +68,15 @@ namespace trapdoor {
 
 using namespace SymHook;
 
-THook(
-        void,
-        MSSYM_B1QA8getBlockB1AE12BlockPaletteB2AAE13QEBAAEBVBlockB2AAA4AEBIB1AA1Z,
-        trapdoor::BlockPalette *palette,
-        size_t * id
-) {
-    if (trapdoor::bdsMod && !trapdoor::bdsMod->getPalette()) {
-        trapdoor::bdsMod->setBlockPalette(palette);
-        L_INFO("set block palette");
-    }
-    original(palette, id);
-}
+//THook(
+//        void,
+//        MSSYM_B1QA8getBlockB1AE12BlockPaletteB2AAE13QEBAAEBVBlockB2AAA4AEBIB1AA1Z,
+//        trapdoor::BlockPalette *palette,
+//        size_t * id
+//) {
+//    if (trapdoor::bdsMod && !trapdoor::bdsMod->getPalette()) {
+//        trapdoor::bdsMod->setBlockPalette(palette);
+//        L_INFO("set block palette");
+//    }
+//    original(palette, id);
+//}

@@ -38,6 +38,7 @@ namespace mod {
         this->commandManager.setCommandConfig(this->configManager.getCommandsConfig());
         this->playerStatisticManager.init("trapdoor.db");
         mod::initBackup();
+        this->initFunctionEnable();
         this->villageHelper.setConfig(this->configManager.getVillageConfig());
         get_cpu_usage();
         L_INFO("==== trapdoor init finish  ====\n Server Start");
@@ -58,34 +59,19 @@ namespace mod {
 //功能开关命令
         commandManager.registerCmd("func", "开启/关闭部分功能")
                 ->then(ARG("hopper", "开启/关闭漏斗计数器", BOOL, {
-                    if (!this->configManager.getFunctionConfig().hopperCounter) {
-                        error(player, "该功能已被关闭，请联系服主");
-                        return;
-                    }
+
                     this->hopperChannelManager.setAble(holder->getBool());
                     info(player, "设置漏斗计数器为 %d", holder->getBool());
                 }))
                 ->then(ARG("spawn", "开启/关闭刷怪指示", BOOL, {
-                    if (!this->configManager.getFunctionConfig().spawnHelper) {
-                        error(player, "该功能已被关闭，请联系服主");
-                        return;
-                    }
                     this->spawnHelper.setAble(holder->getBool());
                     info(player, "设置刷怪指示器为 %d", holder->getBool());
                 }))
                 ->then(ARG("rotate", "开启/关闭转方块", BOOL, {
-                    if (!configManager.getFunctionConfig().cactusRotation) {
-                        error(player, "该功能已被关闭，请联系服主");
-                        return;
-                    }
                     this->rotationHelper.setAble(holder->getBool());
                     info(player, "设置仙人掌转方块为 %d", holder->getBool());
                 }))
                 ->then(ARG("draw", "开启/关闭区块draw命令", BOOL, {
-                    if (!configManager.getFunctionConfig().simpleDraw) {
-                        error(player, "该功能已被关闭，请联系服主");
-                        return;
-                    }
                     this->simpleBuilder.setAble(holder->getBool());
                     info(player, "设置简单建造为 %d", holder->getBool());
                 }))
@@ -132,12 +118,6 @@ namespace mod {
                           player->setGameMode(4);
                           broadcastMsg("设置玩家[%s]为观察者模式", player->getNameTag().c_str());
                       });
-
-//        commandManager.registerCmd("o", "test")
-//                ->then(ARG("s", "cc", INT, {
-//                    player->setGameMode(holder->getInt());
-//                    broadcastMsg("设置玩家[%s]为模式 %d", player->getNameTag().c_str(), holder->getInt());
-//                }));
 
         commandManager.registerCmd("s", "切换到生存模式")
                 ->EXE({
@@ -400,5 +380,14 @@ namespace mod {
         } else {
             return true;
         }
+    }
+
+    void TrapdoorMod::initFunctionEnable() {
+        auto functionCfg = this->configManager.getFunctionConfig();
+        this->spawnHelper.setAble(functionCfg.spawnHelper);
+        this->rotationHelper.setAble(functionCfg.cactusRotation);
+        this->playerStatisticManager.setAble(functionCfg.playerStat);
+        this->simpleBuilder.setAble(functionCfg.simpleDraw);
+        this->hopperChannelManager.setAble(functionCfg.hopperCounter);
     }
 }

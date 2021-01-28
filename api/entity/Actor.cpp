@@ -54,7 +54,7 @@ namespace trapdoor {
 
     BlockSource *Actor::getBlockSource() {
         //!from Player::tickWorld
-        return *((struct BlockSource **) this + 100);
+        return *((struct BlockSource **) this + 105);
     }
 
     void Actor::setGameMode(int mode) {
@@ -85,8 +85,8 @@ namespace trapdoor {
     }
 
     NetworkIdentifier *Actor::getClientID() {
-        //  ServerPlayer::isHostingPlayer
-        return reinterpret_cast<NetworkIdentifier *>((char *) this + 2432);
+        // ！from  ServerPlayer::isHostingPlayer
+        return reinterpret_cast<NetworkIdentifier *>((char *) this + 2536);
     }
 
     PlayerPermissionLevel Actor::getCommandLevel() {

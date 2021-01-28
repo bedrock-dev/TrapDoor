@@ -20,9 +20,10 @@ namespace mod {
     };
 
     //!这个类不要做任何修改
+    //! from  POIInstance::POIInstance
     class POIInstance {
     public:
-        char gap[0x80];
+        char gap[0x98];
         trapdoor::BlockPos poiPos; //位置
         uint64_t ownerCount = 0; //拥有者数量
         uint64_t ownerCapacity = 0; //容量

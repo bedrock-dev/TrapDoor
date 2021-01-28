@@ -22,6 +22,7 @@ namespace trapdoor {
                 MSSYM_B1QA8getBlockB1AE11BlockSourceB2AAE13QEBAAEBVBlockB2AAE12AEBVBlockPosB3AAAA1Z, this,
                 blockPos
         );
+        //    return getBlock(blockPos.x, blockPos.y, blockPos.z);
     }
 
     void BlockSource::setBlock(BlockPos *blockPos, Block *block) {
@@ -60,21 +61,21 @@ namespace trapdoor {
                 );
     }
 
-    uint8_t BlockSource::getRawBrightness(const BlockPos *pos) {
-        uint8_t result = 255;
-        auto r = SYM_CALL(
-                uint8_t *(*)(BlockSource * , uint8_t *,const BlockPos *, bool, bool),
-                MSSYM_B1QE16getRawBrightnessB1AE11BlockSourceB2AAA4QEBAB1QE12AUBrightnessB2AAE12AEBVBlockPosB3AAUA2N1B1AA1Z,
-                this,
-                &result,
-                pos,
-                true,
-                true
-        );
-        printf("%d %d\n", result, *r);
-        return result;
-
-    }
+//    uint8_t BlockSource::getRawBrightness(const BlockPos *pos) {
+//        uint8_t result = 255;
+//        auto r = SYM_CALL(
+//                uint8_t *(*)(BlockSource * , uint8_t *,const BlockPos *, bool, bool),
+//                MSSYM_B1QE16getRawBrightnessB1AE11BlockSourceB2AAA4QEBAB1QE12AUBrightnessB2AAE12AEBVBlockPosB3AAUA2N1B1AA1Z,
+//                this,
+//                &result,
+//                pos,
+//                true,
+//                true
+//        );
+//        printf("%d %d\n", result, *r);
+//        return result;
+//
+//    }
 
     int BlockSource::getMaterial(const BlockPos *pos) {
         return
