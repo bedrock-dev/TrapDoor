@@ -35,6 +35,7 @@ namespace mod::tick {
         /*
          * 这个函数也是每gt执行一次的，但是不经过 TrapdoorMod,因此用static 来表示
          */
+
         void staticWork() {
             //实体性能分析的更新
             if (mod::tick::getActorProfiler().inProfiling) {
@@ -54,9 +55,9 @@ namespace mod::tick {
             if (tickStatus != WorldTickStatus::Frozen) {
                 tickStatus = WorldTickStatus::Frozen;
                 L_DEBUG("freeze world");
-                broadcastMsg("world has frozen!");
+                broadcastMsg("世界运行已停止");
             } else {
-                broadcastMsg("it's in frozen state now");
+                broadcastMsg("已经是停止状态");
             }
         }
     }
@@ -66,17 +67,17 @@ namespace mod::tick {
             tickStatus = WorldTickStatus::Normal;
             L_DEBUG("reset world");
         }
-        broadcastMsg("world has reset to normal status");
+        broadcastMsg("已重置世界运行为正常状态");
     }
 
     void wrapTick(size_t speed) {
         if (tickStatus == WorldTickStatus::Normal) {
-            broadcastMsg("world begin warp");
+            broadcastMsg("世界开始以%zu倍速运行(理论值)", speed);
             tickStatus = WorldTickStatus::Wrap;
             L_DEBUG("begin wrap world %d", speed);
             wrapSpeed = speed;
         } else {
-            broadcastMsg("this command can only be run in normal mode");
+            broadcastMsg("世界不是正常状态，无法使用加速");
         }
     }
 
@@ -85,37 +86,38 @@ namespace mod::tick {
             forwardTickNum = tickNum;
             lastTickStats = tickStatus;
             tickStatus = WorldTickStatus::Forward;
-            broadcastMsg("forwarding start, %d tick last", tickNum);
+            if (tickNum > 1200)
+                broadcastMsg("开始前进，还剩 %zu gt", tickNum);
             L_DEBUG("begin forward %d tick", tickNum);
         } else {
-            broadcastMsg("this command can't be run in slow or wrap mode");
+            broadcastMsg("这个指令只能在正常或者暂停状态下运行");
         }
     }
 
 
     void slowTick(size_t slowSpeed) {
         if (tickStatus == WorldTickStatus::Normal) {
-            broadcastMsg("world has slowed %d times\n", slowSpeed);
+            broadcastMsg("世界现在以 %zu 的速度放慢运行", slowSpeed);
             L_DEBUG("slow world %d times", slowSpeed);
             tickStatus = WorldTickStatus::Slow;
             SlowDownTimes = slowSpeed;
         } else {
-            broadcastMsg("this command must be run at normal status\n");
+            broadcastMsg("现在处于非正常状态，无法减速\n");
         }
     }
 
 
     void profileWorld(trapdoor::Actor *player) {
         if (gameProfiler.inProfiling) {
-            trapdoor::warning(player, "another profiling is running");
+            trapdoor::warning(player, "另外一个分析器在运行中");
             return;
         }
 
         if (tickStatus != WorldTickStatus::Normal) {
-            trapdoor::warning(player, "you are not in normal mode,the result may be wrong");
+            trapdoor::warning(player, "世界不在正常状态，性能分析可能不准确");
         }
         L_DEBUG("begin profiling");
-        info(player, "start profiling...");
+        info(player, "开始分析...");
         gameProfiler.inProfiling = true;
         gameProfiler.currentRound = gameProfiler.totalRound;
     }
@@ -130,17 +132,37 @@ namespace mod::tick {
 
     void profileEntities(trapdoor::Actor *player) {
         if (getActorProfiler().inProfiling) {
-            trapdoor::warning(player, "another profiling is in running");
+            trapdoor::warning(player, "另外一个分析在运行中");
             return;
         }
 
         if (tick::getTickStatus() != tick::WorldTickStatus::Normal) {
-            trapdoor::warning(player, "you are not in normal mode,the result may be wrong");
+            trapdoor::warning(player, "世界不在正常状态，性能分析可能不准确");
         }
         L_DEBUG("begin profiling");
-        info(player, "start entities profiling...");
+        info(player, "开始实体性能分析...");
         getActorProfiler().inProfiling = true;
         getActorProfiler().currentRound = getActorProfiler().totalRound;
+    }
+
+    void queryStatus(trapdoor::Actor *player) {
+        switch (tickStatus) {
+            case Frozen:
+                info(player, "暂停");
+                return;
+            case Normal:
+                info(player, "正常");
+                return;
+            case Slow:
+                info(player, "放慢%d倍", tick::SlowDownTimes);
+                return;
+            case Forward:
+                info(player, "快进");
+                return;
+            case Wrap:
+                info(player, "加速%d倍", tick::wrapSpeed);
+                return;
+        }
     }
 }
 
@@ -151,8 +173,6 @@ THook(
         MSSYM_B1QA4tickB1AE11ServerLevelB2AAA7UEAAXXZ,
         trapdoor::Level * serverLevel
 ) {
-
-
     if (!trapdoor::bdsMod) {
         L_ERROR("mod is nullptr");
     }
@@ -178,7 +198,8 @@ THook(
                 if (mod::tick::isMSPTing) {
                     auto mspt = (double) timeReslut / 1000;
                     int tps = mspt <= 50 ? 20 : (int) (1000.0 / mspt);
-                    trapdoor::broadcastMsg("mspt: %.3lf ms tps: %d", mspt, tps);
+                    bool isRedstoneTick = modInstance->getLevel()->getDimFromID(0)->isRedstoneTick();
+                    trapdoor::broadcastMsg("r:%d mspt: %.3lf ms tps: %d ", isRedstoneTick, mspt, tps);
                     mod::tick::isMSPTing = false;
                 }
                 if (mod::tick::gameProfiler.inProfiling) {
@@ -198,7 +219,6 @@ THook(
             }
             break;
 
-
         case mod::tick::Slow:
             if (mod::tick::slowDownCounter % mod::tick::SlowDownTimes == 0) {
                 original(serverLevel);
@@ -212,7 +232,7 @@ THook(
                 original(serverLevel);
                 modInstance->lightTick();
             }
-            trapdoor::broadcastMsg("forwarding end\n%d tick passed", mod::tick::forwardTickNum);
+            trapdoor::broadcastMsg("%d gt 过去了", mod::tick::forwardTickNum);
             mod::tick::forwardTickNum = 0;
             mod::tick::tickStatus = mod::tick::lastTickStats;
             break;
@@ -369,8 +389,7 @@ THook(
     } else {
         original(dim);
     }
-    // auto v1 = *((int *) globalDimension + 69);
-    // auto v2 = *((int *) globalDimension + 68);
+
     // printf("69%d 68%d\n", v1, v2);
     // printf("69:%d 68:%d\n", v1, v2);
 }

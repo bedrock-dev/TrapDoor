@@ -25,8 +25,14 @@ namespace mod {
         const std::string modVersion = "trapdoor-0.9.20";
     };
 
+    struct SingleFunction {
+        bool preventExplosion = false;
+        bool preventNCUpdate = false;
+    };
+
     class TrapdoorMod : public trapdoor::BDSMod {
     private:
+        SingleFunction singleFunctions;
         HopperChannelManager hopperChannelManager;
         VillageHelper villageHelper;
         HsaManager hsaManager;
@@ -41,6 +47,7 @@ namespace mod {
 
         void registerTickCommand();
 
+        void initFunctionEnable();
 
     public:
         ModInfo modeInfo;
@@ -57,6 +64,7 @@ namespace mod {
 
         void useOnHook(Actor *player, const std::string &itemName, BlockPos &pos, unsigned int facing,
                        const Vec3 &) override;
+
 
         CommandPermissionLevel
         resetVanillaCommandLevel(const std::string &name, CommandPermissionLevel oldLevel) override;
@@ -84,7 +92,7 @@ namespace mod {
 
         inline std::string getLevelName() { return this->configManager.getServerConfig().levelName; }
 
-
+        inline SingleFunction getSingFunction() { return this->singleFunctions; }
     };
 }
 

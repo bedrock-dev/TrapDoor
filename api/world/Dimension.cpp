@@ -24,4 +24,11 @@ namespace trapdoor {
         uint64_t *circuitSystem = reinterpret_cast<uint64_t *>(this) + 33;
         return reinterpret_cast<CircuitSceneGraph *> (*circuitSystem + 8);
     }
+
+    bool Dimension::isRedstoneTick() {
+        //为1是红石刻2是非红石刻
+        return *((uint32_t *) this + 69) == 1;
+        //  auto v2 = *((uint32_t *) this + 68); //恒定为2,也就是多少gt才过一个红石刻
+        // printf("%d %d\n", v1, v2);
+    }
 }

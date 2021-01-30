@@ -76,7 +76,7 @@ THook(
 ) {
     if (trapdoor::bdsMod && !trapdoor::bdsMod->getPalette()) {
         trapdoor::bdsMod->setBlockPalette(palette);
-        L_INFO("set block palette");
+        // L_INFO("set block palette");
     }
     original(palette, id);
 }

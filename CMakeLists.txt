@@ -36,8 +36,7 @@ add_library(${MOD_API_NAME} STATIC
         api/tools/Message.cpp
         api/tools/MsgBuilder.cpp
         api/tools/ThreadPool.h
-        api/world/LevelChunk.cpp
-        "api/tools/noncopyable .h")
+        api/world/LevelChunk.cpp)
 target_include_directories(${MOD_API_NAME}
         PUBLIC
         api
@@ -58,7 +57,7 @@ add_library(${MOD_NAME}
         SHARED
         mod/dllmain.cpp
         mod/TrapdoorMod.cpp
-        mod/function/Explosion.cpp
+        mod/function/SingleFunctions.cpp
         mod/hopper/HopperCounter.cpp
         mod/config/ConfigManager.cpp
         mod/village/Village.cpp

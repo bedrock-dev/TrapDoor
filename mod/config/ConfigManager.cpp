@@ -87,7 +87,7 @@ namespace mod {
         try {
             auto funcConfig = this->configJson["functionsEnable"];
             this->functionConfig.hopperCounter = funcConfig["hopperCounter"].get<bool>();
-            this->functionConfig.explosion = funcConfig["explosion"].get<bool>();
+            //    this->functionConfig.explosion = funcConfig["explosion"].get<bool>();
             this->functionConfig.spawnHelper = funcConfig["spawnHelper"].get<bool>();
             this->functionConfig.cactusRotation = funcConfig["cactusRotate"].get<bool>();
             this->functionConfig.simpleDraw = funcConfig["simpleDraw"].get<bool>();

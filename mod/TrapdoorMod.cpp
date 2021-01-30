@@ -19,7 +19,6 @@
 
 namespace mod {
     void TrapdoorMod::heavyTick() {
-
         this->villageHelper.tick();
         this->hsaManager.tick();
         this->spawnHelper.tick();
@@ -29,7 +28,7 @@ namespace mod {
 
     void TrapdoorMod::lightTick() {
         this->hopperChannelManager.tick();
-        this->spawnAnalyzer.tick();
+        //   this->spawnAnalyzer.tick();
     }
 
 //这个函数会在初始化Level对象后执行
@@ -40,7 +39,8 @@ namespace mod {
         mod::initBackup();
         this->villageHelper.setConfig(this->configManager.getVillageConfig());
         get_cpu_usage();
-        L_INFO("==== trapdoor init finish  ====\n Server Start");
+        this->initFunctionEnable();
+        L_INFO("==== trapdoor init finish  ====\nServer Start");
     }
 
     void TrapdoorMod::registerCommands() {
@@ -58,46 +58,34 @@ namespace mod {
 //功能开关命令
         commandManager.registerCmd("func", "开启/关闭部分功能")
                 ->then(ARG("hopper", "开启/关闭漏斗计数器", BOOL, {
-                    if (!this->configManager.getFunctionConfig().hopperCounter) {
-                        error(player, "该功能已被关闭，请联系服主");
-                        return;
-                    }
                     this->hopperChannelManager.setAble(holder->getBool());
                     info(player, "设置漏斗计数器为 %d", holder->getBool());
                 }))
                 ->then(ARG("spawn", "开启/关闭刷怪指示", BOOL, {
-                    if (!this->configManager.getFunctionConfig().spawnHelper) {
-                        error(player, "该功能已被关闭，请联系服主");
-                        return;
-                    }
+
                     this->spawnHelper.setAble(holder->getBool());
                     info(player, "设置刷怪指示器为 %d", holder->getBool());
                 }))
                 ->then(ARG("rotate", "开启/关闭转方块", BOOL, {
-                    if (!configManager.getFunctionConfig().cactusRotation) {
-                        error(player, "该功能已被关闭，请联系服主");
-                        return;
-                    }
                     this->rotationHelper.setAble(holder->getBool());
                     info(player, "设置仙人掌转方块为 %d", holder->getBool());
                 }))
                 ->then(ARG("draw", "开启/关闭区块draw命令", BOOL, {
-                    if (!configManager.getFunctionConfig().simpleDraw) {
-                        error(player, "该功能已被关闭，请联系服主");
-                        return;
-                    }
                     this->simpleBuilder.setAble(holder->getBool());
                     info(player, "设置简单建造为 %d", holder->getBool());
                 }))
                 ->then(ARG("stat", "开启/关闭玩家行为统计", BOOL, {
-                    if (!configManager.getFunctionConfig().playerStat) {
-                        error(player, "该功能已被关闭，请联系服主");
-                        return;
-                    }
                     this->playerStatisticManager.setAble(holder->getBool());
                     info(player, "设置玩家行为统计为 %d", holder->getBool());
+                }))
+                ->then(ARG("expl", "开启/关闭爆炸破坏地形", BOOL, {
+                    this->singleFunctions.preventExplosion = holder->getBool();
+                    info(player, "设置爆炸破坏地形 %d", holder->getBool());
+                }))
+                ->then(ARG("ncud", "开启/关闭阻止NE更新", BOOL, {
+                    this->singleFunctions.preventNCUpdate = holder->getBool();
+                    info(player, "设置阻止NC更新为 %d", holder->getBool());
                 }));
-
         //史莱姆显示
         commandManager.registerCmd("slime", "史莱姆区块相关")
                 ->then(ARG("show", "显示史莱姆区块", BOOL, {
@@ -133,12 +121,6 @@ namespace mod {
                           broadcastMsg("设置玩家[%s]为观察者模式", player->getNameTag().c_str());
                       });
 
-//        commandManager.registerCmd("o", "test")
-//                ->then(ARG("s", "cc", INT, {
-//                    player->setGameMode(holder->getInt());
-//                    broadcastMsg("设置玩家[%s]为模式 %d", player->getNameTag().c_str(), holder->getInt());
-//                }));
-
         commandManager.registerCmd("s", "切换到生存模式")
                 ->EXE({
                           player->setGameMode(0);
@@ -167,11 +149,11 @@ namespace mod {
                 }))
                 ->then(ARG("s", "显示铁傀儡刷新区域", BOOL, {
                     this->villageHelper.setShowGolemSpawnArea(holder->getBool());
-                    info(player, "设置村庄边框显示为 %d", holder->getBool());
+                    info(player, "设置铁傀儡刷怪显示为 %d", holder->getBool());
                 }))
                 ->then(ARG("c", "显示村庄中心", BOOL, {
                     this->villageHelper.setShowVillageCenter(holder->getBool());
-                    info(player, "设置村庄边框显示为 %d", holder->getBool());
+                    info(player, "设置村庄中心显示为 %d", holder->getBool());
                 }))
                 ->then(ARG("v", "显示村民信息", BOOL, {
                     this->villageHelper.setShowDwellerStatus(holder->getBool());
@@ -208,7 +190,6 @@ namespace mod {
                            }))
                 ->then(ARG("draw", "draw hsa", NONE, { hsaManager.draw(player); }));
 
-
         commandManager.registerCmd("draw", "简单建造")
                 ->then(ARG("ci", "画圆", INT,
                            {
@@ -231,6 +212,7 @@ namespace mod {
                     if (radius < 0) {
                         error(player, "参数不合法(必须>=1)");
                     } else {
+                        info(player, "已设置最大半径为%d", radius);
                         this->simpleBuilder.setMaxRadius(radius);
                     }
                 }));
@@ -266,7 +248,7 @@ namespace mod {
                         return;
                     }
                     this->playerFunctions.getMeasureData(player->getNameTag()).enableMeasure = holder->getBool();
-                    info(player, "设置你的测量开启/关闭 %d", holder->getBool());
+                    info(player, "设置你的测量w为 %d", holder->getBool());
                 }))
                 ->then(ARG("rs", "测量", BOOL, {
                     if (!configManager.getSelfEnableConfig().enableRedstoneStick) {
@@ -274,9 +256,10 @@ namespace mod {
                         return;
                     }
                     this->playerFunctions.setRedstoneHelperAble(player->getNameTag(), holder->getBool());
-                    info(player, "设置你的信号源提示开启/关闭 %d", holder->getBool());
+                    info(player, "设置你的信号源提示为 %d", holder->getBool());
                 }))
                 ->EXE({ PlayerFunction::printInfo(player); });
+
 
         commandManager.registerCmd("os", "显示服务器信息")
                 ->EXE({ TrapdoorMod::printOSInfo(player); });
@@ -293,7 +276,7 @@ namespace mod {
                     if (slowTime > 1 && slowTime <= 64) {
                         tick::slowTick(slowTime);
                     } else {
-                        error(player, "number must in [2-64]");
+                        error(player, "放慢倍数必须在 [2-64] 之间");
                     }
                 }))
                 ->then(ARG("acc", "加速世界运行[num]倍速", INT, {
@@ -309,6 +292,9 @@ namespace mod {
                 }))
                 ->then(ARG("fw", "世界运行步进[num] gt", INT, {
                     tick::forwardTick(holder->getInt());
+                }))
+                ->then(ARG("q", "查询当前世界状态", NONE, {
+                    tick::queryStatus(player);
                 }));
 
     }
@@ -360,7 +346,6 @@ namespace mod {
         }
     }
 
-
     CommandPermissionLevel
     TrapdoorMod::resetVanillaCommandLevel(const std::string &name, CommandPermissionLevel oldLevel) {
         auto lowLevelConfig = this->configManager.getLowLevelCommands();
@@ -400,5 +385,14 @@ namespace mod {
         } else {
             return true;
         }
+    }
+
+    void TrapdoorMod::initFunctionEnable() {
+        auto functionCfg = this->configManager.getFunctionConfig();
+        this->spawnHelper.setAble(functionCfg.spawnHelper);
+        this->rotationHelper.setAble(functionCfg.cactusRotation);
+        this->playerStatisticManager.setAble(functionCfg.playerStat);
+        this->simpleBuilder.setAble(functionCfg.simpleDraw);
+        this->hopperChannelManager.setAble(functionCfg.hopperCounter);
     }
 }
