@@ -13,20 +13,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3eb519fb-7465-437d-86d7-42a97e7c56eb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/mod/function/SingleFunctions.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/block/Block.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/block/Block.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/world/Dimension.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/world/Dimension.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/world/Dimension.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/world/Dimension.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/TrapdoorMod.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/TrapdoorMod.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/TrapdoorMod.h" beforeDir="false" afterPath="$PROJECT_DIR$/mod/TrapdoorMod.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/config/ConfigManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/config/ConfigManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/function/Explosion.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/tick/GameTick.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/tick/GameTick.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/tick/GameTick.h" beforeDir="false" afterPath="$PROJECT_DIR$/mod/tick/GameTick.h" afterDir="false" />
-    </list>
+    <list default="true" id="3eb519fb-7465-437d-86d7-42a97e7c56eb" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -70,11 +57,6 @@
     </key>
   </component>
   <component name="RunManager" selected="CMake Application.trapdoor-mod">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="trapDoorAPI" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="mod" TARGET_NAME="trapDoorAPI" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -134,6 +116,7 @@
       <workItem from="1612005724274" duration="600000" />
       <workItem from="1612014520323" duration="404000" />
       <workItem from="1612016504130" duration="2485000" />
+      <workItem from="1612019061794" duration="283000" />
     </task>
     <servers />
   </component>
