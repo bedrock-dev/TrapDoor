@@ -1,4 +1,4 @@
-![](img/logo.png)
+![](img/logo.png)<br>
 简体中文 |[English](./README_en.md)
 
 ## 这是什么
@@ -46,7 +46,7 @@ Trapdoor是一个为 Minecraft Bedrock Edition 服务的，基于原版服务端
 - 梵蒂冈_273
 - OEOTYAN
 - Origin 0110
-
+- 阿阎mr
 ## 代码贡献者
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
@@ -67,5 +67,4 @@ Trapdoor是一个为 Minecraft Bedrock Edition 服务的，基于原版服务端
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ## license
-
 GPL
