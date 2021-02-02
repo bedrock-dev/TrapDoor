@@ -2,7 +2,7 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="mod" targetName="trapDoorAPI" />
+      <config projectName="mod" targetName="libtrapdoor" />
       <config projectName="mod" targetName="trapdoor-mod" />
     </generated>
   </component>
@@ -14,12 +14,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3eb519fb-7465-437d-86d7-42a97e7c56eb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/mod/function/BetterTps.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/trapdoor.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/lib/SymHook.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/lib/SymHook.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/lib/CppEval.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/lib/CppEval.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/tools/Message.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/tools/Message.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mod/TrapdoorMod.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/TrapdoorMod.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/TrapdoorMod.h" beforeDir="false" afterPath="$PROJECT_DIR$/mod/TrapdoorMod.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/eval/eval.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/eval/Eval.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/eval/eval.h" beforeDir="false" afterPath="$PROJECT_DIR$/mod/eval/Eval.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +31,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -70,7 +72,7 @@
         <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration name="trapDoorAPI" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="mod" TARGET_NAME="trapDoorAPI" CONFIG_NAME="Debug">
+    <configuration name="libtrapdoor" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="mod" TARGET_NAME="libtrapdoor" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -81,7 +83,7 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="CMake Application.trapDoorAPI" />
+      <item itemvalue="CMake Application.libtrapdoor" />
       <item itemvalue="CMake Application.trapdoor-mod" />
     </list>
   </component>
@@ -133,6 +135,8 @@
       <workItem from="1612190220182" duration="1962000" />
       <workItem from="1612235694813" duration="61000" />
       <workItem from="1612250111374" duration="622000" />
+      <workItem from="1612251147071" duration="638000" />
+      <workItem from="1612252130378" duration="3184000" />
     </task>
     <servers />
   </component>

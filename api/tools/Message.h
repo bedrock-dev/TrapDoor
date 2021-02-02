@@ -55,13 +55,14 @@ namespace trapdoor {
         trapdoor::bdsMod->getLevel()->forEachPlayer([&msg](Actor *player) {
             mcbe_sendMessage(msg, player);
         });
-	}
-	template <typename... Args>
-	void evalMsg(const std::string& fmt, Args... args) {
-		auto msg = format(fmt, args...);
-		trapdoor::bdsMod->getLevel()->forEachPlayer(
-			[&msg](Actor* player) { mcbe_sendMessage(msg, player); });
-	}
+    }
+
+    template<typename... Args>
+    void evalMsg(const std::string &fmt, Args... args) {
+        auto msg = format(fmt, args...);
+        trapdoor::bdsMod->getLevel()->forEachPlayer(
+                [&msg](Actor *player) { mcbe_sendMessage(msg, player); });
+    }
 }
 
 

@@ -1,14 +1,17 @@
 cmake_minimum_required(VERSION 3.17)
 project(mod)
 set(CMAKE_CXX_STANDARD 17)
+
+#因为ABI原因这个项目只能msvc编译
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
     add_compile_options(/wd4828 /wd4819 /EHsc /utf-8)
 else ()
     message(this project don't support GNU gcc or clang,please use MSVC instead)
 endif ()
-set(MOD_API_NAME trapDoorAPI)
 
-
+set(MOD_API_NAME libtrapdoor)
+aux_source_directory(${PROJECT_SOURCE_DIR}/api MOD_API_SRC)
+#add_library(${MOD_API_NAME} STATIC ${MOD_API_SRC})
 add_library(${MOD_API_NAME} STATIC
         api/BDSMod.cpp
         api/block/Block.cpp
@@ -77,7 +80,7 @@ add_library(${MOD_NAME}
         mod/function/BackupHelper.cpp
         mod/os/process_stat.cpp
         mod/village/POIInstance.cpp
-        mod/function/BetterTps.cpp
+        mod/eval/Eval.cpp
         )
 
 target_include_directories(
