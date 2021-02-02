@@ -28,6 +28,7 @@ namespace mod {
     struct SingleFunction {
         bool preventExplosion = false;
         bool preventNCUpdate = false;
+        bool enableBetterMspt = false;
     };
 
     class TrapdoorMod : public trapdoor::BDSMod {

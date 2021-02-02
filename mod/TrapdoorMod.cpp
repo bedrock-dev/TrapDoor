@@ -53,6 +53,8 @@ namespace mod {
                 ->then(ARG("actor", "实体更新性能分析", NONE, {
                     tick::profileEntities(player);
                 }))
+
+
                 ->EXE({ tick::profileWorld(player); });
         commandManager.registerCmd("mspt", "展示MSPT和TPS")->EXE({ tick::mspt(); });
 //功能开关命令
@@ -85,6 +87,10 @@ namespace mod {
                 ->then(ARG("ncud", "开启/关闭阻止NE更新", BOOL, {
                     this->singleFunctions.preventNCUpdate = holder->getBool();
                     info(player, "设置阻止NC更新为 %d", holder->getBool());
+                }))
+                ->then(ARG("tps", "开启/关闭TPS优化", BOOL, {
+                    this->singleFunctions.enableBetterMspt = holder->getBool();
+                    info(player, "设置TPS优化为 %d", holder->getBool());
                 }));
         //史莱姆显示
         commandManager.registerCmd("slime", "史莱姆区块相关")

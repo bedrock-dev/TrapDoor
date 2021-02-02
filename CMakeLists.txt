@@ -77,6 +77,7 @@ add_library(${MOD_NAME}
         mod/function/BackupHelper.cpp
         mod/os/process_stat.cpp
         mod/village/POIInstance.cpp
+        mod/function/BetterTps.cpp
         )
 
 target_include_directories(
