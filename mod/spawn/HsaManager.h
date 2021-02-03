@@ -52,6 +52,8 @@ namespace mod {
         inline void setAble(bool able) { this->enable = able; };
 
         void tick();
+
+        void registerCommand(trapdoor::CommandManager &commandManager);
     };
 }  // namespace mod
 

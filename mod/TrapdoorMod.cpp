@@ -17,14 +17,23 @@
 #include "tools/MsgBuilder.h"
 #include "block/Block.h"
 #include "eval/Eval.h"
+#include "trapdoor.h"
+#include "block/BlockLegacy.h"
+#include "VanillaBlockType.h"
 
 namespace mod {
+    bool test(const trapdoor::BlockLegacy &l) {
+        printf("qaq\n");
+        return true;
+    }
+
     void TrapdoorMod::heavyTick() {
         this->villageHelper.tick();
         this->hsaManager.tick();
         this->spawnHelper.tick();
         this->playerFunctions.tick();
         this->slimeChunkHelper.tick();
+        this->simpleLitematica.tick();
     }
 
     void TrapdoorMod::lightTick() {
@@ -42,22 +51,21 @@ namespace mod {
         this->villageHelper.setConfig(this->configManager.getVillageConfig());
         get_cpu_usage();
         this->initFunctionEnable();
+        initBlockMap();
         L_INFO("==== trapdoor init finish  ====\nServer Start");
     }
 
     void TrapdoorMod::registerCommands() {
         using namespace trapdoor;
         BDSMod::registerCommands();
-        // tick
-        this->registerTickCommand();
-        //性能分析
-        commandManager.registerCmd("prof", "游戏性能分析")
-                ->then(ARG("actor", "实体更新性能分析", NONE,
-                           { tick::profileEntities(player); }))
-                ->EXE({ tick::profileWorld(player); });
-        commandManager.registerCmd("mspt", "展示MSPT和TPS")->EXE({
-                                                                  tick::mspt();
-                                                              });
+        tick::registerTickCommand(this->commandManager);
+        tick::registerProfileCommand(this->commandManager);
+        this->simpleBuilder.registerDrawCommand(this->commandManager);
+        this->simpleLitematica.registerCommand(this->commandManager);
+        this->hopperChannelManager.registerCommand(this->commandManager);
+        this->villageHelper.registerCommand(this->commandManager);
+        this->hopperChannelManager.registerCommand(this->commandManager);
+        this->registerDevCommand();
         //功能开关命令
         commandManager.registerCmd("func", "开启/关闭部分功能")
                 ->then(
@@ -99,40 +107,10 @@ namespace mod {
                     this->singleFunctions.preventNCUpdate = holder->getBool();
                     info(player, "设置阻止NC更新为 %d", holder->getBool());
                 }));
+
         //史莱姆显示
-        commandManager.registerCmd("slime", "史莱姆区块相关")
-                ->then(ARG("show", "显示史莱姆区块", BOOL,
-                           {
-                               this->slimeChunkHelper.setAble(holder->getBool());
-                               //    this->slimeChunkHelper.updateChunkPosList();
-                               //   this->slimeChunkHelper.draw();
-                               broadcastMsg("设置史莱姆区块显示为 %d",
-                                            holder->getBool());
-                           }))
-                ->then(ARG("c", "清除缓存并重新绘制", NONE,
-                           {
-                               this->slimeChunkHelper.updateChunkPosList();
-                               this->slimeChunkHelper.draw();
-                               broadcastMsg("已经清除史莱姆区块缓存");
-                           }))
-                ->then(ARG("r", "设置显示半径", INT, {
-                    this->slimeChunkHelper.setRadius(holder->getInt());
-                    this->slimeChunkHelper.updateChunkPosList();
-                    this->slimeChunkHelper.draw();
-                    broadcastMsg("已经清除史莱姆区块缓存");
-                }));
+        this->slimeChunkHelper.registerCommand(this->commandManager);
         //漏斗计数器
-        commandManager.registerCmd("counter", "漏斗计数器相关功能")
-                ->then(Arg("r", "重置频道 [num]", ArgType::INT)
-                               ->execute([this](ArgHolder *holder, Actor *player) {
-                                   this->hopperChannelManager.resetChannel(
-                                           player, holder->getInt());
-                               }))
-                ->then(Arg("p", "打印频道信息 [num]", ArgType::INT)
-                               ->execute([this](ArgHolder *holder, Actor *player) {
-                                   this->hopperChannelManager.printChannel(
-                                           player, holder->getInt());
-                               }));
 
         //便捷模式切换
         commandManager.registerCmd("o", "切换到观察者模式")->EXE({
@@ -154,103 +132,11 @@ namespace mod {
                                                         });
 
         //村庄
-        commandManager.registerCmd("village", "村庄相关功能")
-                ->then(ARG("list", "显示所有正在加载的村庄", NONE,
-                           { this->villageHelper.list(player); }))
-                ->then(ARG("b", "显示村庄边框", BOOL,
-                           {
-                               this->villageHelper.setShowBound(holder->getBool());
-                               info(player, "设置村庄边框显示为 %d",
-                                    holder->getBool());
-                           }))
-                ->then(ARG(
-                               "p", "显示POI查询范围", BOOL,
-                               {
-                                   this->villageHelper.setShowPOIRange(holder->getBool());
-                                   info(player, "设置村庄边框显示为 %d", holder->getBool());
-                               }))
-                ->then(ARG("s", "显示铁傀儡刷新区域", BOOL,
-                           {
-                               this->villageHelper.setShowGolemSpawnArea(
-                                       holder->getBool());
-                               info(player, "设置铁傀儡刷怪显示为 %d",
-                                    holder->getBool());
-                           }))
-                ->then(ARG(
-                               "c", "显示村庄中心", BOOL,
-                               {
-                                   this->villageHelper.setShowVillageCenter(holder->getBool());
-                                   info(player, "设置村庄中心显示为 %d", holder->getBool());
-                               }))
-                ->then(ARG(
-                               "v", "显示村民信息", BOOL,
-                               {
-                                   this->villageHelper.setShowDwellerStatus(holder->getBool());
-                                   info(player, "设置显示村民信息为 %d", holder->getBool());
-                               }))
-                ->then(ARG("n", "显示最近村庄的详细信息", NONE,
-                           {
-                               this->villageHelper.printNearestVillageInfo(
-                                       player, *player->getPos());
-                           }))
-
-                ->then(ARG("test", "???", NONE, {
-                    trapdoor::warning(player, "you are not developer");
-                    //   this->villageHelper.test();
-                }));
 
         commandManager.registerCmd("td?", "显示帮助")->EXE({
                                                            this->commandManager.printfHelpInfo(player);
                                                        });
-        commandManager.registerCmd("hsa", "hsa显示相关")
-                ->then(ARG("clear", "清空hsa缓存", NONE,
-                           {
-                               auto num = hsaManager.clear();
-                               broadcastMsg("一共 %d 个hsa区域被清空", num);
-                           }))
-                ->then(ARG("list", "列出目前所有的hsa", NONE,
-                           { hsaManager.list(player); }))
-                ->then(ARG("show", "开启hsa显示", BOOL,
-                           {
-                               hsaManager.setAble(holder->getBool());
-                               info(player, "设置HSA显示为 %d", holder->getBool());
-                           }))
-                ->then(ARG("find", "find the best pos", NONE,
-                           {
-                               broadcastMsg(
-                                       "find %s",
-                                       hsaManager.findB(player).toString().c_str());
-                           }))
-                ->then(ARG("draw", "draw hsa", NONE, { hsaManager.draw(player); }));
 
-        commandManager.registerCmd("draw", "简单建造")
-                ->then(ARG("ci", "画圆", INT,
-                           {
-                               auto radius = holder->getInt();
-                               bool hollow = holder->getInt() < 0;
-                               if (radius < 0)
-                                   radius = -radius;
-                               this->simpleBuilder.buildCircle(player, radius,
-                                                               hollow);
-                           }))
-                ->then(ARG("sp", "画球体", INT,
-                           {
-                               auto radius = holder->getInt();
-                               bool hollow = holder->getInt() < 0;
-                               if (radius < 0)
-                                   radius = -radius;
-                               this->simpleBuilder.buildSphere(player, radius,
-                                                               hollow);
-                           }))
-                ->then(ARG("mr", "设置最大半径", INT, {
-                    auto radius = holder->getInt();
-                    if (radius < 0) {
-                        error(player, "参数不合法(必须>=1)");
-                    } else {
-                        info(player, "已设置最大半径为%d", radius);
-                        this->simpleBuilder.setMaxRadius(radius);
-                    }
-                }));
 
         commandManager.registerCmd("backup", "备份相关功能")
                 ->then(ARG("b", "创建备份", NONE, { mod::backup(player); }))
@@ -302,37 +188,9 @@ namespace mod {
                 ->EXE({ PlayerFunction::printInfo(player); });
 
         commandManager.registerCmd("os", "显示服务器信息")->EXE({ TrapdoorMod::printOSInfo(player); });
-        commandManager.registerCmd("cl", "计算器", Any, ArgType::STR)->EXE({ eval(player, holder->getString()); });
+        commandManager.registerCmd("cl", "计算器", Any, ArgType::STR)->EXE({ mod::eval(player, holder->getString()); });
     }
 
-    void TrapdoorMod::registerTickCommand() {
-        using namespace trapdoor;
-        commandManager.registerCmd("tick", "改变世界运行状态")
-                ->then(ARG("fz", "暂停世界运行", NONE, { tick::freezeTick(); }))
-                ->then(ARG("slow", "放慢世界运行 [num] 倍速", INT,
-                           {
-                               auto slowTime = holder->getInt();
-                               if (slowTime > 1 && slowTime <= 64) {
-                                   tick::slowTick(slowTime);
-                               } else {
-                                   error(player, "放慢倍数必须在 [2-64] 之间");
-                               }
-                           }))
-                ->then(ARG("acc", "加速世界运行[num]倍速", INT,
-                           {
-                               auto wrapTime = holder->getInt();
-                               if (wrapTime > 1 && wrapTime <= 10) {
-                                   tick::wrapTick(wrapTime);
-                               } else {
-                                   error(player, "倍数必须在 [2-10] 之间");
-                               }
-                           }))
-                ->then(ARG("r", "重置世界运行", NONE, { tick::resetTick(); }))
-                ->then(ARG("fw", "世界运行步进[num] gt", INT,
-                           { tick::forwardTick(holder->getInt()); }))
-                ->then(ARG("q", "查询当前世界状态", NONE,
-                           { tick::queryStatus(player); }));
-    }
 
     void TrapdoorMod::printCopyRightInfo() {
         const char *banner =
@@ -374,13 +232,16 @@ namespace mod {
         } else if (itemName == "Wooden Sword") {
             this->playerFunctions.getMeasureData(player->getNameTag())
                     .setPosition1(pos, player);
+            this->simpleLitematica.getSelectRegion().setPos1(pos, player);
         } else if (itemName == "Stone Sword") {
             this->playerFunctions.getMeasureData(player->getNameTag())
                     .setPosition2(pos, player);
+            this->simpleLitematica.getSelectRegion().setPos2(pos, player);
         } else if (itemName == "Stick") {
             this->playerFunctions.printRedstoneInfo(player, pos);
         }
     }
+
 
     CommandPermissionLevel TrapdoorMod::resetVanillaCommandLevel(
             const std::string &name,
@@ -393,6 +254,7 @@ namespace mod {
             return oldLevel;
         }
     }
+
 
     void TrapdoorMod::printOSInfo(trapdoor::Actor *player) {
         int CPUUsage = get_cpu_usage();
@@ -444,4 +306,16 @@ namespace mod {
         this->simpleBuilder.setAble(functionCfg.simpleDraw);
         this->hopperChannelManager.setAble(functionCfg.hopperCounter);
     }
+
+
+    void TrapdoorMod::registerDevCommand() {
+        this->commandManager.registerCmd("dev", "develop")
+                ->then(ARG("s", "test1", INT, {
+                    auto *block = getBlockByID((BlockType) holder->getInt());
+                    auto pos = player->getPos()->toBlockPos() + trapdoor::BlockPos(0, -1, 0);
+                    player->getBlockSource()->setBlock(&pos, block);
+                }));
+    }
+
+
 }  // namespace mod

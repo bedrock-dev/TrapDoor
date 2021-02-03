@@ -343,10 +343,59 @@ namespace mod {
         }
     }
 
+    void VillageHelper::registerCommand(CommandManager &commandManager) {
+        commandManager.registerCmd("village", "村庄相关功能")
+                ->then(ARG("list", "显示所有正在加载的村庄", NONE,
+                           { this->list(player); }))
+                ->then(ARG("b", "显示村庄边框", BOOL,
+                           {
+                               this->setShowBound(holder->getBool());
+                               info(player, "设置村庄边框显示为 %d",
+                                    holder->getBool());
+                           }))
+                ->then(ARG(
+                               "p", "显示POI查询范围", BOOL,
+                               {
+                                   this->setShowPOIRange(holder->getBool());
+                                   info(player, "设置村庄边框显示为 %d", holder->getBool());
+                               }))
+                ->then(ARG("s", "显示铁傀儡刷新区域", BOOL,
+                           {
+                               this->setShowGolemSpawnArea(
+                                       holder->getBool());
+                               info(player, "设置铁傀儡刷怪显示为 %d",
+                                    holder->getBool());
+                           }))
+                ->then(ARG(
+                               "c", "显示村庄中心", BOOL,
+                               {
+                                   this->setShowVillageCenter(holder->getBool());
+                                   info(player, "设置村庄中心显示为 %d", holder->getBool());
+                               }))
+                ->then(ARG(
+                               "v", "显示村民信息", BOOL,
+                               {
+                                   this->setShowDwellerStatus(holder->getBool());
+                                   info(player, "设置显示村民信息为 %d", holder->getBool());
+                               }))
+                ->then(ARG("n", "显示最近村庄的详细信息", NONE,
+                           {
+                               this->printNearestVillageInfo(
+                                       player, *player->getPos());
+                           }))
+
+                ->then(ARG("test", "???", NONE, {
+                    trapdoor::warning(player, "you are not developer");
+                    //   this->villageHelper.test();
+                }));
+
+    }
+
     bool VillageWithColor::operator<(const VillageWithColor &rhs) const {
         return this->village < rhs.village;
     }
 }
+
 
 THook(
         void, MSSYM_B1QA4tickB1AA7VillageB2AAE10QEAAXUTickB2AAE15AEAVBlockSourceB3AAAA1Z,

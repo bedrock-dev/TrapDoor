@@ -33,9 +33,10 @@ namespace mod {
             }
         }
     }
+
     void HopperChannelManager::printChannel(Actor *player, size_t channel) {
         if (channel < 0 || channel > 4) {
-            error(player, "this channel do not exist");
+            error(player, "该频道不存在");
         } else {
             getChannel(channel).print(player);
         }
@@ -48,6 +49,20 @@ namespace mod {
             getChannel(channel).reset();
             trapdoor::broadcastMsg("channel[%zu] reset", channel);
         }
+    }
+
+    void HopperChannelManager::registerCommand(CommandManager &commandManager) {
+        commandManager.registerCmd("counter", "漏斗计数器相关功能")
+                ->then(Arg("r", "重置频道 [num]", ArgType::INT)
+                               ->execute([this](ArgHolder *holder, Actor *player) {
+                                   this->resetChannel(
+                                           player, holder->getInt());
+                               }))
+                ->then(Arg("p", "打印频道信息 [num]", ArgType::INT)
+                               ->execute([this](ArgHolder *holder, Actor *player) {
+                                   this->printChannel(
+                                           player, holder->getInt());
+                               }));
     }
 
     void CounterChannel::add(const std::string &itemName, size_t num) {
@@ -71,10 +86,12 @@ namespace mod {
             return;
         }
         trapdoor::MessageBuilder builder;
-        builder.sTextF(trapdoor::MessageBuilder::BOLD||trapdoor::MessageBuilder::LIGHT_PURPLE, "channel %d\n", channel)
+        builder.sTextF(trapdoor::MessageBuilder::BOLD || trapdoor::MessageBuilder::LIGHT_PURPLE, "channel %d\n",
+                       channel)
                 .num(n).text("  items in ").num(gameTick).text(" gt(").num(gameTick / 1200.0).text("min)\n");
         for (const auto &i:counterList) {
-            builder.textF(" - ").text(i.first).text("    ").num(i.second).text("(").num(i.second * 1.0 / gameTick * 72000).text(
+            builder.textF(" - ").text(i.first).text("    ").num(i.second).text("(").num(
+                    i.second * 1.0 / gameTick * 72000).text(
                     "/h)\n");
         }
         builder.send(actor);

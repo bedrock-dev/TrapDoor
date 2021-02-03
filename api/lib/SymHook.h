@@ -119,14 +119,6 @@ namespace SymHook {
     // [����] ?setPlayerGameType@ServerPlayer@@UEAAXW4GameType@@@Z
     constexpr RVA MSSYM_B1QE17setPlayerGameTypeB1AE12ServerPlayerB2AAE15UEAAXW4GameTypeB3AAAA1Z = 0x004F1A20;
 
-    // [ԭ��] private: virtual bool __cdecl DyePowderItem::_useOn(class ItemStack & __ptr64,class Actor & __ptr64,class BlockPos,unsigned char,float,float,float)const __ptr64
-    // [����] ?_useOn@DyePowderItem@@EEBA_NAEAVItemStack@@AEAVActor@@VBlockPos@@EMMM@Z
-    constexpr RVA MSSYM_B2QUA5useOnB1AE13DyePowderItemB2AAA4EEBAB1UE14NAEAVItemStackB2AAA9AEAVActorB2AAA9VBlockPosB2AAA4EMMMB1AA1Z = 0x007D56D0;
-
-    // [ԭ��] private: virtual bool __cdecl RedStoneDustItem::_useOn(class ItemStack & __ptr64,class Actor & __ptr64,class BlockPos,unsigned char,float,float,float)const __ptr64
-    // [����] ?_useOn@RedStoneDustItem@@EEBA_NAEAVItemStack@@AEAVActor@@VBlockPos@@EMMM@Z
-    constexpr RVA MSSYM_B2QUA5useOnB1AE16RedStoneDustItemB2AAA4EEBAB1UE14NAEAVItemStackB2AAA9AEAVActorB2AAA9VBlockPosB2AAA4EMMMB1AA1Z = 0x008097E0;
-
     // [ԭ��] public: class Block const & __ptr64 __cdecl BlockSource::getBlock(class BlockPos const & __ptr64)const __ptr64
     // [����] ?getBlock@BlockSource@@QEBAAEBVBlock@@AEBVBlockPos@@@Z
     constexpr RVA MSSYM_B1QA8getBlockB1AE11BlockSourceB2AAE13QEBAAEBVBlockB2AAE12AEBVBlockPosB3AAAA1Z = 0x00A16410;
@@ -471,10 +463,16 @@ namespace SymHook {
     // [����] ?kill@Actor@@UEAAXXZ
     constexpr RVA MSSYM_B1QA4killB1AA5ActorB2AAA7UEAAXXZ = 0x00567540;
 
+    // [ԭ��] public: virtual void __cdecl BlockActor::tick(class BlockSource & __ptr64) __ptr64
+    // [����] ?tick@BlockActor@@UEAAXAEAVBlockSource@@@Z
 
     // [ԭ��] private: void __cdecl PistonBlockActor::_checkInceptionAchievement(class BlockActor & __ptr64,class BlockSource & __ptr64,class BlockPos const & __ptr64) __ptr64
     // [����] ?_checkInceptionAchievement@PistonBlockActor@@AEAAXAEAVBlockActor@@AEAVBlockSource@@AEBVBlockPos@@@Z
     constexpr RVA MSSYM_B2QUE25checkInceptionAchievementB1AE16PistonBlockActorB2AAE19AEAAXAEAVBlockActorB2AAE15AEAVBlockSourceB2AAE12AEBVBlockPosB3AAAA1Z = 0x008C39E0;
+
+    // [ԭ��] public: static void __cdecl BlockTypeRegistry::forEachBlock(class std::function<bool __cdecl(class BlockLegacy const & __ptr64)>)
+    // [����] ?forEachBlock@BlockTypeRegistry@@SAXV?$function@$$A6A_NAEBVBlockLegacy@@@Z@std@@@Z
+    constexpr RVA MSSYM_B1QE12forEachBlockB1AE17BlockTypeRegistryB2AAA4SAXVB2QDA8functionB3ADDA3A6AB1UE16NAEBVBlockLegacyB3AAAA1ZB1AA3stdB3AAAA1Z = 0x0095DEF0;
 
 }
 

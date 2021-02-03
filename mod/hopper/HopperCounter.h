@@ -18,6 +18,8 @@
 #include "entity/Actor.h"
 #include "block/Block.h"
 #include "tools/noncopyable .h"
+#include "trapdoor.h"
+#include "commands/CommandManager.h"
 //漏斗计数器频道
 namespace mod {
 
@@ -71,6 +73,8 @@ namespace mod {
 
         //重置某个频道
         void resetChannel(Actor *player, size_t channel);
+
+        void registerCommand(trapdoor::CommandManager &commandManager);
     };
 }
 #endif //TRAPDOOR_HOPPER_H

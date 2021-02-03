@@ -50,4 +50,28 @@ namespace mod {
     void SlimeChunkHelper::setRadius(int r) {
         this->showRadius = r;
     }
+
+    void SlimeChunkHelper::registerCommand(CommandManager &commandManager) {
+        commandManager.registerCmd("slime", "史莱姆区块相关")
+                ->then(ARG("show", "显示史莱姆区块", BOOL,
+                           {
+                               this->setAble(holder->getBool());
+                               //    this->slimeChunkHelper.updateChunkPosList();
+                               //   this->slimeChunkHelper.draw();
+                               broadcastMsg("设置史莱姆区块显示为 %d",
+                                            holder->getBool());
+                           }))
+                ->then(ARG("c", "清除缓存并重新绘制", NONE,
+                           {
+                               this->updateChunkPosList();
+                               this->draw();
+                               broadcastMsg("已经清除史莱姆区块缓存");
+                           }))
+                ->then(ARG("r", "设置显示半径", INT, {
+                    this->setRadius(holder->getInt());
+                    this->updateChunkPosList();
+                    this->draw();
+                    broadcastMsg("已经清除史莱姆区块缓存");
+                }));
+    }
 }

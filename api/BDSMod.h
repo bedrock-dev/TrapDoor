@@ -77,6 +77,7 @@ namespace trapdoor {
 
         ModConfig &getCfg() { return this->config; }
 
+
     public:
         trapdoor::Actor *fetchEntity(int64_t id, bool b);
     };

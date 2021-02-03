@@ -16,7 +16,7 @@
 
 namespace mod {
     void PlayerFunction::tick() {
-        if (gameTick % 15 == 0) {
+        if (gameTick % 20 == 0) {
             auto modInstance = trapdoor::bdsMod->asInstance<mod::TrapdoorMod>();
             modInstance->getLevel()->forEachPlayer([&](trapdoor::Actor *player) {
                 if (this->enableShowChunk[player->getNameTag()]) {
@@ -25,8 +25,9 @@ namespace mod {
                 //add other functions here
             });
         }
-        this->gameTick = (this->gameTick + 1) % 15;
+        this->gameTick = (this->gameTick + 1) % 40;
     }
+
 
     void PlayerFunction::drawChunkBound(trapdoor::Actor *player) {
         int dimensionID = player->getDimensionID();

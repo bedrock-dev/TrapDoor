@@ -34,4 +34,9 @@ namespace trapdoor {
                 this, state
         );
     }
+
+    BlockType BlockLegacy::getBlockID() {
+        return (BlockType) *(short *) ((char *) this + 268);
+    }
 }
+

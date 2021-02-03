@@ -35,7 +35,7 @@ namespace trapdoor {
 
     //是否是空气
     bool Block::isAir() {
-        return this->getName() == "minecraft:air";
+        return this->getLegacy()->getBlockID() == AIR;
     }
 
     //获取特殊值
@@ -55,28 +55,4 @@ namespace trapdoor {
     Block *BlockActor::getBlock() {
         return *reinterpret_cast<Block **>(reinterpret_cast<VA>(this) + 16);
     }
-
-    Block *BlockPalette::getBlock(unsigned int type) {
-        return SYM_CALL(
-                trapdoor::Block*(*)(trapdoor::BlockPalette * , unsigned int *),
-                SymHook::MSSYM_B1QA8getBlockB1AE12BlockPaletteB2AAE13QEBAAEBVBlockB2AAA4AEBIB1AA1Z,
-                this,
-                &type
-        );
-    }
-}
-
-using namespace SymHook;
-
-THook(
-        void,
-        MSSYM_B1QA8getBlockB1AE12BlockPaletteB2AAE13QEBAAEBVBlockB2AAA4AEBIB1AA1Z,
-        trapdoor::BlockPalette *palette,
-        size_t * id
-) {
-    if (trapdoor::bdsMod && !trapdoor::bdsMod->getPalette()) {
-        trapdoor::bdsMod->setBlockPalette(palette);
-        // L_INFO("set block palette");
-    }
-    original(palette, id);
 }

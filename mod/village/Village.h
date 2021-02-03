@@ -10,6 +10,7 @@
 #include "graphics/Graphics.h"
 #include<set>
 #include "tools/noncopyable .h"
+#include "commands/CommandManager.h"
 
 namespace mod {
 
@@ -121,6 +122,9 @@ namespace mod {
         void printDwellerInfo(trapdoor::Actor *player, trapdoor::Actor *actor);
 
         void removeAllNameTag();
+
+        void registerCommand(trapdoor::CommandManager &commandManager);
+
     };
 
 }

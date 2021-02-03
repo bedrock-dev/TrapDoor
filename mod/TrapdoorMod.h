@@ -17,6 +17,8 @@
 #include "player/SimpleBuilder.h"
 #include "SlimeChunkHelper.h"
 #include "player/PlayerStatisticManager.h"
+#include "dirtyLitematica/SimpleLitematica.h"
+#include "dirtyLitematica/SelectRegion.h"
 
 namespace mod {
 
@@ -46,9 +48,12 @@ namespace mod {
         SlimeChunkHelper slimeChunkHelper;
         PlayerStatisticManager playerStatisticManager;
 
-        void registerTickCommand();
+        SimpleLitematica simpleLitematica;
 
         void initFunctionEnable();
+
+        void registerDevCommand();
+
 
     public:
         ModInfo modeInfo;
@@ -94,6 +99,9 @@ namespace mod {
         inline std::string getLevelName() { return this->configManager.getServerConfig().levelName; }
 
         inline SingleFunction getSingFunction() { return this->singleFunctions; }
+
+        static bool test(trapdoor::Actor *player);
+
     };
 }
 

@@ -17,6 +17,7 @@ add_library(${MOD_API_NAME} STATIC
         api/block/Block.cpp
         api/block/BlockLegacy.cpp
         api/block/BlockSource.cpp
+        api/block/VanillaBlockType.cpp
         api/block/CircuitComponent.cpp
         api/commands/CommandNode.cpp
         api/commands/Command.cpp
@@ -68,7 +69,6 @@ add_library(${MOD_NAME}
         mod/spawn/HsaManager.cpp
         mod/tick/SimpleProfiler.cpp
         mod/tick/ActorProfiler.cpp
-        mod/tick/BlockActorProfiler.cpp
         mod/spawn/SpawnHelper.cpp
         mod/spawn/SpawnAnalyzer.cpp
         mod/function/BlockRotationHelper.cpp
@@ -81,6 +81,8 @@ add_library(${MOD_NAME}
         mod/os/process_stat.cpp
         mod/village/POIInstance.cpp
         mod/eval/Eval.cpp
+        mod/dirtyLitematica/SelectRegion.cpp
+        mod/dirtyLitematica/SimpleLitematica.cpp
         )
 
 target_include_directories(
@@ -95,6 +97,8 @@ target_include_directories(
         mod/village
         mod/tick
         mod/player
+        mod/dirtyLitematica
+        mod/eval
         api
         api/block
         api/commands

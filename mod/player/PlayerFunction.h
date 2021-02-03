@@ -13,6 +13,7 @@
 #include "block/BlockSource.h"
 #include "block/CircuitComponent.h"
 #include "world/Dimension.h"
+#include "dirtyLitematica/SelectRegion.h"
 
 namespace mod {
     struct MeasureData {

@@ -73,5 +73,4 @@ namespace trapdoor {
                 this->getLevel(), id, b
         );
     }
-
 }
