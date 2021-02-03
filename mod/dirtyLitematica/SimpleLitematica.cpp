@@ -243,7 +243,6 @@ namespace mod {
         return true;
     }
 
-
     //读取本地文件到选取数据
     bool SimpleLitematica::readData(trapdoor::Actor *player, const std::string &fileName) {
         const std::string realFileName = fileName + ".tdm";

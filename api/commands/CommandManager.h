@@ -37,8 +37,14 @@ namespace trapdoor {
                                  CommandPermissionLevel level = Any,
                                  ArgType type = ArgType::NONE);
 
+        bool enablePermissionCheck = true;
+
         //解析命令
         int parse(Actor *player, std::string cmd);
+
+        inline bool setEnablePermissionCheck(bool able) {
+            this->enablePermissionCheck = able;
+        }
 
         //设置命令配置
         void setCommandConfig(std::map<std::string, CommandConfig> &cmdConfigList);

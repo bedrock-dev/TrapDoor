@@ -72,6 +72,8 @@ namespace trapdoor {
     }
 
     bool CommandManager::checkCommandPermission(const std::string &command, Actor *player) {
+        if (!this->enablePermissionCheck)
+            return true;
         auto cmdCfg = this->commandConfigList.find(command);
         if (cmdCfg == commandConfigList.end()) {
             L_WARNING("command %s was not config", command.c_str());
