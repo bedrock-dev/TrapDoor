@@ -78,12 +78,5 @@ namespace trapdoor {
                          MSSYM_B1QE14getCurrentTickB1AA5LevelB2AAE12QEBAAEBUTickB2AAA2XZ, this);
     }
 
-    BlockPalette *Level::getGlobalPalette() {
-        //from EnderMan::getCarryingBlock
-        //*(v5 + 2000)
-        auto p = *(BlockPalette **) ((char *) (this) + 250);
-        printf("%p %p\n", p, &p);
-        return nullptr;
-    }
 
 }

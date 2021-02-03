@@ -41,13 +41,13 @@ namespace mod {
                 for (int k = pMin.z; k <= pMax.z; k++) {
                     trapdoor::BlockPos p(i, j, k);
                     auto block = blockSource->getBlock(p);
-                    auto name = block->getName();
-                    if (name != "minecraft:air") {
+                    auto id = block->getLegacy()->getBlockID();
+                    if (id != trapdoor::AIR) {
                         BlockData data;
                         data.x = i - pMin.x;
                         data.y = j - pMin.y;
                         data.z = k - pMin.z;
-                        memcpy(data.name, name.c_str(), 128);
+                        data.blockID = id;
                         data.variant = block->getVariant();
                         this->copiedBlockData.push_back(data);
                     }
@@ -78,8 +78,8 @@ namespace mod {
                 ->then(ARG("save", "存储到本地", STR, { this->saveData(player, holder->getString()); }))
                 ->then(ARG("load", "加载本地文件", STR, { this->readData(player, holder->getString()); }))
                 ->then(ARG("place", "放置地形", NONE, { this->placeBlockData(player); }))
-                ->then(ARG("lock", "锁定放置位置", BOOL, {}))
-                ->then(ARG("c", "检查当前层的放置情况", NONE, { this->checkStatus(player); }))
+                ->then(ARG("fill", "快速放置选取", BOOL, { this->quickPlace(player); }))
+                        //       ->then(ARG("c", "检查当前层的放置情况", NONE, { this->checkStatus(player); }))
 //                ->then(ARG("notice", "开关放置提醒", BOOL, {}))
 //                ->then(ARG("log", "订阅", STR, {}))
 //                ->then(ARG("unlog", "取消订阅", STR, {}))
@@ -114,16 +114,16 @@ namespace mod {
             trapdoor::info(player, "无数据");
             return;
         }
-        std::map<std::string, int> map;
+        std::map<trapdoor::BlockType, int> map;
         for (const auto &i:this->copiedBlockData) {
-            map[i.name]++;
+            map[static_cast<const trapdoor::BlockType>(i.blockID)]++;
         }
         trapdoor::MessageBuilder builder;
         builder.textF("复制完成,区域大小： [%d %d %d] 一共需要 %zu 个方块",
                       this->vecPos.x + 1, this->vecPos.y + 1, this->vecPos.z + 1,
                       copiedBlockData.size());
         for (auto &i:map)
-            builder.textF("\n - %s", i.first.c_str()).text(" : ").num(i.second);
+            builder.textF("\n - %d", i.first).text(" : ").num(i.second);
         builder.send(player);
     }
 
@@ -141,28 +141,28 @@ namespace mod {
     }
 
     void SimpleLitematica::checkStatus(trapdoor::Actor *player) const {
-        if (!this->enableLayers) {
-            trapdoor::warning(player, "请先开启按层显示");
-            return;
-        }
-        auto startPos = this->placeRegion.getBoundingBox().minPos;
-        int yIndex = startPos.y + this->layerIndex;
-        auto layerData = this->layersPlaceData.at(yIndex);
-        trapdoor::info(player, "以下是第%d(y = %d)层的情况\n", layerIndex, yIndex);
-        trapdoor::BlockSource *bs = player->getBlockSource();
-        trapdoor::MessageBuilder builder;
-        for (auto &i:layerData) {
-            auto *block = bs->getBlock(i.first);
-            auto name = block->getName();
-            if (name != i.second.name) {
-                builder.pos(i.first).text(name).text(" ==> ").text(i.second.name).text("\n");
-            } else {
-                if (block->getVariant() != i.second.variant) {
-                    builder.pos(i.first).num(block->getVariant()).text("  ==> ").num(i.second.variant).text("\n");
-                }
-            }
-        }
-        builder.send(player);
+//        if (!this->enableLayers) {
+//            trapdoor::warning(player, "请先开启按层显示");
+//            return;
+//        }
+//        auto startPos = this->placeRegion.getBoundingBox().minPos;
+//        int yIndex = startPos.y + this->layerIndex;
+//        auto layerData = this->layersPlaceData.at(yIndex);
+//        trapdoor::info(player, "以下是第%d(y = %d)层的情况\n", layerIndex, yIndex);
+//        trapdoor::BlockSource *bs = player->getBlockSource();
+//        trapdoor::MessageBuilder builder;
+//        for (auto &i:layerData) {
+//            auto *block = bs->getBlock(i.first);
+//            auto name = block->getName();
+//            if (name != i.second.name) {
+//                builder.pos(i.first).text(name).text(" ==> ").text(i.second.name).text("\n");
+//            } else {
+//                if (block->getVariant() != i.second.variant) {
+//                    builder.pos(i.first).num(block->getVariant()).text("  ==> ").num(i.second.variant).text("\n");
+//                }
+//            }
+//        }
+//        builder.send(player);
     }
 
     void SimpleLitematica::tickPosStatus() {
@@ -191,27 +191,28 @@ namespace mod {
     }
 
     void SimpleLitematica::updateLayerStatus() {
-        auto startPos = this->placeRegion.getBoundingBox().minPos;
-        int yIndex = startPos.y + this->layerIndex;
-        auto &layerData = this->layersPlaceData.at(yIndex);
-        auto player = trapdoor::bdsMod->getLevel()->getNearestDimensionPlayer(startPos, 0);
-        if (!player)return;
-        auto bs = player->getBlockSource();
-        for (auto &i:layerData) {
-            auto *block = bs->getBlock(i.first);
-            auto name = block->getName();
-            if (name != i.second.name) {
-                i.second.status = PLACE_ERROR;
-            } else {
-                if (block->getVariant() != i.second.variant) {
-                    i.second.status = PLACE_WARNING;
-                } else {
-                    i.second.status = PLACE_RIGHT;
-                }
-            }
-        }
+//        auto startPos = this->placeRegion.getBoundingBox().minPos;
+//        int yIndex = startPos.y + this->layerIndex;
+//        auto &layerData = this->layersPlaceData.at(yIndex);
+//        auto player = trapdoor::bdsMod->getLevel()->getNearestDimensionPlayer(startPos, 0);
+//        if (!player)return;
+//        auto bs = player->getBlockSource();
+//        for (auto &i:layerData) {
+//            auto *block = bs->getBlock(i.first);
+//            auto name = block->getName();
+//            if (name != i.second.name) {
+//                i.second.status = PLACE_ERROR;
+//            } else {
+//                if (block->getVariant() != i.second.variant) {
+//                    i.second.status = PLACE_WARNING;
+//                } else {
+//                    i.second.status = PLACE_RIGHT;
+//                }
+//            }
+//        }
     }
 
+    //吧选取数据存到本地
     bool SimpleLitematica::saveData(trapdoor::Actor *player, const std::string &fileName) {
         this->collectBlockData(player);
         const std::string realFileName = fileName + ".tdm";
@@ -243,6 +244,7 @@ namespace mod {
     }
 
 
+    //读取本地文件到选取数据
     bool SimpleLitematica::readData(trapdoor::Actor *player, const std::string &fileName) {
         const std::string realFileName = fileName + ".tdm";
         FILE *file = fopen(realFileName.c_str(), "rb");
@@ -261,8 +263,9 @@ namespace mod {
             trapdoor::error(player, "文件格式校验失败");
             return false;
         }
-        this->vecPos = {(int) header.dz, (int) header.dx, (int) header.dz};
+        this->vecPos = {(int) header.dx, (int) header.dy, (int) header.dz};
         auto size = header.blockNum;
+        printf("size is %d", size);
         BlockData data;
         this->copiedBlockData.clear();
         for (int i = 0; i < size; ++i) {
@@ -275,9 +278,23 @@ namespace mod {
             this->copiedBlockData.push_back(data);
         }
         trapdoor::info(player, "文件读取成功");
-        hasPlaced = true;
+        hasData = true;
         this->printNeedBlocks(player, 0);
         return true;
+    }
+
+    void SimpleLitematica::quickPlace(trapdoor::Actor *player) {
+        if (!this->hasPlaced) {
+            trapdoor::warning(player, "请先选定填充位置");
+            return;
+        }
+        auto bs = player->getBlockSource();
+        for (auto &layerData :this->layersPlaceData) {
+            for (auto &i : layerData.second) {
+                auto pos = i.first;
+                bs->setBlock(&pos, trapdoor::getBlockByID((trapdoor::BlockType) i.second.blockID, i.second.variant));
+            }
+        }
     }
 
 }

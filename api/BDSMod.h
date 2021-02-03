@@ -35,16 +35,13 @@ namespace trapdoor {
         std::map<std::string, PlayerBuffer> playerCache;
         ThreadPool *threadPool = nullptr;
         ModConfig config;
-        BlockPalette *palette;
     public:
 
         Level *getLevel();
 
-        inline BlockPalette *getPalette() { return this->palette; }
 
         void setLevel(Level *level);
 
-        inline void setBlockPalette(BlockPalette *p) { this->palette = p; }
 
         CommandRegistry *getCommandRegistry();
 

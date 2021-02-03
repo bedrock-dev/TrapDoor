@@ -15,5 +15,6 @@
 #include "CommandManager.h"
 #include "block/BlockLegacy.h"
 #include "block/BlockSource.h"
+#include "block/VanillaBlockType.h"
 #include "block/Block.h"
 #endif //MOD_TRAPDOOR_H

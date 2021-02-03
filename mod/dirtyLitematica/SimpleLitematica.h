@@ -30,8 +30,6 @@ namespace mod {
             PlaceStatus status = PlaceStatus::PLACE_ERROR;
         };
 
-
-        std::set<std::string> loggerPlayers; //别人的投影是否通知自己
         SelectRegion selectRegion; //地形选区
         SelectRegion placeRegion; //放置选区
         trapdoor::BlockPos vecPos; //相对坐标的定点位置
@@ -49,6 +47,8 @@ namespace mod {
 
     public:
         void tick();
+
+        void quickPlace(trapdoor::Actor *player);
 
         SelectRegion &getSelectRegion();
 
