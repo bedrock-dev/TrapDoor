@@ -53,6 +53,6 @@ namespace trapdoor {
 
     //获取方块实体内的方块对象
     Block *BlockActor::getBlock() {
-        return *reinterpret_cast<Block **>(reinterpret_cast<VA>(this) + 16);
+        return *reinterpret_cast<Block **>(reinterpret_cast<char *>(this) + 2);
     }
 }

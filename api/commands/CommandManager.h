@@ -14,6 +14,7 @@
 #include <sstream>
 #include "CommandNode.h"
 #include "entity/Actor.h"
+#include "tools/noncopyable .h"
 
 
 namespace trapdoor {
@@ -26,7 +27,7 @@ namespace trapdoor {
         bool survival = false; //生存中是否可用
     };
 
-    class CommandManager {
+    class CommandManager : public trapdoor::noncopyable {
         //命令列表
         std::map<std::string, CommandNode *> commandList;
         //命令配置文件列表
@@ -56,7 +57,7 @@ namespace trapdoor {
         bool findCommand(const std::string &cmd);
 
         //检查权限等级
-        bool checkCommandPermission(const std::string &command, Actor *player);
+        bool checkCommandPermission(const std::string &command, Actor *player,bool showInfo = true);
 
         //执行原版命令(还没做)
         static void runVanillaCommand(const std::string &command);

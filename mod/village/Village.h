@@ -45,12 +45,10 @@ namespace mod {
 
         std::string getDebugInfo();
 
-
         bool printVillagerInfo(trapdoor::Actor *player, trapdoor::Actor *actor);
 
         void removeAllTags();
 
-        //  std::array<std::unordered_map<trapdoor::ActorUniqueID,uint64_t ,&
     };
 
 

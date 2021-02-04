@@ -20,6 +20,7 @@
 #include "tools/noncopyable .h"
 #include "trapdoor.h"
 #include "commands/CommandManager.h"
+#include <array>
 //漏斗计数器频道
 namespace mod {
 
@@ -28,9 +29,9 @@ namespace mod {
     using BlockPos = trapdoor::BlockPos;
 
     class CounterChannel {
-        const size_t channel;
-        std::map<std::string, size_t> counterList;
-        size_t gameTick = 0;
+        const size_t channel; //频道号
+        std::map<std::string, size_t> counterList; //数据
+        size_t gameTick = 0; //游戏刻
     public:
         explicit CounterChannel(size_t ch) : channel(ch), gameTick(0) {}
 
@@ -50,10 +51,11 @@ namespace mod {
         std::vector<CounterChannel> channels;
         bool enable = false;
     public:
-        static const std::map<std::string, size_t> BLOCK_NAME_CHANNEL_MAPPER;
+        static const size_t TOTAL_CHANNEL_NUM;
+        static const trapdoor::BlockType BLOCK_TYPE;
 
         HopperChannelManager() {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 16; i++)
                 channels.emplace_back(i);
         }
 
@@ -75,6 +77,8 @@ namespace mod {
         void resetChannel(Actor *player, size_t channel);
 
         void registerCommand(trapdoor::CommandManager &commandManager);
+
+        void quickPrintData(trapdoor::Actor *player, trapdoor::BlockPos &pos);
     };
 }
 #endif //TRAPDOOR_HOPPER_H

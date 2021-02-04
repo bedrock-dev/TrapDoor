@@ -6,7 +6,7 @@
 #define MOD_BACKUPHELPER_H
 
 #include "entity/Actor.h"
-#include "filesystem"
+#include "commands/CommandManager.h"
 
 namespace mod {
     void backup(trapdoor::Actor *player);
@@ -16,6 +16,8 @@ namespace mod {
     void initBackup();
 
     void restore(trapdoor::Actor *player, int index = 0);
+
+    void registerBackupCommand(trapdoor::CommandManager &commandManager);
 }
 
 #endif //MOD_BACKUPHELPER_H

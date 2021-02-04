@@ -48,11 +48,13 @@ namespace trapdoor {
         auto *helpNode = new CommandNode("?", "print help info");
         //打印帮助信息
         helpNode->execute([rootNode](ArgHolder *holder, Actor *player) {
-            rootNode->printHelpInfo(0, player);
+            std::string s;
+            rootNode->getHelpInfo(0, s);
+            trapdoor::info(player, s);
         });
         rootNode->then(helpNode);
         //注册命令到游戏中
-        L_INFO("register command %s", cmd.c_str());
+        L_DEBUG("register command %s", cmd.c_str());
         regMCBECommand(cmd, description.c_str(), level, true);
         return rootNode;
     }
@@ -66,24 +68,30 @@ namespace trapdoor {
 
 //递归打印命令帮助
     void CommandManager::printfHelpInfo(Actor *actor) {
+        std::string buffer;
         for (const auto &cmd :this->commandList) {
-            cmd.second->printHelpInfo(0, actor);
+            //只打印自己有权限执行的指令
+            if (!this->enablePermissionCheck || this->checkCommandPermission(cmd.first, actor, false))
+                cmd.second->getHelpInfo(0, buffer);
         }
+        trapdoor::info(actor, buffer);
     }
 
-    bool CommandManager::checkCommandPermission(const std::string &command, Actor *player) {
+    bool CommandManager::checkCommandPermission(const std::string &command, Actor *player, bool showInfo) {
         if (!this->enablePermissionCheck)
             return true;
         auto cmdCfg = this->commandConfigList.find(command);
         if (cmdCfg == commandConfigList.end()) {
             L_WARNING("command %s was not config", command.c_str());
-            error(player, "这个命令没有被配置，请联系腐竹");
+            if (showInfo)
+                error(player, "这个命令没有被配置，请联系腐竹");
             return false;
         }
         //todo game mode check
 
         if (!cmdCfg->second.enable) {
-            error(player, "该服务器未启用该指令,请联系腐竹");
+            if (showInfo)
+                error(player, "该服务器未启用该指令,请联系腐竹");
             return false;
         }
 
@@ -92,9 +100,12 @@ namespace trapdoor {
         auto playerLevel = static_cast<int>(player->getCommandLevel());
         auto commandLevel = static_cast<int>(cmdCfg->second.permissionLevel);
         if (playerLevel < commandLevel) {
-            L_DEBUG("server reject the execute of command [%s] for player %s", command.c_str(),
-                    player->getNameTag().c_str());
-            error(player, "你没有权限执行该命令[你的等级:%d < 命令等级:%d]", playerLevel, commandLevel);
+
+            if (showInfo) {
+                L_DEBUG("server reject the execute of command [%s] for player %s", command.c_str(),
+                        player->getNameTag().c_str());
+                error(player, "你没有权限执行该命令[你的等级:%d < 命令等级:%d]", playerLevel, commandLevel);
+            }
             return false;
         }
         return true;

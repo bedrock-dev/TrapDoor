@@ -32,6 +32,7 @@ namespace mod::tick {
             return actorProfiler;
         }
 
+
         /*
          * 这个函数也是每gt执行一次的，但是不经过 TrapdoorMod,因此用static 来表示
          */
@@ -46,6 +47,26 @@ namespace mod::tick {
                     actorProfiler.reset();
                 }
             }
+        }
+
+
+        void sendMsptInfo(microsecond_t time, bool isRedstoneTick) {
+            auto mspt = (double) time / 1000;
+            int tps = mspt <= 50 ? 20 : (int) (1000.0 / mspt);
+            trapdoor::MessageBuilder builder;
+            auto color = MSG_COLOR::WHITE;
+            if (mspt > 40) {
+                if (mspt >= 50) {
+                    color = MSG_COLOR::RED;
+                } else {
+                    color = MSG_COLOR::YELLOW;
+                }
+            }
+            auto rColor = isRedstoneTick ? MSG_COLOR::RED : MSG_COLOR::WHITE;
+            builder.sText("#", rColor)
+                    .text("mspt: ").sTextF(color, "%.3f ms ", mspt)
+                    .text("tps: ").sTextF(color, "%d", tps)
+                    .broadcast();
         }
     }
 
@@ -234,10 +255,9 @@ THook(
                 mod::tick::staticWork();
                 TIMER_END
                 if (mod::tick::isMSPTing) {
-                    auto mspt = (double) timeReslut / 1000;
-                    int tps = mspt <= 50 ? 20 : (int) (1000.0 / mspt);
+                    //发送mspt信息
                     bool isRedstoneTick = modInstance->getLevel()->getDimFromID(0)->isRedstoneTick();
-                    trapdoor::broadcastMsg("r:%d mspt: %.3lf ms tps: %d ", isRedstoneTick, mspt, tps);
+                    mod::tick::sendMsptInfo(timeReslut, isRedstoneTick);
                     mod::tick::isMSPTing = false;
                 }
                 if (mod::tick::gameProfiler.inProfiling) {

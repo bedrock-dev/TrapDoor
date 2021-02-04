@@ -36,7 +36,7 @@ namespace mod {
         trapdoor::spawnChunkSurfaceParticle(p, dimensionID);
     }
 
-    void PlayerFunction::printInfo(trapdoor::Actor *player) {
+    void PlayerFunction::printDebugInfo(trapdoor::Actor *player) {
         MessageBuilder builder;
         auto position = player->getPos();
         auto playerBlockPos = position->toBlockPos();
@@ -84,6 +84,53 @@ namespace mod {
             return;
         }
         component->basePrint(graph, player);
+    }
+
+    void PlayerFunction::registerSelfCommand(trapdoor::CommandManager &commandManager) {
+        //todo
+    }
+
+    void PlayerFunction::broadcastSimpleInfo(trapdoor::Actor *player) {
+        auto pos = player->getPos()->toBlockPos();
+        auto dim = (DimensionType) player->getDimensionID();
+        trapdoor::MessageBuilder builder;
+        int nX = 0, nZ = 0;
+        builder.text(player->getNameTag()).text(" @ ");
+        switch (dim) {
+            case OverWorld:
+                builder.sText("主世界", MSG_COLOR::GREEN);
+                nX = pos.x / 8, nZ = pos.z / 8;
+                break;
+            case Nether:
+                builder.sText("下界", MSG_COLOR::RED);
+                nX = pos.x * 8, nZ = pos.z * 8;
+                break;
+            case TheEnd:
+                builder.sText("末地", MSG_COLOR::YELLOW);
+                break;
+        }
+
+        builder.sTextF(MSG_COLOR::AQUA, "  [%d %d %d]  ", pos.x, pos.y, pos.z);
+        if (dim == OverWorld) {
+            builder.text("==>  ").sText("下界", MSG_COLOR::RED).sTextF(MSG_COLOR::AQUA, " [%d %d]", nX, nZ);
+        }
+        if (dim == Nether) {
+            builder.text("==>  ").sText("主世界", MSG_COLOR::GREEN).sTextF(MSG_COLOR::AQUA, " [%d %d]", nX, nZ);
+        }
+        builder.broadcast();
+    }
+
+    void PlayerFunction::listAllPlayers(trapdoor::Actor *player) {
+        trapdoor::MessageBuilder builder;
+        trapdoor::bdsMod->getLevel()->forEachPlayer([&](trapdoor::Actor *actor) {
+            auto pos = actor->getPos()->toBlockPos();
+            builder.textF("%s @ %s => [%d %d %d]\n", actor->getNameTag().c_str(), actor->getDimensionName().c_str(),
+                          pos.x,
+                          pos.y,
+                          pos.z
+            );
+        });
+        builder.send(player);
     }
 
     void MeasureData::setPosition2(const BlockPos &pos, trapdoor::Actor *player) {

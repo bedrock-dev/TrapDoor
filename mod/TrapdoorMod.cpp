@@ -60,6 +60,8 @@ namespace mod {
         BDSMod::registerCommands();
         tick::registerTickCommand(this->commandManager);
         tick::registerProfileCommand(this->commandManager);
+        mod::registerBackupCommand(this->commandManager);
+        this->hsaManager.registerCommand(this->commandManager);
         this->simpleBuilder.registerDrawCommand(this->commandManager);
         this->simpleLitematica.registerCommand(this->commandManager);
         this->hopperChannelManager.registerCommand(this->commandManager);
@@ -80,13 +82,14 @@ namespace mod {
                                info(player, "设置刷怪指示器为 %d",
                                     holder->getBool());
                            }))
+
                 ->then(ARG("rotate", "开启/关闭转方块", BOOL,
                            {
                                this->rotationHelper.setAble(holder->getBool());
                                info(player, "设置仙人掌转方块为 %d",
                                     holder->getBool());
                            }))
-                ->then(ARG("draw", "开启/关闭区块draw命令", BOOL,
+                ->then(ARG("draw", "开启/关闭draw命令", BOOL,
                            {
                                this->simpleBuilder.setAble(holder->getBool());
                                info(player, "设置简单建造为 %d", holder->getBool());
@@ -136,19 +139,6 @@ namespace mod {
         commandManager.registerCmd("td?", "显示帮助")->EXE({
                                                            this->commandManager.printfHelpInfo(player);
                                                        });
-
-
-        commandManager.registerCmd("backup", "备份相关功能")
-                ->then(ARG("b", "创建备份", NONE, { mod::backup(player); }))
-                ->then(ARG("l", "列出(最新的)备份", NONE,
-                           { mod::listAllBackups(player); }))
-                ->then(ARG("r", "恢复备份", INT,
-                           { mod::restore(player, holder->getInt()); }))
-                ->then(ARG("crash", "崩服", NONE, {
-                    //这种指令的存在真的好吗
-                    *((char *) (0)) = 0;
-                }));
-
         commandManager.registerCmd("self", "玩家个人功能")
                 ->then(ARG(
                                "chunk", "区块显示", BOOL,
@@ -162,7 +152,7 @@ namespace mod {
                                    info(player, "设置你的区块显示为 %d", holder->getBool());
                                }))
                 ->then(ARG(
-                               "me", "信号源显示", BOOL,
+                               "me", "测量", BOOL,
                                {
                                    if (!configManager.getSelfEnableConfig()
                                            .enableDistanceMeasure) {
@@ -171,9 +161,9 @@ namespace mod {
                                    }
                                    this->playerFunctions.getMeasureData(player->getNameTag())
                                            .enableMeasure = holder->getBool();
-                                   info(player, "设置你的测量w为 %d", holder->getBool());
+                                   info(player, "设置你的测量为 %d", holder->getBool());
                                }))
-                ->then(ARG("rs", "测量", BOOL,
+                ->then(ARG("rs", "信号源显示", BOOL,
                            {
                                if (!configManager.getSelfEnableConfig()
                                        .enableRedstoneStick) {
@@ -185,8 +175,10 @@ namespace mod {
                                info(player, "设置你的信号源提示为 %d",
                                     holder->getBool());
                            }))
-                ->EXE({ PlayerFunction::printInfo(player); });
+                ->EXE({ PlayerFunction::printDebugInfo(player); });
 
+        commandManager.registerCmd("here", "广播自己的位置")->EXE({ PlayerFunction::broadcastSimpleInfo(player); });
+        commandManager.registerCmd("l", "列出所有玩家坐标")->EXE({ PlayerFunction::listAllPlayers(player); });
         commandManager.registerCmd("os", "显示服务器信息")->EXE({ TrapdoorMod::printOSInfo(player); });
         commandManager.registerCmd("cl", "计算器", Any, ArgType::STR)->EXE({ mod::eval(player, holder->getString()); });
     }
@@ -214,6 +206,7 @@ namespace mod {
         fflush(stdout);
     }
 
+
     void TrapdoorMod::useOnHook(Actor *player,
                                 const std::string &itemName,
                                 BlockPos &pos,
@@ -228,15 +221,16 @@ namespace mod {
         } else if (itemName == "Leather") {
             this->spawnHelper.printSpawnProbability(player, pos, 15);
         } else if (itemName == "Cactus") {
+            this->hopperChannelManager.quickPrintData(player, pos);
             this->rotationHelper.rotate(pos, player->getBlockSource());
         } else if (itemName == "Wooden Sword") {
             this->playerFunctions.getMeasureData(player->getNameTag())
                     .setPosition1(pos, player);
-            this->simpleLitematica.getSelectRegion().setPos1(pos, player);
+            //  this->simpleLitematica.getSelectRegion().setPos1(pos, player);
         } else if (itemName == "Stone Sword") {
             this->playerFunctions.getMeasureData(player->getNameTag())
                     .setPosition2(pos, player);
-            this->simpleLitematica.getSelectRegion().setPos2(pos, player);
+            // this->simpleLitematica.getSelectRegion().setPos2(pos, player);
         } else if (itemName == "Stick") {
             this->playerFunctions.printRedstoneInfo(player, pos);
         }
@@ -310,12 +304,7 @@ namespace mod {
 
     void TrapdoorMod::registerDevCommand() {
         this->commandManager.registerCmd("dev", "develop")
-                ->then(ARG("s", "test1", INT, {
-                    auto *block = getBlockByID((BlockType) holder->getInt());
-                    auto pos = player->getPos()->toBlockPos() + trapdoor::BlockPos(0, -1, 0);
-                    player->getBlockSource()->setBlock(&pos, block);
+                ->then(ARG("echo", "test1", STR, {
                 }));
     }
-
-
 }  // namespace mod

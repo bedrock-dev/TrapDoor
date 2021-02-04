@@ -100,8 +100,6 @@ namespace mod {
 
         inline SingleFunction getSingFunction() { return this->singleFunctions; }
 
-        static bool test(trapdoor::Actor *player);
-
     };
 }
 

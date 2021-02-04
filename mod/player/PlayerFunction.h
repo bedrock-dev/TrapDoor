@@ -48,9 +48,15 @@ namespace mod {
 
         void tick();
 
-        static void printInfo(trapdoor::Actor *player);
+        static void printDebugInfo(trapdoor::Actor *player);
+
+        static void broadcastSimpleInfo(trapdoor::Actor *player);
 
         void printRedstoneInfo(trapdoor::Actor *player, trapdoor::BlockPos &pos);
+
+        void registerSelfCommand(trapdoor::CommandManager &commandManager);
+
+        static void listAllPlayers(trapdoor::Actor *player);
 
     };
 

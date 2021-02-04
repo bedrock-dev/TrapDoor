@@ -86,7 +86,7 @@ namespace trapdoor {
         return 0;
     }
 
-    void CommandNode::printHelpInfo(int idx, Actor *actor) const {
+    void CommandNode::getHelpInfo(int idx, std::string &buffer) const {
         if (this->getName() == "?")return;
         MessageBuilder builder;
         if (idx != 0) {
@@ -111,9 +111,10 @@ namespace trapdoor {
         }
         builder += "] - ";
         builder += this->getDescription();
-        builder.send(actor);
+        builder += "\n";
+        buffer += builder.get();
         for (auto &node: this->nextNodes) {
-            node.second->printHelpInfo(idx + 1, actor);
+            node.second->getHelpInfo(idx + 1, buffer);
         }
     }
 

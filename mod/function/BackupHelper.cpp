@@ -112,4 +112,19 @@ Copy-Item -Path $SourcePath -Destination "$Destination" -Recurse | Out-Null
         }
     }
 
+    void registerBackupCommand(CommandManager &commandManager) {
+        commandManager.registerCmd("backup", "备份相关功能")
+                ->then(ARG("b", "创建备份", NONE, { mod::backup(player); }))
+                ->then(ARG("l", "列出(最新的)备份", NONE,
+                           { mod::listAllBackups(player); }))
+                ->then(ARG("r", "恢复备份", INT,
+                           { mod::restore(player, holder->getInt()); }))
+                ->then(ARG("crash", "崩服", NONE, {
+                    //这种指令的存在真的好吗
+                    trapdoor::warning(player, "这个指令已经被移除");
+                    // *((char *) (0)) = 0;
+                }));
+
+    }
+
 }

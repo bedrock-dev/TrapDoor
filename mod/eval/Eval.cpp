@@ -63,7 +63,8 @@ namespace mod {
         if (x1 == -0)
             x1 = 0;
         oss << x1;
-        trapdoor::evalMsg("%s=§l§b%s", origin.c_str(),
-                          oss.str().c_str());
+        trapdoor::broadcastMsg("%s=§l§b%s", origin.c_str(),
+
+                               oss.str().c_str());
     }
 }  // namespace mod

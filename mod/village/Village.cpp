@@ -108,18 +108,17 @@ namespace mod {
     void Village::showVillagerStatus() {
         auto *map = reinterpret_cast<std::unordered_map<trapdoor::ActorUniqueID,
                 std::vector<std::weak_ptr<mod::POIInstance>>, trapdoor::ActorUniqueIDHash> *>((char *) this + 96);
-        std::string m = "BMJ";
+        const char *icons[3] = {"☾", "⍾", "☕"};
         for (auto &villager:*map) {
             auto actor = trapdoor::bdsMod->fetchEntity(villager.first.uid, false);
-            printf("%p\n", actor);
             if (actor) {
                 trapdoor::MessageBuilder builder;
                 for (int index = 0; index < villager.second.size(); ++index) {
                     auto poi = villager.second[index].lock();
                     if (poi) {
-                        builder.sTextF(MSG_COLOR::GREEN, " %c ", m[index]);
+                        builder.sTextF(MSG_COLOR::GREEN, " %s ", icons[index]);
                     } else {
-                        builder.sTextF(MSG_COLOR::RED, " %c ", m[index]);
+                        builder.sTextF(MSG_COLOR::RED, " %s ", icons[index]);
                     }
                 }
                 actor->setNameTag(builder.get());

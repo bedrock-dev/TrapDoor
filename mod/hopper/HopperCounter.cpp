@@ -18,13 +18,9 @@ using namespace SymHook;
 
 
 namespace mod {
-    const std::map<std::string, size_t> HopperChannelManager::BLOCK_NAME_CHANNEL_MAPPER = {//NOLINT
-            {"minecraft:diamond_block", 0}, //钻石
-            {"minecraft:emerald_block", 1}, //绿宝石
-            {"minecraft:iron_block",    2},  //铁
-            {"minecraft:gold_block",    3}, //金子
-            {"minecraft:lapis_block",   4} //青金石
-    };
+
+    const size_t  HopperChannelManager::TOTAL_CHANNEL_NUM = 16;
+    const trapdoor::BlockType HopperChannelManager::BLOCK_TYPE = trapdoor::CONCRETE;
 
     void HopperChannelManager::tick() {
         if (this->enable) {
@@ -35,19 +31,19 @@ namespace mod {
     }
 
     void HopperChannelManager::printChannel(Actor *player, size_t channel) {
-        if (channel < 0 || channel > 4) {
-            error(player, "该频道不存在");
+        if (channel < 0 || channel > 15) {
+            error(player, "该频道不存在[0-15]");
         } else {
             getChannel(channel).print(player);
         }
     }
 
     void HopperChannelManager::resetChannel(Actor *player, size_t channel) {
-        if (channel < 0 || channel > 4) {
-            error(player, "this channel do not exist");
+        if (channel < 0 || channel > 15) {
+            error(player, "该频道不存在");
         } else {
             getChannel(channel).reset();
-            trapdoor::broadcastMsg("channel[%zu] reset", channel);
+            trapdoor::broadcastMsg("频道[%zu] 数据已重置", channel);
         }
     }
 
@@ -63,6 +59,13 @@ namespace mod {
                                    this->printChannel(
                                            player, holder->getInt());
                                }));
+    }
+
+    void HopperChannelManager::quickPrintData(trapdoor::Actor *player, trapdoor::BlockPos &pos) {
+        if (!this->enable)return;
+        auto *block = player->getBlockSource()->getBlock(pos);
+        if (block->getLegacy()->getBlockID() != HopperChannelManager::BLOCK_TYPE)return;
+        this->printChannel(player, block->getVariant());
     }
 
     void CounterChannel::add(const std::string &itemName, size_t num) {
@@ -101,12 +104,13 @@ namespace mod {
 THook(
         void,
         MSSYM_B1QA7setItemB1AE16HopperBlockActorB2AAE19UEAAXHAEBVItemStackB3AAAA1Z,
-        void *hopperActor,
+        trapdoor::BlockActor *hopperActor,
         unsigned int index,
         trapdoor::ItemStackBase * itemStack
 ) {
 
 
+    //计数器没开启，直接返回
     auto modInstance = trapdoor::bdsMod->asInstance<mod::TrapdoorMod>();
     if (!modInstance->getHopperChannelManager().isEnable()) {
         original(hopperActor, index, itemStack);
@@ -114,26 +118,25 @@ THook(
     }
 
 
-    auto real_this = reinterpret_cast<void *>(reinterpret_cast<VA>(hopperActor) - 208);
-    auto blockPos = reinterpret_cast<trapdoor::BlockActor *>(real_this)->getPosition();
-    std::string itemName = itemStack->getItemName();
-
-    int stackNum = itemStack->getNum();
-    trapdoor::BlockPos pos(blockPos->x, blockPos->y, blockPos->z);
-    auto nearestPlayer = trapdoor::bdsMod->getLevel()->getNearestPlayer(pos);
+    //附近没玩家，直接返回
+    auto real_this = reinterpret_cast<trapdoor::BlockActor *>(reinterpret_cast<VA>(hopperActor) - 208);
+    auto position = real_this->getPosition();
+    auto nearestPlayer = trapdoor::bdsMod->getLevel()->getNearestPlayer(*position);
     if (!nearestPlayer) {
         original(hopperActor, index, itemStack);
-        //  L_DEBUG("can't find a valid player");
         return;
     }
-
-    auto blockSource = nearestPlayer->getBlockSource();
-    auto block = blockSource->getBlock(blockPos->x, blockPos->y - 1, blockPos->z);
-    std::string blockName = block->getName();
-    auto result = mod::HopperChannelManager::BLOCK_NAME_CHANNEL_MAPPER.find(blockName);
-    if (result != mod::HopperChannelManager::BLOCK_NAME_CHANNEL_MAPPER.end()) {
+    auto bs = nearestPlayer->getBlockSource();
+    auto hopperBlockVariant = (trapdoor::FACING) bs->getBlock(*position)->getVariant();
+    auto attachBlockPos = trapdoor::facingToBlockPos(hopperBlockVariant) + *position;
+    auto attachBlock = bs->getBlock(attachBlockPos);
+    int stackNum = itemStack->getNum();
+    std::string itemName = itemStack->getItemName();
+    auto channel = attachBlock->getVariant();
+    auto blockId = attachBlock->getLegacy()->getBlockID();
+    if (blockId == mod::HopperChannelManager::BLOCK_TYPE) {
         if (!itemName.empty()) {
-            modInstance->getHopperChannelManager().getChannel(result->second).add(itemName, stackNum);
+            modInstance->getHopperChannelManager().getChannel(channel).add(itemName, stackNum);
         } else {
             original(hopperActor, index, itemStack);
         }
@@ -141,4 +144,3 @@ THook(
         original(hopperActor, index, itemStack);
     }
 }
-
