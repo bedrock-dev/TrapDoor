@@ -111,6 +111,7 @@ namespace mod {
         std::string m = "BMJ";
         for (auto &villager:*map) {
             auto actor = trapdoor::bdsMod->fetchEntity(villager.first.uid, false);
+            printf("%p\n", actor);
             if (actor) {
                 trapdoor::MessageBuilder builder;
                 for (int index = 0; index < villager.second.size(); ++index) {
