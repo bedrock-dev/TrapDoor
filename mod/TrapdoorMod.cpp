@@ -63,7 +63,7 @@ namespace mod {
         mod::registerBackupCommand(this->commandManager);
         this->hsaManager.registerCommand(this->commandManager);
         this->simpleBuilder.registerDrawCommand(this->commandManager);
-        this->simpleLitematica.registerCommand(this->commandManager);
+        // this->simpleLitematica.registerCommand(this->commandManager);
         this->hopperChannelManager.registerCommand(this->commandManager);
         this->villageHelper.registerCommand(this->commandManager);
         this->hopperChannelManager.registerCommand(this->commandManager);
