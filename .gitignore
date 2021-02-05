@@ -13,4 +13,4 @@ doc/
 test
 version/*
 *.exe
-
+.idea/workspace.xml
