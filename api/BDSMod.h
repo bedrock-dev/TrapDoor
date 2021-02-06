@@ -17,6 +17,7 @@
 #include "PlayerBuffer.h"
 #include "tools/ThreadPool.h"
 #include "tools/noncopyable .h"
+#include "language/I18nManager.h"
 
 namespace trapdoor {
 
@@ -27,6 +28,9 @@ namespace trapdoor {
             size_t particleViewDistance = 256;
             bool particlePerformanceMode = false;
         };
+
+        void registerLangCommand();
+
     protected:
         typedef void CommandRegistry;
         Level *serverLevel{};
@@ -35,6 +39,8 @@ namespace trapdoor {
         std::map<std::string, PlayerBuffer> playerCache;
         ThreadPool *threadPool = nullptr;
         ModConfig config;
+        I18nManager i18NManager;
+
     public:
 
         Level *getLevel();
@@ -77,6 +83,8 @@ namespace trapdoor {
 
     public:
         trapdoor::Actor *fetchEntity(int64_t id, bool b);
+
+        inline I18nManager &getI18NManager() { return this->i18NManager; }
     };
 
     void initializeMod(BDSMod *bdsMod);

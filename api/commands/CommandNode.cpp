@@ -27,12 +27,11 @@ namespace trapdoor {
     CommandNode::CommandNode(std::string name, std::string description)
             : name(std::move(name)),
               work([&name](ArgHolder *holder, Actor *actor) {
-                  error(actor, " %s 后面缺少子命令", name.c_str());
+                  error(actor, LANG("command.error.moreTokenRequired"), name.c_str());
               }),
               description(std::move(description)) {}
 
-
-    CommandNode::CommandNode(std::string name) : CommandNode(std::move(name), "该命令没有描述信息") {}
+    CommandNode::CommandNode(std::string name) : CommandNode(std::move(name), LANG("command.error.noDesc")) {}
 
     int CommandNode::parse(Actor *player, const std::vector<std::string> &tokens, size_t idx) {
         bool executeNow = false;
@@ -42,7 +41,7 @@ namespace trapdoor {
                 ArgHolder holder(0);
                 this->run(&holder, player);
             } else {
-                error(player, "\"%s\"后面少一个参数", tokens[idx - 1].c_str());
+                error(player, LANG("command.error.moreTokenRequired"), tokens[idx - 1].c_str());
             }
         } else if (idx == tokens.size() - 1) { //当前是最后一个token
             ArgHolder *holder = nullptr;
@@ -75,7 +74,8 @@ namespace trapdoor {
                     return node.second->parse(player, tokens, idx + 1);
                 }
             }
-            std::string s = std::string("没有这个命令,下面是所有可能的子命令: [ ") + tokens[idx] + " ]\n";
+            //std::string s = std::string("没有这个命令,下面是所有可能的子命令: [ ") + tokens[idx] + " ]\n";
+            std::string  s = LANG("command.error.noSubCommand");
             for (auto &node:this->nextNodes) {
                 s += "[";
                 s += node.first;
@@ -124,7 +124,7 @@ namespace trapdoor {
     }
 
     std::string CommandNode::getDescription() const {
-        return this->description;
+        return LANG(this->description);
     }
 
     void CommandNode::run(ArgHolder *holder, Actor *player) {

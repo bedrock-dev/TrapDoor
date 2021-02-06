@@ -6,10 +6,9 @@
 #include "tools/DirtyLogger.h"
 #include "SymHook.h"
 #include "lib/mod.h"
+#include "tools/Message.h"
 
 namespace trapdoor {
-
-
     //全局模组对象
     BDSMod *bdsMod = nullptr;
 
@@ -41,15 +40,17 @@ namespace trapdoor {
     }
 
     void BDSMod::registerCommands() {
+
         if (!this->commandRegistry) {
             L_ERROR("fail to register command!![commandRegistry is null ptr]");
         }
         L_INFO("begin register command");
-        getCommandManager().registerCmd("apicfg", "部分设置")
-                ->then(ARG("pvd", "设置粒子可见距离", INT, {
+        this->registerLangCommand();
+        getCommandManager().registerCmd("apicfg", "command.apicfg.desc")
+                ->then(ARG("pvd", "command.apicfg.pvd.desc", INT, {
                     this->getCfg().particleViewDistance = holder->getInt();
                 }))
-                ->then(ARG("pm", "牺牲一定显示效果减少部分显示卡顿", BOOL, {
+                ->then(ARG("pm", "command.apicfg.pm.desc", BOOL, {
                     this->getCfg().particlePerformanceMode = holder->getBool();
                 }));
     }
@@ -59,7 +60,6 @@ namespace trapdoor {
     }
 
     void BDSMod::initialize() {
-        L_INFO("==== trapdoor mod begin init ====");
         L_INFO("init thread pool");
         this->threadPool = new ThreadPool(std::thread::hardware_concurrency());
     }
@@ -72,5 +72,20 @@ namespace trapdoor {
                 MSSYM_B1QE11fetchEntityB1AA5LevelB2AAE13QEBAPEAVActorB2AAE14UActorUniqueIDB3AAUA1NB1AA1Z,
                 this->getLevel(), id, b
         );
+    }
+
+    void BDSMod::registerLangCommand() {
+        this->commandManager.registerCmd("lang", "command.lang.desc")
+                ->then(ARG("list", "command.lang.list.desc", NONE, {
+                    trapdoor::info(player, this->i18NManager.getAllLanguages());
+                }))
+                ->then(ARG("set", "command.lang.set.desc", STR, {
+                    auto result = this->i18NManager.tryChangeLanguage(holder->getString());
+                    if (result) {
+                        info(player, LANG("command.lang.set.success"));
+                    } else {
+                        info(player, LANG("command.lang.set.failure"));
+                    }
+                }));
     }
 }

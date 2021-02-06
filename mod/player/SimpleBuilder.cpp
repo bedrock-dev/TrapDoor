@@ -157,8 +157,8 @@ namespace mod {
 
     void SimpleBuilder::registerDrawCommand(CommandManager &commandManager) {
         using namespace trapdoor;
-        commandManager.registerCmd("draw", "简单建造")
-                ->then(ARG("ci", "画圆", INT,
+        commandManager.registerCmd("draw", "command.draw.desc")
+                ->then(ARG("ci", "command.draw.ci.desc", INT,
                            {
                                auto radius = holder->getInt();
                                bool hollow = holder->getInt() < 0;
@@ -167,7 +167,7 @@ namespace mod {
                                buildCircle(player, radius,
                                            hollow);
                            }))
-                ->then(ARG("sp", "画球体", INT,
+                ->then(ARG("sp", "command.draw.sp.desc", INT,
                            {
                                auto radius = holder->getInt();
                                bool hollow = holder->getInt() < 0;
@@ -176,7 +176,7 @@ namespace mod {
                                buildSphere(player, radius,
                                            hollow);
                            }))
-                ->then(ARG("mr", "设置最大半径", INT, {
+                ->then(ARG("mr", "command.draw.mr.desc", INT, {
                     auto radius = holder->getInt();
                     if (radius < 0) {
                         error(player, "参数不合法(必须>=1)");

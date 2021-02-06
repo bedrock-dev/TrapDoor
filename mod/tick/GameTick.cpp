@@ -187,9 +187,9 @@ namespace mod::tick {
     }
 
     void registerTickCommand(CommandManager &commandManager) {
-        commandManager.registerCmd("tick", "改变世界运行状态")
-                ->then(ARG("fz", "暂停世界运行", NONE, { tick::freezeTick(); }))
-                ->then(ARG("slow", "放慢世界运行 [num] 倍速", INT,
+        commandManager.registerCmd("tick", "command.tick.desc")
+                ->then(ARG("fz", "command.tick.fw.desc", NONE, { tick::freezeTick(); }))
+                ->then(ARG("slow", "command.tick.slow.desc", INT,
                            {
                                auto slowTime = holder->getInt();
                                if (slowTime > 1 && slowTime <= 64) {
@@ -198,7 +198,7 @@ namespace mod::tick {
                                    error(player, "放慢倍数必须在 [2-64] 之间");
                                }
                            }))
-                ->then(ARG("acc", "加速世界运行[num]倍速", INT,
+                ->then(ARG("acc", "command.tick.acc.desc", INT,
                            {
                                auto wrapTime = holder->getInt();
                                if (wrapTime > 1 && wrapTime <= 10) {
@@ -207,21 +207,20 @@ namespace mod::tick {
                                    error(player, "倍数必须在 [2-10] 之间");
                                }
                            }))
-                ->then(ARG("r", "重置世界运行", NONE, { tick::resetTick(); }))
-                ->then(ARG("fw", "世界运行步进[num] gt", INT,
+                ->then(ARG("r", "command.tick.r.desc", NONE, { tick::resetTick(); }))
+                ->then(ARG("fw", "command.tick.fw.desc", INT,
                            { tick::forwardTick(holder->getInt()); }))
-                ->then(ARG("q", "查询当前世界状态", NONE,
+                ->then(ARG("q", "command.tick.q.desc", NONE,
                            { tick::queryStatus(player); }));
     }
 
     void registerProfileCommand(CommandManager &commandManager) {
-        commandManager.registerCmd("prof", "游戏性能分析")
-                ->then(ARG("actor", "实体更新性能分析", NONE,
+        commandManager.registerCmd("prof", "command.prof.desc")
+                ->then(ARG("actor", "command.prof.actor.desc", NONE,
                            { tick::profileEntities(player); }))
                 ->EXE({ tick::profileWorld(player); });
-        commandManager.registerCmd("mspt", "展示MSPT和TPS")->EXE({
-                                                                  tick::mspt();
-                                                              });
+        commandManager.registerCmd("mspt", "command.mspt.desc")
+                ->EXE({ tick::mspt(); });
     }
 }
 

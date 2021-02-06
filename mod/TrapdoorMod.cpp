@@ -64,123 +64,122 @@ namespace mod {
         this->hsaManager.registerCommand(this->commandManager);
         this->simpleBuilder.registerDrawCommand(this->commandManager);
         // this->simpleLitematica.registerCommand(this->commandManager);
-        this->hopperChannelManager.registerCommand(this->commandManager);
         this->villageHelper.registerCommand(this->commandManager);
         this->hopperChannelManager.registerCommand(this->commandManager);
         this->registerDevCommand();
         //功能开关命令
-        commandManager.registerCmd("func", "开启/关闭部分功能")
+        commandManager.registerCmd("func", "command.func.desc")
                 ->then(
-                        ARG("hopper", "开启/关闭漏斗计数器", BOOL,
+                        ARG("hopper", "command.func.hopper.desc", BOOL,
                             {
                                 this->hopperChannelManager.setAble(holder->getBool());
-                                info(player, "设置漏斗计数器为 %d", holder->getBool());
+                                info(player, LANG("command.func.hopper.set"), holder->getBool());
                             }))
-                ->then(ARG("spawn", "开启/关闭刷怪指示", BOOL,
+                ->then(ARG("spawn", "command.func.spawn.desc", BOOL,
                            {
                                this->spawnHelper.setAble(holder->getBool());
-                               info(player, "设置刷怪指示器为 %d",
+                               info(player, LANG("command.func.spawn.set"),
                                     holder->getBool());
                            }))
-
-                ->then(ARG("rotate", "开启/关闭转方块", BOOL,
+                ->then(ARG("rotate", "command.func.rotate.desc", BOOL,
                            {
                                this->rotationHelper.setAble(holder->getBool());
-                               info(player, "设置仙人掌转方块为 %d",
+                               info(player, LANG("command.func.rotate.set"),
                                     holder->getBool());
                            }))
-                ->then(ARG("draw", "开启/关闭draw命令", BOOL,
+                ->then(ARG("draw", "command.func.draw.desc", BOOL,
                            {
                                this->simpleBuilder.setAble(holder->getBool());
-                               info(player, "设置简单建造为 %d", holder->getBool());
+                               info(player, LANG("command.func.draw.set"), holder->getBool());
                            }))
                 ->then(ARG(
-                               "stat", "开启/关闭玩家行为统计", BOOL,
+                               "stat", "command.func.stat.desc", BOOL,
                                {
                                    this->playerStatisticManager.setAble(holder->getBool());
-                                   info(player, "设置玩家行为统计为 %d", holder->getBool());
+                                   info(player, LANG("command.func.stat.set"), holder->getBool());
                                }))
-                ->then(ARG(
-                               "expl", "开启/关闭爆炸破坏地形", BOOL,
-                               {
-                                   this->singleFunctions.preventExplosion = holder->getBool();
-                                   info(player, "设置爆炸破坏地形 %d", holder->getBool());
-                               }))
-                ->then(ARG("ncud", "开启/关闭阻止NE更新", BOOL, {
+                ->then(ARG("expl", "command.func.expl.desc", BOOL,
+                           {
+                               this->singleFunctions.preventExplosion = holder->getBool();
+                               info(player, LANG("command.func.expl.set"), holder->getBool());
+                           }))
+                ->then(ARG("ncud", "command.func.ncud.desc", BOOL, {
                     this->singleFunctions.preventNCUpdate = holder->getBool();
-                    info(player, "设置阻止NC更新为 %d", holder->getBool());
+                    info(player, LANG("command.func.ncud.set"), holder->getBool());
                 }));
 
-        //史莱姆显示
+//史莱姆显示
         this->slimeChunkHelper.registerCommand(this->commandManager);
-        //漏斗计数器
+//漏斗计数器
 
-        //便捷模式切换
-        commandManager.registerCmd("o", "切换到观察者模式")->EXE({
-                                                             player->setGameMode(4);
-                                                             broadcastMsg("设置玩家[%s]为观察者模式",
-                                                                          player->getNameTag().c_str());
-                                                         });
+//便捷模式切换
+        commandManager.registerCmd("o", "command.o.desc")
+                ->EXE({
+                          player->setGameMode(4);
+                          broadcastMsg(LANG("command.o.set"),
+                                       player->getNameTag().c_str());
+                      });
 
-        commandManager.registerCmd("s", "切换到生存模式")->EXE({
-                                                            player->setGameMode(0);
-                                                            broadcastMsg("设置玩家[%s]为生存模式",
-                                                                         player->getNameTag().c_str());
-                                                        });
+        commandManager.registerCmd("s", "command.s.desc")
+                ->EXE({
+                          player->setGameMode(0);
+                          broadcastMsg(LANG("command.s.set"), player->getNameTag().c_str());
+                      });
 
-        commandManager.registerCmd("c", "切换到创造模式")->EXE({
-                                                            player->setGameMode(1);
-                                                            broadcastMsg("设置玩家[%s]为创造者模式",
-                                                                         player->getNameTag().c_str());
-                                                        });
+        commandManager.registerCmd("c", "command.c.desc")
+                ->EXE({
+                          player->setGameMode(1);
+                          broadcastMsg(LANG("command.c.set"), player->getNameTag().c_str());
+                      });
 
-        //村庄
 
-        commandManager.registerCmd("td?", "显示帮助")->EXE({
-                                                           this->commandManager.printfHelpInfo(player);
-                                                       });
-        commandManager.registerCmd("self", "玩家个人功能")
+        commandManager.registerCmd("td?", "command.td?.desc")->EXE({
+                                                                       this->commandManager.printfHelpInfo(player);
+                                                                   });
+        commandManager.registerCmd("self", "command.self.desc")
+                ->
+                        then(ARG(
+                                     "chunk", "command.self.chunk.desc", BOOL,
+                                     {
+                                         if (!configManager.getSelfEnableConfig().enableChunkShow) {
+                                             error(player, LANG("command.error.config"));
+                                             return;
+                                         }
+                                         this->playerFunctions.setShowChunkAble(player->getNameTag(),
+                                                                                holder->getBool());
+                                         info(player, LANG("command.self.chunk.set"), holder->getBool());
+                                     }))
                 ->then(ARG(
-                               "chunk", "区块显示", BOOL,
-                               {
-                                   if (!configManager.getSelfEnableConfig().enableChunkShow) {
-                                       error(player, "该功能已被关闭，请联系服主");
-                                       return;
-                                   }
-                                   this->playerFunctions.setShowChunkAble(player->getNameTag(),
-                                                                          holder->getBool());
-                                   info(player, "设置你的区块显示为 %d", holder->getBool());
-                               }))
-                ->then(ARG(
-                               "me", "测量", BOOL,
+                               "me", "command.self.me.desc", BOOL,
                                {
                                    if (!configManager.getSelfEnableConfig()
                                            .enableDistanceMeasure) {
-                                       error(player, "该功能已被关闭，请联系服主");
+                                       error(player, LANG("command.error.config"));
                                        return;
                                    }
                                    this->playerFunctions.getMeasureData(player->getNameTag())
                                            .enableMeasure = holder->getBool();
-                                   info(player, "设置你的测量为 %d", holder->getBool());
-                               }))
-                ->then(ARG("rs", "信号源显示", BOOL,
-                           {
-                               if (!configManager.getSelfEnableConfig()
-                                       .enableRedstoneStick) {
-                                   error(player, "该功能已被关闭，请联系服主");
-                                   return;
-                               }
-                               this->playerFunctions.setRedstoneHelperAble(
-                                       player->getNameTag(), holder->getBool());
-                               info(player, "设置你的信号源提示为 %d",
-                                    holder->getBool());
-                           }))
+                                   info(player, LANG("command.self.me.set"), holder->getBool());
+                               }))->
+                        then(ARG("rs", "command.self.rs.desc", BOOL,
+                                 {
+                                     if (!configManager.getSelfEnableConfig()
+                                             .enableRedstoneStick) {
+                                         error(player, LANG("command.error.config"));
+                                         return;
+                                     }
+                                     this->playerFunctions.setRedstoneHelperAble(
+                                             player->getNameTag(), holder->getBool());
+                                     info(player, LANG("command.self.rs.set"),
+                                          holder->getBool());
+                                 }))
                 ->EXE({ PlayerFunction::printDebugInfo(player); });
 
-        commandManager.registerCmd("here", "广播自己的位置")->EXE({ PlayerFunction::broadcastSimpleInfo(player); });
-        commandManager.registerCmd("l", "列出所有玩家坐标")->EXE({ PlayerFunction::listAllPlayers(player); });
-        commandManager.registerCmd("os", "显示服务器信息")->EXE({ TrapdoorMod::printOSInfo(player); });
-        commandManager.registerCmd("cl", "计算器", Any, ArgType::STR)->EXE({ mod::eval(player, holder->getString()); });
+        commandManager.registerCmd("here", "command.here.desc")->EXE({ PlayerFunction::broadcastSimpleInfo(player); });
+        commandManager.registerCmd("l", "command.l.desc")->EXE({ PlayerFunction::listAllPlayers(player); });
+        commandManager.registerCmd("os", "command.os.desc")->EXE({ TrapdoorMod::printOSInfo(player); });
+        commandManager.registerCmd("cl", "command.cl.desc", Any, ArgType::STR)->EXE(
+                { mod::eval(player, holder->getString()); });
     }
 
 
@@ -209,30 +208,68 @@ namespace mod {
 
     void TrapdoorMod::useOnHook(Actor *player,
                                 const std::string &itemName,
-                                BlockPos &pos,
+                                BlockPos
+                                &pos,
                                 unsigned int facing,
-                                const Vec3 &v) {
-        //     L_INFO("%.2f %.2f %.2f", v.x,v.y,v.z , itemName.c_str());
-        //取消注释这一行可以看到右击地面的是什么东西
-        if (itemName == "Bone" && this->spawnHelper.isEnable()) {
-            spawnHelper.updateVerticalSpawnPositions(pos, player);
+                                const Vec3 &v
+    ) {
+//     L_INFO("%.2f %.2f %.2f", v.x,v.y,v.z , itemName.c_str());
+//取消注释这一行可以看到右击地面的是什么东西
+        if (itemName == "Bone" && this->spawnHelper.
+
+                isEnable()
+
+                ) {
+            spawnHelper.
+                    updateVerticalSpawnPositions(pos, player
+            );
         } else if (itemName == "Gunpowder") {
-            this->spawnHelper.printSpawnProbability(player, pos, 0);
+            this->spawnHelper.
+                    printSpawnProbability(player, pos,
+                                          0);
         } else if (itemName == "Leather") {
-            this->spawnHelper.printSpawnProbability(player, pos, 15);
+            this->spawnHelper.
+                    printSpawnProbability(player, pos,
+                                          15);
         } else if (itemName == "Cactus") {
-            this->hopperChannelManager.quickPrintData(player, pos);
-            this->rotationHelper.rotate(pos, player->getBlockSource());
+            this->hopperChannelManager.
+                    quickPrintData(player, pos
+            );
+            this->rotationHelper.
+                    rotate(pos, player
+                    ->
+
+                            getBlockSource()
+
+            );
         } else if (itemName == "Wooden Sword") {
-            this->playerFunctions.getMeasureData(player->getNameTag())
-                    .setPosition1(pos, player);
-            //  this->simpleLitematica.getSelectRegion().setPos1(pos, player);
+            this->playerFunctions.
+                            getMeasureData(player
+                                                   ->
+
+                                                           getNameTag()
+
+                    )
+                    .
+                            setPosition1(pos, player
+                    );
+//  this->simpleLitematica.getSelectRegion().setPos1(pos, player);
         } else if (itemName == "Stone Sword") {
-            this->playerFunctions.getMeasureData(player->getNameTag())
-                    .setPosition2(pos, player);
-            // this->simpleLitematica.getSelectRegion().setPos2(pos, player);
+            this->playerFunctions.
+                            getMeasureData(player
+                                                   ->
+
+                                                           getNameTag()
+
+                    )
+                    .
+                            setPosition2(pos, player
+                    );
+// this->simpleLitematica.getSelectRegion().setPos2(pos, player);
         } else if (itemName == "Stick") {
-            this->playerFunctions.printRedstoneInfo(player, pos);
+            this->playerFunctions.
+                    printRedstoneInfo(player, pos
+            );
         }
     }
 
@@ -272,12 +309,12 @@ namespace mod {
                 .send(player);
     }
 
-    /*
-     * 实体攻击接口
-    @ return 返回false会阻止掉血,返回true会正常掉血
-     @ entity1 进行攻击的实体
-     @entity2 被攻击的实体
-    */
+/*
+ * 实体攻击接口
+@ return 返回false会阻止掉血,返回true会正常掉血
+ @ entity1 进行攻击的实体
+ @entity2 被攻击的实体
+*/
     bool TrapdoorMod::attackEntityHook(Actor *entity1, Actor *entity2) {
         if (entity1->getActorId() != "player")
             return true;  //非玩家攻击直接忽略
@@ -307,4 +344,5 @@ namespace mod {
                 ->then(ARG("echo", "test1", STR, {
                 }));
     }
+
 }  // namespace mod

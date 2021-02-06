@@ -115,26 +115,26 @@ namespace mod {
     }
 
     void HsaManager::registerCommand(trapdoor::CommandManager &commandManager) {
-        commandManager.registerCmd("hsa", "hsa显示相关")
-                ->then(ARG("clear", "清空hsa缓存", NONE,
+        commandManager.registerCmd("hsa", "command.hsa.desc")
+                ->then(ARG("clear", "command.hsa.clear.desc", NONE,
                            {
                                auto num = this->clear();
                                broadcastMsg("一共 %d 个hsa区域被清空", num);
                            }))
-                ->then(ARG("list", "列出目前所有的hsa", NONE,
+                ->then(ARG("list", "command.hsa.list.desc", NONE,
                            { this->list(player); }))
-                ->then(ARG("show", "开启hsa显示", BOOL,
+                ->then(ARG("show", "command.hsa.desc", BOOL,
                            {
                                this->setAble(holder->getBool());
                                info(player, "设置HSA显示为 %d", holder->getBool());
                            }))
-                ->then(ARG("find", "find the best pos", NONE,
+                ->then(ARG("find", "command.hsa.find.desc", NONE,
                            {
                                broadcastMsg(
                                        "find %s",
                                        this->findB(player).toString().c_str());
                            }))
-                ->then(ARG("draw", "draw hsa", NONE, { this->draw(player); }));
+                ->then(ARG("draw", "command.hsa.draw.desc", NONE, { this->draw(player); }));
     }
 
 }  // namespace mod

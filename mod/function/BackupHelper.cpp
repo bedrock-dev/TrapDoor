@@ -15,6 +15,7 @@
 #include "tools/DirtyLogger.h"
 #include "TrapdoorMod.h"
 #include "BDSMod.h"
+#include "language/I18nManager.h"
 
 namespace mod {
 
@@ -43,7 +44,7 @@ Copy-Item -Path $SourcePath -Destination "$Destination" -Recurse | Out-Null
             namespace fs = std::filesystem;
             fs::path backupRootPath("trapdoor-backup");
             if (!fs::exists(backupRootPath)) {
-                trapdoor::error(player, "备份根目录不存在!");
+                trapdoor::error(player, trapdoor::LANG("backup.error.dictNotExist"));
                 return {};
             }
             std::vector<std::string> backupList;
@@ -62,16 +63,16 @@ Copy-Item -Path $SourcePath -Destination "$Destination" -Recurse | Out-Null
 
 
     void backup(trapdoor::Actor *player) {
-        trapdoor::broadcastMsg("backup start");
+        trapdoor::broadcastMsg(LANG("backup.info.start"));
         //我也不知道为啥不会崩服
         trapdoor::bdsMod->getThreadPool()->enqueue([&]() {
             const std::string backupScript = R"(powershell ./backup.ps1)";
             writeBackupScript();
             int r = system(backupScript.c_str());
             if (r == 0) {
-                trapdoor::broadcastMsg("backup finished");
+                trapdoor::broadcastMsg(LANG("backup.info.end"));
             } else {
-                trapdoor::broadcastMsg("backup error with code %d", r);
+                trapdoor::broadcastMsg(LANG("backup.error.failure"), r);
             }
         });
     }
@@ -82,10 +83,11 @@ Copy-Item -Path $SourcePath -Destination "$Destination" -Recurse | Out-Null
         //往当前目录写入backup.ps1
     }
 
+
     void listAllBackups(trapdoor::Actor *player) {
         auto backupList = getAllBackups(player);
         if (backupList.empty()) {
-            trapdoor::error(player, "没有任何备份文件");
+            trapdoor::error(player, LANG("backup.info.noBackups"));
             return;
         }
         trapdoor::MessageBuilder builder;
@@ -95,33 +97,33 @@ Copy-Item -Path $SourcePath -Destination "$Destination" -Recurse | Out-Null
             builder.num(i).textF(" %s\n", backupList[totalSize - i - 1].c_str());
         }
         if (totalSize > 10) {
-            builder.textF("还有 %d 个备份未被列出", totalSize - 10);
+            builder.textF(LANG("backup.info.moreBackups"), totalSize - 10);
         }
         builder.send(player);
     }
 
     void restore(trapdoor::Actor *player, int index) {
         trapdoor::warning(player, "咕咕咕");
-        return;
-        namespace fs = std::filesystem;
-        auto backupList = getAllBackups(player);
-        if (index < 0 || index >= backupList.size() || backupList.empty()) {
-            trapdoor::error(player, "该备份不存在");
-        } else {
-            trapdoor::info(player, "正在恢复备份: %s", backupList[backupList.size() - 1 - index].c_str());
-        }
+//        return;
+//        namespace fs = std::filesystem;
+//        auto backupList = getAllBackups(player);
+//        if (index < 0 || index >= backupList.size() || backupList.empty()) {
+//            trapdoor::error(player, "该备份不存在");
+//        } else {
+//            trapdoor::info(player, "正在恢复备份: %s", backupList[backupList.size() - 1 - index].c_str());
+//        }
     }
 
     void registerBackupCommand(CommandManager &commandManager) {
-        commandManager.registerCmd("backup", "备份相关功能")
-                ->then(ARG("b", "创建备份", NONE, { mod::backup(player); }))
-                ->then(ARG("l", "列出(最新的)备份", NONE,
+        commandManager.registerCmd("backup", "command.backup.desc")
+                ->then(ARG("b", "command.backup.b.desc", NONE, { mod::backup(player); }))
+                ->then(ARG("l", "command.backup.l.desc", NONE,
                            { mod::listAllBackups(player); }))
-                ->then(ARG("r", "恢复备份", INT,
+                ->then(ARG("r", "command.backup.r.desc", INT,
                            { mod::restore(player, holder->getInt()); }))
-                ->then(ARG("crash", "崩服", NONE, {
+                ->then(ARG("crash", "command.backup.crash.desc", NONE, {
                     //这种指令的存在真的好吗
-                    trapdoor::warning(player, "这个指令已经被移除");
+                    trapdoor::warning(player, "this command has been removed");
                     // *((char *) (0)) = 0;
                 }));
 

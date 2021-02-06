@@ -43,7 +43,7 @@ namespace trapdoor {
         //解析命令
         int parse(Actor *player, std::string cmd);
 
-        inline bool setEnablePermissionCheck(bool able) {
+        inline void setEnablePermissionCheck(bool able) {
             this->enablePermissionCheck = able;
         }
 
@@ -57,7 +57,7 @@ namespace trapdoor {
         bool findCommand(const std::string &cmd);
 
         //检查权限等级
-        bool checkCommandPermission(const std::string &command, Actor *player,bool showInfo = true);
+        bool checkCommandPermission(const std::string &command, Actor *player, bool showInfo = true);
 
         //执行原版命令(还没做)
         static void runVanillaCommand(const std::string &command);

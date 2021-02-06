@@ -152,7 +152,7 @@ namespace mod {
                 .text("- Radius: ").num(this->getRadius()).text("\n")
                 .text("Dweller: ").sTextF(MSG_COLOR::GREEN, "%d / %d %d\n", getWorkedVillagerNum(), getPopulation(),
                                           getIronGolemNum())
-                .text("POIS:\n      Bed          |          Work|\n");
+                .text("POIS:\n      Bed          |          Work      |\n");
         auto *map = reinterpret_cast<std::unordered_map<trapdoor::ActorUniqueID,
                 std::vector<std::weak_ptr<mod::POIInstance>>, trapdoor::ActorUniqueIDHash> *>((char *) this + 96);
         bool existAlarm = false;
@@ -251,7 +251,7 @@ namespace mod {
 
     void VillageHelper::list(trapdoor::Actor *player) {
         trapdoor::MessageBuilder builder;
-        builder.text("here are all the ticking villages:\n");
+        builder.text(LANG("village.info.allVillages"));
         int i = 0;
         for (auto vw : villageList) {
             auto village = vw.village;
@@ -314,7 +314,7 @@ namespace mod {
         if (target) {
             trapdoor::info(player, target->getDebugInfo());
         } else {
-            trapdoor::warning(player, "附近没有村庄");
+            trapdoor::warning(player, LANG("village.error.noVillage"));
         }
     }
 
@@ -323,13 +323,13 @@ namespace mod {
         //试图获取居民组件
         auto component = getDwellerComponentFromActor(actor);
         if (!component) {
-            trapdoor::warning(player, "该实体不是居民(或不属于任何村庄)");
+            trapdoor::warning(player, LANG("village.error.notDweller"));
         } else {
             if (actor->getActorId() == "villager_v2") {
                 for (auto villages:this->villageList) {
                     if (villages.village->printVillagerInfo(player, actor))return;
                 }
-                trapdoor::warning(player, "这个村民不属于任何村庄");
+                trapdoor::warning(player, LANG("village.error.notDweller"));
             } else {
                 auto center = component->getVillageCenter(actor);
                 trapdoor::info(player, "[ %d  %d  %d]", center->x, center->y, center->z);
@@ -344,56 +344,56 @@ namespace mod {
     }
 
     void VillageHelper::registerCommand(CommandManager &commandManager) {
-        commandManager.registerCmd("village", "村庄相关功能")
-                ->then(ARG("list", "显示所有正在加载的村庄", NONE,
+        commandManager.registerCmd("village", "command.village.desc")
+                ->then(ARG("list", "command.village.list.desc", NONE,
                            { this->list(player); }))
-                ->then(ARG("b", "显示村庄边框", BOOL,
+                ->then(ARG("b", "command.village.b.desc", BOOL,
                            {
                                this->setShowBound(holder->getBool());
-                               info(player, "设置村庄边框显示为 %d",
-                                    holder->getBool());
+                               info(player, LANG("command.village.b.set"), holder->getBool());
                            }))
                 ->then(ARG(
-                               "p", "显示POI查询范围", BOOL,
+                               "p", "command.village.p.desc", BOOL,
                                {
                                    this->setShowPOIRange(holder->getBool());
-                                   info(player, "设置村庄边框显示为 %d", holder->getBool());
+                                   info(player, LANG("command.village.p.set"), holder->getBool());
                                }))
-                ->then(ARG("s", "显示铁傀儡刷新区域", BOOL,
+                ->then(ARG("s", "command.village.s.desc", BOOL,
                            {
                                this->setShowGolemSpawnArea(
                                        holder->getBool());
-                               info(player, "设置铁傀儡刷怪显示为 %d",
+                               info(player, LANG("command.village.spawn.set"),
                                     holder->getBool());
                            }))
                 ->then(ARG(
-                               "c", "显示村庄中心", BOOL,
+                               "c", "command.village.c.desc", BOOL,
                                {
                                    this->setShowVillageCenter(holder->getBool());
-                                   info(player, "设置村庄中心显示为 %d", holder->getBool());
+                                   info(player, LANG("command.village.c.set"), holder->getBool());
                                }))
                 ->then(ARG(
-                               "v", "显示村民信息", BOOL,
+                               "v", "command.village.v.desc", BOOL,
                                {
                                    this->setShowDwellerStatus(holder->getBool());
-                                   info(player, "设置显示村民信息为 %d", holder->getBool());
+                                   info(player, LANG("command.village.v.set"), holder->getBool());
                                }))
-                ->then(ARG("n", "显示最近村庄的详细信息", NONE,
+                ->then(ARG("n", "command.village.n.desc", NONE,
                            {
                                this->printNearestVillageInfo(
                                        player, *player->getPos());
                            }))
 
-                ->then(ARG("test", "???", NONE, {
+                ->
+                        then(ARG("test", "???", NONE, {
                     trapdoor::warning(player, "you are not developer");
                     //   this->villageHelper.test();
                 }));
-
     }
 
     bool VillageWithColor::operator<(const VillageWithColor &rhs) const {
         return this->village < rhs.village;
     }
+
 }
 
 

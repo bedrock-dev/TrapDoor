@@ -29,6 +29,8 @@ void mod_init() {
     // trapdoor::setDevMode(true);
     mod::TrapdoorMod::printCopyRightInfo(); //打印日志
     auto *mod = createBDSModInstance();
+    mod->getI18NManager().initialize();
+
     mod->asInstance<mod::TrapdoorMod>()->readConfigFile("trapdoor-config.json"); //读取配置文件
     trapdoor::initializeMod(mod);
 }

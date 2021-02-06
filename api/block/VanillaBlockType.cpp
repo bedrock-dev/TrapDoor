@@ -14,7 +14,6 @@ namespace trapdoor {
         }
     }
 
-
     trapdoor::BlockLegacy *getBlockLegacyByID(BlockType type) {
         auto iter = getBlockMap().find(type);
         if (iter != getBlockMap().end()) {

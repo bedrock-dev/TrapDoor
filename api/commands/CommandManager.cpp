@@ -27,6 +27,7 @@ namespace trapdoor {
         auto iter = this->commandList.find(tokens[0]);
         if (iter != commandList.end()) {
             //这里进行权限检查
+            L_DEBUG("player [%s] try to execute [%s]", player->getNameTag().c_str(), cmd.c_str());
             if (!this->checkCommandPermission(tokens[0], player)) {
                 return -2;
             }
@@ -41,7 +42,7 @@ namespace trapdoor {
     CommandManager::registerCmd(const std::string &cmd, const std::string &description, CommandPermissionLevel level,
                                 ArgType type) {
         //创建当前命令的根节点
-        auto *rootNode = new CommandNode(cmd, description);
+        auto *rootNode = new CommandNode(cmd, LANG(description));
         rootNode->setArgType(type);
         commandList["/" + cmd] = rootNode; //加个/方便查找
         //给根节点添加一个默认的?选项方便打印帮助信息
@@ -55,7 +56,7 @@ namespace trapdoor {
         rootNode->then(helpNode);
         //注册命令到游戏中
         L_DEBUG("register command %s", cmd.c_str());
-        regMCBECommand(cmd, description.c_str(), level, true);
+        regMCBECommand(cmd, LANG(description).c_str(), level, true);
         return rootNode;
     }
 
@@ -84,14 +85,14 @@ namespace trapdoor {
         if (cmdCfg == commandConfigList.end()) {
             L_WARNING("command %s was not config", command.c_str());
             if (showInfo)
-                error(player, "这个命令没有被配置，请联系腐竹");
+                error(player, LANG("command.error.config"));
             return false;
         }
         //todo game mode check
 
         if (!cmdCfg->second.enable) {
             if (showInfo)
-                error(player, "该服务器未启用该指令,请联系腐竹");
+                error(player, LANG("command.error.config"));
             return false;
         }
 
@@ -104,7 +105,7 @@ namespace trapdoor {
             if (showInfo) {
                 L_DEBUG("server reject the execute of command [%s] for player %s", command.c_str(),
                         player->getNameTag().c_str());
-                error(player, "你没有权限执行该命令[你的等级:%d < 命令等级:%d]", playerLevel, commandLevel);
+                error(player, LANG("command.error.permission"), playerLevel, commandLevel);
             }
             return false;
         }

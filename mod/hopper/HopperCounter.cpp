@@ -48,13 +48,13 @@ namespace mod {
     }
 
     void HopperChannelManager::registerCommand(CommandManager &commandManager) {
-        commandManager.registerCmd("counter", "漏斗计数器相关功能")
-                ->then(Arg("r", "重置频道 [num]", ArgType::INT)
+        commandManager.registerCmd("counter", "command.counter.desc")
+                ->then(Arg("r", "command.counter.r.desc", ArgType::INT)
                                ->execute([this](ArgHolder *holder, Actor *player) {
                                    this->resetChannel(
                                            player, holder->getInt());
                                }))
-                ->then(Arg("p", "打印频道信息 [num]", ArgType::INT)
+                ->then(Arg("p", "command.counter.p.desc", ArgType::INT)
                                ->execute([this](ArgHolder *holder, Actor *player) {
                                    this->printChannel(
                                            player, holder->getInt());
