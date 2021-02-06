@@ -7,7 +7,6 @@
 
 
 #include <string>
-
 #include "Block.h"
 
 namespace trapdoor {
@@ -17,7 +16,6 @@ namespace trapdoor {
         int getNum();
 
         void setNull();
-
     };
 }
 

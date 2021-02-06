@@ -15,6 +15,7 @@
 #include "block/BlockSource.h"
 #include "Dimension.h"
 #include "tools/DirtyLogger.h"
+
 namespace trapdoor {
 
     using namespace SymHook;
@@ -111,8 +112,9 @@ namespace trapdoor {
         //  return *(unsigned int *) reinterpret_cast<char *>(this + 168);
     }
 
+    //from: Actor::getLevel
     Level *Actor::getLevel() {
-        return bdsMod->getLevel();
+        return *reinterpret_cast<trapdoor::Level **>((VA) this + 816);
     }
 
     std::string Actor::getActorId() {

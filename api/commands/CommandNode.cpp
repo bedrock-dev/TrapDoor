@@ -74,8 +74,7 @@ namespace trapdoor {
                     return node.second->parse(player, tokens, idx + 1);
                 }
             }
-            //std::string s = std::string("没有这个命令,下面是所有可能的子命令: [ ") + tokens[idx] + " ]\n";
-            std::string  s = LANG("command.error.noSubCommand");
+            std::string s = LANG("command.error.noSubCommand");
             for (auto &node:this->nextNodes) {
                 s += "[";
                 s += node.first;

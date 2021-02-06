@@ -106,15 +106,4 @@ namespace trapdoor {
     }
 }
 
-using namespace SymHook;
-//初始化电路图
-//这个函数没用了
-THook(
-        trapdoor::BaseCircuitComponent
-        *,
-        MSSYM_B1QE16getBaseComponentB1AE17CircuitSceneGraphB2AAE28QEAAPEAVBaseCircuitComponentB2AAE12AEBVBlockPosB3AAAA1Z,
-        trapdoor::CircuitSceneGraph *graph,
-        trapdoor::BlockPos * pos
-) {
-    return original(graph, pos);
-}
+

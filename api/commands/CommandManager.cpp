@@ -27,7 +27,6 @@ namespace trapdoor {
         auto iter = this->commandList.find(tokens[0]);
         if (iter != commandList.end()) {
             //这里进行权限检查
-            L_DEBUG("player [%s] try to execute [%s]", player->getNameTag().c_str(), cmd.c_str());
             if (!this->checkCommandPermission(tokens[0], player)) {
                 return -2;
             }

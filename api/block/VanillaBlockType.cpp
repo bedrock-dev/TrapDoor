@@ -41,5 +41,4 @@ namespace trapdoor {
         auto *blockLegacy = getBlockLegacyByID(type);
         return blockLegacy->tryGetStateBlock(variant);
     }
-
 }

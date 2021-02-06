@@ -14,26 +14,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3eb519fb-7465-437d-86d7-42a97e7c56eb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/api/language/I18nManager.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/language/I18nManager.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/BDSMod.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/BDSMod.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/BDSMod.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/BDSMod.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/block/BlockSource.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/block/BlockSource.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/block/BlockSource.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/block/BlockSource.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/block/CircuitComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/block/CircuitComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/block/CircuitComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/block/CircuitComponent.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/block/VanillaBlockType.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/block/VanillaBlockType.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/commands/ArgHolder.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/commands/ArgHolder.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/commands/Command.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/commands/Command.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/commands/CommandManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/commands/CommandManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/commands/CommandManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/commands/CommandManager.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/commands/CommandNode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/commands/CommandNode.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/commands/CommandNode.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/commands/CommandNode.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/entity/Actor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/entity/Actor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/entity/Item.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/entity/Item.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mod/TrapdoorMod.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/TrapdoorMod.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/dllmain.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/dllmain.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/function/BackupHelper.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/function/BackupHelper.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/hopper/HopperCounter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/hopper/HopperCounter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/player/SimpleBuilder.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/player/SimpleBuilder.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/spawn/HsaManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/spawn/HsaManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/spawn/SlimeChunkHelper.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/spawn/SlimeChunkHelper.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/tick/GameTick.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/tick/GameTick.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/village/Village.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/village/Village.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,6 +71,11 @@
     </key>
   </component>
   <component name="RunManager" selected="CMake Application.trapdoor-mod">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="libtrapdoor" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="mod" TARGET_NAME="libtrapdoor" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -155,7 +152,9 @@
       <workItem from="1612451281189" duration="5000" />
       <workItem from="1612521931334" duration="7043000" />
       <workItem from="1612539567842" duration="2717000" />
-      <workItem from="1612584879767" duration="10141000" />
+      <workItem from="1612584879767" duration="10654000" />
+      <workItem from="1612597819899" duration="11000" />
+      <workItem from="1612613109238" duration="3115000" />
     </task>
     <servers />
   </component>

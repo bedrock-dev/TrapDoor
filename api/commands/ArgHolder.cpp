@@ -9,7 +9,6 @@ namespace trapdoor {
         return new ArgHolder(val);
     }
 
-
     ArgHolder *strArg(const std::string &val) {
         return new ArgHolder(val);
     }

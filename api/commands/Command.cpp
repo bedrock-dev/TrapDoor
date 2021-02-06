@@ -75,7 +75,6 @@ THook(
         trapdoor::NetworkIdentifier *id,
         void * commandPacket
 ) {
-
     //找到发送命令的玩家
     trapdoor::Actor *source = nullptr;
     trapdoor::bdsMod->getLevel()->forEachPlayer([&id, &source](trapdoor::Actor *player) {
@@ -84,7 +83,6 @@ THook(
             return;
         }
     });
-
 
     //找不到就直接返回
     if (!source) {

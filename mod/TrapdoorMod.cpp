@@ -215,61 +215,23 @@ namespace mod {
     ) {
 //     L_INFO("%.2f %.2f %.2f", v.x,v.y,v.z , itemName.c_str());
 //取消注释这一行可以看到右击地面的是什么东西
-        if (itemName == "Bone" && this->spawnHelper.
-
-                isEnable()
-
-                ) {
-            spawnHelper.
-                    updateVerticalSpawnPositions(pos, player
-            );
+        if (itemName == "Bone" && this->spawnHelper.isEnable()) {
+            spawnHelper.updateVerticalSpawnPositions(pos, player);
         } else if (itemName == "Gunpowder") {
-            this->spawnHelper.
-                    printSpawnProbability(player, pos,
-                                          0);
+            this->spawnHelper.printSpawnProbability(player, pos, 0);
         } else if (itemName == "Leather") {
-            this->spawnHelper.
-                    printSpawnProbability(player, pos,
-                                          15);
+            this->spawnHelper.printSpawnProbability(player, pos, 15);
         } else if (itemName == "Cactus") {
-            this->hopperChannelManager.
-                    quickPrintData(player, pos
-            );
-            this->rotationHelper.
-                    rotate(pos, player
-                    ->
-
-                            getBlockSource()
-
-            );
+            this->hopperChannelManager.quickPrintData(player, pos);
+            this->rotationHelper.rotate(pos, player->getBlockSource());
         } else if (itemName == "Wooden Sword") {
-            this->playerFunctions.
-                            getMeasureData(player
-                                                   ->
-
-                                                           getNameTag()
-
-                    )
-                    .
-                            setPosition1(pos, player
-                    );
+            this->playerFunctions.getMeasureData(player->getNameTag()).setPosition1(pos, player);
 //  this->simpleLitematica.getSelectRegion().setPos1(pos, player);
         } else if (itemName == "Stone Sword") {
-            this->playerFunctions.
-                            getMeasureData(player
-                                                   ->
-
-                                                           getNameTag()
-
-                    )
-                    .
-                            setPosition2(pos, player
-                    );
+            this->playerFunctions.getMeasureData(player->getNameTag()).setPosition2(pos, player);
 // this->simpleLitematica.getSelectRegion().setPos2(pos, player);
         } else if (itemName == "Stick") {
-            this->playerFunctions.
-                    printRedstoneInfo(player, pos
-            );
+            this->playerFunctions.printRedstoneInfo(player, pos);
         }
     }
 
@@ -341,8 +303,10 @@ namespace mod {
 
     void TrapdoorMod::registerDevCommand() {
         this->commandManager.registerCmd("dev", "develop")
-                ->then(ARG("echo", "test1", STR, {
+                ->then(ARG("level_test", "test1", NONE, {
+                    player->getLevel()->forEachPlayer([&](trapdoor::Actor *p) {
+                        printf("%s\n", p->getNameTag().c_str());
+                    });
                 }));
     }
-
 }  // namespace mod

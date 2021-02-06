@@ -18,15 +18,17 @@ namespace trapdoor {
 
     Block *BlockSource::getBlock(const BlockPos &blockPos) {
         return SYM_CALL(
-                Block* (*)(void * ,const BlockPos &),
-                MSSYM_B1QA8getBlockB1AE11BlockSourceB2AAE13QEBAAEBVBlockB2AAE12AEBVBlockPosB3AAAA1Z, this,
+                Block * (*)(void * ,
+        const BlockPos &),
+        MSSYM_B1QA8getBlockB1AE11BlockSourceB2AAE13QEBAAEBVBlockB2AAE12AEBVBlockPosB3AAAA1Z, this,
                 blockPos
         );
     }
 
+
     void BlockSource::setBlock(BlockPos *blockPos, Block *block) {
         SYM_CALL(
-                void(*)(void * , BlockPos *, void *, int, void *),
+                void(*)(void * , BlockPos * , void * , int, void * ),
                 MSSYM_B1QA8setBlockB1AE11BlockSourceB2AAA4QEAAB1UE13NAEBVBlockPosB2AAA9AEBVBlockB2AAE26HPEBUActorBlockSyncMessageB3AAAA1Z,
                 this, blockPos, block, 3, nullptr
         );
@@ -34,10 +36,10 @@ namespace trapdoor {
     }
 
     void BlockSource::updateNeighborsAt(const BlockPos *pos) {
-//    dbg("update");
         SYM_CALL(
-                void(*)(BlockSource * self,const BlockPos *pos),
-                MSSYM_B1QE17updateNeighborsAtB1AE11BlockSourceB2AAE17QEAAXAEBVBlockPosB3AAAA1Z,
+                void(*)(BlockSource * self,
+        const BlockPos *pos),
+        MSSYM_B1QE17updateNeighborsAtB1AE11BlockSourceB2AAE17QEAAXAEBVBlockPosB3AAAA1Z,
                 this, pos
         );
     }
@@ -53,18 +55,20 @@ namespace trapdoor {
     Biome *BlockSource::getBiome(const BlockPos *pos) {
         return
                 SYM_CALL(
-                        Biome*(*)(BlockSource * , const BlockPos *),
-                        MSSYM_B1QA8getBiomeB1AE11BlockSourceB2AAE13QEAAAEAVBiomeB2AAE12AEBVBlockPosB3AAAA1Z,
-                        this,
-                        pos
-                );
+                        Biome * (*)(BlockSource * ,
+        const BlockPos *),
+        MSSYM_B1QA8getBiomeB1AE11BlockSourceB2AAE13QEAAAEAVBiomeB2AAE12AEBVBlockPosB3AAAA1Z,
+                this,
+                pos
+        );
     }
 
     uint8_t BlockSource::getRawBrightness(const BlockPos *pos) {
         uint8_t result = 255;
         auto r = SYM_CALL(
-                uint8_t *(*)(BlockSource * , uint8_t *,const BlockPos *, bool, bool),
-                MSSYM_B1QE16getRawBrightnessB1AE11BlockSourceB2AAA4QEBAB1QE12AUBrightnessB2AAE12AEBVBlockPosB3AAUA2N1B1AA1Z,
+                uint8_t * (*)(BlockSource * , uint8_t * ,
+        const BlockPos *, bool, bool),
+        MSSYM_B1QE16getRawBrightnessB1AE11BlockSourceB2AAA4QEBAB1QE12AUBrightnessB2AAE12AEBVBlockPosB3AAUA2N1B1AA1Z,
                 this,
                 &result,
                 pos,
@@ -78,7 +82,7 @@ namespace trapdoor {
 
     int BlockSource::getMaterial(const BlockPos *pos) {
         return
-                *SYM_CALL(int*(*)(BlockSource * , int, int, int),
+                *SYM_CALL(int * (*)(BlockSource * , int, int, int),
                           MSSYM_B1QE11getMaterialB1AE11BlockSourceB2AAE16QEBAAEBVMaterialB2AAA3HHHB1AA1Z,
                           this,
                           pos->x,

@@ -7,6 +7,7 @@
 
 #include "graphics/BlockPos.h"
 #include "entity/Actor.h"
+
 namespace trapdoor {
     class CircuitSceneGraph;
 
