@@ -30,7 +30,7 @@ namespace trapdoor {
     void I18nManager::readLanguageFile(const std::string &path) {
         if (path.size() < 10) { return; }
         auto langName = path.substr(5, path.size() - 10);
-        L_INFO("find language file %s", langName.c_str());
+        L_DEBUG("find language file %s", langName.c_str());
         json langJson;
         try {
             std::ifstream i(path);
@@ -42,8 +42,9 @@ namespace trapdoor {
 
         this->languages.insert(langName);
         try {
-            for (auto&[key, value] : langJson.items())
-                this->strings[langName][key] = value;
+            for (auto&[key, value] : langJson.items()) {
+                this->strings[langName][key] = value.get<std::string>();
+            }
         } catch (std::exception &e) {
             L_ERROR("can not read config file %s ", path.c_str());
         }

@@ -88,16 +88,16 @@ namespace mod {
             info(actor, "no data in this channel");
             return;
         }
+        std::string stringBuilder;
         trapdoor::MessageBuilder builder;
-        builder.sTextF(trapdoor::MessageBuilder::BOLD || trapdoor::MessageBuilder::LIGHT_PURPLE, "channel %d\n",
-                       channel)
-                .num(n).text("  items in ").num(gameTick).text(" gt(").num(gameTick / 1200.0).text("min)\n");
+        stringBuilder += trapdoor::format("channel: " C_INT "\ntotal " C_INT " items in " C_INT " gt(" C_FLOAT "min)\n",
+                                          channel, n, gameTick, gameTick / 1200.0);
         for (const auto &i:counterList) {
-            builder.textF(" - ").text(i.first).text("    ").num(i.second).text("(").num(
-                    i.second * 1.0 / gameTick * 72000).text(
-                    "/h)\n");
+            stringBuilder += trapdoor::format("- %s  " C_INT "(" C_FLOAT "/hour)\n",
+                                              i.first.c_str(), i.second,
+                                              i.second * 1.0 / gameTick * 72000);
         }
-        builder.send(actor);
+        trapdoor::info(actor, stringBuilder);
     }
 }
 

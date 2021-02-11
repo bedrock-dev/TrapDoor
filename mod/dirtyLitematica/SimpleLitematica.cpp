@@ -118,6 +118,7 @@ namespace mod {
         for (const auto &i:this->copiedBlockData) {
             map[static_cast<const trapdoor::BlockType>(i.blockID)]++;
         }
+
         trapdoor::MessageBuilder builder;
         builder.textF("复制完成,区域大小： [%d %d %d] 一共需要 %zu 个方块",
                       this->vecPos.x + 1, this->vecPos.y + 1, this->vecPos.z + 1,

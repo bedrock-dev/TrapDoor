@@ -76,9 +76,7 @@ namespace mod::tick {
             if (tickStatus != WorldTickStatus::Frozen) {
                 tickStatus = WorldTickStatus::Frozen;
                 L_DEBUG("freeze world");
-                broadcastMsg("世界运行已停止");
-            } else {
-                broadcastMsg("已经是停止状态");
+                broadcastMsg(LANG("tick.fz.set"));
             }
         }
     }
@@ -88,17 +86,17 @@ namespace mod::tick {
             tickStatus = WorldTickStatus::Normal;
             L_DEBUG("reset world");
         }
-        broadcastMsg("已重置世界运行为正常状态");
+        broadcastMsg(LANG("tick.r.set"));
     }
 
     void wrapTick(size_t speed) {
         if (tickStatus == WorldTickStatus::Normal) {
-            broadcastMsg("世界开始以%zu倍速运行(理论值)", speed);
+            broadcastMsg(LANG("tick.acc.set"), speed);
             tickStatus = WorldTickStatus::Wrap;
-            L_DEBUG("begin wrap world %d", speed);
+            L_DEBUG("begin accelerate world %d", speed);
             wrapSpeed = speed;
         } else {
-            broadcastMsg("世界不是正常状态，无法使用加速");
+            broadcastMsg(LANG("tick.acc.error"));
         }
     }
 
@@ -108,37 +106,37 @@ namespace mod::tick {
             lastTickStats = tickStatus;
             tickStatus = WorldTickStatus::Forward;
             if (tickNum > 1200)
-                broadcastMsg("开始前进，还剩 %zu gt", tickNum);
+                broadcastMsg(LANG("tick.fw.begin"), tickNum);
             L_DEBUG("begin forward %d tick", tickNum);
         } else {
-            broadcastMsg("这个指令只能在正常或者暂停状态下运行");
+            broadcastMsg(LANG("tick.fw.error"));
         }
     }
 
 
     void slowTick(size_t slowSpeed) {
         if (tickStatus == WorldTickStatus::Normal) {
-            broadcastMsg("世界现在以 %zu 的速度放慢运行", slowSpeed);
+            broadcastMsg(LANG("tick.slow.set"), slowSpeed);
             L_DEBUG("slow world %d times", slowSpeed);
             tickStatus = WorldTickStatus::Slow;
             SlowDownTimes = slowSpeed;
         } else {
-            broadcastMsg("现在处于非正常状态，无法减速\n");
+            broadcastMsg(LANG("tick.slow.error"));
         }
     }
 
 
     void profileWorld(trapdoor::Actor *player) {
         if (gameProfiler.inProfiling) {
-            trapdoor::warning(player, "另外一个分析器在运行中");
+            trapdoor::warning(player, LANG("prof.error"));
             return;
         }
 
         if (tickStatus != WorldTickStatus::Normal) {
-            trapdoor::warning(player, "世界不在正常状态，性能分析可能不准确");
+            trapdoor::warning(player, LANG("prof.warning"));
         }
         L_DEBUG("begin profiling");
-        info(player, "开始分析...");
+        broadcastMsg(LANG("prof.start"));
         gameProfiler.inProfiling = true;
         gameProfiler.currentRound = gameProfiler.totalRound;
     }
@@ -153,15 +151,15 @@ namespace mod::tick {
 
     void profileEntities(trapdoor::Actor *player) {
         if (getActorProfiler().inProfiling) {
-            trapdoor::warning(player, "另外一个分析在运行中");
+            trapdoor::warning(player, LANG("prof.error"));
             return;
         }
 
         if (tick::getTickStatus() != tick::WorldTickStatus::Normal) {
-            trapdoor::warning(player, "世界不在正常状态，性能分析可能不准确");
+            trapdoor::warning(player, LANG("prof.warning"));
         }
         L_DEBUG("begin profiling");
-        info(player, "开始实体性能分析...");
+        info(player, LANG("prof.start"));
         getActorProfiler().inProfiling = true;
         getActorProfiler().currentRound = getActorProfiler().totalRound;
     }
@@ -169,19 +167,19 @@ namespace mod::tick {
     void queryStatus(trapdoor::Actor *player) {
         switch (tickStatus) {
             case Frozen:
-                info(player, "暂停");
+                info(player, "frozen");
                 return;
             case Normal:
-                info(player, "正常");
+                info(player, "normal");
                 return;
             case Slow:
-                info(player, "放慢%d倍", tick::SlowDownTimes);
+                info(player, "slow %d times", tick::SlowDownTimes);
                 return;
             case Forward:
-                info(player, "快进");
+                info(player, "forwarding");
                 return;
             case Wrap:
-                info(player, "加速%d倍", tick::wrapSpeed);
+                info(player, "accelerate %d times", tick::wrapSpeed);
                 return;
         }
     }
@@ -195,7 +193,7 @@ namespace mod::tick {
                                if (slowTime > 1 && slowTime <= 64) {
                                    tick::slowTick(slowTime);
                                } else {
-                                   error(player, "放慢倍数必须在 [2-64] 之间");
+                                   error(player, LANG("command.tick.slow.error"));
                                }
                            }))
                 ->then(ARG("acc", "command.tick.acc.desc", INT,
@@ -204,7 +202,7 @@ namespace mod::tick {
                                if (wrapTime > 1 && wrapTime <= 10) {
                                    tick::wrapTick(wrapTime);
                                } else {
-                                   error(player, "倍数必须在 [2-10] 之间");
+                                   error(player, LANG("command.tick.acc.error"));
                                }
                            }))
                 ->then(ARG("r", "command.tick.r.desc", NONE, { tick::resetTick(); }))
@@ -289,7 +287,7 @@ THook(
                 original(serverLevel);
                 modInstance->lightTick();
             }
-            trapdoor::broadcastMsg("%d gt 过去了", mod::tick::forwardTickNum);
+            trapdoor::broadcastMsg(trapdoor::LANG("tick.fw.end"), mod::tick::forwardTickNum);
             mod::tick::forwardTickNum = 0;
             mod::tick::tickStatus = mod::tick::lastTickStats;
             break;
@@ -451,7 +449,6 @@ THook(
     // printf("69:%d 68:%d\n", v1, v2);
 }
 
-
 THook(
         void,
         MSSYM_B1QA4tickB1AE13EntitySystemsB2AAE23QEAAXAEAVEntityRegistryB3AAAA1Z,
@@ -465,6 +462,55 @@ THook(
         mod::tick::gameProfiler.levelEntitySystemTickTime += timeReslut;
     } else {
         original(entitySystem, registry);
+    }
+}
+
+//pending update
+THook(
+        void,
+        MSSYM_B1QE21processPendingUpdatesB1AE17CircuitSceneGraphB2AAE20AEAAXPEAVBlockSourceB3AAAA1Z,
+        void *graph,
+        void * bs
+) {
+    if (mod::tick::gameProfiler.inProfiling) {
+        TIMER_START
+        original(graph, bs);
+        TIMER_END
+        mod::tick::gameProfiler.redstonePendingUpdateTime += timeReslut;
+    } else {
+        original(graph, bs);
+    }
+}
+//pendingAdd
+THook(
+        void,
+        MSSYM_B1QE18processPendingAddsB1AE17CircuitSceneGraphB2AAA7AEAAXXZ,
+        void * graph
+) {
+    if (mod::tick::gameProfiler.inProfiling) {
+        TIMER_START
+        original(graph);
+        TIMER_END
+        mod::tick::gameProfiler.redstonePendingAddTime += timeReslut;
+    } else {
+        original(graph);
+    }
+}
+
+//pnding remove
+THook(
+        void,
+        MSSYM_B1QE15removeComponentB1AE17CircuitSceneGraphB2AAE17AEAAXAEBVBlockPosB3AAAA1Z,
+        void *graph,
+        void * bs
+) {
+    if (mod::tick::gameProfiler.inProfiling) {
+        TIMER_START
+        original(graph, bs);
+        TIMER_END
+        mod::tick::gameProfiler.redstonePendingRemoveTime += timeReslut;
+    } else {
+        original(graph, bs);
     }
 }
 
@@ -489,3 +535,4 @@ THook(
         original(actor, blockSource);
     }
 }
+

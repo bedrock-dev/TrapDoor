@@ -17,4 +17,6 @@
 #include "block/BlockSource.h"
 #include "block/VanillaBlockType.h"
 #include "block/Block.h"
+#include "tools/CastHelper.h"
+
 #endif //MOD_TRAPDOOR_H

@@ -8,6 +8,7 @@
 #include "lib/SymHook.h"
 #include "block/BlockLegacy.h"
 #include "tools/DirtyLogger.h"
+#include "tools/CastHelper.h"
 
 namespace trapdoor {
     using namespace SymHook;

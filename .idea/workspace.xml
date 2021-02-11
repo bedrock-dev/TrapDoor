@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
       <config projectName="mod" targetName="libtrapdoor" />
@@ -14,18 +17,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3eb519fb-7465-437d-86d7-42a97e7c56eb" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/api/tools/CastHelper.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/block/BlockSource.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/block/BlockSource.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/block/BlockSource.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/block/BlockSource.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/BDSMod.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/BDSMod.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/block/Block.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/block/Block.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/block/BlockLegacy.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/block/BlockLegacy.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/block/CircuitComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/block/CircuitComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/block/CircuitComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/block/CircuitComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/block/VanillaBlockType.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/block/VanillaBlockType.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/commands/ArgHolder.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/commands/ArgHolder.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/commands/Command.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/commands/Command.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/commands/CommandManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/commands/CommandManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/entity/Actor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/entity/Actor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/entity/Item.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/entity/Item.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/language/I18nManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/language/I18nManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/lib/SymHook.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/lib/SymHook.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/tools/Message.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/tools/Message.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/tools/MsgBuilder.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/tools/MsgBuilder.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/trapdoor.h" beforeDir="false" afterPath="$PROJECT_DIR$/api/trapdoor.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mod/TrapdoorMod.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/TrapdoorMod.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/config/ConfigManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/config/ConfigManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/dirtyLitematica/SimpleLitematica.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/dirtyLitematica/SimpleLitematica.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/function/BackupHelper.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/function/BackupHelper.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/hopper/HopperCounter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/hopper/HopperCounter.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/hopper/HopperCounter.h" beforeDir="false" afterPath="$PROJECT_DIR$/mod/hopper/HopperCounter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/tick/GameTick.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/tick/GameTick.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/tick/SimpleProfiler.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/tick/SimpleProfiler.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/tick/SimpleProfiler.h" beforeDir="false" afterPath="$PROJECT_DIR$/mod/tick/SimpleProfiler.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,6 +167,11 @@
       <workItem from="1612584879767" duration="10654000" />
       <workItem from="1612597819899" duration="11000" />
       <workItem from="1612613109238" duration="3115000" />
+      <workItem from="1612783146371" duration="1323000" />
+      <workItem from="1612786136757" duration="2344000" />
+      <workItem from="1612840439165" duration="21000" />
+      <workItem from="1612954553052" duration="5376000" />
+      <workItem from="1613020224258" duration="5629000" />
     </task>
     <servers />
   </component>

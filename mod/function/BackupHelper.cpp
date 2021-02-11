@@ -83,7 +83,6 @@ Copy-Item -Path $SourcePath -Destination "$Destination" -Recurse | Out-Null
         //往当前目录写入backup.ps1
     }
 
-
     void listAllBackups(trapdoor::Actor *player) {
         auto backupList = getAllBackups(player);
         if (backupList.empty()) {
@@ -93,8 +92,11 @@ Copy-Item -Path $SourcePath -Destination "$Destination" -Recurse | Out-Null
         trapdoor::MessageBuilder builder;
         int totalSize = backupList.size();
         int maxNum = totalSize < 10 ? totalSize : 10;
+        std::string stringBuilder;
         for (int i = 0; i < maxNum; i++) {
+
             builder.num(i).textF(" %s\n", backupList[totalSize - i - 1].c_str());
+            stringBuilder += trapdoor::format(C_INT"\n", backupList[totalSize - i - 1].c_str());
         }
         if (totalSize > 10) {
             builder.textF(LANG("backup.info.moreBackups"), totalSize - 10);

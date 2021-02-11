@@ -27,6 +27,9 @@ namespace mod {
         microsecond_t chunkPendingTickTime = 0; //计划刻更新
         microsecond_t chunkRandomPendingTickTime = 0; //随机计划刻更新
         microsecond_t levelEntitySystemTickTime = 0;
+        microsecond_t redstonePendingUpdateTime = 0;
+        microsecond_t redstonePendingAddTime = 0;
+        microsecond_t redstonePendingRemoveTime = 0;
         microsecond_t trapdoorModTickTime = 0;
         size_t tickChunkNum = 0;
         size_t totalRound = 100;
@@ -43,6 +46,9 @@ namespace mod {
             chunkPendingTickTime = 0; //计划刻更新
             chunkRandomPendingTickTime = 0; //随机计划刻更新
             levelEntitySystemTickTime = 0; //实体系统更新
+            redstonePendingAddTime = 0;
+            redstonePendingRemoveTime = 0;
+            redstonePendingUpdateTime = 0;
             trapdoorModTickTime = 0; //模组自身的更新时间(heavy tick)
             tickChunkNum = 0;
             currentRound = 0;

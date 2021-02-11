@@ -28,7 +28,7 @@ namespace mod {
     }
 
     bool ConfigManager::initialize(const std::string &configFileName) {
-        L_INFO("begin read config file %s", configFileName.c_str());
+        L_DEBUG("begin read config file %s", configFileName.c_str());
         if (!this->readConfigFile(configFileName))return false;
         if (!this->readCommandConfig())return false;
         if (!this->readLowLevelVanillaCommands())return false;
@@ -41,7 +41,7 @@ namespace mod {
     }
 
     bool ConfigManager::readCommandConfig() {
-        L_INFO("begin read command permission info");
+        L_DEBUG("begin read command permission info");
         auto commandConfigs = this->configJson["commands"];
         trapdoor::CommandConfig tempConfig;
         try {
@@ -56,12 +56,12 @@ namespace mod {
             }
 
             for (const auto &item:this->commandsConfig) {
-                L_INFO(" - %-10s enable:%d  level:%d", item.first.c_str(),
-                       item.second.enable,
-                       item.second.permissionLevel
+                L_DEBUG(" - %-10s enable:%d  level:%d", item.first.c_str(),
+                        item.second.enable,
+                        item.second.permissionLevel
                 );
             }
-            L_INFO("read command permission info successfully\n");
+            L_DEBUG("read command permission info successfully\n");
         } catch (const std::exception &e) {
             L_ERROR("error read command config : %s", e.what());
             return false;
@@ -73,7 +73,7 @@ namespace mod {
         try {
             std::ifstream i(configFileName);
             i >> this->configJson;
-            L_INFO("read config file %s successfully\n", configFileName.c_str());
+            L_DEBUG("read config file %s successfully\n", configFileName.c_str());
             return true;
         } catch (std::exception &e) {
             L_ERROR("can not read config file %s ", configFileName.c_str());
@@ -83,7 +83,7 @@ namespace mod {
 
 
     bool ConfigManager::readFunctionConfig() {
-        L_INFO("begin read function config");
+        L_DEBUG("begin read function config");
         try {
             auto funcConfig = this->configJson["functionsEnable"];
             this->functionConfig.hopperCounter = funcConfig["hopperCounter"].get<bool>();
@@ -93,7 +93,7 @@ namespace mod {
             this->functionConfig.simpleDraw = funcConfig["simpleDraw"].get<bool>();
             this->functionConfig.playerStat = funcConfig["playerStat"].get<bool>();
 
-            L_INFO("read function config successfully\n");
+            L_DEBUG("read function config successfully\n");
         } catch (std::exception &e) {
             L_ERROR("can not read function config： %s", e.what());
             return false;
@@ -132,17 +132,17 @@ namespace mod {
 
 
     bool ConfigManager::readLowLevelVanillaCommands() {
-        L_INFO("begin read low level vanilla command info");
+        L_DEBUG("begin read low level vanilla command info");
         try {
             auto lowLevelVanillaCommandsConfig = this->configJson["lowLevelVanillaCommands"];
             for (const auto &i:lowLevelVanillaCommandsConfig) {
                 this->lowerLevelVanillaCommands.insert(i.get<std::string>());
             }
-            L_INFO("here are the all low level commands:");
+            L_DEBUG("here are the all low level commands:");
             for (const auto &item:this->lowerLevelVanillaCommands) {
-                L_INFO("- %s", item.c_str());
+                L_DEBUG("- %s", item.c_str());
             }
-            L_INFO("read low level vanilla commands successfully\n");
+            L_DEBUG("read low level vanilla commands successfully\n");
         } catch (std::exception &e) {
             L_ERROR("error read low level vanilla command info : %s", e.what());
             return false;
@@ -151,12 +151,12 @@ namespace mod {
     }
 
     bool ConfigManager::readServerConfig() {
-        L_INFO("begin read server  info");
+        L_DEBUG("begin read server info");
         try {
             auto config = this->configJson["server"];
             //以后可能会有其它配置项
             this->serverConfig.levelName = config["levelName"].get<std::string>();
-            L_INFO(" - levelMame : %s\nread server info successfully\n", serverConfig.levelName.c_str());
+            L_DEBUG(" - levelMame : %s\nread server info successfully\n", serverConfig.levelName.c_str());
         } catch (std::exception &e) {
             L_ERROR("can not read server config : %s", e.what());
             return false;
@@ -165,7 +165,7 @@ namespace mod {
     }
 
     bool ConfigManager::readVillageConfig() {
-        L_INFO("begin read village config info");
+        L_DEBUG("begin read village config info");
         try {
             auto config = this->configJson["village"];
             //以后可能会有其它配置项
@@ -179,13 +179,13 @@ namespace mod {
                     str2color(poiQuery),
                     centerParticle
             };
-            L_INFO(" - bound color: %s\n - spawn color: %s\n - poiQueryColor: %s\n - center:%s",
+            L_DEBUG(" - bound color: %s\n - spawn color: %s\n - poiQueryColor: %s\n - center:%s",
                    boundColor.c_str(),
                    spawnColor.c_str(),
                    poiQuery.c_str(),
                    centerParticle.c_str()
             );
-            L_INFO("read village color successfully\n");
+            L_DEBUG("read village color successfully\n");
         } catch (std::exception &e) {
             L_ERROR("can not read village config : %s", e.what());
             return false;
@@ -194,13 +194,13 @@ namespace mod {
     }
 
     bool ConfigManager::readSelfConfig() {
-        L_INFO("begin read self command config");
+        L_DEBUG("begin read self command config");
         try {
             auto funcConfig = this->configJson["selfEnable"];
             this->selfEnableConfig.enableChunkShow = funcConfig["chunkShow"].get<bool>();
             this->selfEnableConfig.enableDistanceMeasure = funcConfig["distanceMeasure"].get<bool>();
             this->selfEnableConfig.enableRedstoneStick = funcConfig["redstoneStick"].get<bool>();
-            L_INFO("read self command config successfully\n");
+            L_DEBUG("read self command config successfully\n");
         } catch (std::exception &e) {
             L_ERROR("can not read self config: %s", e.what());
             return false;

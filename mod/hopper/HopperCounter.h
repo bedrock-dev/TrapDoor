@@ -4,12 +4,6 @@
 
 #ifndef TRAPDOOR_HOPPER_H
 #define TRAPDOOR_HOPPER_H
-//: minecraft:hopper" (std::string)
-//[..or\entity\Player.cpp:29 (_hook)] name = "name: minecraft:diamond_block" (std::string)
-//[..or\entity\Player.cpp:29 (_hook)] name = "name: minecraft:emerald_block" (std::string)
-//[..or\entity\Player.cpp:29 (_hook)] name = "name: minecraft:iron_block" (std::string)
-//[..or\entity\Player.cpp:29 (_hook)] name = "name: minecraft:gold_block" (std::string)
-//[..or\entity\Player.cpp:29 (_hook)] name = "name: minecraft:lapis_block"
 
 #include "lib/mod.h"
 #include <map>

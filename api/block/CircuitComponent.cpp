@@ -27,6 +27,8 @@ namespace trapdoor {
     //打印信号源等信息
     void BaseCircuitComponent::basePrint(CircuitSceneGraph *graph, trapdoor::Actor *player) {
         MessageBuilder builder;
+        std::string stringBuilder;
+        stringBuilder += trapdoor::format("Signal " C_INT, this->getStrength());
         builder.text("Signal: ").num(this->getStrength());
         auto begin = (uint32_t *) *((uint64_t *) this + 1);
         auto end = (uint32_t *) *((uint64_t *) this + 2);
@@ -38,7 +40,8 @@ namespace trapdoor {
             BlockPos pos = BlockPos(val[3], val[4], val[5]);
             auto comp = graph->getBaseCircuitComponent(&pos);
             if (comp) {
-                builder.text("\n - ").pos(pos).text(" <==> ").num(comp->getStrength());
+                stringBuilder += trapdoor::format("\n - " C_POS " <==> " C_INT, pos.x, pos.y, pos.z,
+                                                  comp->getStrength());
                 vec3.x = (float) pos.x + 0.5f;
                 vec3.y = (float) pos.y + 0.7f;
                 vec3.z = (float) pos.z + 0.5f;
@@ -46,7 +49,7 @@ namespace trapdoor {
             }
             num++;
         }
-        builder.send(player);
+        trapdoor::info(player, stringBuilder);
     }
 
     //获取火把的燃烧情况

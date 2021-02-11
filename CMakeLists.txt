@@ -40,7 +40,7 @@ add_library(${MOD_API_NAME} STATIC
         api/tools/Message.cpp
         api/tools/MsgBuilder.cpp
         api/tools/ThreadPool.h
-        api/world/LevelChunk.cpp api/language/I18nManager.cpp api/language/I18nManager.h)
+        api/world/LevelChunk.cpp api/language/I18nManager.cpp api/language/I18nManager.h api/tools/CastHelper.h)
 target_include_directories(${MOD_API_NAME}
         PUBLIC
         api

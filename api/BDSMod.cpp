@@ -13,7 +13,7 @@ namespace trapdoor {
     BDSMod *bdsMod = nullptr;
 
     void initializeMod(BDSMod *BDSMod) {
-        L_INFO("create BDS mod instance");
+        L_DEBUG("create BDS mod instance");
         trapdoor::bdsMod = BDSMod;
     }
 
@@ -22,7 +22,7 @@ namespace trapdoor {
     }
 
     void BDSMod::setCommandRegistry(void *registry) {
-        L_INFO("set commandRegistry");
+        L_DEBUG("set commandRegistry");
         this->commandRegistry = registry;
     }
 
@@ -31,7 +31,7 @@ namespace trapdoor {
     }
 
     void BDSMod::setLevel(Level *level) {
-        L_INFO("init server level");
+        L_DEBUG("init server level");
         this->serverLevel = level;
     }
 
@@ -44,7 +44,7 @@ namespace trapdoor {
         if (!this->commandRegistry) {
             L_ERROR("fail to register command!![commandRegistry is null ptr]");
         }
-        L_INFO("begin register command");
+        L_DEBUG("begin register command");
         this->registerLangCommand();
         getCommandManager().registerCmd("apicfg", "command.apicfg.desc")
                 ->then(ARG("pvd", "command.apicfg.pvd.desc", INT, {
@@ -60,7 +60,7 @@ namespace trapdoor {
     }
 
     void BDSMod::initialize() {
-        L_INFO("init thread pool");
+        L_DEBUG("init thread pool");
         this->threadPool = new ThreadPool(std::thread::hardware_concurrency());
     }
 
