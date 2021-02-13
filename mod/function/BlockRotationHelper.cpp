@@ -48,6 +48,7 @@ namespace mod {
             blockSource->setBlock(&pos, air);
             auto newBlock = block->getLegacy()->tryGetStateBlock(newState);
             blockSource->setBlock(&pos, newBlock);
+            blockSource->updateNeighbors(&pos);
         } else if (name.find("cake") != std::string::npos) {
             auto newState = (variant + 1) % 7;
             auto newBlock = block->getLegacy()->tryGetStateBlock(newState);
@@ -71,11 +72,13 @@ namespace mod {
             auto newBlock = block->getLegacy()->tryGetStateBlock(newState);
             //blockSource->setBlock(&pos, blockSource->getBlock(pos + trapdoor::BlockPos(0, 1, 0)));
             blockSource->setBlock(&pos, newBlock);
+            blockSource->updateNeighbors(&pos);
         } else if (name.find("rail") != std::string::npos) {
             auto newState = (variant + 1) % 10;
             auto newBlock = block->getLegacy()->tryGetStateBlock(newState);
             blockSource->setBlock(&pos, air);
             blockSource->setBlock(&pos, newBlock);
+            blockSource->updateNeighbors(&pos);
         } else if ((name.find("log") != std::string::npos &&
                     name.find("stripped") != std::string::npos) ||
                    name.find("basalt") != std::string::npos ||

@@ -18,13 +18,9 @@
   <component name="ChangeListManager">
     <list default="true" id="3eb519fb-7465-437d-86d7-42a97e7c56eb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/block/VanillaBlockType.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/block/VanillaBlockType.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/commands/Command.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/commands/Command.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/commands/CommandManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/commands/CommandManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/tools/DirtyLogger.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/tools/DirtyLogger.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/TrapdoorMod.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/TrapdoorMod.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/function/BackupHelper.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/function/BackupHelper.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/player/PlayerStatisticManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/player/PlayerStatisticManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/block/BlockSource.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/api/block/BlockSource.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/function/BlockRotationHelper.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/function/BlockRotationHelper.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/更新日志.md" beforeDir="false" afterPath="$PROJECT_DIR$/更新日志.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,11 +66,6 @@
     </key>
   </component>
   <component name="RunManager" selected="CMake Application.trapdoor-mod">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="libtrapdoor" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="mod" TARGET_NAME="libtrapdoor" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -159,7 +150,8 @@
       <workItem from="1612840439165" duration="21000" />
       <workItem from="1612954553052" duration="5376000" />
       <workItem from="1613020224258" duration="5721000" />
-      <workItem from="1613186418882" duration="965000" />
+      <workItem from="1613186418882" duration="2539000" />
+      <workItem from="1613195001640" duration="3000" />
     </task>
     <servers />
   </component>
