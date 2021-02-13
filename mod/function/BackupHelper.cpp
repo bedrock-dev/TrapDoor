@@ -78,7 +78,7 @@ Copy-Item -Path $SourcePath -Destination "$Destination" -Recurse | Out-Null
     }
 
     void initBackup() {
-        L_INFO("create backup folder");
+        L_DEBUG("create backup folder");
         std::filesystem::create_directory("trapdoor-backup");
         //往当前目录写入backup.ps1
     }

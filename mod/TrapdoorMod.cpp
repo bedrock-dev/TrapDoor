@@ -241,7 +241,7 @@ namespace mod {
             CommandPermissionLevel oldLevel) {
         auto lowLevelConfig = this->configManager.getLowLevelCommands();
         if (lowLevelConfig.find(name) != lowLevelConfig.end()) {
-            L_INFO("set command %s level to gameMaster", name.c_str());
+            L_DEBUG("set command %s level to gameMaster", name.c_str());
             return CommandPermissionLevel::GameMasters;
         } else {
             return oldLevel;

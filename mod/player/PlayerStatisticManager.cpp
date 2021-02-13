@@ -49,12 +49,12 @@ namespace mod {
     }
 
     void PlayerStatisticManager::init(const std::string &dbName) {
-        L_INFO("begin init player statistic database");
+        L_DEBUG("begin init player statistic database");
         sqlite3_open(dbName.c_str(), &this->db);
         if (this->createPlayerActionTable() != 0) {
             L_ERROR("create table failure");
         } else {
-            L_INFO("success create table");
+            L_DEBUG("success create table");
         }
     }
 }

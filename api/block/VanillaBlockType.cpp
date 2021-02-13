@@ -23,7 +23,7 @@ namespace trapdoor {
     }
 
     void initBlockMap() {
-        L_INFO("init block map");
+        L_DEBUG("init block map");
         using namespace SymHook;
         std::function < bool(trapdoor::BlockLegacy & b) > function(
                 [&](trapdoor::BlockLegacy &l) {

@@ -41,7 +41,7 @@ namespace trapdoor {
     CommandManager::registerCmd(const std::string &cmd, const std::string &description, CommandPermissionLevel level,
                                 ArgType type) {
         //创建当前命令的根节点
-        auto *rootNode = new CommandNode(cmd, LANG(description));
+        auto *rootNode = new CommandNode(cmd, description);
         rootNode->setArgType(type);
         commandList["/" + cmd] = rootNode; //加个/方便查找
         //给根节点添加一个默认的?选项方便打印帮助信息
@@ -114,7 +114,7 @@ namespace trapdoor {
 
     void CommandManager::setCommandConfig(std::map<std::string, CommandConfig> &cmdConfigList) {
         this->commandConfigList = cmdConfigList;
-        L_INFO("set command permission info");
+        L_DEBUG("set command permission info");
 
     }
 

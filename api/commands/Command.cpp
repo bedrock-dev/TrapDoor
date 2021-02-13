@@ -61,7 +61,7 @@ THook(
         //初始化CommandRegistry 并且注册命令
         if (!trapdoor::bdsMod->getCommandRegistry()) {
             trapdoor::bdsMod->setCommandRegistry(commandRegistry);
-            L_INFO("init commandRegistry");
+            L_DEBUG("init commandRegistry");
             trapdoor::bdsMod->registerCommands();
         }
     }
