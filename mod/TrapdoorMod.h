@@ -79,8 +79,8 @@ namespace mod {
 
         void lightTick();
 
-        inline void readConfigFile(const std::string &configFileName) {
-            this->configManager.initialize(configFileName);
+        inline bool readConfigFile(const std::string &configFileName) {
+            return this->configManager.initialize(configFileName);
         }
 
         bool attackEntityHook(Actor *entity1, Actor *entity2) override;

@@ -36,15 +36,18 @@ trapdoor::BDSMod *createBDSModInstance() {
 
 //dll注入初始化
 void mod_init() {
-    displayDisclaimerMessageBox(); //免责声明窗口
+    //   displayDisclaimerMessageBox(); //免责声明窗口
     initConsole();
     trapdoor::initLogger("trapdoor.log"); //初始化日志
     // trapdoor::setDevMode(true);
     mod::TrapdoorMod::printCopyRightInfo(); //打印日志
     auto *mod = createBDSModInstance();
     mod->getI18NManager().initialize();
-
-    mod->asInstance<mod::TrapdoorMod>()->readConfigFile("trapdoor-config.json"); //读取配置文件
+    auto result = mod->asInstance<mod::TrapdoorMod>()->readConfigFile("trapdoor-config.json"); //读取配置文件
+    if (!result) {
+        L_ERROR("can not read configFile, trapdoor won't be injected");
+        return;
+    }
     trapdoor::initializeMod(mod);
 }
 

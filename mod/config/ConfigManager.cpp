@@ -30,6 +30,7 @@ namespace mod {
     bool ConfigManager::initialize(const std::string &configFileName) {
         L_DEBUG("begin read config file %s", configFileName.c_str());
         if (!this->readConfigFile(configFileName))return false;
+        if (!this->readEULA())return false;
         if (!this->readCommandConfig())return false;
         if (!this->readLowLevelVanillaCommands())return false;
         if (!this->readServerConfig())return false;
@@ -180,10 +181,10 @@ namespace mod {
                     centerParticle
             };
             L_DEBUG(" - bound color: %s\n - spawn color: %s\n - poiQueryColor: %s\n - center:%s",
-                   boundColor.c_str(),
-                   spawnColor.c_str(),
-                   poiQuery.c_str(),
-                   centerParticle.c_str()
+                    boundColor.c_str(),
+                    spawnColor.c_str(),
+                    poiQuery.c_str(),
+                    centerParticle.c_str()
             );
             L_DEBUG("read village color successfully\n");
         } catch (std::exception &e) {
@@ -203,6 +204,25 @@ namespace mod {
             L_DEBUG("read self command config successfully\n");
         } catch (std::exception &e) {
             L_ERROR("can not read self config: %s", e.what());
+            return false;
+        }
+        return true;
+    }
+
+    bool ConfigManager::readEULA() {
+        L_DEBUG("begin read EULA");
+        try {
+            auto config = this->configJson["EULA"];
+            //以后可能会有其它配置项
+            auto acceptEULA = config.get<bool>();
+            if (!acceptEULA) {
+                L_ERROR("you need to accept the EULA before use trapdoor mod");
+            } else {
+                L_DEBUG("read eula success");
+            }
+            return acceptEULA;
+        } catch (std::exception &e) {
+            L_ERROR("can not read server config : %s", e.what());
             return false;
         }
         return true;

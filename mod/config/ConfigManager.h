@@ -66,6 +66,7 @@ namespace mod {
 
         bool readParticleConfig();
 
+        bool readEULA();
 
         bool readLowLevelVanillaCommands();
 
