@@ -17,6 +17,18 @@ void initConsole() {
     SetConsoleMode(hOutput, dwMode);
 }
 
+void displayDisclaimerMessageBox() {
+    auto boxID = MessageBox(
+            nullptr,
+            (LPCSTR) "If you click yes, this means you have agreed the disclaimer in the follow link:"
+                     " https://github.com/hhhxiao/TrapDoor/blob/1.16.4/trapdoor-disclaimer.txt",
+            (LPCSTR) "Trapdoor Disclaimer",
+            MB_ICONINFORMATION | MB_YESNO
+    );
+    if (boxID == IDNO) {
+        ExitProcess(0);
+    }
+}
 
 trapdoor::BDSMod *createBDSModInstance() {
     return new mod::TrapdoorMod();
@@ -24,6 +36,7 @@ trapdoor::BDSMod *createBDSModInstance() {
 
 //dll注入初始化
 void mod_init() {
+    displayDisclaimerMessageBox(); //免责声明窗口
     initConsole();
     trapdoor::initLogger("trapdoor.log"); //初始化日志
     // trapdoor::setDevMode(true);
