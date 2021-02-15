@@ -24,7 +24,7 @@ namespace mod {
 
     struct ModInfo {
         const std::string minecraftVersion = "1.16.4.02";
-        const std::string modVersion = "trapdoor-0.9.20";
+        const std::string modVersion = "trapdoor-0.9.32";
     };
 
     struct SingleFunction {
