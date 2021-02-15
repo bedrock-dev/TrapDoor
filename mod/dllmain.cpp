@@ -2,7 +2,7 @@
 #include "tools/DirtyLogger.h"
 #include "BDSMod.h"
 #include "TrapdoorMod.h"
-
+#include "lib/Remotery.h"
 
 /*
  * 设置所有输出为utf8,设置支持彩色输出
@@ -34,8 +34,12 @@ trapdoor::BDSMod *createBDSModInstance() {
     return new mod::TrapdoorMod();
 }
 
+
+Remotery *rmt = nullptr;
+
 //dll注入初始化
 void mod_init() {
+    rmt_CreateGlobalInstance(&rmt);
     //   displayDisclaimerMessageBox(); //免责声明窗口
     initConsole();
     trapdoor::initLogger("trapdoor.log"); //初始化日志
@@ -51,7 +55,9 @@ void mod_init() {
     trapdoor::initializeMod(mod);
 }
 
-void mod_exit() {}
+void mod_exit() {
+    rmt_DestroyGlobalInstance(rmt);
+}
 
 BOOL APIENTRY DllMain(HMODULE hModule,
                       DWORD ul_reason_for_call,

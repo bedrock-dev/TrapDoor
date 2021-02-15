@@ -10,6 +10,7 @@
 #include "BDSMod.h"
 #include "TrapdoorMod.h"
 #include "ActorProfiler.h"
+#include "lib/Remotery.h"
 
 namespace mod::tick {
     using trapdoor::broadcastMsg;

@@ -14,7 +14,7 @@
 #include "TrapdoorMod.h"
 #include "PlayerStatisticManager.h"
 #include "Player.h"
-
+#include "lib/Remotery.h"
 //player place block
 using namespace SymHook;
 
@@ -28,10 +28,13 @@ THook(
         bool flag
 ) {
     auto modInstance = trapdoor::bdsMod->asInstance<mod::TrapdoorMod>();
-    modInstance->getPlayerStatisticManager().insetPlayerAction(player->getNameTag(), pos,
-                                                               mod::PlayerStatisticManager::PLACE_BLOCK,
-                                                               player->getDimensionID(),
-                                                               block.getName());
+    rmt_ScopedCPUSample(DESTORY_BLOCK, 0);
+    if (modInstance->getPlayerStatisticManager().isEnable()) {
+        modInstance->getPlayerStatisticManager().insetPlayerAction(player->getNameTag(), pos,
+                                                                   mod::PlayerStatisticManager::PLACE_BLOCK,
+                                                                   player->getDimensionID(),
+                                                                   block.getName());
+    }
 
     return original(self, player, block, pos, flag);
 }
@@ -45,14 +48,21 @@ THook(
         int64_t a3,
         int a4
 ) {
-    uint64_t *ptr = self + 1;
-    auto player = reinterpret_cast<trapdoor::Actor *>(*ptr);
+
+    rmt_ScopedCPUSample(DESTORY_BLOCK, 0);
     auto modInstance = trapdoor::bdsMod->asInstance<mod::TrapdoorMod>();
-    auto block = player->getBlockSource()->getBlock(pos->x, pos->y, pos->z);
-    modInstance->getPlayerStatisticManager().insetPlayerAction(player->getNameTag(), *pos,
-                                                               mod::PlayerStatisticManager::DESTROY_BLOCK,
-                                                               player->getDimensionID(),
-                                                               block->getName());
+    if (modInstance->getPlayerStatisticManager().isEnable()) {
+        rmt_ScopedCPUSample(INSERT_SQL, 0);
+        uint64_t *ptr = self + 1;
+        auto player = reinterpret_cast<trapdoor::Actor *>(*ptr);
+
+        auto block = player->getBlockSource()->getBlock(pos->x, pos->y, pos->z);
+        modInstance->getPlayerStatisticManager().insetPlayerAction(player->getNameTag(), *pos,
+                                                                   mod::PlayerStatisticManager::DESTROY_BLOCK,
+                                                                   player->getDimensionID(),
+                                                                   block->getName());
+    }
+
     original(self, pos, a3, a4);
 }
 
