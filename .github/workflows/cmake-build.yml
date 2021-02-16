@@ -3,7 +3,7 @@ name: CMake
 on:
   push:
     branches: 
-      - 1.16.4-main
+      - 1.16.201
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
@@ -62,9 +62,9 @@ jobs:
 #      env:
 #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #      with:
-#          upload_url: ${{ steps.create_release.outputs.upload_url }}
+#          upload_url: https://github.com/quizhizhe/TrapDoor/releases/tag/1.16.4
 #          asset_path: ${{github.workspace}}/build/Release/trapdoor-mod.dll
-#          asset_name: trapdoor-mod.dll
+#          asset_name: trapdoor-v0.9.20-1.16.201.dll
 #          asset_content_type: application/dll
 #
 ##     - name: Test

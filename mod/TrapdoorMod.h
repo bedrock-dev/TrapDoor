@@ -16,7 +16,7 @@
 #include "player/PlayerFunction.h"
 #include "player/SimpleBuilder.h"
 #include "SlimeChunkHelper.h"
-#include "player/PlayerStatisticManager.h"
+//#include "player/PlayerStatisticManager.h"
 
 namespace mod {
 
@@ -37,7 +37,7 @@ namespace mod {
         PlayerFunction playerFunctions;
         SimpleBuilder simpleBuilder;
         SlimeChunkHelper slimeChunkHelper;
-        PlayerStatisticManager playerStatisticManager;
+//        PlayerStatisticManager playerStatisticManager;
 
         void registerTickCommand();
 
@@ -81,7 +81,7 @@ namespace mod {
 
         inline SpawnAnalyzer &getSpawnAnalyzer() { return this->spawnAnalyzer; }
 
-        inline PlayerStatisticManager &getPlayerStatisticManager() { return this->playerStatisticManager; }
+//        inline PlayerStatisticManager &getPlayerStatisticManager() { return this->playerStatisticManager; }
 
         inline std::string getLevelName() { return this->configManager.getServerConfig().levelName; }
 

@@ -13,7 +13,18 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3eb519fb-7465-437d-86d7-42a97e7c56eb" name="Default Changelist" comment="" />
+    <list default="true" id="3eb519fb-7465-437d-86d7-42a97e7c56eb" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/TrapdoorMod.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/TrapdoorMod.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/TrapdoorMod.h" beforeDir="false" afterPath="$PROJECT_DIR$/mod/TrapdoorMod.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/player/Player.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/player/Player.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/player/PlayerStatisticManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mod/player/PlayerStatisticManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/player/PlayerStatisticManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/mod/player/PlayerStatisticManager.h" afterDir="false" />
+    </list>
+    <list id="0e74ad51-a4ad-4961-878c-36f503ae2e8b" name="remove player destory record" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,6 +55,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="add_unversioned_files" value="$PROJECT_DIR$/version/symbol-1164.txt&#10;C:/Users/xhy/dev/TrapDoor/version/symbol-116201.txt" />
     <property name="cf.first.check.clang-format" value="false" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
@@ -52,10 +64,10 @@
       <recent name="C:\Users\xhy\dev\TrapDoor\mod\os" />
     </key>
   </component>
-  <component name="RunManager" selected="CMake Application.trapdoor-mod">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
+  <component name="RunManager" selected="CMake 应用程序.trapdoor-mod">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
     <configuration name="trapDoorAPI" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="mod" TARGET_NAME="trapDoorAPI" CONFIG_NAME="Debug">
@@ -68,15 +80,21 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <list>
-      <item itemvalue="CMake Application.trapDoorAPI" />
-      <item itemvalue="CMake Application.trapdoor-mod" />
+      <item itemvalue="CMake 应用程序.trapDoorAPI" />
+      <item itemvalue="CMake 应用程序.trapdoor-mod" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="3eb519fb-7465-437d-86d7-42a97e7c56eb" name="Default Changelist" comment="" />
+      <changelist id="0e74ad51-a4ad-4961-878c-36f503ae2e8b" name="remove player destory record" comment="" />
       <created>1610412403756</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -88,7 +106,22 @@
       <workItem from="1610590311798" duration="553000" />
       <workItem from="1610590886592" duration="2628000" />
       <workItem from="1611715278738" duration="5493000" />
+      <workItem from="1613486181713" duration="1612000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
