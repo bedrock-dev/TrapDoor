@@ -36,7 +36,7 @@ namespace mod {
     void TrapdoorMod::initialize() {
         BDSMod::initialize();
         this->commandManager.setCommandConfig(this->configManager.getCommandsConfig());
-        this->playerStatisticManager.init("trapdoor.db");
+//        this->playerStatisticManager.init("trapdoor.db");
         mod::initBackup();
         this->initFunctionEnable();
         this->villageHelper.setConfig(this->configManager.getVillageConfig());
@@ -80,7 +80,7 @@ namespace mod {
                         error(player, "该功能已被关闭，请联系服主");
                         return;
                     }
-                    this->playerStatisticManager.setAble(holder->getBool());
+//                    this->playerStatisticManager.setAble(holder->getBool());
                     info(player, "设置玩家行为统计为 %d", holder->getBool());
                 }));
 
@@ -386,7 +386,7 @@ namespace mod {
         auto functionCfg = this->configManager.getFunctionConfig();
         this->spawnHelper.setAble(functionCfg.spawnHelper);
         this->rotationHelper.setAble(functionCfg.cactusRotation);
-        this->playerStatisticManager.setAble(functionCfg.playerStat);
+//        this->playerStatisticManager.setAble(functionCfg.playerStat);
         this->simpleBuilder.setAble(functionCfg.simpleDraw);
         this->hopperChannelManager.setAble(functionCfg.hopperCounter);
     }
