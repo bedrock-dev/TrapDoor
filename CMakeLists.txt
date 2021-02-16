@@ -55,7 +55,7 @@ target_include_directories(${MOD_API_NAME}
         )
 
 target_link_libraries(${MOD_API_NAME} ${PROJECT_SOURCE_DIR}/api/lib/detours.lib)
-target_link_libraries(${MOD_API_NAME} ${PROJECT_SOURCE_DIR}/api/lib/sqlite3.lib)
+#target_link_libraries(${MOD_API_NAME} ${PROJECT_SOURCE_DIR}/api/lib/sqlite3.lib)
 
 set(MOD_NAME trapdoor-mod)
 add_library(${MOD_NAME}
@@ -63,7 +63,7 @@ add_library(${MOD_NAME}
         mod/dllmain.cpp
         mod/TrapdoorMod.cpp
         mod/function/SingleFunctions.cpp
-        mod/hopper/HopperCounter.cpp
+        mod/function/HopperCounter.cpp
         mod/config/ConfigManager.cpp
         mod/village/Village.cpp
         mod/tick/GameTick.cpp
@@ -74,7 +74,7 @@ add_library(${MOD_NAME}
         mod/spawn/SpawnAnalyzer.cpp
         mod/function/BlockRotationHelper.cpp
         mod/player/PlayerFunction.cpp
-        mod/player/SimpleBuilder.cpp
+        mod/function/SimpleBuilder.cpp
         mod/spawn/SlimeChunkHelper.cpp
         mod/player/PlayerStatisticManager.cpp
         mod/player/Player.cpp
@@ -92,7 +92,7 @@ target_include_directories(
         mod
         mod/os
         mod/config
-        mod/hopper
+        mod/test
         mod/spawn
         mod/function
         mod/village

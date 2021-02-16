@@ -25,9 +25,9 @@ Trapdoor是一个为 Minecraft Bedrock Edition 服务的，基于原版服务端
 - [https://github.com/nlohmann/json](https://github.com/nlohmann/json)
 
 - [https://github.com/DarthTon/Xenos](https://github.com/DarthTon/Xenos)
-
-- [sqlite](https://www.sqlite.org/index.html)
-
+  
+- [https://github.com/Celtoys/Remotery](https://github.com/Celtoys/Remotery)
+  
 - [https://github.com/progschj/ThreadPool](https://github.com/progschj/ThreadPool)
 
 ### 特别感谢

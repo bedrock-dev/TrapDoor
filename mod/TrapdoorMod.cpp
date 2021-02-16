@@ -46,7 +46,6 @@ namespace mod {
         BDSMod::initialize();
         this->commandManager.setCommandConfig(
                 this->configManager.getCommandsConfig());
-        this->playerStatisticManager.init("trapdoor.db");
         mod::initBackup();
         this->villageHelper.setConfig(this->configManager.getVillageConfig());
         get_cpu_usage();
@@ -92,12 +91,12 @@ namespace mod {
                                this->simpleBuilder.setAble(holder->getBool());
                                info(player, LANG("command.func.draw.set"), holder->getBool());
                            }))
-                ->then(ARG(
-                               "stat", "command.func.stat.desc", BOOL,
-                               {
-                                   this->playerStatisticManager.setAble(holder->getBool());
-                                   info(player, LANG("command.func.stat.set"), holder->getBool());
-                               }))
+//                ->then(ARG(
+//                               "stat", "command.func.stat.desc", BOOL,
+//                               {
+//                                   this->playerStatisticManager.setAble(holder->getBool());
+//                                   info(player, LANG("command.func.stat.set"), holder->getBool());
+//                               }))
                 ->then(ARG("expl", "command.func.expl.desc", BOOL,
                            {
                                this->singleFunctions.preventExplosion = holder->getBool();
@@ -288,7 +287,6 @@ namespace mod {
         auto functionCfg = this->configManager.getFunctionConfig();
         this->spawnHelper.setAble(functionCfg.spawnHelper);
         this->rotationHelper.setAble(functionCfg.cactusRotation);
-        this->playerStatisticManager.setAble(functionCfg.playerStat);
         this->simpleBuilder.setAble(functionCfg.simpleDraw);
         this->hopperChannelManager.setAble(functionCfg.hopperCounter);
     }

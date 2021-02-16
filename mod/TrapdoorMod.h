@@ -7,16 +7,15 @@
 
 #include "BDSMod.h"
 #include "village/Village.h"
-#include "hopper/HopperCounter.h"
+#include "function/HopperCounter.h"
 #include "spawn/HsaManager.h"
 #include "config/ConfigManager.h"
 #include "spawn/SpawnHelper.h"
 #include "spawn/SpawnAnalyzer.h"
 #include "function/BlockRotationHelper.h"
 #include "player/PlayerFunction.h"
-#include "player/SimpleBuilder.h"
+#include "function/SimpleBuilder.h"
 #include "SlimeChunkHelper.h"
-#include "player/PlayerStatisticManager.h"
 #include "dirtyLitematica/SimpleLitematica.h"
 #include "dirtyLitematica/SelectRegion.h"
 
@@ -46,7 +45,6 @@ namespace mod {
         PlayerFunction playerFunctions;
         SimpleBuilder simpleBuilder;
         SlimeChunkHelper slimeChunkHelper;
-        PlayerStatisticManager playerStatisticManager;
 
         SimpleLitematica simpleLitematica;
 
@@ -94,7 +92,6 @@ namespace mod {
 
         inline SpawnAnalyzer &getSpawnAnalyzer() { return this->spawnAnalyzer; }
 
-        inline PlayerStatisticManager &getPlayerStatisticManager() { return this->playerStatisticManager; }
 
         inline std::string getLevelName() { return this->configManager.getServerConfig().levelName; }
 
