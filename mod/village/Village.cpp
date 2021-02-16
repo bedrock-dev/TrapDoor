@@ -362,7 +362,7 @@ namespace mod {
                            {
                                this->setShowGolemSpawnArea(
                                        holder->getBool());
-                               info(player, LANG("command.village.spawn.set"),
+                               info(player, LANG("command.village.s.set"),
                                     holder->getBool());
                            }))
                 ->then(ARG(

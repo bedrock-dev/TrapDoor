@@ -20,12 +20,9 @@
 #include "trapdoor.h"
 #include "block/BlockLegacy.h"
 #include "VanillaBlockType.h"
+#include "test/TrapdoorTest.h"
 
 namespace mod {
-    bool test(const trapdoor::BlockLegacy &l) {
-        printf("qaq\n");
-        return true;
-    }
 
     void TrapdoorMod::heavyTick() {
         this->villageHelper.tick();
@@ -59,6 +56,7 @@ namespace mod {
         BDSMod::registerCommands();
         tick::registerTickCommand(this->commandManager);
         tick::registerProfileCommand(this->commandManager);
+        mod::test::registerTestCommand(this->commandManager);
         mod::registerBackupCommand(this->commandManager);
         this->hsaManager.registerCommand(this->commandManager);
         this->simpleBuilder.registerDrawCommand(this->commandManager);

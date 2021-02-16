@@ -45,10 +45,9 @@ namespace mod {
             blockSource->setBlock(&pos, newBlock);
         } else if (name.find("torch") != std::string::npos) {
             auto newState = (variant + 1) % 5;
-            blockSource->setBlock(&pos, air);
             auto newBlock = block->getLegacy()->tryGetStateBlock(newState);
+            blockSource->setBlock(&pos, air);
             blockSource->setBlock(&pos, newBlock);
-          //  blockSource->updateNeighbors(&pos);
         } else if (name.find("cake") != std::string::npos) {
             auto newState = (variant + 1) % 7;
             auto newBlock = block->getLegacy()->tryGetStateBlock(newState);
@@ -68,17 +67,18 @@ namespace mod {
                    name.find("barrel") != std::string::npos ||
                    name.find("glazed_terracotta") != std::string::npos) {
             auto newState = (variant % 8 + 1) % 6 + (variant / 8) * 8;
-            blockSource->setBlock(&pos, air);
+
             auto newBlock = block->getLegacy()->tryGetStateBlock(newState);
+            blockSource->setBlock(&pos, air);
             //blockSource->setBlock(&pos, blockSource->getBlock(pos + trapdoor::BlockPos(0, 1, 0)));
             blockSource->setBlock(&pos, newBlock);
-       //     blockSource->updateNeighbors(&pos);
+
         } else if (name.find("rail") != std::string::npos) {
             auto newState = (variant + 1) % 10;
             auto newBlock = block->getLegacy()->tryGetStateBlock(newState);
             blockSource->setBlock(&pos, air);
             blockSource->setBlock(&pos, newBlock);
-         //   blockSource->updateNeighbors(&pos);
+            //   blockSource->updateNeighbors(&pos);
         } else if ((name.find("log") != std::string::npos &&
                     name.find("stripped") != std::string::npos) ||
                    name.find("basalt") != std::string::npos ||

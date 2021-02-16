@@ -84,7 +84,7 @@ add_library(${MOD_NAME}
         mod/eval/Eval.cpp
         mod/dirtyLitematica/SelectRegion.cpp
         mod/dirtyLitematica/SimpleLitematica.cpp
-        )
+        mod/test/TrapdoorTest.cpp)
 
 target_include_directories(
         ${MOD_NAME}
