@@ -1,8 +1,11 @@
 #pragma once
+#define _WINSOCKAPI_
+
 #include "Windows.h"
 #include "detours.h"
 #include "detver.h"
 #include <iostream>
+
 using VA = unsigned __int64;
 using RVA = unsigned long int;
 
@@ -16,9 +19,9 @@ auto Hook(T *p, T f) {
     if (error != NO_ERROR) {
         return "Hook: DetourUpdateThread Error";
     }
-    error = DetourAttach((PVOID * )
-    p, (PVOID)
-    f);
+    error = DetourAttach((PVOID *)
+                                 p, (PVOID)
+                                 f);
     if (error != NO_ERROR) {
         return "Hook: DetourAttach Error";
     }
@@ -39,9 +42,9 @@ auto UnHook(T *p, T f) {
     if (error != NO_ERROR) {
         return "UnHook: DetourUpdateThread Error";
     }
-    error = DetourDetach((PVOID * )
-    p, (PVOID)
-    f);
+    error = DetourDetach((PVOID *)
+                                 p, (PVOID)
+                                 f);
     if (error != NO_ERROR) {
         return "UnHook: DetourDetach Error";
     }

@@ -3,34 +3,27 @@
 //
 
 #include "TrapdoorMod.h"
-#include "commands/CommandManager.h"
 #include "commands/Command.h"
 #include "tick/GameTick.h"
-#include "tools/DirtyLogger.h"
-#include "tick/ActorProfiler.h"
-#include "block/BlockSource.h"
-#include "graphics/BlockPos.h"
-#include "player/PlayerFunction.h"
-#include "player/PlayerStatisticManager.h"
 #include "function/BackupHelper.h"
 #include "os/process_stat.h"
-#include "tools/MsgBuilder.h"
-#include "block/Block.h"
 #include "eval/Eval.h"
 #include "trapdoor.h"
-#include "block/BlockLegacy.h"
 #include "VanillaBlockType.h"
 #include "test/TrapdoorTest.h"
+#include "lib/Remotery.h"
 
 namespace mod {
 
     void TrapdoorMod::heavyTick() {
+        rmt_ScopedCPUSample(MOD_TICK, 0);
         this->villageHelper.tick();
         this->hsaManager.tick();
         this->spawnHelper.tick();
         this->playerFunctions.tick();
         this->slimeChunkHelper.tick();
         this->simpleLitematica.tick();
+        this->fakePlayerClient->tick();
     }
 
     void TrapdoorMod::lightTick() {
@@ -48,6 +41,9 @@ namespace mod {
         get_cpu_usage();
         this->initFunctionEnable();
         initBlockMap();
+        //初始化假人客户端的线程池
+        this->fakePlayerClient = new FakePlayerClient(this->getThreadPool());
+        this->fakePlayerClient->registerFakePlayerCommand(commandManager);
         L_INFO("==== trapdoor init finish  ====\nServer Start");
     }
 

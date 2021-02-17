@@ -18,6 +18,7 @@
 #include "SlimeChunkHelper.h"
 #include "dirtyLitematica/SimpleLitematica.h"
 #include "dirtyLitematica/SelectRegion.h"
+#include "fakePlayer/FakePlayerClient.h"
 
 namespace mod {
 
@@ -45,8 +46,8 @@ namespace mod {
         PlayerFunction playerFunctions;
         SimpleBuilder simpleBuilder;
         SlimeChunkHelper slimeChunkHelper;
-
         SimpleLitematica simpleLitematica;
+        FakePlayerClient *fakePlayerClient = nullptr;
 
         void initFunctionEnable();
 
