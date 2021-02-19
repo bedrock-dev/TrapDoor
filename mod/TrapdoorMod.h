@@ -21,8 +21,8 @@
 namespace mod {
 
     struct ModInfo {
-        const std::string minecraftVersion = "1.16.4.02";
-        const std::string modVersion = "trapdoor-0.9.20";
+        const std::string minecraftVersion = "1.16.201";
+        const std::string modVersion = "trapdoor-0.9.21";
     };
 
     class TrapdoorMod : public trapdoor::BDSMod {
