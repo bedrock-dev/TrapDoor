@@ -36,7 +36,7 @@ namespace mod {
     void TrapdoorMod::initialize() {
         BDSMod::initialize();
         this->commandManager.setCommandConfig(this->configManager.getCommandsConfig());
-        this->playerStatisticManager.init("trapdoor.db");
+//        this->playerStatisticManager.init("trapdoor.db");
         mod::initBackup();
         this->initFunctionEnable();
         this->villageHelper.setConfig(this->configManager.getVillageConfig());
@@ -74,7 +74,9 @@ namespace mod {
                 ->then(ARG("draw", "开启/关闭区块draw命令", BOOL, {
                     this->simpleBuilder.setAble(holder->getBool());
                     info(player, "设置简单建造为 %d", holder->getBool());
-                }))
+                }));
+/*
+            //commented out fully player statistics manager
                 ->then(ARG("stat", "开启/关闭玩家行为统计", BOOL, {
                     if (!configManager.getFunctionConfig().playerStat) {
                         error(player, "该功能已被关闭，请联系服主");
@@ -83,6 +85,7 @@ namespace mod {
                     this->playerStatisticManager.setAble(holder->getBool());
                     info(player, "设置玩家行为统计为 %d", holder->getBool());
                 }));
+*/
 
         //史莱姆显示
         commandManager.registerCmd("slime", "史莱姆区块相关")
@@ -386,7 +389,7 @@ namespace mod {
         auto functionCfg = this->configManager.getFunctionConfig();
         this->spawnHelper.setAble(functionCfg.spawnHelper);
         this->rotationHelper.setAble(functionCfg.cactusRotation);
-        this->playerStatisticManager.setAble(functionCfg.playerStat);
+//        this->playerStatisticManager.setAble(functionCfg.playerStat);
         this->simpleBuilder.setAble(functionCfg.simpleDraw);
         this->hopperChannelManager.setAble(functionCfg.hopperCounter);
     }
