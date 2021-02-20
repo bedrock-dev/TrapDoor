@@ -8,8 +8,14 @@
 #include <cstdint>
 
 template<typename T>
-T *offset_cast(void *ptr, size_t bytes) {
-    return reinterpret_cast<T *>(reinterpret_cast<uint8_t *>(ptr) + bytes);
+/*
+ *  [                              ]
+ *  |<----bytes---->|
+ *  ^               ^
+ *  ptr             T
+ */
+T offset_cast(void *ptr, size_t bytes) {
+    return reinterpret_cast<T>(reinterpret_cast<uint8_t *>(ptr) + bytes);
 }
 
 #endif //MOD_CASTHELPER_H

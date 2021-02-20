@@ -38,7 +38,7 @@
     "command.village.b.set": "Set the village border display as: %d",
     "command.village.p.desc": "Display POI query range",
     "command.village.p.set": "Set the POI query range to: %d",
-    "command.village.s.desc": "Display the refresh area of ​​the iron golem",
+    "command.village.s.desc": "Display the refresh area of spawn the iron golem",
     "command.village.s.set": "Set the refresh area for displaying iron golems as: %d",
     "command.village.c.desc": "Show Village Center",
     "command.village.c.set": "Set the display village center to",

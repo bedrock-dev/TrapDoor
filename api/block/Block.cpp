@@ -33,7 +33,6 @@ namespace trapdoor {
         return debugStr.erase(0, 6);
     }
 
-
     //是否是空气
     bool Block::isAir() {
         return this->getLegacy()->getBlockID() == AIR;
@@ -42,18 +41,19 @@ namespace trapdoor {
     //获取特殊值
     int Block::getVariant() {
         //! from BlockLegacy::getVariant(BlockLegacy *this, char *a2)
-        return reinterpret_cast<char *>(this)[8];
+        return *offset_cast<char *>(this, 8);
     }
-
 
     //获取方块实体的位置
     BlockPos *BlockActor::getPosition() {
-        return reinterpret_cast<BlockPos *>(reinterpret_cast<VA>(this) + 44);
+        return offset_cast<BlockPos *>(this, 44);
+        //return reinterpret_cast<BlockPos *>(reinterpret_cast<VA>(this) + 44);
     }
 
 
-    //获取方块实体内的方块对象
-    Block *BlockActor::getBlock() {
-        return *reinterpret_cast<Block **>(reinterpret_cast<char *>(this) + 2);
-    }
+//    //获取方块实体内的方块对象
+//    Block *BlockActor::getBlock() {
+//        return *reinterpret_cast<Block **>(reinterpret_cast<char *>(this) + 2);
+//    }
 }
+

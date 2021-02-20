@@ -15,6 +15,7 @@
 #include "block/BlockSource.h"
 #include "Dimension.h"
 #include "tools/DirtyLogger.h"
+#include "tools/CastHelper.h"
 
 namespace trapdoor {
 
@@ -55,6 +56,7 @@ namespace trapdoor {
 
     BlockSource *Actor::getBlockSource() {
         //!from Player::tickWorld
+        //  return offset_cast<BlockSource *>(this, 100);
         return *((struct BlockSource **) this + 100);
     }
 
@@ -68,8 +70,8 @@ namespace trapdoor {
 
 
     int Actor::getDimensionID() {
-
-        return *(reinterpret_cast<int *>(this) + 51);
+        return *offset_cast<int *>(this, 204);
+        // return *(reinterpret_cast<int *>(this) + 51);
     }
 
     Dimension *Actor::getDimension() {
@@ -86,8 +88,9 @@ namespace trapdoor {
     }
 
     NetworkIdentifier *Actor::getClientID() {
-        //  ServerPlayer::isHostingPlayer
-        return reinterpret_cast<NetworkIdentifier *>((char *) this + 2432);
+        //! from  ServerPlayer::isHostingPlayer
+        return offset_cast<NetworkIdentifier *>(this, 2432);
+        // return reinterpret_cast<NetworkIdentifier *>((char *) this + 2432);
     }
 
     PlayerPermissionLevel Actor::getCommandLevel() {
@@ -113,8 +116,9 @@ namespace trapdoor {
     }
 
     //from: Actor::getLevel
-    Level *Actor::getLevel() {
-        return *reinterpret_cast<trapdoor::Level **>((VA) this + 816);
+    Level *Actor::getLevel() { //NOLINT
+        return bdsMod->getLevel();
+        // return *reinterpret_cast<trapdoor::Level **>((VA) this + 816);
     }
 
     std::string Actor::getActorId() {
@@ -146,7 +150,7 @@ namespace trapdoor {
     }
 
     std::string ActorDefinitionIdentifier::getName() {
-        auto str = reinterpret_cast<std::string *>((char *) this + 32);
+        auto str = offset_cast<std::string *>(this, 32);
         return std::string(*str);
     }
 

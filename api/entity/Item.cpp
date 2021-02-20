@@ -11,6 +11,7 @@
 #include "lib/mod.h"
 #include "lib/SymHook.h"
 #include "tools/DirtyLogger.h"
+#include "tools/CastHelper.h"
 
 namespace trapdoor {
     using namespace SymHook;
@@ -24,7 +25,10 @@ namespace trapdoor {
         return name;
     }
 
-    int ItemStackBase::getNum() { return (int) *((unsigned char *) this + 34); }
+    int ItemStackBase::getNum() {
+        return *offset_cast<char *>(this, 34);
+        //    return (int) *((unsigned char *) this + 34);
+    }
 
     void ItemStackBase::setNull() {
         SYM_CALL(void(*)(ItemStackBase * ),
