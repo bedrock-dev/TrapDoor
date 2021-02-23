@@ -6,7 +6,7 @@
 Trapdoor是一个为 Minecraft Bedrock Edition 服务的，基于原版服务端(BDS)的，致力于为原版玩家探索游戏机制服务的插件(或者mod)
 ,该插件的功能很大程度上参考了JE的[carpet](https://github.com/gnembon/fabric-carpet) 模组。
 
-## 安装和使用教程
+## 下载安装和使用教程
 
 [Trapdoor Wiki](https://github.com/hhhxiao/TrapDoor/wiki)
 
@@ -46,6 +46,7 @@ Trapdoor是一个为 Minecraft Bedrock Edition 服务的，基于原版服务端
 - 梵蒂冈_273
 - OEOTYAN
 - Origin 0110
+- 玲珑芯
 
 ## 代码贡献者
 
