@@ -2,7 +2,7 @@
 #include "tools/DirtyLogger.h"
 #include "BDSMod.h"
 #include "TrapdoorMod.h"
-
+#include "lib/Remotery.h"
 
 /*
  * 设置所有输出为utf8,设置支持彩色输出
@@ -17,23 +17,48 @@ void initConsole() {
     SetConsoleMode(hOutput, dwMode);
 }
 
+void displayDisclaimerMessageBox() {
+    auto boxID = MessageBox(
+            nullptr,
+            (LPCSTR) "If you click yes, this means you have agreed the disclaimer in the follow link:"
+                     " https://github.com/hhhxiao/TrapDoor/blob/1.16.4/trapdoor-disclaimer.txt",
+            (LPCSTR) "Trapdoor Disclaimer",
+            MB_ICONINFORMATION | MB_YESNO
+    );
+    if (boxID == IDNO) {
+        ExitProcess(0);
+    }
+}
 
 trapdoor::BDSMod *createBDSModInstance() {
     return new mod::TrapdoorMod();
 }
 
+
+Remotery *rmt = nullptr;
+
 //dll注入初始化
 void mod_init() {
+    rmt_CreateGlobalInstance(&rmt);
+    //   displayDisclaimerMessageBox(); //免责声明窗口
     initConsole();
     trapdoor::initLogger("trapdoor.log"); //初始化日志
-   // trapdoor::setDevMode(true);
+    // trapdoor::setDevMode(true);
     mod::TrapdoorMod::printCopyRightInfo(); //打印日志
     auto *mod = createBDSModInstance();
-    mod->asInstance<mod::TrapdoorMod>()->readConfigFile("trapdoor-config.json"); //读取配置文件
+    mod->getI18NManager().initialize();
+    auto result = mod->asInstance<mod::TrapdoorMod>()->readConfigFile("trapdoor-config.json"); //读取配置文件
+    if (!result) {
+        L_ERROR("can not read configFile, trapdoor won't be injected");
+        return;
+    }
     trapdoor::initializeMod(mod);
 }
 
-void mod_exit() {}
+void mod_exit() {
+    rmt_DestroyGlobalInstance(rmt);
+}
+
 BOOL APIENTRY DllMain(HMODULE hModule,
                       DWORD ul_reason_for_call,
                       LPVOID lpReserved

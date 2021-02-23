@@ -23,7 +23,7 @@ namespace trapdoor {
 //初始化日志，不然不能使用
     void initLogger(const std::string &logFileName) {
         logger = fopen(logFileName.c_str(), "a+");
-        L_INFO("\n-------------------------TRAPDOOR LOG FILE---------------------------\n "
+        L_DEBUG("\n-------------------------TRAPDOOR LOG FILE---------------------------\n "
                "-----------------------------init BDS------------------------------- \n");
         if (!logger)logger = stderr;
     }

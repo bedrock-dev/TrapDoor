@@ -61,7 +61,7 @@ THook(
         //初始化CommandRegistry 并且注册命令
         if (!trapdoor::bdsMod->getCommandRegistry()) {
             trapdoor::bdsMod->setCommandRegistry(commandRegistry);
-            L_INFO("init commandRegistry");
+            L_DEBUG("init commandRegistry");
             trapdoor::bdsMod->registerCommands();
         }
     }
@@ -75,7 +75,6 @@ THook(
         trapdoor::NetworkIdentifier *id,
         void * commandPacket
 ) {
-
     //找到发送命令的玩家
     trapdoor::Actor *source = nullptr;
     trapdoor::bdsMod->getLevel()->forEachPlayer([&id, &source](trapdoor::Actor *player) {
@@ -84,7 +83,6 @@ THook(
             return;
         }
     });
-
 
     //找不到就直接返回
     if (!source) {

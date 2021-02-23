@@ -10,7 +10,10 @@ build
 include/
 api/math/
 doc/
-test
 version/*
 *.exe
-
+.idea/workspace.xml
+.idea/TrapDoor.iml
+.idea/misc.xml
+.idea/vcs.xml
+.idea/modules.xml

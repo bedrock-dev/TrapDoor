@@ -11,7 +11,7 @@
 #include <map>
 
 namespace mod {
-    class ActorProfiler:noncopyable {
+    class ActorProfiler : noncopyable {
     public:
         struct ActorProfilerInfo {
             microsecond_t time = 0;

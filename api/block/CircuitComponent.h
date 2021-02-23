@@ -7,6 +7,7 @@
 
 #include "graphics/BlockPos.h"
 #include "entity/Actor.h"
+
 namespace trapdoor {
     class CircuitSceneGraph;
 
@@ -14,19 +15,19 @@ namespace trapdoor {
     public:
         int getStrength();
 
-        int getVar2();
+        //int getVar2();
 
-        int getPowerCount();
+        // int getPowerCount();
 
-        int getAcceptHalfPulse();
+        // int getAcceptHalfPulse();
 
-        int getHalfPulse();
+        // int getHalfPulse();
 
         void basePrint(CircuitSceneGraph *graph, trapdoor::Actor *player);
 
-        void printRepeater();
+        // void printRepeater();
 
-        void printTorch(BlockPos blockPos);
+        // void printTorch(BlockPos blockPos);
     };
 
     //红石电路图组件

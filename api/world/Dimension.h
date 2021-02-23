@@ -20,8 +20,9 @@ namespace trapdoor {
         void printBaseTypeLimit();
 
         CircuitSceneGraph *getGraph();
-    };
 
+        bool isRedstoneTick();
+    };
 
 }
 

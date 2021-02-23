@@ -41,8 +41,6 @@ namespace trapdoor {
     };
 
     class Level {
-    private:
-        BlockPalette *getGlobalPalette();
 
     public:
         Level() = delete;

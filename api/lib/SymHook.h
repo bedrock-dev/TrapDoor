@@ -119,14 +119,6 @@ namespace SymHook{
 	// [符号] ?setPlayerGameType@ServerPlayer@@UEAAXW4GameType@@@Z
 	constexpr RVA MSSYM_B1QE17setPlayerGameTypeB1AE12ServerPlayerB2AAE15UEAAXW4GameTypeB3AAAA1Z = 0x004F1A20;
 
-	// [原型] private: virtual bool __cdecl DyePowderItem::_useOn(class ItemStack & __ptr64,class Actor & __ptr64,class BlockPos,unsigned char,float,float,float)const __ptr64
-	// [符号] ?_useOn@DyePowderItem@@EEBA_NAEAVItemStack@@AEAVActor@@VBlockPos@@EMMM@Z
-	constexpr RVA MSSYM_B2QUA5useOnB1AE13DyePowderItemB2AAA4EEBAB1UE14NAEAVItemStackB2AAA9AEAVActorB2AAA9VBlockPosB2AAA4EMMMB1AA1Z = 0x007D56D0;
-
-	// [原型] private: virtual bool __cdecl RedStoneDustItem::_useOn(class ItemStack & __ptr64,class Actor & __ptr64,class BlockPos,unsigned char,float,float,float)const __ptr64
-	// [符号] ?_useOn@RedStoneDustItem@@EEBA_NAEAVItemStack@@AEAVActor@@VBlockPos@@EMMM@Z
-	constexpr RVA MSSYM_B2QUA5useOnB1AE16RedStoneDustItemB2AAA4EEBAB1UE14NAEAVItemStackB2AAA9AEAVActorB2AAA9VBlockPosB2AAA4EMMMB1AA1Z = 0x008097E0;
-
 	// [原型] public: class Block const & __ptr64 __cdecl BlockSource::getBlock(class BlockPos const & __ptr64)const __ptr64
 	// [符号] ?getBlock@BlockSource@@QEBAAEBVBlock@@AEBVBlockPos@@@Z
 	constexpr RVA MSSYM_B1QA8getBlockB1AE11BlockSourceB2AAE13QEBAAEBVBlockB2AAE12AEBVBlockPosB3AAAA1Z = 0x00A16410;
@@ -142,10 +134,6 @@ namespace SymHook{
 	// [原型] public: bool __cdecl BlockSource::setBlock(class BlockPos const & __ptr64,class Block const & __ptr64,int,struct ActorBlockSyncMessage const * __ptr64) __ptr64
 	// [符号] ?setBlock@BlockSource@@QEAA_NAEBVBlockPos@@AEBVBlock@@HPEBUActorBlockSyncMessage@@@Z
 	constexpr RVA MSSYM_B1QA8setBlockB1AE11BlockSourceB2AAA4QEAAB1UE13NAEBVBlockPosB2AAA9AEBVBlockB2AAE26HPEBUActorBlockSyncMessageB3AAAA1Z = 0x00A164E0;
-
-	// [原型] private: virtual bool __cdecl ShovelItem::_useOn(class ItemStack & __ptr64,class Actor & __ptr64,class BlockPos,unsigned char,float,float,float)const __ptr64
-	// [符号] ?_useOn@ShovelItem@@EEBA_NAEAVItemStack@@AEAVActor@@VBlockPos@@EMMM@Z
-	constexpr RVA MSSYM_B2QUA5useOnB1AE10ShovelItemB2AAA4EEBAB1UE14NAEAVItemStackB2AAA9AEAVActorB2AAA9VBlockPosB2AAA4EMMMB1AA1Z = 0x0080CF30;
 
 	// [原型] public: void __cdecl BlockSource::updateNeighborsAt(class BlockPos const & __ptr64) __ptr64
 	// [符号] ?updateNeighborsAt@BlockSource@@QEAAXAEBVBlockPos@@@Z
@@ -451,9 +439,41 @@ namespace SymHook{
 	// [符号] ?getCurrentTick@Level@@QEBAAEBUTick@@XZ
 	constexpr RVA MSSYM_B1QE14getCurrentTickB1AA5LevelB2AAE12QEBAAEBUTickB2AAA2XZ = 0x00A7D840;
 
-	// [原型] public: class Block const & __ptr64 __cdecl BlockPalette::getBlock(unsigned int const & __ptr64)const __ptr64
-	// [符号] ?getBlock@BlockPalette@@QEBAAEBVBlock@@AEBI@Z
-	constexpr RVA MSSYM_B1QA8getBlockB1AE12BlockPaletteB2AAE13QEBAAEBVBlockB2AAA4AEBIB1AA1Z = 0x00A128B0;
+	// [原型] public: class Player * __ptr64 __cdecl Dimension::fetchNearestPlayer(float,float,float,float,bool) __ptr64
+	// [符号] ?fetchNearestPlayer@Dimension@@QEAAPEAVPlayer@@MMMM_N@Z
+	constexpr RVA MSSYM_B1QE18fetchNearestPlayerB1AA9DimensionB2AAE14QEAAPEAVPlayerB2AAA4MMMMB1UA1NB1AA1Z = 0x00A64070;
+
+	// [原型] public: virtual void __cdecl Actor::die(class ActorDamageSource const & __ptr64) __ptr64
+	// [符号] ?die@Actor@@UEAAXAEBVActorDamageSource@@@Z
+	constexpr RVA MSSYM_B1QA3dieB1AA5ActorB2AAE26UEAAXAEBVActorDamageSourceB3AAAA1Z = 0x005675D0;
+
+	// [原型] public: virtual void __cdecl Actor::kill(void) __ptr64
+	// [符号] ?kill@Actor@@UEAAXXZ
+	constexpr RVA MSSYM_B1QA4killB1AA5ActorB2AAA7UEAAXXZ = 0x00567540;
+
+	// [原型] private: void __cdecl PistonBlockActor::_checkInceptionAchievement(class BlockActor & __ptr64,class BlockSource & __ptr64,class BlockPos const & __ptr64) __ptr64
+	// [符号] ?_checkInceptionAchievement@PistonBlockActor@@AEAAXAEAVBlockActor@@AEAVBlockSource@@AEBVBlockPos@@@Z
+	constexpr RVA MSSYM_B2QUE25checkInceptionAchievementB1AE16PistonBlockActorB2AAE19AEAAXAEAVBlockActorB2AAE15AEAVBlockSourceB2AAE12AEBVBlockPosB3AAAA1Z = 0x008C39E0;
+
+	// [原型] public: static void __cdecl BlockTypeRegistry::forEachBlock(class std::function<bool __cdecl(class BlockLegacy const & __ptr64)>)
+	// [符号] ?forEachBlock@BlockTypeRegistry@@SAXV?$function@$$A6A_NAEBVBlockLegacy@@@Z@std@@@Z
+	constexpr RVA MSSYM_B1QE12forEachBlockB1AE17BlockTypeRegistryB2AAA4SAXVB2QDA8functionB3ADDA3A6AB1UE16NAEBVBlockLegacyB3AAAA1ZB1AA3stdB3AAAA1Z = 0x0095DEF0;
+
+	// [原型] public: virtual bool __cdecl Player::isSleeping(void)const __ptr64
+	// [符号] ?isSleeping@Player@@UEBA_NXZ
+	constexpr RVA MSSYM_B1QE10isSleepingB1AA6PlayerB2AAA4UEBAB1UA3NXZ = 0x00713790;
+
+	// [原型] private: void __cdecl CircuitSceneGraph::processPendingUpdates(class BlockSource * __ptr64) __ptr64
+	// [符号] ?processPendingUpdates@CircuitSceneGraph@@AEAAXPEAVBlockSource@@@Z
+	constexpr RVA MSSYM_B1QE21processPendingUpdatesB1AE17CircuitSceneGraphB2AAE20AEAAXPEAVBlockSourceB3AAAA1Z = 0x00B8FF50;
+
+	// [原型] private: void __cdecl CircuitSceneGraph::processPendingAdds(void) __ptr64
+	// [符号] ?processPendingAdds@CircuitSceneGraph@@AEAAXXZ
+	constexpr RVA MSSYM_B1QE18processPendingAddsB1AE17CircuitSceneGraphB2AAA7AEAAXXZ = 0x00B8EBC0;
+
+	// [原型] private: void __cdecl CircuitSceneGraph::removeComponent(class BlockPos const & __ptr64) __ptr64
+	// [符号] ?removeComponent@CircuitSceneGraph@@AEAAXAEBVBlockPos@@@Z
+	constexpr RVA MSSYM_B1QE15removeComponentB1AE17CircuitSceneGraphB2AAE17AEAAXAEBVBlockPosB3AAAA1Z = 0x00B8F890;
 
 }
 

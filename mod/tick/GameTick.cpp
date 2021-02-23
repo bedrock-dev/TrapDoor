@@ -10,6 +10,7 @@
 #include "BDSMod.h"
 #include "TrapdoorMod.h"
 #include "ActorProfiler.h"
+#include "lib/Remotery.h"
 
 namespace mod::tick {
     using trapdoor::broadcastMsg;
@@ -32,9 +33,11 @@ namespace mod::tick {
             return actorProfiler;
         }
 
+
         /*
          * 这个函数也是每gt执行一次的，但是不经过 TrapdoorMod,因此用static 来表示
          */
+
         void staticWork() {
             //实体性能分析的更新
             if (mod::tick::getActorProfiler().inProfiling) {
@@ -46,6 +49,26 @@ namespace mod::tick {
                 }
             }
         }
+
+
+        void sendMsptInfo(microsecond_t time, bool isRedstoneTick) {
+            auto mspt = (double) time / 1000;
+            int tps = mspt <= 50 ? 20 : (int) (1000.0 / mspt);
+            trapdoor::MessageBuilder builder;
+            auto color = MSG_COLOR::WHITE;
+            if (mspt > 40) {
+                if (mspt >= 50) {
+                    color = MSG_COLOR::RED;
+                } else {
+                    color = MSG_COLOR::YELLOW;
+                }
+            }
+            auto rColor = isRedstoneTick ? MSG_COLOR::RED : MSG_COLOR::WHITE;
+            builder.sText("#", rColor)
+                    .text("mspt: ").sTextF(color, "%.3f ms ", mspt)
+                    .text("tps: ").sTextF(color, "%d", tps)
+                    .broadcast();
+        }
     }
 
     void freezeTick() {
@@ -54,9 +77,7 @@ namespace mod::tick {
             if (tickStatus != WorldTickStatus::Frozen) {
                 tickStatus = WorldTickStatus::Frozen;
                 L_DEBUG("freeze world");
-                broadcastMsg("world has frozen!");
-            } else {
-                broadcastMsg("it's in frozen state now");
+                broadcastMsg(LANG("tick.fz.set"));
             }
         }
     }
@@ -66,17 +87,17 @@ namespace mod::tick {
             tickStatus = WorldTickStatus::Normal;
             L_DEBUG("reset world");
         }
-        broadcastMsg("world has reset to normal status");
+        broadcastMsg(LANG("tick.r.set"));
     }
 
     void wrapTick(size_t speed) {
         if (tickStatus == WorldTickStatus::Normal) {
-            broadcastMsg("world begin warp");
+            broadcastMsg(LANG("tick.acc.set"), speed);
             tickStatus = WorldTickStatus::Wrap;
-            L_DEBUG("begin wrap world %d", speed);
+            L_DEBUG("begin accelerate world %d", speed);
             wrapSpeed = speed;
         } else {
-            broadcastMsg("this command can only be run in normal mode");
+            broadcastMsg(LANG("tick.acc.error"));
         }
     }
 
@@ -85,37 +106,38 @@ namespace mod::tick {
             forwardTickNum = tickNum;
             lastTickStats = tickStatus;
             tickStatus = WorldTickStatus::Forward;
-            broadcastMsg("forwarding start, %d tick last", tickNum);
+            if (tickNum > 1200)
+                broadcastMsg(LANG("tick.fw.begin"), tickNum);
             L_DEBUG("begin forward %d tick", tickNum);
         } else {
-            broadcastMsg("this command can't be run in slow or wrap mode");
+            broadcastMsg(LANG("tick.fw.error"));
         }
     }
 
 
     void slowTick(size_t slowSpeed) {
         if (tickStatus == WorldTickStatus::Normal) {
-            broadcastMsg("world has slowed %d times\n", slowSpeed);
+            broadcastMsg(LANG("tick.slow.set"), slowSpeed);
             L_DEBUG("slow world %d times", slowSpeed);
             tickStatus = WorldTickStatus::Slow;
             SlowDownTimes = slowSpeed;
         } else {
-            broadcastMsg("this command must be run at normal status\n");
+            broadcastMsg(LANG("tick.slow.error"));
         }
     }
 
 
     void profileWorld(trapdoor::Actor *player) {
         if (gameProfiler.inProfiling) {
-            trapdoor::warning(player, "another profiling is running");
+            trapdoor::warning(player, LANG("prof.error"));
             return;
         }
 
         if (tickStatus != WorldTickStatus::Normal) {
-            trapdoor::warning(player, "you are not in normal mode,the result may be wrong");
+            trapdoor::warning(player, LANG("prof.warning"));
         }
         L_DEBUG("begin profiling");
-        info(player, "start profiling...");
+        broadcastMsg(LANG("prof.start"));
         gameProfiler.inProfiling = true;
         gameProfiler.currentRound = gameProfiler.totalRound;
     }
@@ -130,17 +152,74 @@ namespace mod::tick {
 
     void profileEntities(trapdoor::Actor *player) {
         if (getActorProfiler().inProfiling) {
-            trapdoor::warning(player, "another profiling is in running");
+            trapdoor::warning(player, LANG("prof.error"));
             return;
         }
 
         if (tick::getTickStatus() != tick::WorldTickStatus::Normal) {
-            trapdoor::warning(player, "you are not in normal mode,the result may be wrong");
+            trapdoor::warning(player, LANG("prof.warning"));
         }
         L_DEBUG("begin profiling");
-        info(player, "start entities profiling...");
+        info(player, LANG("prof.start"));
         getActorProfiler().inProfiling = true;
         getActorProfiler().currentRound = getActorProfiler().totalRound;
+    }
+
+    void queryStatus(trapdoor::Actor *player) {
+        switch (tickStatus) {
+            case Frozen:
+                info(player, "frozen");
+                return;
+            case Normal:
+                info(player, "normal");
+                return;
+            case Slow:
+                info(player, "slow %d times", tick::SlowDownTimes);
+                return;
+            case Forward:
+                info(player, "forwarding");
+                return;
+            case Wrap:
+                info(player, "accelerate %d times", tick::wrapSpeed);
+                return;
+        }
+    }
+
+    void registerTickCommand(CommandManager &commandManager) {
+        commandManager.registerCmd("tick", "command.tick.desc")
+                ->then(ARG("fz", "command.tick.fw.desc", NONE, { tick::freezeTick(); }))
+                ->then(ARG("slow", "command.tick.slow.desc", INT,
+                           {
+                               auto slowTime = holder->getInt();
+                               if (slowTime > 1 && slowTime <= 64) {
+                                   tick::slowTick(slowTime);
+                               } else {
+                                   error(player, LANG("command.tick.slow.error"));
+                               }
+                           }))
+                ->then(ARG("acc", "command.tick.acc.desc", INT,
+                           {
+                               auto wrapTime = holder->getInt();
+                               if (wrapTime > 1 && wrapTime <= 10) {
+                                   tick::wrapTick(wrapTime);
+                               } else {
+                                   error(player, LANG("command.tick.acc.error"));
+                               }
+                           }))
+                ->then(ARG("r", "command.tick.r.desc", NONE, { tick::resetTick(); }))
+                ->then(ARG("fw", "command.tick.fw.desc", INT,
+                           { tick::forwardTick(holder->getInt()); }))
+                ->then(ARG("q", "command.tick.q.desc", NONE,
+                           { tick::queryStatus(player); }));
+    }
+
+    void registerProfileCommand(CommandManager &commandManager) {
+        commandManager.registerCmd("prof", "command.prof.desc")
+                ->then(ARG("actor", "command.prof.actor.desc", NONE,
+                           { tick::profileEntities(player); }))
+                ->EXE({ tick::profileWorld(player); });
+        commandManager.registerCmd("mspt", "command.mspt.desc")
+                ->EXE({ tick::mspt(); });
     }
 }
 
@@ -151,8 +230,6 @@ THook(
         MSSYM_B1QA4tickB1AE11ServerLevelB2AAA7UEAAXXZ,
         trapdoor::Level * serverLevel
 ) {
-
-
     if (!trapdoor::bdsMod) {
         L_ERROR("mod is nullptr");
     }
@@ -176,9 +253,9 @@ THook(
                 mod::tick::staticWork();
                 TIMER_END
                 if (mod::tick::isMSPTing) {
-                    auto mspt = (double) timeReslut / 1000;
-                    int tps = mspt <= 50 ? 20 : (int) (1000.0 / mspt);
-                    trapdoor::broadcastMsg("mspt: %.3lf ms tps: %d", mspt, tps);
+                    //发送mspt信息
+                    bool isRedstoneTick = modInstance->getLevel()->getDimFromID(0)->isRedstoneTick();
+                    mod::tick::sendMsptInfo(timeReslut, isRedstoneTick);
                     mod::tick::isMSPTing = false;
                 }
                 if (mod::tick::gameProfiler.inProfiling) {
@@ -198,7 +275,6 @@ THook(
             }
             break;
 
-
         case mod::tick::Slow:
             if (mod::tick::slowDownCounter % mod::tick::SlowDownTimes == 0) {
                 original(serverLevel);
@@ -212,7 +288,7 @@ THook(
                 original(serverLevel);
                 modInstance->lightTick();
             }
-            trapdoor::broadcastMsg("forwarding end\n%d tick passed", mod::tick::forwardTickNum);
+            trapdoor::broadcastMsg(trapdoor::LANG("tick.fw.end"), mod::tick::forwardTickNum);
             mod::tick::forwardTickNum = 0;
             mod::tick::tickStatus = mod::tick::lastTickStats;
             break;
@@ -369,12 +445,10 @@ THook(
     } else {
         original(dim);
     }
-    // auto v1 = *((int *) globalDimension + 69);
-    // auto v2 = *((int *) globalDimension + 68);
+
     // printf("69%d 68%d\n", v1, v2);
     // printf("69:%d 68:%d\n", v1, v2);
 }
-
 
 THook(
         void,
@@ -389,6 +463,55 @@ THook(
         mod::tick::gameProfiler.levelEntitySystemTickTime += timeReslut;
     } else {
         original(entitySystem, registry);
+    }
+}
+
+//pending update
+THook(
+        void,
+        MSSYM_B1QE21processPendingUpdatesB1AE17CircuitSceneGraphB2AAE20AEAAXPEAVBlockSourceB3AAAA1Z,
+        void *graph,
+        void * bs
+) {
+    if (mod::tick::gameProfiler.inProfiling) {
+        TIMER_START
+        original(graph, bs);
+        TIMER_END
+        mod::tick::gameProfiler.redstonePendingUpdateTime += timeReslut;
+    } else {
+        original(graph, bs);
+    }
+}
+//pendingAdd
+THook(
+        void,
+        MSSYM_B1QE18processPendingAddsB1AE17CircuitSceneGraphB2AAA7AEAAXXZ,
+        void * graph
+) {
+    if (mod::tick::gameProfiler.inProfiling) {
+        TIMER_START
+        original(graph);
+        TIMER_END
+        mod::tick::gameProfiler.redstonePendingAddTime += timeReslut;
+    } else {
+        original(graph);
+    }
+}
+
+//pnding remove
+THook(
+        void,
+        MSSYM_B1QE15removeComponentB1AE17CircuitSceneGraphB2AAE17AEAAXAEBVBlockPosB3AAAA1Z,
+        void *graph,
+        void * bs
+) {
+    if (mod::tick::gameProfiler.inProfiling) {
+        TIMER_START
+        original(graph, bs);
+        TIMER_END
+        mod::tick::gameProfiler.redstonePendingRemoveTime += timeReslut;
+    } else {
+        original(graph, bs);
     }
 }
 
@@ -413,3 +536,4 @@ THook(
         original(actor, blockSource);
     }
 }
+

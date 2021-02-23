@@ -8,6 +8,8 @@
 #include "graphics/BlockPos.h"
 #include <set>
 #include "tools/noncopyable .h"
+#include "trapdoor.h"
+#include "commands/CommandManager.h"
 
 namespace mod {
 
@@ -24,6 +26,8 @@ namespace mod {
         void tick();
 
         void setRadius(int r);
+
+        void registerCommand(trapdoor::CommandManager &manager);
 
         void draw();
     };

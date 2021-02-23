@@ -12,7 +12,7 @@
 
 namespace mod {
     class BlockRotationHelper : noncopyable {
-        bool enable = false;
+        bool enable = true;
 
     public:
         inline bool inEnable() const { return this->enable; }

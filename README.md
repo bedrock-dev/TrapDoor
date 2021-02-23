@@ -1,4 +1,4 @@
-![](img/logo.png)
+![](img/logo.png)<br>
 简体中文 |[English](./README_en.md)
 
 ## 这是什么
@@ -25,9 +25,9 @@ Trapdoor是一个为 Minecraft Bedrock Edition 服务的，基于原版服务端
 - [https://github.com/nlohmann/json](https://github.com/nlohmann/json)
 
 - [https://github.com/DarthTon/Xenos](https://github.com/DarthTon/Xenos)
-
-- [sqlite](https://www.sqlite.org/index.html)
-
+  
+- [https://github.com/Celtoys/Remotery](https://github.com/Celtoys/Remotery)
+  
 - [https://github.com/progschj/ThreadPool](https://github.com/progschj/ThreadPool)
 
 ### 特别感谢
@@ -46,7 +46,7 @@ Trapdoor是一个为 Minecraft Bedrock Edition 服务的，基于原版服务端
 - 梵蒂冈_273
 - OEOTYAN
 - Origin 0110
-
+- 阿阎mr
 ## 代码贡献者
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
@@ -58,6 +58,7 @@ Trapdoor是一个为 Minecraft Bedrock Edition 服务的，基于原版服务端
     <td align="center"><a href="https://github.com/OEOTYAN"><img src="https://avatars2.githubusercontent.com/u/58554322?v=4?s=100" width="100px;" alt=""/><br /><sub><b>OEOTYAN</b></sub></a><br /><a href="https://github.com/hhhxiao/TrapDoor/commits?author=OEOTYAN" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/xiaohengying"><img src="https://avatars2.githubusercontent.com/u/44132837?v=4?s=100" width="100px;" alt=""/><br /><sub><b>xiaohengying</b></sub></a><br /><a href="https://github.com/hhhxiao/TrapDoor/commits?author=xiaohengying" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/quizhizhe"><img src="https://avatars1.githubusercontent.com/u/42761326?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Qiuzhizhe</b></sub></a><br /><a href="https://github.com/hhhxiao/TrapDoor/commits?author=quizhizhe" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/0x506978656c"><img src="https://avatars.githubusercontent.com/u/66031115?s=96&v=4" width="100px;" alt=""/><br /><sub><b>! Pixel</b></sub></a><br /><a href="https://github.com/hhhxiao/TrapDoor/commits?author=0x506978656c" title="Code">💻</a></td>
   </tr>
 </table>
 
@@ -67,5 +68,4 @@ Trapdoor是一个为 Minecraft Bedrock Edition 服务的，基于原版服务端
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ## license
-
 GPL

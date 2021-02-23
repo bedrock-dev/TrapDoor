@@ -10,6 +10,7 @@
 #include "graphics/Graphics.h"
 #include<set>
 #include "tools/noncopyable .h"
+#include "commands/CommandManager.h"
 
 namespace mod {
 
@@ -44,12 +45,10 @@ namespace mod {
 
         std::string getDebugInfo();
 
-
         bool printVillagerInfo(trapdoor::Actor *player, trapdoor::Actor *actor);
 
         void removeAllTags();
 
-        //  std::array<std::unordered_map<trapdoor::ActorUniqueID,uint64_t ,&
     };
 
 
@@ -121,6 +120,9 @@ namespace mod {
         void printDwellerInfo(trapdoor::Actor *player, trapdoor::Actor *actor);
 
         void removeAllNameTag();
+
+        void registerCommand(trapdoor::CommandManager &commandManager);
+
     };
 
 }

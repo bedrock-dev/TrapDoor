@@ -31,27 +31,37 @@ namespace mod {
         hsaBoundingBox.minPos = firsthsa.boundingBox.minPos;
         hsaBoundingBox.maxPos = firsthsa.boundingBox.maxPos;
         for (const auto &hsa : this->hsaList) {
-            hsaBoundingBox.minPos.x = min(hsaBoundingBox.minPos.x, hsa.boundingBox.minPos.x);
-            hsaBoundingBox.minPos.y = min(hsaBoundingBox.minPos.y, hsa.boundingBox.minPos.y);
-            hsaBoundingBox.minPos.z = min(hsaBoundingBox.minPos.z, hsa.boundingBox.minPos.z);
-            hsaBoundingBox.maxPos.x = max(hsaBoundingBox.maxPos.x, hsa.boundingBox.maxPos.x);
-            hsaBoundingBox.maxPos.y = max(hsaBoundingBox.maxPos.y, hsa.boundingBox.maxPos.y);
-            hsaBoundingBox.maxPos.z = max(hsaBoundingBox.maxPos.z, hsa.boundingBox.maxPos.z);
+            hsaBoundingBox.minPos.x =
+                    min(hsaBoundingBox.minPos.x, hsa.boundingBox.minPos.x);
+            hsaBoundingBox.minPos.y =
+                    min(hsaBoundingBox.minPos.y, hsa.boundingBox.minPos.y);
+            hsaBoundingBox.minPos.z =
+                    min(hsaBoundingBox.minPos.z, hsa.boundingBox.minPos.z);
+            hsaBoundingBox.maxPos.x =
+                    max(hsaBoundingBox.maxPos.x, hsa.boundingBox.maxPos.x);
+            hsaBoundingBox.maxPos.y =
+                    max(hsaBoundingBox.maxPos.y, hsa.boundingBox.maxPos.y);
+            hsaBoundingBox.maxPos.z =
+                    max(hsaBoundingBox.maxPos.z, hsa.boundingBox.maxPos.z);
         }
         info(player, "%s  %s", hsaBoundingBox.minPos.toString().c_str(),
              hsaBoundingBox.maxPos.toString().c_str());
         info(player, "%d", firsthsa.dimensionID);
         int points = 0, maxPoints = 0;
         trapdoor::BlockPos pos;
-        for (int x = hsaBoundingBox.minPos.x - 44; x <= hsaBoundingBox.maxPos.x + 44; x++)
+        for (int x = hsaBoundingBox.minPos.x - 44;
+             x <= hsaBoundingBox.maxPos.x + 44; x++)
             for (int y = max(hsaBoundingBox.minPos.y - 44, 0);
-                 y <= min(hsaBoundingBox.maxPos.y + 44, 127 + firsthsa.dimensionID == 1 ? 0 : 128);
+                 y <= min(hsaBoundingBox.maxPos.y + 44,
+                          127 + firsthsa.dimensionID == 1 ? 0 : 128);
                  y++)
-                for (int z = hsaBoundingBox.minPos.z - 44; z <= hsaBoundingBox.maxPos.z + 44; z++) {
+                for (int z = hsaBoundingBox.minPos.z - 44;
+                     z <= hsaBoundingBox.maxPos.z + 44; z++) {
                     points = 0;
                     for (const auto &hsa : this->hsaList) {
-                        float dis = hsa.boundingBox.getCenter().distanceTo(
-                                trapdoor::BlockPos(x, y, z));
+                        float dis = hsa.boundingBox.getSpawnArea()
+                                .getCenter()
+                                .distanceTo({x, y, z});
                         if (dis >= 24.0 && dis <= 44.0) {
                             points += 1;
                         }
@@ -70,7 +80,8 @@ namespace mod {
         auto block = player->getBlockSource()->getBlock(standPos.x, standPos.y,
                                                         standPos.z);
         for (const auto &hsa : this->hsaList) {
-            trapdoor::BlockPos pos = hsa.boundingBox.getCenter();
+            trapdoor::BlockPos pos =
+                    hsa.boundingBox.getSpawnArea().getCenter().toBlockPos();
             player->getBlockSource()->setBlock(&pos, block);
         }
     }
@@ -114,10 +125,33 @@ namespace mod {
         info(player, "developing");
     }
 
+    void HsaManager::registerCommand(trapdoor::CommandManager &commandManager) {
+        commandManager.registerCmd("hsa", "command.hsa.desc")
+                ->then(ARG("clear", "command.hsa.clear.desc", NONE,
+                           {
+                               auto num = this->clear();
+                               broadcastMsg("一共 %d 个hsa区域被清空", num);
+                           }))
+                ->then(ARG("list", "command.hsa.list.desc", NONE,
+                           { this->list(player); }))
+                ->then(ARG("show", "command.hsa.desc", BOOL,
+                           {
+                               this->setAble(holder->getBool());
+                               info(player, "设置HSA显示为 %d", holder->getBool());
+                           }))
+                ->then(ARG("find", "command.hsa.find.desc", NONE,
+                           {
+                               broadcastMsg("find %s",
+                                            this->findB(player).toString().c_str());
+                           }))
+                ->then(ARG("draw", "command.hsa.draw.desc", NONE,
+                           { this->draw(player); }));
+    }
+
 }  // namespace mod
 using namespace SymHook;
 
-//HSA collector
+// HSA collector
 THook(
         void,
         MSSYM_B2QUE17spawnStructureMobB1AA7SpawnerB2AAE20AEAAXAEAVBlockSourceB2AAE12AEBVBlockPosB2AAE25AEBUHardcodedSpawningAreaB1AE10LevelChunkB2AAE19AEBVSpawnConditionsB3AAAA1Z,

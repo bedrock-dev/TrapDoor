@@ -32,6 +32,7 @@ enum class ArgType {
  */
 namespace trapdoor {
     class Actor;
+
     enum PlayerPermissionLevel {
         Visitor = 0,
         Member = 1,
@@ -110,7 +111,7 @@ namespace trapdoor {
 
         CommandNode *then(CommandNode *node);
 
-        void printHelpInfo(int idx, Actor *actor) const;
+        void getHelpInfo(int idx, std::string &buffer) const;
 
         std::string getDescription() const;
 

@@ -6,6 +6,7 @@
 #include "BlockLegacy.h"
 #include "lib/mod.h"
 #include "lib/SymHook.h"
+#include "tools/CastHelper.h"
 
 namespace trapdoor {
     using namespace SymHook;
@@ -17,13 +18,8 @@ namespace trapdoor {
                 MSSYM_MD5_794b421b4bf67101f7418cd0d78bad83,
                 this, vector
         );
-        int i = 0;
-        for (const auto &str:vector) {
-            printf("%d: %s ", i, str.c_str());
-            ++i;
-        }
-        printf("\n");
-        return std::string("text");
+        return "this api was removed";
+
     }
 
     //获取某个特殊值状态下的方块对象
@@ -34,4 +30,10 @@ namespace trapdoor {
                 this, state
         );
     }
+
+    BlockType BlockLegacy::getBlockID() {
+        return (BlockType) *offset_cast<short *>(this, 268);
+        // return (BlockType) *(short *) ((char *) this + 268);
+    }
 }
+

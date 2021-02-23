@@ -39,6 +39,14 @@ namespace mod::tick {
     void profileWorld(trapdoor::Actor *player);
 
     void profileEntities(trapdoor::Actor *player);
+
+    void queryStatus(trapdoor::Actor *player);
+
+
+    void registerTickCommand(trapdoor::CommandManager &commandManager);
+
+    void registerProfileCommand(trapdoor::CommandManager &commandManager);
+
     void mspt();
 }
 

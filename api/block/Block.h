@@ -10,10 +10,6 @@ struct Biome;
 
 
 namespace trapdoor {
-    enum BlockType : size_t {
-        Air = 0,
-        Dirt = 4
-    };
 
 /*
  * 方块接口
@@ -46,14 +42,9 @@ namespace trapdoor {
         BlockPos *getPosition();
 
         //获取方块对象
-        Block *getBlock();
+      //  Block *getBlock();
     };
 
-    class BlockPalette {
-    public:
-        Block *getBlock(unsigned int type);
-    };
 }
 typedef trapdoor::Block Block;
 typedef trapdoor::BlockActor BlockActor;
-typedef trapdoor::BlockType BlockType;

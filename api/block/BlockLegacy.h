@@ -6,7 +6,7 @@
 #define TRAPDOOR_BLOCKLEGACY_H
 
 #include <string>
-
+#include "VanillaBlockType.h"
 
 /*
  * 所有方块的父类
@@ -22,6 +22,7 @@ namespace trapdoor {
         //获取具有特殊值状态的方块对象
         Block *tryGetStateBlock(unsigned short state);
 
+        BlockType getBlockID();
     };
 }
 typedef trapdoor::BlockLegacy BlockLegacy;

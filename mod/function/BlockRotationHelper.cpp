@@ -6,6 +6,7 @@
 #include "block/Block.h"
 #include "block/BlockSource.h"
 #include "graphics/BlockPos.h"
+#include "block/VanillaBlockType.h"
 
 namespace mod {
     //我有点后悔搞个单独的类了
@@ -15,6 +16,7 @@ namespace mod {
         if (!this->enable)
             return;
         auto block = blockSource->getBlock(pos);
+        auto air = trapdoor::getBlockByID(trapdoor::AIR);
         auto variant = block->getVariant();
         auto name = block->getName();
         if (name.find("slab") != std::string::npos) {
@@ -29,6 +31,7 @@ namespace mod {
             blockSource->setBlock(&pos, newBlock);
         } else if (name.find("bell") != std::string::npos) {
             auto newState = (variant + 1) % 16;
+            blockSource->setBlock(&pos, air);
             auto newBlock = block->getLegacy()->tryGetStateBlock(newState);
             blockSource->setBlock(&pos, newBlock);
         } else if (name.find("stairs") != std::string::npos) {
@@ -43,6 +46,7 @@ namespace mod {
         } else if (name.find("torch") != std::string::npos) {
             auto newState = (variant + 1) % 5;
             auto newBlock = block->getLegacy()->tryGetStateBlock(newState);
+            blockSource->setBlock(&pos, air);
             blockSource->setBlock(&pos, newBlock);
         } else if (name.find("cake") != std::string::npos) {
             auto newState = (variant + 1) % 7;
@@ -63,13 +67,18 @@ namespace mod {
                    name.find("barrel") != std::string::npos ||
                    name.find("glazed_terracotta") != std::string::npos) {
             auto newState = (variant % 8 + 1) % 6 + (variant / 8) * 8;
+
             auto newBlock = block->getLegacy()->tryGetStateBlock(newState);
+            blockSource->setBlock(&pos, air);
             //blockSource->setBlock(&pos, blockSource->getBlock(pos + trapdoor::BlockPos(0, 1, 0)));
             blockSource->setBlock(&pos, newBlock);
+
         } else if (name.find("rail") != std::string::npos) {
             auto newState = (variant + 1) % 10;
             auto newBlock = block->getLegacy()->tryGetStateBlock(newState);
+            blockSource->setBlock(&pos, air);
             blockSource->setBlock(&pos, newBlock);
+            //   blockSource->updateNeighbors(&pos);
         } else if ((name.find("log") != std::string::npos &&
                     name.find("stripped") != std::string::npos) ||
                    name.find("basalt") != std::string::npos ||
@@ -89,16 +98,19 @@ namespace mod {
                    name.find("loom") != std::string::npos) {
             auto newState = (variant % 4 + 1) % 4 + (variant / 4) * 4;
             auto newBlock = block->getLegacy()->tryGetStateBlock(newState);
+            blockSource->setBlock(&pos, air);
             blockSource->setBlock(&pos, newBlock);
         } else if (name.find("trapdoor") != std::string::npos) {
             auto newState = (variant % 8 + 1) % 8 + (variant / 8) * 8;
             auto newBlock = block->getLegacy()->tryGetStateBlock(newState);
+            blockSource->setBlock(&pos, air);
             blockSource->setBlock(&pos, newBlock);
         } else if (name.find("hopper") != std::string::npos) {
             auto newState = (variant % 8 + 1) % 6 + (variant / 8) * 8;
             if (newState % 8 == 1)
                 newState += 1;
             auto newBlock = block->getLegacy()->tryGetStateBlock(newState);
+            blockSource->setBlock(&pos, air);
             blockSource->setBlock(&pos, newBlock);
         }
     }

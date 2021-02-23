@@ -19,8 +19,8 @@ namespace mod {
             return;
         }
         if (radius > this->maxCircleRadius) {
-			info(player, "半径过大(必须<= 30000000)");
-			return;
+            info(player, "半径过大(必须<= 30000000)");
+            return;
         }
         trapdoor::BlockPos standPos = player->getStandPosition();
         auto block = player->getBlockSource()->getBlock(standPos.x, standPos.y,
@@ -100,8 +100,8 @@ namespace mod {
             return;
         }
         if (radius > this->maxCircleRadius) {
-			info(player, "半径过大(必须<= 30000000)");
-			return;
+            info(player, "半径过大(必须<= 30000000)");
+            return;
         }
         trapdoor::BlockPos standPos = player->getStandPosition();
         auto block = player->getBlockSource()->getBlock(standPos.x, standPos.y,
@@ -153,5 +153,37 @@ namespace mod {
                 }
             }
         }
+    }
+
+    void SimpleBuilder::registerDrawCommand(CommandManager &commandManager) {
+        using namespace trapdoor;
+        commandManager.registerCmd("draw", "command.draw.desc")
+                ->then(ARG("ci", "command.draw.ci.desc", INT,
+                           {
+                               auto radius = holder->getInt();
+                               bool hollow = holder->getInt() < 0;
+                               if (radius < 0)
+                                   radius = -radius;
+                               buildCircle(player, radius,
+                                           hollow);
+                           }))
+                ->then(ARG("sp", "command.draw.sp.desc", INT,
+                           {
+                               auto radius = holder->getInt();
+                               bool hollow = holder->getInt() < 0;
+                               if (radius < 0)
+                                   radius = -radius;
+                               buildSphere(player, radius,
+                                           hollow);
+                           }))
+                ->then(ARG("mr", "command.draw.mr.desc", INT, {
+                    auto radius = holder->getInt();
+                    if (radius < 0) {
+                        error(player, "参数不合法(必须>=1)");
+                    } else {
+                        info(player, "已设置最大半径为%d", radius);
+                        setMaxRadius(radius);
+                    }
+                }));
     }
 }  // namespace mod

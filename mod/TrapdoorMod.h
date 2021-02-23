@@ -7,26 +7,34 @@
 
 #include "BDSMod.h"
 #include "village/Village.h"
-#include "hopper/HopperCounter.h"
+#include "function/HopperCounter.h"
 #include "spawn/HsaManager.h"
 #include "config/ConfigManager.h"
 #include "spawn/SpawnHelper.h"
 #include "spawn/SpawnAnalyzer.h"
 #include "function/BlockRotationHelper.h"
 #include "player/PlayerFunction.h"
-#include "player/SimpleBuilder.h"
+#include "function/SimpleBuilder.h"
 #include "SlimeChunkHelper.h"
-#include "player/PlayerStatisticManager.h"
+#include "dirtyLitematica/SimpleLitematica.h"
+#include "dirtyLitematica/SelectRegion.h"
 
 namespace mod {
 
     struct ModInfo {
         const std::string minecraftVersion = "1.16.4.02";
-        const std::string modVersion = "trapdoor-0.9.20";
+        const std::string modVersion = "trapdoor-0.9.32";
+    };
+
+    struct SingleFunction {
+        bool preventExplosion = false;
+        bool preventNCUpdate = false;
+        bool enableBetterMspt = false;
     };
 
     class TrapdoorMod : public trapdoor::BDSMod {
     private:
+        SingleFunction singleFunctions;
         HopperChannelManager hopperChannelManager;
         VillageHelper villageHelper;
         HsaManager hsaManager;
@@ -37,9 +45,12 @@ namespace mod {
         PlayerFunction playerFunctions;
         SimpleBuilder simpleBuilder;
         SlimeChunkHelper slimeChunkHelper;
-        PlayerStatisticManager playerStatisticManager;
 
-        void registerTickCommand();
+        SimpleLitematica simpleLitematica;
+
+        void initFunctionEnable();
+
+        void registerDevCommand();
 
 
     public:
@@ -58,6 +69,7 @@ namespace mod {
         void useOnHook(Actor *player, const std::string &itemName, BlockPos &pos, unsigned int facing,
                        const Vec3 &) override;
 
+
         CommandPermissionLevel
         resetVanillaCommandLevel(const std::string &name, CommandPermissionLevel oldLevel) override;
 
@@ -65,8 +77,8 @@ namespace mod {
 
         void lightTick();
 
-        inline void readConfigFile(const std::string &configFileName) {
-            this->configManager.initialize(configFileName);
+        inline bool readConfigFile(const std::string &configFileName) {
+            return this->configManager.initialize(configFileName);
         }
 
         bool attackEntityHook(Actor *entity1, Actor *entity2) override;
@@ -80,10 +92,10 @@ namespace mod {
 
         inline SpawnAnalyzer &getSpawnAnalyzer() { return this->spawnAnalyzer; }
 
-        inline PlayerStatisticManager &getPlayerStatisticManager() { return this->playerStatisticManager; }
 
         inline std::string getLevelName() { return this->configManager.getServerConfig().levelName; }
 
+        inline SingleFunction getSingFunction() { return this->singleFunctions; }
 
     };
 }

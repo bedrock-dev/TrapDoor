@@ -30,9 +30,8 @@ namespace trapdoor {
         void setBlock(BlockPos *, Block *block);
 
 
-        //更新某个方块
+        //更新某个方块(NC更新)
         void updateNeighborsAt(const BlockPos *pos);
-
 
         //更新position周围的六个方块
         void updateNeighbors(BlockPos *pos);

@@ -10,6 +10,24 @@
 #include "BDSMod.h"
 #include <string>
 
+#define STR(x) #x
+#define C_DARK_RED(x) "§4" STR(x) "§r"
+#define C_RED(x) "§c" STR(x) "§r"
+#define C_GOLD(x) "§6" STR(x) "§r"
+#define C_YELLOW(x) "§e" STR(x) "§r"
+#define C_GREEN(x) "§a" STR(x) "§r"
+#define C_AQUA(x) "§b" STR(x) "§r"
+#define C_BLUE(x) "§9" STR(x) "§r"
+#define C_LIGHT_PURPLE(x) "§d" STR(x) "§r"
+#define C_WHITE(x) "§f" STR(x) "§r"
+#define C_GRAY(x) "§7" STR(x) "§r"
+#define  C_BLACK(x) "§0" STR(x) "§r"
+#define C_BOLD(x) "§l" STR(x) "§r"
+#define C_ITALIC  "§o" STR(x) "§r"
+#define C_INT C_GREEN( %d )
+#define C_FLOAT C_GREEN( %.3f )
+#define C_POS C_AQUA(%d %d %d)
+#define C_VEC3 C_LIGHT_PURPLE(%.2f %.2f %.2f)
 namespace trapdoor {
     class Actor;
 
@@ -51,11 +69,18 @@ namespace trapdoor {
 
     template<typename ... Args>
     void broadcastMsg(const std::string &fmt, Args... args) {
-        auto msg = "[server] " + format(fmt, args...);
+        auto msg = format(fmt, args...);
         trapdoor::bdsMod->getLevel()->forEachPlayer([&msg](Actor *player) {
             mcbe_sendMessage(msg, player);
         });
     }
+
+//    template<typename... Args>
+//    void evalMsg(const std::string &fmt, Args... args) {
+//        auto msg = format(fmt, args...);
+//        trapdoor::bdsMod->getLevel()->forEachPlayer(
+//                [&msg](Actor *player) { mcbe_sendMessage(msg, player); });
+//    }
 }
 
 

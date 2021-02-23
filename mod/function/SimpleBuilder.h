@@ -8,6 +8,7 @@
 #include "entity/Actor.h"
 #include "block/BlockSource.h"
 #include "tools/noncopyable .h"
+#include "trapdoor.h"
 
 namespace mod {
     class SimpleBuilder : noncopyable {
@@ -23,6 +24,8 @@ namespace mod {
         void buildSphere(trapdoor::Actor *player, size_t size, bool hollow) const;
 
         void buildCircle(trapdoor::Actor *player, size_t size, bool hollow) const;
+
+        void registerDrawCommand(trapdoor::CommandManager &commandManager);
     };
 }
 
