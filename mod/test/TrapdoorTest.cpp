@@ -137,6 +137,7 @@ namespace mod::test {
     }
 
     COMMAND_TEST(village) {
+        RUN_CMD("/village")
         RUN_CMD("/village list")
         RUN_CMD("/village b true")
         RUN_CMD("/village b false")

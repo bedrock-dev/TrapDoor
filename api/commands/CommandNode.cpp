@@ -26,8 +26,8 @@ namespace trapdoor {
 
     CommandNode::CommandNode(std::string name, std::string description)
             : name(std::move(name)),
-              work([&name](ArgHolder *holder, Actor *actor) {
-                  error(actor, LANG("command.error.moreTokenRequired"), name.c_str());
+              work([this](ArgHolder *holder, Actor *actor) {
+                  error(actor, LANG("command.error.moreTokenRequired"), this->name.c_str());
               }),
               description(std::move(description)) {}
 
