@@ -33,6 +33,7 @@ namespace mod {
             }
         }
     }
+
     void HopperChannelManager::printChannel(Actor *player, size_t channel) {
         if (channel < 0 || channel > 4) {
             error(player, "this channel do not exist");
@@ -71,10 +72,12 @@ namespace mod {
             return;
         }
         trapdoor::MessageBuilder builder;
-        builder.sTextF(trapdoor::MessageBuilder::BOLD||trapdoor::MessageBuilder::LIGHT_PURPLE, "channel %d\n", channel)
+        builder.sTextF(trapdoor::MessageBuilder::BOLD || trapdoor::MessageBuilder::LIGHT_PURPLE, "channel %d\n",
+                       channel)
                 .num(n).text("  items in ").num(gameTick).text(" gt(").num(gameTick / 1200.0).text("min)\n");
         for (const auto &i:counterList) {
-            builder.textF(" - ").text(i.first).text("    ").num(i.second).text("(").num(i.second * 1.0 / gameTick * 72000).text(
+            builder.textF(" - ").text(i.first).text("    ").num(i.second).text("(").num(
+                    i.second * 1.0 / gameTick * 72000).text(
                     "/h)\n");
         }
         builder.send(actor);
