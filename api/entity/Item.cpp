@@ -35,33 +35,34 @@ namespace trapdoor {
 
 using namespace SymHook;
 //右键代理类
-//THook(
-//        void,
-//        MSSYM_B1QA5useOnB1AA4ItemB2AAA4QEBAB1UE14NAEAVItemStackB2AAA9AEAVActorB2AAA7HHHEMMMB1AA1Z,
-//        void *item,
-//        trapdoor::ItemStackBase *itemStack,
-//        trapdoor::Actor *player,
-//        int x,
-//        int y,
-//        int z,
-//        unsigned int facing,
-//        float dx,
-//        float dy,
-//        float dz) {
-//    uint64_t gameTick = trapdoor::bdsMod->getLevel()->getGameTick();
-//    trapdoor::RightClickCache targetCache{gameTick, x, y, z};
-//
-//    auto &playerCache =
-//            trapdoor::bdsMod->getPlayerBuffer()[player->getNameTag()]
-//                    .rightClickCache;
-//    //下面用一个简单的缓存 + 判定消除重复点击
-//    if (playerCache != targetCache) {
-//        //响应右键事件
-//        trapdoor::BlockPos pos(x, y, z);
-//        const trapdoor::Vec3 vec3(dx, dy, dz);
-//        trapdoor::bdsMod->useOnHook(player, itemStack->getItemName(), pos,
-//                                    facing, vec3);
-//        playerCache = targetCache;
-//    }
-//    original(item, itemStack, player, x, y, z, facing, dx, dy, dz);
-//}
+THook(
+        void,
+        MSSYM_B1QA5useOnB1AA4ItemB2AAA4QEBAB1UE14NAEAVItemStackB2AAA9AEAVActorB2AAA7HHHEMMMB1AA1Z,
+        void *item,
+        trapdoor::ItemStackBase *itemStack,
+        trapdoor::Actor *player,
+        int x,
+        int y,
+        int z,
+        unsigned int facing,
+        float dx,
+        float dy,
+        float dz) {
+
+    original(item, itemStack, player, x, y, z, facing, dx, dy, dz);
+    uint64_t gameTick = trapdoor::bdsMod->getLevel()->getGameTick();
+    trapdoor::RightClickCache targetCache{gameTick, x, y, z};
+    auto &playerCache =
+            trapdoor::bdsMod->getPlayerBuffer()[player->getNameTag()]
+                    .rightClickCache;
+    //下面用一个简单的缓存 + 判定消除重复点击
+    if (playerCache != targetCache) {
+        //响应右键事件
+        trapdoor::BlockPos pos(x, y, z);
+        const trapdoor::Vec3 vec3(dx, dy, dz);
+        trapdoor::bdsMod->useOnHook(player, itemStack->getItemName(), pos,
+                                    facing, vec3);
+        playerCache = targetCache;
+    }
+
+}

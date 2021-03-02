@@ -26,8 +26,8 @@ namespace trapdoor {
 
     CommandNode::CommandNode(std::string name, std::string description)
             : name(std::move(name)),
-              work([&name](ArgHolder *holder, Actor *actor) {
-                  error(actor, " %s 后面缺少子命令", name.c_str());
+              work([this](ArgHolder *holder, Actor *actor) {
+                  error(actor, " %s 后面缺少子命令", this->name.c_str());
               }),
               description(std::move(description)) {}
 
