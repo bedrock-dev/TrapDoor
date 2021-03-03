@@ -42,7 +42,7 @@ namespace trapdoor {
         BlockPos *getPosition();
 
         //获取方块对象
-        Block *getBlock();
+      //  Block *getBlock();
     };
 
 }

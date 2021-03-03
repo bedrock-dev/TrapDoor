@@ -9,18 +9,22 @@
 
 namespace mod {
 
-
     void FakePlayerClient::registerFakePlayerCommand(CommandManager &manager) {
         using namespace trapdoor;
         manager.registerCmd("fakeplayer", "command.fakeplayer.desc")
                 ->then(ARG("conn", "command.fakeplayer.conn.desc", STR, {
                     this->connect(player, holder->getString());
                 }))
+                ->then(ARG("list", "command.fakeplayer.list.desc", STR, {
+                    this->sendMessage(player, FakePlayerClient::buildMessage(MessageType::PLAYER_LIST));
+                }))
                 ->then(ARG("add", "command.fakeplayer.add.desc", STR, {
-                    this->sendMessage(holder->getString());
+                    this->sendMessage(player,
+                                      FakePlayerClient::buildMessage(MessageType::ADD_PLAYER, holder->getString()));
                 }))
                 ->then(ARG("rm", "command.fakeplayer.remove.desc", STR, {
-                    this->sendMessage(holder->getString());
+                    this->sendMessage(player,
+                                      FakePlayerClient::buildMessage(MessageType::REMOVE_PLAYER, holder->getString()));
                 }));
     }
 
@@ -37,6 +41,7 @@ namespace mod {
         }
         printf("send %s", msg.c_str());
         this->webSocket->send(msg);
+        this->source = player;
         this->clientStatus = ClientStatus::WAITING_MESSAGE;
         return true;
     }
@@ -66,7 +71,12 @@ namespace mod {
 
     bool FakePlayerClient::consume() {
         //处理服务端的回复消息
-        trapdoor::broadcastMsg("receive msg: %s", this->message.c_str());
+        if (source) {
+            trapdoor::info(this->source, "receive msg: %s", this->message.c_str());
+        } else {
+            trapdoor::broadcastMsg("receive msg: %s(you receive this because of source has been offline)",
+                                   this->message.c_str());
+        }
         return true;
     }
 
@@ -81,15 +91,15 @@ namespace mod {
         }
     }
 
-    //更新状态，查询消息队列
+    //更新状态，查询和消费消息队列
     void FakePlayerClient::tick() {
         //如果是等待消息的状态就增加计时器如果五秒内收不到消息就说明消息发送失败
         if (this->clientStatus == ClientStatus::WAITING_MESSAGE) {
             this->timer++;
             //超过100gt没有回复就说明连接炸了
             if (this->timer == 100) {
-                this->timer = 0;
-                this->clientStatus = ClientStatus::READY;
+                this->message = "timeout";
+                this->clientStatus = ClientStatus::NEED_CONSUME;
             }
         }
 
@@ -114,8 +124,36 @@ namespace mod {
     }
 
     void FakePlayerClient::disconnectCallBack() {
-        trapdoor::broadcastMsg("client or server has closed the connection");
+        trapdoor::broadcastMsg("client or server has closed the fakeplayer connection");
         this->clientStatus = ClientStatus::NOT_OPEN;
+    }
+
+    std::string FakePlayerClient::buildMessage(FakePlayerClient::MessageType type, const std::string &param) {
+        switch (type) {
+            case MessageType::PLAYER_LIST:
+                return R"({
+                   "type": "list"
+                        })";
+            case MessageType::ADD_PLAYER:
+                return trapdoor::format(R"(
+                {
+                    "type": "add",
+                    "data": {
+                    "name": "%s",
+                    "skin": "steve"
+                        }
+                    }
+                )", param.c_str());
+            case MessageType::REMOVE_PLAYER:
+                return trapdoor::format(R"(
+                {
+                    "type": "remove",
+                    "data": {
+                            "name": "%s"
+                    }
+                }
+                )", param.c_str());
+        }
     }
 }
 

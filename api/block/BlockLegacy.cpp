@@ -19,14 +19,7 @@ namespace trapdoor {
                 this, vector
         );
         return "this api was removed";
-//        int i = 0;
-//        for (const auto &str:vector) {
-//            printf("%d: %s ", i, str.c_str());
-//            ++i;
-//        }
-//        printf("\n");
-//        return std::string("text");
-//    }
+
     }
 
     //获取某个特殊值状态下的方块对象
@@ -39,7 +32,7 @@ namespace trapdoor {
     }
 
     BlockType BlockLegacy::getBlockID() {
-        return (BlockType) *offset_cast<short>(this, 268);
+        return (BlockType) *offset_cast<short *>(this, 268);
         // return (BlockType) *(short *) ((char *) this + 268);
     }
 }

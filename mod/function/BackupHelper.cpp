@@ -125,8 +125,8 @@ Copy-Item -Path $SourcePath -Destination "$Destination" -Recurse | Out-Null
                            { mod::restore(player, holder->getInt()); }))
                 ->then(ARG("crash", "command.backup.crash.desc", NONE, {
                     //这种指令的存在真的好吗
-                    trapdoor::warning(player, "this command has been removed");
-                    // *((char *) (0)) = 0;
+                    //trapdoor::warning(player, "this command has been removed");
+                    *((char *) (0)) = 0;
                 }));
 
     }

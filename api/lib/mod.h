@@ -1,16 +1,15 @@
 #pragma once
 #define _WINSOCKAPI_
-
 #include "Windows.h"
 #include "detours.h"
 #include "detver.h"
 #include <iostream>
-
 using VA = unsigned __int64;
 using RVA = unsigned long int;
-
-template<typename T>
-auto Hook(T *p, T f) {
+#include<cstdio>
+#define _EXPORTED _declspec(dllexport)
+inline const char* Hook_wrap(void** pOriginal, void* f)
+{
     int error = DetourTransactionBegin();
     if (error != NO_ERROR) {
         return "Hook: DetourTransactionBegin Error";
@@ -19,9 +18,9 @@ auto Hook(T *p, T f) {
     if (error != NO_ERROR) {
         return "Hook: DetourUpdateThread Error";
     }
-    error = DetourAttach((PVOID *)
-                                 p, (PVOID)
-                                 f);
+    error = DetourAttach(
+        pOriginal, (void*)
+        f);
     if (error != NO_ERROR) {
         return "Hook: DetourAttach Error";
     }
@@ -29,89 +28,20 @@ auto Hook(T *p, T f) {
     if (error != NO_ERROR) {
         return "Hook: DetourTransactionCommit Error";
     }
-    return static_cast<const char *>(nullptr);
+    return nullptr;
 }
-
-template<typename T>
-auto UnHook(T *p, T f) {
-    int error = DetourTransactionBegin();
-    if (error != NO_ERROR) {
-        return "UnHook: DetourTransactionBegin Error";
+inline void Hook(void** pOriginal, void* f, const char* prefix) {
+    auto ret = Hook_wrap(pOriginal, f);
+    if (ret) {
+        fprintf(stderr, "[!] Hook error at %s : %s\n",ret, prefix);
     }
-    error = DetourUpdateThread(GetCurrentThread());
-    if (error != NO_ERROR) {
-        return "UnHook: DetourUpdateThread Error";
-    }
-    error = DetourDetach((PVOID *)
-                                 p, (PVOID)
-                                 f);
-    if (error != NO_ERROR) {
-        return "UnHook: DetourDetach Error";
-    }
-    error = DetourTransactionCommit();
-    if (error != NO_ERROR) {
-        return "UnHook: DetourTransactionCommit Error";
-    }
-    return static_cast<const char *>(nullptr);
 }
-
-struct RegisterStaticHook {
-
-    RegisterStaticHook(RVA sym, void *hook, void **org) {
-        auto base = reinterpret_cast<VA>(GetModuleHandle(NULL));
-        *org = reinterpret_cast<void *>(base + sym);
-        auto ret = Hook<void *>(org, hook);
-        if (ret != nullptr)
-            std::cout << "[Error]" << " " << ret << std::endl;
-    }
-
-    // workaround for a warning
-    template<typename T>
-    RegisterStaticHook(RVA sym, T hook, void **org) {
-        union {
-            T a;
-            void *b;
-        } hookUnion;
-        hookUnion.a = hook;
-        RegisterStaticHook(sym, hookUnion.b, org);
-    }
-};
-
-#define _TInstanceHook(class_inh, pclass, iname, sym, ret, ...)                                                                                  \
-  struct _TInstanceHook_##iname class_inh {                                                                                                          \
-    static ret (_TInstanceHook_##iname::*_original)(__VA_ARGS__);                                                                                           \
-    template <typename... Params> static ret original(pclass *_this, Params &&... params) {                                                          \
-      return (((_TInstanceHook_##iname *)_this)->*_original)(std::forward<Params>(params)...);                                                       \
-    }                                                                                                                                                \
-    ret _hook(__VA_ARGS__);                                                                                                                                 \
-  };                                                                                                                                                 \
-  static RegisterStaticHook _TRInstanceHook_##iname(sym, &_TInstanceHook_##iname::_hook, (void **)&_TInstanceHook_##iname::_original);              \
-  ret (_TInstanceHook_##iname::*_TInstanceHook_##iname::_original)(__VA_ARGS__);                                                                            \
-  ret _TInstanceHook_##iname::_hook(__VA_ARGS__)
-#define _TInstanceDefHook(iname, sym, ret, type, ...)                _TInstanceHook( : public type, type, iname, sym, ret, __VA_ARGS__)
-#define _TInstanceNoDefHook(iname, sym, ret, ...)                    _TInstanceHook(, void, iname, sym, ret, __VA_ARGS__)
-
-#define _TStaticHook(pclass, iname, sym, ret, ...)                                                                                               \
-  struct _TStaticHook_##iname pclass {                                                                                                               \
-    static ret (*_original)(__VA_ARGS__);                                                                                                                   \
-    template <typename... Params> static ret original(Params &&... params) { return (*_original)(std::forward<Params>(params)...); }                 \
-    static ret _hook(__VA_ARGS__);                                                                                                                          \
-  };                                                                                                                                                 \
-  static RegisterStaticHook _TRStaticHook_##iname(sym, &_TStaticHook_##iname::_hook, (void **)&_TStaticHook_##iname::_original);                    \
-  ret (*_TStaticHook_##iname::_original)(__VA_ARGS__);                                                                                                      \
-  ret _TStaticHook_##iname::_hook(__VA_ARGS__)
-#define _TStaticDefHook(iname, sym, ret, type, ...)                    _TStaticHook( : public type, iname, sym, ret, __VA_ARGS__)
-#define _TStaticNoDefHook(iname, sym, ret, ...)                        _TStaticHook(, iname, sym, ret, __VA_ARGS__)
-
-#define THook2(iname, ret, sym, ...)                                _TStaticNoDefHook(iname, sym, ret, __VA_ARGS__)
-#define THook(ret, sym, ...)                                        THook2(sym, ret, sym, __VA_ARGS__)
-#define TClasslessInstanceHook2(iname, ret, sym, ...)                _TInstanceNoDefHook(iname, sym, ret, __VA_ARGS__)
-#define TClasslessInstanceHook(ret, sym, ...)                        TClasslessInstanceHook2(sym, ret, sym, args)
-#define TInstanceHook2(iname, ret, sym, type, ...)                    _TInstanceDefHook(iname, sym, ret, type, __VA_ARGS__)
-#define TInstanceHook(ret, sym, type, ...)                            TInstanceHook2(sym, ret, sym, type, __VA_ARGS__)
-#define TStaticHook2(iname, ret, sym, type, ...)                    _TStaticDefHook(iname, sym, ret, type, __VA_ARGS__)
-#define TStaticHook(ret, sym, type, ...)                            TStaticHook2(sym, ret, sym, type, __VA_ARGS__)
-
+inline VA GetVA(RVA off) {
+    return (VA)GetModuleHandle(NULL) + (VA)off;
+}
+#define TD_CONCAT3_I(a,b,c) a##b##c
+#define TD_CONCAT3(a,b,c) TD_CONCAT3_I(a,b,c)
+#define THook(ret, iname, ...)  struct TD_CONCAT3(TDHook_, __LINE__,iname)     {  static ret(*original)(__VA_ARGS__);   _EXPORTED static ret p(__VA_ARGS__);   TD_CONCAT3(TDHook_, __LINE__,iname)   ()        { original = (decltype(original))GetVA(iname);   Hook((void **)&original, (void *)&p, #iname); }                            };                  static TD_CONCAT3(TDHook_, __LINE__,iname)   tdh##iname; ret(*TD_CONCAT3(TDHook_, __LINE__,iname)::original)(__VA_ARGS__); ret TD_CONCAT3(TDHook_, __LINE__,iname)::p(__VA_ARGS__)
 #define FNTYPE_DEF(...) VA (*)(__VA_ARGS__)
 #define FNTYPE_DEF_0    FNTYPE_DEF()
 #define FNTYPE_DEF_1    FNTYPE_DEF(VA)

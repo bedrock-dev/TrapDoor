@@ -135,7 +135,7 @@ namespace mod {
                            }))
                 ->then(ARG("list", "command.hsa.list.desc", NONE,
                            { this->list(player); }))
-                ->then(ARG("show", "command.hsa.desc", BOOL,
+                ->then(ARG("show", "command.hsa.show.desc", BOOL,
                            {
                                this->setAble(holder->getBool());
                                info(player, "设置HSA显示为 %d", holder->getBool());
@@ -160,9 +160,9 @@ THook(
         trapdoor::BlockSource *blockSource,
         trapdoor::BlockPos *blockPos,
         trapdoor::BoundingBox *hsa,
-        void *spawnconditions) {
+        void *spawnConditions) {
     // todo add hsa here
-    original(spawner, blockSource, blockPos, hsa, spawnconditions);
+    original(spawner, blockSource, blockPos, hsa, spawnConditions);
     auto modInstance = trapdoor::bdsMod->asInstance<mod::TrapdoorMod>();
     auto &hsaManager = modInstance->getHsaManager();
     mod::HsaInfo info;

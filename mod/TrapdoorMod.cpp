@@ -225,9 +225,12 @@ namespace mod {
 // this->simpleLitematica.getSelectRegion().setPos2(pos, player);
         } else if (itemName == "Stick") {
             this->playerFunctions.printRedstoneInfo(player, pos);
+            auto *block = player->getBlockSource()->getBlock(pos);
+            printf("id:%d name:%s variant:%d\n", block->getLegacy()->getBlockID(), block->getName().c_str(),
+                   block->getVariant());
+            fflush(stdout);
         }
     }
-
 
     CommandPermissionLevel TrapdoorMod::resetVanillaCommandLevel(
             const std::string &name,
