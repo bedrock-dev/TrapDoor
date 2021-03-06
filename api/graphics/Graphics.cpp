@@ -22,10 +22,12 @@ namespace trapdoor {
                 lengthMap.insert({point, 256});
             }
 
-            for (auto defaultLength = 256; defaultLength >= 1; defaultLength /= 2) {
+            for (auto defaultLength = 256; defaultLength >= 1;
+                 defaultLength /= 2) {
                 if (length >= defaultLength) {
                     length -= defaultLength;
-                    auto point = static_cast<float>(0.5 * defaultLength + start);
+                    auto point =
+                        static_cast<float>(0.5 * defaultLength + start);
                     start += defaultLength;
                     lengthMap.insert({point, defaultLength});
                 }
@@ -78,13 +80,13 @@ namespace trapdoor {
             }
             return str;
         }
-    }
+    }  // namespace
 
-
-    void drawLine(const Vec3 &originPoint,
+    void drawLine(const Vec3& originPoint,
                   FACING direction,
                   float length,
-                  GRAPHIC_COLOR color, int dimType) {
+                  GRAPHIC_COLOR color,
+                  int dimType) {
         if (length <= 0)
             return;
         float start = 0, end = 0;
@@ -121,25 +123,54 @@ namespace trapdoor {
         if (facingIsX(direction)) {
             for (auto i : list)
                 positionList.insert(
-                        {{i.first, originPoint.y, originPoint.z}, i.second});
+                    {{i.first, originPoint.y, originPoint.z}, i.second});
         } else if (facingIsY(direction)) {
             for (auto i : list)
                 positionList.insert(
-                        {{originPoint.x, i.first, originPoint.z}, i.second});
+                    {{originPoint.x, i.first, originPoint.z}, i.second});
         } else if (facingIsZ(direction)) {
             for (auto i : list)
                 positionList.insert(
-                        {{originPoint.x, originPoint.y, i.first}, i.second});
+                    {{originPoint.x, originPoint.y, i.first}, i.second});
         }
 
         for (auto points : positionList) {
             auto particleType =
-                    getLineParticleType(points.second, direction, color);
+                getLineParticleType(points.second, direction, color);
             auto particleTypeInv =
-                    getLineParticleType(points.second, invFacing(direction), color);
+                getLineParticleType(points.second, invFacing(direction), color);
             spawnParticle(points.first, particleType, dimType);
             if (!bdsMod->getCfg().particlePerformanceMode)
                 spawnParticle(points.first, particleTypeInv, dimType);
         }
     }
-}
+
+    void drawPoint(const Vec3& point, GRAPHIC_COLOR color, int dimType) {
+        std::string particleType = "trapdoor:point";
+        std::string particleTypeBack = "trapdoor:point_back";
+        switch (color) {
+            case GRAPHIC_COLOR::WHITE:
+                particleType += "W";
+                particleTypeBack += "W";
+                break;
+            case GRAPHIC_COLOR::RED:
+                particleType += "R";
+                particleTypeBack += "R";
+                break;
+            case GRAPHIC_COLOR::YELLOW:
+                particleType += "Y";
+                particleTypeBack += "Y";
+                break;
+            case GRAPHIC_COLOR::BLUE:
+                particleType += "B";
+                particleTypeBack += "B";
+                break;
+            case GRAPHIC_COLOR::GREEN:
+                particleType += "G";
+                particleTypeBack += "G";
+                break;
+        }
+        spawnParticle(point, particleType, dimType);
+        spawnParticle(point, particleTypeBack, dimType);
+    }
+}  // namespace trapdoor
