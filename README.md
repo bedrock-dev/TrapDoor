@@ -64,7 +64,6 @@ Trapdoor是一个为 Minecraft Bedrock Edition 服务的，基于原版服务端
   </tr>
 </table>
 
-
 ## 翻译贡献者
 -  <a href="https://github.com/0x506978656c"><img src="https://avatars.githubusercontent.com/u/66031115?s=96&v=4" width="15px;" alt=""/><b> ! Pixel </b></sub></a><a href="https://github.com/hhhxiao/TrapDoor/commits?author=0x506978656c" title="Code">🌎</a></td>
 
