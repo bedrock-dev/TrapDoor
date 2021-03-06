@@ -3,7 +3,7 @@ name: CMake
 on:
   push:
     branches: 
-      - 1.16.4-main
+      - 1.16.4
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
@@ -25,7 +25,7 @@ jobs:
       #github.workspace =trapdoor/trapdoor
       working-directory: ${{github.workspace}}
       run: ls
-
+#
 #    - name: Create Build Environment
 #      # 主目录下面建立一个build目录(trapdoor/trapdoor/build)
 #      run: cmake -E make_directory ${{github.workspace}}/build
@@ -46,13 +46,14 @@ jobs:
 #      run: cmake --build . --config Release
 #
 #    - name: Create Release
+#      #创建发布
 #      id: create_release
 #      uses: actions/create-release@v1
 #      env:
 #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #      with:
-#          tag_name: ${{ github.ref }}
-#          release_name: Release ${{ github.ref }}
+#          tag_name: 1.16.4
+#          release_name: Trapdoor-v0.9.20
 #          draft: false
 #          prerelease: false
 #
@@ -64,9 +65,9 @@ jobs:
 #      with:
 #          upload_url: ${{ steps.create_release.outputs.upload_url }}
 #          asset_path: ${{github.workspace}}/build/Release/trapdoor-mod.dll
-#          asset_name: trapdoor-mod.dll
+#          asset_name: trapdoor-v0.9.20-1.16.40.dll
 #          asset_content_type: application/dll
-#
+
 ##     - name: Test
 ##       working-directory: ${{github.workspace}}/build
 ##       shell: powershell
