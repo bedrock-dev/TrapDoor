@@ -6,6 +6,7 @@
 #include "entity/Actor.h"
 #include "tools/Message.h"
 #include "language/I18nManager.h"
+#include "tools/json.hpp"
 
 namespace mod {
 
@@ -15,7 +16,7 @@ namespace mod {
                 ->then(ARG("conn", "command.fakeplayer.conn.desc", STR, {
                     this->connect(player, holder->getString());
                 }))
-                ->then(ARG("list", "command.fakeplayer.list.desc", STR, {
+                ->then(ARG("list", "command.fakeplayer.list.desc", NONE, {
                     this->sendMessage(player, FakePlayerClient::buildMessage(MessageType::PLAYER_LIST));
                 }))
                 ->then(ARG("add", "command.fakeplayer.add.desc", STR, {
@@ -70,12 +71,18 @@ namespace mod {
 
 
     bool FakePlayerClient::consume() {
+        bool status = true;
+        auto msg = FakePlayerClient::parseResponse(this->message, status);
         //处理服务端的回复消息
         if (source) {
-            trapdoor::info(this->source, "receive msg: %s", this->message.c_str());
+            if (status) {
+                trapdoor::info(this->source, "%s", msg.c_str());
+            } else {
+                trapdoor::error(this->source, "%s", msg.c_str());
+            }
         } else {
-            trapdoor::broadcastMsg("receive msg: %s(you receive this because of source has been offline)",
-                                   this->message.c_str());
+            trapdoor::broadcastMsg("%s(you receive this because of source player has been offline)",
+                                   msg.c_str());
         }
         return true;
     }
@@ -153,6 +160,43 @@ namespace mod {
                     }
                 }
                 )", param.c_str());
+        }
+        return "{}";
+    }
+
+    std::string FakePlayerClient::parseResponse(const std::string &response, bool &status) {
+        using json = nlohmann::json;
+        try {
+            json jsonMsg = json::parse(response);
+            auto respType = jsonMsg["type"].get<std::string>();
+            auto respData = jsonMsg["data"];
+            if (respType == "list") {
+                status = true;
+                std::string strBuilder = "下面是所有的假人玩家";
+                for (auto &i:respData["list"]) {
+                    strBuilder += "\n";
+                    strBuilder += i.get<std::string>();
+                }
+                return strBuilder;
+            } else if (respType == "add" || respType == "remove") {
+                const char *type = respType == "add" ? "添加" : "移除";
+                auto name = respData["name"].get<std::string>();
+                auto success = respData["success"].get<bool>();
+                if (success) {
+                    status = true;
+                    return trapdoor::format("成功%s假人[%s]", type, name.c_str());
+                } else {
+                    status = false;
+                    auto reason = respData["reason"].get<std::string>();
+                    return trapdoor::format("无法%s假人[%s],原因: %s", type, name.c_str(), reason.c_str());
+                }
+            } else {
+                status = false;
+                return "unknown message";
+            }
+        } catch (std::exception &e) {
+            status = false;
+            return trapdoor::format("message error: %s", e.what());
         }
     }
 }

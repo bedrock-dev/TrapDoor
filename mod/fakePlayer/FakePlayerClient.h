@@ -37,6 +37,8 @@ namespace mod {
     private:
         static std::string buildMessage(MessageType type, const std::string &param = "");
 
+        static std::string parseResponse(const std::string &response, bool &status);
+
         easywsclient::WebSocket *webSocket = nullptr;
         ThreadPool *pool = nullptr;
         std::atomic<ClientStatus> clientStatus{ClientStatus::NOT_OPEN};
