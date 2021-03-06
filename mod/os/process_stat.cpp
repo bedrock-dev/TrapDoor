@@ -1,3 +1,5 @@
+#define _WINSOCKAPI_
+
 #include <Windows.h>
 #include <Psapi.h>
 #include <cassert>

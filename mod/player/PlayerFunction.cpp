@@ -13,9 +13,10 @@
 #include "world/Biome.h"
 #include "block/CircuitComponent.h"
 #include "world/Dimension.h"
-
+#include "lib/Remotery.h"
 namespace mod {
     void PlayerFunction::tick() {
+        rmt_ScopedCPUSample(PLAYER_FUNC, 0);
         if (gameTick % 20 == 0) {
             auto modInstance = trapdoor::bdsMod->asInstance<mod::TrapdoorMod>();
             modInstance->getLevel()->forEachPlayer([&](trapdoor::Actor *player) {

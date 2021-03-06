@@ -22,6 +22,7 @@ using namespace SymHook;
 #include "world/Level.h"
 #include "entity/Actor.h"
 #include "tools/MsgBuilder.h"
+#include "lib/Remotery.h"
 
 namespace mod {
     namespace {
@@ -284,6 +285,7 @@ namespace mod {
     }
 
     void VillageHelper::tick() {
+        rmt_ScopedCPUSample(VILLAGE_TICK, 0)
         if (gameTick % 40 == 0) {
             //todo clear village and draw village;
             this->draw();

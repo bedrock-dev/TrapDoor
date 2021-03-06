@@ -47,6 +47,7 @@
 */
 
 #define RMT_IMPL
+
 #include "Remotery.h"
 
 #ifdef RMT_PLATFORM_WINDOWS
@@ -74,76 +75,76 @@ static rmtBool g_SettingsInitialized = RMT_FALSE;
 //
 #if RMT_USE_TINYCRT
 
-	#include <TinyCRT/TinyCRT.h>
-	#include <TinyCRT/TinyWinsock.h>
-    #include <Memory/Memory.h>
+#include <TinyCRT/TinyCRT.h>
+#include <TinyCRT/TinyWinsock.h>
+#include <Memory/Memory.h>
 
-    #define CreateFileMapping CreateFileMappingA
+#define CreateFileMapping CreateFileMappingA
 
 #else
 
-    #ifdef RMT_PLATFORM_MACOS
-        #include <mach/mach_time.h>
-        #include <mach/vm_map.h>
-        #include <mach/mach.h>
-        #include <sys/time.h>
-    #else
-        #if !defined(__FreeBSD__) && !defined(__OpenBSD__)
-            #include <malloc.h>
-        #endif
-    #endif
+#ifdef RMT_PLATFORM_MACOS
+#include <mach/mach_time.h>
+#include <mach/vm_map.h>
+#include <mach/mach.h>
+#include <sys/time.h>
+#else
+#if !defined(__FreeBSD__) && !defined(__OpenBSD__)
+#include <malloc.h>
+#endif
+#endif
 
-    #include <assert.h>
-    #include <stdio.h>
-    #include <time.h>
+#include <assert.h>
+#include <stdio.h>
+#include <time.h>
 
-    #ifdef RMT_PLATFORM_WINDOWS
-        #include <winsock2.h>
-        #ifndef __MINGW32__
-            #include <intrin.h>
-        #endif
-        #undef min
-        #undef max
-        #ifdef _XBOX_ONE
-            #include "xmem.h"
-        #endif
-    #endif
+#ifdef RMT_PLATFORM_WINDOWS
+#include <winsock2.h>
+#ifndef __MINGW32__
+#include <intrin.h>
+#endif
+#undef min
+#undef max
+#ifdef _XBOX_ONE
+#include "xmem.h"
+#endif
+#endif
 
-    #ifdef RMT_PLATFORM_LINUX
-        #if defined(__FreeBSD__) || defined(__OpenBSD__)
-            #include <pthread_np.h>
-        #else
-            #include <sys/prctl.h>
-        #endif
-    #endif
+#ifdef RMT_PLATFORM_LINUX
+#if defined(__FreeBSD__) || defined(__OpenBSD__)
+#include <pthread_np.h>
+#else
+#include <sys/prctl.h>
+#endif
+#endif
 
-    #if defined(RMT_PLATFORM_POSIX)
-        #include <stdlib.h>
-        #include <pthread.h>
-        #include <unistd.h>
-        #include <string.h>
-        #include <sys/socket.h>
-        #include <sys/mman.h>
-        #include <netinet/in.h>
-        #include <fcntl.h>
-        #include <errno.h>
-        #include <dlfcn.h>
-    #endif
+#if defined(RMT_PLATFORM_POSIX)
+#include <stdlib.h>
+#include <pthread.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/socket.h>
+#include <sys/mman.h>
+#include <netinet/in.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <dlfcn.h>
+#endif
 
-    #ifdef __MINGW32__
-        #include <pthread.h>
-    #endif
+#ifdef __MINGW32__
+#include <pthread.h>
+#endif
 
 #endif
 
 #if defined(_MSC_VER) && !defined(__clang__)
-    #define RMT_UNREFERENCED_PARAMETER(i) (i)
+#define RMT_UNREFERENCED_PARAMETER(i) (i)
 #else
-    #define RMT_UNREFERENCED_PARAMETER(i) (void)(1 ? (void)0 : ((void)i))
+#define RMT_UNREFERENCED_PARAMETER(i) (void)(1 ? (void)0 : ((void)i))
 #endif
 
 #if RMT_USE_CUDA
-    #include <cuda.h>
+#include <cuda.h>
 #endif
 
 // clang-format on

@@ -18,7 +18,7 @@
 #include "tools/MsgBuilder.h"
 #include "world/Biome.h"
 #include "world/Level.h"
-
+#include "lib/Remotery.h"
 namespace mod {
 
     bool HsaInfo::operator<(const mod::HsaInfo &rhs) const {
@@ -87,6 +87,7 @@ namespace mod {
     }
 
     void HsaManager::tick() {
+        rmt_ScopedCPUSample(HSA_TICK, 0);
         if (!this->enable)
             return;
         if (gameTick % 40 == 0) {
