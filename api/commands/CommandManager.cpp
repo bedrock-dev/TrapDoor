@@ -6,6 +6,7 @@
 #include "tools/Message.h"
 #include "tools/DirtyLogger.h"
 #include "Command.h"
+#include "mod.h"
 
 namespace trapdoor {
     namespace {
@@ -118,8 +119,29 @@ namespace trapdoor {
 
     }
 
-    void CommandManager::runVanillaCommand(const std::string &command) {
-        //todo
+    using namespace SymHook;
+
+    //获取指令队列
+    static VA cmdQueue = 0;
+    THook(VA,
+          MSSYM_MD5_3b8fb7204bf8294ee636ba7272eec000,
+          VA _this
+          ){
+        cmdQueue = original(_this);
+        return cmdQueue;
+    }
+
+    //执行原版指令
+    bool CommandManager::runVanillaCommand(const std::string &command) {
+        if (cmdQueue != 0) {
+            SYM_CALL(bool(*) (VA, std::string),
+                     MSSYM_MD5_b5c9e566146b3136e6fb37f0c080d91e,
+                     cmdQueue,
+                     command
+                     );
+            return true;
+        }
+        return false;
     }
 
 }
