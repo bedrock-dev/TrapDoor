@@ -56,6 +56,7 @@ namespace mod::test {
 
 
     COMMAND_TEST(apicfg) {
+        RUN_CMD("/apicfg")
         RUN_CMD("/apicfg ?")
         RUN_CMD("/apicfg pm 1")
         RUN_CMD("/apicfg pm 0")
@@ -69,6 +70,7 @@ namespace mod::test {
     }
 
     COMMAND_TEST(func) {
+        RUN_CMD("/func")
         RUN_CMD("/func ?")
         RUN_CMD("/func hopper 1")
         RUN_CMD("/func hopper 0")
@@ -83,11 +85,13 @@ namespace mod::test {
     }
 
     COMMAND_TEST(lang) {
+        RUN_CMD("/lang")
         RUN_CMD("/lang list")
         RUN_CMD("/lang set zh_cn")
     }
 
     COMMAND_TEST(tick) {
+        RUN_CMD("/tick")
         RUN_CMD("/tick ?")
         RUN_CMD("/tick fz")
         RUN_CMD("/tick fw 20")
@@ -104,6 +108,7 @@ namespace mod::test {
     }
 
     COMMAND_TEST(counter) {
+        RUN_CMD("/counter")
         RUN_CMD("/counter p 15")
         RUN_CMD("/counter p -1")
         RUN_CMD("/counter p 16")
@@ -137,6 +142,7 @@ namespace mod::test {
     }
 
     COMMAND_TEST(village) {
+        RUN_CMD("/village")
         RUN_CMD("/village list")
         RUN_CMD("/village b true")
         RUN_CMD("/village b false")
@@ -150,6 +156,7 @@ namespace mod::test {
     }
 
     COMMAND_TEST(hsa) {
+        RUN_CMD("/hsa")
         RUN_CMD("/hsa show 1")
         RUN_CMD("/hsa show false")
         RUN_CMD("/hsa clear")
@@ -158,6 +165,7 @@ namespace mod::test {
     }
 
     COMMAND_TEST(draw) {
+        RUN_CMD("/func")
         RUN_CMD("/func draw false")
         RUN_CMD("/func draw 1")
         RUN_CMD("/draw sp 2")
@@ -167,6 +175,7 @@ namespace mod::test {
     }
 
     COMMAND_TEST(cl) {
+        RUN_CMD("/cl")
         RUN_CMD("/cl 12+sin(0.5+2*pi)-log2(12)")
         RUN_CMD("/cl 1/0")
         RUN_CMD("/cl log(-1)")
@@ -177,6 +186,7 @@ namespace mod::test {
     }
 
     COMMAND_TEST(slime) {
+        RUN_CMD("/slime")
         RUN_CMD("/slime show 1")
         RUN_CMD("/slime show 0")
         RUN_CMD("/slime c")
@@ -218,7 +228,6 @@ namespace mod::test {
         addManualTestItem("draw");
         addManualTestItem("slime");
         addManualTestItem("hsa");
-
     }
 
     void registerTestCommand(CommandManager &manager) {

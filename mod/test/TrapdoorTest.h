@@ -14,5 +14,4 @@ namespace mod::test {
     void registerTestCommand(trapdoor::CommandManager &);
 }
 
-
 #endif //MOD_TRAPDOORTEST_H
