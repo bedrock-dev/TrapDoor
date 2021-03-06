@@ -147,30 +147,30 @@ namespace trapdoor {
 
     void drawPoint(const Vec3& point, GRAPHIC_COLOR color, int dimType) {
         std::string particleType = "trapdoor:point";
-        std::string particleTypeBack = "trapdoor:point_back";
+        // std::string particleTypeBack = "trapdoor:point_back";
         switch (color) {
             case GRAPHIC_COLOR::WHITE:
                 particleType += "W";
-                particleTypeBack += "W";
+                // particleTypeBack += "W";
                 break;
             case GRAPHIC_COLOR::RED:
                 particleType += "R";
-                particleTypeBack += "R";
+                // particleTypeBack += "R";
                 break;
             case GRAPHIC_COLOR::YELLOW:
                 particleType += "Y";
-                particleTypeBack += "Y";
+                // particleTypeBack += "Y";
                 break;
             case GRAPHIC_COLOR::BLUE:
                 particleType += "B";
-                particleTypeBack += "B";
+                // particleTypeBack += "B";
                 break;
             case GRAPHIC_COLOR::GREEN:
                 particleType += "G";
-                particleTypeBack += "G";
+                // particleTypeBack += "G";
                 break;
         }
         spawnParticle(point, particleType, dimType);
-        spawnParticle(point, particleTypeBack, dimType);
+        // spawnParticle(point, particleTypeBack, dimType);
     }
 }  // namespace trapdoor
