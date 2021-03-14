@@ -5,7 +5,7 @@
 #include "FakePlayerClient.h"
 #include "entity/Actor.h"
 #include "tools/Message.h"
-#include "language/I18nManager.h"
+//#include "language/I18nManager.h"
 #include "tools/json.hpp"
 
 namespace mod {
@@ -34,11 +34,11 @@ namespace mod {
     bool FakePlayerClient::sendMessage(trapdoor::Actor *player, const std::string &msg) {
         //如果可以发送消息就发送，不能发送就gg
         if (!webSocket || webSocket->getReadyState() == easywsclient::WebSocket::CLOSED) {
-            trapdoor::error(player, trapdoor::LANG("fp.error.noConnect"));
+            trapdoor::error(player, "假人没有链接上");
             return false;
         }
         if (this->clientStatus != ClientStatus::READY) {
-            trapdoor::error(player, trapdoor::LANG("fp.error.status"));
+            trapdoor::error(player, "假人没有准备好");
         }
         printf("send %s", msg.c_str());
         this->webSocket->send(msg);

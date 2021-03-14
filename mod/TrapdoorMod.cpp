@@ -25,6 +25,7 @@ namespace mod {
         this->spawnHelper.tick();
         this->playerFunctions.tick();
         this->slimeChunkHelper.tick();
+        this->fakePlayerClient->tick();
     }
 
     void TrapdoorMod::lightTick() {
@@ -41,6 +42,9 @@ namespace mod {
         this->initFunctionEnable();
         this->villageHelper.setConfig(this->configManager.getVillageConfig());
         get_cpu_usage();
+        //初始化假人客户端的线程池
+        this->fakePlayerClient = new FakePlayerClient(this->getThreadPool());
+        this->fakePlayerClient->registerFakePlayerCommand(commandManager);
         L_INFO("==== trapdoor init finish  ====\n Server Start");
     }
 

@@ -16,7 +16,7 @@
 #include "player/PlayerFunction.h"
 #include "player/SimpleBuilder.h"
 #include "SlimeChunkHelper.h"
-//#include "player/PlayerStatisticManager.h"
+#include "fakePlayer/FakePlayerClient.h"
 
 namespace mod {
 
@@ -37,6 +37,7 @@ namespace mod {
         PlayerFunction playerFunctions;
         SimpleBuilder simpleBuilder;
         SlimeChunkHelper slimeChunkHelper;
+        FakePlayerClient *fakePlayerClient = nullptr;
 //        PlayerStatisticManager playerStatisticManager;
 
         void registerTickCommand();
