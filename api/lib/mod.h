@@ -1,5 +1,5 @@
 #pragma once
-
+#define _WINSOCKAPI_
 #include "Windows.h"
 #include "detours.h"
 #include "detver.h"
