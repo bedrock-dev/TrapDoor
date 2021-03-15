@@ -3,9 +3,8 @@
 //
 
 #include "FakePlayerClient.h"
-#include "entity/Actor.h"
 #include "tools/Message.h"
-#include "language/I18nManager.h"
+//#include "language/I18nManager.h"
 #include "tools/json.hpp"
 
 namespace mod {
@@ -26,6 +25,9 @@ namespace mod {
                 ->then(ARG("rm", "command.fakeplayer.remove.desc", STR, {
                     this->sendMessage(player,
                                       FakePlayerClient::buildMessage(MessageType::REMOVE_PLAYER, holder->getString()));
+                }))
+                ->then(ARG("tp", "command.fakeplayer.tp.desc", STR, {
+                    this->tpFakePlayer(holder->getString());
                 }));
     }
 
@@ -34,11 +36,11 @@ namespace mod {
     bool FakePlayerClient::sendMessage(trapdoor::Actor *player, const std::string &msg) {
         //如果可以发送消息就发送，不能发送就gg
         if (!webSocket || webSocket->getReadyState() == easywsclient::WebSocket::CLOSED) {
-            trapdoor::error(player, trapdoor::LANG("fp.error.noConnect"));
+            trapdoor::error(player, "假人没有链接上");
             return false;
         }
         if (this->clientStatus != ClientStatus::READY) {
-            trapdoor::error(player, trapdoor::LANG("fp.error.status"));
+            trapdoor::error(player, "假人没有准备好");
         }
         printf("send %s", msg.c_str());
         this->webSocket->send(msg);
@@ -173,9 +175,11 @@ namespace mod {
             if (respType == "list") {
                 status = true;
                 std::string strBuilder = "下面是所有的假人玩家";
+                this->fakePlayerList.clear();
                 for (auto &i:respData["list"]) {
                     strBuilder += "\n";
                     strBuilder += i.get<std::string>();
+                    this->fakePlayerList.insert(i.get<std::string>());
                 }
                 return strBuilder;
             } else if (respType == "add" || respType == "remove") {
@@ -197,6 +201,24 @@ namespace mod {
         } catch (std::exception &e) {
             status = false;
             return trapdoor::format("message error: %s", e.what());
+        }
+    }
+
+    void FakePlayerClient::tpFakePlayer(const std::string &fakePlayerN) {
+        if (source) {
+            trapdoor::BlockPos playerPos = this->source->getStandPosition();
+            std::string playerPosStr =
+                    std::to_string(playerPos.x) + " " + std::to_string(playerPos.y+1) + " " + std::to_string(playerPos.z);
+//        std::string playerPosStr = "300 100 300";
+            if (this->fakePlayerList.count(fakePlayerN)) {
+                std::string tpCmd = "tp " + fakePlayerN + " " + playerPosStr;
+                CommandManager::runVanillaCommand(tpCmd);
+                trapdoor::info(this->source, "假人闪现到%s啦", playerPosStr.c_str());
+            } else {
+                trapdoor::info(this->source, "没找到你要tp的假人，请在执行假人的list指令后再试");
+            }
+        } else {
+            trapdoor::broadcastMsg("请在使用tp之前使用list指令");
         }
     }
 }
