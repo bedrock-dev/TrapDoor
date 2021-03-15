@@ -19,6 +19,7 @@
 #include <cstdio>
 #include <string>
 #include <mutex>
+#include <set>
 
 namespace mod {
     //和falePlayer进行通信的客户端
@@ -37,7 +38,7 @@ namespace mod {
     private:
         static std::string buildMessage(MessageType type, const std::string &param = "");
 
-        static std::string parseResponse(const std::string &response, bool &status);
+        std::string parseResponse(const std::string &response, bool &status);
 
         easywsclient::WebSocket *webSocket = nullptr;
         ThreadPool *pool = nullptr;
@@ -45,6 +46,7 @@ namespace mod {
         std::string message;
         size_t timer = 0;
         trapdoor::Actor *source = nullptr;
+        std::set<std::string> fakePlayerList;
 
         //发送消息
         bool sendMessage(trapdoor::Actor *player, const std::string &msg);
@@ -70,6 +72,8 @@ namespace mod {
         void disconnect();
 
         void tick();
+
+        void tpFakePlayer(const std::string &param);
 
         ~FakePlayerClient();
     };

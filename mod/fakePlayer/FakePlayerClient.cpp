@@ -26,6 +26,9 @@ namespace mod {
                 ->then(ARG("rm", "command.fakeplayer.remove.desc", STR, {
                     this->sendMessage(player,
                                       FakePlayerClient::buildMessage(MessageType::REMOVE_PLAYER, holder->getString()));
+                }))
+                ->then(ARG("tp", "command.fakeplayer.tp.desc", STR, {
+                    this->tpFakePlayer(holder->getString());
                 }));
     }
 
@@ -173,9 +176,11 @@ namespace mod {
             if (respType == "list") {
                 status = true;
                 std::string strBuilder = "下面是所有的假人玩家";
+                this->fakePlayerList.clear();
                 for (auto &i:respData["list"]) {
                     strBuilder += "\n";
                     strBuilder += i.get<std::string>();
+                    this->fakePlayerList.insert(i.get<std::string>());
                 }
                 return strBuilder;
             } else if (respType == "add" || respType == "remove") {
@@ -197,6 +202,23 @@ namespace mod {
         } catch (std::exception &e) {
             status = false;
             return trapdoor::format("message error: %s", e.what());
+        }
+    }
+
+    void FakePlayerClient::tpFakePlayer(const std::string &fakePlayerN) {
+        if (source) {
+            trapdoor::BlockPos playerPos = this->source->getStandPosition();
+            std::string playerPosStr =
+                    std::to_string(playerPos.x) + " " + std::to_string(playerPos.y+1) + " " + std::to_string(playerPos.z);
+            if (this->fakePlayerList.count(fakePlayerN)) {
+                std::string tpCmd = "tp " + fakePlayerN + " " + playerPosStr;
+                CommandManager::runVanillaCommand(tpCmd);
+                trapdoor::info(this->source, "假人闪现到%s啦", playerPosStr.c_str());
+            } else {
+                trapdoor::info(this->source, "没找到你要tp的假人，请在执行假人的list指令后再试");
+            }
+        } else {
+            trapdoor::broadcastMsg("请在使用tp之前使用list指令");
         }
     }
 }
