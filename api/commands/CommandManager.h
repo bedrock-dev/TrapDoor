@@ -59,7 +59,7 @@ namespace trapdoor {
         //检查权限等级
         bool checkCommandPermission(const std::string &command, Actor *player, bool showInfo = true);
 
-        //执行原版命令(还没做)
+        //执行原版命令
         static bool runVanillaCommand(const std::string &command);
     };
 
