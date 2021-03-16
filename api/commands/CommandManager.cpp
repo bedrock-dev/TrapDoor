@@ -124,24 +124,24 @@ namespace trapdoor {
     using namespace SymHook;
 
     //获取指令队列
-//    THook(VA,
-//          MSSYM_MD5_3b8fb7204bf8294ee636ba7272eec000,
-//          VA _this
-//    ) {
-//        cmdQueue = original(_this);
-//        return cmdQueue;
-//    }
+    THook(VA,
+          MSSYM_B2QQA10B2QDA9SPSCQueueB1AA1VB2QDA5basicB1UA6stringB1AA2DUB2QDA4charB1UA6traitsB1AA1DB1AA3stdB2AAA1VB2QDA9allocatorB1AA1DB1AA12B2AAA3stdB3AADA40CAAB3AAAA4QEAAB2AUA1KB1AA1Z,
+          VA self
+    ) {
+        cmdQueue = original(self);
+        return cmdQueue;
+    }
 
     //执行原版指令
     bool CommandManager::runVanillaCommand(const std::string &command) {
-//        if (cmdQueue) {
-//            SYM_CALL(bool(*) (VA, std::string),
-//                     MSSYM_MD5_b5c9e566146b3136e6fb37f0c080d91e,
-//                     cmdQueue,
-//                     command
-//            );
-//            return true;
-//        }
+        if (cmdQueue) {
+            SYM_CALL(bool(*) (VA, std::string),
+                     MSSYM_MD5_b5c9e566146b3136e6fb37f0c080d91e,
+                     cmdQueue,
+                     command
+            );
+            return true;
+        }
         return false;
     }
 

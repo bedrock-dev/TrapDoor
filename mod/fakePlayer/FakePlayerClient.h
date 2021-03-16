@@ -73,7 +73,7 @@ namespace mod {
 
         void tick();
 
-        void tpFakePlayer(const std::string &param);
+        void tpFakePlayer(trapdoor::Actor *player, const std::string &playerName);
 
         ~FakePlayerClient();
     };

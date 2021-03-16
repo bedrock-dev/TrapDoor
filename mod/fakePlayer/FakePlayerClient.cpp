@@ -28,10 +28,9 @@ namespace mod {
                                       FakePlayerClient::buildMessage(MessageType::REMOVE_PLAYER, holder->getString()));
                 }))
                 ->then(ARG("tp", "command.fakeplayer.tp.desc", STR, {
-                    this->tpFakePlayer(holder->getString());
+                    this->tpFakePlayer(player,holder->getString());
                 }));
     }
-
 
     //发送消息
     bool FakePlayerClient::sendMessage(trapdoor::Actor *player, const std::string &msg) {
@@ -43,7 +42,6 @@ namespace mod {
         if (this->clientStatus != ClientStatus::READY) {
             trapdoor::error(player, trapdoor::LANG("fp.error.status"));
         }
-        printf("send %s", msg.c_str());
         this->webSocket->send(msg);
         this->source = player;
         this->clientStatus = ClientStatus::WAITING_MESSAGE;
@@ -57,7 +55,6 @@ namespace mod {
             while (this->webSocket && this->webSocket->getReadyState() != easywsclient::WebSocket::CLOSED) {
                 this->webSocket->poll();
                 this->webSocket->dispatch([&](const std::string &msg) {
-                    printf("receive from ws: %s\n", msg.c_str());
                     if (this->clientStatus == ClientStatus::WAITING_MESSAGE) {
                         //改变状态来通知消息到了
                         this->clientStatus = ClientStatus::NEED_CONSUME;
@@ -205,20 +202,13 @@ namespace mod {
         }
     }
 
-    void FakePlayerClient::tpFakePlayer(const std::string &fakePlayerN) {
-        if (source) {
-            trapdoor::BlockPos playerPos = this->source->getStandPosition();
-            std::string playerPosStr =
-                    std::to_string(playerPos.x) + " " + std::to_string(playerPos.y+1) + " " + std::to_string(playerPos.z);
-            if (this->fakePlayerList.count(fakePlayerN)) {
-                std::string tpCmd = "tp " + fakePlayerN + " " + playerPosStr;
-                CommandManager::runVanillaCommand(tpCmd);
-                trapdoor::info(this->source, "假人闪现到%s啦", playerPosStr.c_str());
-            } else {
-                trapdoor::info(this->source, "没找到你要tp的假人，请在执行假人的list指令后再试");
-            }
+    void FakePlayerClient::tpFakePlayer(trapdoor::Actor *player, const std::string &playerName) {
+        if (this->fakePlayerList.count(playerName)) {
+            std::string tpCmd = "tp " + playerName + " " + player->getNameTag();
+            CommandManager::runVanillaCommand(tpCmd);
+            trapdoor::info(this->source, "假人已被tp到[%s]所在位置", player->getNameTag().c_str());
         } else {
-            trapdoor::broadcastMsg("请在使用tp之前使用list指令");
+            trapdoor::info(this->source, "找不到假人，请尝试执行fakeplayer list指令后再试");
         }
     }
 }

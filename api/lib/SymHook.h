@@ -439,30 +439,6 @@ namespace SymHook{
 	// [符号] ?getCurrentTick@Level@@QEBAAEBUTick@@XZ
 	constexpr RVA MSSYM_B1QE14getCurrentTickB1AA5LevelB2AAE12QEBAAEBUTickB2AAA2XZ = 0x00A7D840;
 
-	// [原型] public: class Block const & __ptr64 __cdecl BlockPalette::getBlock(unsigned int const & __ptr64)const __ptr64
-	// [符号] ?getBlock@BlockPalette@@QEBAAEBVBlock@@AEBI@Z
-	constexpr RVA MSSYM_B1QA8getBlockB1AE12BlockPaletteB2AAE13QEBAAEBVBlockB2AAA4AEBIB1AA1Z = 0x00A128B0;
-
-	// [原型] public: class Player * __ptr64 __cdecl Dimension::fetchNearestPlayer(float,float,float,float,bool) __ptr64
-	// [符号] ?fetchNearestPlayer@Dimension@@QEAAPEAVPlayer@@MMMM_N@Z
-	constexpr RVA MSSYM_B1QE18fetchNearestPlayerB1AA9DimensionB2AAE14QEAAPEAVPlayerB2AAA4MMMMB1UA1NB1AA1Z = 0x00A64070;
-
-	// [原型] public: virtual bool __cdecl BegGoal::canUse(void) __ptr64
-	// [符号] ?canUse@BegGoal@@UEAA_NXZ
-	constexpr RVA MSSYM_B1QA6canUseB1AA7BegGoalB2AAA4UEAAB1UA3NXZ = 0x00CC0290;
-
-	// [原型] public: virtual void __cdecl Actor::die(class ActorDamageSource const & __ptr64) __ptr64
-	// [符号] ?die@Actor@@UEAAXAEBVActorDamageSource@@@Z
-	constexpr RVA MSSYM_B1QA3dieB1AA5ActorB2AAE26UEAAXAEBVActorDamageSourceB3AAAA1Z = 0x005675D0;
-
-	// [原型] public: virtual void __cdecl Actor::kill(void) __ptr64
-	// [符号] ?kill@Actor@@UEAAXXZ
-	constexpr RVA MSSYM_B1QA4killB1AA5ActorB2AAA7UEAAXXZ = 0x00567540;
-
-	// [原型] private: void __cdecl PistonBlockActor::_checkInceptionAchievement(class BlockActor & __ptr64,class BlockSource & __ptr64,class BlockPos const & __ptr64) __ptr64
-	// [符号] ?_checkInceptionAchievement@PistonBlockActor@@AEAAXAEAVBlockActor@@AEAVBlockSource@@AEBVBlockPos@@@Z
-	constexpr RVA MSSYM_B2QUE25checkInceptionAchievementB1AE16PistonBlockActorB2AAE19AEAAXAEAVBlockActorB2AAE15AEAVBlockSourceB2AAE12AEBVBlockPosB3AAAA1Z = 0x008C39E0;
-
 	// [原型] public: static void __cdecl BlockTypeRegistry::forEachBlock(class std::function<bool __cdecl(class BlockLegacy const & __ptr64)>)
 	// [符号] ?forEachBlock@BlockTypeRegistry@@SAXV?$function@$$A6A_NAEBVBlockLegacy@@@Z@std@@@Z
 	constexpr RVA MSSYM_B1QE12forEachBlockB1AE17BlockTypeRegistryB2AAA4SAXVB2QDA8functionB3ADDA3A6AB1UE16NAEBVBlockLegacyB3AAAA1ZB1AA3stdB3AAAA1Z = 0x0095DEF0;
@@ -483,13 +459,13 @@ namespace SymHook{
 	// [符号] ?processPendingUpdates@CircuitSceneGraph@@AEAAXPEAVBlockSource@@@Z
 	constexpr RVA MSSYM_B1QE21processPendingUpdatesB1AE17CircuitSceneGraphB2AAE20AEAAXPEAVBlockSourceB3AAAA1Z = 0x00B8FF50;
 
-	// [原型] public: class NavigationComponent const * __ptr64 __cdecl Actor::tryGetComponent<class NavigationComponent>(void)const __ptr64
-	// [符号] ??$tryGetComponent@VNavigationComponent@@@Actor@@QEBAPEBVNavigationComponent@@XZ
-	constexpr RVA MSSYM_B3QQDE15tryGetComponentB1AE20VNavigationComponentB3AAAA5ActorB2AAE27QEBAPEBVNavigationComponentB2AAA2XZ = 0x001C89C0;
+	// [原型] public: __cdecl SPSCQueue<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,512>::SPSCQueue<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,512>(unsigned __int64) __ptr64
+	// [符号] ??0?$SPSCQueue@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$0CAA@@@QEAA@_K@Z
+	constexpr RVA MSSYM_B2QQA10B2QDA9SPSCQueueB1AA1VB2QDA5basicB1UA6stringB1AA2DUB2QDA4charB1UA6traitsB1AA1DB1AA3stdB2AAA1VB2QDA9allocatorB1AA1DB1AA12B2AAA3stdB3AADA40CAAB3AAAA4QEAAB2AUA1KB1AA1Z = 0x000AC140;
 
-	// [原型] public: class Vec3 __cdecl Path::getPos(class Actor const * __ptr64,unsigned __int64)const __ptr64
-	// [符号] ?getPos@Path@@QEBA?AVVec3@@PEBVActor@@_K@Z
-	constexpr RVA MSSYM_B1QA6getPosB1AA4PathB2AAA4QEBAB1QA6AVVec3B2AAA9PEBVActorB3AAUA1KB1AA1Z = 0x00B237C0;
+	// [原型] private: bool __cdecl SPSCQueue<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,512>::inner_enqueue<0,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const & __ptr64>(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const & __ptr64) __ptr64
+	// [符号] ??$inner_enqueue@$0A@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@?$SPSCQueue@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$0CAA@@@AEAA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+	constexpr RVA MSSYM_MD5_b5c9e566146b3136e6fb37f0c080d91e = 0x000AC4A0;
 
 }
 
