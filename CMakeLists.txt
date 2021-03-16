@@ -8,7 +8,7 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
 else ()
     message(this project don't support GNU gcc or clang,please use MSVC instead)
 endif ()
-
+set(CMAKE_BUILD_TYPE release)
 set(MOD_API_NAME libtrapdoor)
 aux_source_directory(${PROJECT_SOURCE_DIR}/api MOD_API_SRC)
 #add_library(${MOD_API_NAME} STATIC ${MOD_API_SRC})
