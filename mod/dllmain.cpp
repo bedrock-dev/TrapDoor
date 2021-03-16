@@ -1,3 +1,4 @@
+#define _WINSOCKAPI_
 #include <Windows.h>
 #include "tools/DirtyLogger.h"
 #include "BDSMod.h"

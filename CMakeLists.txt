@@ -78,6 +78,8 @@ add_library(${MOD_NAME}
         mod/function/BackupHelper.cpp
         mod/os/process_stat.cpp
         mod/village/POIInstance.cpp
+        mod/fakePlayer/FakePlayerClient.cpp
+        mod/fakePlayer/easywsclient.cpp
         )
 
 target_include_directories(
@@ -92,6 +94,7 @@ target_include_directories(
         mod/village
         mod/tick
         mod/player
+        mod/fakePlayer
         api
         api/block
         api/commands

@@ -2,6 +2,7 @@
 // 一个简单的日志类 ，仅仅是简单的信息按照格式写入文件中，没有任何性能和可靠性保证
 // Created by xhy on 2020/12/2.
 //
+#define _WINSOCKAPI_
 
 #include <cstdarg>
 #include <ctime>
