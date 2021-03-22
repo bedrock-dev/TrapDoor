@@ -52,8 +52,62 @@ namespace mod::test {
             getNeedMoreTestItems()[s] = false;
         }
 
-    }
+        void buildTestPlatform(trapdoor::Actor *player) {
+            //build space
+            auto *bs = player->getBlockSource();
+            for (int i = -16; i < 16; i++) {
+                for (int j = -16; j < 16; j++) {
+                    for (int k = -1; k < 30; k++) {
+                        trapdoor::BlockPos pos = player->getStandPosition() + trapdoor::BlockPos(i, j, k);
+                        bs->setBlock(&pos, k == -1 ? getBlockByID(QUARTZ_BLOCK) : getBlockByID(AIR));
+                    }
+                }
+            }
+            //hopper test
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 4; j++) {
+                    trapdoor::BlockPos pos = player->getStandPosition() + trapdoor::BlockPos(2 * i - 16, 2, 2 * j - 16);
+                    trapdoor::Block *b = getBlockByID(CONCRETE, (unsigned short) (i * 4 + j));
+                    bs->setBlock(&pos, b);
+                    auto hopperV = rand() % 6;
+                    auto pos2 = pos + trapdoor::BlockPos(0, 1, 0);
+                    auto *b2 = getBlockByID(HOPPER, (unsigned short) hopperV);
+                    bs->setBlock(&pos2, b2);
+                    auto *wool = getBlockByID(WOOL, hopperV == 0 ? 0 : 4);
+                    auto pos3 = pos + trapdoor::BlockPos(0, -1, 0);
+                    bs->setBlock(&pos3, b2);
+                }
+            }
 
+            //village test
+            auto bedPos = player->getStandPosition();
+            player->getBlockSource()->setBlock(&bedPos, getBlockByID(BED));
+            trapdoor::CommandManager::runVanillaCommand("execute @p ~ ~ ~ summon ~ ~2 ~ villager");
+
+            //rotate
+            trapdoor::CommandManager::runVanillaCommand("give " + player->getNameTag() + " cactus");
+            std::vector<trapdoor::BlockType> blocks = {
+                    PISTON, STICKY_PISTON, DISPENSER,
+                    REDSTONE_TORCH, CHEST, OBSERVER,
+                    WOODEN_SLAB, ACACIA_STAIRS, BARREL,
+                    ACACIA_BUTTON, DROPPER, POWERED_REPEATER, UNPOWERED_REPEATER,
+                    POWERED_COMPARATOR, POWERED_REPEATER
+            };
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 4; j++) {
+                    auto index = i * 4 + j;
+                    if (index < blocks.size()) {
+                        trapdoor::BlockPos p = player->getStandPosition() + trapdoor::BlockPos(i+2,0,j+2);
+                        bs->setBlock(&p,getBlockByID(blocks[index]));
+                    }
+                }
+            }
+
+            //redstone signal
+            trapdoor::CommandManager::runVanillaCommand("give " + player->getNameTag() + " stick");
+
+        }
+    }
 
     COMMAND_TEST(apicfg) {
         RUN_CMD("/apicfg")
@@ -242,6 +296,9 @@ namespace mod::test {
                 }))
                 ->then(ARG("l", "列出所有手动测试项", NONE, {
                     printTestStatus(player);
+                }))
+                ->then(ARG("b", "手动测试项", STR, {
+                    buildTestPlatform(player);
                 }))
                 ->execute([&](trapdoor::ArgHolder *holder, trapdoor::Actor *player) {
                     testAll(player, manager);

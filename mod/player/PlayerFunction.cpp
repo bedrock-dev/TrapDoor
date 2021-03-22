@@ -14,6 +14,7 @@
 #include "block/CircuitComponent.h"
 #include "world/Dimension.h"
 #include "lib/Remotery.h"
+
 namespace mod {
     void PlayerFunction::tick() {
         rmt_ScopedCPUSample(PLAYER_FUNC, 0);
@@ -49,13 +50,8 @@ namespace mod {
         auto biome = player->getBlockSource()->getBiome(&playerBlockPos);
         auto name = biome->getBiomeName();
 
-
         auto modInstance = trapdoor::bdsMod->asInstance<mod::TrapdoorMod>();
-        auto modInfo = modInstance->modeInfo;
 
-
-//        std::string MinecraftVersion = format("Minecraft Bedrock(BDS) %s  (%s)\n\n", minecraftVersion,
-//                                              trapDoorVersion);
         std::string xyz = format("XYZ: %.2f / %.2f / %.2f\n", position->x, position->y, position->z);
         std::string block = format("Block: %d %d %d\n", playerBlockPos.x, playerBlockPos.y, playerBlockPos.z);
         std::string chunk = "Chunk: " + inChunkOffset.toString() + " in " + chunkPos.toString() + "\n";
@@ -64,7 +60,7 @@ namespace mod {
         std::string biomeString = format("Biome: minecraft:%s (%d)\n", name.c_str(), biome->getBiomeType());
         std::string dimString = format("Dimension: %s (%d)\n", player->getDimensionName().c_str(),
                                        player->getDimensionID());
-        builder.textF("Minecraft BDS %s (%s)\n", modInfo.minecraftVersion.c_str(), modInfo.modVersion.c_str())
+        builder.textF("Minecraft BDS %s \n", TrapdoorMod::getModVersion().c_str())
                 .text(xyz)
                 .text(block);
         if (inSlimeChunk) {

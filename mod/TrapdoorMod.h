@@ -22,11 +22,6 @@
 
 namespace mod {
 
-    struct ModInfo {
-        const std::string minecraftVersion = "1.16.4.02";
-        const std::string modVersion = "trapdoor-0.9.32";
-    };
-
     struct SingleFunction {
         bool preventExplosion = false;
         bool preventNCUpdate = false;
@@ -53,13 +48,10 @@ namespace mod {
 
         void registerDevCommand();
 
-
-    public:
-        ModInfo modeInfo;
-
-
     public:
         static void printCopyRightInfo();
+
+        static std::string getModVersion();
 
         static void printOSInfo(trapdoor::Actor *player);
 

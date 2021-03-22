@@ -177,6 +177,7 @@ namespace mod {
 
 
     void TrapdoorMod::printCopyRightInfo() {
+
         const char *banner =
                 "\n"
                 "  _______                  _                   \n"
@@ -191,13 +192,13 @@ namespace mod {
                 "%s\n  "
                 "\ngithub:https://github.com/hhhxiao/TrapDoor\nLicense: GPL\n",
                 banner);
+        printf("trapdoor version: %s\n", getModVersion().c_str());
         printf(
                 "build time:     %s      "
                 "%s\n-----------------------------------------------\n",
                 __DATE__, __TIME__);
         fflush(stdout);
     }
-
 
     void TrapdoorMod::useOnHook(Actor *player,
                                 const std::string &itemName,
@@ -288,7 +289,6 @@ namespace mod {
         this->hopperChannelManager.setAble(functionCfg.hopperCounter);
     }
 
-
     void TrapdoorMod::registerDevCommand() {
         this->commandManager.registerCmd("dev", "develop")
                 ->then(ARG("level_test", "test1", NONE, {
@@ -296,5 +296,23 @@ namespace mod {
                         printf("%s\n", p->getNameTag().c_str());
                     });
                 }));
+    }
+
+    std::string TrapdoorMod::getModVersion() {
+#ifdef TD_VERSION
+        const char *modVersion = TD_VERSION;
+#else
+        const char*modVersion = "unknown_mod_version";
+#endif
+#ifdef MC_VERSION
+        const char *gameVersion = MC_VERSION;
+#else
+        const char *gameVersion = "unknown_mcbe_version";
+#endif
+        std::string version = std::string(modVersion) + "-" + gameVersion;
+#ifdef  BETA
+        version += "-test";
+#endif
+        return version;
     }
 }  // namespace mod

@@ -1,17 +1,15 @@
 cmake_minimum_required(VERSION 3.17)
 project(mod)
 set(CMAKE_CXX_STANDARD 17)
-
 #因为ABI原因这个项目只能msvc编译
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
     add_compile_options(/wd4828 /wd4819 /EHsc /utf-8)
 else ()
-    message(this project don't support GNU gcc or clang,please use MSVC instead)
+    message(this project don't support GNU gcc or clang, please use MSVC instead)
 endif ()
 set(CMAKE_BUILD_TYPE release)
-set(MOD_API_NAME libtrapdoor)
-aux_source_directory(${PROJECT_SOURCE_DIR}/api MOD_API_SRC)
-#add_library(${MOD_API_NAME} STATIC ${MOD_API_SRC})
+set(MOD_API_NAME trapdoor)
+
 add_library(${MOD_API_NAME} STATIC
         api/BDSMod.cpp
         api/block/Block.cpp
@@ -41,7 +39,11 @@ add_library(${MOD_API_NAME} STATIC
         api/tools/MsgBuilder.cpp
         api/tools/ThreadPool.h
         api/lib/Remotery.c
-        api/world/LevelChunk.cpp api/language/I18nManager.cpp api/language/I18nManager.h api/tools/CastHelper.h)
+        api/world/LevelChunk.cpp
+        api/language/I18nManager.cpp
+        api/language/I18nManager.h
+        api/tools/CastHelper.h)
+
 target_include_directories(${MOD_API_NAME}
         PUBLIC
         api
@@ -57,7 +59,20 @@ target_include_directories(${MOD_API_NAME}
 target_link_libraries(${MOD_API_NAME} ${PROJECT_SOURCE_DIR}/api/lib/detours.lib)
 #target_link_libraries(${MOD_API_NAME} ${PROJECT_SOURCE_DIR}/api/lib/sqlite3.lib)
 
-set(MOD_NAME trapdoor-mod)
+####################这里是具体功能##########################
+set(TRAPDOOR_VERSION 0.9.42)
+set(MCBE_VERSION 1.16.4.02)
+set(BETA  OFF)
+
+add_definitions(-DTD_VERSION="${TRAPDOOR_VERSION}")
+add_definitions(-DMC_VERSION="${MCBE_VERSION}")
+if (${BETA} STREQUAL "ON")
+    add_definitions(-DBETA)
+    set(MOD_NAME ${MOD_API_NAME}-${TRAPDOOR_VERSION}-${MCBE_VERSION}-test)
+else ()
+    set(MOD_NAME ${MOD_API_NAME}-${TRAPDOOR_VERSION}-${MCBE_VERSION})
+endif ()
+
 add_library(${MOD_NAME}
         SHARED
         mod/dllmain.cpp
