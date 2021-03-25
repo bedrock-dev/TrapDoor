@@ -12,7 +12,7 @@
 #include "lib/SymHook.h"
 #include "tools/DirtyLogger.h"
 #include "tools/CastHelper.h"
-
+#include "Offset.h"
 namespace trapdoor {
     using namespace SymHook;
 
@@ -26,8 +26,7 @@ namespace trapdoor {
     }
 
     int ItemStackBase::getNum() {
-        return *offset_cast<char *>(this, 34);
-        //    return (int) *((unsigned char *) this + 34);
+        return *offset_cast<char *>(this, off::ITEM_GET_NUM);
     }
 
     void ItemStackBase::setNull() {

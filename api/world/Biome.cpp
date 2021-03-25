@@ -7,13 +7,13 @@
 
 #include "lib/mod.h"
 #include "lib/SymHook.h"
-
+#include "Offset.h"
 
 namespace trapdoor {
     using namespace SymHook;
 
     std::string Biome::getBiomeName() {
-        char *str = reinterpret_cast<char *>(this) + 8;
+        char *str = reinterpret_cast<char *>(this) + off::BIOME_GET_NAME;
         return std::string(str);
     }
 

@@ -3,19 +3,15 @@
 //
 
 #include <bitset>
-#include <map>
-
 #include "Actor.h"
 #include "lib/mod.h"
 #include "tools/MsgBuilder.h"
-#include "tools/Message.h"
-#include "block/Block.h"
 #include "world/Biome.h"
 #include "PlayerInventory.h"
 #include "block/BlockSource.h"
 #include "Dimension.h"
-#include "tools/DirtyLogger.h"
 #include "tools/CastHelper.h"
+#include "Offset.h"
 
 namespace trapdoor {
 
@@ -57,7 +53,7 @@ namespace trapdoor {
     BlockSource *Actor::getBlockSource() {
         //!from Player::tickWorld
         //  return offset_cast<BlockSource *>(this, 100);
-        return *((struct BlockSource **) this + 100);
+        return *((struct BlockSource **) this + off::PLAYER_GET_BLOCKSOURCE);
     }
 
     void Actor::setGameMode(int mode) {
@@ -70,8 +66,7 @@ namespace trapdoor {
 
 
     int Actor::getDimensionID() {
-        return *offset_cast<int *>(this, 204);
-        // return *(reinterpret_cast<int *>(this) + 51);
+        return *offset_cast<int *>(this, off::ACTOR_GET_DIMENSION_ID);
     }
 
     Dimension *Actor::getDimension() {
@@ -89,8 +84,7 @@ namespace trapdoor {
 
     NetworkIdentifier *Actor::getClientID() {
         //! from  ServerPlayer::isHostingPlayer
-        return offset_cast<NetworkIdentifier *>(this, 2432);
-        // return reinterpret_cast<NetworkIdentifier *>((char *) this + 2432);
+        return offset_cast<NetworkIdentifier *>(this, off::ACTOR_GET_CLIENT_ID);
     }
 
     PlayerPermissionLevel Actor::getCommandLevel() {
@@ -150,7 +144,7 @@ namespace trapdoor {
     }
 
     std::string ActorDefinitionIdentifier::getName() {
-        auto str = offset_cast<std::string *>(this, 32);
+        auto str = offset_cast<std::string *>(this, off::ACTOR_ID_GET_NAME);
         return std::string(*str);
     }
 

@@ -9,6 +9,7 @@
 #include "block/BlockLegacy.h"
 #include "tools/DirtyLogger.h"
 #include "tools/CastHelper.h"
+#include "Offset.h"
 
 namespace trapdoor {
     using namespace SymHook;
@@ -40,20 +41,15 @@ namespace trapdoor {
 
     //获取特殊值
     int Block::getVariant() {
-        //! from BlockLegacy::getVariant(BlockLegacy *this, char *a2)
-        return *offset_cast<char *>(this, 8);
+
+        return *offset_cast<char *>(this, off::BLOCK_GET_VARIANT);
     }
 
     //获取方块实体的位置
     BlockPos *BlockActor::getPosition() {
-        return offset_cast<BlockPos *>(this, 44);
+        return offset_cast<BlockPos *>(this, off::BLOCKSOURCE_GET_POSITION);
         //return reinterpret_cast<BlockPos *>(reinterpret_cast<VA>(this) + 44);
     }
 
-
-//    //获取方块实体内的方块对象
-//    Block *BlockActor::getBlock() {
-//        return *reinterpret_cast<Block **>(reinterpret_cast<char *>(this) + 2);
-//    }
 }
 

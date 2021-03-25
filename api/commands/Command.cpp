@@ -10,6 +10,7 @@
 #include "BDSMod.h"
 #include "tools/DirtyLogger.h"
 #include "CommandNode.h"
+#include "Offset.h"
 
 namespace trapdoor {
 //注册命令
@@ -92,7 +93,7 @@ THook(
     }
 
     //! 这是一处强制转换
-    auto *commandString = reinterpret_cast<std::string *>((char *) commandPacket + 40);
+    auto *commandString = reinterpret_cast<std::string *>((char *) commandPacket + off::COMMAND_PACKET_STR);
     L_DEBUG("player %s execute command %s", source->getNameTag().c_str(), commandString->c_str());
     //截获命令数据包，获取命令字符串，如果是插件自定义的命令就直接处理，屏蔽原版，如果不是自定义命令就转发给原版去处理
     auto &commandManager = trapdoor::bdsMod->getCommandManager();

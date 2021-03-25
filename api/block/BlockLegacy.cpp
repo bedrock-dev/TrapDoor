@@ -7,6 +7,7 @@
 #include "lib/mod.h"
 #include "lib/SymHook.h"
 #include "tools/CastHelper.h"
+#include "Offset.h"
 
 namespace trapdoor {
     using namespace SymHook;
@@ -32,8 +33,7 @@ namespace trapdoor {
     }
 
     BlockType BlockLegacy::getBlockID() {
-        return (BlockType) *offset_cast<short *>(this, 268);
-        // return (BlockType) *(short *) ((char *) this + 268);
+        return (BlockType) *offset_cast<short *>(this, off::BLOCKLEGACY_GET_BLOCK_ID);
     }
 }
 

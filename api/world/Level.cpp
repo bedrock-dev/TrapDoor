@@ -10,14 +10,15 @@
 #include "lib/SymHook.h"
 #include "tools/DirtyLogger.h"
 #include "Block.h"
+#include "Offset.h"
 
 namespace trapdoor {
     using namespace SymHook;
 
     void Level::forEachPlayer(const std::function<void(Actor *)> &todo) {
         //!硬编码
-        auto begin = (uint64_t *) *((uint64_t *) this + 11);
-        auto end = (uint64_t *) *((uint64_t *) this + 12);
+        auto begin = (uint64_t *) *((uint64_t *) this + off::LEVEL_FOREACH_PLAYER.first);
+        auto end = (uint64_t *) *((uint64_t *) this + off::LEVEL_FOREACH_PLAYER.second);
         while (begin != end) {
             auto *player = (Actor *) (*begin);
             if (player)todo(player);

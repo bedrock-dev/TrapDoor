@@ -42,7 +42,9 @@ add_library(${MOD_API_NAME} STATIC
         api/world/LevelChunk.cpp
         api/language/I18nManager.cpp
         api/language/I18nManager.h
-        api/tools/CastHelper.h)
+        api/tools/CastHelper.h
+        api/Offset.h
+        )
 
 target_include_directories(${MOD_API_NAME}
         PUBLIC
@@ -62,7 +64,7 @@ target_link_libraries(${MOD_API_NAME} ${PROJECT_SOURCE_DIR}/api/lib/detours.lib)
 ####################这里是具体功能##########################
 set(TRAPDOOR_VERSION 0.9.42)
 set(MCBE_VERSION 1.16.40.2)
-set(BETA  OFF)
+set(BETA OFF)
 
 add_definitions(-DTD_VERSION="${TRAPDOOR_VERSION}")
 add_definitions(-DMC_VERSION="${MCBE_VERSION}")
@@ -86,13 +88,10 @@ add_library(${MOD_NAME}
         mod/tick/SimpleProfiler.cpp
         mod/tick/ActorProfiler.cpp
         mod/spawn/SpawnHelper.cpp
-        mod/spawn/SpawnAnalyzer.cpp
         mod/function/BlockRotationHelper.cpp
         mod/player/PlayerFunction.cpp
         mod/function/SimpleBuilder.cpp
         mod/spawn/SlimeChunkHelper.cpp
-        mod/player/PlayerStatisticManager.cpp
-        mod/player/Player.cpp
         mod/function/BackupHelper.cpp
         mod/os/process_stat.cpp
         mod/village/POIInstance.cpp

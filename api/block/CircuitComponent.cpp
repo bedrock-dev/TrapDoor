@@ -12,19 +12,15 @@
 #include "tools/MsgBuilder.h"
 #include "CastHelper.h"
 #include "BlockSource.h"
+#include "Offset.h"
 
 namespace trapdoor {
 
     //获取能量等级
     int BaseCircuitComponent::getStrength() {
-        return *offset_cast<int *>(this, 52);
-        //return *((uint32_t *) this + 13);
+        return *offset_cast<int *>(this, off::BASECIRCUITCOMPONENT_GET_STRENGTH);
     }
 
-//    int BaseCircuitComponent::getVar2() {
-//        return *((uint64_t *) this + 2);
-//
-//    }
 
     //打印信号源等信息
     void BaseCircuitComponent::basePrint(CircuitSceneGraph *graph, trapdoor::Actor *player) {
@@ -32,8 +28,9 @@ namespace trapdoor {
         std::string stringBuilder;
         stringBuilder += trapdoor::format("Signal " C_INT, this->getStrength());
         builder.text("Signal: ").num(this->getStrength());
-        auto begin = (uint32_t *) *((uint64_t *) this + 1);
-        auto end = (uint32_t *) *((uint64_t *) this + 2);
+        //todo rewrite
+        auto begin = (uint32_t *) *((uint64_t *) this + off::BASECIRCUITCOMPONENT_SOURCE_RANGE.first);
+        auto end = (uint32_t *) *((uint64_t *) this + off::BASECIRCUITCOMPONENT_SOURCE_RANGE.second);
         int num = 0;
         std::string particleType = "minecraft:silverfish_grief_emitter";
         trapdoor::Vec3 vec3{};
@@ -53,50 +50,6 @@ namespace trapdoor {
         }
         trapdoor::info(player, stringBuilder);
     }
-
-    //获取火把的燃烧情况
-//    int BaseCircuitComponent::getPowerCount() {
-//        return (int) *((int *) this + 20);
-//    }
-
-//    //是否接受半脉冲
-//    void BaseCircuitComponent::setAcceptHalfPulse() {
-//        *((char *) this + 67) = 1;
-//    }
-
-
-    //是否接受半脉冲
-//    int BaseCircuitComponent::getAcceptHalfPulse() {
-//        return (int) *((char *) this + 67);
-//    }
-
-    //打印中继器相关信息
-//    void BaseCircuitComponent::printRepeater() {
-//        int *ptr = (int *) this;
-////    info("repeater: %d %d %d %d  s: %d", ptr[21], ptr[20], ptr[19], ptr[18], ((char *) this)[96]);
-//    }
-
-    //打印火把相关信息
-//    void BaseCircuitComponent::printTorch(BlockPos pos) {
-//        int selfPowerCount = (int) *((int *) this + 20);
-//        auto strength = (char) *((char *) this + 84);
-//        bool flag;
-////    int signal = SYM_CALL(
-////            int(*)(BaseCircuitComponent * ,const BlockPos *pos,void *circuitSystem,bool *),
-////            MSSYM_B1QE21FindStrongestStrengthB1AE22RedstoneTorchCapacitorB2AAE17AEAAHAEBVBlockPosB2AAE17AEAVCircuitSystemB2AAA3AEAB1UA1NB1AA1Z,
-////            this, &pos,
-////            globalCircuitSystem,
-////            &flag
-////    );
-////    info("torch: bc: %d s: %d hp: %d", selfPowerCount, strength, getHalfPulse());
-//        //   info("%d %d", signal, flag);
-//    }
-
-
-    //是否接受半脉冲
-//    int BaseCircuitComponent::getHalfPulse() {
-//        return (int) *((char *) this + 85);
-//    }
 
 
     //从电路图中获取电路组件

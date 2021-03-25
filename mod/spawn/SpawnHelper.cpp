@@ -16,6 +16,7 @@
 #include "BlockSource.h"
 #include "Message.h"
 #include "MsgBuilder.h"
+#include "Offset.h"
 
 namespace mod {
 
@@ -139,12 +140,13 @@ namespace mod {
 
     MobSpawnRules *MobSpawnData::getSpawnRules() {
         //! Spawner::_spawnMobCluster
-        return reinterpret_cast<MobSpawnRules *>(reinterpret_cast<char *>(this) + 176);
+        return reinterpret_cast<MobSpawnRules *>(reinterpret_cast<char *>(this) + off::MOB_SPAWN_DATA_GET_RULE);
     }
 
     trapdoor::ActorDefinitionIdentifier *MobSpawnData::getActorID() {
         //!MobSpawnData::MobSpawnData
-        return reinterpret_cast<trapdoor::ActorDefinitionIdentifier *>(reinterpret_cast<char *>(this) + 8);
+        return reinterpret_cast<trapdoor::ActorDefinitionIdentifier *>(reinterpret_cast<char *>(this) +
+                                                                       off::MOB_SPAWN_DATA_GET_ACTOR_ID);
     }
 }
 

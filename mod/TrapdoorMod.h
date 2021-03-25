@@ -36,7 +36,6 @@ namespace mod {
         HsaManager hsaManager;
         ConfigManager configManager;
         SpawnHelper spawnHelper;
-        SpawnAnalyzer spawnAnalyzer;
         BlockRotationHelper rotationHelper;
         PlayerFunction playerFunctions;
         SimpleBuilder simpleBuilder;
@@ -82,9 +81,6 @@ namespace mod {
         inline VillageHelper &getVillageHelper() { return this->villageHelper; }
 
         inline HsaManager &getHsaManager() { return this->hsaManager; }
-
-        inline SpawnAnalyzer &getSpawnAnalyzer() { return this->spawnAnalyzer; }
-
 
         inline std::string getLevelName() { return this->configManager.getServerConfig().levelName; }
 
