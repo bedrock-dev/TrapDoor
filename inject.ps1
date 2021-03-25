@@ -1,6 +1,6 @@
 chcp 65001
 $INJECTOR =  "MCDllInject.exe"
-$GAME_VERSION = "1.16.40.02"
+$GAME_VERSION = "1.16.210.06"
 $BDS_DIR = "C:\Users\xhy\Desktop\MC\bedrock-server-"+$GAME_VERSION+"\"
 $TD_BUILD_DIR = "C:\Users\xhy\dev\TrapDoor\cmake-build-release\"
 $BDS_FILE = $BDS_DIR+"bedrock_server.exe"

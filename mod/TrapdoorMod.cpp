@@ -227,9 +227,6 @@ namespace mod {
         } else if (itemName == "Stick") {
             this->playerFunctions.printRedstoneInfo(player, pos);
             auto *block = player->getBlockSource()->getBlock(pos);
-            printf("id:%d name:%s variant:%d\n", block->getLegacy()->getBlockID(), block->getName().c_str(),
-                   block->getVariant());
-            fflush(stdout);
         }
     }
 

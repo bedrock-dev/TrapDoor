@@ -62,10 +62,10 @@ namespace mod {
     }
 
     void HopperChannelManager::quickPrintData(trapdoor::Actor *player, trapdoor::BlockPos &pos) {
-        if (!this->enable)return;
-        auto *block = player->getBlockSource()->getBlock(pos);
-        if (block->getLegacy()->getBlockID() != HopperChannelManager::BLOCK_TYPE)return;
-        this->printChannel(player, block->getVariant());
+//        if (!this->enable)return;
+//        auto *block = player->getBlockSource()->getBlock(pos);
+//        if (block->getLegacy()->getBlockID() != HopperChannelManager::BLOCK_TYPE)return;
+//        this->printChannel(player, block->getVariant());
     }
 
     void CounterChannel::add(const std::string &itemName, size_t num) {
@@ -109,6 +109,8 @@ THook(
         trapdoor::ItemStackBase * itemStack
 ) {
 
+    original(hopperActor, index, itemStack);
+    return;
 
     //计数器没开启，直接返回
     auto modInstance = trapdoor::bdsMod->asInstance<mod::TrapdoorMod>();

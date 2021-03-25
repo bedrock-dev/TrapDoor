@@ -12,7 +12,6 @@
 #include "BDSMod.h"
 #include "tools/DirtyLogger.h"
 
-//todo
 namespace trapdoor {
     using namespace SymHook;
 
@@ -27,11 +26,11 @@ namespace trapdoor {
         if (!player) {
             return;
         }
-        //  L_DEBUG("spawn particle@ %.2f %.2f %.2f", p.x, p.y, p.z);
         auto maxDist = trapdoor::bdsMod->getCfg().particleViewDistance;
         if (p.distanceTo(*player->getPos()) > static_cast<float>(maxDist))return;
         SYM_CALL(void(*)(Level * , std::string, Vec3 *, void *),
-                 MSSYM_MD5_a2fdc6a066bbe9a360c9c9d76725a8fb, level, type, &p,
+                 MSSYM_B1QA8spawnMobB1AA7SpawnerB2AAE11QEAAPEAVMobB2AAE15AEAVBlockSourceB2AAE29AEBUActorDefinitionIdentifierB2AAA9PEAVActorB2AAA8AEBVVec3B3AAUA3N44B1AA1Z,
+                 level, type, &p,
                  player->getDimension());
     }
 

@@ -467,21 +467,23 @@ THook(
 }
 
 //pending update
-THook(
-        void,
-        MSSYM_B1QE21processPendingUpdatesB1AE17CircuitSceneGraphB2AAE20AEAAXPEAVBlockSourceB3AAAA1Z,
-        void *graph,
-        void * bs
-) {
-    if (mod::tick::gameProfiler.inProfiling) {
-        TIMER_START
-        original(graph, bs);
-        TIMER_END
-        mod::tick::gameProfiler.redstonePendingUpdateTime += timeReslut;
-    } else {
-        original(graph, bs);
-    }
-}
+//这个符号没了，直接测不准就不要这一条了
+//THook(
+//        void,
+//        MSSYM_B1QE21processPendingUpdatesB1AE17CircuitSceneGraphB2AAE20AEAAXPEAVBlockSourceB3AAAA1Z,
+//        void *graph,
+//        void * bs
+//) {
+//    if (mod::tick::gameProfiler.inProfiling) {
+//        TIMER_START
+//        original(graph, bs);
+//        TIMER_END
+//        mod::tick::gameProfiler.redstonePendingUpdateTime += timeReslut;
+//    } else {
+//        original(graph, bs);
+//    }
+//}
+
 //pendingAdd
 THook(
         void,

@@ -63,7 +63,7 @@ target_link_libraries(${MOD_API_NAME} ${PROJECT_SOURCE_DIR}/api/lib/detours.lib)
 
 ####################这里是具体功能##########################
 set(TRAPDOOR_VERSION 0.9.42)
-set(MCBE_VERSION 1.16.40.2)
+set(MCBE_VERSION 1.16.210.06)
 set(BETA OFF)
 
 add_definitions(-DTD_VERSION="${TRAPDOOR_VERSION}")

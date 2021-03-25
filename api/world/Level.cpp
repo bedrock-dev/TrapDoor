@@ -43,7 +43,7 @@ namespace trapdoor {
     Dimension *Level::getDimFromID(int id) {
         Dimension *dim = SYM_CALL(
                 Dimension*(*)(Level * , int),
-                MSSYM_B1QE12getDimensionB1AA5LevelB2AAE17QEBAPEAVDimensionB2AAA1VB2QDE11AutomaticIDB1AE10VDimensionB2AAA1HB3AAAA1Z,
+                MSSYM_B1QE12getDimensionB1AA5LevelB2AAE17UEBAPEAVDimensionB2AAA1VB2QDE11AutomaticIDB1AE10VDimensionB2AAA1HB3AAAA1Z,
                 this,
                 id
         );
@@ -66,17 +66,12 @@ namespace trapdoor {
         return nearest;
     }
 
-    Actor *Level::fetchEntity(const trapdoor::ActorUniqueID &id, bool b) {
-        return SYM_CALL(
-                Actor*(*)(Level * ,const trapdoor::ActorUniqueID &, bool),
-                MSSYM_B1QE11fetchEntityB1AA5LevelB2AAE13QEBAPEAVActorB2AAE14UActorUniqueIDB3AAUA1NB1AA1Z,
-                this, id, b
-        );
-    }
+
 
     uint64_t Level::getGameTick() {
-        return *SYM_CALL(uint64_t*(*)(Level * ),
-                         MSSYM_B1QE14getCurrentTickB1AA5LevelB2AAE12QEBAAEBUTickB2AAA2XZ, this);
+//        return *SYM_CALL(uint64_t*(*)(Level * ),
+//                         MSSYM_B1QE14getCurrentTickB1AA5LevelB2AAE12QEBAAEBUTickB2AAA2XZ, this);
+        return 0;
     }
 
 

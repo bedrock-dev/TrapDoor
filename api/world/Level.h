@@ -20,8 +20,6 @@ namespace trapdoor {
     class ActorUniqueID;
 
 
-
-
     class Tick {
     public:
         uint64_t tick;
@@ -55,8 +53,6 @@ namespace trapdoor {
 
 
         Dimension *getDimFromID(int id);
-
-        Actor *fetchEntity(const trapdoor::ActorUniqueID &id, bool b);
 
 
         uint64_t getGameTick();

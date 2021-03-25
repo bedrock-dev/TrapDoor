@@ -66,10 +66,13 @@ namespace trapdoor {
 
     trapdoor::Actor *BDSMod::fetchEntity(int64_t id, bool b) {
         using namespace SymHook;
+
+        //todo
+        return nullptr;
         return SYM_CALL(
                 Actor * (*)(Level * ,
                 int64_t, bool),
-                MSSYM_B1QE11fetchEntityB1AA5LevelB2AAE13QEBAPEAVActorB2AAE14UActorUniqueIDB3AAUA1NB1AA1Z,
+                MSSYM_B1QE11fetchEntityB1AA5LevelB2AAE13UEBAPEAVActorB2AAE14UActorUniqueIDB3AAUA1NB1AA1Z,
                 this->getLevel(), id, b
         );
     }
