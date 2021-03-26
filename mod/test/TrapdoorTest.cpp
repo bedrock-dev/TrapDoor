@@ -4,7 +4,6 @@
 
 #include "TrapdoorTest.h"
 
-#define TRAPDOOR_TEST
 #define COMMAND_TEST(TEST_NAME) void commandTest_##TEST_NAME (trapdoor::CommandManager &manager, trapdoor::Actor *player)
 #define TEST(TEST_NAME) commandTest_##TEST_NAME (manager,player);
 #define RUN_CMD(cmd) { trapdoor::info(player,"TEST: [" cmd "]\n");manager.parse(player, cmd);}
@@ -58,8 +57,8 @@ namespace mod::test {
             for (int i = -16; i < 16; i++) {
                 for (int j = -16; j < 16; j++) {
                     for (int k = -1; k < 30; k++) {
-                        trapdoor::BlockPos pos = player->getStandPosition() + trapdoor::BlockPos(i, j, k);
-                        bs->setBlock(&pos, k == -1 ? getBlockByID(QUARTZ_BLOCK) : getBlockByID(AIR));
+                        trapdoor::BlockPos pos = player->getStandPosition() + trapdoor::BlockPos(i, k, j);
+                        bs->setBlock(&pos, getBlockByID(AIR));
                     }
                 }
             }
@@ -97,8 +96,8 @@ namespace mod::test {
                 for (int j = 0; j < 4; j++) {
                     auto index = i * 4 + j;
                     if (index < blocks.size()) {
-                        trapdoor::BlockPos p = player->getStandPosition() + trapdoor::BlockPos(i+2,0,j+2);
-                        bs->setBlock(&p,getBlockByID(blocks[index]));
+                        trapdoor::BlockPos p = player->getStandPosition() + trapdoor::BlockPos(i + 2, 0, j + 2);
+                        bs->setBlock(&p, getBlockByID(blocks[index]));
                     }
                 }
             }
@@ -285,7 +284,7 @@ namespace mod::test {
     }
 
     void registerTestCommand(CommandManager &manager) {
-#ifdef TRAPDOOR_TEST
+#ifdef BETA
         addManualTest();
         manager.registerCmd("test")
                 ->then(ARG("p", "通过某项测试", STR, {

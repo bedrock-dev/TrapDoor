@@ -36,7 +36,6 @@ namespace trapdoor {
 
     //获取特殊值
     int Block::getVariant() {
-
         return *offset_cast<char *>(this, off::BLOCK_GET_VARIANT);
     }
 

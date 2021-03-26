@@ -16,8 +16,8 @@ namespace off {
     //todo
     constexpr std::pair<uint64_t, uint64_t> BASECIRCUITCOMPONENT_SOURCE_RANGE = {0x1, 0x2};
 
-    //todo
-    constexpr uint64_t COMMAND_PACKET_STR = 0x28;
+    //!CommandRequestPacket::createCommandContext(
+    constexpr uint64_t COMMAND_PACKET_STR = 0x30;
 
     //!from Player::tickWorld
     constexpr uint64_t PLAYER_GET_BLOCKSOURCE = 0x69;

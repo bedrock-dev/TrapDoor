@@ -45,7 +45,9 @@ void mod_init() {
     //   displayDisclaimerMessageBox(); //免责声明窗口
     initConsole();
     trapdoor::initLogger("trapdoor.log"); //初始化日志
-    // trapdoor::setDevMode(true);
+#ifdef  BETA
+    trapdoor::setDevMode(true);
+#endif
     mod::TrapdoorMod::printCopyRightInfo(); //打印日志
     auto *mod = createBDSModInstance();
     mod->getI18NManager().initialize();

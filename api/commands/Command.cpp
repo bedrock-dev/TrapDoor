@@ -77,7 +77,9 @@ THook(
         void * commandPacket
 ) {
     //找到发送命令的玩家
+
     trapdoor::Actor *source = nullptr;
+    L_DEBUG("receive command");
     trapdoor::bdsMod->getLevel()->forEachPlayer([&id, &source](trapdoor::Actor *player) {
         if (player->getClientID()->getHash() == id->getHash()) {
             source = player;
@@ -92,6 +94,7 @@ THook(
         return;
     }
 
+    L_DEBUG("find %s\n", source->getNameTag().c_str());
     //! 这是一处强制转换
     auto *commandString = reinterpret_cast<std::string *>((char *) commandPacket + off::COMMAND_PACKET_STR);
     L_DEBUG("player %s execute command %s", source->getNameTag().c_str(), commandString->c_str());

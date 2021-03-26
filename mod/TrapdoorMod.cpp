@@ -226,7 +226,6 @@ namespace mod {
 // this->simpleLitematica.getSelectRegion().setPos2(pos, player);
         } else if (itemName == "Stick") {
             this->playerFunctions.printRedstoneInfo(player, pos);
-            auto *block = player->getBlockSource()->getBlock(pos);
         }
     }
 

@@ -12,8 +12,6 @@ namespace mod {
     //我有点后悔搞个单独的类了
     void BlockRotationHelper::rotate(trapdoor::BlockPos &pos,
                                      trapdoor::BlockSource *blockSource) const {
-        //todo
-        return;
         using trapdoor::BlockSource;
         if (!this->enable)
             return;
