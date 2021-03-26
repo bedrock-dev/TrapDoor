@@ -29,9 +29,10 @@ namespace trapdoor {
         auto maxDist = trapdoor::bdsMod->getCfg().particleViewDistance;
         if (p.distanceTo(*player->getPos()) > static_cast<float>(maxDist))return;
         SYM_CALL(void(*)(Level * , std::string, Vec3 *, void *),
-                 MSSYM_B1QA8spawnMobB1AA7SpawnerB2AAE11QEAAPEAVMobB2AAE15AEAVBlockSourceB2AAE29AEBUActorDefinitionIdentifierB2AAA9PEAVActorB2AAA8AEBVVec3B3AAUA3N44B1AA1Z,
+                 MSSYM_MD5_52e7de092fab8d042fb516e31fc9756f,
                  level, type, &p,
                  player->getDimension());
+
     }
 
 

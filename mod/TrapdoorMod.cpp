@@ -27,6 +27,7 @@ namespace mod {
     }
 
     void TrapdoorMod::lightTick() {
+        this->tick();
         this->hopperChannelManager.tick();
         //   this->spawnAnalyzer.tick();
     }
@@ -59,12 +60,13 @@ namespace mod {
         // this->simpleLitematica.registerCommand(this->commandManager);
         this->villageHelper.registerCommand(this->commandManager);
         this->hopperChannelManager.registerCommand(this->commandManager);
-        this->registerDevCommand();
         //功能开关命令
         commandManager.registerCmd("func", "command.func.desc")
                 ->then(
                         ARG("hopper", "command.func.hopper.desc", BOOL,
                             {
+                            FUNC_DISABLED(player)
+                                return;
                                 this->hopperChannelManager.setAble(holder->getBool());
                                 info(player, LANG("command.func.hopper.set"), holder->getBool());
                             }))
@@ -76,6 +78,8 @@ namespace mod {
                            }))
                 ->then(ARG("rotate", "command.func.rotate.desc", BOOL,
                            {
+                               FUNC_DISABLED(player)
+                               return;
                                this->rotationHelper.setAble(holder->getBool());
                                info(player, LANG("command.func.rotate.set"),
                                     holder->getBool());
@@ -85,12 +89,7 @@ namespace mod {
                                this->simpleBuilder.setAble(holder->getBool());
                                info(player, LANG("command.func.draw.set"), holder->getBool());
                            }))
-//                ->then(ARG(
-//                               "stat", "command.func.stat.desc", BOOL,
-//                               {
-//                                   this->playerStatisticManager.setAble(holder->getBool());
-//                                   info(player, LANG("command.func.stat.set"), holder->getBool());
-//                               }))
+
                 ->then(ARG("expl", "command.func.expl.desc", BOOL,
                            {
                                this->singleFunctions.preventExplosion = holder->getBool();
@@ -156,6 +155,8 @@ namespace mod {
                                }))->
                         then(ARG("rs", "command.self.rs.desc", BOOL,
                                  {
+                                     FUNC_DISABLED(player)
+                                     return;
                                      if (!configManager.getSelfEnableConfig()
                                              .enableRedstoneStick) {
                                          error(player, LANG("command.error.config"));
@@ -283,15 +284,6 @@ namespace mod {
         this->rotationHelper.setAble(functionCfg.cactusRotation);
         this->simpleBuilder.setAble(functionCfg.simpleDraw);
         this->hopperChannelManager.setAble(functionCfg.hopperCounter);
-    }
-
-    void TrapdoorMod::registerDevCommand() {
-        this->commandManager.registerCmd("dev", "develop")
-                ->then(ARG("level_test", "test1", NONE, {
-                    player->getLevel()->forEachPlayer([&](trapdoor::Actor *p) {
-                        printf("%s\n", p->getNameTag().c_str());
-                    });
-                }));
     }
 
     std::string TrapdoorMod::getModVersion() {

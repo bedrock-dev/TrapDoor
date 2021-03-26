@@ -66,9 +66,6 @@ namespace trapdoor {
 
     trapdoor::Actor *BDSMod::fetchEntity(int64_t id, bool b) {
         using namespace SymHook;
-
-        //todo
-        return nullptr;
         return SYM_CALL(
                 Actor * (*)(Level * ,
                 int64_t, bool),
@@ -90,5 +87,9 @@ namespace trapdoor {
                         info(player, LANG("command.lang.set.failure"));
                     }
                 }));
+    }
+
+    void BDSMod::tick() {
+        ++this->trapdoorTick;
     }
 }

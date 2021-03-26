@@ -19,4 +19,7 @@
 #include "block/Block.h"
 #include "tools/CastHelper.h"
 
+
+#define FUNC_DISABLED(p) trapdoor::warning(p,"this function is blocked by developer");
+
 #endif //MOD_TRAPDOOR_H

@@ -45,8 +45,6 @@ namespace mod {
 
         void initFunctionEnable();
 
-        void registerDevCommand();
-
     public:
         static void printCopyRightInfo();
 

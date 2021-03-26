@@ -13,6 +13,7 @@
 #include "tools/DirtyLogger.h"
 #include "tools/CastHelper.h"
 #include "Offset.h"
+
 namespace trapdoor {
     using namespace SymHook;
 
@@ -51,7 +52,7 @@ THook(
         float dx,
         float dy,
         float dz) {
-    uint64_t gameTick = player->getLevel()->getGameTick();
+    uint64_t gameTick = trapdoor::bdsMod->getTrapdoorTick();
     // L_INFO("%.2f %.2f %.2f,tick =  %llu", x, y, z, gameTick);
     trapdoor::RightClickCache targetCache{gameTick, x, y, z};
 

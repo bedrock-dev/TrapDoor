@@ -40,11 +40,15 @@ namespace trapdoor {
         ThreadPool *threadPool = nullptr;
         ModConfig config;
         I18nManager i18NManager;
+        size_t trapdoorTick = 0;
 
     public:
 
-        Level *getLevel();
+        void tick();
 
+        inline size_t getTrapdoorTick() { return this->trapdoorTick; }
+
+        Level *getLevel();
 
         void setLevel(Level *level);
 
