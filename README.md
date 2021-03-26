@@ -1,3 +1,6 @@
+# 1.16.210还未完全支持
+
+
 <h1>
     <img src="img/trapdoor logo.svg" alt="Trapdoor" width="400" /> 
 </h1>
