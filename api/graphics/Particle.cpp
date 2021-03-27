@@ -65,7 +65,6 @@ namespace trapdoor {
 
 
     void spawnChunkSurfaceParticle(const ChunkPos &p, int dimID) {
-        //chunkp/m chunkslimep/m
         bool isSlime = p.isSlimeChunk();
         std::string pName2 = isSlime ? "trapdoor:chunkslimep" : "trapdoor:chunkp";
         std::string pName1 = isSlime ? "trapdoor:chunkslimem" : "trapdoor:chunkm";

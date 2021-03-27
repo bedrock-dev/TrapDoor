@@ -1,15 +1,19 @@
 #pragma once
 #define _WINSOCKAPI_
+
 #include "Windows.h"
 #include "detours.h"
 #include "detver.h"
 #include <iostream>
+
 using VA = unsigned __int64;
 using RVA = unsigned long int;
+
 #include<cstdio>
+
 #define _EXPORTED _declspec(dllexport)
-inline const char* Hook_wrap(void** pOriginal, void* f)
-{
+
+inline const char *Hook_wrap(void **pOriginal, void *f) {
     int error = DetourTransactionBegin();
     if (error != NO_ERROR) {
         return "Hook: DetourTransactionBegin Error";
@@ -19,8 +23,8 @@ inline const char* Hook_wrap(void** pOriginal, void* f)
         return "Hook: DetourUpdateThread Error";
     }
     error = DetourAttach(
-        pOriginal, (void*)
-        f);
+            pOriginal, (void *)
+                    f);
     if (error != NO_ERROR) {
         return "Hook: DetourAttach Error";
     }
@@ -30,17 +34,20 @@ inline const char* Hook_wrap(void** pOriginal, void* f)
     }
     return nullptr;
 }
-inline void Hook(void** pOriginal, void* f, const char* prefix) {
+
+inline void Hook(void **pOriginal, void *f, const char *prefix) {
     auto ret = Hook_wrap(pOriginal, f);
     if (ret) {
-        fprintf(stderr, "[!] Hook error at %s : %s\n",ret, prefix);
+        fprintf(stderr, "[!] Hook error at %s : %s\n", ret, prefix);
     }
 }
+
 inline VA GetVA(RVA off) {
-    return (VA)GetModuleHandle(NULL) + (VA)off;
+    return (VA) GetModuleHandle(NULL) + (VA) off;
 }
-#define TD_CONCAT3_I(a,b,c) a##b##c
-#define TD_CONCAT3(a,b,c) TD_CONCAT3_I(a,b,c)
+
+#define TD_CONCAT3_I(a, b, c) a##b##c
+#define TD_CONCAT3(a, b, c) TD_CONCAT3_I(a,b,c)
 #define THook(ret, iname, ...)  struct TD_CONCAT3(TDHook_, __LINE__,iname)     {  static ret(*original)(__VA_ARGS__);   _EXPORTED static ret p(__VA_ARGS__);   TD_CONCAT3(TDHook_, __LINE__,iname)   ()        { original = (decltype(original))GetVA(iname);   Hook((void **)&original, (void *)&p, #iname); }                            };                  static TD_CONCAT3(TDHook_, __LINE__,iname)   tdh##iname; ret(*TD_CONCAT3(TDHook_, __LINE__,iname)::original)(__VA_ARGS__); ret TD_CONCAT3(TDHook_, __LINE__,iname)::p(__VA_ARGS__)
 #define FNTYPE_DEF(...) VA (*)(__VA_ARGS__)
 #define FNTYPE_DEF_0    FNTYPE_DEF()

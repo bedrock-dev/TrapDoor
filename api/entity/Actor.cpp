@@ -64,7 +64,6 @@ namespace trapdoor {
         );
     }
 
-
     int Actor::getDimensionID() {
         return *offset_cast<int *>(this, off::ACTOR_GET_DIMENSION_ID);
     }

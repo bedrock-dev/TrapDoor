@@ -67,7 +67,6 @@ namespace trapdoor {
     }
 
 
-
     uint64_t Level::getGameTick() {
 //        return *SYM_CALL(uint64_t*(*)(Level * ),
 //                         MSSYM_B1QE14getCurrentTickB1AA5LevelB2AAE12QEBAAEBUTickB2AAA2XZ, this);

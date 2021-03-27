@@ -22,8 +22,8 @@ namespace off {
     //!from Player::tickWorld
     constexpr uint64_t PLAYER_GET_BLOCKSOURCE = 0x69;
 
-    //todo
-    constexpr uint64_t ACTOR_GET_DIMENSION_ID = 0xCC;
+    //! Actor::getDimensionId
+    constexpr uint64_t ACTOR_GET_DIMENSION_ID = 0xEC;
 
 
     //! from  ServerPlayer::isHostingPlayer

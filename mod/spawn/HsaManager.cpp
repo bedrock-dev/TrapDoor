@@ -19,6 +19,7 @@
 #include "world/Biome.h"
 #include "world/Level.h"
 #include "lib/Remotery.h"
+
 namespace mod {
 
     bool HsaInfo::operator<(const mod::HsaInfo &rhs) const {
@@ -91,7 +92,6 @@ namespace mod {
         if (!this->enable)
             return;
         if (gameTick % 40 == 0) {
-            // printf("sum =  %zu\n", gameTick);
             trapdoor::GRAPHIC_COLOR color = trapdoor::GRAPHIC_COLOR::WHITE;
             for (const auto &hsa : this->hsaList) {
                 switch (hsa.type) {
