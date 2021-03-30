@@ -1,27 +1,30 @@
-# 1.16.210 not support fully
+# 1.16.210还未完全支持
+
+
 <h1>
     <img src="img/trapdoor logo.svg" alt="Trapdoor" width="400" /> 
 </h1>
 
-[简体中文](./README.md)|English
+简体中文 |[English](README.md)
 
-## What's this
+## 这是什么
 
-Trapdoor is a dll plugin(mod) used for BDS,which porvides rich functions for survival players. It's similar to je's
-[carpet](https://github.com/gnembon/fabric-carpet) mod.
-## Download
+Trapdoor是一个为 Minecraft Bedrock Edition 服务的，基于原版服务端(BDS)的，致力于为原版玩家探索游戏机制服务的插件(或者mod)
+,该插件的功能很大程度上参考了JE的[carpet](https://github.com/gnembon/fabric-carpet) 模组。
+
+## 下载
 [Releases](https://github.com/hhhxiao/TrapDoor/releases)
-## Install & Usage
+## 安装和使用教程
 
-[Chinese Trapdoor Wiki](https://github.com/hhhxiao/TrapDoor/wiki)
+[Trapdoor Wiki](https://github.com/hhhxiao/TrapDoor/wiki)
 
 ## Credits
 
 ### Minecraft
 
-[Minecraft](https://www.minecraft.net/zh-hans)
+感谢`mojang`提供的[Minecraft](https://www.minecraft.net/zh-hans)游戏
 
-### 3rd-party libs or codes
+### 第三方库或者代码
 
 - [https://github.com/microsoft/Detours](https://github.com/microsoft/Detours)
 
@@ -35,13 +38,13 @@ Trapdoor is a dll plugin(mod) used for BDS,which porvides rich functions for sur
 
 - [https://github.com/progschj/ThreadPool](https://github.com/progschj/ThreadPool)
 
-### Special
+### 特别感谢
 
-Special thanks to Player for providing readable source code
+提供可读性极强的BDS源码的Player
 
-### Players
+### 玩家
 
-thanks for the follow game players who make suggestions and feedback bugs:
+感谢下面的玩家提供的优秀建议与反馈的bug:
 
 - 木月酸与云龙碱
 - 莵道三室戸
@@ -53,8 +56,7 @@ thanks for the follow game players who make suggestions and feedback bugs:
 - 阿阎mr
 - 玲珑芯
 
-## Contributors
-
+## 代码贡献者
 <table>
   <tr>
     <td align="center"><a href="https://github.com/hhhxiao"><img src="https://avatars0.githubusercontent.com/u/33011851?v=4?s=100" width="60px;" alt=""/><br /><sub><b>AgNO3</b></sub></a><br /><a href="https://github.com/hhhxiao/TrapDoor/commits?author=hhhxiao" title="Code">💻</a></td>
@@ -65,9 +67,8 @@ thanks for the follow game players who make suggestions and feedback bugs:
   </tr>
 </table>
 
-## Translators
+## 翻译贡献者
 -  <a href="https://github.com/0x506978656c"><img src="https://avatars.githubusercontent.com/u/66031115?s=96&v=4" width="15px;" alt=""/><b> ! Pixel </b></sub></a><a href="https://github.com/hhhxiao/TrapDoor/commits?author=0x506978656c" title="Code">🌎</a></td>
 
 ## license
-
 GPL v3

@@ -1,30 +1,28 @@
-# 1.16.210还未完全支持
-
-
+# 1.16.210 not support fully
 <h1>
     <img src="img/trapdoor logo.svg" alt="Trapdoor" width="400" /> 
 </h1>
 
-简体中文 |[English](./README_en.md)
+[简体中文](README_zh.md)|English
 
-## 这是什么
+## What's this
 
-Trapdoor是一个为 Minecraft Bedrock Edition 服务的，基于原版服务端(BDS)的，致力于为原版玩家探索游戏机制服务的插件(或者mod)
-,该插件的功能很大程度上参考了JE的[carpet](https://github.com/gnembon/fabric-carpet) 模组。
-
-## 下载
+Trapdoor is a dll plugin(mod) used for BDS,which porvides rich functions for survival players. It's similar to 
+java edition's [carpet](https://github.com/gnembon/fabric-carpet) mod.
+## Download
 [Releases](https://github.com/hhhxiao/TrapDoor/releases)
-## 安装和使用教程
+## Install & Usage
 
-[Trapdoor Wiki](https://github.com/hhhxiao/TrapDoor/wiki)
-
+[Chinese Trapdoor Wiki](https://github.com/hhhxiao/TrapDoor/wiki)
+<br>
+English Wiki is coming soon
 ## Credits
 
 ### Minecraft
 
-感谢`mojang`提供的[Minecraft](https://www.minecraft.net/zh-hans)游戏
+[Minecraft](https://www.minecraft.net/zh-hans)
 
-### 第三方库或者代码
+### 3rd-party libs or codes
 
 - [https://github.com/microsoft/Detours](https://github.com/microsoft/Detours)
 
@@ -38,13 +36,13 @@ Trapdoor是一个为 Minecraft Bedrock Edition 服务的，基于原版服务端
 
 - [https://github.com/progschj/ThreadPool](https://github.com/progschj/ThreadPool)
 
-### 特别感谢
+### Special
 
-提供可读性极强的BDS源码的Player
+Special thanks to Player for providing readable source code
 
-### 玩家
+### Players
 
-感谢下面的玩家提供的优秀建议与反馈的bug:
+thanks for the follow game players who make suggestions and feedback bugs:
 
 - 木月酸与云龙碱
 - 莵道三室戸
@@ -55,8 +53,9 @@ Trapdoor是一个为 Minecraft Bedrock Edition 服务的，基于原版服务端
 - Origin 0110
 - 阿阎mr
 - 玲珑芯
+- Sysca11
+## Contributors
 
-## 代码贡献者
 <table>
   <tr>
     <td align="center"><a href="https://github.com/hhhxiao"><img src="https://avatars0.githubusercontent.com/u/33011851?v=4?s=100" width="60px;" alt=""/><br /><sub><b>AgNO3</b></sub></a><br /><a href="https://github.com/hhhxiao/TrapDoor/commits?author=hhhxiao" title="Code">💻</a></td>
@@ -67,8 +66,9 @@ Trapdoor是一个为 Minecraft Bedrock Edition 服务的，基于原版服务端
   </tr>
 </table>
 
-## 翻译贡献者
+## Translators
 -  <a href="https://github.com/0x506978656c"><img src="https://avatars.githubusercontent.com/u/66031115?s=96&v=4" width="15px;" alt=""/><b> ! Pixel </b></sub></a><a href="https://github.com/hhhxiao/TrapDoor/commits?author=0x506978656c" title="Code">🌎</a></td>
 
 ## license
+
 GPL v3
