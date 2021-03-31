@@ -8,6 +8,13 @@
 
 Trapdoor is a dll plugin(mod) used for BDS,which porvides rich functions for survival players. It's similar to je's
 [carpet](https://github.com/gnembon/fabric-carpet) mod.
+
+- World ticking speed change
+- Village bounds and iron golem spawn area display
+- In game observer mode
+- CPU& memory usage
+- mspt and tps measure
+- ...
 ## Download
 [Releases](https://github.com/hhhxiao/TrapDoor/releases)
 ## Install & Usage
