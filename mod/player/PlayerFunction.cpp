@@ -14,6 +14,7 @@
 #include "block/CircuitComponent.h"
 #include "world/Dimension.h"
 #include "lib/Remotery.h"
+#include "language/I18nManager.h"
 
 namespace mod {
     void PlayerFunction::tick() {
@@ -77,7 +78,7 @@ namespace mod {
         auto graph = player->getDimension()->getGraph();
         auto component = graph->getBaseCircuitComponent(&pos);
         if (!component) {
-            trapdoor::warning(player, "这不是一个红石原件");
+            trapdoor::warning(player, "self.rs.error");
             return;
         }
         component->basePrint(graph, player);
@@ -95,24 +96,24 @@ namespace mod {
         builder.text(player->getNameTag()).text(" @ ");
         switch (dim) {
             case OverWorld:
-                builder.sText("主世界", MSG_COLOR::GREEN);
+                builder.sText(trapdoor::LANG("dimension.overworld"), MSG_COLOR::GREEN);
                 nX = pos.x / 8, nZ = pos.z / 8;
                 break;
             case Nether:
-                builder.sText("下界", MSG_COLOR::RED);
+                builder.sText(trapdoor::LANG("dimension.nether"), MSG_COLOR::RED);
                 nX = pos.x * 8, nZ = pos.z * 8;
                 break;
             case TheEnd:
-                builder.sText("末地", MSG_COLOR::YELLOW);
+                builder.sText(trapdoor::LANG("dimension.end"), MSG_COLOR::YELLOW);
                 break;
         }
 
         builder.sTextF(MSG_COLOR::AQUA, "  [%d %d %d]  ", pos.x, pos.y, pos.z);
         if (dim == OverWorld) {
-            builder.text("==>  ").sText("下界", MSG_COLOR::RED).sTextF(MSG_COLOR::AQUA, " [%d %d]", nX, nZ);
+            builder.text("==>  ").sText(trapdoor::LANG("dimension.nether"), MSG_COLOR::RED).sTextF(MSG_COLOR::AQUA, " [%d %d]", nX, nZ);
         }
         if (dim == Nether) {
-            builder.text("==>  ").sText("主世界", MSG_COLOR::GREEN).sTextF(MSG_COLOR::AQUA, " [%d %d]", nX, nZ);
+            builder.text("==>  ").sText(trapdoor::LANG("dimension.overworld"), MSG_COLOR::GREEN).sTextF(MSG_COLOR::AQUA, " [%d %d]", nX, nZ);
         }
         builder.broadcast();
     }
