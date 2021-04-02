@@ -1,4 +1,4 @@
-# 1.16.210 not support fully
+# 1.16.210 - Not supported fully
 <h1>
     <img src="img/trapdoor logo.svg" alt="Trapdoor" width="400" /> 
 </h1>
@@ -15,7 +15,7 @@ java edition's [carpet](https://github.com/gnembon/fabric-carpet) mod.
 
 [Chinese Trapdoor Wiki](https://github.com/hhhxiao/TrapDoor/wiki)
 <br>
-English Wiki is coming soon
+[English Trapdoor Wiki](https://github.com/hhhxiao/TrapDoor/wiki/Home-en-US)
 ## Credits
 
 ### Minecraft
@@ -42,7 +42,7 @@ Special thanks to Player for providing readable source code
 
 ### Players
 
-thanks for the follow game players who make suggestions and feedback bugs:
+Thanks for the follow game players who make suggestions and feedback bugs:
 
 - 木月酸与云龙碱
 - 莵道三室戸
