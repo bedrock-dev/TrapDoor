@@ -25,7 +25,7 @@ namespace mod {
         trapdoor::MessageBuilder builder;
         auto totalRedstoneTickTime =
                 static_cast<float>
-                (redstoneTickTime + redstonePendingUpdateTime + redstonePendingRemoveTime + redstonePendingRemoveTime) /
+                (redstoneTickTime + redstonePendingUpdateTime + redstonePendingRemoveTime) /
                 rounds;
         builder.textF("Total mspt:    %.3fms   TPS:  %d\n", serverLevelTickTime / rounds, tps)
                 .textF(" - Redstone:    %.3fms\n", totalRedstoneTickTime)
