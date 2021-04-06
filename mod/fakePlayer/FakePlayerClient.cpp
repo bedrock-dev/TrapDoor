@@ -28,7 +28,7 @@ namespace mod {
                                       FakePlayerClient::buildMessage(MessageType::REMOVE_PLAYER, holder->getString()));
                 }))
                 ->then(ARG("tp", "command.fakeplayer.tp.desc", STR, {
-                    this->tpFakePlayer(player,holder->getString());
+                    this->tpFakePlayer(player, holder->getString());
                 }));
     }
 
@@ -81,7 +81,7 @@ namespace mod {
                 trapdoor::error(this->source, "%s", msg.c_str());
             }
         } else {
-            trapdoor::broadcastMsg("fp.error.consume",
+            trapdoor::broadcastMsg(trapdoor::LANG("fp.error.noSource"),
                                    msg.c_str());
         }
         return true;
@@ -91,10 +91,10 @@ namespace mod {
         this->webSocket = easywsclient::WebSocket::from_url(url);
         if (this->webSocket) {
             this->clientStatus = ClientStatus::READY;
-            trapdoor::info(player, "fp.info.connected", url.c_str());
+            trapdoor::info(player, trapdoor::LANG("fp.info.connected"), url.c_str());
             this->run();
         } else {
-            trapdoor::info(player, "fp.error.connect", url.c_str());
+            trapdoor::info(player, trapdoor::LANG("fp.error.connect"), url.c_str());
         }
     }
 
@@ -105,7 +105,7 @@ namespace mod {
             this->timer++;
             //超过100gt没有回复就说明连接炸了
             if (this->timer == 100) {
-                this->message = "fp.tick.timeout";
+                this->message = trapdoor::LANG("fp.tick.timeout");
                 this->clientStatus = ClientStatus::NEED_CONSUME;
             }
         }
@@ -131,7 +131,7 @@ namespace mod {
     }
 
     void FakePlayerClient::disconnectCallBack() {
-        trapdoor::broadcastMsg("fp.error.disconectCallBack");
+        trapdoor::broadcastMsg(trapdoor::LANG("fp.info.disconnectCallBack"));
         this->clientStatus = ClientStatus::NOT_OPEN;
     }
 
@@ -172,7 +172,7 @@ namespace mod {
             auto respData = jsonMsg["data"];
             if (respType == "list") {
                 status = true;
-                std::string strBuilder = "fp.info.list"; //下面是所有的假人玩家
+                std::string strBuilder = trapdoor::LANG("fp.info.list"); //下面是所有的假人玩家
                 this->fakePlayerList.clear();
                 for (auto &i:respData["list"]) {
                     strBuilder += "\n";
@@ -181,16 +181,19 @@ namespace mod {
                 }
                 return strBuilder;
             } else if (respType == "add" || respType == "remove") {
-                const char *type = respType == "add" ? "fp.added" : "fp.remove"; // 添加" : "移除
+                const std::string type =
+                        respType == "add" ? trapdoor::LANG("fp.added") : trapdoor::LANG("fp.remove"); // 添加" : "移除
                 auto name = respData["name"].get<std::string>();
                 auto success = respData["success"].get<bool>();
                 if (success) {
                     status = true;
-                    return trapdoor::format("fp.connect.sucess", type, name.c_str());// 成功%s假人[%s]
+                    return trapdoor::format(trapdoor::LANG("fp.connect.success"), type.c_str(),
+                                            name.c_str());// 成功%s假人[%s]
                 } else {
                     status = false;
                     auto reason = respData["reason"].get<std::string>();
-                    return trapdoor::format("fp.connect.fail", type, name.c_str(), reason.c_str());//无法%s假人[%s],原因: %s
+                    return trapdoor::format(trapdoor::LANG("fp.connect.fail"), type.c_str(), name.c_str(),
+                                            reason.c_str());//无法%s假人[%s],原因: %s
                 }
             } else {
                 status = false;
@@ -206,9 +209,10 @@ namespace mod {
         if (this->fakePlayerList.count(playerName)) {
             std::string tpCmd = "tp " + playerName + " " + player->getNameTag();
             CommandManager::runVanillaCommand(tpCmd);
-            trapdoor::info(this->source, "fp.tp.sucess", player->getNameTag().c_str());//假人已被tp到[%s]所在位置
+            trapdoor::info(this->source, trapdoor::LANG("fp.tp.success"),
+                           player->getNameTag().c_str());//假人已被tp到[%s]所在位置
         } else {
-            trapdoor::info(this->source, "fp.tp.fail");//找不到假人，请尝试执行fakeplayer list指令后再试
+            trapdoor::info(this->source, trapdoor::LANG("fp.tp.fail"));//找不到假人，请尝试执行fakeplayer list指令后再试
         }
     }
 }

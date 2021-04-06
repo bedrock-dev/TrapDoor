@@ -2,7 +2,6 @@
   "command.apicfg.desc": "Internal command settings in the API",
   "command.apicfg.pvd.desc": "Set the visible distance of particles",
   "command.apicfg.pm.desc": "Sacrifice a certain display effect to reduce lag",
-
   "command.tick.desc": "Change the running state of the world",
   "command.tick.fz.desc": "Freeze world operation",
   "command.tick.slow.desc": "Slow down the world to run [num] multiples",
@@ -15,7 +14,6 @@
   "command.prof.desc": "Game Performance Analysis",
   "command.prof.actor.desc": "Entity Update Performance Analysis",
   "command.mspt.desc": "Display Mspt and tps",
-
   "tick.fz.set": "The operation of the world has stopped",
   "tick.r.set": "The world has been restored to its initial state",
   "tick.acc.set": "Set the world to run at %zu speed (theoretical value)",
@@ -25,29 +23,24 @@
   "tick.fw.end": "%d gt has passed",
   "tick.slow.set": "The world is now slowing down at %zu",
   "tick.slow.error": "This command can only be executed under normal conditions",
-
   "command.backup.desc": "Backup related functions",
   "command.backup.l.desc": "List all backups",
   "command.backup.b.desc": "Create Backup",
   "command.backup.r.desc": "Restore Backup",
   "command.backup.crash.desc": "Crash Server",
-
   "command.hsa.desc": "HSA (structure spawning area) related commands",
   "command.hsa.list.desc": "List all hsa",
   "command.hsa.clear.desc": "Clear the hsa cache and display the number of points",
   "command.hsa.find.desc": "find the best pos",
   "command.hsa.show.desc": "Switch hsa display",
   "command.hsa.draw.desc": "Draw hsa",
-
   "command.draw.desc": "Simple Construction",
   "command.draw.ci.desc": "Draw a circle",
   "command.draw.sp.desc": "Draw a sphere",
   "command.draw.mr.desc": "Set the maximum radius",
-
   "command.counter.desc": "Hopper Counter",
   "command.counter.r.desc": "Reset Channel [num]",
   "command.counter.p.desc": "Print Channel",
-
   "command.village.desc": "Village related functions",
   "command.village.list.desc": "List all loaded villages",
   "command.village.b.desc": "Toggle village boundry box display",
@@ -64,7 +57,6 @@
   "village.error.noDweller": "The entity is not a resident or does not belong to any village",
   "village.error.noVillage": "There is no village nearby",
   "village.info.allVillages": "Below are all the villages that are being loaded",
-
   "command.func.desc": "Toggles for some global functions",
   "command.func.hopper.desc": "Toggle Counter",
   "command.func.hopper.set": "Set the hopper counter to %d",
@@ -80,16 +72,13 @@
   "command.func.expl.set": "Set explosion no block damage to %d",
   "command.func.ncud.desc": "Toggle no pending tick block updates",
   "command.func.ncud.set": "Set pending tick block updates to %d",
-
   "command.o.desc": "Quickly switch spectator mode",
   "command.o.set": "Set player [%s] as spectator mode",
   "command.s.desc": "Quickly switch survival mode",
   "command.s.set": "Set player [%s] to survival mode",
   "command.c.desc": "Quickly switch creative mode",
   "command.c.set": "Set player [%s] to creative mode",
-
   "command.td?.desc": "Print Help",
-
   "command.self.desc": "Player Personal Function Switch",
   "command.self.chunk.desc": "Toggle chunk boarder display",
   "command.self.chunk.set": "Set chunk boarder display as %d",
@@ -102,39 +91,32 @@
   "command.l.desc": "Display the coordinates of all online players",
   "command.os.desc": "Display the CPU and memory usage of the server process",
   "command.cl.desc": "Calculator",
-
   "dimension.overworld": "Overworld",
   "dimension.nether": "Nether",
   "dimension.end": "End",
-
   "command.lang.desc": "Language related",
   "command.lang.set.desc": "Change Language",
   "command.lang.list.desc": "List all languages",
   "command.lang.set.success": "Language set successfully",
   "command.lang.set.failure": "Language setting failed",
-
   "command.slime.desc": "Slime chunk display",
   "command.slime.c.desc": "Please clear the slime cache",
   "command.slime.r.desc": "Set the display radius of the slime area",
   "command.slime.show.desc": "Show slime chunks",
-
   "command.error.config": "This command is not configured or has been closed",
   "command.error.permission": "You do not have permission to execute this command, your permission level: %d <command permission level: %d",
   "command.error.moreTokenRequired": "Missing parameters or subcommands after %s",
   "command.error.noDesc": "The command has no description information",
   "command.error.noSubCommand": "There is no such subcommand, the following are all possible subcommands of this command:\n",
-
   "prof.error": "Another analyzer is running",
   "prof.start": "Start analysis...",
   "prof.warning": "The world is not in a normal state, performance analysis may be inaccurate",
-
   "backup.error.dictNotExist": "The backup directory does not exist",
   "backup.info.start": "Backup Start",
   "backup.info.end": "Backup complete",
   "backup.error.failure": "Backup failed with error code %d",
   "backup.info.noBackups": "No backup files",
   "backup.info.moreBackups": "There are %d older backups not listed",
-
   "command.fakeplayer.desc": "Fakeplayer related commands",
   "command.fakeplayer.conn.desc": "Connects the fakeplayer websocket",
   "command.fakeplayer.list.desc": "Lists all connected fakeplayers",
@@ -143,16 +125,16 @@
   "command.fakeplayer.tp.desc": "Teleports a fakeplayer to a specified location",
   "fp.error.noConnect": "Websocket is not connected",
   "fp.error.status": "Websocket is connected",
-  "fp.error.consume": "%s The source player has is offline",
+  "fp.error.noSource": "%s The source player has been offline",
   "fp.info.connected": "Trapdoor has been connected to: %s",
   "fp.error.connect": "Cannot connect: %s,please check the url",
   "fp.tick.timeout": "Timeout",
-  "fp.error.disconectCallBack": "The client or server has closed the fakeplayer connection",
+  "fp.error.disconnectCallBack": "The client or server has closed the fakeplayer connection",
   "fp.info.list": "Below is a list of all fakeplayers:",
   "fp.added": "Added",
   "fp.remove": "Removed",
-  "fp.connect.sucess": "Successful %s fakeplayer [%s]",
+  "fp.connect.success": "Successful %s fakeplayer [%s]",
   "fp.connect.fail": "Cannot %s fakeplayer [%s], reason: %s",
-  "fp.tp.sucess": "The fakeplayer has been tp'ed to the location of [%s]",
-  "fp.tp.fail": "Can't find the fakeplayer, please try to execute fakeplayer list command and try again"
+  "fp.tp.success": "The fakeplayer has been tp'ed to the location of [%s]",
+  "fp.tp.fail": "Can't find the fakeplayer, please try to execute [fakeplayer list] command and try again"
 }
