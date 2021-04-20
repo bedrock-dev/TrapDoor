@@ -97,8 +97,8 @@ namespace mod::test {
                 for (int j = 0; j < 4; j++) {
                     auto index = i * 4 + j;
                     if (index < blocks.size()) {
-                        trapdoor::BlockPos p = player->getStandPosition() + trapdoor::BlockPos(i+2,0,j+2);
-                        bs->setBlock(&p,getBlockByID(blocks[index]));
+                        trapdoor::BlockPos p = player->getStandPosition() + trapdoor::BlockPos(i + 2, 0, j + 2);
+                        bs->setBlock(&p, getBlockByID(blocks[index]));
                     }
                 }
             }
