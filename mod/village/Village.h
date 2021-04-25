@@ -17,14 +17,20 @@ namespace mod {
 
     class Village {
     public:
+
+        //获取人口数量
         int getPopulation();
 
+        //获取铁傀儡数量
         int getIronGolemNum();
 
+        //获取床数量
         int getBedPOICount();
 
+        //获取前一天工作过的村民数量
         int getWorkedVillagerNum();
 
+        //是否能刷铁傀儡
         bool canSpawnIronGolem();
 
         trapdoor::Vec3 getCenter();
@@ -37,11 +43,9 @@ namespace mod {
 
         trapdoor::AABB getBounds();
 
-        void printAllPOIs();
 
         void showVillagerStatus();
 
-        void showTimeStamp();
 
         std::string getDebugInfo();
 
@@ -51,15 +55,6 @@ namespace mod {
 
     };
 
-
-    //这个其实蛮冗余的，懒得删了
-    class VillageWithColor {
-    public:
-        Village *village;
-        trapdoor::GRAPHIC_COLOR color;
-
-        bool operator<(const VillageWithColor &rhs) const;
-    };
 
     struct VillageHelperConfig {
         trapdoor::GRAPHIC_COLOR boundColor = GRAPH_COLOR::BLUE;
@@ -95,9 +90,9 @@ namespace mod {
 
         VillageHelper() = default;
 
-        std::set<VillageWithColor> villageList;
+        std::set<Village *> villageList;
 
-        void insert(const VillageWithColor &vw);
+        void insert(Village *village);
 
         void clear();
 

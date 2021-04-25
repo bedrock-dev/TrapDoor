@@ -103,8 +103,6 @@ namespace mod {
         return trapdoor::AABB(center - Vec3(8, 3, 8), center + Vec3(8, 3, 8));
     }
 
-    void Village::printAllPOIs() {
-    }
 
     void Village::showVillagerStatus() {
         auto *map = reinterpret_cast<std::unordered_map<trapdoor::ActorUniqueID,
@@ -128,19 +126,6 @@ namespace mod {
         //  this->showTimeStamp();
     }
 
-    void Village::showTimeStamp() {
-        auto *dwellerList = reinterpret_cast<std::array<std::unordered_map<trapdoor::ActorUniqueID,
-                uint64_t, trapdoor::ActorUniqueIDHash>, 4> * >((char *) this + 152);
-        for (int i = 1; i < 4; i++) {
-            auto dwellers = dwellerList->operator[](i);
-            for (const auto &d:dwellers) {
-                auto actor = trapdoor::bdsMod->fetchEntity(d.first.uid, false);
-                if (actor) {
-                    actor->setNameTag(std::to_string(d.second));
-                }
-            }
-        }
-    }
 
     std::string Village::getDebugInfo() {
         using namespace trapdoor;
@@ -226,13 +211,12 @@ namespace mod {
         villageList.clear();
     }
 
-    void VillageHelper::insert(const VillageWithColor &vw) {
-        villageList.insert(vw);
+    void VillageHelper::insert(Village *village) {
+        villageList.insert(village);
     }
 
     void VillageHelper::draw() {
-        for (auto vw:villageList) {
-            auto village = vw.village;
+        for (auto village:villageList) {
             if (village) {
                 if (this->showBounds)
                     trapdoor::spawnRectangleParticle(village->getBounds(), villageHelperConfig.boundColor);
@@ -254,8 +238,7 @@ namespace mod {
         trapdoor::MessageBuilder builder;
         builder.text(LANG("village.info.allVillages"));
         int i = 0;
-        for (auto vw : villageList) {
-            auto village = vw.village;
+        for (auto village : villageList) {
             if (village) {
                 i++;
                 auto aabb = village->getBounds();
@@ -299,7 +282,7 @@ namespace mod {
 
     void VillageHelper::showVillagerStatus() {
         for (auto village:this->villageList) {
-            village.village->showVillagerStatus();
+            village->showVillagerStatus();
         }
     }
 
@@ -307,9 +290,9 @@ namespace mod {
         mod::Village *target = nullptr;
         float maxDistance = 1024;
         for (auto village:this->villageList) {
-            auto dis = village.village->getCenter().distanceTo(pos);
+            auto dis = village->getCenter().distanceTo(pos);
             if (dis < maxDistance) {
-                target = village.village;
+                target = village;
                 maxDistance = dis;
             }
         }
@@ -329,7 +312,7 @@ namespace mod {
         } else {
             if (actor->getActorId() == "villager_v2") {
                 for (auto villages:this->villageList) {
-                    if (villages.village->printVillagerInfo(player, actor))return;
+                    if (villages->printVillagerInfo(player, actor))return;
                 }
                 trapdoor::warning(player, LANG("village.error.notDweller"));
             } else {
@@ -341,7 +324,7 @@ namespace mod {
 
     void VillageHelper::removeAllNameTag() {
         for (auto vill:this->villageList) {
-            vill.village->removeAllTags();
+            vill->removeAllTags();
         }
     }
 
@@ -392,10 +375,6 @@ namespace mod {
                 }));
     }
 
-    bool VillageWithColor::operator<(const VillageWithColor &rhs) const {
-        return this->village < rhs.village;
-    }
-
 }
 
 
@@ -403,10 +382,7 @@ THook(
         void, MSSYM_B1QA4tickB1AA7VillageB2AAE10QEAAXUTickB2AAE15AEAVBlockSourceB3AAAA1Z,
         mod::Village *vill, void *tick, void * blockSource
 ) {
-    //village tick
     original(vill, tick, blockSource);
-    mod::VillageWithColor vw{vill, trapdoor::GRAPHIC_COLOR::GREEN};
-    trapdoor::bdsMod->asInstance<mod::TrapdoorMod>()->getVillageHelper().insert(vw);
-    // village::villageHelper.insert(vill);
+    trapdoor::bdsMod->asInstance<mod::TrapdoorMod>()->getVillageHelper().insert(vill);
 }
 

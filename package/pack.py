@@ -67,5 +67,6 @@ for other_file in other_files:
     other_file_name = other_file[3:]
     print('pack:  ' + other_file_name)
     release_zip_file.write(other_file,arcname=other_file_name)
+release_zip_file.write(config_file)
 release_zip_file.close()
 input('success pack release:' + version+'.zip\n')
