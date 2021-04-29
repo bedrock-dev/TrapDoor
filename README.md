@@ -73,7 +73,7 @@ thanks for the follow game players who make suggestions and feedback bugs:
 
 ## Translators
 -  <a href="https://github.com/0x506978656c"><img src="https://avatars.githubusercontent.com/u/66031115?s=96&v=4" width="15px;" alt=""/><b> ! Pixel </b></sub></a><a href="https://github.com/hhhxiao/TrapDoor/commits?author=0x506978656c" title="Code">🌎</a></td>
-
+-  <a href="https://github.com/TimothyGrass"><img src="https://avatars.githubusercontent.com/u/77906640?s=96&v=4" width="15px;" alt=""/><b> TimothyGrass </b></sub></a><a href="#" title="Code">🌎</a></td>
 ## license
 
 GPL v3
