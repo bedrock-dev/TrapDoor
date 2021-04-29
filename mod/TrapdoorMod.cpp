@@ -59,7 +59,7 @@ namespace mod {
         // this->simpleLitematica.registerCommand(this->commandManager);
         this->villageHelper.registerCommand(this->commandManager);
         this->hopperChannelManager.registerCommand(this->commandManager);
-        this->registerDevCommand();
+
         //功能开关命令
         commandManager.registerCmd("func", "command.func.desc")
                 ->then(
@@ -289,14 +289,6 @@ namespace mod {
         this->hopperChannelManager.setAble(functionCfg.hopperCounter);
     }
 
-    void TrapdoorMod::registerDevCommand() {
-        this->commandManager.registerCmd("dev", "develop")
-                ->then(ARG("level_test", "test1", NONE, {
-                    player->getLevel()->forEachPlayer([&](trapdoor::Actor *p) {
-                        printf("%s\n", p->getNameTag().c_str());
-                    });
-                }));
-    }
 
     std::string TrapdoorMod::getModVersion() {
 #ifdef TD_VERSION

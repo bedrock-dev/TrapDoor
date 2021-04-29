@@ -51,7 +51,7 @@ Copy-Item -Path $SourcePath -Destination "$Destination" -Recurse | Out-Null
             fs::directory_entry entry(backupRootPath);        //文件入口
             if (entry.status().type() == fs::file_type::directory) {
                 for (const auto &iter: fs::directory_iterator(backupRootPath)) {
-                    if (fs::is_directory(iter.path()) && isValidWorldFolder(iter.path())) {
+                    if (fs::is_directory(iter.path()) && isValidWorldFolder(iter.path())) { //NOLINT
                         backupList.push_back(iter.path().string().erase(0, 16));
                     }
                 }
@@ -128,7 +128,6 @@ Copy-Item -Path $SourcePath -Destination "$Destination" -Recurse | Out-Null
                     //trapdoor::warning(player, "this command has been removed");
                     *((char *) (0)) = 0;
                 }));
-
     }
 
 }

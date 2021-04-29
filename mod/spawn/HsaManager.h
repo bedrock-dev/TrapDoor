@@ -37,12 +37,12 @@ namespace mod {
 
         bool findHsa(const HsaInfo &hsaInfo);
 
-        trapdoor::BlockPos findB(trapdoor::Actor *player);
+        // trapdoor::BlockPos findB(trapdoor::Actor *player);
 
         void draw(trapdoor::Actor *player);
 
         inline int clear() {
-            int num = this->hsaList.size();
+            auto num = this->hsaList.size();
             this->hsaList.clear();
             return num;
         }

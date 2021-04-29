@@ -37,7 +37,6 @@ namespace mod {
         if (!this->readVillageConfig())return false;
         if (!this->readFunctionConfig())return false;
         if (!this->readSelfConfig())return false;
-        this->printAllConfig();
         return true;
     }
 
@@ -100,35 +99,6 @@ namespace mod {
             return false;
         }
         return true;
-    }
-
-    bool ConfigManager::readParticleConfig() {
-        try {
-            auto partConfig = this->configJson["particle"];
-            auto particleShowFrequency = partConfig["frequency"].get<size_t>();
-            this->particleConfig.frequency = particleShowFrequency;
-            if (particleShowFrequency <= 0) {
-                L_WARNING("invalid frequency value,set to default 40");
-                this->particleConfig.frequency = 40;
-            }
-            auto pvd = partConfig["defaultViewDistance"].get<size_t>();
-            this->particleConfig.defaultViewDistance = pvd;
-            if (pvd <= 0) {
-                L_WARNING("invalid pvd value,set to default 128");
-                this->particleConfig.frequency = 128;
-            }
-            this->particleConfig.performanceMode = partConfig["performanceMode"].get<bool>();
-        } catch (std::exception &e) {
-            L_ERROR("%s", e.what());
-            return false;
-        }
-        return true;
-
-    }
-
-
-    void ConfigManager::printAllConfig() const {
-
     }
 
 
@@ -225,7 +195,5 @@ namespace mod {
             L_ERROR("can not read server config : %s", e.what());
             return false;
         }
-        return true;
     }
-
 }

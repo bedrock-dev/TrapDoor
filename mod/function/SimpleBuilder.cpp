@@ -11,6 +11,8 @@
 #include "tools/DirtyLogger.h"
 
 namespace mod {
+
+    //Bresenham画圆算法
     void SimpleBuilder::buildCircle(trapdoor::Actor *player,
                                     size_t radius,
                                     bool hollow) const {
@@ -18,16 +20,18 @@ namespace mod {
             info(player, "builder未开启");
             return;
         }
+
         if (radius > this->maxCircleRadius) {
-            info(player, "半径过大(必须<= 30000000)");
+            info(player, "半径过大(必须<= 256)");
             return;
         }
         trapdoor::BlockPos standPos = player->getStandPosition();
         auto block = player->getBlockSource()->getBlock(standPos.x, standPos.y,
                                                         standPos.z);
         trapdoor::BlockPos pos = standPos;
+        auto bs = player->getBlockSource();
         //  printf("%d %d %d %s", pos.x,pos.y,pos.z, block->getName().c_str());
-        float R = radius;
+        float R = static_cast<float >(radius);
         R += 0.5;
         int X, Y, p;
         X = 0;
@@ -38,22 +42,22 @@ namespace mod {
                 for (int Yi = X; Yi <= Y; Yi++) {
                     pos.x = standPos.x + X;
                     pos.z = standPos.z + Yi;
-                    player->getBlockSource()->setBlock(&pos, block);
+                    bs->setBlock(&pos, block);
                     pos.z = standPos.z - Yi;
-                    player->getBlockSource()->setBlock(&pos, block);
+                    bs->setBlock(&pos, block);
                     pos.x = standPos.x - X;
-                    player->getBlockSource()->setBlock(&pos, block);
+                    bs->setBlock(&pos, block);
                     pos.z = standPos.z + Yi;
-                    player->getBlockSource()->setBlock(&pos, block);
+                    bs->setBlock(&pos, block);
                     pos.x = standPos.x + Yi;
                     pos.z = standPos.z + X;
-                    player->getBlockSource()->setBlock(&pos, block);
+                    bs->setBlock(&pos, block);
                     pos.z = standPos.z - X;
-                    player->getBlockSource()->setBlock(&pos, block);
+                    bs->setBlock(&pos, block);
                     pos.x = standPos.x - Yi;
-                    player->getBlockSource()->setBlock(&pos, block);
+                    bs->setBlock(&pos, block);
                     pos.z = standPos.z + X;
-                    player->getBlockSource()->setBlock(&pos, block);
+                    bs->setBlock(&pos, block);
                 }
                 if (p >= 0) {
                     p += 4 * (X - Y) + 10;
@@ -66,22 +70,22 @@ namespace mod {
             for (; X <= Y; X++) {
                 pos.x = standPos.x + X;
                 pos.z = standPos.z + Y;
-                player->getBlockSource()->setBlock(&pos, block);
+                bs->setBlock(&pos, block);
                 pos.z = standPos.z - Y;
-                player->getBlockSource()->setBlock(&pos, block);
+                bs->setBlock(&pos, block);
                 pos.x = standPos.x - X;
-                player->getBlockSource()->setBlock(&pos, block);
+                bs->setBlock(&pos, block);
                 pos.z = standPos.z + Y;
-                player->getBlockSource()->setBlock(&pos, block);
+                bs->setBlock(&pos, block);
                 pos.x = standPos.x + Y;
                 pos.z = standPos.z + X;
-                player->getBlockSource()->setBlock(&pos, block);
+                bs->setBlock(&pos, block);
                 pos.z = standPos.z - X;
-                player->getBlockSource()->setBlock(&pos, block);
+                bs->setBlock(&pos, block);
                 pos.x = standPos.x - Y;
-                player->getBlockSource()->setBlock(&pos, block);
+                bs->setBlock(&pos, block);
                 pos.z = standPos.z + X;
-                player->getBlockSource()->setBlock(&pos, block);
+                bs->setBlock(&pos, block);
                 if (p >= 0) {
                     p += 4 * (X - Y) + 10;
                     Y--;
@@ -106,6 +110,7 @@ namespace mod {
         trapdoor::BlockPos standPos = player->getStandPosition();
         auto block = player->getBlockSource()->getBlock(standPos.x, standPos.y,
                                                         standPos.z);
+        auto bs = player->getBlockSource();
         trapdoor::BlockPos pos = standPos;
         float R = radius;
         R += 0.5;
@@ -134,22 +139,22 @@ namespace mod {
                     pos.x = standPos.x + x;
                     pos.y = standPos.y + y;
                     pos.z = standPos.z + z;
-                    player->getBlockSource()->setBlock(&pos, block);
+                    bs->setBlock(&pos, block);
                     pos.y = standPos.y - y;
-                    player->getBlockSource()->setBlock(&pos, block);
+                    bs->setBlock(&pos, block);
                     pos.z = standPos.z - z;
-                    player->getBlockSource()->setBlock(&pos, block);
+                    bs->setBlock(&pos, block);
                     pos.x = standPos.x - x;
-                    player->getBlockSource()->setBlock(&pos, block);
+                    bs->setBlock(&pos, block);
                     pos.y = standPos.y + y;
-                    player->getBlockSource()->setBlock(&pos, block);
+                    bs->setBlock(&pos, block);
                     pos.x = standPos.x + x;
-                    player->getBlockSource()->setBlock(&pos, block);
+                    bs->setBlock(&pos, block);
                     pos.x = standPos.x - x;
                     pos.z = standPos.z + z;
-                    player->getBlockSource()->setBlock(&pos, block);
+                    bs->setBlock(&pos, block);
                     pos.y = standPos.y - y;
-                    player->getBlockSource()->setBlock(&pos, block);
+                    bs->setBlock(&pos, block);
                 }
             }
         }

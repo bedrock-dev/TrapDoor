@@ -15,7 +15,7 @@ namespace mod {
         bool enable = true;
 
     public:
-        inline bool inEnable() const { return this->enable; }
+        inline bool isEnable() const { return this->enable; }
 
         inline void setAble(bool able) { this->enable = able; }
 

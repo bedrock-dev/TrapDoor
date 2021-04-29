@@ -385,4 +385,3 @@ THook(
     original(vill, tick, blockSource);
     trapdoor::bdsMod->asInstance<mod::TrapdoorMod>()->getVillageHelper().insert(vill);
 }
-

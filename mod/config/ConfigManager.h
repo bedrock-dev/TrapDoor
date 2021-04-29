@@ -26,7 +26,7 @@ namespace mod {
             bool spawnHelper = true; //刷怪指示器
             bool cactusRotation = false; //仙人掌转方块
             bool playerStat = false; //玩家行为统计
-            bool simpleDraw = true; //画圆
+            bool simpleDraw = true; //画圆(和球)
         };
 
         struct SelfEnableConfig {
@@ -56,22 +56,27 @@ namespace mod {
         ServerConfig serverConfig;
         SelfEnableConfig selfEnableConfig;
 
-        bool readCommandConfig();
-
+        //读取配置文件
         bool readConfigFile(const std::string &configFileName);
 
+        //读取命令配置信息
+        bool readCommandConfig();
+
+        //读取函数赔偿信息
         bool readFunctionConfig();
 
         bool readSelfConfig();
 
-        bool readParticleConfig();
-
+        //读取EULA
         bool readEULA();
 
+        //读取指令列表
         bool readLowLevelVanillaCommands();
 
+        //读取服务器信息
         bool readServerConfig();
 
+        //读取村庄配置信息
         bool readVillageConfig();
 
     public:
@@ -80,11 +85,7 @@ namespace mod {
 
         inline std::map<std::string, trapdoor::CommandConfig> &getCommandsConfig() { return this->commandsConfig; }
 
-        inline const ParticleConfig &getParticleConfig() { return this->particleConfig; }
-
         bool initialize(const std::string &configFileName);
-
-        void printAllConfig() const;
 
         inline const std::set<std::string> &getLowLevelCommands() const { return this->lowerLevelVanillaCommands; }
 
