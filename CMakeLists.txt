@@ -44,7 +44,9 @@ add_library(${MOD_API_NAME} STATIC
         api/language/I18nManager.h
         api/tools/CastHelper.h
         api/Offset.h
+        api/FunctionInterface.h
         )
+
 
 target_include_directories(${MOD_API_NAME}
         PUBLIC
@@ -59,10 +61,10 @@ target_include_directories(${MOD_API_NAME}
         )
 
 target_link_libraries(${MOD_API_NAME} ${PROJECT_SOURCE_DIR}/api/lib/detours.lib)
-#target_link_libraries(${MOD_API_NAME} ${PROJECT_SOURCE_DIR}/api/lib/sqlite3.lib)
+
 
 ####################这里是具体功能##########################
-set(TRAPDOOR_VERSION 0.9.45)
+set(TRAPDOOR_VERSION 0.9.46)
 set(MCBE_VERSION 1.16.40.2)
 set(BETA OFF)
 
@@ -96,8 +98,8 @@ add_library(${MOD_NAME}
         mod/os/process_stat.cpp
         mod/village/POIInstance.cpp
         mod/eval/Eval.cpp
-        mod/dirtyLitematica/SelectRegion.cpp
-        mod/dirtyLitematica/SimpleLitematica.cpp
+        #  mod/dirtyLitematica/SelectRegion.cpp
+        # mod/dirtyLitematica/SimpleLitematica.cpp
         mod/test/TrapdoorTest.cpp
         mod/fakePlayer/FakePlayerClient.cpp
         mod/fakePlayer/easywsclient.cpp
@@ -115,7 +117,7 @@ target_include_directories(
         mod/village
         mod/tick
         mod/player
-        mod/dirtyLitematica
+        #mod/dirtyLitematica
         mod/eval
         mod/fakePlayer
         api
