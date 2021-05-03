@@ -23,7 +23,7 @@ namespace mod {
         this->playerFunctions.tick();
         this->slimeChunkHelper.tick();
         //   this->simpleLitematica.tick();
-        this->fakePlayerClient->tick();
+        this->fakePlayerClient->tick(); //NOLINT
     }
 
     void TrapdoorMod::lightTick() {
@@ -45,6 +45,7 @@ namespace mod {
         this->fakePlayerClient = new FakePlayerClient(this->getThreadPool());
         this->fakePlayerClient->registerFakePlayerCommand(commandManager);
         L_INFO("==== trapdoor init finish  ====\nServer Start");
+        fflush(stdout);
     }
 
     void TrapdoorMod::registerCommands() {
