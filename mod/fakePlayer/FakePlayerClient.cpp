@@ -207,7 +207,7 @@ namespace mod {
 
     void FakePlayerClient::tpFakePlayer(trapdoor::Actor *player, const std::string &playerName) {
         if (this->fakePlayerList.count(playerName)) {
-            std::string tpCmd = "tp " + playerName + " " + player->getNameTag();
+            const std::string tpCmd = "tp \"" + playerName + "\"  \"" + player->getNameTag() + "\"";
             CommandManager::runVanillaCommand(tpCmd);
             trapdoor::info(this->source, trapdoor::LANG("fp.tp.success"),
                            player->getNameTag().c_str());//假人已被tp到[%s]所在位置
@@ -216,4 +216,5 @@ namespace mod {
         }
     }
 }
+
 
