@@ -1,0 +1,4 @@
+C:/Users/xhy/dev/TrapDoor/cmake-build-release/CMakeFiles/trapdoor.dir
+C:/Users/xhy/dev/TrapDoor/cmake-build-release/CMakeFiles/rebuild_cache.dir
+C:/Users/xhy/dev/TrapDoor/cmake-build-release/CMakeFiles/trapdoor-0.9.46-1.16.40.2.dir
+C:/Users/xhy/dev/TrapDoor/cmake-build-release/CMakeFiles/edit_cache.dir

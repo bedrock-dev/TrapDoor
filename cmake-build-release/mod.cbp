@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="mod"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="msvc8"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="C:/Users/xhy/dev/TrapDoor/cmake-build-release"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\xhy\dev\TrapDoor\cmake-build-release\Makefile VERBOSE=1 all"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\xhy\dev\TrapDoor\cmake-build-release\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\xhy\dev\TrapDoor\cmake-build-release\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\xhy\dev\TrapDoor\cmake-build-release\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="trapdoor">
+				<Option output="C:/Users/xhy/dev/TrapDoor/cmake-build-release/trapdoor.lib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/xhy/dev/TrapDoor/cmake-build-release"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add option="-DTD_VERSION=&quot;0.9.46&quot;"/>
+					<Add option="-DMC_VERSION=&quot;1.16.40.2&quot;"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api/block"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api/commands"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api/entity"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api/graphics"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api/world"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api/lib"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api/tools"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\xhy\dev\TrapDoor\cmake-build-release\Makefile VERBOSE=1 trapdoor"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\xhy\dev\TrapDoor\cmake-build-release\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\xhy\dev\TrapDoor\cmake-build-release\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\xhy\dev\TrapDoor\cmake-build-release\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="trapdoor/fast">
+				<Option output="C:/Users/xhy/dev/TrapDoor/cmake-build-release/trapdoor.lib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/xhy/dev/TrapDoor/cmake-build-release"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add option="-DTD_VERSION=&quot;0.9.46&quot;"/>
+					<Add option="-DMC_VERSION=&quot;1.16.40.2&quot;"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api/block"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api/commands"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api/entity"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api/graphics"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api/world"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api/lib"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api/tools"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\xhy\dev\TrapDoor\cmake-build-release\Makefile VERBOSE=1 trapdoor/fast"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\xhy\dev\TrapDoor\cmake-build-release\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\xhy\dev\TrapDoor\cmake-build-release\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\xhy\dev\TrapDoor\cmake-build-release\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="C:/Users/xhy/dev/TrapDoor/cmake-build-release"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\xhy\dev\TrapDoor\cmake-build-release\Makefile VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\xhy\dev\TrapDoor\cmake-build-release\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\xhy\dev\TrapDoor\cmake-build-release\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\xhy\dev\TrapDoor\cmake-build-release\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="trapdoor-0.9.46-1.16.40.2">
+				<Option output="C:/Users/xhy/dev/TrapDoor/cmake-build-release/trapdoor-0.9.46-1.16.40.2.dll" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/xhy/dev/TrapDoor/cmake-build-release"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add option="-DTD_VERSION=&quot;0.9.46&quot;"/>
+					<Add option="-DMC_VERSION=&quot;1.16.40.2&quot;"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/mod"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/mod/os"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/mod/config"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/mod/test"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/mod/spawn"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/mod/function"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/mod/village"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/mod/tick"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/mod/player"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/mod/eval"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/mod/fakePlayer"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api/block"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api/commands"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api/entity"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api/graphics"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api/world"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api/lib"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api/tools"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\xhy\dev\TrapDoor\cmake-build-release\Makefile VERBOSE=1 trapdoor-0.9.46-1.16.40.2"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\xhy\dev\TrapDoor\cmake-build-release\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\xhy\dev\TrapDoor\cmake-build-release\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\xhy\dev\TrapDoor\cmake-build-release\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="trapdoor-0.9.46-1.16.40.2/fast">
+				<Option output="C:/Users/xhy/dev/TrapDoor/cmake-build-release/trapdoor-0.9.46-1.16.40.2.dll" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/xhy/dev/TrapDoor/cmake-build-release"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add option="-DTD_VERSION=&quot;0.9.46&quot;"/>
+					<Add option="-DMC_VERSION=&quot;1.16.40.2&quot;"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/mod"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/mod/os"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/mod/config"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/mod/test"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/mod/spawn"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/mod/function"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/mod/village"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/mod/tick"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/mod/player"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/mod/eval"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/mod/fakePlayer"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api/block"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api/commands"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api/entity"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api/graphics"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api/world"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api/lib"/>
+					<Add directory="C:/Users/xhy/dev/TrapDoor/api/tools"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\xhy\dev\TrapDoor\cmake-build-release\Makefile VERBOSE=1 trapdoor-0.9.46-1.16.40.2/fast"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\xhy\dev\TrapDoor\cmake-build-release\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\xhy\dev\TrapDoor\cmake-build-release\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\xhy\dev\TrapDoor\cmake-build-release\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="C:/Users/xhy/dev/TrapDoor/cmake-build-release"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\xhy\dev\TrapDoor\cmake-build-release\Makefile VERBOSE=1 edit_cache"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\xhy\dev\TrapDoor\cmake-build-release\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\xhy\dev\TrapDoor\cmake-build-release\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\xhy\dev\TrapDoor\cmake-build-release\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/BDSMod.cpp">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/BDSMod.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/FunctionInterface.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/Offset.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/block/Block.cpp">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/block/Block.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/block/BlockLegacy.cpp">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/block/BlockLegacy.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/block/BlockSource.cpp">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/block/BlockSource.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/block/CircuitComponent.cpp">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/block/CircuitComponent.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/block/VanillaBlockType.cpp">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/block/VanillaBlockType.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/commands/ArgHolder.cpp">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/commands/ArgHolder.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/commands/Command.cpp">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/commands/Command.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/commands/CommandManager.cpp">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/commands/CommandManager.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/commands/CommandNode.cpp">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/commands/CommandNode.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/entity/Actor.cpp">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/entity/Actor.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/entity/Item.cpp">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/entity/Item.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/entity/PlayerBuffer.cpp">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/entity/PlayerBuffer.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/entity/PlayerInventory.cpp">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/entity/PlayerInventory.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/graphics/AABB.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/graphics/BlockPos.cpp">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/graphics/BlockPos.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/graphics/Graphics.cpp">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/graphics/Graphics.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/graphics/Particle.cpp">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/graphics/Particle.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/graphics/Vec3.cpp">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/graphics/Vec3.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/language/I18nManager.cpp">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/language/I18nManager.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/lib/Remotery.c">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/lib/Remotery.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/tools/CastHelper.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/tools/DirtyLogger.cpp">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/tools/DirtyLogger.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/tools/Message.cpp">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/tools/Message.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/tools/MsgBuilder.cpp">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/tools/MsgBuilder.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/tools/ThreadPool.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/world/Biome.cpp">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/world/Biome.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/world/Dimension.cpp">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/world/Dimension.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/world/Level.cpp">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/world/Level.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/world/LevelChunk.cpp">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/api/world/LevelChunk.h">
+			<Option target="trapdoor"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/TrapdoorMod.cpp">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/TrapdoorMod.h">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/config/ConfigManager.cpp">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/config/ConfigManager.h">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/dllmain.cpp">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/eval/Eval.cpp">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/eval/Eval.h">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/fakePlayer/FakePlayerClient.cpp">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/fakePlayer/FakePlayerClient.h">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/fakePlayer/easywsclient.cpp">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/fakePlayer/easywsclient.hpp">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/function/BackupHelper.cpp">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/function/BackupHelper.h">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/function/BlockRotationHelper.cpp">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/function/BlockRotationHelper.h">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/function/HopperCounter.cpp">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/function/HopperCounter.h">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/function/SimpleBuilder.cpp">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/function/SimpleBuilder.h">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/function/SingleFunctions.cpp">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/os/process_stat.cpp">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/os/process_stat.h">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/player/PlayerFunction.cpp">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/player/PlayerFunction.h">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/spawn/HsaManager.cpp">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/spawn/HsaManager.h">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/spawn/SlimeChunkHelper.cpp">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/spawn/SlimeChunkHelper.h">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/spawn/SpawnHelper.cpp">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/spawn/SpawnHelper.h">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/test/TrapdoorTest.cpp">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/test/TrapdoorTest.h">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/tick/ActorProfiler.cpp">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/tick/ActorProfiler.h">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/tick/GameTick.cpp">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/tick/GameTick.h">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/tick/SimpleProfiler.cpp">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/tick/SimpleProfiler.h">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/village/POIInstance.cpp">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/village/POIInstance.h">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/village/Village.cpp">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/mod/village/Village.h">
+			<Option target="trapdoor-0.9.46-1.16.40.2"/>
+		</Unit>
+		<Unit filename="C:/Users/xhy/dev/TrapDoor/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
