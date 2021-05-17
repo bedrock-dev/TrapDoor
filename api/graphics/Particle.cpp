@@ -32,7 +32,6 @@ namespace trapdoor {
                  MSSYM_MD5_52e7de092fab8d042fb516e31fc9756f,
                  level, type, &p,
                  player->getDimension());
-
     }
 
 

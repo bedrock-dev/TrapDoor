@@ -1,11 +1,14 @@
 namespace off {
 
 
+    //OK
     //!BlockLegacy::getVariant(BlockLegacy *this, char *a2)
     constexpr uint64_t BLOCK_GET_VARIANT = 0x8;
 
-    //todo:
-    constexpr uint64_t BLOCKSOURCE_GET_POSITION = 0x2c;
+    //OK
+    //! BlockActor::tick
+    constexpr uint64_t BLOCKACTOR_GET_POSITION = 0x2c;
+
 
     //todo:
     constexpr uint64_t BLOCKLEGACY_GET_BLOCK_ID = 0x10c;
@@ -16,16 +19,21 @@ namespace off {
     //todo
     constexpr std::pair<uint64_t, uint64_t> BASECIRCUITCOMPONENT_SOURCE_RANGE = {0x1, 0x2};
 
+    //OK
     //!CommandRequestPacket::createCommandContext(
     constexpr uint64_t COMMAND_PACKET_STR = 0x30;
 
+    //OK
     //!from Player::tickWorld
     constexpr uint64_t PLAYER_GET_BLOCKSOURCE = 0x69;
 
+
+    //OK
     //! Actor::getDimensionId
     constexpr uint64_t ACTOR_GET_DIMENSION_ID = 0xEC;
 
 
+    //OK
     //! from  ServerPlayer::isHostingPlayer
     constexpr uint64_t ACTOR_GET_CLIENT_ID = 0x9F0;
 

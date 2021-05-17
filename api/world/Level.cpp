@@ -41,14 +41,15 @@ namespace trapdoor {
     }
 
     Dimension *Level::getDimFromID(int id) {
-        Dimension *dim = SYM_CALL(
+
+        return SYM_CALL(
                 Dimension*(*)(Level * , int),
                 MSSYM_B1QE12getDimensionB1AA5LevelB2AAE17UEBAPEAVDimensionB2AAA1VB2QDE11AutomaticIDB1AE10VDimensionB2AAA1HB3AAAA1Z,
                 this,
                 id
         );
-        return dim;
     }
+
 
     Actor *Level::getNearestDimensionPlayer(const BlockPos &pos, int dimID) {
         Actor *nearest = nullptr;

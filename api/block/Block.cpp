@@ -41,7 +41,7 @@ namespace trapdoor {
 
     //获取方块实体的位置
     BlockPos *BlockActor::getPosition() {
-        return offset_cast<BlockPos *>(this, off::BLOCKSOURCE_GET_POSITION);
+        return offset_cast<BlockPos *>(this, off::BLOCKACTOR_GET_POSITION);
         //return reinterpret_cast<BlockPos *>(reinterpret_cast<VA>(this) + 44);
     }
 

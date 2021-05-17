@@ -65,7 +65,7 @@ namespace mod {
                 ->then(
                         ARG("hopper", "command.func.hopper.desc", BOOL,
                             {
-                            FUNC_DISABLED(player)
+                                FUNC_DISABLED(player)
                                 return;
                                 this->hopperChannelManager.setAble(holder->getBool());
                                 info(player, LANG("command.func.hopper.set"), holder->getBool());
@@ -96,6 +96,8 @@ namespace mod {
                                info(player, LANG("command.func.expl.set"), holder->getBool());
                            }))
                 ->then(ARG("ncud", "command.func.ncud.desc", BOOL, {
+                    FUNC_DISABLED(player)
+                    return;
                     this->singleFunctions.preventNCUpdate = holder->getBool();
                     info(player, LANG("command.func.ncud.set"), holder->getBool());
                 }));

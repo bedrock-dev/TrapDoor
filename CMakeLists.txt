@@ -23,7 +23,6 @@ add_library(${MOD_API_NAME} STATIC
         api/commands/ArgHolder.cpp
         api/entity/Actor.cpp
         api/entity/Item.cpp
-        api/entity/PlayerInventory.cpp
         api/entity/PlayerBuffer.cpp
         api/graphics/Particle.cpp
         api/graphics/AABB.h
@@ -63,9 +62,9 @@ target_link_libraries(${MOD_API_NAME} ${PROJECT_SOURCE_DIR}/api/lib/detours.lib)
 
 ####################这里是具体功能##########################
 set(TRAPDOOR_VERSION 0.9.42)
-set(MCBE_VERSION 1.16.210.06)
+set(MCBE_VERSION 1.16.221.01)
 set(BETA ON)
-set(TEST_NUMBER 2)
+set(TEST_NUMBER 1)
 
 add_definitions(-DTD_VERSION="${TRAPDOOR_VERSION}")
 add_definitions(-DMC_VERSION="${MCBE_VERSION}")

@@ -7,7 +7,6 @@
 #include "lib/mod.h"
 #include "tools/MsgBuilder.h"
 #include "world/Biome.h"
-#include "PlayerInventory.h"
 #include "block/BlockSource.h"
 #include "Dimension.h"
 #include "tools/CastHelper.h"
