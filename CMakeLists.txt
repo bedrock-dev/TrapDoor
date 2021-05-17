@@ -10,6 +10,7 @@ endif ()
 set(CMAKE_BUILD_TYPE release)
 set(MOD_API_NAME trapdoor)
 
+
 add_library(${MOD_API_NAME} STATIC
         api/BDSMod.cpp
         api/block/Block.cpp
@@ -23,7 +24,6 @@ add_library(${MOD_API_NAME} STATIC
         api/commands/ArgHolder.cpp
         api/entity/Actor.cpp
         api/entity/Item.cpp
-        api/entity/PlayerInventory.cpp
         api/entity/PlayerBuffer.cpp
         api/graphics/Particle.cpp
         api/graphics/AABB.h
@@ -64,8 +64,11 @@ target_link_libraries(${MOD_API_NAME} ${PROJECT_SOURCE_DIR}/api/lib/detours.lib)
 
 
 ####################这里是具体功能##########################
+#设置插版本
 set(TRAPDOOR_VERSION 0.9.46)
+#设置游戏版本
 set(MCBE_VERSION 1.16.40.2)
+#是否是测试版
 set(BETA OFF)
 
 add_definitions(-DTD_VERSION="${TRAPDOOR_VERSION}")
@@ -98,8 +101,6 @@ add_library(${MOD_NAME}
         mod/os/process_stat.cpp
         mod/village/POIInstance.cpp
         mod/eval/Eval.cpp
-        #  mod/dirtyLitematica/SelectRegion.cpp
-        # mod/dirtyLitematica/SimpleLitematica.cpp
         mod/test/TrapdoorTest.cpp
         mod/fakePlayer/FakePlayerClient.cpp
         mod/fakePlayer/easywsclient.cpp
@@ -117,7 +118,6 @@ target_include_directories(
         mod/village
         mod/tick
         mod/player
-        #mod/dirtyLitematica
         mod/eval
         mod/fakePlayer
         api

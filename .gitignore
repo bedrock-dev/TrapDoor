@@ -3,7 +3,6 @@ cmake-build-release
 version/PDB-1164.txt
 cvdump.exe
 PDB导出工具.exe
-*.txt
 .vscode
 .idea
 build

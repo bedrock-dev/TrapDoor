@@ -7,7 +7,6 @@
 #include "lib/mod.h"
 #include "tools/MsgBuilder.h"
 #include "world/Biome.h"
-#include "PlayerInventory.h"
 #include "block/BlockSource.h"
 #include "Dimension.h"
 #include "tools/CastHelper.h"
@@ -95,19 +94,19 @@ namespace trapdoor {
         );
     }
 
-    PlayerInventory *Actor::getPlayerInventory() {
-        return SYM_CALL(
-                PlayerInventory * (*)(Actor * ),
-                SymHook::MSSYM_B1QE11getSuppliesB1AA6PlayerB2AAE23QEAAAEAVPlayerInventoryB2AAA2XZ,
-                this
-        );
-    }
+//    PlayerInventory *Actor::getPlayerInventory() {
+//        return SYM_CALL(
+//                PlayerInventory * (*)(Actor * ),
+//                SymHook::MSSYM_B1QE11getSuppliesB1AA6PlayerB2AAE23QEAAAEAVPlayerInventoryB2AAA2XZ,
+//                this
+//        );
+//    }
 
-    unsigned int Actor::getSelectSlot() {
-        //!这个api是有问题的
-        return 0;
-        //  return *(unsigned int *) reinterpret_cast<char *>(this + 168);
-    }
+//    unsigned int Actor::getSelectSlot() {
+//        //!这个api是有问题的
+//        return 0;
+//        //  return *(unsigned int *) reinterpret_cast<char *>(this + 168);
+//    }
 
     //from: Actor::getLevel
     Level *Actor::getLevel() { //NOLINT

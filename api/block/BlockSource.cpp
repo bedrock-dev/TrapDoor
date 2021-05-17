@@ -63,32 +63,32 @@ namespace trapdoor {
                 );
     }
 
-    uint8_t BlockSource::getRawBrightness(const BlockPos *pos) {
-        uint8_t result = 255;
-        auto r = SYM_CALL(
-                uint8_t * (*)(BlockSource * , uint8_t *,
-                const BlockPos *, bool, bool),
-                MSSYM_B1QE16getRawBrightnessB1AE11BlockSourceB2AAA4QEBAB1QE12AUBrightnessB2AAE12AEBVBlockPosB3AAUA2N1B1AA1Z,
-                this,
-                &result,
-                pos,
-                true,
-                true
-        );
-        printf("%d %d\n", result, *r);
-        return result;
+//    uint8_t BlockSource::getRawBrightness(const BlockPos *pos) {
+//        uint8_t result = 255;
+//        auto r = SYM_CALL(
+//                uint8_t * (*)(BlockSource * , uint8_t *,
+//                const BlockPos *, bool, bool),
+//                MSSYM_B1QE16getRawBrightnessB1AE11BlockSourceB2AAA4QEBAB1QE12AUBrightnessB2AAE12AEBVBlockPosB3AAUA2N1B1AA1Z,
+//                this,
+//                &result,
+//                pos,
+//                true,
+//                true
+//        );
+//        printf("%d %d\n", result, *r);
+//        return result;
+//
+//    }
 
-    }
-
-    int BlockSource::getMaterial(const BlockPos *pos) {
-        return
-                *SYM_CALL(int * (*)(BlockSource * , int, int, int),
-                          MSSYM_B1QE11getMaterialB1AE11BlockSourceB2AAE16QEBAAEBVMaterialB2AAA3HHHB1AA1Z,
-                          this,
-                          pos->x,
-                          pos->y,
-                          pos->z
-                );
-    }
+//    int BlockSource::getMaterial(const BlockPos *pos) {
+//        return
+//                *SYM_CALL(int * (*)(BlockSource * , int, int, int),
+//                          MSSYM_B1QE11getMaterialB1AE11BlockSourceB2AAE16QEBAAEBVMaterialB2AAA3HHHB1AA1Z,
+//                          this,
+//                          pos->x,
+//                          pos->y,
+//                          pos->z
+//                );
+//    }
 
 }
