@@ -19,8 +19,8 @@ namespace trapdoor {
                 MSSYM_MD5_794b421b4bf67101f7418cd0d78bad83,
                 this, vector
         );
-        return "this api was removed";
-
+        //   return "this api was removed";
+        return vector.empty() ? "unknown" : vector[0];
     }
 
     //获取某个特殊值状态下的方块对象

@@ -65,8 +65,6 @@ namespace mod {
                 ->then(
                         ARG("hopper", "command.func.hopper.desc", BOOL,
                             {
-                                FUNC_DISABLED(player)
-                                return;
                                 this->hopperChannelManager.setAble(holder->getBool());
                                 info(player, LANG("command.func.hopper.set"), holder->getBool());
                             }))
@@ -78,8 +76,6 @@ namespace mod {
                            }))
                 ->then(ARG("rotate", "command.func.rotate.desc", BOOL,
                            {
-                               FUNC_DISABLED(player)
-                               return;
                                this->rotationHelper.setAble(holder->getBool());
                                info(player, LANG("command.func.rotate.set"),
                                     holder->getBool());
@@ -104,7 +100,6 @@ namespace mod {
 
 //史莱姆显示
         this->slimeChunkHelper.registerCommand(this->commandManager);
-//漏斗计数器
 
 //便捷模式切换
         commandManager.registerCmd("o", "command.o.desc")

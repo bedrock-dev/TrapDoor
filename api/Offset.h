@@ -10,8 +10,11 @@ namespace off {
     constexpr uint64_t BLOCKACTOR_GET_POSITION = 0x2c;
 
 
+    //)OK
+    constexpr uint64_t BLOCK_GET_LEGACY = 0x10;
+
     //todo:
-    constexpr uint64_t BLOCKLEGACY_GET_BLOCK_ID = 0x10c;
+    constexpr uint64_t BLOCKLEGACY_GET_BLOCK_ID = 0x148;
 
     //todo:
     constexpr uint64_t BASECIRCUITCOMPONENT_GET_STRENGTH = 0x34;

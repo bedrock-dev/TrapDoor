@@ -16,8 +16,9 @@ namespace trapdoor {
 
     //获取方块legacy
     BlockLegacy *Block::getLegacy() {
-        return offset_cast<BlockLegacy *>(this, 16);
+        return *offset_cast<BlockLegacy **>(this, off::BLOCK_GET_LEGACY);
     }
+
 
     //获取方块名字
     std::string Block::getName() {
