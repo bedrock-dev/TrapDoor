@@ -51,7 +51,6 @@ namespace trapdoor {
         trapdoor::info(player, stringBuilder);
     }
 
-
     //从电路图中获取电路组件
     BaseCircuitComponent *CircuitSceneGraph::getBaseCircuitComponent(BlockPos *pos) {
         using namespace SymHook;

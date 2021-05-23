@@ -11,10 +11,6 @@ struct Biome;
 
 namespace trapdoor {
 
-/*
- * 方块接口
- *
- */
     class BlockLegacy;
 
     class Block {
@@ -28,8 +24,6 @@ namespace trapdoor {
         //获取特殊值
         int getVariant();
 
-        //是否是空气
-        bool isAir();
     };
 
 
@@ -42,7 +36,7 @@ namespace trapdoor {
         BlockPos *getPosition();
 
         //获取方块对象
-      //  Block *getBlock();
+        //  Block *getBlock();
     };
 
 }

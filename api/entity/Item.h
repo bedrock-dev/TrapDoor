@@ -15,7 +15,7 @@ namespace trapdoor {
 
         int getNum();
 
-        void setNull();
+        // void setNull();
     };
 }
 

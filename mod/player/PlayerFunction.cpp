@@ -84,9 +84,6 @@ namespace mod {
         component->basePrint(graph, player);
     }
 
-    void PlayerFunction::registerSelfCommand(trapdoor::CommandManager &commandManager) {
-        //todo
-    }
 
     void PlayerFunction::broadcastSimpleInfo(trapdoor::Actor *player) {
         auto pos = player->getPos()->toBlockPos();

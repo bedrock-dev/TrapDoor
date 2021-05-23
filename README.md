@@ -1,21 +1,25 @@
-# 1.16.210 - Not supported fully
 <h1>
     <img src="img/trapdoor logo.svg" alt="Trapdoor" width="400" /> 
 </h1>
 
-[简体中文](README_zh.md)|English
+[简体中文](README_zh.md)| English 
+
 
 ## What's this
 
-Trapdoor is a dll plugin(mod) used for BDS,which porvides rich functions for survival players. It's similar to 
-java edition's [carpet](https://github.com/gnembon/fabric-carpet) mod.
+Trapdoor is a dll plugin(mod) used for BDS,which porvides rich functions for survival players. It's similar to java
+edition's [carpet](https://github.com/gnembon/fabric-carpet) mod.
+
 ## Download
+
 [Releases](https://github.com/hhhxiao/TrapDoor/releases)
+
 ## Install & Usage
 
 [Chinese Trapdoor Wiki](https://github.com/hhhxiao/TrapDoor/wiki)
 <br>
 [English Trapdoor Wiki](https://github.com/hhhxiao/TrapDoor/wiki/Home-en-US)
+
 ## Credits
 
 ### Minecraft
@@ -54,6 +58,7 @@ Thanks for the follow game players who make suggestions and feedback bugs:
 - 阿阎mr
 - 玲珑芯
 - Sysca11
+
 ## Contributors
 
 <table>
@@ -67,10 +72,11 @@ Thanks for the follow game players who make suggestions and feedback bugs:
 </table>
 
 ## Translators
--  <a href="https://github.com/0x506978656c"><img src="https://avatars.githubusercontent.com/u/66031115?s=96&v=4" width="15px;" alt=""/><b> ! Pixel </b></sub></a><a href="https://github.com/hhhxiao/TrapDoor/commits?author=0x506978656c" title="Code">🌎</a></td>
--  <a href="https://github.com/TimothyGrass"><img src="https://avatars.githubusercontent.com/u/77906640?s=96&v=4" width="15px;" alt=""/><b> TimothyGrass </b></sub></a><a href="#" title="Code">🌎</a></td>
 
-
+- <a href="https://github.com/0x506978656c"><img src="https://avatars.githubusercontent.com/u/66031115?s=96&v=4" width="15px;" alt=""/><b> !
+  Pixel </b></sub></a><a href="https://github.com/hhhxiao/TrapDoor/commits?author=0x506978656c" title="Code">🌎</a></td>
+- <a href="https://github.com/TimothyGrass"><img src="https://avatars.githubusercontent.com/u/77906640?s=96&v=4" width="15px;" alt=""/><b>
+  TimothyGrass </b></sub></a><a href="#" title="Code">🌎</a></td>
 
 ## license
 

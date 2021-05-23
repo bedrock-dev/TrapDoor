@@ -95,8 +95,6 @@ add_library(${MOD_NAME}
         mod/os/process_stat.cpp
         mod/village/POIInstance.cpp
         mod/eval/Eval.cpp
-        mod/dirtyLitematica/SelectRegion.cpp
-        mod/dirtyLitematica/SimpleLitematica.cpp
         mod/test/TrapdoorTest.cpp
         mod/fakePlayer/FakePlayerClient.cpp
         mod/fakePlayer/easywsclient.cpp

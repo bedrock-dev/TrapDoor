@@ -30,11 +30,6 @@ namespace trapdoor {
         return debugStr.erase(0, 6);
     }
 
-    //是否是空气
-    bool Block::isAir() {
-        return this->getLegacy()->getBlockID() == AIR;
-    }
-
     //获取特殊值
     int Block::getVariant() {
         return *offset_cast<char *>(this, off::BLOCK_GET_VARIANT);

@@ -13,7 +13,7 @@
 #include "block/BlockSource.h"
 #include "block/CircuitComponent.h"
 #include "world/Dimension.h"
-#include "dirtyLitematica/SelectRegion.h"
+//#include "dirtyLitematica/SelectRegion.h"
 
 namespace mod {
     struct MeasureData {
@@ -53,8 +53,6 @@ namespace mod {
         static void broadcastSimpleInfo(trapdoor::Actor *player);
 
         void printRedstoneInfo(trapdoor::Actor *player, trapdoor::BlockPos &pos);
-
-        void registerSelfCommand(trapdoor::CommandManager &commandManager);
 
         static void listAllPlayers(trapdoor::Actor *player);
 

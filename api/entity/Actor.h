@@ -81,8 +81,6 @@ namespace trapdoor {
         //获取玩家背包
         PlayerInventory *getPlayerInventory();
 
-        unsigned int getSelectSlot();
-
         //获取站立位置
         BlockPos getStandPosition();
 

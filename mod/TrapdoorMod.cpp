@@ -22,7 +22,6 @@ namespace mod {
         this->spawnHelper.tick();
         this->playerFunctions.tick();
         this->slimeChunkHelper.tick();
-        this->simpleLitematica.tick();
         this->fakePlayerClient->tick();
     }
 

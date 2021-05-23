@@ -30,11 +30,11 @@ namespace trapdoor {
         return *offset_cast<char *>(this, off::ITEM_GET_NUM);
     }
 
-    void ItemStackBase::setNull() {
-        SYM_CALL(void(*)(ItemStackBase * ),
-                 SymHook::MSSYM_B1QA7setNullB1AE13ItemStackBaseB2AAA7UEAAXXZ,
-                 this);
-    }
+//    void ItemStackBase::setNull() {
+//        SYM_CALL(void(*)(ItemStackBase * ),
+//                 SymHook::MSSYM_B1QA7setNullB1AE13ItemStackBaseB2AAA7UEAAXXZ,
+//                 this);
+//    }
 }  // namespace trapdoor
 
 using namespace SymHook;
