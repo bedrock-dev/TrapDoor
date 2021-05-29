@@ -26,9 +26,6 @@ namespace trapdoor {
                 true, player, s, v);
     }
 
-
-
-
 }
 
 

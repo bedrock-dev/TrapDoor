@@ -29,6 +29,7 @@ namespace mod {
         const size_t BOUND_OFFSET = 104;
         const size_t POPULATION_OFFSET = 22;
         const size_t GOLEM_NUM_OFFSET = 30;
+        const size_t DWELLER_MAP_OFFSET = 160;
     }
 
     //get village population
@@ -128,19 +129,19 @@ namespace mod {
         //  this->showTimeStamp();
     }
 
-    void Village::showTimeStamp() {
-        auto *dwellerList = reinterpret_cast<std::array<std::unordered_map<trapdoor::ActorUniqueID,
-                uint64_t, trapdoor::ActorUniqueIDHash>, 4> * >((char *) this + 152);
-        for (int i = 1; i < 4; i++) {
-            auto dwellers = dwellerList->operator[](i);
-            for (const auto &d:dwellers) {
-                auto actor = trapdoor::bdsMod->fetchEntity(d.first.uid, false);
-                if (actor) {
-                    actor->setNameTag(std::to_string(d.second));
-                }
-            }
-        }
-    }
+//    void Village::showTimeStamp() {
+//        auto *dwellerList = reinterpret_cast<std::array<std::unordered_map<trapdoor::ActorUniqueID,
+//                uint64_t, trapdoor::ActorUniqueIDHash>, 4> * >((char *) this + 152);
+//        for (int i = 1; i < 4; i++) {
+//            auto dwellers = dwellerList->operator[](i);
+//            for (const auto &d:dwellers) {
+//                auto actor = trapdoor::bdsMod->fetchEntity(d.first.uid, false);
+//                if (actor) {
+//                    actor->setNameTag(std::to_string(d.second));
+//                }
+//            }
+//        }
+//    }
 
     std::string Village::getDebugInfo() {
         using namespace trapdoor;
@@ -210,6 +211,7 @@ namespace mod {
         }
         return false;
     }
+
 
     void Village::removeAllTags() {
         auto *map = reinterpret_cast<std::unordered_map<trapdoor::ActorUniqueID,
