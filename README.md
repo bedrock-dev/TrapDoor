@@ -10,6 +10,13 @@
 Trapdoor is a dll plugin(mod) used for BDS,which porvides rich functions for survival players. It's similar to java
 edition's [carpet](https://github.com/gnembon/fabric-carpet) mod.
 
+## Example
+
+![](./img/sample/hsa.png)
+
+more example imags see [here](./example.md)
+
+
 ## Download
 
 [Releases](https://github.com/hhhxiao/TrapDoor/releases)
