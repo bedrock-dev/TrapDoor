@@ -1,39 +1,36 @@
-<h1>
-    <img src="img/trapdoor logo.svg" alt="Trapdoor" width="400" /> 
-</h1>
+![title-banner](img/trapdoor logo.svg)
 
 [简体中文](README_zh.md)| English 
 
+Trapdoor is a dll plugin(mod) used for BDS,which porvides rich functions for survival players:
+- World ticking speed change
 
-## What's this
+- Village bounds and iron golem spawn area display
 
-Trapdoor is a dll plugin(mod) used for BDS,which porvides rich functions for survival players. It's similar to java
-edition's [carpet](https://github.com/gnembon/fabric-carpet) mod.
+- In-game observer mode
 
-## Example
+- CPU& memory usage
 
-![](./img/sample/hsa.png)
+- Mspt and TPS measure
 
-more example imags see [here](./example.md)
+This mod completely follows features of vanilla game, which will NOT change any features without notifying users, so it is suitable for use this mod in survival server.
+  ![screenshot](./img/sc.png)
 
 
-## Download
+### Download
 
-[Releases](https://github.com/hhhxiao/TrapDoor/releases)
+You can download at  [Releases](https://github.com/hhhxiao/TrapDoor/releases) page.
 
-## Install & Usage
+### Install & Usage
+You can view this mod's wiki at  [English Trapdoor Wiki](https://github.com/hhhxiao/TrapDoor/wiki/Home-en-US).
 
-[Chinese Trapdoor Wiki](https://github.com/hhhxiao/TrapDoor/wiki)
-<br>
-[English Trapdoor Wiki](https://github.com/hhhxiao/TrapDoor/wiki/Home-en-US)
+### Credits
 
-## Credits
-
-### Minecraft
+#### Minecraft
 
 [Minecraft](https://www.minecraft.net/zh-hans)
 
-### 3rd-party libs or codes
+#### 3rd-party libs or codes
 
 - [https://github.com/microsoft/Detours](https://github.com/microsoft/Detours)
 
@@ -47,28 +44,19 @@ more example imags see [here](./example.md)
 
 - [https://github.com/progschj/ThreadPool](https://github.com/progschj/ThreadPool)
 
-### Special
+#### Special
 
-Special thanks to Player for providing readable source code
+Special thanks to [Player] for providing readable source code
 
-### Players
+#### Players
 
 Thanks for the follow game players who make suggestions and feedback bugs:
 
-- 木月酸与云龙碱
-- 莵道三室戸
-- orange_31
-- panda4994万岁
-- 梵蒂冈_273
-- OEOTYAN
-- Origin 0110
-- 阿阎mr
-- 玲珑芯
-- Sysca11
+木月酸与云龙碱、莵道三室戸、orange_31、panda4994万岁、梵蒂冈_273、OEOTYAN、Origin 0110、阿阎mr、玲珑芯、Sysca11
 
-## Contributors
+### Contributors
 
-<table>
+<table frame=void>
   <tr>
     <td align="center"><a href="https://github.com/hhhxiao"><img src="https://avatars0.githubusercontent.com/u/33011851?v=4?s=100" width="60px;" alt=""/><br /><sub><b>AgNO3</b></sub></a><br /><a href="https://github.com/hhhxiao/TrapDoor/commits?author=hhhxiao" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/OEOTYAN"><img src="https://avatars2.githubusercontent.com/u/58554322?v=4?s=100" width="60px;" alt=""/><br /><sub><b>OEOTYAN</b></sub></a><br /><a href="https://github.com/hhhxiao/TrapDoor/commits?author=OEOTYAN" title="Code">💻</a></td>
@@ -78,13 +66,16 @@ Thanks for the follow game players who make suggestions and feedback bugs:
   </tr>
 </table>
 
-## Translators
+
+### Translators
 
 - <a href="https://github.com/0x506978656c"><img src="https://avatars.githubusercontent.com/u/66031115?s=96&v=4" width="15px;" alt=""/><b> !
   Pixel </b></sub></a><a href="https://github.com/hhhxiao/TrapDoor/commits?author=0x506978656c" title="Code">🌎</a></td>
 - <a href="https://github.com/TimothyGrass"><img src="https://avatars.githubusercontent.com/u/77906640?s=96&v=4" width="15px;" alt=""/><b>
   TimothyGrass </b></sub></a><a href="#" title="Code">🌎</a></td>
 
-## license
+---
 
-GPL v3
+![JetBrainsLogo](./img/jetbrains.svg)<br>
+Special thanks to [JetBrains](https://www.jetbrains.com/?from=BlueMap) for giving out an OpenSource-Licence for development!
+
