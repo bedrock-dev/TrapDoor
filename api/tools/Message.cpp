@@ -20,10 +20,11 @@ namespace trapdoor {
         L_DEBUG("send message [%s] to %s", s.c_str(), player->getNameTag().c_str());
         std::vector<std::string> v;
         v.emplace_back("test");
-        SYM_CALL(
-                void(*)(bool, Actor *,const std::string &, std::vector<std::string> &),
-                MSSYM_MD5_24be62e9330073695808606844de0d99,
-                true, player, s, v);
+        SymCall("?displayLocalizableMessage@CommandUtils@@YAX_NAEAVPlayer@@AEBV?$basic"
+            "_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$vector@V?$bas"
+            "ic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$ba"
+            "sic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@4@@Z", void,
+            bool, Actor*, const std::string&, std::vector<std::string> &)(true, player, s, v);
     }
 
 }

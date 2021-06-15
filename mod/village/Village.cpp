@@ -11,7 +11,6 @@
 #include "graphics/Graphics.h"
 #include <random>
 
-using namespace SymHook;
 
 //village tick
 #include "POIInstance.h"
@@ -44,12 +43,7 @@ namespace mod {
 
     //get village owned bed poi count(max is villager num + 32)
     int Village::getBedPOICount() {
-        return
-                SYM_CALL(
-                        int(*)(Village * ),
-                        MSSYM_B1QE14getBedPOICountB1AA7VillageB2AAA4QEBAB1UA3KXZ,
-                        this
-                );
+        return SymCall("?getBedPOICount@Village@@QEBA_KXZ", int, Village*)(this);
     }
 
     //get worked villager num
@@ -87,11 +81,7 @@ namespace mod {
 
     //get village radius
     float Village::getRadius() {
-        return SYM_CALL(
-                float(*)(Village * ),
-                MSSYM_B1QE20getApproximateRadiusB1AA7VillageB2AAA7QEBAMXZ,
-                this
-        );
+        return SymCall("?getApproximateRadius@Village@@QEBAMXZ", float, Village*)(this);
     }
 
     trapdoor::AABB Village::getPOIRange() {
@@ -402,7 +392,7 @@ namespace mod {
 
 
 THook(
-        void, MSSYM_B1QA4tickB1AA7VillageB2AAE10QEAAXUTickB2AAE15AEAVBlockSourceB3AAAA1Z,
+        void, "?tick@Village@@QEAAXUTick@@AEAVBlockSource@@@Z",
         mod::Village *vill, void *tick, void * blockSource
 ) {
     //village tick

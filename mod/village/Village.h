@@ -1,7 +1,6 @@
 #pragma once
 
-#include "lib/mod.h"
-#include "lib/SymHook.h"
+
 #include "graphics/BlockPos.h"
 #include "entity/Actor.h"
 #include "graphics/AABB.h"

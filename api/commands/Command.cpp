@@ -1,8 +1,7 @@
 //
 // Created by xhy on 2020/8/26.
 //
-#include "lib/mod.h"
-#include "lib/SymHook.h"
+#include <lib/Loader.h>
 #include <map>
 #include <vector>
 #include "Command.h"
@@ -18,7 +17,6 @@ namespace trapdoor {
 // 注释这个函数一级指令就没提示了
     void
     regMCBECommand(const std::string &command, const char *description, CommandPermissionLevel level, bool noCheat) {
-        using namespace SymHook;
         if (!trapdoor::bdsMod) {
             L_ERROR("get a nullptr of trapdoor::mod");
             return;
@@ -28,29 +26,26 @@ namespace trapdoor {
             return;
         }
         auto cheatOption = noCheat ? NoCheat : CommandFlag2::Cheat;
-        SYM_CALL(
-                void(*)(void * cmdReg,
-                const std::string&, const char*, char, char, char),
-                MSSYM_MD5_8574de98358ff66b5a913417f44dd706,
-                trapdoor::bdsMod->getCommandRegistry(),
-                command, description, level, None, cheatOption
-        );
-    }
+        SymCall("?registerCommand@CommandRegistry@@QEAAXAEBV?$basic"
+            "_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@P"
+            "EBDW4CommandPermissionLevel@@UCommandFlag@@3@Z", void, void*,
+            const std::string&, const char*, char, char, char)(trapdoor::bdsMod->getCommandRegistry(),
+                command, description, level, None, cheatOption);
+
+    } 
 }
 
 
 //? hook: 命令注册过程，服务器的命令注册和命令执行是分开的，二者并不绑定，因此可以直接调用这个函数来获得基本的命令提示
-using namespace SymHook;
 
-THook(
-        void,
-        MSSYM_MD5_8574de98358ff66b5a913417f44dd706,
+THook(void,"?registerCommand@CommandRegistry@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$al"
+    "locator@D@2@@std@@PEBDW4CommandPermissionLevel@@UCommandFlag@@3@Z",
         void *commandRegistry,
         const std::string &name,
         const char *str,
         trapdoor::CommandPermissionLevel level,
-        trapdoor::CommandFlag1 flag1,
-        trapdoor::CommandFlag2 flag2
+        trapdoor::CommandFlag1& flag1,
+        trapdoor::CommandFlag2& flag2
 ) {
     //这里是重新定义权限等级的，可以降低命令等级到游戏内执行
     auto newLevel = trapdoor::bdsMod->resetVanillaCommandLevel(name, level);
@@ -69,13 +64,8 @@ THook(
 }
 
 //这个函数用来处理BDS中的命令发送数据包,也就是命令接口
-THook(
-        void,
-        MSSYM_B1QA6handleB1AE20ServerNetworkHandlerB2AAE26UEAAXAEBVNetworkIdentifierB2AAE24AEBVCommandRequestPacketB3AAAA1Z,
-        void *handler,
-        trapdoor::NetworkIdentifier *id,
-        void * commandPacket
-) {
+THook(void,"?handle@ServerNetworkHandler@@UEAAXAEBVNetworkIdentifier@@AEBVCommandRequestPacket@@@Z",
+        void* handler, trapdoor::NetworkIdentifier *id,void* commandPacket){
     //找到发送命令的玩家
 
     trapdoor::Actor *source = nullptr;
