@@ -155,7 +155,7 @@ using namespace SymHook;
 // HSA collector
 THook(
         void,
-        MSSYM_B2QUE17spawnStructureMobB1AA7SpawnerB2AAE20AEAAXAEAVBlockSourceB2AAE12AEBVBlockPosB2AAE25AEBUHardcodedSpawningAreaB1AE10LevelChunkB2AAE19AEBVSpawnConditionsB3AAAA1Z,
+    MSSYM_MD5_98a1693eb37395744d5e37d7597c1455,
         void *spawner,
         trapdoor::BlockSource *blockSource,
         trapdoor::BlockPos *blockPos,
