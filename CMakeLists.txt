@@ -62,11 +62,12 @@ target_include_directories(${MOD_API_NAME}
         api/tools
         )
 
+target_link_libraries(${MOD_API_NAME} ${PROJECT_SOURCE_DIR}/api/lib/Chakra.lib)
 target_link_libraries(${MOD_API_NAME} ${PROJECT_SOURCE_DIR}/api/lib/detours.lib)
 #target_link_libraries(${MOD_API_NAME} ${PROJECT_SOURCE_DIR}/api/lib/sqlite3.lib)
 
 ####################这里是具体功能##########################
-set(TRAPDOOR_VERSION 0.9.48)
+set(TRAPDOOR_VERSION 0.9.49)
 set(MCBE_VERSION 1.17.1.01)
 set(BETA OFF)
 set(TEST_NUMBER 1)

@@ -1,35 +1,26 @@
 //
 // Created by xhy on 2020/12/16.
 //
-
+#include "lib/Loader.h"
 #include <vector>
 #include "BlockLegacy.h"
-#include "lib/mod.h"
-#include "lib/SymHook.h"
 #include "tools/CastHelper.h"
 #include "Offset.h"
 
 namespace trapdoor {
-    using namespace SymHook;
 
     std::string BlockLegacy::getDebugText() {
         std::vector<std::string> vector;
-        SYM_CALL(
-                void(*)(BlockLegacy * , std::vector<std::string> &),
-                MSSYM_MD5_794b421b4bf67101f7418cd0d78bad83,
-                this, vector
-        );
-        //   return "this api was removed";
+        SymCall("?getDebugText@BlockLegacy@@QEBAXAEAV?$vector@V?$basic_string@DU?$char_t"
+            "raits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_t"
+            "raits@D@std@@V?$allocator@D@2@@std@@@2@@std@@AEBVBlockPos@@@Z",
+            void, BlockLegacy*, std::vector<std::string> &)(this, vector);
         return vector.empty() ? "unknown" : vector[0];
     }
 
     //获取某个特殊值状态下的方块对象
     Block *BlockLegacy::tryGetStateBlock(unsigned short state) {
-        return SYM_CALL(
-                Block * (*)(BlockLegacy * , unsigned short),
-                MSSYM_B1QE25tryGetStateFromLegacyDataB1AE11BlockLegacyB2AAE13QEBAPEBVBlockB2AAA1GB1AA1Z,
-                this, state
-        );
+        return SymCall("?tryGetStateFromLegacyData@BlockLegacy@@QEBAPEBVBlock@@G@Z", Block*, BlockLegacy*, unsigned short)(this, state);
     }
 
     BlockType BlockLegacy::getBlockID() {

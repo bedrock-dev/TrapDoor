@@ -3,8 +3,7 @@
 //
 #include "Particle.h"
 #include <string>
-#include "lib/mod.h"
-#include "lib/SymHook.h"
+#include "Loader.h"
 
 #include "Graphics.h"
 #include "entity/Actor.h"
@@ -13,7 +12,6 @@
 #include "tools/DirtyLogger.h"
 
 namespace trapdoor {
-    using namespace SymHook;
 
     void spawnParticle(Vec3 p, std::string &type, int dimType) {
         auto pos = p.toBlockPos();
@@ -28,10 +26,9 @@ namespace trapdoor {
         }
         auto maxDist = trapdoor::bdsMod->getCfg().particleViewDistance;
         if (p.distanceTo(*player->getPos()) > static_cast<float>(maxDist))return;
-        SYM_CALL(void(*)(Level * , std::string, Vec3 *, void *),
-                 MSSYM_MD5_52e7de092fab8d042fb516e31fc9756f,
-                 level, type, &p,
-                 player->getDimension());
+        SymCall("?spawnParticleEffect@Level@@UEAAXAEBV?$basic_string@DU?$char_tr"
+            "aits@D@std@@V?$allocator@D@2@@std@@AEBVVec3@@PEAVDimension@@@Z",void, Level*, std::string, Vec3*, void*)(level, type, &p,
+                player->getDimension());
     }
 
 

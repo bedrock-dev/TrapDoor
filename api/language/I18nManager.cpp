@@ -8,7 +8,7 @@
 #include <fstream>
 #include "BDSMod.h"
 #include <iostream>
-
+#include <Windows.h>
 namespace trapdoor {
     void I18nManager::findLanguageFile() {
         namespace fs = std::filesystem;

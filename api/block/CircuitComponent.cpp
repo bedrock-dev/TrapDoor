@@ -2,8 +2,7 @@
 // Created by xhy on 2021/1/20.
 //
 
-#include "lib/mod.h"
-#include "lib/SymHook.h"
+
 #include "CircuitComponent.h"
 #include "tools/DirtyLogger.h"
 #include "graphics/Vec3.h"
@@ -13,7 +12,7 @@
 #include "CastHelper.h"
 #include "BlockSource.h"
 #include "Offset.h"
-
+#include "lib/Loader.h"
 namespace trapdoor {
 
     //获取能量等级
@@ -53,13 +52,8 @@ namespace trapdoor {
 
     //从电路图中获取电路组件
     BaseCircuitComponent *CircuitSceneGraph::getBaseCircuitComponent(BlockPos *pos) {
-        using namespace SymHook;
-        return SYM_CALL(
-                BaseCircuitComponent * (*)(CircuitSceneGraph * graph,
-                const BlockPos *pos),
-                MSSYM_B1QE16getBaseComponentB1AE17CircuitSceneGraphB2AAE28QEAAPEAVBaseCircuitComponentB2AAE12AEBVBlockPosB3AAAA1Z,
-                this, pos
-        );
+        return SymCall("?getBaseComponent@CircuitSceneGraph@@QEAAPEAVBaseCircuitComponent@@AEBVBlockPos@@@Z", BaseCircuitComponent*, CircuitSceneGraph * ,
+            const BlockPos * )(this, pos);
     }
 }
 

@@ -4,10 +4,8 @@
 
 #include "BDSMod.h"
 #include "tools/DirtyLogger.h"
-#include "SymHook.h"
-#include "lib/mod.h"
 #include "tools/Message.h"
-
+#include "lib/Loader.h"
 namespace trapdoor {
     //全局模组对象
     BDSMod *bdsMod = nullptr;
@@ -65,13 +63,7 @@ namespace trapdoor {
     }
 
     trapdoor::Actor *BDSMod::fetchEntity(int64_t id, bool b) {
-        using namespace SymHook;
-        return SYM_CALL(
-                Actor * (*)(Level * ,
-                int64_t, bool),
-                MSSYM_B1QE11fetchEntityB1AA5LevelB2AAE13UEBAPEAVActorB2AAE14UActorUniqueIDB3AAUA1NB1AA1Z,
-                this->getLevel(), id, b
-        );
+        return SymCall("?fetchEntity@Level@@UEBAPEAVActor@@UActorUniqueID@@_N@Z", Actor*, Level*, int64_t, bool)(this->getLevel(), id, b);
     }
 
     void BDSMod::registerLangCommand() {
