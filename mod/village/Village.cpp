@@ -134,7 +134,7 @@ namespace mod {
 //    }
 
     std::string Village::getDebugInfo() {
-        using namespace trapdoor;
+        /* using namespace trapdoor;
         trapdoor::MessageBuilder builder;
         auto pos = this->getCenter().toBlockPos();
         auto minPos = this->getBounds().p1.toBlockPos();
@@ -145,6 +145,7 @@ namespace mod {
                 .text("Dweller: ").sTextF(MSG_COLOR::GREEN, "%d / %d %d\n", getWorkedVillagerNum(), getPopulation(),
                                           getIronGolemNum())
                 .text("POIS:\n      Bed          |          Work      |\n");
+
         auto *map = reinterpret_cast<std::unordered_map<trapdoor::ActorUniqueID,
                 std::vector<std::weak_ptr<mod::POIInstance>>, trapdoor::ActorUniqueIDHash> *>((char *) this + 96);
         bool existAlarm = false;
@@ -153,7 +154,6 @@ namespace mod {
                 if (index == 0) {
                     builder.text("|");
                 }
-
                 auto poi = villager.second[index].lock();
                 if (index == 1) {
                     if (poi)existAlarm = true;
@@ -171,7 +171,8 @@ namespace mod {
             }
         }
         builder.textF("Alarm:  %d", existAlarm);
-        return builder.get();
+        return builder.get();    */
+        return "null";
     }
 
     bool Village::printVillagerInfo(trapdoor::Actor *player, trapdoor::Actor *v) {

@@ -451,7 +451,7 @@ THook(
 
 THook(
         void,
-        "MSSYM_B1QA4tickB1AE13EntitySystemsB2AAE23QEAAXAEAVEntityRegistryB3AAAA1Z",
+        "?tick@EntitySystems@@QEAAXAEAVEntityRegistry@@@Z",
         void *entitySystem,
         void * registry
 ) {

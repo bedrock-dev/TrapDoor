@@ -1,0 +1,33 @@
+﻿  Building Custom Rule C:/Users/GuXiang/source/repos/dreamguxiang/TrapDoor/CMakeLists.txt
+  dllmain.cpp
+  TrapdoorMod.cpp
+  SingleFunctions.cpp
+  HopperCounter.cpp
+  ConfigManager.cpp
+  Village.cpp
+  GameTick.cpp
+  HsaManager.cpp
+  SimpleProfiler.cpp
+  ActorProfiler.cpp
+  SpawnHelper.cpp
+  BlockRotationHelper.cpp
+  PlayerFunction.cpp
+  SimpleBuilder.cpp
+  SlimeChunkHelper.cpp
+  BackupHelper.cpp
+  process_stat.cpp
+  POIInstance.cpp
+  Eval.cpp
+  TrapdoorTest.cpp
+  正在生成代码...
+  正在编译...
+  FakePlayerClient.cpp
+  easywsclient.cpp
+  正在生成代码...
+detours.lib(detours.obj) : warning LNK4099: 未找到 PDB“detours.pdb”(使用“detours.lib(detours.obj)”或在“C:\Users\GuXiang\source\repos\dreamguxiang\TrapDoor\Release\detours.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+detours.lib(disasm.obj) : warning LNK4099: 未找到 PDB“detours.pdb”(使用“detours.lib(disasm.obj)”或在“C:\Users\GuXiang\source\repos\dreamguxiang\TrapDoor\Release\detours.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+detours.lib(modules.obj) : warning LNK4099: 未找到 PDB“detours.pdb”(使用“detours.lib(modules.obj)”或在“C:\Users\GuXiang\source\repos\dreamguxiang\TrapDoor\Release\detours.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+dllmain.obj : warning LNK4197: 多次指定导出“HookFunction”；使用第一个规范
+dllmain.obj : warning LNK4197: 多次指定导出“GetServerSymbol”；使用第一个规范
+    正在创建库 C:/Users/GuXiang/source/repos/dreamguxiang/TrapDoor/Release/trapdoor-0.9.50-1.17.1.01.lib 和对象 C:/Users/GuXiang/source/repos/dreamguxiang/TrapDoor/Release/trapdoor-0.9.50-1.17.1.01.exp
+  trapdoor-0.9.50-1.17.1.01.vcxproj -> C:\Users\GuXiang\source\repos\dreamguxiang\TrapDoor\Release\trapdoor-0.9.50-1.17.1.01.dll
