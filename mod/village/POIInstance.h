@@ -20,20 +20,21 @@ namespace mod {
     };
 
     //!这个类不要做任何修改
+    //! 已坏，待修
     class POIInstance {
     public:
-        char gap[0x80];
-        trapdoor::BlockPos poiPos; //位置
-        uint64_t ownerCount = 0; //拥有者数量
-        bool useBoundingBox = true; //?
-        uint64_t weight{}; //权重
-        uint64_t ownerCapacity = 0; //容量
-        std::string soundEvent;
-        int16_t arriveFailureCount = 0;  //到达失败的次数
-        float radius = 0; //半径
-        POIType poiType; //类型
+         char gap[0x98];
+         trapdoor::BlockPos poiPos; //位置
+         uint64_t ownerCount = 0; //拥有者数量
+         uint64_t ownerCapacity = 0; //容量
+         uint64_t weight{}; //权重
+         float radius = 0; //半径
+         POIType poiType; //类型
+         std::string soundEvent;
+         int16_t arriveFailureCount = 0;  //到达失败的次数
+         bool useBoundingBox = true; //?
     };
-    //bad
+
 
     class DwellerComponent {
     public:
