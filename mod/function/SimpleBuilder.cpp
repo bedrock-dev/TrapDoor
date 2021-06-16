@@ -39,6 +39,7 @@ namespace mod {
                     pos.x = standPos.x + X;
                     pos.z = standPos.z + Yi;
                     player->getBlockSource()->setBlock(&pos, block);
+                    std::cout << " a\n";
                     pos.z = standPos.z - Yi;
                     player->getBlockSource()->setBlock(&pos, block);
                     pos.x = standPos.x - X;
