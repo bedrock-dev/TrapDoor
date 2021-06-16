@@ -6,15 +6,12 @@
 #include "tools/Message.h"
 #include "tools/MsgBuilder.h"
 #include "HopperCounter.h"
-#include "lib/SymHook.h"
-#include "lib/mod.h"
 #include "BDSMod.h"
 #include "tools/DirtyLogger.h"
 #include "block/BlockSource.h"
 #include "tools/MsgBuilder.h"
 #include "TrapdoorMod.h"
 
-using namespace SymHook;
 
 
 namespace mod {
@@ -103,7 +100,7 @@ namespace mod {
 
 THook(
         void,
-        MSSYM_B1QA7setItemB1AE16HopperBlockActorB2AAE19UEAAXHAEBVItemStackB3AAAA1Z,
+    "?setItem@HopperBlockActor@@UEAAXHAEBVItemStack@@@Z",
         trapdoor::BlockActor *hopperActor,
         unsigned int index,
         trapdoor::ItemStackBase * itemStack

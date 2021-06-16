@@ -5,10 +5,10 @@
 #ifndef TRAPDOOR_MESSAGE_H
 #define TRAPDOOR_MESSAGE_H
 
-#include "lib/mod.h"
 #include "world/Level.h"
 #include "BDSMod.h"
 #include <string>
+#include "lib/Loader.h"
 
 #define STR(x) #x
 #define C_DARK_RED(x) "§4" STR(x) "§r"

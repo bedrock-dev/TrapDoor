@@ -28,7 +28,7 @@ namespace off {
 
     //OK
     //!from Player::tickWorld
-    constexpr uint64_t PLAYER_GET_BLOCKSOURCE = 0x69;
+    constexpr uint64_t PLAYER_GET_BLOCKSOURCE = 109;
 
 
     //OK
@@ -38,7 +38,7 @@ namespace off {
 
     //OK
     //! from  ServerPlayer::isHostingPlayer
-    constexpr uint64_t ACTOR_GET_CLIENT_ID = 0x9F0;
+    constexpr uint64_t ACTOR_GET_CLIENT_ID = 2712;
 
     //todo
     constexpr uint64_t ACTOR_ID_GET_NAME = 0x20;
@@ -54,7 +54,7 @@ namespace off {
 
     constexpr uint64_t DIMENSION_IS_RS_TICK = 0x45;
     //! Spawner::_spawnMobCluster
-    constexpr uint64_t MOB_SPAWN_DATA_GET_RULE = 0xb0;
+    constexpr uint64_t MOB_SPAWN_DATA_GET_RULE = 184;
 
     constexpr std::pair<uint64_t, uint64_t> LEVEL_FOREACH_PLAYER = {0xE, 0xF};
 

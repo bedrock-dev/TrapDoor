@@ -24,17 +24,12 @@ namespace trapdoor {
 
     void initBlockMap() {
         L_DEBUG("init block map");
-        using namespace SymHook;
         std::function < bool(trapdoor::BlockLegacy & b) > function(
                 [&](trapdoor::BlockLegacy &l) {
                     getBlockMap()[l.getBlockID()] = &l;
                     return true;
                 });
-        SYM_CALL(
-                void(*)(const std::function < bool(BlockLegacy &)> *),
-                MSSYM_B1QE12forEachBlockB1AE17BlockTypeRegistryB2AAA4SAXVB2QDA8functionB3ADDA3A6AB1UE16NAEBVBlockLegacyB3AAAA1ZB1AA3stdB3AAAA1Z,
-                &function
-        );
+        SymCall("?forEachBlock@BlockTypeRegistry@@SAXV?$function@$$A6A_NAEBVBlockLegacy@@@Z@std@@@Z", void, const std::function < bool(BlockLegacy&)> *)(&function);
     }
 
     trapdoor::Block *getBlockByID(BlockType type, unsigned short variant) {

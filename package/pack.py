@@ -4,8 +4,9 @@ from os import path
 import zipfile
 
 
-build_dir =  '../cmake-build-release'
+build_dir =  '../release'
 lang_folders = 'lang/'
+rodb_file = 'RoDB.exe'
 config_file = 'trapdoor-config.json'
 other_files = ['../changelog.md','../README.md','../README_zh.md','../trapdoor-disclaimer.md','../LICENSE']
 
@@ -41,7 +42,7 @@ dll_file = dll_files[len(dll_files)-1-idx]
 full_dll_file_path = build_dir+'/'+ dll_file
 os.system('upx '+full_dll_file_path)
 ## check lang and config.json
-if not  (path.exists(lang_folders) and  path.exists(config_file)):
+if not  (path.exists(lang_folders) and  path.exists(config_file) and path.exists(rodb_file)):
     input('can not find land folder or config_file')
     exit(0)
 
@@ -69,5 +70,6 @@ for other_file in other_files:
     print('pack:  ' + other_file_name)
     release_zip_file.write(other_file,arcname=other_file_name)
 release_zip_file.write(config_file)
+release_zip_file.write(rodb_file)
 release_zip_file.close()
 input('success pack release:' + version+'.zip\n')
