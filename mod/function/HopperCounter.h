@@ -5,6 +5,7 @@
 #ifndef TRAPDOOR_HOPPER_H
 #define TRAPDOOR_HOPPER_H
 
+#include "lib/mod.h"
 #include <map>
 #include <array>
 #include <vector>

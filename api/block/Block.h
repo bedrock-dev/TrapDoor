@@ -1,9 +1,10 @@
 #pragma once
 
+#include "lib/mod.h"
+#include "lib/SymHook.h"
 #include "graphics/BlockPos.h"
 #include "BlockLegacy.h"
 #include <vector>
-#include "lib/Loader.h"
 
 struct Biome;
 

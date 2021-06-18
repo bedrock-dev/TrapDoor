@@ -223,10 +223,11 @@ namespace mod::tick {
     }
 }
 
+using namespace SymHook;
 
 THook(
         void,
-        "?tick@ServerLevel@@UEAAXXZ",
+        MSSYM_B1QA4tickB1AE11ServerLevelB2AAA7UEAAXXZ,
         trapdoor::Level * serverLevel
 ) {
     if (!trapdoor::bdsMod) {
@@ -304,7 +305,7 @@ THook(
 //ServerPlayer::tickWorld
 THook(
         void,
-        "?tickWorld@ServerPlayer@@UEAAHAEBUTick@@@Z",
+        MSSYM_B1QA9tickWorldB1AE12ServerPlayerB2AAE13UEAAHAEBUTickB3AAAA1Z,
         trapdoor::Actor *p,
         void * tick
 ) {
@@ -314,7 +315,7 @@ THook(
 //Dimension::tick
 THook(
         void,
-        "?tick@Dimension@@UEAAXXZ",
+        MSSYM_B1QA4tickB1AA9DimensionB2AAA7UEAAXXZ,
         void * dim
 ) {
     if (mod::tick::gameProfiler.inProfiling) {
@@ -329,7 +330,7 @@ THook(
 //LevelChunk::tick
 THook(
         void,
-        "?tick@LevelChunk@@QEAAXAEAVBlockSource@@AEBUTick@@@Z",
+        MSSYM_B1QA4tickB1AE10LevelChunkB2AAE20QEAAXAEAVBlockSourceB2AAA8AEBUTickB3AAAA1Z,
         void *levelChunk,
         trapdoor::BlockSource *blockSource,
         size_t * tick
@@ -348,7 +349,7 @@ THook(
 //LevelChunk::tickBlocks
 THook(
         void,
-        "?tickBlocks@LevelChunk@@QEAAXAEAVBlockSource@@@Z",
+        MSSYM_B1QE10tickBlocksB1AE10LevelChunkB2AAE20QEAAXAEAVBlockSourceB3AAAA1Z,
         void *levelChunk,
         void *blockSource,
         INT64 a3,
@@ -371,7 +372,7 @@ THook(
 //LevelChunk::tickBlockEntities
 THook(
         void,
-        "?tickBlockEntities@LevelChunk@@QEAAXAEAVBlockSource@@@Z",
+        MSSYM_B1QE17tickBlockEntitiesB1AE10LevelChunkB2AAE20QEAAXAEAVBlockSourceB3AAAA1Z,
         void *levelChunk,
         void * blockSource
 ) {
@@ -413,7 +414,7 @@ THook(
 //the server will crash if hook this function
 THook(
         void,
-        "?tickPendingTicks@BlockTickingQueue@@QEAA_NAEAVBlockSource@@AEBUTick@@H_N@Z",
+        MSSYM_B1QE16tickPendingTicksB1AE17BlockTickingQueueB2AAA4QEAAB1UE16NAEAVBlockSourceB2AAA8AEBUTickB2AAA1HB1UA1NB1AA1Z,
         void *queue,
         trapdoor::BlockSource *source,
         const int *until,
@@ -433,7 +434,7 @@ THook(
 //Dimension::tick
 THook(
         void,
-        "?tickRedstone@Dimension@@UEAAXXZ",
+        MSSYM_B1QE12tickRedstoneB1AA9DimensionB2AAA7UEAAXXZ,
         void * dim
 ) {
     if (mod::tick::gameProfiler.inProfiling) {
@@ -451,7 +452,7 @@ THook(
 
 THook(
         void,
-        "?tick@EntitySystems@@QEAAXAEAVEntityRegistry@@@Z",
+        MSSYM_B1QA4tickB1AE13EntitySystemsB2AAE23QEAAXAEAVEntityRegistryB3AAAA1Z,
         void *entitySystem,
         void * registry
 ) {
@@ -486,7 +487,7 @@ THook(
 //pendingAdd
 THook(
         void,
-        "?processPendingAdds@CircuitSceneGraph@@AEAAXXZ",
+        MSSYM_B1QE18processPendingAddsB1AE17CircuitSceneGraphB2AAA7AEAAXXZ,
         void * graph
 ) {
     if (mod::tick::gameProfiler.inProfiling) {
@@ -502,7 +503,7 @@ THook(
 //pnding remove
 THook(
         void,
-        "?removeComponent@CircuitSceneGraph@@AEAAXAEBVBlockPos@@@Z",
+        MSSYM_B1QE15removeComponentB1AE17CircuitSceneGraphB2AAE17AEAAXAEBVBlockPosB3AAAA1Z,
         void *graph,
         void * bs
 ) {
@@ -521,7 +522,7 @@ THook(
 //实体性能分析的钩子函数
 THook(
         void,
-        "?tick@Actor@@QEAA_NAEAVBlockSource@@@Z",
+        MSSYM_B1QA4tickB1AA5ActorB2AAA4QEAAB1UE16NAEAVBlockSourceB3AAAA1Z,
         trapdoor::Actor *actor,
         trapdoor::BlockSource * blockSource
 ) {

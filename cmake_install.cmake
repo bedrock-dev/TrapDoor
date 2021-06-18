@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/GuXiang/source/repos/dreamguxiang/TrapDoor
+# Install script for directory: C:/Users/GuXiang/source/repos/TrapDoor
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/GuXiang/source/repos/dreamguxiang/TrapDoor/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/GuXiang/source/repos/TrapDoor/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

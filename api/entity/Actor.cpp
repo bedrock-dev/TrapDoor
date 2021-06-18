@@ -1,39 +1,52 @@
 //
 // Created by xhy on 2020/8/25.
 //
-// 
-// 
-//
+
 #include <bitset>
 #include "Actor.h"
+#include "lib/mod.h"
 #include "tools/MsgBuilder.h"
 #include "world/Biome.h"
 #include "block/BlockSource.h"
 #include "Dimension.h"
 #include "tools/CastHelper.h"
 #include "Offset.h"
-#include "lib/Loader.h"
 
 namespace trapdoor {
 
+    using namespace SymHook;
 
     uint64_t NetworkIdentifier::getHash() {
-        return SymCall("?getHash@NetworkIdentifier@@QEBA_KXZ", uint64_t, NetworkIdentifier*)(this);
+        return SYM_CALL(
+                uint64_t(*)(NetworkIdentifier * ),
+                SymHook::MSSYM_B1QA7getHashB1AE17NetworkIdentifierB2AAA4QEBAB1UA3KXZ,
+                this
+        );
     }
 
 
     Vec3 *Actor::getPos() {
-        return SymCall("?getPos@Actor@@UEBAAEBVVec3@@XZ", Vec3*, Actor*)(this);
-
+        return SYM_CALL(
+                Vec3 * (*)(void * ),
+                SymHook::MSSYM_B1QA6getPosB1AA5ActorB2AAE12UEBAAEBVVec3B2AAA2XZ,
+                this
+        );
     }
 
     void Actor::getViewActor(Vec3 *vec3, float val) {
-        SymCall("?getViewVector@Actor@@QEBA?AVVec3@@M@Z", Vec3*, Actor*, Vec3*, float)(this, vec3, val);
+        SYM_CALL(
+                Vec3 * (*)(Actor * , Vec3 *, float),
+                SymHook::MSSYM_B1QE13getViewVectorB1AA5ActorB2AAA4QEBAB1QA6AVVec3B2AAA1MB1AA1Z,
+                this, vec3, val
+        );
     }
 
 
     std::string Actor::getNameTag() {
-        return SymCall("?getNameTag@Actor@@UEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ", std::string&, Actor*)(this);
+        return *SYM_CALL(std::string * (*)(Actor * ),
+                         SymHook::MSSYM_MD5_7044ab83168b0fd345329e6566fd47fd,
+                         this
+        );
     }
 
     BlockSource *Actor::getBlockSource() {
@@ -43,8 +56,11 @@ namespace trapdoor {
     }
 
     void Actor::setGameMode(int mode) {
-        SymCall("?setPlayerGameType@ServerPlayer@@UEAAXW4GameType@@@Z", void, Actor*, int)(this, mode);
-
+        SYM_CALL(void(*)(Actor * , int),
+                 SymHook::MSSYM_B1QE17setPlayerGameTypeB1AE12ServerPlayerB2AAE15UEAAXW4GameTypeB3AAAA1Z,
+                 this,
+                 mode
+        );
     }
 
     int Actor::getDimensionID() {
@@ -70,13 +86,19 @@ namespace trapdoor {
     }
 
     PlayerPermissionLevel Actor::getCommandLevel() {
-        return SymCall("?getCommandPermissionLevel@Player@@UEBA?AW4CommandPermissionLevel@@XZ", PlayerPermissionLevel, Actor*)(this);
-
+        return SYM_CALL(
+                PlayerPermissionLevel(*)(Actor * ),
+                SymHook::MSSYM_B1QE25getCommandPermissionLevelB1AA6PlayerB2AAA4UEBAB1QE25AW4CommandPermissionLevelB2AAA2XZ,
+                this
+        );
     }
 
     PlayerInventory *Actor::getPlayerInventory() {
-        return SymCall("?getSupplies@Player@@QEAAAEAVPlayerInventory@@XZ", PlayerInventory*, Actor*)(this);
-
+        return SYM_CALL(
+                PlayerInventory * (*)(Actor * ),
+                SymHook::MSSYM_B1QE11getSuppliesB1AA6PlayerB2AAE23QEAAAEAVPlayerInventoryB2AAA2XZ,
+                this
+        );
     }
 
 
@@ -88,10 +110,9 @@ namespace trapdoor {
 
     std::string Actor::getActorId() {
         std::vector<std::string> info;
-        SymCall("?getDebugText@Actor@@UEAAXAEAV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@"
-            "2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@@Z",
-            void, void*, std::vector<std::string> &)(this,info);
-
+        SYM_CALL(void(*)(void * , std::vector<std::string> &),
+                 SymHook::MSSYM_MD5_f04fad6bac034f1e861181d3580320f2,
+                 this, info);
         if (info.empty())return "null";
         std::string name = info[0];
         name.erase(0, 23); //remove:Entity:minecraft
@@ -106,9 +127,13 @@ namespace trapdoor {
     }
 
     void Actor::setNameTag(const std::string &name) {
-        SymCall("?setNameTag@Actor@@UEAAXAEBV?$basic_string@DU?$char_traits@D@std@"
-            "@V?$allocator@D@2@@std@@@Z", void, Actor*, const std::string)(this, name);
-
+        SYM_CALL(
+                void(*)(void * actor,
+                const std::string &str),
+            MSSYM_MD5_2f9772d3549cbbfca05bc883e3dd5c30,
+                this,
+                name
+        );
     }
 
     std::string ActorDefinitionIdentifier::getName() {
@@ -119,8 +144,14 @@ namespace trapdoor {
 }
 
 
-THook(void,"?attack@Player@@UEAA_NAEAVActor@@@Z",
-        trapdoor::Actor *p1, trapdoor::Actor * p2) {
+using namespace SymHook;
+
+THook(
+        void,
+        MSSYM_B1QA6attackB1AA6PlayerB2AAA4UEAAB1UE10NAEAVActorB3AAAA1Z,
+        trapdoor::Actor *p1,
+        trapdoor::Actor * p2
+) {
     if (p2) {
         auto result = trapdoor::bdsMod->attackEntityHook(p1, p2);
         if (result) {

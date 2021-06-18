@@ -6,7 +6,7 @@
 #include "tools/Message.h"
 #include "tools/DirtyLogger.h"
 #include "Command.h"
-#include "lib/Loader.h"
+#include "mod.h"
 
 namespace trapdoor {
     namespace {
@@ -121,24 +121,28 @@ namespace trapdoor {
 
     }
 
+    using namespace SymHook;
+
+    //获取指令队列
+    THook(VA,
+        MSSYM_MD5_3b8fb7204bf8294ee636ba7272eec000,
+          VA self
+    ) {
+        cmdQueue = original(self);
+        return cmdQueue;
+    }
+
     //执行原版指令
     bool CommandManager::runVanillaCommand(const std::string &command) {
         if (cmdQueue) {
-            SymCall("??$inner_enqueue@$0A@AEBV?$basic_string@DU?$char_traits@"
-                "D@std@@V?$allocator@D@2@@std@@@?$SPSCQueue@V?$basic_string@DU"
-                "?$char_traits@D@std@@V?$allocator@D@2@@std@@$0CAA@@@AEAA_NAEB"
-                "V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z",bool, VA, std::string)(cmdQueue,
-                    command
+            SYM_CALL(bool(*) (VA, std::string),
+                     MSSYM_MD5_b5c9e566146b3136e6fb37f0c080d91e,
+                     cmdQueue,
+                     command
             );
             return true;
         }
         return false;
     }
 
-}
-
-//获取指令队列
-THook(VA, "??0?$SPSCQueue@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$0CAA@@@QEAA@_K@Z", VA self) {
-    trapdoor::cmdQueue = original(self);
-    return trapdoor::cmdQueue;
 }

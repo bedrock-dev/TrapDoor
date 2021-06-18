@@ -2,8 +2,6 @@
 
 [简体中文](README_zh.md)| English 
 
-## 此为symdb版本，用法详见wiki
-
 Trapdoor is a dll plugin(mod) used for BDS,which porvides rich functions for survival players:
 - World ticking speed change
 

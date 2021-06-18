@@ -50,7 +50,7 @@ namespace trapdoor {
 
         bool isSlimeChunk() const;
 
-        bool operator<(const BlockPos2& rhs) const;
+        bool operator<(const BlockPos2 &rhs) const;
     };
 
     typedef BlockPos2 ChunkPos;
@@ -70,15 +70,15 @@ namespace trapdoor {
 
         explicit BlockPos(float x) : BlockPos(x, x, x) {}
 
-        BlockPos(float _x, float _y, float _z) : x((int)_x), y((int)_y), z((int)_z) {}
+        BlockPos(float _x, float _y, float _z) : x((int) _x), y((int) _y), z((int) _z) {}
 
-        bool operator==(const BlockPos& v) const;
+        bool operator==(const BlockPos &v) const;
 
-        bool operator!=(const BlockPos& v) const;
+        bool operator!=(const BlockPos &v) const;
 
-        float distanceTo(const BlockPos& blockPos) const;
+        float distanceTo(const BlockPos &blockPos) const;
 
-        friend std::ostream& operator<<(std::ostream& os, const BlockPos& vec3);
+        friend std::ostream &operator<<(std::ostream &os, const BlockPos &vec3);
 
         Vec3 toVec3() const;
 
@@ -93,11 +93,11 @@ namespace trapdoor {
         BlockPos2 InChunkOffset() const;
 
 
-        int operator*(const BlockPos& pos) const;
+        int operator*(const BlockPos &pos) const;
 
-        BlockPos operator+(const BlockPos& pos) const;
+        BlockPos operator+(const BlockPos &pos) const;
 
-        bool operator<(const BlockPos& rhs) const;
+        bool operator<(const BlockPos &rhs) const;
     };
 
 }

@@ -11,6 +11,8 @@
 #include "entity/Actor.h"
 #include "graphics/AABB.h"
 #include "graphics/Particle.h"
+#include "lib/SymHook.h"
+#include "lib/mod.h"
 #include "tools/DirtyLogger.h"
 #include "tools/Message.h"
 #include "tools/MsgBuilder.h"
@@ -148,12 +150,12 @@ namespace mod {
     }
 
 }  // namespace mod
-
+using namespace SymHook;
 
 // HSA collector
 THook(
         void,
-    "?_spawnStructureMob@Spawner@@AEAAXAEAVBlockSource@@AEBVBlockPos@@AEBUHardcodedSpawningArea@LevelChunk@@AEBVSpawnConditions@@@Z",
+    MSSYM_MD5_98a1693eb37395744d5e37d7597c1455,
         void *spawner,
         trapdoor::BlockSource *blockSource,
         trapdoor::BlockPos *blockPos,

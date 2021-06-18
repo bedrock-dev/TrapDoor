@@ -4,9 +4,13 @@
 
 #include "Biome.h"
 
+
+#include "lib/mod.h"
+#include "lib/SymHook.h"
 #include "Offset.h"
-#include "lib/Loader.h"
+
 namespace trapdoor {
+    using namespace SymHook;
 
     std::string Biome::getBiomeName() {
         char *str = reinterpret_cast<char *>(this) + off::BIOME_GET_NAME;
@@ -14,8 +18,11 @@ namespace trapdoor {
     }
 
     int Biome::getBiomeType() {
-        return SymCall("?getBiomeType@Biome@@QEBA?AW4VanillaBiomeTypes@@XZ", int, Biome*)(this);
-
+        return SYM_CALL(
+                int(*)(Biome * ),
+                MSSYM_B1QE12getBiomeTypeB1AA5BiomeB2AAA4QEBAB1QE20AW4VanillaBiomeTypesB2AAA2XZ,
+                this
+        );
     }
 
 }

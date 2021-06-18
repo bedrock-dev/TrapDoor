@@ -6,12 +6,14 @@
 #include "entity/Actor.h"
 #include "graphics/BlockPos.h"
 #include "Dimension.h"
-#include "Loader.h"
+#include "lib/mod.h"
+#include "lib/SymHook.h"
 #include "tools/DirtyLogger.h"
 #include "Block.h"
 #include "Offset.h"
 
 namespace trapdoor {
+    using namespace SymHook;
 
     void Level::forEachPlayer(const std::function<void(Actor *)> &todo) {
         //!硬编码
@@ -39,8 +41,12 @@ namespace trapdoor {
     }
 
     Dimension *Level::getDimFromID(int id) {
-        return SymCall("?getDimension@Level@@UEBAPEAVDimension@@V?$AutomaticID@VDimension@@H@@@Z", Dimension*, Level*, int)(this,
-            id
+
+        return SYM_CALL(
+                Dimension*(*)(Level * , int),
+                MSSYM_B1QE12getDimensionB1AA5LevelB2AAE17UEBAPEAVDimensionB2AAA1VB2QDE11AutomaticIDB1AE10VDimensionB2AAA1HB3AAAA1Z,
+                this,
+                id
         );
     }
 

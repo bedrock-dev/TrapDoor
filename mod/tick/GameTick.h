@@ -7,6 +7,8 @@
 
 
 #include "SimpleProfiler.h"
+#include "lib/mod.h"
+#include "lib/SymHook.h"
 #include "village/Village.h"
 #include <vector>
 #include <chrono>

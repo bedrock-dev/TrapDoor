@@ -6,6 +6,8 @@
 #include "graphics/Particle.h"
 #include "graphics/Graphics.h"
 #include "graphics/AABB.h"
+#include "lib/SymHook.h"
+#include "lib/mod.h"
 #include "tools/Message.h"
 #include "tools/MsgBuilder.h"
 #include "tools/DirtyLogger.h"
@@ -115,17 +117,25 @@ namespace mod {
 
 
     void findNextSpawnPosition(trapdoor::BlockSource *source, trapdoor::BlockPos *pos, unsigned int material) {
-        SymCall("?findNextSpawnBlockUnder@Spawner@@SA_NAEBVBlockSource@@AEAVBlockPos@@W4MaterialType@@W4SpawnBlockRequirements@@@Z",
-            void, trapdoor::BlockSource*, trapdoor::BlockPos*, unsigned int)(source, pos, material);
+        using namespace SymHook;
+        SYM_CALL(
+                void(*)(trapdoor::BlockSource * , trapdoor::BlockPos *, unsigned int),
+                MSSYM_B1QE23findNextSpawnBlockUnderB1AA7SpawnerB2AAA2SAB1UE16NAEBVBlockSourceB2AAE12AEAVBlockPosB2AAE14W4MaterialTypeB2AAE24W4SpawnBlockRequirementsB3AAAA1Z,
+                source, pos, material
+        );
     }
 
     MobSpawnData *
     getMobToSpawn(trapdoor::BlockLegacy *legacy, const SpawnConditions &spawnConditions,
                   trapdoor::BlockSource *blockSource) {
-        return SymCall("?getMobToSpawn@BlockLegacy@@UEBAPEBVMobSpawnerData@@AEBVSpawnConditions@@AEAVBlockSource@@@Z"
-            , MobSpawnData*, trapdoor::BlockLegacy*, const SpawnConditions&, trapdoor::BlockSource*)(legacy,
+        using namespace SymHook;
+        return SYM_CALL(
+                MobSpawnData*(*)(trapdoor::BlockLegacy * ,const SpawnConditions&, trapdoor::BlockSource*source),
+                MSSYM_B1QE13getMobToSpawnB1AE11BlockLegacyB2AAE22UEBAPEBVMobSpawnerDataB2AAE19AEBVSpawnConditionsB2AAE15AEAVBlockSourceB3AAAA1Z,
+                legacy,
                 spawnConditions,
-                blockSource);
+                blockSource
+        );
     }
 
     MobSpawnRules *MobSpawnData::getSpawnRules() {
