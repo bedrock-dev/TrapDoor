@@ -21,7 +21,7 @@ namespace trapdoor {
         std::string name;
         SYM_CALL(
                 void(*)(ItemStackBase * , std::string *),
-                MSSYM_B1QA7getNameB1AE13ItemStackBaseB2AAA4QEBAB1QA2AVB2QDA5basicB1UA6stringB1AA2DUB2QDA4charB1UA6traitsB1AA1DB1AA3stdB2AAA1VB2QDA9allocatorB1AA1DB1AA12B2AAA3stdB2AAA2XZ,
+            MSSYM_MD5_6d581a35d7ad70fd364b60c3ebe93394,
                 this, &name);
         return name;
     }

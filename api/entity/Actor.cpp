@@ -44,7 +44,7 @@ namespace trapdoor {
 
     std::string Actor::getNameTag() {
         return *SYM_CALL(std::string * (*)(Actor * ),
-                         SymHook::MSSYM_B1QE10getNameTagB1AA5ActorB2AAA8UEBAAEBVB2QDA5basicB1UA6stringB1AA2DUB2QDA4charB1UA6traitsB1AA1DB1AA3stdB2AAA1VB2QDA9allocatorB1AA1DB1AA12B2AAA3stdB2AAA2XZ,
+                         SymHook::MSSYM_MD5_7044ab83168b0fd345329e6566fd47fd,
                          this
         );
     }
@@ -130,7 +130,7 @@ namespace trapdoor {
         SYM_CALL(
                 void(*)(void * actor,
                 const std::string &str),
-                MSSYM_B1QE10setNameTagB1AA5ActorB2AAA9UEAAXAEBVB2QDA5basicB1UA6stringB1AA2DUB2QDA4charB1UA6traitsB1AA1DB1AA3stdB2AAA1VB2QDA9allocatorB1AA1DB1AA12B2AAA3stdB3AAAA1Z,
+            MSSYM_MD5_2f9772d3549cbbfca05bc883e3dd5c30,
                 this,
                 name
         );

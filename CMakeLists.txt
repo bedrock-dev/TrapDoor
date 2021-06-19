@@ -10,6 +10,11 @@ endif ()
 set(CMAKE_BUILD_TYPE release)
 set(MOD_API_NAME trapdoor)
 
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Zi")
+set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /DEBUG /OPT:REF /OPT:ICF")
+set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "${CMAKE_SHARED_LINKER_FLAGS_RELEASE} /DEBUG /OPT:REF /OPT:ICF")
+
+
 add_library(${MOD_API_NAME} STATIC
         api/BDSMod.cpp
         api/block/Block.cpp
@@ -61,8 +66,8 @@ target_link_libraries(${MOD_API_NAME} ${PROJECT_SOURCE_DIR}/api/lib/detours.lib)
 #target_link_libraries(${MOD_API_NAME} ${PROJECT_SOURCE_DIR}/api/lib/sqlite3.lib)
 
 ####################这里是具体功能##########################
-set(TRAPDOOR_VERSION 0.9.48)
-set(MCBE_VERSION 1.16.221.01)
+set(TRAPDOOR_VERSION 0.9.50)
+set(MCBE_VERSION 1.17.1.01)
 set(BETA OFF)
 set(TEST_NUMBER 1)
 add_definitions(-DTD_VERSION="${TRAPDOOR_VERSION}")
