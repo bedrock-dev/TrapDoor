@@ -59,10 +59,17 @@ Thanks for the follow game players who make suggestions and feedback bugs:
 <table frame=void>
   <tr>
     <td align="center"><a href="https://github.com/hhhxiao"><img src="https://avatars0.githubusercontent.com/u/33011851?v=4?s=100" width="60px;" alt=""/><br /><sub><b>AgNO3</b></sub></a><br /><a href="https://github.com/hhhxiao/TrapDoor/commits?author=hhhxiao" title="Code">💻</a></td>
+    
     <td align="center"><a href="https://github.com/OEOTYAN"><img src="https://avatars2.githubusercontent.com/u/58554322?v=4?s=100" width="60px;" alt=""/><br /><sub><b>OEOTYAN</b></sub></a><br /><a href="https://github.com/hhhxiao/TrapDoor/commits?author=OEOTYAN" title="Code">💻</a></td>
+    
     <td align="center"><a href="https://github.com/xiaohengying"><img src="https://avatars2.githubusercontent.com/u/44132837?v=4?s=100" width="60px;" alt=""/><br /><sub><b>xiaohengying</b></sub></a><br /><a href="https://github.com/hhhxiao/TrapDoor/commits?author=xiaohengying" title="Code">💻</a></td>
+    
     <td align="center"><a href="https://github.com/quizhizhe"><img src="https://avatars1.githubusercontent.com/u/42761326?v=4?s=100" width="60px;" alt=""/><br /><sub><b>Qiuzhizhe</b></sub></a><br /><a href="https://github.com/hhhxiao/TrapDoor/commits?author=quizhizhe" title="Code">💻</a></td>
+    
     <td align="center"><a href="https://github.com/Sysca11"><img src="https://avatars.githubusercontent.com/u/46832985?s=96&v=4" width="60px;" alt=""/><br /><sub><b>Sysca11</b></sub></a><br /><a href="https://github.com/hhhxiao/TrapDoor/commits?author=Sysca11" title="Code">💻</a></td>
+    
+    <td align="center"><a href="https://github.com/dreamguxiang"><img src="https://avatars.githubusercontent.com/u/62042544?s=96&v=4" width="60px;" alt=""/><br /><sub><b>dreamguxiang</b></sub></a><br /><a href="https://github.com/hhhxiao/TrapDoor/commits?author=dreamguxiang" title="Code">💻</a></td>
+    
   </tr>
 </table>
 
