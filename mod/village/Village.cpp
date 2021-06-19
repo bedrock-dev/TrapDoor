@@ -25,11 +25,25 @@ using namespace SymHook;
 #include "lib/Remotery.h"
 
 namespace mod {
+
+
     namespace {
         const size_t BOUND_OFFSET = 104;
+        //from Village::_trySpawnDefenderDwellers
         const size_t POPULATION_OFFSET = 22;
+        //from Village::_trySpawnDefenderDwellers
         const size_t GOLEM_NUM_OFFSET = 30;
-        const size_t DWELLER_MAP_OFFSET = 160;
+        //from Village::_trySpawnDefenderDwellers
+        const size_t DWELLER_POI_MAP_OFFSET = 160;
+
+        typedef std::vector<std::weak_ptr<mod::POIInstance>> DwellerData;
+        typedef std::unordered_map<trapdoor::ActorUniqueID, DwellerData, trapdoor::ActorUniqueIDHash>
+                DwellerPOIMapType;
+
+        DwellerPOIMapType *
+        getDwellerPOIMap(Village *v) {
+            return reinterpret_cast<DwellerPOIMapType *>((char *) v + DWELLER_POI_MAP_OFFSET);
+        }
     }
 
     //get village population
@@ -54,6 +68,7 @@ namespace mod {
 
     //get worked villager num
     int Village::getWorkedVillagerNum() {
+        //from Village::_trySpawnDefenderDwellers
         auto timeOfDay = *(reinterpret_cast<int64_t *>(this) + 60) - 24000;
         auto begin = *(reinterpret_cast<int64_t *>(this) + 85);
         auto end = *(reinterpret_cast<int64_t *>(this) + 86);
@@ -104,29 +119,28 @@ namespace mod {
         return trapdoor::AABB(center - Vec3(8, 3, 8), center + Vec3(8, 3, 8));
     }
 
-    void Village::printAllPOIs() {
-    }
 
     void Village::showVillagerStatus() {
-        auto *map = reinterpret_cast<std::unordered_map<trapdoor::ActorUniqueID,
-                std::vector<std::weak_ptr<mod::POIInstance>>, trapdoor::ActorUniqueIDHash> *>((char *) this + 96);
+        auto *map = getDwellerPOIMap(this);
+        L_INFO("%zu", map->size());
         const char *icons[3] = {"☾", "⍾", "☕"};
         for (auto &villager:*map) {
             auto actor = trapdoor::bdsMod->fetchEntity(villager.first.uid, false);
             if (actor) {
                 trapdoor::MessageBuilder builder;
-                for (int index = 0; index < villager.second.size(); ++index) {
-                    auto poi = villager.second[index].lock();
-                    if (poi) {
-                        builder.sTextF(MSG_COLOR::GREEN, " %s ", icons[index]);
-                    } else {
-                        builder.sTextF(MSG_COLOR::RED, " %s ", icons[index]);
-                    }
-                }
+                builder.text("ERROR!");
+//                for (int index = 0; index < villager.second.size(); ++index) {
+//                    auto poi = villager.second[index].lock();
+//                    if (poi) {
+//                        builder.sTextF(MSG_COLOR::GREEN, " %s ", icons[index]);
+//                    } else {
+//                        builder.sTextF(MSG_COLOR::RED, " %s ", icons[index]);
+//                    }
+//                }
                 actor->setNameTag(builder.get());
             }
         }
-        //  this->showTimeStamp();
+        this->showTimeStamp();
     }
 
 //    void Village::showTimeStamp() {
@@ -155,8 +169,7 @@ namespace mod {
                 .text("Dweller: ").sTextF(MSG_COLOR::GREEN, "%d / %d %d\n", getWorkedVillagerNum(), getPopulation(),
                                           getIronGolemNum())
                 .text("POIS:\n      Bed          |          Work      |\n");
-        auto *map = reinterpret_cast<std::unordered_map<trapdoor::ActorUniqueID,
-                std::vector<std::weak_ptr<mod::POIInstance>>, trapdoor::ActorUniqueIDHash> *>((char *) this + 96);
+        auto *map = getDwellerPOIMap(this);
         bool existAlarm = false;
         for (auto &villager:*map) {
             for (int index = 0; index < villager.second.size(); ++index) {
@@ -185,8 +198,7 @@ namespace mod {
     }
 
     bool Village::printVillagerInfo(trapdoor::Actor *player, trapdoor::Actor *v) {
-        auto *map = reinterpret_cast<std::unordered_map<trapdoor::ActorUniqueID,
-                std::vector<std::weak_ptr<mod::POIInstance>>, trapdoor::ActorUniqueIDHash> *>((char *) this + 96);
+        auto *map = getDwellerPOIMap(this);
         for (auto &villager:*map) {
             auto actor = trapdoor::bdsMod->fetchEntity(villager.first.uid, false);
             if (actor && v && actor == v) {
@@ -212,10 +224,9 @@ namespace mod {
         return false;
     }
 
-
+//这个96是一个POI分配表
     void Village::removeAllTags() {
-        auto *map = reinterpret_cast<std::unordered_map<trapdoor::ActorUniqueID,
-                std::vector<std::weak_ptr<mod::POIInstance>>, trapdoor::ActorUniqueIDHash> *>((char *) this + 96);
+        auto *map = getDwellerPOIMap(this);
         for (auto &villager:*map) {
             auto actor = trapdoor::bdsMod->fetchEntity(villager.first.uid, false);
             if (actor && actor->getNameTag().size() > 1) {
@@ -223,6 +234,11 @@ namespace mod {
             }
         }
     }
+
+    void Village::showTimeStamp() {
+
+    }
+
 
     void VillageHelper::clear() {
         villageList.clear();

@@ -19,12 +19,13 @@ namespace trapdoor {
         GREEN = 4
     };
 
-    void drawLine(const Vec3& originPoint,
+    void drawLine(const Vec3 &originPoint,
                   FACING direction,
                   float length,
                   GRAPHIC_COLOR color,
                   int dimType = 0);
-    void drawPoint(const Vec3& point, GRAPHIC_COLOR color, int dimType = 0);
+
+    void drawPoint(const Vec3 &point, GRAPHIC_COLOR color, int dimType = 0);
 }  // namespace trapdoor
 typedef trapdoor::GRAPHIC_COLOR GRAPH_COLOR;
 

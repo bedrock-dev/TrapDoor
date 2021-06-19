@@ -63,7 +63,6 @@ target_include_directories(${MOD_API_NAME}
         )
 
 target_link_libraries(${MOD_API_NAME} ${PROJECT_SOURCE_DIR}/api/lib/detours.lib)
-#target_link_libraries(${MOD_API_NAME} ${PROJECT_SOURCE_DIR}/api/lib/sqlite3.lib)
 
 ####################这里是具体功能##########################
 set(TRAPDOOR_VERSION 0.9.50)

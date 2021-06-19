@@ -8,6 +8,7 @@
 #include <string>
 #include "Graphics.h"
 #include "AABB.h"
+
 namespace trapdoor {
     void spawnParticle(Vec3 p, std::string &type, int dimType = 0);
 
@@ -15,7 +16,7 @@ namespace trapdoor {
 
     void spawnChunkSurfaceParticle(const ChunkPos &pos, int dimID);
 
-    void spawnSlimeChunkParticle(const ChunkPos&pos);
+    void spawnSlimeChunkParticle(const ChunkPos &pos);
 
     void spawnLineParticle(const Vec3 &p, FACING facing, float length, GRAPHIC_COLOR color, int dimType = 0);
 }
