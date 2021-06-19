@@ -43,3 +43,4 @@ jobs:
       with:
         name: TrapDoor
         path: D:/out
+
