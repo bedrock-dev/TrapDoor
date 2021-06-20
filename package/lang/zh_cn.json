@@ -56,7 +56,7 @@
   "command.village.n.desc": "显示最近的村庄的详细信息",
   "village.error.noDweller": "该实体不是居民或不属于任何村庄",
   "village.error.noVillage": "附近没有村庄",
-  "village.info.allVillages": "下面是所有正在加载的村庄",
+  "village.info.allVillages": "下面是所有正在加载的村庄\n",
   "command.func.desc": "一些全局功能的开关",
   "command.func.hopper.desc": "开关漏斗计数器",
   "command.func.hopper.set": "设置漏斗计数器为: %d",

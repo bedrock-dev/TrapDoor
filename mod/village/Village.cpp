@@ -394,11 +394,15 @@ namespace mod {
                 ->then(ARG(
                                "v", "command.village.v.desc", BOOL,
                                {
+                                   FUNC_DISABLED(player);
+                                   return;
                                    this->setShowDwellerStatus(holder->getBool());
                                    info(player, LANG("command.village.v.set"), holder->getBool());
                                }))
                 ->then(ARG("n", "command.village.n.desc", NONE,
                            {
+                               FUNC_DISABLED(player);
+                               return;
                                this->printNearestVillageInfo(
                                        player, *player->getPos());
                            }))
