@@ -2,7 +2,7 @@
 
 
 <h1>
-    <img src="img/trapdoor logo.svg" alt="Trapdoor" width="400" /> 
+    <img src="img/logo.svg" alt="Trapdoor" width="400" /> 
 </h1>
 
 简体中文 |[English](README.md)
