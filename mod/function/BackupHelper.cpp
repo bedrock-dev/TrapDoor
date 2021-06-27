@@ -42,7 +42,7 @@ Copy-Item -Path $SourcePath -Destination "$Destination" -Recurse | Out-Null
 
         std::vector<std::string> getAllBackups(trapdoor::Actor *player) {
             namespace fs = std::filesystem;
-            fs::path backupRootPath("trapdoor-backup");
+            fs::path backupRootPath("plugins/trapdoor/trapdoor-backup");
             if (!fs::exists(backupRootPath)) {
                 trapdoor::error(player, trapdoor::LANG("backup.error.dictNotExist"));
                 return {};

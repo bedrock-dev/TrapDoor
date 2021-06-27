@@ -44,14 +44,14 @@ void mod_init() {
     rmt_CreateGlobalInstance(&rmt);
     //   displayDisclaimerMessageBox(); //免责声明窗口
     initConsole();
-    trapdoor::initLogger("trapdoor.log"); //初始化日志
+    trapdoor::initLogger("plugins/trapdoor/trapdoor.log"); //初始化日志
 #ifdef  BETA
     trapdoor::setDevMode(true);
 #endif
     mod::TrapdoorMod::printCopyRightInfo(); //打印日志
     auto *mod = createBDSModInstance();
     mod->getI18NManager().initialize();
-    auto result = mod->asInstance<mod::TrapdoorMod>()->readConfigFile("trapdoor-config.json"); //读取配置文件
+    auto result = mod->asInstance<mod::TrapdoorMod>()->readConfigFile("plugins/trapdoor/trapdoor-config.json"); //读取配置文件
     if (!result) {
         L_ERROR("can not read configFile, trapdoor won't be injected");
         return;

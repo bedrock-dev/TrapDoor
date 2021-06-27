@@ -12,7 +12,7 @@
 namespace trapdoor {
     void I18nManager::findLanguageFile() {
         namespace fs = std::filesystem;
-        fs::path path("lang");
+        fs::path path("plugins/trapdoor/lang");
         if (!fs::exists(path)) {
             L_WARNING("can't find the language dictionary");
             return;
