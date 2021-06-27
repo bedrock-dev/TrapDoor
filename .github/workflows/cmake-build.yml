@@ -31,20 +31,23 @@ jobs:
       - name: MkDir
         shell: bash
         working-directory: ${{github.workspace}}
-        run: mkdir D:/out
+        run: |
+          mkdir D:/out
+          mkdir -p D:/out/plugins/trapdoor
 
       - name: Copy Output Files
         shell: bash
         working-directory: ${{github.workspace}}
         run: |
-          cp -r ./package/lang D:/out
+          cp -r ./package/lang D:/out/plugins/trapdoor
           cp ./LICENSE D:/out
           cp ./changelog.md D:/out
           cp ./README.md D:/out
           cp ./README_zh.md D:/out
           cp ./Release/*.dll D:/out
-          cp ./package/trapdoor-config.json D:/out
+          cp ./package/trapdoor-config.json D:/out/plugins/trapdoor
           cp ./trapdoor-disclaimer.md D:/out
+
       - name: package
         if: startsWith(github.event.ref, 'refs/tags/')
         shell: pwsh
