@@ -92,6 +92,7 @@ add_library(${MOD_NAME}
         mod/tick/ActorProfiler.cpp
         mod/spawn/SpawnHelper.cpp
         mod/function/BlockRotationHelper.cpp
+        mod/function/FunctionCommands.cpp
         mod/player/PlayerFunction.cpp
         mod/function/SimpleBuilder.cpp
         mod/spawn/SlimeChunkHelper.cpp
@@ -119,6 +120,7 @@ target_include_directories(
         mod/dirtyLitematica
         mod/eval
         mod/fakePlayer
+        
         api
         api/block
         api/commands

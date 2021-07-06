@@ -5,28 +5,32 @@
 #ifndef MOD_SIMPLEBUILDER_H
 #define MOD_SIMPLEBUILDER_H
 
-#include "entity/Actor.h"
 #include "block/BlockSource.h"
+#include "entity/Actor.h"
 #include "tools/noncopyable .h"
 #include "trapdoor.h"
 
 namespace mod {
-    class SimpleBuilder : noncopyable {
-        size_t maxCircleRadius = 30000000;
-        bool enable = false;
-    public:
-        inline void setAble(bool able) { this->enable = able; }
+class SimpleBuilder : noncopyable {
+  size_t maxCircleRadius = 30000000;
+  bool enable = false;
 
-        inline void setMaxRadius(int radius) {
-            this->maxCircleRadius = radius;
-        }
+  bool preCheck(trapdoor::Actor *player, size_t radius) const;
 
-        void buildSphere(trapdoor::Actor *player, size_t size, bool hollow) const;
+ public:
+  inline void setAble(bool able) { this->enable = able; }
 
-        void buildCircle(trapdoor::Actor *player, size_t size, bool hollow) const;
+  inline void setMaxRadius(int radius) { this->maxCircleRadius = radius; }
 
-        void registerDrawCommand(trapdoor::CommandManager &commandManager);
-    };
-}
+  void buildSphere(trapdoor::Actor *player, size_t size, bool hollow) const;
 
-#endif //MOD_SIMPLEBUILDER_H
+  void buildCircle(trapdoor::Actor *player, size_t size, bool hollow) const;
+
+  //按照区块进行fill
+  void chunksFill(trapdoor::Actor *player, size_t size, bool hollow) const;
+
+  void registerDrawCommand(trapdoor::CommandManager &commandManager);
+};
+}  // namespace mod
+
+#endif  // MOD_SIMPLEBUILDER_H

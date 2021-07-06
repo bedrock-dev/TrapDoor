@@ -83,6 +83,7 @@ namespace mod {
 
         inline SingleFunction getSingFunction() { return this->singleFunctions; }
 
+
     };
 }
 

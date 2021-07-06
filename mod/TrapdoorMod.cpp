@@ -12,7 +12,7 @@
 #include "VanillaBlockType.h"
 #include "test/TrapdoorTest.h"
 #include "lib/Remotery.h"
-
+#include "function/FunctionCommands.h"
 namespace mod {
 
     void TrapdoorMod::heavyTick() {
@@ -59,6 +59,8 @@ namespace mod {
         // this->simpleLitematica.registerCommand(this->commandManager);
         this->villageHelper.registerCommand(this->commandManager);
         this->hopperChannelManager.registerCommand(this->commandManager);
+        registerGamemodeSwitchCommand(this->commandManager);
+        this->slimeChunkHelper.registerCommand(this->commandManager);
         //功能开关命令
         commandManager.registerCmd("func", "command.func.desc")
                 ->then(
@@ -90,6 +92,7 @@ namespace mod {
                                this->singleFunctions.preventExplosion = holder->getBool();
                                info(player, LANG("command.func.expl.set"), holder->getBool());
                            }))
+                        
                 ->then(ARG("ncud", "command.func.ncud.desc", BOOL, {
                     FUNC_DISABLED(player)
                     return;
@@ -97,33 +100,8 @@ namespace mod {
                     info(player, LANG("command.func.ncud.set"), holder->getBool());
                 }));
 
-//史莱姆显示
-        this->slimeChunkHelper.registerCommand(this->commandManager);
-
-//便捷模式切换
-        commandManager.registerCmd("o", "command.o.desc")
-                ->EXE({
-                          player->setGameMode(4);
-                          broadcastMsg(LANG("command.o.set"),
-                                       player->getNameTag().c_str());
-                      });
-
-        commandManager.registerCmd("s", "command.s.desc")
-                ->EXE({
-                          player->setGameMode(0);
-                          broadcastMsg(LANG("command.s.set"), player->getNameTag().c_str());
-                      });
-
-        commandManager.registerCmd("c", "command.c.desc")
-                ->EXE({
-                          player->setGameMode(1);
-                          broadcastMsg(LANG("command.c.set"), player->getNameTag().c_str());
-                      });
 
 
-        commandManager.registerCmd("td?", "command.td?.desc")->EXE({
-                                                                       this->commandManager.printfHelpInfo(player);
-                                                                   });
         commandManager.registerCmd("self", "command.self.desc")
                 ->
                         then(ARG(
@@ -170,6 +148,7 @@ namespace mod {
         commandManager.registerCmd("os", "command.os.desc")->EXE({ TrapdoorMod::printOSInfo(player); });
         commandManager.registerCmd("cl", "command.cl.desc", Any, ArgType::STR)->EXE(
                 { mod::eval(player, holder->getString()); });
+        commandManager.registerCmd("td?", "command.td?.desc")->EXE({this->commandManager.printfHelpInfo(player);});
     }
 
 
