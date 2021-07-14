@@ -39,13 +39,13 @@ jobs:
         shell: bash
         working-directory: ${{github.workspace}}
         run: |
-          cp -r ./package/lang D:/out/plugins/trapdoor
+          cp -r ./tools/package/lang D:/out/plugins/trapdoor
           cp ./LICENSE D:/out
           cp ./changelog.md D:/out
           cp ./README.md D:/out
           cp ./README_zh.md D:/out
           cp ./Release/*.dll D:/out
-          cp ./package/trapdoor-config.json D:/out/plugins/trapdoor
+          cp ./tools/package/trapdoor-config.json D:/out/plugins/trapdoor
           cp ./trapdoor-disclaimer.md D:/out
 
       - name: package
