@@ -4,10 +4,11 @@ from os import path
 import zipfile
 
 
-build_dir =  '../cmake-build-release'
+relative_dir = '../../'
+build_dir =  relative_dir+'build'
 lang_folders = 'lang/'
 config_file = 'trapdoor-config.json'
-other_files = ['../changelog.md','../README.md','../README_zh.md','../trapdoor-disclaimer.md','../LICENSE']
+other_files = ['../../changelog.md','../../README.md','../../README_zh.md','../../trapdoor-disclaimer.md','../../LICENSE']
 
 
 #get dll files
@@ -39,7 +40,7 @@ if len(dll_files) > 1:
 dll_file = dll_files[len(dll_files)-1-idx]
 
 full_dll_file_path = build_dir+'/'+ dll_file
-os.system('upx '+full_dll_file_path)
+#os.system('upx '+full_dll_file_path)
 ## check lang and config.json
 if not  (path.exists(lang_folders) and  path.exists(config_file)):
     input('can not find land folder or config_file')
@@ -57,17 +58,19 @@ print('version is '+version)
 print('begin packing...')
 
 #begin pack
+#zip.write 第一个参数是要打包的文件，第二个参数是该文件在压缩包中的相对路径
 release_zip_file = zipfile.ZipFile(version +'.zip','w')
-release_zip_file.write(build_dir+'/'+ dll_file,arcname=dll_file)
+zip_root_path='./plugins/trapdoor/'
+release_zip_file.write(build_dir+'/'+ dll_file,arcname= zip_root_path+dll_file)
 print('pack:  ' + dll_file)
 for file in os.listdir(lang_folders): 
     if file.endswith('.json'):
         print('pack:  ' + file)
-        release_zip_file.write(lang_folders+file)
+        release_zip_file.write(lang_folders+file,arcname=zip_root_path+lang_folders+file)
 for other_file in other_files:
-    other_file_name = other_file[3:]
+    other_file_name = other_file[5:]
     print('pack:  ' + other_file_name)
-    release_zip_file.write(other_file,arcname=other_file_name)
-release_zip_file.write(config_file)
+    release_zip_file.write(other_file,arcname=zip_root_path+'others/'+other_file_name)
+release_zip_file.write(config_file,zip_root_path+config_file)
 release_zip_file.close()
 input('success pack release:' + version+'.zip\n')
