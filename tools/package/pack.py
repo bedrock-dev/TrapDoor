@@ -40,7 +40,7 @@ if len(dll_files) > 1:
 dll_file = dll_files[len(dll_files)-1-idx]
 
 full_dll_file_path = build_dir+'/'+ dll_file
-#os.system('upx '+full_dll_file_path)
+os.system('upx '+full_dll_file_path)
 ## check lang and config.json
 if not  (path.exists(lang_folders) and  path.exists(config_file)):
     input('can not find land folder or config_file')

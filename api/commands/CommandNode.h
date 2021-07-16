@@ -70,7 +70,7 @@ namespace trapdoor {
 
     enum CommandFlag2 : uint8_t {
         Cheat = 0x0,
-        NoCheat = 0x40,
+        NoCheat = 0x80,
     };
 
     inline const char *CommandFlag2ToStr(CommandFlag2 flag2) {
