@@ -1,3 +1,10 @@
+# 1.17.1.01-0.9.6
+2021-07-14
+
+- 修复`village n`和`village v`,新增村庄居民TS值的显示
+- 现在把所有的trapdoor相关文件放到了`bds_root\plugins\trapdoor\`下(#26),使用方法将release解压到bds根目录即可
+
+
 # 1.17.1.01-0.9.51
 2021-07-14
 
