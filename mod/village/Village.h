@@ -38,7 +38,7 @@ class Village {
 
     void printAllPOIs();
 
-    void showVillagerStatus();
+    void showVillagerStatus(int vIdx);
 
     void showTimeStamp();
 

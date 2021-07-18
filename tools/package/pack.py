@@ -61,7 +61,7 @@ print('begin packing...')
 #zip.write 第一个参数是要打包的文件，第二个参数是该文件在压缩包中的相对路径
 release_zip_file = zipfile.ZipFile(version +'.zip','w')
 zip_root_path='./plugins/trapdoor/'
-release_zip_file.write(build_dir+'/'+ dll_file,arcname= './plugins'+dll_file)
+release_zip_file.write(build_dir+'/'+ dll_file,arcname= './plugins/'+dll_file)
 print('pack:  ' + dll_file)
 for file in os.listdir(lang_folders): 
     if file.endswith('.json'):

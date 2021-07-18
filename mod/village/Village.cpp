@@ -133,22 +133,22 @@ trapdoor::AABB Village::getGolemSpawnArea() {
     return trapdoor::AABB(center - Vec3(8, 3, 8), center + Vec3(8, 3, 8));
 }
 
-void Village::showVillagerStatus() {
+void Village::showVillagerStatus(int vIdx) {
     auto *map = getDwellerPOIMap(this);
-    int idx = 0;
+    int idx = 1;
     const char *icons[3] = {"☾", "⍾", "☕"};
     for (auto &villager : *map) {
         auto actor = trapdoor::bdsMod->fetchEntity(villager.first.uid, false);
         if (actor) {
             trapdoor::MessageBuilder builder;
-            builder.textF("%d | ", idx);
+            builder.textF("[%d] %d", vIdx, idx);
             ++idx;
             for (int index = 0; index < 3; ++index) {
                 auto poi = villager.second[index].lock();
                 if (poi) {
-                    builder.sTextF(MSG_COLOR::GREEN, " %s ", icons[index]);
+                    builder.sTextF(MSG_COLOR::GREEN, " %s", icons[index]);
                 } else {
-                    builder.sTextF(MSG_COLOR::RED, " %s ", icons[index]);
+                    builder.sTextF(MSG_COLOR::RED, " %s", icons[index]);
                 }
             }
             actor->setNameTag(builder.get());
@@ -192,7 +192,7 @@ std::string Village::getDebugInfo() {
         .text("Dweller: ")
         .sTextF(MSG_COLOR::GREEN, "%d / %d %d\n", getWorkedVillagerNum(),
                 getPopulation(), getIronGolemNum())
-        .text("POIS:\n      Bed          |          Work      |\n");
+        .text("POIS:\n      Bed          |          Work       |\n");
     auto *map = getDwellerPOIMap(this);
     bool existAlarm = false;
     for (auto &villager : *map) {
@@ -270,7 +270,7 @@ void Village::showTimeStamp() {
         for (auto &v : i) {
             auto actor = trapdoor::bdsMod->fetchEntity(v.first.uid, false);
             if (actor) {
-                actor->setNameTag(actor->getNameTag() + " | " +
+                actor->setNameTag(actor->getNameTag() + " " +
                                   std::to_string(v.second.tick));
             }
         }
@@ -298,9 +298,11 @@ void VillageHelper::draw() {
                 trapdoor::spawnRectangleParticle(
                     village->getGolemSpawnArea(),
                     villageHelperConfig.spawnColor);
+
             if (this->showPOIRange)
                 trapdoor::spawnRectangleParticle(
                     village->getPOIRange(), villageHelperConfig.poiQueryColor);
+
             if (this->showDwellerStatus)
                 this->showVillagerStatus();
         }
@@ -319,7 +321,7 @@ void VillageHelper::list(trapdoor::Actor *player) {
             builder.num(i)
                 .text(": ")
                 .pos(village->getCenter().toBlockPos())
-                .text("r:")
+                .text(" r:")
                 .num(village->getRadius())
                 .text(" p:")
                 .num(village->getWorkedVillagerNum())
@@ -359,8 +361,10 @@ void VillageHelper::test() {
 }
 
 void VillageHelper::showVillagerStatus() {
+    int idx = 0;
     for (auto village : this->villageList) {
-        village.village->showVillagerStatus();
+        idx++;
+        village.village->showVillagerStatus(idx);
     }
 }
 
