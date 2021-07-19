@@ -266,14 +266,21 @@ void Village::removeAllTags() {
 
 void Village::showTimeStamp() {
     auto *tickMap = getDwellerTicklMap(this);
+    int index = 0;
     for (auto i : *tickMap) {
         for (auto &v : i) {
             auto actor = trapdoor::bdsMod->fetchEntity(v.first.uid, false);
             if (actor) {
-                actor->setNameTag(actor->getNameTag() + " " +
-                                  std::to_string(v.second.tick));
+                if (index == 0) {
+                    actor->setNameTag(actor->getNameTag() + " " +
+                                      std::to_string(v.second.tick));
+                } else {
+                    actor->setNameTag(std::to_string(v.second.tick));
+                }
             }
         }
+
+        index++;
     }
 }
 
