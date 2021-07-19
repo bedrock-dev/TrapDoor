@@ -14,7 +14,7 @@ constexpr uint64_t BLOCK_GET_LEGACY = 0x10;
 // todo:BlockLegacy::getBlockItemId(BlockLegacy *this)
 constexpr uint64_t BLOCKLEGACY_GET_BLOCK_ID = 0x14C;
 
-// 
+//
 constexpr uint64_t BASECIRCUITCOMPONENT_GET_STRENGTH = 0x34;
 
 // todo

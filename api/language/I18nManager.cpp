@@ -84,4 +84,9 @@ void I18nManager::getSystemLangAndSet() {
 std::string LANG(const std::string &l) {
     return trapdoor::bdsMod->getI18NManager().get(l);
 }
+
 } // namespace trapdoor
+
+std::string operator""_i18(const char *key, unsigned long long) {
+    return trapdoor::LANG(key);
+}

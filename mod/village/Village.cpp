@@ -318,7 +318,7 @@ void VillageHelper::draw() {
 
 void VillageHelper::list(trapdoor::Actor *player) {
     trapdoor::MessageBuilder builder;
-    builder.text(LANG("village.info.allVillages"));
+    builder.text("village.info.allVillages"_i18);
     int i = 0;
     for (auto vw : villageList) {
         auto village = vw.village;

@@ -11,12 +11,12 @@
 namespace trapdoor {
 namespace {
 //字符串转为tokens列表
-std::vector<std::string> tokenize(std::string &commandString) {
+std::vector<std::string> tokenize(const std::string &commandString) {
     std::vector<std::string> tokens;
     std::stringstream str(commandString);
     std::string command;
-    while (str >> commandString)
-        tokens.push_back(commandString);
+    while (str >> command)
+        tokens.push_back(command);
     return tokens;
 }
 
@@ -24,7 +24,7 @@ VA cmdQueue = 0;
 } // namespace
 
 //解析玩家命令字符串
-int CommandManager::parse(Actor *player, std::string cmd) {
+int CommandManager::parse(Actor *player, const std::string &cmd) {
     auto tokens = tokenize(cmd);
     if (tokens.empty())
         return -1;
@@ -65,8 +65,7 @@ CommandNode *CommandManager::registerCmd(const std::string &cmd,
 }
 
 bool CommandManager::findCommand(const std::string &cmd) {
-    std::string buff(cmd);
-    auto tokens = tokenize(buff);
+    auto tokens = tokenize(cmd);
     if (tokens.empty())
         return false;
     return this->commandList.find(tokens[0]) != this->commandList.end();

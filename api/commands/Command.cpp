@@ -68,7 +68,6 @@ THook(
     //找到发送命令的玩家
 
     trapdoor::Actor *source = nullptr;
-    L_DEBUG("receive command");
     trapdoor::bdsMod->getLevel()->forEachPlayer(
         [&id, &source](trapdoor::Actor *player) {
             if (player->getClientID()->getHash() == id->getHash()) {
