@@ -392,4 +392,7 @@ constexpr RVA MSSYM_MD5_b5c9e566146b3136e6fb37f0c080d91e = 0x00361CB0;
 constexpr RVA
     MSSYM_B1QE12getDimensionB1AA5LevelB2AAE17UEBAPEAVDimensionB2AAA1VB2QDE11AutomaticIDB1AE10VDimensionB2AAA1HB3AAAA1Z =
         0x00F8AE90;
+
+constexpr RVA MSSYM_tickEntitySystemsLevelUEAAXXZ = 0x00F9CFE0;
+
 } // namespace SymHook

@@ -418,21 +418,16 @@ THook(void, MSSYM_B1QE12tickRedstoneB1AA9DimensionB2AAA7UEAAXXZ, void *dim) {
     // printf("69:%d 68:%d\n", v1, v2);
 }
 
-// THook(
-//         void,
-//         MSSYM_B1QA4tickB1AE13EntitySystemsB2AAE23QEAAXAEAVEntityRegistryB3AAAA1Z,
-//         void *entitySystem,
-//         void * registry
-// ) {
-//     if (mod::tick::gameProfiler.inProfiling) {
-//         TIMER_START
-//         original(entitySystem, registry);
-//         TIMER_END
-//         mod::tick::gameProfiler.levelEntitySystemTickTime += timeReslut;
-//     } else {
-//         original(entitySystem, registry);
-//     }
-// }
+THook(void, MSSYM_tickEntitySystemsLevelUEAAXXZ, void *level) {
+    if (mod::tick::gameProfiler.inProfiling) {
+        TIMER_START
+        original(level);
+        TIMER_END
+        mod::tick::gameProfiler.levelEntitySystemTickTime += timeReslut;
+    } else {
+        original(level);
+    }
+}
 
 // pending update
 //这个符号没了，直接测不准就不要这一条了

@@ -9,6 +9,7 @@
 
 namespace trapdoor {
 const uint8_t MessageBuilder::BLACK = 0x0;
+const uint8_t MessageBuilder::DARK_GREEN = 0x2;
 const uint8_t MessageBuilder::DARK_READ = 0x4;
 const uint8_t MessageBuilder::GOLD = 0x6;
 const uint8_t MessageBuilder::GRAY = 0x7;
@@ -25,10 +26,10 @@ const uint8_t MessageBuilder::ITALIC = 0x20;
 const uint8_t MessageBuilder::RESET = 0x30;
 
 const std::map<uint8_t, std::string> MessageBuilder::STYLE_MAP = {
-    {BLACK, "§0"},        {DARK_READ, "§4"}, {GOLD, "§6"},  {GRAY, "§7"},
-    {BLUE, "§9"},         {GREEN, "§a"},     {AQUA, "§b"},  {RED, "§c"},
-    {LIGHT_PURPLE, "§d"}, {YELLOW, "§e"},    {WHITE, "§f"}, {BOLD, "§l"},
-    {ITALIC, "§o"},       {RESET, "§r"}};
+    {BLACK, "§0"}, {DARK_GREEN, "§2"},   {DARK_READ, "§4"}, {GOLD, "§6"},
+    {GRAY, "§7"},  {BLUE, "§9"},         {GREEN, "§a"},     {AQUA, "§b"},
+    {RED, "§c"},   {LIGHT_PURPLE, "§d"}, {YELLOW, "§e"},    {WHITE, "§f"},
+    {BOLD, "§l"},  {ITALIC, "§o"},       {RESET, "§r"}};
 
 MessageBuilder &MessageBuilder::text(const std::string &s) {
     messageBuffer.emplace_back(s);
