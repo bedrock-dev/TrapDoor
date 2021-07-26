@@ -49,7 +49,7 @@ constexpr uint64_t DIMENSION_GET_CIRCUIT_SYSTEM = 0x21;
 
 constexpr uint64_t CIRCUIT_GET_GRAPH = 0x8;
 
-constexpr uint64_t DIMENSION_IS_RS_TICK = 0x45;
+constexpr uint64_t DIMENSION_IS_RS_TICK = 0x4B;
 //! Spawner::_spawnMobCluster
 constexpr uint64_t MOB_SPAWN_DATA_GET_RULE = 184;
 

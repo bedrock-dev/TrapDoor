@@ -98,8 +98,7 @@ void TrapdoorMod::registerCommands() {
                    }))
 
         ->then(ARG("ncud", "command.func.ncud.desc", BOOL, {
-            FUNC_DISABLED(player)
-            return;
+            // FUNC_DISABLED(player)
             this->singleFunctions.preventNCUpdate = holder->getBool();
             info(player, LANG("command.func.ncud.set"), holder->getBool());
         }));
