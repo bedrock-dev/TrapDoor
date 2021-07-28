@@ -3,6 +3,8 @@
 //
 
 #include "FakePlayerClient.h"
+#include "ConfigManager.h"
+#include "TrapdoorMod.h"
 #include "entity/Actor.h"
 #include "language/I18nManager.h"
 #include "tools/Message.h"
@@ -13,6 +15,8 @@ namespace mod {
 void FakePlayerClient::registerFakePlayerCommand(CommandManager &manager) {
     using namespace trapdoor;
     manager.registerCmd("fakeplayer", "command.fakeplayer.desc")
+        ->then(ARG("c", "command.fakeplayer.c.desc", NONE,
+                   { this->connect(player, ""); }))
         ->then(ARG("conn", "command.fakeplayer.conn.desc", STR,
                    { this->connect(player, holder->getString()); }))
         ->then(ARG("list", "command.fakeplayer.list.desc", NONE,
@@ -60,7 +64,7 @@ void FakePlayerClient::run() {
         //如果socket 是处于开启状态就一直监听作为事件循环
         while (this->webSocket && this->webSocket->getReadyState() !=
                                       easywsclient::WebSocket::CLOSED) {
-            this->webSocket->poll();
+            this->webSocket->poll(50);
             this->webSocket->dispatch([&](const std::string &msg) {
                 if (this->clientStatus == ClientStatus::WAITING_MESSAGE) {
                     //改变状态来通知消息到了
@@ -95,14 +99,21 @@ bool FakePlayerClient::consume() {
 
 void FakePlayerClient::connect(trapdoor::Actor *player,
                                const std::string &url) {
-    this->webSocket = easywsclient::WebSocket::from_url(url);
+    auto wsUrl = url;
+    if (wsUrl.empty()) {
+        auto mod = trapdoor::bdsMod->asInstance<mod::TrapdoorMod>();
+        wsUrl = mod->getConfigManager().getServerConfig().wsUrl;
+    }
+    L_INFO("ws url is %s\n", wsUrl.c_str());
+    this->webSocket = easywsclient::WebSocket::from_url(wsUrl);
     if (this->webSocket) {
         this->clientStatus = ClientStatus::READY;
         trapdoor::info(player, trapdoor::LANG("fp.info.connected"),
-                       url.c_str());
+                       wsUrl.c_str());
         this->run();
     } else {
-        trapdoor::info(player, trapdoor::LANG("fp.error.connect"), url.c_str());
+        trapdoor::info(player, trapdoor::LANG("fp.error.connect"),
+                       wsUrl.c_str());
     }
 }
 

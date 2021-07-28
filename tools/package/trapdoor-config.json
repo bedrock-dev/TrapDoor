@@ -1,5 +1,5 @@
 {
-  "EULA":true,
+  "EULA": true,
   "commands": {
     "/tick": {
       "enable": true,
@@ -81,54 +81,52 @@
       "enable": true,
       "permissionLevel": 0
     },
-    
     "/l": {
       "enable": true,
       "permissionLevel": 1
     },
-    "/lang":{
-      "enable":true,
+    "/lang": {
+      "enable": true,
       "permissionLevel": 1
     },
-    "/spawn":{
-      "enable":true,
+    "/spawn": {
+      "enable": true,
       "permissionLevel": 0
     },
-    "/fakeplayer":{
-       "enable":true,
+    "/fakeplayer": {
+      "enable": true,
       "permissionLevel": 1
     },
-    "/rs":{
-      "enable":true,
-     "permissionLevel": 1
-   }
-  },
-  "lowLevelVanillaCommands":[
-         "stop",
-      "whitelist"
-  ],
-
-  "server":{
-    "levelName": "Bedrock level",
-    "lang": "zh_cn"
-  },
-
-  "village":{
-      "bound": "red",
-      "spawn": "red",
-      "poiQuery": "red",
-      "center": "minecraft:heart_particle"
-  },
-  "functionsEnable":{
-      "hopperCounter": false,
-      "spawnHelper":false,
-      "cactusRotate":false,
-      "simpleDraw":false,
-      "playerStat":false
-    },
-    "selfEnable":{
-      "chunkShow":true,
-      "distanceMeasure":true,
-      "redstoneStick":true
+    "/rs": {
+      "enable": true,
+      "permissionLevel": 1
     }
+  },
+  "lowLevelVanillaCommands": [
+    "stop",
+    "whitelist"
+  ],
+  "server": {
+    "levelName": "Bedrock level",
+    "lang": "zh_cn",
+    "ws": "ws://127.0.0.1:54321"
+  },
+  "village": {
+    "bound": "red",
+    "spawn": "red",
+    "poiQuery": "red",
+    "center": "minecraft:heart_particle"
+  },
+  "functionsEnable": {
+    "hopperCounter": false,
+    "spawnHelper": false,
+    "cactusRotate": false,
+    "simpleDraw": false,
+    "playerStat": false
+  },
+  "selfEnable": {
+    "chunkShow": true,
+    "distanceMeasure": true,
+    "redstoneStick": true
+  }
 }

@@ -45,7 +45,7 @@ void TrapdoorMod::initialize() {
     //初始化假人客户端的线程池
     this->fakePlayerClient = new FakePlayerClient(this->getThreadPool());
     this->fakePlayerClient->registerFakePlayerCommand(commandManager);
-    L_INFO("==== trapdoor init finish  ====\nServer Start");
+    L_INFO("[INFO] Trapdoor init finish,Server Start");
 }
 
 void TrapdoorMod::registerCommands() {
