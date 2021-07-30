@@ -88,5 +88,5 @@ Thanks for the follow game players who make suggestions and feedback bugs:
 ---
 
 ![JetBrainsLogo](./img/jetbrains.svg)<br>
-Special thanks to [JetBrains](https://www.jetbrains.com/?from=BlueMap) for giving out an OpenSource-Licence for development!
+Special thanks to [JetBrains](https://www.jetbrains.com/?from=TrapDoor) for giving out an OpenSource-Licence for development!
 
