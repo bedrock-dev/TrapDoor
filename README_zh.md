@@ -59,6 +59,7 @@ Trapdoor是一个为 Minecraft Bedrock Edition 服务的，基于原版服务端
 - Origin 0110
 - 阿阎mr
 - 玲珑芯
+- yqs112358 
 
 ## 代码贡献者
 <table frame=void>

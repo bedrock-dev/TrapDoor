@@ -73,6 +73,8 @@ class MessageBuilder {
 
     MessageBuilder &aabb(AABB aabb);
 
+    inline void clear() { this->messageBuffer.clear(); }
+
     std::string get();
 
     void send(Actor *player);

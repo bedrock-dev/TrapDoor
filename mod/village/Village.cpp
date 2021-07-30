@@ -12,7 +12,8 @@
 #include <random>
 
 using namespace SymHook;
-
+#include <excpt.h>
+#include <windows.h> // for EXCEPTION_ACCESS_VIOLATION
 // village tick
 #include "BDSMod.h"
 #include "POIInstance.h"
@@ -371,7 +372,11 @@ void VillageHelper::showVillagerStatus() {
     int idx = 0;
     for (auto village : this->villageList) {
         idx++;
-        village.village->showVillagerStatus(idx);
+        __try {
+            village.village->showVillagerStatus(idx);
+        } __except (EXCEPTION_EXECUTE_HANDLER) {
+            // nothing
+        }
     }
 }
 

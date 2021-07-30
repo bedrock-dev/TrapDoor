@@ -56,8 +56,7 @@ Special thanks to [Player] for providing readable source code
 
 Thanks for the follow game players who make suggestions and feedback bugs:
 
-木月酸与云龙碱、莵道三室戸、orange_31、panda4994万岁、梵蒂冈_273、OEOTYAN、Origin 0110、阿阎mr、玲珑芯、Sysca11
-
+木月酸与云龙碱、莵道三室戸、orange_31、panda4994万岁、梵蒂冈_273、OEOTYAN、Origin 0110、阿阎mr、玲珑芯、Sysca11、yqs112358 
 ### Contributors
 <table frame=void>
   <tr>
