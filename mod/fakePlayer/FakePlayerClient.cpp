@@ -3,6 +3,7 @@
 //
 
 #include "FakePlayerClient.h"
+#include "TrapdoorMod.h"
 #include "entity/Actor.h"
 #include "language/I18nManager.h"
 #include "tools/Message.h"
@@ -15,6 +16,8 @@ void FakePlayerClient::registerFakePlayerCommand(CommandManager &manager) {
     manager.registerCmd("fakeplayer", "command.fakeplayer.desc")
         ->then(ARG("conn", "command.fakeplayer.conn.desc", STR,
                    { this->connect(player, holder->getString()); }))
+        ->then(ARG("c", "command.fakeplayer.c.desc", NONE,
+                   { this->connect(player, ""); }))
         ->then(ARG("list", "command.fakeplayer.list.desc", NONE,
                    {
                        this->sendMessage(player, FakePlayerClient::buildMessage(
@@ -95,14 +98,25 @@ bool FakePlayerClient::consume() {
 
 void FakePlayerClient::connect(trapdoor::Actor *player,
                                const std::string &url) {
-    this->webSocket = easywsclient::WebSocket::from_url(url);
+
+    std::string wsUrl = url;
+    if (wsUrl.empty()) {
+        auto mod = trapdoor::bdsMod->asInstance<TrapdoorMod>();
+        wsUrl = mod->getConfigManager().getServerConfig().wsUrl;
+    }
+    if (this->webSocket) {
+        trapdoor::warning(player, trapdoor::LANG("fp.error.exist"));
+        return;
+    }
+    this->webSocket = easywsclient::WebSocket::from_url(wsUrl);
     if (this->webSocket) {
         this->clientStatus = ClientStatus::READY;
-        trapdoor::info(player, trapdoor::LANG("fp.info.connected"),
-                       url.c_str());
+        trapdoor::info(player, trapdoor::LANG("fp.info.connect"),
+                       wsUrl.c_str());
         this->run();
     } else {
-        trapdoor::info(player, trapdoor::LANG("fp.error.connect"), url.c_str());
+        trapdoor::info(player, trapdoor::LANG("fp.error.connect"),
+                       wsUrl.c_str());
     }
 }
 

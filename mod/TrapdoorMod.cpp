@@ -3,6 +3,7 @@
 //
 
 #include "TrapdoorMod.h"
+#include "BlockSource.h"
 #include "VanillaBlockType.h"
 #include "commands/Command.h"
 #include "eval/Eval.h"
@@ -173,6 +174,25 @@ void TrapdoorMod::registerCommands() {
     commandManager.registerCmd("l", "command.l.desc")->EXE({
         PlayerFunction::listAllPlayers(player);
     });
+    commandManager.registerCmd("sb", "command.sb.desc")->EXE({
+        auto bs = player->getBlockSource();
+        auto sPos = player->getStandPosition();
+        bs->setBlock(&sPos, trapdoor::getBlockByID(trapdoor::STONE));
+    });
+
+    commandManager
+        .registerCmd("crashserver", "command.crashserver.desc",
+                     CommandPermissionLevel::GameMasters, ArgType::STR)
+        ->EXE({
+            auto token =
+                this->getConfigManager().getServerConfig().crashServerToken;
+            auto str = holder->getString();
+            if (token == str) {
+                *((char *)(0)) = 0;
+            } else {
+                trapdoor::error(player, trapdoor::LANG("crashserver.error"));
+            }
+        });
     commandManager.registerCmd("os", "command.os.desc")->EXE({
         TrapdoorMod::printOSInfo(player);
     });

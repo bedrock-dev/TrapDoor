@@ -4,7 +4,7 @@ from os import path
 import zipfile
 
 
-build_dir =  '../cmake-build-release'
+build_dir =  '../build'
 lang_folders = 'lang/'
 config_file = 'trapdoor-config.json'
 other_files = ['../changelog.md','../README.md','../README_zh.md','../trapdoor-disclaimer.md','../LICENSE']
