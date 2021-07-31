@@ -20,8 +20,29 @@
 #include <string>
 #include <mutex>
 #include <set>
+#include <queue>
 
 namespace mod {
+
+
+    template<typename T>
+    class SimpleThreadSafeVal {
+    private:;
+        T val;
+        std::mutex m;
+    public:
+        void set(const T &v) {
+            std::lock_guard<std::mutex> l(m);
+            this->val = v;
+        }
+
+        T get() {
+            std::lock_guard<std::mutex> l(m);
+            return val;
+        }
+
+    };
+
     //和falePlayer进行通信的客户端
     class FakePlayerClient {
         enum class ClientStatus {
@@ -43,7 +64,7 @@ namespace mod {
         easywsclient::WebSocket *webSocket = nullptr;
         ThreadPool *pool = nullptr;
         std::atomic<ClientStatus> clientStatus{ClientStatus::NOT_OPEN};
-        std::string message;
+        SimpleThreadSafeVal<std::string> message;
         size_t timer = 0;
         trapdoor::Actor *source = nullptr;
         std::set<std::string> fakePlayerList;
