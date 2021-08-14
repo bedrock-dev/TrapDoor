@@ -114,4 +114,32 @@ namespace mod {
             blockSource->setBlock(&pos, newBlock);
         }
     }
+
+    void
+    BlockRotationHelper::newRotate(trapdoor::BlockSource *blockSource, trapdoor::BlockPos &pos, trapdoor::FACING facing,
+                                   Vec3 *v) const {
+        auto block = blockSource->getBlock(pos);
+        auto bId = block->getLegacy()->getBlockID();
+        for (const auto &action: this->actions) {
+            if (action.patterns.find(bId) != action.patterns.end()) {
+                action.action(blockSource, block, pos, facing, v);
+                return;
+            }
+        }
+    }
+
+    void BlockRotationHelper::addActons() {
+#define ROTATE_ACTION(S) [](trapdoor::BlockSource *blockSource, trapdoor::BlockPos &pos, trapdoor::FACING facing, Vec3 *v){}
+        using namespace trapdoor;
+        std::set<BlockType> t1{PISTON, STICKY_PISTON, DROPPER, OBSERVER, DISPENSER};
+        this->actions.emplace_back(t1, ROTATE_ACTION({
+
+                                                     }));
+
+
+
+
+
+    }
+
 }  // namespace mod
