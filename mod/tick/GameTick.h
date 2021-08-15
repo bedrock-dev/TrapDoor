@@ -5,24 +5,18 @@
 #ifndef TRAPDOOR_GAMETICK_H
 #define TRAPDOOR_GAMETICK_H
 
+#include <chrono>
+#include <vector>
 
 #include "SimpleProfiler.h"
-#include "lib/mod.h"
-#include "lib/SymHook.h"
-#include "village/Village.h"
-#include <vector>
-#include <chrono>
-#include "tools/Message.h"
 #include "entity/Actor.h"
+#include "lib/SymHook.h"
+#include "lib/mod.h"
+#include "tools/Message.h"
+#include "village/Village.h"
 
 namespace mod::tick {
-    enum WorldTickStatus {
-        Frozen,
-        Normal,
-        Slow,
-        Forward,
-        Wrap
-    };
+    enum WorldTickStatus { Frozen, Normal, Slow, Forward, Wrap };
 
     WorldTickStatus getTickStatus();
 
@@ -42,12 +36,11 @@ namespace mod::tick {
 
     void queryStatus(trapdoor::Actor *player);
 
-
     void registerTickCommand(trapdoor::CommandManager &commandManager);
 
     void registerProfileCommand(trapdoor::CommandManager &commandManager);
 
     void mspt();
-}
+}  // namespace mod::tick
 
-#endif //TRAPDOOR_GAMETICK_H
+#endif  // TRAPDOOR_GAMETICK_H

@@ -47,3 +47,4 @@ log/
 /trapdoor-0.9.50-1.17.1.01.vcxproj
 *.zip
 /vsbuild
+/sym

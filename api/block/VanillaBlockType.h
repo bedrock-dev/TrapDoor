@@ -569,14 +569,12 @@ namespace trapdoor {
         QUARTZ_BRICKS = 559,
     };
 
-
     trapdoor::Block *getBlockByID(BlockType type, unsigned short variant = 0);
 
     trapdoor::BlockLegacy *getBlockLegacyByID(BlockType type);
 
     void initBlockMap();
 
-}
+}  // namespace trapdoor
 
-
-#endif //MOD_VANILLABLOCKTYPE_H
+#endif  // MOD_VANILLABLOCKTYPE_H

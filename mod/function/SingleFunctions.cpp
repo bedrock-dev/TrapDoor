@@ -8,13 +8,14 @@
 #include "lib/mod.h"
 
 namespace mod {
-using namespace SymHook;
+    using namespace SymHook;
 
-THook(void, MSSYM_B1QA7explodeB1AA9ExplosionB2AAA7QEAAXXZ, void *exp) {
-    auto modInstance = trapdoor::bdsMod->asInstance<mod::TrapdoorMod>();
-    if (!modInstance->getSingFunction().preventExplosion)
-        original(exp);
-}
+    THook(void,
+          Explosion_explode_5adcea90, void *exp) {
+        auto modInstance = trapdoor::bdsMod->asInstance<mod::TrapdoorMod>();
+        if (!modInstance->getSingFunction().preventExplosion)
+            original(exp);
+    }
 
 /**
  *  SYM_CALL(
@@ -24,12 +25,12 @@ THook(void, MSSYM_B1QA7explodeB1AA9ExplosionB2AAA7QEAAXXZ, void *exp) {
     );
  */
 
-THook(
-    void,
-    MSSYM_B1QE17updateNeighborsAtB1AE11BlockSourceB2AAE17QEAAXAEBVBlockPosB3AAAA1Z,
-    trapdoor::BlockSource *source, trapdoor::BlockPos *pos) {
-    auto modInstance = trapdoor::bdsMod->asInstance<mod::TrapdoorMod>();
-    if (!modInstance->getSingFunction().preventNCUpdate)
-        original(source, pos);
-}
+    THook(
+            void,
+            BlockSource_updateNeighborsAt_4c3f8cf7,
+            trapdoor::BlockSource *source, trapdoor::BlockPos *pos) {
+        auto modInstance = trapdoor::bdsMod->asInstance<mod::TrapdoorMod>();
+        if (!modInstance->getSingFunction().preventNCUpdate)
+            original(source, pos);
+    }
 } // namespace mod

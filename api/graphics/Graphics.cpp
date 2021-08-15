@@ -2,11 +2,13 @@
 // Created by xhy on 2020/12/12.
 //
 
-#include <string>
 #include "Graphics.h"
+
+#include <string>
+
+#include "BDSMod.h"
 #include "Particle.h"
 #include "Vec3.h"
-#include "BDSMod.h"
 
 namespace trapdoor {
 
@@ -27,7 +29,7 @@ namespace trapdoor {
                 if (length >= defaultLength) {
                     length -= defaultLength;
                     auto point =
-                            static_cast<float>(0.5 * defaultLength + start);
+                        static_cast<float>(0.5 * defaultLength + start);
                     start += defaultLength;
                     lengthMap.insert({point, defaultLength});
                 }
@@ -35,8 +37,7 @@ namespace trapdoor {
             return lengthMap;
         }
 
-        std::string getLineParticleType(int length,
-                                        FACING direction,
+        std::string getLineParticleType(int length, FACING direction,
                                         GRAPHIC_COLOR color) {
             std::string str = "trapdoor:line";
             str += std::to_string(length);
@@ -82,13 +83,9 @@ namespace trapdoor {
         }
     }  // namespace
 
-    void drawLine(const Vec3 &originPoint,
-                  FACING direction,
-                  float length,
-                  GRAPHIC_COLOR color,
-                  int dimType) {
-        if (length <= 0)
-            return;
+    void drawLine(const Vec3 &originPoint, FACING direction, float length,
+                  GRAPHIC_COLOR color, int dimType) {
+        if (length <= 0) return;
         float start = 0, end = 0;
         switch (direction) {
             case FACING::NEG_Y:
@@ -122,22 +119,22 @@ namespace trapdoor {
         if (facingIsX(direction)) {
             for (auto i : list)
                 positionList.insert(
-                        {{i.first, originPoint.y, originPoint.z}, i.second});
+                    {{i.first, originPoint.y, originPoint.z}, i.second});
         } else if (facingIsY(direction)) {
             for (auto i : list)
                 positionList.insert(
-                        {{originPoint.x, i.first, originPoint.z}, i.second});
+                    {{originPoint.x, i.first, originPoint.z}, i.second});
         } else if (facingIsZ(direction)) {
             for (auto i : list)
                 positionList.insert(
-                        {{originPoint.x, originPoint.y, i.first}, i.second});
+                    {{originPoint.x, originPoint.y, i.first}, i.second});
         }
 
         for (auto points : positionList) {
             auto particleType =
-                    getLineParticleType(points.second, direction, color);
+                getLineParticleType(points.second, direction, color);
             auto particleTypeInv =
-                    getLineParticleType(points.second, invFacing(direction), color);
+                getLineParticleType(points.second, invFacing(direction), color);
             spawnParticle(points.first, particleType, dimType);
             if (!bdsMod->getCfg().particlePerformanceMode)
                 spawnParticle(points.first, particleTypeInv, dimType);

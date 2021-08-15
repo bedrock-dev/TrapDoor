@@ -5,25 +5,17 @@
 #ifndef TRAPDOOR_DIMENSION_H
 #define TRAPDOOR_DIMENSION_H
 
-#include "block/CircuitComponent.h"
-
 namespace trapdoor {
 
-    enum DimensionType {
-        OverWorld = 0,
-        Nether = 1,
-        TheEnd = 2
-    };
+    enum DimensionType { OverWorld = 0, Nether = 1, TheEnd = 2 };
 
     class Dimension {
-    public:
+       public:
         void printBaseTypeLimit();
-
-        CircuitSceneGraph *getGraph();
 
         bool isRedstoneTick();
     };
 
-}
+}  // namespace trapdoor
 
-#endif //TRAPDOOR_DIMENSION_H
+#endif  // TRAPDOOR_DIMENSION_H

@@ -7,11 +7,11 @@
 
 #include <map>
 #include <string>
-#include "entity/Actor.h"
-#include "tools/noncopyable .h"
-#include "graphics/BlockPos.h"
+
 #include "block/BlockSource.h"
-#include "block/CircuitComponent.h"
+#include "entity/Actor.h"
+#include "graphics/BlockPos.h"
+#include "tools/noncopyable .h"
 #include "world/Dimension.h"
 //#include "dirtyLitematica/SelectRegion.h"
 
@@ -23,9 +23,11 @@ namespace mod {
         trapdoor::BlockPos pos2;
         bool hasSetPos2 = false;
 
-        void setPosition1(const trapdoor::BlockPos &pos, trapdoor::Actor *player);
+        void setPosition1(const trapdoor::BlockPos &pos,
+                          trapdoor::Actor *player);
 
-        void setPosition2(const trapdoor::BlockPos &pos, trapdoor::Actor *player);
+        void setPosition2(const trapdoor::BlockPos &pos,
+                          trapdoor::Actor *player);
 
         void trySendDistanceInfo(trapdoor::Actor *player) const;
     };
@@ -38,13 +40,19 @@ namespace mod {
 
         static void drawChunkBound(trapdoor::Actor *player);
 
-    public:
-        inline void setShowChunkAble(const std::string &playerName, bool able) { enableShowChunk[playerName] = able; }
+       public:
+        inline void setShowChunkAble(const std::string &playerName, bool able) {
+            enableShowChunk[playerName] = able;
+        }
 
-        inline void
-        setRedstoneHelperAble(const std::string &playerName, bool able) { enableRedstoneHelper[playerName] = able; }
+        inline void setRedstoneHelperAble(const std::string &playerName,
+                                          bool able) {
+            enableRedstoneHelper[playerName] = able;
+        }
 
-        MeasureData &getMeasureData(const std::string &playerName) { return playerMeasureData[playerName]; }
+        MeasureData &getMeasureData(const std::string &playerName) {
+            return playerMeasureData[playerName];
+        }
 
         void tick();
 
@@ -52,14 +60,12 @@ namespace mod {
 
         static void broadcastSimpleInfo(trapdoor::Actor *player);
 
-        void printRedstoneInfo(trapdoor::Actor *player, trapdoor::BlockPos &pos);
+        void printRedstoneInfo(trapdoor::Actor *player,
+                               trapdoor::BlockPos &pos);
 
         static void listAllPlayers(trapdoor::Actor *player);
-
     };
 
+}  // namespace mod
 
-}
-
-
-#endif //MOD_PLAYERFUNCTION_H
+#endif  // MOD_PLAYERFUNCTION_H

@@ -21,7 +21,8 @@ namespace trapdoor {
 
         explicit Vec3(float _x);
 
-        Vec3(int _x, int _y, int _z) : x((float) _x), y((float) _y), z((float) _z) {}
+        Vec3(int _x, int _y, int _z)
+            : x((float)_x), y((float)_y), z((float)_z) {}
 
         Vec3(float _x, float _y, float _z) : x(_x), y(_y), z(_z) {}
 
@@ -39,15 +40,13 @@ namespace trapdoor {
 
         float distanceTo(const Vec3 &vec3) const;
 
-
         std::string toString() const;
 
         BlockPos toBlockPos() const;
 
         std::string toDirString() const;
     };
-}
-
+}  // namespace trapdoor
 
 typedef trapdoor::Vec3 Vec3;
-#endif //LIBMCBEMOD_VEC3_H
+#endif  // LIBMCBEMOD_VEC3_H

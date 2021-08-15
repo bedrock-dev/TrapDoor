@@ -6,6 +6,7 @@
 #define MOD_HSAMANAGER_H
 
 #include <set>
+
 #include "BDSMod.h"
 #include "graphics/AABB.h"
 #include "tools/noncopyable .h"
@@ -32,7 +33,7 @@ namespace mod {
         std::set<HsaInfo> hsaList;
         size_t gameTick;
 
-    public:
+       public:
         inline void insert(HsaInfo info) { this->hsaList.insert(info); }
 
         bool findHsa(const HsaInfo &hsaInfo);
@@ -57,4 +58,4 @@ namespace mod {
     };
 }  // namespace mod
 
-#endif    // MOD_HSAMANAGER_H
+#endif  // MOD_HSAMANAGER_H

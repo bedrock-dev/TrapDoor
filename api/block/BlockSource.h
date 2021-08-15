@@ -15,9 +15,8 @@ namespace trapdoor {
 
     class BlockPos;
 
-
     class BlockSource {
-    public:
+       public:
         //获取某个位置的方块对象
         Block *getBlock(int x, int y, int z);
 
@@ -26,7 +25,6 @@ namespace trapdoor {
 
         //设置某个位置为某方块
         void setBlock(BlockPos *, Block *block);
-
 
         //更新某个方块(NC更新)
         void updateNeighborsAt(const BlockPos *pos);
@@ -37,14 +35,13 @@ namespace trapdoor {
         //获取某个位置的群系
         Biome *getBiome(const BlockPos *pos);
 
-//        uint8_t getRawBrightness(const BlockPos *pos);
-//
-//        int getMaterial(const BlockPos *pos);
+        //        uint8_t getRawBrightness(const BlockPos *pos);
+        //
+        //        int getMaterial(const BlockPos *pos);
 
         // LevelChunk *getLevelChunk(const ChunkPos &chunkPos);
-
     };
 
-}
+}  // namespace trapdoor
 typedef trapdoor::BlockSource BlockSource;
-#endif //TRAPDOOR_BLOCKSOURCE_H
+#endif  // TRAPDOOR_BLOCKSOURCE_H

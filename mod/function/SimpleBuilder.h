@@ -11,26 +11,29 @@
 #include "trapdoor.h"
 
 namespace mod {
-class SimpleBuilder : noncopyable {
-  size_t maxCircleRadius = 30000000;
-  bool enable = false;
+    class SimpleBuilder : noncopyable {
+        size_t maxCircleRadius = 30000000;
+        bool enable = false;
 
-  bool preCheck(trapdoor::Actor *player, size_t radius) const;
+        bool preCheck(trapdoor::Actor *player, size_t radius) const;
 
- public:
-  inline void setAble(bool able) { this->enable = able; }
+       public:
+        inline void setAble(bool able) { this->enable = able; }
 
-  inline void setMaxRadius(int radius) { this->maxCircleRadius = radius; }
+        inline void setMaxRadius(int radius) { this->maxCircleRadius = radius; }
 
-  void buildSphere(trapdoor::Actor *player, size_t size, bool hollow) const;
+        void buildSphere(trapdoor::Actor *player, size_t size,
+                         bool hollow) const;
 
-  void buildCircle(trapdoor::Actor *player, size_t size, bool hollow) const;
+        void buildCircle(trapdoor::Actor *player, size_t size,
+                         bool hollow) const;
 
-  //按照区块进行fill
-  void chunksFill(trapdoor::Actor *player, size_t size, bool hollow) const;
+        //按照区块进行fill
+        void chunksFill(trapdoor::Actor *player, size_t size,
+                        bool hollow) const;
 
-  void registerDrawCommand(trapdoor::CommandManager &commandManager);
-};
+        void registerDrawCommand(trapdoor::CommandManager &commandManager);
+    };
 }  // namespace mod
 
 #endif  // MOD_SIMPLEBUILDER_H

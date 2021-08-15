@@ -7,11 +7,11 @@
 
 #include "Actor.h"
 #include "BDSMod.h"
-#include "TrapdoorMod.h"
 #include "CommandManager.h"
+#include "TrapdoorMod.h"
 
 namespace mod::test {
     void registerTestCommand(trapdoor::CommandManager &);
 }
 
-#endif //MOD_TRAPDOORTEST_H
+#endif  // MOD_TRAPDOORTEST_H

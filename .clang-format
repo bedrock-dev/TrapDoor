@@ -1,0 +1,5 @@
+Language: Cpp
+BasedOnStyle: Google
+UseTab: Never
+IndentWidth: 4
+NamespaceIndentation: All

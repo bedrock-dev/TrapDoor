@@ -3,6 +3,7 @@
 //
 
 #include "HopperCounter.h"
+
 #include "BDSMod.h"
 #include "TrapdoorMod.h"
 #include "block/BlockSource.h"
@@ -17,97 +18,95 @@ using namespace SymHook;
 
 namespace mod {
 
-const size_t HopperChannelManager::TOTAL_CHANNEL_NUM = 16;
-const trapdoor::BlockType HopperChannelManager::BLOCK_TYPE = trapdoor::CONCRETE;
+    const size_t HopperChannelManager::TOTAL_CHANNEL_NUM = 16;
+    const trapdoor::BlockType HopperChannelManager::BLOCK_TYPE =
+        trapdoor::CONCRETE;
 
-void HopperChannelManager::tick() {
-    if (this->enable) {
-        for (auto &channel : channels) {
-            channel.tick();
+    void HopperChannelManager::tick() {
+        if (this->enable) {
+            for (auto &channel : channels) {
+                channel.tick();
+            }
         }
     }
-}
 
-void HopperChannelManager::printChannel(Actor *player, size_t channel) {
-    if (channel < 0 || channel > 15) {
-        error(player, "该频道不存在[0-15]");
-    } else {
-        getChannel(channel).print(player);
-    }
-}
-
-void HopperChannelManager::resetChannel(Actor *player, size_t channel) {
-    if (channel < 0 || channel > 15) {
-        error(player, "该频道不存在");
-    } else {
-        getChannel(channel).reset();
-        trapdoor::broadcastMsg("频道[%zu] 数据已重置", channel);
-    }
-}
-
-void HopperChannelManager::registerCommand(CommandManager &commandManager) {
-    commandManager.registerCmd("counter", "command.counter.desc")
-        ->then(Arg("r", "command.counter.r.desc", ArgType::INT)
-                   ->execute([this](ArgHolder *holder, Actor *player) {
-                       this->resetChannel(player, holder->getInt());
-                   }))
-        ->then(Arg("p", "command.counter.p.desc", ArgType::INT)
-                   ->execute([this](ArgHolder *holder, Actor *player) {
-                       this->printChannel(player, holder->getInt());
-                   }));
-}
-
-void HopperChannelManager::quickPrintData(trapdoor::Actor *player,
-                                          trapdoor::BlockPos &pos) {
-    if (!this->enable)
-        return;
-    auto *block = player->getBlockSource()->getBlock(pos);
-    if (block->getLegacy()->getBlockID() != HopperChannelManager::BLOCK_TYPE)
-        return;
-    this->printChannel(player, block->getVariant());
-}
-
-void CounterChannel::add(const std::string &itemName, size_t num) {
-    counterList[itemName] += num;
-}
-
-void CounterChannel::reset() {
-    gameTick = 0;
-    counterList.clear();
-}
-
-void CounterChannel::print(Actor *actor) {
-    int n = 0;
-    for (const auto &i : this->counterList) {
-        n += i.second;
+    void HopperChannelManager::printChannel(Actor *player, size_t channel) {
+        if (channel < 0 || channel > 15) {
+            error(player, "该频道不存在[0-15]");
+        } else {
+            getChannel(channel).print(player);
+        }
     }
 
-    if (this->gameTick == 0 || n == 0) {
-        L_DEBUG("tick = %d num = %d", gameTick, n);
-        info(actor, "no data in this channel");
-        return;
+    void HopperChannelManager::resetChannel(Actor *player, size_t channel) {
+        if (channel < 0 || channel > 15) {
+            error(player, "该频道不存在");
+        } else {
+            getChannel(channel).reset();
+            trapdoor::broadcastMsg("频道[%zu] 数据已重置", channel);
+        }
     }
-    std::string stringBuilder;
-    trapdoor::MessageBuilder builder;
-    stringBuilder +=
-        trapdoor::format("channel: " C_INT "\ntotal " C_INT " items in " C_INT
-                         " gt(" C_FLOAT "min)\n",
-                         channel, n, gameTick, gameTick / 1200.0);
-    for (const auto &i : counterList) {
-        stringBuilder += trapdoor::format("- %s  " C_INT "(" C_FLOAT "/hour)\n",
-                                          i.first.c_str(), i.second,
-                                          i.second * 1.0 / gameTick * 72000);
+
+    void HopperChannelManager::registerCommand(CommandManager &commandManager) {
+        commandManager.registerCmd("counter", "command.counter.desc")
+            ->then(Arg("r", "command.counter.r.desc", ArgType::INT)
+                       ->execute([this](ArgHolder *holder, Actor *player) {
+                           this->resetChannel(player, holder->getInt());
+                       }))
+            ->then(Arg("p", "command.counter.p.desc", ArgType::INT)
+                       ->execute([this](ArgHolder *holder, Actor *player) {
+                           this->printChannel(player, holder->getInt());
+                       }));
     }
-    trapdoor::info(actor, stringBuilder);
-}
-} // namespace mod
 
-THook(
-    void,
-    MSSYM_B1QA7setItemB1AE16HopperBlockActorB2AAE19UEAAXHAEBVItemStackB3AAAA1Z,
-    trapdoor::BlockActor *hopperActor, unsigned int index,
-    trapdoor::ItemStackBase *itemStack) {
+    void HopperChannelManager::quickPrintData(trapdoor::Actor *player,
+                                              trapdoor::BlockPos &pos) {
+        if (!this->enable) return;
+        auto *block = player->getBlockSource()->getBlock(pos);
+        if (block->getLegacy()->getBlockID() !=
+            HopperChannelManager::BLOCK_TYPE)
+            return;
+        this->printChannel(player, block->getVariant());
+    }
 
+    void CounterChannel::add(const std::string &itemName, size_t num) {
+        counterList[itemName] += num;
+    }
+
+    void CounterChannel::reset() {
+        gameTick = 0;
+        counterList.clear();
+    }
+
+    void CounterChannel::print(Actor *actor) {
+        int n = 0;
+        for (const auto &i : this->counterList) {
+            n += i.second;
+        }
+
+        if (this->gameTick == 0 || n == 0) {
+            L_DEBUG("tick = %d num = %d", gameTick, n);
+            info(actor, "no data in this channel");
+            return;
+        }
+        std::string stringBuilder;
+        trapdoor::MessageBuilder builder;
+        stringBuilder +=
+            trapdoor::format("channel: " C_INT "\ntotal " C_INT
+                             " items in " C_INT " gt(" C_FLOAT "min)\n",
+                             channel, n, gameTick, gameTick / 1200.0);
+        for (const auto &i : counterList) {
+            stringBuilder += trapdoor::format(
+                "- %s  " C_INT "(" C_FLOAT "/hour)\n", i.first.c_str(),
+                i.second, i.second * 1.0 / gameTick * 72000);
+        }
+        trapdoor::info(actor, stringBuilder);
+    }
+}  // namespace mod
+
+THook(void, HopperBlockActor_setItem_c0e5f3ce,
+      trapdoor::BlockActor *hopperActor, unsigned int index,
+      trapdoor::ItemStackBase *itemStack) {
     //计数器没开启，直接返回
     auto modInstance = trapdoor::bdsMod->asInstance<mod::TrapdoorMod>();
     if (!modInstance->getHopperChannelManager().isEnable()) {

@@ -4,10 +4,9 @@
 
 #include "Biome.h"
 
-
-#include "lib/mod.h"
-#include "lib/SymHook.h"
 #include "Offset.h"
+#include "lib/SymHook.h"
+#include "lib/mod.h"
 
 namespace trapdoor {
     using namespace SymHook;
@@ -18,11 +17,7 @@ namespace trapdoor {
     }
 
     int Biome::getBiomeType() {
-        return SYM_CALL(
-                int(*)(Biome * ),
-                MSSYM_B1QE12getBiomeTypeB1AA5BiomeB2AAA4QEBAB1QE20AW4VanillaBiomeTypesB2AAA2XZ,
-                this
-        );
+        return SYM_CALL(int (*)(Biome *), Biome_getBiomeType_bb099b78, this);
     }
 
-}
+}  // namespace trapdoor

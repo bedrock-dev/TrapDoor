@@ -6,9 +6,10 @@
 #define TRAPDOOR_GRAPHICS_H
 
 //#include "Particle.h"
-#include "BlockPos.h"
-#include <vector>
 #include <map>
+#include <vector>
+
+#include "BlockPos.h"
 
 namespace trapdoor {
     enum class GRAPHIC_COLOR {
@@ -19,11 +20,8 @@ namespace trapdoor {
         GREEN = 4
     };
 
-    void drawLine(const Vec3 &originPoint,
-                  FACING direction,
-                  float length,
-                  GRAPHIC_COLOR color,
-                  int dimType = 0);
+    void drawLine(const Vec3 &originPoint, FACING direction, float length,
+                  GRAPHIC_COLOR color, int dimType = 0);
 
     void drawPoint(const Vec3 &point, GRAPHIC_COLOR color, int dimType = 0);
 }  // namespace trapdoor

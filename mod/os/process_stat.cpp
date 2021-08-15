@@ -1,9 +1,11 @@
 #define _WINSOCKAPI_
 
-#include <Windows.h>
-#include <Psapi.h>
-#include <cassert>
 #include "process_stat.h"
+
+#include <Psapi.h>
+#include <Windows.h>
+
+#include <cassert>
 #include <cstdio>
 #include <iostream>
 
@@ -16,17 +18,15 @@ static uint64_t file_time_2_utc(const FILETIME *ftime) {
     return li.QuadPart;
 }
 
-
 /// 获得CPU的核数
 static int get_processor_number() {
     SYSTEM_INFO info;
     GetSystemInfo(&info);
-    return (int) info.dwNumberOfProcessors;
+    return (int)info.dwNumberOfProcessors;
 }
 
-
 int get_cpu_usage() {
-    //cpu数量
+    // cpu数量
     static int processor_count_ = -1;
     //上一次的时间
     static int64_t last_time_ = 0;
@@ -53,9 +53,9 @@ int get_cpu_usage() {
         return -1;
     }
 
-    system_time = (file_time_2_utc(&kernel_time) + file_time_2_utc(&user_time))
-                  /
-                  processor_count_;
+    system_time =
+        (file_time_2_utc(&kernel_time) + file_time_2_utc(&user_time)) /
+        processor_count_;
     time = file_time_2_utc(&now);
 
     if ((last_system_time_ == 0) || (last_time_ == 0)) {
@@ -74,12 +74,11 @@ int get_cpu_usage() {
     }
 
     // We add time_delta / 2 so the result is rounded.
-    cpu = (int) ((system_time_delta * 100 + time_delta / 2) / time_delta);
+    cpu = (int)((system_time_delta * 100 + time_delta / 2) / time_delta);
     last_system_time_ = system_time;
     last_time_ = time;
     return cpu;
 }
-
 
 int get_memory_usage(uint64_t *mem, uint64_t *vmem) {
     PROCESS_MEMORY_COUNTERS pmc;
@@ -90,7 +89,6 @@ int get_memory_usage(uint64_t *mem, uint64_t *vmem) {
     }
     return -1;
 }
-
 
 int get_io_bytes(uint64_t *read_bytes, uint64_t *write_bytes) {
     IO_COUNTERS io_counter;

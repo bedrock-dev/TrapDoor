@@ -5,8 +5,8 @@
 #ifndef TRAPDOOR_ITEM_H
 #define TRAPDOOR_ITEM_H
 
-
 #include <string>
+
 #include "Block.h"
 
 namespace trapdoor {
@@ -17,7 +17,6 @@ namespace trapdoor {
 
         // void setNull();
     };
-}
+}  // namespace trapdoor
 
-
-#endif //TRAPDOOR_ITEM_H
+#endif  // TRAPDOOR_ITEM_H

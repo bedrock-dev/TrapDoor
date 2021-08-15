@@ -9,15 +9,15 @@
 #include "entity/Actor.h"
 
 namespace mod {
-void backup(trapdoor::Actor *player);
+    void backup(trapdoor::Actor *player);
 
-void listAllBackups(trapdoor::Actor *player);
+    void listAllBackups(trapdoor::Actor *player);
 
-void initBackup();
+    void initBackup();
 
-void restore(trapdoor::Actor *player, int index = 0);
+    void restore(trapdoor::Actor *player, int index = 0);
 
-void registerBackupCommand(trapdoor::CommandManager &commandManager);
-} // namespace mod
+    void registerBackupCommand(trapdoor::CommandManager &commandManager);
+}  // namespace mod
 
-#endif // MOD_BACKUPHELPER_H
+#endif  // MOD_BACKUPHELPER_H

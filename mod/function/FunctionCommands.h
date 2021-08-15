@@ -3,8 +3,8 @@
 
 #include "commands/CommandManager.h"
 
-namespace mod{
-    void registerGamemodeSwitchCommand(CommandManager & commandManager);
-    }
+namespace mod {
+    void registerGamemodeSwitchCommand(CommandManager& commandManager);
+}
 
 #endif

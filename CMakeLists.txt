@@ -21,7 +21,6 @@ add_library(${MOD_API_NAME} STATIC
         api/block/BlockLegacy.cpp
         api/block/BlockSource.cpp
         api/block/VanillaBlockType.cpp
-        api/block/CircuitComponent.cpp
         api/commands/CommandNode.cpp
         api/commands/Command.cpp
         api/commands/CommandManager.cpp
@@ -43,7 +42,6 @@ add_library(${MOD_API_NAME} STATIC
         api/tools/MsgBuilder.cpp
         api/tools/ThreadPool.h
         api/lib/Remotery.c
-        api/world/LevelChunk.cpp
         api/language/I18nManager.cpp
         api/language/I18nManager.h
         api/tools/CastHelper.h
@@ -65,8 +63,8 @@ target_include_directories(${MOD_API_NAME}
 target_link_libraries(${MOD_API_NAME} ${PROJECT_SOURCE_DIR}/api/lib/detours.lib)
 
 ####################这里是具体功能##########################
-set(TRAPDOOR_VERSION 0.9.71)
-set(MCBE_VERSION 1.17.10.04)
+set(TRAPDOOR_VERSION 0.9.73)
+set(MCBE_VERSION 1.17.11.01)
 set(BETA OFF)
 set(TEST_NUMBER 3)
 add_definitions(-DTD_VERSION="${TRAPDOOR_VERSION}")
@@ -120,7 +118,7 @@ target_include_directories(
         mod/dirtyLitematica
         mod/eval
         mod/fakePlayer
-        
+
         api
         api/block
         api/commands

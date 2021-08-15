@@ -5,8 +5,8 @@
 #ifndef TRAPDOOR_PLAYER_BUFFER_H
 #define TRAPDOOR_PLAYER_BUFFER_H
 
-#include "graphics/BlockPos.h"
 #include "Actor.h"
+#include "graphics/BlockPos.h"
 
 namespace trapdoor {
     struct RightClickCache {
@@ -20,11 +20,10 @@ namespace trapdoor {
         bool operator!=(const RightClickCache &rhs) const;
     };
 
-
     //这个结构专门存储玩家个人相关的缓存信息(相当于玩家的一个私人空间),后面可能加新东西
     struct PlayerBuffer {
         RightClickCache rightClickCache;  //玩家右键缓存，作为右键检测使用
     };
 }  // namespace trapdoor
 
-#endif    // TRAPDOOR_PLAYER_BUFFER_H
+#endif  // TRAPDOOR_PLAYER_BUFFER_H

@@ -4,20 +4,19 @@
 
 #ifndef MOD_NONCOPYABLE_H
 #define MOD_NONCOPYABLE_H
-//from boost
+// from boost
 namespace trapdoor {
     class noncopyable {
-    protected:
+       protected:
         noncopyable() {}
 
         ~noncopyable() {}
 
-    private:  // emphasize the following members are private
+       private:  // emphasize the following members are private
         noncopyable(const noncopyable &);
 
         const noncopyable &operator=(const noncopyable &);
     };
-}
+}  // namespace trapdoor
 typedef trapdoor::noncopyable noncopyable;
-#endif //MOD_NONCOPYABLE_H
-
+#endif  // MOD_NONCOPYABLE_H

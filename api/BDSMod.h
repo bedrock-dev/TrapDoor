@@ -8,22 +8,22 @@
 #ifndef TRAPDOOR_TRAPDOOR_H
 #define TRAPDOOR_TRAPDOOR_H
 
-#include <set>
 #include <cstdio>
 #include <map>
+#include <set>
 #include <string>
-#include "commands/CommandManager.h"
-#include "world/Level.h"
+
 #include "PlayerBuffer.h"
+#include "commands/CommandManager.h"
+#include "language/I18nManager.h"
 #include "tools/ThreadPool.h"
 #include "tools/noncopyable .h"
-#include "language/I18nManager.h"
+#include "world/Level.h"
 
 namespace trapdoor {
 
-
     class BDSMod : public noncopyable {
-    public:
+       public:
         struct ModConfig {
             size_t particleViewDistance = 256;
             bool particlePerformanceMode = false;
@@ -31,7 +31,7 @@ namespace trapdoor {
 
         void registerLangCommand();
 
-    protected:
+       protected:
         typedef void CommandRegistry;
         Level *serverLevel{};
         CommandRegistry *commandRegistry{};
@@ -42,8 +42,7 @@ namespace trapdoor {
         I18nManager i18NManager;
         size_t trapdoorTick = 0;
 
-    public:
-
+       public:
         void tick();
 
         inline size_t getTrapdoorTick() { return this->trapdoorTick; }
@@ -51,7 +50,6 @@ namespace trapdoor {
         Level *getLevel();
 
         void setLevel(Level *level);
-
 
         CommandRegistry *getCommandRegistry();
 
@@ -65,27 +63,27 @@ namespace trapdoor {
 
         virtual void registerCommands();
 
-
-        virtual void useOnHook(Actor *player, const std::string &itemName, BlockPos &pos,
-                               unsigned int facing,
+        virtual void useOnHook(Actor *player, const std::string &itemName,
+                               BlockPos &pos, unsigned int facing,
                                const Vec3 &) = 0;
 
         virtual bool attackEntityHook(Actor *player, Actor *entity) = 0;
 
-        virtual CommandPermissionLevel
-        resetVanillaCommandLevel(const std::string &name, CommandPermissionLevel oldLevel) { return oldLevel; }
+        virtual CommandPermissionLevel resetVanillaCommandLevel(
+            const std::string &name, CommandPermissionLevel oldLevel) {
+            return oldLevel;
+        }
 
         std::map<std::string, PlayerBuffer> &getPlayerBuffer();
 
-        template<typename Mod>
+        template <typename Mod>
         Mod *asInstance() {
             return reinterpret_cast<Mod *>(this);
         }
 
         ModConfig &getCfg() { return this->config; }
 
-
-    public:
+       public:
         trapdoor::Actor *fetchEntity(int64_t id, bool b);
 
         inline I18nManager &getI18NManager() { return this->i18NManager; }
@@ -94,6 +92,6 @@ namespace trapdoor {
     void initializeMod(BDSMod *bdsMod);
 
     extern BDSMod *bdsMod;
-}
+}  // namespace trapdoor
 
-#endif //TRAPDOOR_TRAPDOOR_H
+#endif  // TRAPDOOR_TRAPDOOR_H

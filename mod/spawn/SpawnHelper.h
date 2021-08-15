@@ -6,10 +6,11 @@
 #define MOD_SPAWNHELPER_H
 
 #include <vector>
-#include "graphics/BlockPos.h"
-#include "entity/Actor.h"
-#include "block/BlockLegacy.h"
+
 #include "block/Block.h"
+#include "block/BlockLegacy.h"
+#include "entity/Actor.h"
+#include "graphics/BlockPos.h"
 #include "tools/noncopyable .h"
 
 namespace mod {
@@ -26,9 +27,7 @@ namespace mod {
         trapdoor::BlockPos pos{};
     };
 
-    struct MobSpawnRules {
-
-    };
+    struct MobSpawnRules {};
 
     struct MobSpawnData {
         MobSpawnRules *getSpawnRules();
@@ -41,7 +40,8 @@ namespace mod {
         bool enable = false;
         int dimensionID = 0;
         unsigned long long gameTick;
-    public:
+
+       public:
         inline void setAble(bool able) { this->enable = able; }
 
         inline bool isEnable() const { return this->enable; }
@@ -50,19 +50,21 @@ namespace mod {
 
         void draw();
 
-        void updateVerticalSpawnPositions(const trapdoor::BlockPos &pos, trapdoor::Actor *player);
+        void updateVerticalSpawnPositions(const trapdoor::BlockPos &pos,
+                                          trapdoor::Actor *player);
 
-        void printSpawnProbability(trapdoor::Actor *player, const trapdoor::BlockPos &pos, uint32_t bright) const;
-
+        void printSpawnProbability(trapdoor::Actor *player,
+                                   const trapdoor::BlockPos &pos,
+                                   uint32_t bright) const;
     };
 
-    void findNextSpawnPosition(trapdoor::BlockSource *source, trapdoor::BlockPos *pos, unsigned int material);
+    void findNextSpawnPosition(trapdoor::BlockSource *source,
+                               trapdoor::BlockPos *pos, unsigned int material);
 
-    MobSpawnData *
-    getMobToSpawn(trapdoor::BlockLegacy *legacy, const SpawnConditions &spawnConditions,
-                  trapdoor::BlockSource *blockSource);
+    MobSpawnData *getMobToSpawn(trapdoor::BlockLegacy *legacy,
+                                const SpawnConditions &spawnConditions,
+                                trapdoor::BlockSource *blockSource);
 
-}
+}  // namespace mod
 
-
-#endif //MOD_SPAWNHELPER_H
+#endif  // MOD_SPAWNHELPER_H

@@ -5,11 +5,12 @@
 #ifndef MOD_SLIMECHUNKHELPER_H
 #define MOD_SLIMECHUNKHELPER_H
 
-#include "graphics/BlockPos.h"
 #include <set>
+
+#include "commands/CommandManager.h"
+#include "graphics/BlockPos.h"
 #include "tools/noncopyable .h"
 #include "trapdoor.h"
-#include "commands/CommandManager.h"
 
 namespace mod {
 
@@ -18,7 +19,8 @@ namespace mod {
         bool enable = false;
         size_t gameTick = 0;
         std::set<trapdoor::ChunkPos> posList;
-    public:
+
+       public:
         inline void setAble(bool able) { this->enable = able; }
 
         void updateChunkPosList();
@@ -31,5 +33,5 @@ namespace mod {
 
         void draw();
     };
-}
-#endif //MOD_SLIMECHUNKHELPER_H
+}  // namespace mod
+#endif  // MOD_SLIMECHUNKHELPER_H

@@ -55,9 +55,8 @@ namespace trapdoor {
 
     typedef BlockPos2 ChunkPos;
 
-
     class BlockPos {
-    public:
+       public:
         int x = 0;
         int y = 0;
         int z = 0;
@@ -70,7 +69,8 @@ namespace trapdoor {
 
         explicit BlockPos(float x) : BlockPos(x, x, x) {}
 
-        BlockPos(float _x, float _y, float _z) : x((int) _x), y((int) _y), z((int) _z) {}
+        BlockPos(float _x, float _y, float _z)
+            : x((int)_x), y((int)_y), z((int)_z) {}
 
         bool operator==(const BlockPos &v) const;
 
@@ -92,7 +92,6 @@ namespace trapdoor {
 
         BlockPos2 InChunkOffset() const;
 
-
         int operator*(const BlockPos &pos) const;
 
         BlockPos operator+(const BlockPos &pos) const;
@@ -100,5 +99,5 @@ namespace trapdoor {
         bool operator<(const BlockPos &rhs) const;
     };
 
-}
-#endif //LIBMCBEMOD_BLOCKPOS_H
+}  // namespace trapdoor
+#endif  // LIBMCBEMOD_BLOCKPOS_H

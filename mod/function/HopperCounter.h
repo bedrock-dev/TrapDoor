@@ -5,16 +5,16 @@
 #ifndef TRAPDOOR_HOPPER_H
 #define TRAPDOOR_HOPPER_H
 
-#include "lib/mod.h"
-#include <map>
 #include <array>
+#include <map>
 #include <vector>
-#include "entity/Actor.h"
+
 #include "block/Block.h"
+#include "commands/CommandManager.h"
+#include "entity/Actor.h"
+#include "lib/mod.h"
 #include "tools/noncopyable .h"
 #include "trapdoor.h"
-#include "commands/CommandManager.h"
-#include <array>
 //漏斗计数器频道
 namespace mod {
 
@@ -23,10 +23,10 @@ namespace mod {
     using BlockPos = trapdoor::BlockPos;
 
     class CounterChannel {
-        const size_t channel; //频道号
-        std::map<std::string, size_t> counterList; //数据
-        size_t gameTick = 0; //游戏刻
-    public:
+        const size_t channel;                       //频道号
+        std::map<std::string, size_t> counterList;  //数据
+        size_t gameTick = 0;                        //游戏刻
+       public:
         explicit CounterChannel(size_t ch) : channel(ch), gameTick(0) {}
 
         void reset();
@@ -35,22 +35,20 @@ namespace mod {
 
         void add(const std::string &itemName, size_t num);
 
-        inline void tick() {
-            ++gameTick;
-        }
+        inline void tick() { ++gameTick; }
     };
 
-//漏斗频道管理器
+    //漏斗频道管理器
     class HopperChannelManager : noncopyable {
         std::vector<CounterChannel> channels;
         bool enable = false;
-    public:
+
+       public:
         static const size_t TOTAL_CHANNEL_NUM;
         static const trapdoor::BlockType BLOCK_TYPE;
 
         HopperChannelManager() {
-            for (int i = 0; i < 16; i++)
-                channels.emplace_back(i);
+            for (int i = 0; i < 16; i++) channels.emplace_back(i);
         }
 
         inline CounterChannel &getChannel(const int &ch) {
@@ -74,5 +72,5 @@ namespace mod {
 
         void quickPrintData(trapdoor::Actor *player, trapdoor::BlockPos &pos);
     };
-}
-#endif //TRAPDOOR_HOPPER_H
+}  // namespace mod
+#endif  // TRAPDOOR_HOPPER_H

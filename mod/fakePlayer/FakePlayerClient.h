@@ -5,21 +5,22 @@
 #ifndef MOD_FAKEPLAYERCLIENT_H
 #define MOD_FAKEPLAYERCLIENT_H
 #ifdef _WIN32
-#pragma comment( lib, "ws2_32")
+#pragma comment(lib, "ws2_32")
 
 #include <WinSock2.h>
 
 #endif
 
-#include "easywsclient.hpp"
-#include "ThreadPool.h"
-#include "CommandManager.h"
 #include <atomic>
 #include <cassert>
 #include <cstdio>
-#include <string>
 #include <mutex>
 #include <set>
+#include <string>
+
+#include "CommandManager.h"
+#include "ThreadPool.h"
+#include "easywsclient.hpp"
 
 namespace mod {
     //和falePlayer进行通信的客户端
@@ -30,13 +31,11 @@ namespace mod {
             WAITING_MESSAGE,
             NEED_CONSUME
         };
-        enum class MessageType {
-            PLAYER_LIST,
-            ADD_PLAYER,
-            REMOVE_PLAYER
-        };
-    private:
-        static std::string buildMessage(MessageType type, const std::string &param = "");
+        enum class MessageType { PLAYER_LIST, ADD_PLAYER, REMOVE_PLAYER };
+
+       private:
+        static std::string buildMessage(MessageType type,
+                                        const std::string &param = "");
 
         std::string parseResponse(const std::string &response, bool &status);
 
@@ -62,7 +61,7 @@ namespace mod {
             this->source = player;
         }
 
-    public:
+       public:
         void registerFakePlayerCommand(trapdoor::CommandManager &manager);
 
         explicit FakePlayerClient(ThreadPool *threadPool) : pool(threadPool) {}
@@ -73,10 +72,11 @@ namespace mod {
 
         void tick();
 
-        void tpFakePlayer(trapdoor::Actor *player, const std::string &playerName);
+        void tpFakePlayer(trapdoor::Actor *player,
+                          const std::string &playerName);
 
         ~FakePlayerClient();
     };
 
-}
-#endif //MOD_FAKEPLAYERCLIENT_H
+}  // namespace mod
+#endif  // MOD_FAKEPLAYERCLIENT_H
