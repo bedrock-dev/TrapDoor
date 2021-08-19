@@ -505,5 +505,4 @@ THook(void, Village_tick_2a1ecbf8, mod::Village *vill, void *tick,
     mod::VillageWithColor vw{vill, trapdoor::GRAPHIC_COLOR::GREEN};
     trapdoor::bdsMod->asInstance<mod::TrapdoorMod>()->getVillageHelper().insert(
         vw);
-    // village::villageHelper.insert(vill);
 }

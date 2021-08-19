@@ -5,7 +5,8 @@ import zipfile
 
 
 relative_dir = '../../'
-build_dir =  relative_dir+'build'
+build_dir_name = 'cmake-build-release'
+build_dir =  relative_dir+build_dir_name
 lang_folders = 'lang/'
 config_file = 'trapdoor-config.json'
 other_files = ['../../changelog.md','../../README.md','../../README_zh.md','../../trapdoor-disclaimer.md','../../LICENSE']

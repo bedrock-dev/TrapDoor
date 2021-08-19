@@ -55,6 +55,7 @@ THook(void, CommandRegistry_registerCommand_8574de98, void *commandRegistry,
     } else {
         //初始化CommandRegistry 并且注册命令
         if (!trapdoor::bdsMod->getCommandRegistry()) {
+            L_DEBUG("set command Registry %p", commandRegistry);
             trapdoor::bdsMod->setCommandRegistry(commandRegistry);
             L_DEBUG("init commandRegistry");
             trapdoor::bdsMod->registerCommands();

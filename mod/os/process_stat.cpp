@@ -2,8 +2,8 @@
 
 #include "process_stat.h"
 
-#include <Psapi.h>
 #include <Windows.h>
+#include <Psapi.h>
 
 #include <cassert>
 #include <cstdio>

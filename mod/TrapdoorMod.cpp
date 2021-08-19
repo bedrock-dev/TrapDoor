@@ -35,6 +35,7 @@ namespace mod {
 
     //这个函数会在初始化Level对象后执行
     void TrapdoorMod::initialize() {
+        L_DEBUG("mod init");
         BDSMod::initialize();
         this->commandManager.setCommandConfig(
             this->configManager.getCommandsConfig());

@@ -33,6 +33,7 @@ namespace mod {
         }
         L_DEBUG("begin actor profiling");
         info(player, "开始测试");
+    
         getActorProfiler().inProfiling = true;
         getActorProfiler().currentRound = getActorProfiler().totalRound;
     }

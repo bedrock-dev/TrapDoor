@@ -31,9 +31,8 @@ namespace trapdoor {
                 getBlockMap()[l.getBlockID()] = &l;
                 return true;
             });
-
         SYM_CALL(void (*)(const std::function<bool(BlockLegacy &)> *),
-                 SymHook::BlockTypeRegistry_forEachBlock_7f891f2d, &function);
+                 BlockTypeRegistry_forEachBlock_7f891f2d, &function);
     }
 
     trapdoor::Block *getBlockByID(BlockType type, unsigned short variant) {

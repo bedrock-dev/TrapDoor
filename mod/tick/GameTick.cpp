@@ -302,11 +302,10 @@ THook(void, ServerLevel_tick_86efb826, trapdoor::Level *serverLevel) {
     }
 }
 
-//// ServerPlayer::tickWorld
-// THook(void, SymHook::Serv ,
-//       trapdoor::Actor *p, void *tick) {
-//     original(p, tick);
-// }
+// ServerPlayer::tickWorld
+// THook(void, SymHook::Serv, trapdoor::Actor *p, void *tick) {
+//    original(p, tick);
+//}
 
 // Dimension::tick
 THook(void, Dimension_tick_39d89862, void *dim) {
@@ -359,32 +358,7 @@ THook(void, LevelChunk_tickBlockEntities_41f9b2ca, void *levelChunk,
     }
 }
 
-////mob actor Spawner::tick
-// THook(
-//        void,
-//        MSSYM_B1QA4tickB1AA7SpawnerB2AAE20QEAAXAEAVBlockSourceB2AAE14AEBVLevelChunkB3AAAA1Z,
-//        void *swr,
-//        void *blockSource,
-//        void * chunk
-//) {
-////    if (!globalSpawner)globalSpawner = swr;
-//    if (!swr) {
-//        printf("spawner.tick --> spawner is nullptr");
-//        return;
-//    }
-//    original(swr, blockSource, chunk);
-////    if (mod::tick::isProfiling) {
-////        TIMER_START
-////        original(swr, blockSource, chunk);
-////        TIMER_END
-////        mod::tick::spawnerTickTime += timeReslut;
-////    } else {
-////    }
-//
-//}
-
 // BlockTickingQueue::pendingTicks
-// the server will crash if hook this function
 THook(void, BlockTickingQueue_tickPendingTicks_e4625213, void *queue,
       trapdoor::BlockSource *source, const int *until, int max,
       bool instalTick) {
@@ -428,7 +402,8 @@ THook(void, Level_tickEntitySystems_251e10ba, void *level) {
 //这个符号没了，直接测不准就不要这一条了
 // THook(
 //        void,
-//        MSSYM_B1QE21processPendingUpdatesB1AE17CircuitSceneGraphB2AAE20AEAAXPEAVBlockSourceB3AAAA1Z,
+//
+// MSSYM_B1QE21processPendingUpdatesB1AE17CircuitSceneGraphB2AAE20AEAAXPEAVBlockSourceB3AAAA1Z,
 //        void *graph,
 //        void * bs
 //) {
