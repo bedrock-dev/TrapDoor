@@ -78,6 +78,13 @@ namespace trapdoor {
         return *SYM_CALL(uint64_t*(*)(Level * ),
                          MSSYM_B1QE14getCurrentTickB1AA5LevelB2AAE12QEBAAEBUTickB2AAA2XZ, this);
     }
+    bool Level::noPlayerExists() {
+      int num = 0;
+      this->forEachPlayer([&num](Actor *actor){
+        ++num;
+        printf("num is %d",num);
+      });
+      return num==0;
+    }
 
-
-}
+    }

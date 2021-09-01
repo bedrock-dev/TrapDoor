@@ -60,6 +60,8 @@ namespace trapdoor {
 
 
         uint64_t getGameTick();
+
+        bool noPlayerExists();
     };
 }
 

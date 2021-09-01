@@ -6,7 +6,6 @@
 #include "world/Biome.h"
 #include "lib/mod.h"
 #include "lib/SymHook.h"
-#include "world/LevelChunk.h"
 
 namespace trapdoor {
     using namespace SymHook;

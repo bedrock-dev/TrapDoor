@@ -42,10 +42,10 @@ namespace mod {
 
         void rotate(trapdoor::BlockPos &pos, trapdoor::BlockSource *blockSource) const;
 
-        void
-        newRotate(trapdoor::BlockSource *blockSource, trapdoor::BlockPos &pos, trapdoor::FACING facing, Vec3 *v) const;
-
-        void addActons();
+//        void
+//        newRotate(trapdoor::BlockSource *blockSource, trapdoor::BlockPos &pos, trapdoor::FACING facing, Vec3 *v) const;
+//
+//        void addActons();
 
     };
 }

@@ -20,3 +20,4 @@ version/*
 venv/
 log/
 /vsbuild
+/sym
