@@ -6,9 +6,9 @@
 
 #include <cstdarg>
 
+#include "Actor.h"
 #include "DirtyLogger.h"
-#include "entity/Actor.h"
-#include "lib/SymHook.h"
+#include "SymHook.h"
 
 namespace trapdoor {
     using namespace SymHook;

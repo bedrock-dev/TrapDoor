@@ -30,7 +30,7 @@ namespace mod::tick {
 
     void slowTick(size_t slowSpeed);
 
-    void profileWorld(trapdoor::Actor *player);
+    void profileWorld(trapdoor::Actor *player, int round = 0);
 
     void profileEntities(trapdoor::Actor *player);
 

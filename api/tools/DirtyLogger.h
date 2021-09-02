@@ -7,6 +7,15 @@
 
 #include <cstdio>
 #include <string>
+#ifdef WIN32
+#define __FILENAME__                                                           \
+    (__builtin_strrchr(__FILE__, '\\') ? __builtin_strrchr(__FILE__, '\\') + 1 \
+                                       : __FILE__)
+#elif
+#define __FILENAME__                                                         \
+    (__builtin_strrchr(__FILE__, '/') ? __builtin_strrchr(__FILE__, '/') + 1 \
+                                      : __FILE__)
+#endif
 
 #define L_DEBUG(fmt, ...)                                                \
     trapdoor::logInfo(trapdoor::LOG_LEVEL::LOG_DEBUG, __FUNCTION__, fmt, \
@@ -35,6 +44,10 @@ namespace trapdoor {
 
     void logInfo(LOG_LEVEL logLevel, const char *functionName, const char *fmt,
                  ...);
+
+    void newLogInfo(LOG_LEVEL logLevel, const char *fileName,
+                    const char *functionName, size_t line, const char *fmt,
+                    ...);
 
     void setDevMode(bool useDevMode);
 

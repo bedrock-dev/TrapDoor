@@ -6,6 +6,7 @@
 
 #include "ActorProfiler.h"
 #include "BDSMod.h"
+#include "SymHook.h"
 #include "TrapdoorMod.h"
 #include "commands/Command.h"
 #include "entity/Actor.h"
@@ -23,10 +24,10 @@ namespace mod::tick {
         WorldTickStatus lastTickStats = WorldTickStatus::Normal;
 
         mod::SimpleProfiler gameProfiler;
-        size_t wrapSpeed = 1;
-        int SlowDownTimes = 1;    // slow down time
-        int slowDownCounter = 0;  // slow down counter
-        int forwardTickNum = 0;   // forward tick num
+        size_t accSpeed = 1;
+        int SlowDownTimes = 1;      // slow down time
+        int slowDownCounter = 0;    // slow down counter
+        size_t forwardTickNum = 0;  // forward tick num
         bool isMSPTing = false;
 
         mod::ActorProfiler &getActorProfiler() {
@@ -75,12 +76,9 @@ namespace mod::tick {
 
     void freezeTick() {
         if (tickStatus == WorldTickStatus::Normal) {
-            // info("world has frozen");
-            if (tickStatus != WorldTickStatus::Frozen) {
-                tickStatus = WorldTickStatus::Frozen;
-                L_DEBUG("freeze world");
-                broadcastMsg(LANG("tick.fz.set"));
-            }
+            tickStatus = WorldTickStatus::Frozen;
+            L_DEBUG("freeze world");
+            broadcastMsg(LANG("tick.fz.set"));
         }
     }
 
@@ -97,7 +95,7 @@ namespace mod::tick {
             broadcastMsg(LANG("tick.acc.set"), speed);
             tickStatus = WorldTickStatus::Wrap;
             L_DEBUG("begin accelerate world %d", speed);
-            wrapSpeed = speed;
+            accSpeed = speed;
         } else {
             broadcastMsg(LANG("tick.acc.error"));
         }
@@ -107,6 +105,7 @@ namespace mod::tick {
         if (tickStatus == WorldTickStatus::Frozen ||
             tickStatus == WorldTickStatus::Normal) {
             forwardTickNum = tickNum;
+            //记录上次的状态以便恢复
             lastTickStats = tickStatus;
             tickStatus = WorldTickStatus::Forward;
             if (tickNum > 1200) broadcastMsg(LANG("tick.fw.begin"), tickNum);
@@ -127,7 +126,7 @@ namespace mod::tick {
         }
     }
 
-    void profileWorld(trapdoor::Actor *player) {
+    void profileWorld(trapdoor::Actor *player, int round) {
         if (gameProfiler.inProfiling) {
             trapdoor::warning(player, LANG("prof.error"));
             return;
@@ -142,7 +141,9 @@ namespace mod::tick {
         gameProfiler.currentRound = gameProfiler.totalRound;
     }
 
-    void mspt() { tick::isMSPTing = true; }
+    void mspt() {
+        if (!tick::isMSPTing) tick::isMSPTing = true;
+    }
 
     WorldTickStatus getTickStatus() { return tickStatus; }
 
@@ -176,7 +177,7 @@ namespace mod::tick {
                 info(player, "forwarding");
                 return;
             case Wrap:
-                info(player, "accelerate %d times", tick::wrapSpeed);
+                info(player, "accelerate %d times", tick::accSpeed);
                 return;
         }
     }
@@ -223,13 +224,13 @@ namespace mod::tick {
 }  // namespace mod::tick
 
 using namespace SymHook;
-
+// Hook整个ServerLevel::tick函数来实现变速和暂停的功能
 THook(void, ServerLevel_tick_86efb826, trapdoor::Level *serverLevel) {
     if (!trapdoor::bdsMod) {
         L_ERROR("mod is nullptr");
     }
     if (!trapdoor::bdsMod->getLevel()) {
-        L_DEBUG("init levle obj");
+        L_DEBUG("init level obj");
         trapdoor::bdsMod->setLevel(serverLevel);
         trapdoor::bdsMod->asInstance<mod::TrapdoorMod>()->initialize();
     }
@@ -250,9 +251,11 @@ THook(void, ServerLevel_tick_86efb826, trapdoor::Level *serverLevel) {
                 TIMER_END
                 if (mod::tick::isMSPTing) {
                     //发送mspt信息
-                    bool isRedstoneTick = modInstance->getLevel()
-                                              ->getDimFromID(0)
-                                              ->isRedstoneTick();
+                    //                    bool isRedstoneTick =
+                    //                    modInstance->getLevel()
+                    //                                              ->getDimFromID(0)
+                    //                                              ->isRedstoneTick();
+                    bool isRedstoneTick = false;
                     mod::tick::sendMsptInfo(timeReslut, isRedstoneTick);
                     mod::tick::isMSPTing = false;
                 }
@@ -290,10 +293,11 @@ THook(void, ServerLevel_tick_86efb826, trapdoor::Level *serverLevel) {
             trapdoor::broadcastMsg(trapdoor::LANG("tick.fw.end"),
                                    mod::tick::forwardTickNum);
             mod::tick::forwardTickNum = 0;
+            //换回上次的状态
             mod::tick::tickStatus = mod::tick::lastTickStats;
             break;
         case mod::tick::Wrap:
-            for (int i = 0; i < mod::tick::wrapSpeed; ++i) {
+            for (int i = 0; i < mod::tick::accSpeed; ++i) {
                 original(serverLevel);
                 modInstance->lightTick();
             }
@@ -360,8 +364,7 @@ THook(void, LevelChunk_tickBlockEntities_41f9b2ca, void *levelChunk,
 
 // BlockTickingQueue::pendingTicks
 THook(void, BlockTickingQueue_tickPendingTicks_e4625213, void *queue,
-      trapdoor::BlockSource *source, const int *until, int max,
-      bool instalTick) {
+      trapdoor::BlockSource *source, uint64_t until, int max, bool instalTick) {
     if (mod::tick::gameProfiler.inProfiling) {
         TIMER_START
         original(queue, source, until, max, instalTick);
