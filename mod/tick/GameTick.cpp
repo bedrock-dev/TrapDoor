@@ -459,3 +459,4 @@ THook(void, Actor_tick_8589defc, trapdoor::Actor *actor,
         original(actor, blockSource);
     }
 }
+
