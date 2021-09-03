@@ -6,7 +6,7 @@
 
 #include "ActorProfiler.h"
 #include "BDSMod.h"
-#include "SymHook.h"
+#include "lib/SymHook.h"
 #include "TrapdoorMod.h"
 #include "commands/Command.h"
 #include "entity/Actor.h"
