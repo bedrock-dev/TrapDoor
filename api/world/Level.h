@@ -39,6 +39,10 @@ namespace trapdoor {
 
         void forEachPlayer(const std::function<void(Actor *)> &todo);
 
+        // // public: virtual void __cdecl Level::forEachPlayer(class
+        // std::function<bool __cdecl(class Player & __ptr64)>) __ptr64
+        void newForEachPlayer(std::function<bool(Actor &)> todo);
+
         Actor *getNearestPlayer(BlockPos &pos);
 
         Actor *getNearestDimensionPlayer(const BlockPos &pos, int dimID);

@@ -17,16 +17,16 @@ namespace trapdoor {
     using namespace SymHook;
 
     void Level::forEachPlayer(const std::function<void(Actor *)> &todo) {
-        //!硬编码
-        auto begin =
-            (uint64_t *)*((uint64_t *)this + off::LEVEL_FOREACH_PLAYER.first);
-        auto end =
-            (uint64_t *)*((uint64_t *)this + off::LEVEL_FOREACH_PLAYER.second);
-        while (begin != end) {
-            auto *player = (Actor *)(*begin);
-            if (player) todo(player);
-            ++begin;
-        }
+        auto f = [&](Actor &actor) {
+            todo(&actor);
+            return true;
+        };
+        this->newForEachPlayer(f);
+    }
+
+    void Level::newForEachPlayer(std::function<bool(Actor &)> todo) {
+        SYM_CALL(void (*)(Level *, std::function<bool(Actor &)>),
+                 Level_forEachPlayer_71a4f564, this, todo);
     }
 
     Actor *Level::getNearestPlayer(BlockPos &pos) {

@@ -6,6 +6,7 @@ namespace off {
     // BlockLegacy::getVariant(BlockLegacy *this, char *a2);
     constexpr uint64_t BLOCK_GET_VARIANT = 0x8;
 
+    // OK
     // BlockActor::tick
     constexpr uint64_t BLOCKACTOR_GET_POSITION = 0x2c;
 
@@ -27,7 +28,7 @@ namespace off {
 
     // OK
     // Player::tickWorld
-    constexpr uint64_t PLAYER_GET_BLOCKSOURCE = 109;
+    constexpr uint64_t PLAYER_GET_BLOCKSOURCE = 108;
 
     // OK
     // Actor::getDimensionId

@@ -48,3 +48,4 @@ log/
 *.zip
 /vsbuild
 /sym
+/symbol/sys_sym.txt

@@ -17,7 +17,7 @@ namespace trapdoor {
 
     Block *BlockSource::getBlock(const BlockPos &blockPos) {
         return SYM_CALL(Block * (*)(void *, const BlockPos &),
-                        BlockSource_getBlock_fd731636, this, blockPos);
+                        BlockSource_getBlock_b39e5e5d, this, blockPos);
     }
 
     void BlockSource::setBlock(BlockPos *blockPos, Block *block) {
