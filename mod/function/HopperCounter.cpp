@@ -116,8 +116,9 @@ THook(void, HopperBlockActor_setItem_c0e5f3ce,
 
     //附近没玩家，直接返回
     auto real_this = reinterpret_cast<trapdoor::BlockActor *>(
-        reinterpret_cast<VA>(hopperActor) - 208);
+        reinterpret_cast<VA>(hopperActor) - 200);
     auto position = real_this->getPosition();
+    L_DEBUG("postion is:%d %d %d", position->x, position->y, position->z);
     auto nearestPlayer =
         trapdoor::bdsMod->getLevel()->getNearestPlayer(*position);
     if (!nearestPlayer) {
@@ -130,6 +131,8 @@ THook(void, HopperBlockActor_setItem_c0e5f3ce,
     auto attachBlockPos =
         trapdoor::facingToBlockPos(hopperBlockVariant) + *position;
     auto attachBlock = bs->getBlock(attachBlockPos);
+    L_DEBUG("name: %s, variant: %d", attachBlock->getName().c_str(),
+            attachBlock->getVariant());
     int stackNum = itemStack->getNum();
     std::string itemName = itemStack->getItemName();
     auto channel = attachBlock->getVariant();

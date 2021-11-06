@@ -17,6 +17,17 @@
 
 namespace trapdoor {
 
+    namespace {
+        void *getUserEntityIdentifierComponent(trapdoor::Actor *actor) {
+            if (!actor) return nullptr;
+            return SYM_CALL(
+                void *(*)(trapdoor::Actor *),
+                SymHook::
+                    Actor_tryGetComponent_UserEntityIdentifierComponent_4bafed89,
+                actor);
+        }
+    }  // namespace
+
     using namespace SymHook;
 
     uint64_t NetworkIdentifier::getHash() {
@@ -67,8 +78,11 @@ namespace trapdoor {
     }
 
     NetworkIdentifier *Actor::getClientID() {
+        return reinterpret_cast<NetworkIdentifier *>(
+            getUserEntityIdentifierComponent(this));
         //! from  ServerPlayer::isHostingPlayer
-        return offset_cast<NetworkIdentifier *>(this, off::ACTOR_GET_CLIENT_ID);
+        //  return offset_cast<NetworkIdentifier *>(this,
+        //  off::ACTOR_GET_CLIENT_ID);
     }
 
     PlayerPermissionLevel Actor::getCommandLevel() {

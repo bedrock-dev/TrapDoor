@@ -307,160 +307,157 @@ THook(void, ServerLevel_tick_86efb826, trapdoor::Level *serverLevel) {
     }
 }
 
-// // ServerPlayer::tickWorld
-// // THook(void, SymHook::Serv, trapdoor::Actor *p, void *tick) {
-// //    original(p, tick);
-// //}
+// ServerPlayer::tickWorld
+// THook(void, SymHook::Serv, trapdoor::Actor *p, void *tick) {
+//    original(p, tick);
+//}
 
-// // Dimension::tick
-// THook(void, Dimension_tick_39d89862, void *dim) {
-//     if (mod::tick::gameProfiler.inProfiling) {
-//         TIMER_START
-//         original(dim);
-//         TIMER_END
-//         mod::tick::gameProfiler.dimensionTickTime += timeReslut;
-//     } else {
-//         original(dim);
-//     }
-// }
-// // LevelChunk::tick
-// THook(void, LevelChunk_tick_9d729ccd, void *levelChunk,
-//       trapdoor::BlockSource *blockSource, size_t *tick) {
-//     if (mod::tick::gameProfiler.inProfiling) {
-//         TIMER_START
-//         original(levelChunk, blockSource, tick);
-//         TIMER_END
-//         mod::tick::gameProfiler.chunkTickTime += timeReslut;
-//         mod::tick::gameProfiler.tickChunkNum++;
-//     } else {
-//         original(levelChunk, blockSource, tick);
-//     }
-// }
+// Dimension::tick
+THook(void, Dimension_tick_39d89862, void *dim) {
+    if (mod::tick::gameProfiler.inProfiling) {
+        TIMER_START
+        original(dim);
+        TIMER_END
+        mod::tick::gameProfiler.dimensionTickTime += timeReslut;
+    } else {
+        original(dim);
+    }
+}
+// LevelChunk::tick
+THook(void, LevelChunk_tick_9d729ccd, void *levelChunk,
+      trapdoor::BlockSource *blockSource, size_t *tick) {
+    if (mod::tick::gameProfiler.inProfiling) {
+        TIMER_START
+        original(levelChunk, blockSource, tick);
+        TIMER_END
+        mod::tick::gameProfiler.chunkTickTime += timeReslut;
+        mod::tick::gameProfiler.tickChunkNum++;
+    } else {
+        original(levelChunk, blockSource, tick);
+    }
+}
 
-// // LevelChunk::tickBlocks
-// THook(void, LevelChunk_tickBlocks_66280c26, void *levelChunk, void
-// *blockSource,
-//       INT64 a3, int a4) {
-//     if (mod::tick::gameProfiler.inProfiling) {
-//         TIMER_START
-//         original(levelChunk, blockSource, a3, a4);
-//         TIMER_END
-//         mod::tick::gameProfiler.chunkRandomTickTime += timeReslut;
-//     } else {
-//         original(levelChunk, blockSource, a3, a4);
-//     }
-// }
+// LevelChunk::tickBlocks
+THook(void, LevelChunk_tickBlocks_66280c26, void *levelChunk, void *blockSource,
+      INT64 a3, int a4) {
+    if (mod::tick::gameProfiler.inProfiling) {
+        TIMER_START
+        original(levelChunk, blockSource, a3, a4);
+        TIMER_END
+        mod::tick::gameProfiler.chunkRandomTickTime += timeReslut;
+    } else {
+        original(levelChunk, blockSource, a3, a4);
+    }
+}
 
-// // LevelChunk::tickBlockEntities
-// THook(void, LevelChunk_tickBlockEntities_41f9b2ca, void *levelChunk,
-//       void *blockSource) {
-//     if (mod::tick::gameProfiler.inProfiling) {
-//         TIMER_START
-//         original(levelChunk, blockSource);
-//         TIMER_END
-//         mod::tick::gameProfiler.chunkBlockEntityTickTime += timeReslut;
-//     } else {
-//         original(levelChunk, blockSource);
-//     }
-// }
+// LevelChunk::tickBlockEntities
+THook(void, LevelChunk_tickBlockEntities_41f9b2ca, void *levelChunk,
+      void *blockSource) {
+    if (mod::tick::gameProfiler.inProfiling) {
+        TIMER_START
+        original(levelChunk, blockSource);
+        TIMER_END
+        mod::tick::gameProfiler.chunkBlockEntityTickTime += timeReslut;
+    } else {
+        original(levelChunk, blockSource);
+    }
+}
 
-// // BlockTickingQueue::pendingTicks
-// THook(void, BlockTickingQueue_tickPendingTicks_e4625213, void *queue,
-//       trapdoor::BlockSource *source, uint64_t until, int max, bool
-//       instalTick) {
-//     if (mod::tick::gameProfiler.inProfiling) {
-//         TIMER_START
-//         original(queue, source, until, max, instalTick);
-//         TIMER_END
-//         mod::tick::gameProfiler.chunkPendingTickTime += timeReslut;
-//     } else {
-//         original(queue, source, until, max, instalTick);
-//     }
-// }
+// BlockTickingQueue::pendingTicks
+THook(void, BlockTickingQueue_tickPendingTicks_e4625213, void *queue,
+      trapdoor::BlockSource *source, uint64_t until, int max, bool instalTick) {
+    if (mod::tick::gameProfiler.inProfiling) {
+        TIMER_START
+        original(queue, source, until, max, instalTick);
+        TIMER_END
+        mod::tick::gameProfiler.chunkPendingTickTime += timeReslut;
+    } else {
+        original(queue, source, until, max, instalTick);
+    }
+}
 
-// // Dimension::tickRedstone
-// THook(void, Dimension_tickRedstone_c8a7e6e5, void *dim) {
-//     if (mod::tick::gameProfiler.inProfiling) {
-//         TIMER_START
-//         original(dim);
-//         TIMER_END
-//         mod::tick::gameProfiler.redstoneTickTime += timeReslut;
-//     } else {
-//         original(dim);
-//     }
+// Dimension::tickRedstone
+THook(void, Dimension_tickRedstone_c8a7e6e5, void *dim) {
+    if (mod::tick::gameProfiler.inProfiling) {
+        TIMER_START
+        original(dim);
+        TIMER_END
+        mod::tick::gameProfiler.redstoneTickTime += timeReslut;
+    } else {
+        original(dim);
+    }
 
-//     // printf("69%d 68%d\n", v1, v2);
-//     // printf("69:%d 68:%d\n", v1, v2);
-// }
+    // printf("69%d 68%d\n", v1, v2);
+    // printf("69:%d 68:%d\n", v1, v2);
+}
 
-// THook(void, Level_tickEntitySystems_251e10ba, void *level) {
-//     if (mod::tick::gameProfiler.inProfiling) {
-//         TIMER_START
-//         original(level);
-//         TIMER_END
-//         mod::tick::gameProfiler.levelEntitySystemTickTime += timeReslut;
-//     } else {
-//         original(level);
-//     }
-// }
+THook(void, Level_tickEntitySystems_251e10ba, void *level) {
+    if (mod::tick::gameProfiler.inProfiling) {
+        TIMER_START
+        original(level);
+        TIMER_END
+        mod::tick::gameProfiler.levelEntitySystemTickTime += timeReslut;
+    } else {
+        original(level);
+    }
+}
 
-// // pending update
-// //这个符号没了，直接测不准就不要这一条了
-// // THook(
-// //        void,
-// //
-// //
+// pending update
+//这个符号没了，直接测不准就不要这一条了
+// THook(
+//        void,
+//
+//
 // MSSYM_B1QE21processPendingUpdatesB1AE17CircuitSceneGraphB2AAE20AEAAXPEAVBlockSourceB3AAAA1Z,
-// //        void *graph,
-// //        void * bs
-// //) {
-// //    if (mod::tick::gameProfiler.inProfiling) {
-// //        TIMER_START
-// //        original(graph, bs);
-// //        TIMER_END
-// //        mod::tick::gameProfiler.redstonePendingUpdateTime += timeReslut;
-// //    } else {
-// //        original(graph, bs);
-// //    }
-// //}
+//        void *graph,
+//        void * bs
+//) {
+//    if (mod::tick::gameProfiler.inProfiling) {
+//        TIMER_START
+//        original(graph, bs);
+//        TIMER_END
+//        mod::tick::gameProfiler.redstonePendingUpdateTime += timeReslut;
+//    } else {
+//        original(graph, bs);
+//    }
+//}
 
-// // pendingAdd
-// THook(void, CircuitSceneGraph_processPendingAdds_9d2954e5, void *graph) {
-//     if (mod::tick::gameProfiler.inProfiling) {
-//         TIMER_START
-//         original(graph);
-//         TIMER_END
-//         mod::tick::gameProfiler.redstonePendingAddTime += timeReslut;
-//     } else {
-//         original(graph);
-//     }
-// }
+// pendingAdd
+THook(void, CircuitSceneGraph_processPendingAdds_9d2954e5, void *graph) {
+    if (mod::tick::gameProfiler.inProfiling) {
+        TIMER_START
+        original(graph);
+        TIMER_END
+        mod::tick::gameProfiler.redstonePendingAddTime += timeReslut;
+    } else {
+        original(graph);
+    }
+}
 
-// // pnding remove
-// THook(void, CircuitSceneGraph_removeComponent_1f06081d, void *graph, void
-// *bs) {
-//     if (mod::tick::gameProfiler.inProfiling) {
-//         TIMER_START
-//         original(graph, bs);
-//         TIMER_END
-//         mod::tick::gameProfiler.redstonePendingRemoveTime += timeReslut;
-//     } else {
-//         original(graph, bs);
-//     }
-// }
+// pnding remove
+THook(void, CircuitSceneGraph_removeComponent_1f06081d, void *graph, void *bs) {
+    if (mod::tick::gameProfiler.inProfiling) {
+        TIMER_START
+        original(graph, bs);
+        TIMER_END
+        mod::tick::gameProfiler.redstonePendingRemoveTime += timeReslut;
+    } else {
+        original(graph, bs);
+    }
+}
 
-// //实体性能分析的钩子函数
-// THook(void, Actor_tick_8589defc, trapdoor::Actor *actor,
-//       trapdoor::BlockSource *blockSource) {
-//     if (mod::tick::getActorProfiler().inProfiling) {
-//         auto &profiler = mod::tick::getActorProfiler();
-//         TIMER_START
-//         original(actor, blockSource);
-//         TIMER_END
-//         auto name = actor->getActorId();
-//         profiler.entitiesTickingList[name].time += timeReslut;
-//         profiler.entitiesTickingList[name].count++;
-//     } else {
-//         original(actor, blockSource);
-//     }
-// }
+//实体性能分析的钩子函数
+THook(void, Actor_tick_8589defc, trapdoor::Actor *actor,
+      trapdoor::BlockSource *blockSource) {
+    if (mod::tick::getActorProfiler().inProfiling) {
+        auto &profiler = mod::tick::getActorProfiler();
+        TIMER_START
+        original(actor, blockSource);
+        TIMER_END
+        auto name = actor->getActorId();
+        profiler.entitiesTickingList[name].time += timeReslut;
+        profiler.entitiesTickingList[name].count++;
+    } else {
+        original(actor, blockSource);
+    }
+}
