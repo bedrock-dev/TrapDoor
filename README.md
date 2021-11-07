@@ -1,38 +1,38 @@
 
 
 [简体中文](README_zh.md)| English 
+
 <br>
 
-![title-banner](./img/logo.svg)
+![banner](./img/logo.svg)
 
+Trapdoor is a minecraft bedrock server-side mod(or plugin) inspired by the java edition's carpet mod. It provides a wealth of functions for survival and technical players, including but not limited to below:
+- Change the World ticking speed
 
-Trapdoor is a dll plugin(mod) used for BDS,which porvides rich functions for survival players:
-- World ticking speed change
+- Display village bounds, center and iron golem spawn area
 
-- Village bounds and iron golem spawn area display
+- Dispaly server's CPU& memory usage
 
-- In-game observer mode
+- Measure and profile mspt and TPS
 
-- CPU& memory usage
+- Display Hardcoded spawn area 
 
-- Mspt and TPS measure
-
-This mod completely follows features of vanilla game, which will NOT change any features without notifying users, so it is suitable for use this mod in survival server.
+What's more, this mod **completely follows features of vanilla game**. This means it will **NOT** change any features without notifying users and will not affect the game level, so it is suitable for use this mod in vanilla survival server.
   ![screenshot](./img/sc.png)
-
 
 ### Download
 
-You can download at  [Releases](https://github.com/hhhxiao/TrapDoor/releases) page.
+Please go to [Releases](https://github.com/hhhxiao/TrapDoor/releases) page to download  the latest version.
 
 ### Install & Usage
 You can view this mod's wiki at  [English Trapdoor Wiki](https://github.com/hhhxiao/TrapDoor/wiki/Home-en-US).
+
 
 ### Credits
 
 #### Minecraft
 
-[Minecraft](https://www.minecraft.net/zh-hans)
+[Minecraft](https://www.minecraft.net)
 
 #### 3rd-party libs or codes
 
@@ -48,6 +48,7 @@ You can view this mod's wiki at  [English Trapdoor Wiki](https://github.com/hhhx
 
 - [https://github.com/progschj/ThreadPool](https://github.com/progschj/ThreadPool)
 
+- [https://github.com/LiteLDev/LiteLoaderBDS](https://github.com/LiteLDev/LiteLoaderBDS)
 #### Special
 
 Special thanks to [Player] for providing readable source code
@@ -67,17 +68,8 @@ Thanks for the follow game players who make suggestions and feedback bugs:
     <td align="center"><a href="https://github.com/Sysca11"><img src="https://avatars.githubusercontent.com/u/46832985?s=96&v=4" width="60px;" alt=""/><br /><sub><b>Sysca11</b></sub></a><br /><a href="https://github.com/hhhxiao/TrapDoor/commits?author=Sysca11" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/dreamguxiang"><img src="https://avatars.githubusercontent.com/u/62042544?s=96&v=4" width="60px;" alt=""/><br /><sub><b>dreamguxiang</b></sub></a><br /><a href="https://github.com/hhhxiao/TrapDoor/commits?author=dreamguxiang" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/pa733"><img src="https://avatars.githubusercontent.com/u/67588574?s=96&v=4" width="60px;" alt=""/><br /><sub><b>pa733</b></sub></a><br /><a href="https://github.com/hhhxiao/TrapDoor/commits?author=pa733" title="Code">💻</a></td>
-    
-    
-    
-
   </tr>
 </table>
-
-
-
-
-
 ### Translators
 
 - <a href="https://github.com/0x506978656c"><img src="https://avatars.githubusercontent.com/u/66031115?s=96&v=4" width="15px;" alt=""/><b> !

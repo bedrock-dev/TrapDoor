@@ -42,6 +42,7 @@ Trapdoor是一个为 Minecraft Bedrock Edition 服务的，基于原版服务端
 
 - [https://github.com/progschj/ThreadPool](https://github.com/progschj/ThreadPool)
 
+- [https://github.com/LiteLDev/LiteLoaderBDS](https://github.com/LiteLDev/LiteLoaderBDS)
 ### 特别感谢
 
 提供可读性极强的BDS源码的Player
