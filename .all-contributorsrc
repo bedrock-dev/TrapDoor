@@ -45,8 +45,8 @@
       "contributions": [
         "code"
       ]
-    }
-  ],{
+    },
+    {
       "login": "0x506978656c",
       "name": "! Pixel",
       "avatar_url": "https://avatars.githubusercontent.com/u/66031115?s=96&v=4",
@@ -54,6 +54,7 @@
       "contributions": [
         "code"
       ]
-    },
+    }
+  ],
   "contributorsPerLine": 7
 }

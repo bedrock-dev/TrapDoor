@@ -59,6 +59,8 @@ Thanks for the follow game players who make suggestions and feedback bugs:
 
 木月酸与云龙碱、莵道三室戸、orange_31、panda4994万岁、梵蒂冈_273、OEOTYAN、Origin 0110、阿阎mr、玲珑芯、Sysca11、yqs112358 
 ### Contributors
+<!-- ALL-CONTRIBUTORS-LIST: START - Do not remove or modify this section -->
+
 <table frame=void>
   <tr>
     <td align="center"><a href="https://github.com/hhhxiao"><img src="https://avatars0.githubusercontent.com/u/33011851?v=4?s=100" width="60px;" alt=""/><br /><sub><b>AgNO3</b></sub></a><br /><a href="https://github.com/hhhxiao/TrapDoor/commits?author=hhhxiao" title="Code">💻</a></td>
@@ -70,8 +72,8 @@ Thanks for the follow game players who make suggestions and feedback bugs:
     <td align="center"><a href="https://github.com/pa733"><img src="https://avatars.githubusercontent.com/u/67588574?s=96&v=4" width="60px;" alt=""/><br /><sub><b>pa733</b></sub></a><br /><a href="https://github.com/hhhxiao/TrapDoor/commits?author=pa733" title="Code">💻</a></td>
   </tr>
 </table>
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 ### Translators
-
 - <a href="https://github.com/0x506978656c"><img src="https://avatars.githubusercontent.com/u/66031115?s=96&v=4" width="15px;" alt=""/><b> !
   Pixel </b></sub></a><a href="https://github.com/hhhxiao/TrapDoor/commits?author=0x506978656c" title="Code">🌎</a></td>
 - <a href="https://github.com/TimothyGrass"><img src="https://avatars.githubusercontent.com/u/77906640?s=96&v=4" width="15px;" alt=""/><b>
