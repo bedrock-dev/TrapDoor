@@ -54,7 +54,17 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "TimothyGrass",
+      "name": "TimothyGrass",
+      "avatar_url": "https://avatars.githubusercontent.com/u/77906640?v=4",
+      "profile": "https://github.com/TimothyGrass",
+      "contributions": [
+        "translation"
+      ]
     }
   ],
-  "contributorsPerLine": 7
+  "contributorsPerLine": 7,
+  "skipCi": true
 }
