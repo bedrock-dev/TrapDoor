@@ -1,8 +1,10 @@
-<h1>
-    <img src="img/logo.svg" alt="Trapdoor" width="400" /> 
-</h1>
+简体中文 | [English](README.md)
 
-简体中文 |[English](README.md)
+![GitHub All Releases](https://img.shields.io/github/downloads/hhhxiao/TrapDoor/total?style=for-the-badge)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/hhhxiao/TrapDoor?style=for-the-badge)
+
+
+![banner](./img/logo.svg)
 
 ## 这是什么
 
@@ -86,4 +88,4 @@ Trapdoor是一个为 Minecraft Bedrock Edition 服务的，基于原版服务端
 GPL v3
 
 ![JetBrainsLogo](./img/jetbrains.svg)<br>
-特别感谢[JetBrains](https://www.jetbrains.com/?from=BlueMap) 对本项目开发的支持
+特别感谢[JetBrains](https://www.jetbrains.com/?from=TrapDoor) 对本项目开发的支持
