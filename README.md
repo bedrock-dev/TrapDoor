@@ -1,6 +1,10 @@
 
 
-[简体中文](README_zh.md)| English 
+[简体中文](README_zh.md) | English 
+
+
+![GitHub All Releases](https://img.shields.io/github/downloads/hhhxiao/TrapDoor/total?style=for-the-badge)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/hhhxiao/TrapDoor?style=for-the-badge)
 
 <br>
 
