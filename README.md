@@ -1,10 +1,10 @@
-
-
-[简体中文](README_zh.md)| English 
-
-<br>
-
 ![banner](./img/logo.svg)
+**[简体中文](README_zh.md) | English** 
+
+
+![GitHub All Releases](https://img.shields.io/github/downloads/hhhxiao/TrapDoor/total?style=for-the-badge)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/hhhxiao/TrapDoor?style=for-the-badge)
+
 
 Trapdoor is a minecraft bedrock server-side mod(or plugin) inspired by the java edition's carpet mod. It provides a wealth of functions for survival and technical players, including but not limited to below:
 - Change the World ticking speed
