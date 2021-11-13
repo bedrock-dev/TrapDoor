@@ -6,6 +6,7 @@
 
 #include "VanillaBlockType.h"
 #include "commands/Command.h"
+#include "entity/Item.h"
 #include "eval/Eval.h"
 #include "function/BackupHelper.h"
 #include "function/FunctionCommands.h"
@@ -45,6 +46,7 @@ namespace mod {
         get_cpu_usage();
         this->initFunctionEnable();
         initBlockMap();
+        InitItemNameMap();
         //初始化假人客户端的线程池
         this->fakePlayerClient = new FakePlayerClient(this->getThreadPool());
         this->fakePlayerClient->registerFakePlayerCommand(commandManager);

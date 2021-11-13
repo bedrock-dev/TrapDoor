@@ -17,6 +17,10 @@ namespace trapdoor {
 
         // void setNull();
     };
+
+    void InitItemNameMap();
+
+    std::string GetItemLocalName(const std::string &name);
 }  // namespace trapdoor
 
 #endif  // TRAPDOOR_ITEM_H

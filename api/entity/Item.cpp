@@ -4,6 +4,7 @@
 
 #include "Item.h"
 
+#include <fstream>
 #include <string>
 
 #include "Offset.h"
@@ -19,6 +20,9 @@
 namespace trapdoor {
     using namespace SymHook;
 
+    namespace {
+        std::unordered_map<std::string, std::string> item_name_map;
+    }
     std::string ItemStackBase::getItemName() {
         std::string name;
         SYM_CALL(void (*)(ItemStackBase *, std::string *),
@@ -30,6 +34,54 @@ namespace trapdoor {
         return *offset_cast<char *>(this, off::ITEM_GET_NUM);
     }
 
+    void InitItemNameMap() {
+        const std::string bds_lang_file_path =
+            ".\\resource_packs\\vanilla\\texts\\zh_CN.lang";
+        std::ifstream input(bds_lang_file_path);
+        if (!input.is_open()) {
+            L_WARNING("can not read bds lang file");
+            return;
+        }
+        std::string line;
+        while (getline(input, line)) {
+            if (line.find("item.") == 0 || line.find("tile.") == 0) {
+                // item.iron_hoe.name=铁锄	#
+                auto p1 = line.find("=");
+                auto p2 = line.find('\t');
+                auto key = line.substr(0, p1);
+                auto name = line.substr(p1 + 1, p2 - p1);
+                name.erase(std::remove(name.begin(), name.end(), '\t'),
+                           name.end());
+                item_name_map[key] = name;
+            }
+        }
+    }
+
+    std::string GetItemLocalName(const std::string &name) {
+        LCID localeID = GetUserDefaultLCID();
+        unsigned short lang = localeID & 0xFF;
+        if (lang != LANG_CHINESE) {
+            return name;
+        }
+        auto key = name;
+        for (auto &i : key) {
+            if (i == ' ') i = '_';
+            if (i <= 'Z' && i >= 'A') i -= ('Z' - 'z');
+        }
+
+        auto key1 = "item." + key + ".name";
+        auto iter = item_name_map.find(key1);
+        if (iter != item_name_map.end()) {
+            return iter->second;
+        }
+
+        auto key2 = "tile." + key + ".name";
+        auto iter2 = item_name_map.find(key2);
+        if (iter2 != item_name_map.end()) {
+            return iter2->second;
+        }
+        return name;
+    }
 }  // namespace trapdoor
 
 using namespace SymHook;
