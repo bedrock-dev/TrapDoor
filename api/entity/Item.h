@@ -5,19 +5,21 @@
 #ifndef TRAPDOOR_ITEM_H
 #define TRAPDOOR_ITEM_H
 
-
-#include <string>
 #include "Block.h"
+#include <string>
 
 namespace trapdoor {
-    struct ItemStackBase {
-        std::string getItemName();
+struct ItemStackBase {
+  std::string getItemName();
 
-        int getNum();
+  int getNum();
 
-        void setNull();
-    };
-}
+  void setNull();
+};
 
+void InitItemNameMap();
 
-#endif //TRAPDOOR_ITEM_H
+std::string GetItemLocalName(const std::string &name);
+} // namespace trapdoor
+
+#endif // TRAPDOOR_ITEM_H
