@@ -16,6 +16,8 @@ namespace mod {
         using trapdoor::BlockSource;
         if (!this->enable) return;
         auto block = blockSource->getBlock(pos);
+        printf("%d(%s)", block->getLegacy()->getBlockID(),
+               block->getName().c_str());
         auto air = trapdoor::getBlockByID(trapdoor::AIR);
         auto variant = block->getVariant();
         auto name = block->getName();
@@ -49,12 +51,12 @@ namespace mod {
             blockSource->setBlock(&pos, newBlock);
         }
 
-            //    else if (name.find("cake") != std::string::npos) {
-            //        auto newState = (variant + 1) % 7;
-            //        auto newBlock =
-            //        block->getLegacy()->tryGetStateBlock(newState);
-            //        blockSource->setBlock(&pos, newBlock);
-            //    }
+        //    else if (name.find("cake") != std::string::npos) {
+        //        auto newState = (variant + 1) % 7;
+        //        auto newBlock =
+        //        block->getLegacy()->tryGetStateBlock(newState);
+        //        blockSource->setBlock(&pos, newBlock);
+        //    }
         else if (name.find("grindstone") != std::string::npos) {
             auto newState = (variant + 1) % 12;
             auto newBlock = block->getLegacy()->tryGetStateBlock(newState);
@@ -118,24 +120,26 @@ namespace mod {
         }
     }
 
-    void BlockRotationHelper::addAction(const std::initializer_list<std::string> &patterns,
-                                        const RotateAction &rotateAction) {
+    void BlockRotationHelper::addAction(
+        const std::initializer_list<std::string> &patterns,
+        const RotateAction &rotateAction) {
         std::set<std::string> pat(patterns);
         this->actionList.emplace_back(patterns, rotateAction);
-
     }
 
-    void
-    BlockRotationHelper::newRotate(trapdoor::BlockPos &pos, trapdoor::BlockSource *blockSource, const trapdoor::Vec3 &v,
-                                   trapdoor::FACING facing) const {
+    void BlockRotationHelper::newRotate(trapdoor::BlockPos &pos,
+                                        trapdoor::BlockSource *blockSource,
+                                        const trapdoor::Vec3 &v,
+                                        trapdoor::FACING facing) const {
         auto block = blockSource->getBlock(pos);
         auto variant = block->getVariant();
         auto blockName = blockSource->getBlock(pos)->getName();
-        for (const auto &act:actionList) {
+        for (const auto &act : actionList) {
             if (act.match(blockName)) {
                 auto newVariant = act.action(variant, v, facing);
                 if (newVariant != variant) {
-                    auto newBlock = block->getLegacy()->tryGetStateBlock(newVariant);
+                    auto newBlock =
+                        block->getLegacy()->tryGetStateBlock(newVariant);
                     auto air = trapdoor::getBlockByID(trapdoor::AIR);
                     blockSource->setBlock(&pos, air);
                     blockSource->setBlock(&pos, newBlock);
@@ -146,29 +150,23 @@ namespace mod {
     }
 
     void BlockRotationHelper::init() {
+        using trapdoor::BlockSource;
         using trapdoor::FACING;
         using trapdoor::Vec3;
-        using trapdoor::BlockSource;
-        this->addAction({"piston", "repeater"},
-                //根据当前特殊值，玩家点击的位置和方向来返回新的特殊值
-                        [](int variant, const Vec3 &v, FACING facing) {
-                            return variant;
-                        });
+        this->addAction(
+            {"piston", "repeater"},
+            //根据当前特殊值，玩家点击的位置和方向来返回新的特殊值
+            [](int variant, const Vec3 &v, FACING facing) { return variant; });
 
-        this->addAction({"cake"},
-                        [](int variant, const Vec3 &v, FACING facing) {
-                            return variant;
-                        });
-
-
-
-
+        this->addAction({"cake"}, [](int variant, const Vec3 &v,
+                                     FACING facing) { return variant; });
     }
 
     bool BlockRotateAction::match(const std::string &name) const {
-        return std::any_of(patterns.begin(), patterns.end(), [&](const std::string &pattern) {
-            return pattern.find(name) != std::string::npos;
-        });
+        return std::any_of(patterns.begin(), patterns.end(),
+                           [&](const std::string &pattern) {
+                               return pattern.find(name) != std::string::npos;
+                           });
     }
 
 }  // namespace mod

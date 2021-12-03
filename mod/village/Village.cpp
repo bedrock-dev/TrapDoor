@@ -39,8 +39,8 @@ namespace mod {
         const size_t GOLEM_NUM_OFFSET = 30;
         // from Village::_trySpawnDefenderDwellers
         const size_t DWELLER_POI_MAP_OFFSET = 96;
-
-        const size_t DWELLER_TICK_MAP_OFFSET = 160;
+        // Village::_getDwellerMap
+        const size_t DWELLER_TICK_MAP_OFFSET = 152;
 
         struct DwellerData {
             uint64_t tick;
@@ -89,15 +89,15 @@ namespace mod {
 
     // get worked villager num
     int Village::getWorkedVillagerNum() {
-        // from Village::_trySpawnDefenderDwellers
-        auto timeOfDay = *(reinterpret_cast<int64_t *>(this) + 60) - 24000;
-        auto begin = *(reinterpret_cast<int64_t *>(this) + 85);
-        auto end = *(reinterpret_cast<int64_t *>(this) + 86);
-        int num;
-        for (num = 0; begin != end; begin += 16) {
-            if (*(int64_t *)(begin + 8) > timeOfDay) ++num;
-        }
-        return num;
+        //     from Village::_trySpawnDefenderDwellers
+        // auto timeOfDay = *(reinterpret_cast<int64_t *>(this) + 54) - 24000;
+        // auto begin = *(reinterpret_cast<int64_t *>(this) + 76);
+        // auto end = *(reinterpret_cast<int64_t *>(this) + 77);
+        // int num;
+        // for (num = 0; begin != end; begin += 16) {
+        //     if (*(int64_t *)(begin + 8) > timeOfDay) ++num;
+        // }
+        return -1;
     }
 
     // check can actor iron golem
@@ -345,17 +345,14 @@ namespace mod {
                     .num(village->getIronGolemNum())
                     .text(" b:")
                     .num(village->getBedPOICount())
-                    .text(" s:")
-                    .num((int)village->canSpawnIronGolem())
                     .text(" [")
                     .pos(aabb.p1.toBlockPos())
-                    .text("-")
+                    .text("")
                     .pos(aabb.p2.toBlockPos())
                     .text("]\n");
             }
         }
         builder.send(player);
-        //  builder.send();
     }
 
     void VillageHelper::tick() {
