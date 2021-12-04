@@ -234,14 +234,13 @@ namespace mod {
         get_memory_usage(&memory, &virtualMemory);
         get_io_bytes(&ioRead, &ioWrite);
         std::string stringBuilder;
-        stringBuilder +=
-            trapdoor::format("CPU " C_INT
-                             "%%%%"
-                             "Mem: " C_INT " MB VMem; " C_INT
-                             " MB\n"
-                             "Read/Write" C_INT "KB / " C_INT " KB",
-                             CPUUsage, memory >> 20u, virtualMemory >> 20u,
-                             ioRead >> 10u, ioWrite >> 10u);
+        stringBuilder += trapdoor::format(
+            "CPU: %d %%\n"
+            "Mem: " C_INT " MB VMem; " C_INT
+            " MB\n"
+            "Read/Write" C_INT "KB / " C_INT " KB",
+            CPUUsage, memory >> 20u, virtualMemory >> 20u, ioRead >> 10u,
+            ioWrite >> 10u);
         trapdoor::info(player, stringBuilder);
     }
 

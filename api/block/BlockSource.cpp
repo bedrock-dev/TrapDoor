@@ -7,7 +7,7 @@
 #include "lib/SymHook.h"
 #include "lib/mod.h"
 #include "world/Biome.h"
-
+bool flag = false;
 namespace trapdoor {
     using namespace SymHook;
 
@@ -15,15 +15,15 @@ namespace trapdoor {
         return getBlock({x, y, z});
     }
 
-    Block *BlockSource::getBlock(const BlockPos &blockPos) {
-        printf("%d %d %d)", blockPos.x, blockPos.y, blockPos.z);
-        return SYM_CALL(Block * (*)(void *, const BlockPos &),
-                        BlockSource_getBlock_b39e5e5d, this, blockPos);
+    Block *BlockSource::getBlock(const BlockPos &pos) {
+        flag = true;
+        auto *b = SYM_CALL(Block * (*)(void *, const BlockPos &),
+                           BlockSource_getBlock_b39e5e5d, this, pos);
+        return b;
     }
 
     void BlockSource::setBlock(BlockPos *blockPos, Block *block) {
         SYM_CALL(void (*)(void *, int, int, int, Block *, int),
-
                  BlockSource_setBlock_71ce9a25, this, blockPos->x, blockPos->y,
                  blockPos->z, block, 3);
     }
@@ -45,3 +45,8 @@ namespace trapdoor {
                         BlockSource_getBiome_967864de, this, pos);
     }
 }  // namespace trapdoor
+// using namespace SymHook;
+// THook(trapdoor::Block *, BlockSource_getBlock_b39e5e5d,
+//       trapdoor::BlockSource *source, const trapdoor::BlockPos &pos) {
+//     return trapdoor::getBlockByID(trapdoor::DIAMOND_BLOCK);
+// }

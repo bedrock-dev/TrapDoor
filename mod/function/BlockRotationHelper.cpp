@@ -14,10 +14,10 @@ namespace mod {
     void BlockRotationHelper::rotate(trapdoor::BlockPos &pos,
                                      trapdoor::BlockSource *blockSource) const {
         using trapdoor::BlockSource;
-        if (!this->enable) return;
         auto block = blockSource->getBlock(pos);
         printf("%d(%s)", block->getLegacy()->getBlockID(),
                block->getName().c_str());
+        if (!this->enable) return;
         auto air = trapdoor::getBlockByID(trapdoor::AIR);
         auto variant = block->getVariant();
         auto name = block->getName();
