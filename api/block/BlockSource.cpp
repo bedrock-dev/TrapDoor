@@ -7,19 +7,19 @@
 #include "lib/SymHook.h"
 #include "lib/mod.h"
 #include "world/Biome.h"
-bool flag = false;
 namespace trapdoor {
     using namespace SymHook;
 
     Block *BlockSource::getBlock(int x, int y, int z) {
-        return getBlock({x, y, z});
+        //        return getBlock({x, y, z});
+        return SYM_CALL(Block * (*)(void *, int, int, int),
+                        BlockSource_getBlock_6df88a51, this, x, y, z);
     }
 
     Block *BlockSource::getBlock(const BlockPos &pos) {
-        flag = true;
-        auto *b = SYM_CALL(Block * (*)(void *, const BlockPos &),
-                           BlockSource_getBlock_b39e5e5d, this, pos);
-        return b;
+        return SYM_CALL(Block * (*)(void *, const BlockPos &),
+                        BlockSource_getBlock_b39e5e5d, this, pos);
+        //    return getBlock(pos.x, pos.y, pos.z);
     }
 
     void BlockSource::setBlock(BlockPos *blockPos, Block *block) {

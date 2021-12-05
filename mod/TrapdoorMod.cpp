@@ -193,7 +193,7 @@ namespace mod {
     void TrapdoorMod::useOnHook(Actor *player, const std::string &itemName,
                                 BlockPos &pos, unsigned int facing,
                                 const Vec3 &v) {
-        L_INFO("%.2f %.2f %.2f %s", v.x, v.y, v.z, itemName.c_str());
+        L_DEBUG("%.2f %.2f %.2f %s", v.x, v.y, v.z, itemName.c_str());
         //取消注释这一行可以看到右击地面的是什么东西
         if (itemName == "Bone" && this->spawnHelper.isEnable()) {
             spawnHelper.updateVerticalSpawnPositions(pos, player);
@@ -235,7 +235,7 @@ namespace mod {
         get_io_bytes(&ioRead, &ioWrite);
         std::string stringBuilder;
         stringBuilder += trapdoor::format(
-            "CPU: %d %%\n"
+            "CPU: %d %%%%\n"
             "Mem: " C_INT " MB VMem; " C_INT
             " MB\n"
             "Read/Write" C_INT "KB / " C_INT " KB",
@@ -283,7 +283,8 @@ namespace mod {
 #else
         const char *gameVersion = "unknown_mcbe_version";
 #endif
-        std::string version = std::string(modVersion) + "-" + gameVersion;
+        std::string version =
+            "TrapDoor-" + std::string(modVersion) + "-" + gameVersion;
 #ifdef BETA
         version += "-test";
 #endif

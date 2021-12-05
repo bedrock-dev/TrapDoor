@@ -48,9 +48,8 @@ namespace mod {
         auto inSlimeChunk = chunkPos.isSlimeChunk();
         Vec3 viewVec{};
         player->getViewActor(&viewVec, 1);
-        //  auto biome = player->getBlockSource()->getBiome(&playerBlockPos);
-        // auto name = biome->getBiomeName();
-        std::string name = "Unknown";
+        auto biome = player->getBlockSource()->getBiome(&playerBlockPos);
+        auto name = biome->getBiomeName();
         auto modInstance = trapdoor::bdsMod->asInstance<mod::TrapdoorMod>();
 
         std::string xyz = format("XYZ: %.2f / %.2f / %.2f\n", position->x,
@@ -62,10 +61,8 @@ namespace mod {
         std::string facing = "Facing: " + viewVec.toDirString();
         facing +=
             format("(%.2f / %.2f / %.2f)\n", viewVec.x, viewVec.y, viewVec.z);
-        std::string biomeString =
-            format("Biome: minecraft:%s (%d)\n", name.c_str(),
-                   // biome->getBiomeType()
-                   -1);
+        std::string biomeString = format("Biome: minecraft:%s (%d)\n",
+                                         name.c_str(), biome->getBiomeType());
         std::string dimString =
             format("Dimension: %s (%d)\n", player->getDimensionName().c_str(),
                    player->getDimensionID());

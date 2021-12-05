@@ -93,12 +93,12 @@ namespace mod {
         trapdoor::MessageBuilder builder;
         stringBuilder +=
             trapdoor::format("channel: " C_INT "\ntotal " C_INT
-                             " items in " C_INT " gt(" C_FLOAT "min)\n",
+                             " items in " C_INT " gt  (" C_FLOAT "min)\n",
                              channel, n, gameTick, gameTick / 1200.0);
         for (const auto &i : counterList) {
             auto itemName = GetItemLocalName(i.first);
             stringBuilder += trapdoor::format(
-                "- %s  " C_INT "(" C_FLOAT "/hour)\n", itemName.c_str(),
+                "- %s  " C_INT " (" C_FLOAT " /hour)\n", itemName.c_str(),
                 i.second, i.second * 1.0 / gameTick * 72000);
         }
         trapdoor::info(actor, stringBuilder);

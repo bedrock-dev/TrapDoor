@@ -56,14 +56,15 @@
 #设置玩家游戏模式
 ?setPlayerGameType@ServerPlayer@@UEAAXW4GameType@@@Z
 
-
 #从BlockSource中获取方块
 #?getBlock@BlockSource@@QEBAAEBVBlock@@AEBVBlockPos@@@Z
 ?getBlock@BlockSource@@UEBAAEBVBlock@@AEBVBlockPos@@@Z
 
+#同上，但是参数是int,int,int
+?getBlock@BlockSource@@UEBAAEBVBlock@@HHH@Z
+
 #利用blocksource设置方块
 ?setBlock@BlockSource@@QEAA_NHHHAEBVBlock@@H@Z
-
 
 #更新邻居方块
 ?updateNeighborsAt@BlockSource@@QEAAXAEBVBlockPos@@@Z
@@ -142,3 +143,7 @@
 
 #获取用户验证的component
 ??$tryGetComponent@VUserEntityIdentifierComponent@@@Actor@@QEAAPEAVUserEntityIdentifierComponent@@XZ
+
+
+#获取BlockSource
+?getRegion@Actor@@QEBAAEAVBlockSource@@XZ

@@ -53,7 +53,9 @@ namespace trapdoor {
     BlockSource *Actor::getBlockSource() {
         //! from Player::tickWorld
         //  return offset_cast<BlockSource *>(this, 100);
-        return *((struct BlockSource **)this + off::PLAYER_GET_BLOCKSOURCE);
+        return SYM_CALL(trapdoor::BlockSource * (*)(trapdoor::Actor *),
+                        Actor_getRegion_757c8f63, this);
+        //  return *((struct BlockSource **)this + off::PLAYER_GET_BLOCKSOURCE);
     }
 
     void Actor::setGameMode(int mode) {
