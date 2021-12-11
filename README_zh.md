@@ -1,70 +1,48 @@
-简体中文 | [English](README.md)
+<p align="center">
+<img src="./img/logo.svg" alt="drawing" style="width:600px;"/>
+</p>
 
-![GitHub All Releases](https://img.shields.io/github/downloads/hhhxiao/TrapDoor/total?style=for-the-badge)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/hhhxiao/TrapDoor?style=for-the-badge)
+
+**简体中文 | [English](README.md)** 
 
 
-![banner](./img/logo.svg)
+![GitHub All Releases](https://img.shields.io/github/downloads/hhhxiao/TrapDoor/total?style=for-the-badge)![GitHub release (latest by date)](https://img.shields.io/github/v/release/hhhxiao/TrapDoor?style=for-the-badge)
 
-## 这是什么
+Trapdoor是类似JE的地毯mod的启发开发的一个基岩版BDS mod（或者说叫插件）。Trapdoor给技术玩家和生电玩家提供了非常丰富且好用的功能，包括但不限于：
+- 改变世界运行速度
+- 显示村庄边界，村庄中心，村民的POI绑定状态等等
+- 显示服务器占用的CPU和内存
+- 显示服务器的MSPT和TPS以及详细的性能分析数据
+- 显示HSA以及史莱姆刷怪区域
 
-Trapdoor是一个为 Minecraft Bedrock Edition 服务的，基于原版服务端(BDS)的，致力于为原版玩家探索游戏机制服务的插件(或者mod)
-,该插件的功能很大程度上参考了JE的[carpet](https://github.com/gnembon/fabric-carpet) 模组。
+除此之外，本插件**不会在不告知玩家的前提下修改原版游戏特性，且所有功能均可选择性关闭**，而且理论上不会影响存档，你可以随时移除本插件而不对存档造成影响，因此本插件十分适合在生电服和研究游戏机制的创造服中使用。
 
-## 效果展示
+<p align="center">
+<img src="./img/sc.png" alt="drawing" style="width:100%;"/>
+</p>
 
-![](./img/sample/hsa.png)
 
-更多图片展示看 [这里](./example.md)
+### 下载
 
-## 下载
-[Releases](https://github.com/hhhxiao/TrapDoor/releases)
+你可以到[Releases页面](https://github.com/hhhxiao/TrapDoor/releases) 来下载最新的版本。
 
-## 安装和使用教程
+### 安装和使用
 
-[Trapdoor Wiki](https://github.com/hhhxiao/TrapDoor/wiki)
+Trapdoor和其它的BDS插件一样，你可以用任何DLL注入器或者插件加载器来进行加载。详情见 [Trapdoor 中文wiki](https://github.com/hhhxiao/TrapDoor/wiki/)中的安装和使用界面。
 
-## Credits
+### TODO和计划
 
-### Minecraft
+你可在 [这里](./TODOs.md) 看到相关的开发计划和进展。
+### 交流和反馈
 
-感谢`mojang`提供的[Minecraft](https://www.minecraft.net/zh-hans)游戏
+- [Discord](https://discord.gg/bnSzTUCr)
+- [QQ 群](https://jq.qq.com/?_wv=1027&k=R8FXPBWp)
 
-### 第三方库或者代码
 
-- [https://github.com/microsoft/Detours](https://github.com/microsoft/Detours)
+### Contributors
 
-- [https://github.com/zhkj-liuxiaohua/MCMODDLL-CPP]( https://github.com/zhkj-liuxiaohua/MCMODDLL-CPP )
+感谢以下的开发者对本仓库的无私贡献：
 
-- [https://github.com/nlohmann/json](https://github.com/nlohmann/json)
-
-- [https://github.com/DarthTon/Xenos](https://github.com/DarthTon/Xenos)
-
-- [https://github.com/Celtoys/Remotery](https://github.com/Celtoys/Remotery)
-
-- [https://github.com/progschj/ThreadPool](https://github.com/progschj/ThreadPool)
-
-- [https://github.com/LiteLDev/LiteLoaderBDS](https://github.com/LiteLDev/LiteLoaderBDS)
-### 特别感谢
-
-提供可读性极强的BDS源码的Player
-
-### 玩家
-
-感谢下面的玩家提供的优秀建议与反馈的bug:
-
-- 木月酸与云龙碱
-- 莵道三室戸
-- orange_31
-- panda4994万岁
-- 梵蒂冈_273
-- OEOTYAN
-- Origin 0110
-- 阿阎mr
-- 玲珑芯
-- yqs112358 
-
-## 代码贡献者
 <table frame=void>
   <tr>
     <td align="center"><a href="https://github.com/hhhxiao"><img src="https://avatars0.githubusercontent.com/u/33011851?v=4?s=100" width="60px;" alt=""/><br /><sub><b>AgNO3</b></sub></a><br /><a href="https://github.com/hhhxiao/TrapDoor/commits?author=hhhxiao" title="Code">💻</a></td>
@@ -74,18 +52,32 @@ Trapdoor是一个为 Minecraft Bedrock Edition 服务的，基于原版服务端
     <td align="center"><a href="https://github.com/Sysca11"><img src="https://avatars.githubusercontent.com/u/46832985?s=96&v=4" width="60px;" alt=""/><br /><sub><b>Sysca11</b></sub></a><br /><a href="https://github.com/hhhxiao/TrapDoor/commits?author=Sysca11" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/dreamguxiang"><img src="https://avatars.githubusercontent.com/u/62042544?s=96&v=4" width="60px;" alt=""/><br /><sub><b>dreamguxiang</b></sub></a><br /><a href="https://github.com/hhhxiao/TrapDoor/commits?author=dreamguxiang" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/pa733"><img src="https://avatars.githubusercontent.com/u/67588574?s=96&v=4" width="60px;" alt=""/><br /><sub><b>pa733</b></sub></a><br /><a href="https://github.com/hhhxiao/TrapDoor/commits?author=pa733" title="Code">💻</a></td>
-    
-    
-    
-
   </tr>
 </table>
 
-## 翻译贡献者
--  <a href="https://github.com/0x506978656c"><img src="https://avatars.githubusercontent.com/u/66031115?s=96&v=4" width="15px;" alt=""/><b> ! Pixel </b></sub></a><a href="https://github.com/hhhxiao/TrapDoor/commits?author=0x506978656c" title="Code">🌎</a></td>
+感谢以下社区贡献者提供的其它语言的翻译：
 
-## license
-GPL v3
+- 0x506978656c
+- TimothyGrass
 
-![JetBrainsLogo](./img/jetbrains.svg)<br>
-特别感谢[JetBrains](https://www.jetbrains.com/?from=TrapDoor) 对本项目开发的支持
+### Credits
+
+#### 第三方库
+
+- [Detours](https://github.com/microsoft/Detours)
+- [MCMODDLL-CPP]( https://github.com/zhkj-liuxiaohua/MCMODDLL-CPP )
+- [nlohmann json](https://github.com/nlohmann/json)
+- [Remotery](https://github.com/Celtoys/Remotery)
+- [ThreadPool](https://github.com/progschj/ThreadPool)
+- [LiteLoaderBDS](https://github.com/LiteLDev/LiteLoaderBDS)
+
+#### 玩家
+
+感谢下列的玩家或者社区贡献者提供的建议和反馈: Player,木月酸与云龙碱, 莵道三室戸, orange_31, panda4994万岁, 梵蒂冈_273, OEOTYAN, Origin 0110, 阿阎mr, 玲珑芯, Sysca11, yqs112358。
+
+---
+
+### 支持和赞助
+
+你可以通过  <img src="https://afdian.net/static/img/logo/logo.png" alt="drawing" style="display:inline; width: 30px"/> **<a href="https://afdian.net/@hhhxiao">https://afdian.net/@hhhxiao</a>**　来支持开发者。
+

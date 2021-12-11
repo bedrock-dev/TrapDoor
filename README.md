@@ -1,65 +1,53 @@
-![banner](./img/logo.svg)
+<p align="center">
+<img src="./img/logo.svg" alt="drawing" style="width:600px;"/>
+</p>
+
+
+
 **[简体中文](README_zh.md) | English** 
 
 
-![GitHub All Releases](https://img.shields.io/github/downloads/hhhxiao/TrapDoor/total?style=for-the-badge)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/hhhxiao/TrapDoor?style=for-the-badge)
+![GitHub All Releases](https://img.shields.io/github/downloads/hhhxiao/TrapDoor/total?style=for-the-badge)![GitHub release (latest by date)](https://img.shields.io/github/v/release/hhhxiao/TrapDoor?style=for-the-badge)
 
 
 Trapdoor is a minecraft bedrock server-side mod(or plugin) inspired by the java edition's carpet mod. It provides a wealth of functions for survival and technical players, including but not limited to below:
+
 - Change the World ticking speed
-
 - Display village bounds, center and iron golem spawn area
-
-- Dispaly server's CPU& memory usage
-
-- Measure and profile mspt and TPS
-
-- Display Hardcoded spawn area 
+- Display server's CPU& memory usage
+- Measure and profile MSPT and TPS
+- Display Hardcoded spawn area
 
 What's more, this mod **completely follows features of vanilla game**. This means it will **NOT** change any features without notifying users and will not affect the game level, so it is suitable for use this mod in vanilla survival server.
-  ![screenshot](./img/sc.png)
+
+<p align="center">
+<img src="./img/sc.png" alt="drawing" style="width:100%;"/>
+</p>
+
+
+
 
 ### Download
 
 Please go to [Releases](https://github.com/hhhxiao/TrapDoor/releases) page to download  the latest version.
 
 ### Install & Usage
-You can view this mod's wiki at  [English Trapdoor Wiki](https://github.com/hhhxiao/TrapDoor/wiki/Home-en-US).
+
+Trapdoor is the same as other BDS plugins, you can use any DLL injector to inject it into your BDS. There are the details of how to install and usage: [English Trapdoor Wiki](https://github.com/hhhxiao/TrapDoor/wiki/Home-en-US).
+
+### TODOs and Plans
+
+See  [TODOs](./TODOs.md) for todo and development plans.
+
+### Feedback and discussion
+
+- [Discord](https://discord.gg/bnSzTUCr)
+- [QQ group](https://jq.qq.com/?_wv=1027&k=R8FXPBWp)
 
 
-### Credits
-
-#### Minecraft
-
-[Minecraft](https://www.minecraft.net)
-
-#### 3rd-party libs or codes
-
-- [https://github.com/microsoft/Detours](https://github.com/microsoft/Detours)
-
-- [https://github.com/zhkj-liuxiaohua/MCMODDLL-CPP]( https://github.com/zhkj-liuxiaohua/MCMODDLL-CPP )
-
-- [https://github.com/nlohmann/json](https://github.com/nlohmann/json)
-
-- [https://github.com/DarthTon/Xenos](https://github.com/DarthTon/Xenos)
-
-- [https://github.com/Celtoys/Remotery](https://github.com/Celtoys/Remotery)
-
-- [https://github.com/progschj/ThreadPool](https://github.com/progschj/ThreadPool)
-
-- [https://github.com/LiteLDev/LiteLoaderBDS](https://github.com/LiteLDev/LiteLoaderBDS)
-#### Special
-
-Special thanks to [Player] for providing readable source code
-
-#### Players
-
-Thanks for the follow game players who make suggestions and feedback bugs:
-
-木月酸与云龙碱、莵道三室戸、orange_31、panda4994万岁、梵蒂冈_273、OEOTYAN、Origin 0110、阿阎mr、玲珑芯、Sysca11、yqs112358 
 ### Contributors
-<!-- ALL-CONTRIBUTORS-LIST: START - Do not remove or modify this section -->
+
+Thanks to the developers below for their selfless contributions to this repository:
 
 <table frame=void>
   <tr>
@@ -72,15 +60,29 @@ Thanks for the follow game players who make suggestions and feedback bugs:
     <td align="center"><a href="https://github.com/pa733"><img src="https://avatars.githubusercontent.com/u/67588574?s=96&v=4" width="60px;" alt=""/><br /><sub><b>pa733</b></sub></a><br /><a href="https://github.com/hhhxiao/TrapDoor/commits?author=pa733" title="Code">💻</a></td>
   </tr>
 </table>
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-### Translators
-- <a href="https://github.com/0x506978656c"><img src="https://avatars.githubusercontent.com/u/66031115?s=96&v=4" width="15px;" alt=""/><b> !
-  Pixel </b></sub></a><a href="https://github.com/hhhxiao/TrapDoor/commits?author=0x506978656c" title="Code">🌎</a></td>
-- <a href="https://github.com/TimothyGrass"><img src="https://avatars.githubusercontent.com/u/77906640?s=96&v=4" width="15px;" alt=""/><b>
-  TimothyGrass </b></sub></a><a href="#" title="Code">🌎</a></td>
+
+Thanks to the following community contributors for providing multilingual translations:
+
+- 0x506978656c
+- TimothyGrass
+
+### Credits
+
+#### 3rd-party libraries or codes
+
+- [Detours](https://github.com/microsoft/Detours)
+- [MCMODDLL-CPP]( https://github.com/zhkj-liuxiaohua/MCMODDLL-CPP )
+- [nlohmann json](https://github.com/nlohmann/json)
+- [Remotery](https://github.com/Celtoys/Remotery)
+- [ThreadPool](https://github.com/progschj/ThreadPool)
+- [LiteLoaderBDS](https://github.com/LiteLDev/LiteLoaderBDS)
+
+#### Players
+
+Thanks for the follow game players who make suggestions and feedback bugs: Player,木月酸与云龙碱, 莵道三室戸, orange_31, panda4994万岁, 梵蒂冈_273, OEOTYAN, Origin 0110, 阿阎mr, 玲珑芯, Sysca11, yqs112358
 
 ---
 
-![JetBrainsLogo](./img/jetbrains.svg)<br>
-Special thanks to [JetBrains](https://www.jetbrains.com/?from=TrapDoor) for giving out an OpenSource-Licence for development!
+### Support
 
+You can sponsor me through  <img src="https://afdian.net/static/img/logo/logo.png" alt="drawing" style="display:inline; width: 30px"/> **<a href="https://afdian.net/@hhhxiao">https://afdian.net/@hhhxiao</a>**
