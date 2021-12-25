@@ -12,9 +12,9 @@ namespace trapdoor {
     using namespace SymHook;
 
     std::string Biome::getBiomeName() {
-        return "Unknown";
-        // char *str = reinterpret_cast<char *>(this) + off::BIOME_GET_NAME;
-        // return std::string(str);
+        //return "Unknown";
+        char *str = reinterpret_cast<char *>(this) + off::BIOME_GET_NAME;
+        return std::string(str);
     }
 
     int Biome::getBiomeType() {
