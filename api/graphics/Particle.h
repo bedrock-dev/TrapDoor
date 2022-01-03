@@ -25,7 +25,7 @@ namespace trapdoor {
     void spawnParticle(Vec3 p, std::string &type, int dimType = 0);
 
     void spawnRectangleParticle(const AABB &aabb, GRAPHIC_COLOR color,
-                                int dimType = 0);
+                                bool mark, int dimType = 0);
 
     void spawnChunkSurfaceParticle(const ChunkPos &pos, int dimID);
 

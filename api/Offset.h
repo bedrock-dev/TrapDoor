@@ -32,7 +32,7 @@ namespace off {
 
     // OK
     // Actor::getDimensionId
-    constexpr uint64_t ACTOR_GET_DIMENSION_ID = 0xEC;
+    constexpr uint64_t ACTOR_GET_DIMENSION_ID = 0xE4;
 
     // OK
     // from  ServerPlayer::isHostingPlayer

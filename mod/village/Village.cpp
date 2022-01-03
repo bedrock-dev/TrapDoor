@@ -303,7 +303,8 @@ namespace mod {
             if (village) {
                 if (this->showBounds)
                     trapdoor::spawnRectangleParticle(
-                        village->getBounds(), villageHelperConfig.boundColor);
+                        village->getBounds(), villageHelperConfig.boundColor,
+                        false);
                 if (this->showVillageCenter)
                     trapdoor::spawnParticle(
                         village->getCenter() + Vec3(0.5f, 0.9f, 0.5f),
@@ -311,12 +312,12 @@ namespace mod {
                 if (this->showGolemSpawnArea)
                     trapdoor::spawnRectangleParticle(
                         village->getGolemSpawnArea(),
-                        villageHelperConfig.spawnColor);
+                        villageHelperConfig.spawnColor, false);
 
                 if (this->showPOIRange)
                     trapdoor::spawnRectangleParticle(
                         village->getPOIRange(),
-                        villageHelperConfig.poiQueryColor);
+                        villageHelperConfig.poiQueryColor, false);
 
                 if (this->showDwellerStatus) this->showVillagerStatus();
             }

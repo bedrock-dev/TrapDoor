@@ -97,22 +97,22 @@ namespace mod {
             for (const auto &hsa : this->hsaList) {
                 switch (hsa.type) {
                     case PillagerOutpost:
-                        color = trapdoor::GRAPHIC_COLOR::YELLOW;
+                        color = trapdoor::GRAPHIC_COLOR::BLUE;
                         break;
                     case SwampHut:
-                        color = trapdoor::GRAPHIC_COLOR::GREEN;
-                        break;
-                    case NetherFortress:
                         color = trapdoor::GRAPHIC_COLOR::RED;
                         break;
+                    case NetherFortress:
+                        color = trapdoor::GRAPHIC_COLOR::GREEN;
+                        break;
                     case OceanMonument:
-                        color = trapdoor::GRAPHIC_COLOR::BLUE;
+                        color = trapdoor::GRAPHIC_COLOR::YELLOW;
                         break;
                     default:
                         break;
                 }
                 trapdoor::spawnRectangleParticle(hsa.boundingBox.getSpawnArea(),
-                                                 color, hsa.dimensionID);
+                                                 color, true, hsa.dimensionID);
             }
         }
         this->gameTick = (this->gameTick + 1) % 80;

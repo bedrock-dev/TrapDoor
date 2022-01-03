@@ -192,16 +192,20 @@ namespace trapdoor {
                  player->getDimension());
     }
 
-
     void spawnRectangleParticle(const AABB &aabb, GRAPHIC_COLOR color,
-                                int dimType) {
+                                bool mark, int dimType) {
         auto p1 = aabb.p1, p2 = aabb.p2;
         auto dx = p2.x - p1.x;
         auto dy = p2.y - p1.y;
         auto dz = p2.z - p1.z;
         drawLine(p1, FACING::POS_X, dx, color, dimType);
-        drawLine(p1, FACING::POS_Y, dy, color, dimType);
+        if (mark) {
+            drawLine(p1, FACING::POS_Y, dy, GRAPH_COLOR::WHITE, dimType);
+        } else {
+            drawLine(p1, FACING::POS_Y, dy, color, dimType);
+        }
         drawLine(p1, FACING::POS_Z, dz, color, dimType);
+
         Vec3 p3{p2.x, p1.y, p2.z};
         drawLine(p3, FACING::NEG_X, dx, color, dimType);
         drawLine(p3, FACING::POS_Y, dy, color, dimType);

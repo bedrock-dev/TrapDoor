@@ -38,14 +38,14 @@ namespace mod {
                                               verticalSpawnPositions[0]};
             trapdoor::spawnRectangleParticle(boundingBox.toAABB(),
                                              trapdoor::GRAPHIC_COLOR::GREEN,
-                                             dimensionID);
+                                             false, dimensionID);
         }
         for (auto i = 1; i < verticalSpawnPositions.size(); i++) {
             trapdoor::BoundingBox boundingBox{verticalSpawnPositions[i],
                                               verticalSpawnPositions[i]};
             trapdoor::spawnRectangleParticle(boundingBox.toAABB(),
                                              trapdoor::GRAPHIC_COLOR::RED,
-                                             dimensionID);
+                                             false, dimensionID);
         }
     }
 
