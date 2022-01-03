@@ -41,7 +41,7 @@ See  [TODOs](./TODOs.md) for todo and development plans.
 
 ### Feedback and discussion
 
-- [Discord](https://discord.gg/bnSzTUCr)
+- [Discord](https://discord.gg/taWNYs5zhA)
 - [QQ group](https://jq.qq.com/?_wv=1027&k=R8FXPBWp)
 
 
