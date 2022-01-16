@@ -74,11 +74,16 @@ namespace mod {
                         pos = trapdoor::BlockPos(x, y, z);
                     }
                 }
-        broadcastMsg("N=%d", maxPoints);
+        broadcastMsg("N = %d", maxPoints);
         return pos;
     }
 
     void HsaManager::draw(trapdoor::Actor *player) {
+        auto mod = bdsMod->asInstance<mod::TrapdoorMod>();
+        if (!mod->getSimpleBuilder().isAble()) {
+            trapdoor::info(player, "builder未开启");
+            return;
+        }
         trapdoor::BlockPos standPos = player->getStandPosition();
         auto block = player->getBlockSource()->getBlock(standPos.x, standPos.y,
                                                         standPos.z);
@@ -170,7 +175,7 @@ THook(void, Spawner_spawnStructureMob_98a1693e, void *spawner,
     auto type = biome->getBiomeType();
     if (type == 5 || type == 18) {
         info.type = mod::StructureType::NetherFortress;
-        info.dimensionID = 1;
+        info.dimensionID = trapdoor::Nether;
     } else if (type == 10) {
         info.type = mod::StructureType::OceanMonument;
     } else if (type == 15) {
@@ -181,6 +186,5 @@ THook(void, Spawner_spawnStructureMob_98a1693e, void *spawner,
 
     hsaManager.insert(info);
     blockSource->getBiome(blockPos);
-
     modInstance->getHsaManager().insert(info);
 }

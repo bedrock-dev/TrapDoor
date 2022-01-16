@@ -4,6 +4,7 @@
 
 #include "SimpleProfiler.h"
 
+#include "DirtyLogger.h"
 #include "Message.h"
 #include "entity/Actor.h"
 #include "tools/MsgBuilder.h"
@@ -14,12 +15,25 @@ namespace mod {
 
         void addShowItem(trapdoor::MessageBuilder &builder,
                          const std::string &prefix, const std::string &key,
-                         float value) {
-            builder.sText(prefix, trapdoor::MSG_COLOR::GRAY)
-                .sText(key + ": ", trapdoor::MSG_COLOR::WHITE)
-                .sTextF(
-                    trapdoor::MSG_COLOR::WHITE | trapdoor::MessageBuilder::BOLD,
-                    "%.3fms\n", value);
+                         float value, float mspt) {
+            builder.sText(prefix, trapdoor::MSG_COLOR::GRAY);
+            L_DEBUG("%.3f,  %.3f\n", value, mspt);
+            auto color = trapdoor::MSG_COLOR::WHITE;
+            if (mspt > 40 && mspt <= 50) {
+                if (value / mspt > 0.25) {
+                    color = trapdoor::MSG_COLOR::YELLOW;
+                }
+            } else if (mspt > 50) {
+                auto ratio = value / mspt;
+                if (ratio > 0.2 && ratio < 0.4) {
+                    color = trapdoor::MSG_COLOR::YELLOW;
+                } else if (ratio >= 0.4) {
+                    color = trapdoor::MSG_COLOR::RED;
+                }
+            }
+            builder.sTextF(color, key + ": ", trapdoor::MSG_COLOR::WHITE)
+                .sTextF(color | trapdoor::MessageBuilder::BOLD, "%.3fms\n",
+                        value);
         }
     }  // namespace
 
@@ -36,7 +50,8 @@ namespace mod {
 
     void SimpleProfiler::print() const {
         auto rounds = static_cast<float>(this->totalRound * 1000);
-        int tps = static_cast<int>(1000.0 / (serverLevelTickTime / rounds));
+        float mspt = serverLevelTickTime / rounds;
+        int tps = static_cast<int>(1000.0 / mspt);
         if (tps > 20) tps = 20;
         trapdoor::MessageBuilder builder;
         auto totalRedstoneTickTime =
@@ -44,37 +59,46 @@ namespace mod {
                                redstonePendingRemoveTime) /
             rounds;
 
-        builder.textF("MSPT:  ");
-        auto color =
-            tps < 20 ? trapdoor::MSG_COLOR::RED : trapdoor::MSG_COLOR::WHITE;
-        builder.sTextF(color, "%.3fms", serverLevelTickTime / rounds)
-            .text("  TPS: ")
-            .sTextF(color, "%d", tps)
-            .textF("  Chunks: %d\n", tickChunkNum / this->totalRound);
-        addShowItem(builder, " - ", "Redstone", totalRedstoneTickTime);
-        addShowItem(builder, "   - ", "SignalUpdate",
-                    redstoneTickTime / rounds);
+        auto firstLineColor =
+            trapdoor::MSG_COLOR::WHITE || trapdoor::MSG_COLOR::BOLD;
+        builder.sTextF(firstLineColor, "MSPT:  ");
 
+        auto color = trapdoor::MSG_COLOR::WHITE;
+        if (mspt > 40 && mspt <= 50) {
+            color = trapdoor::MSG_COLOR::YELLOW;
+        } else if (mspt > 50) {
+            color = trapdoor::MSG_COLOR::RED;
+        }
+        color |= trapdoor::MSG_COLOR::BOLD;
+
+        builder.sTextF(color, "%.3fms", mspt)
+            .sTextF(firstLineColor, "  TPS: ")
+            .sTextF(color, "%d", tps)
+            .sTextF(firstLineColor, "  CHUNKS: %d\n",
+                    tickChunkNum / this->totalRound);
+        addShowItem(builder, " - ", "Redstone", totalRedstoneTickTime, mspt);
+
+        addShowItem(builder, "     - ", "SignalUpdate",
+                    redstoneTickTime / rounds, mspt);
         builder.sText("  - ", trapdoor::MSG_COLOR::GRAY)
             .text("PendingUpdate: Invalid\n");
-        addShowItem(builder, "   - ", "PendingRemove",
-                    redstonePendingRemoveTime / rounds);
+        addShowItem(builder, "     - ", "PendingRemove",
+                    redstonePendingRemoveTime / rounds, mspt);
 
         addShowItem(builder, " - ", "EntitySystem",
-                    levelEntitySystemTickTime / rounds);
+                    levelEntitySystemTickTime / rounds, mspt);
         addShowItem(builder, " - ", "Chunk (un)load & village",
-                    dimensionTickTime / rounds);
+                    dimensionTickTime / rounds, mspt);
 
-        addShowItem(builder, " - ", "ChunkTick", chunkTickTime / rounds);
+        addShowItem(builder, " - ", "ChunkTick", chunkTickTime / rounds, mspt);
 
-        addShowItem(builder, "   - ", "BlockEntities",
-                    chunkBlockEntityTickTime / rounds);
-        addShowItem(builder, "   - ", "RandomTick",
-                    chunkRandomTickTime / rounds);
+        addShowItem(builder, "     - ", "BlockEntities",
+                    chunkBlockEntityTickTime / rounds, mspt);
+        addShowItem(builder, "     - ", "RandomTick",
+                    chunkRandomTickTime / rounds, mspt);
 
-        addShowItem(builder, "   - ", "PendingTick",
-                    chunkPendingTickTime / rounds);
-
+        addShowItem(builder, "     - ", "PendingTick",
+                    chunkPendingTickTime / rounds, mspt);
         builder.broadcast();
 
         //     .textF(" - Chunk tick:    %.3fms (%d)\n", chunkTickTime / rounds,

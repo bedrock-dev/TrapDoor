@@ -24,10 +24,10 @@ namespace mod {
         struct FunctionEnableConfig {
             bool hopperCounter = true;    //漏斗计数器
             bool explosion = true;        //爆炸破坏地形
-            bool spawnHelper = true;      //刷怪指示器
+            bool spawnHelper = false;     //刷怪指示器
             bool cactusRotation = false;  //仙人掌转方块
             bool playerStat = false;      //玩家行为统计
-            bool simpleDraw = true;       //画圆
+            bool simpleDraw = false;      //画圆
         };
 
         struct SelfEnableConfig {

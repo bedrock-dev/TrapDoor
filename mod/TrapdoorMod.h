@@ -80,6 +80,8 @@ namespace mod {
 
         inline HsaManager &getHsaManager() { return this->hsaManager; }
 
+        inline SimpleBuilder &getSimpleBuilder() { return this->simpleBuilder; }
+
         inline std::string getLevelName() {
             return this->configManager.getServerConfig().levelName;
         }

@@ -20,7 +20,7 @@ namespace trapdoor {
 
     class MessageBuilder {
        public:
-        static const uint8_t DARK_READ;
+        static const uint8_t DARK_RED;
         static const uint8_t RED;
         static const uint8_t GOLD;
         static const uint8_t YELLOW;

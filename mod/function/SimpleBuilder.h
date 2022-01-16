@@ -19,7 +19,7 @@ namespace mod {
 
        public:
         inline void setAble(bool able) { this->enable = able; }
-
+        inline bool isAble() const { return this->enable; }
         inline void setMaxRadius(int radius) { this->maxCircleRadius = radius; }
 
         void buildSphere(trapdoor::Actor *player, size_t size,
