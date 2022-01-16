@@ -229,19 +229,7 @@ namespace mod {
     }
 
     void TrapdoorMod::printOSInfo(trapdoor::Actor *player) {
-        int CPUUsage = get_cpu_usage();
-        uint64_t memory, virtualMemory, ioRead, ioWrite;
-        get_memory_usage(&memory, &virtualMemory);
-        get_io_bytes(&ioRead, &ioWrite);
-        std::string stringBuilder;
-        stringBuilder += trapdoor::format(
-            "CPU: %d %%%%\n"
-            "Mem: " C_INT " MB VMem; " C_INT
-            " MB\n"
-            "Read/Write" C_INT "KB / " C_INT " KB",
-            CPUUsage, memory >> 20u, virtualMemory >> 20u, ioRead >> 10u,
-            ioWrite >> 10u);
-        trapdoor::info(player, stringBuilder);
+        printfSysInfo(player);
     }
 
     /*
