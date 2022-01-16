@@ -102,7 +102,7 @@ namespace trapdoor {
         }
 
         builder.sText(this->getName(), MSG_COLOR::YELLOW | MSG_COLOR::BOLD);
-        builder += " [";
+        builder += " <";
         switch (this->argType) {
             case ArgType::NONE:
                 builder += "none";
@@ -111,13 +111,13 @@ namespace trapdoor {
                 builder += "integer";
                 break;
             case ArgType::BOOL:
-                builder += "true/false";
+                builder += "bool";
                 break;
             case ArgType::STR:
                 builder += "string";
                 break;
         }
-        builder += "] - ";
+        builder += "> - ";
         builder += this->getDescription();
         builder += "\n";
         buffer += builder.get();

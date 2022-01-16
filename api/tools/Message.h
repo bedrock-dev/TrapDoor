@@ -26,7 +26,7 @@
 #define C_BOLD(x) "§l" STR(x) "§r"
 #define C_ITALIC "§o" STR(x) "§r"
 #define C_INT C_GREEN(% d)
-#define C_FLOAT C_GREEN(% .3f)
+#define C_FLOAT C_GREEN(% .2f)
 #define C_POS C_AQUA(% d % d % d)
 #define C_VEC3 C_LIGHT_PURPLE(% .2f % .2f % .2f)
 namespace trapdoor {

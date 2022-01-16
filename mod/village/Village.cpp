@@ -196,7 +196,7 @@ namespace mod {
             .text("- Radius: ")
             .num(this->getRadius())
             .text("\n")
-            .text("Dweller: ")
+            .text("Dwellers: ")
             .sTextF(MSG_COLOR::GREEN, "%d / %d %d\n", getWorkedVillagerNum(),
                     getPopulation(), getIronGolemNum())
             .text("POIS:\n      Bed          |          Work       |\n");

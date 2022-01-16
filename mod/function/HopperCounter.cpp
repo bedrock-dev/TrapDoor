@@ -32,7 +32,7 @@ namespace mod {
 
     void HopperChannelManager::printChannel(Actor *player, size_t channel) {
         if (channel < 0 || channel > 15) {
-            error(player, "该频道不存在[0-15]");
+            error(player, "该频道不存在，范围在[0-15]内");
         } else {
             getChannel(channel).print(player);
         }
@@ -43,7 +43,7 @@ namespace mod {
             error(player, "该频道不存在");
         } else {
             getChannel(channel).reset();
-            trapdoor::broadcastMsg("频道[%zu] 数据已重置", channel);
+            trapdoor::broadcastMsg("频道[%zu]的数据已重置", channel);
         }
     }
 
@@ -92,13 +92,13 @@ namespace mod {
         std::string stringBuilder;
         trapdoor::MessageBuilder builder;
         stringBuilder +=
-            trapdoor::format("channel: " C_INT "\ntotal " C_INT
-                             " items in " C_INT " gt  (" C_FLOAT "min)\n",
+            trapdoor::format("Channel " C_INT ":\nTotal " C_INT
+                             " items in " C_INT " gt  ( " C_FLOAT " min(s) )\n",
                              channel, n, gameTick, gameTick / 1200.0);
         for (const auto &i : counterList) {
             auto itemName = GetItemLocalName(i.first);
             stringBuilder += trapdoor::format(
-                "- %s  " C_INT " (" C_FLOAT " /hour)\n", itemName.c_str(),
+                " - %s " C_INT " (" C_FLOAT " / hour )\n", itemName.c_str(),
                 i.second, i.second * 1.0 / gameTick * 72000);
         }
         trapdoor::info(actor, stringBuilder);
