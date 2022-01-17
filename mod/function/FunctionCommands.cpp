@@ -54,11 +54,11 @@ namespace mod {
     }
 
     void printfSysInfo(trapdoor::Actor* player) {
-        int currentProcessCPUUsage = get_cpu_usage();
+        int currentProcessCPUUsage = getCurProcessCPUUsage();
         int totalCPUUsage = static_cast<int>(GetCPULoad() * 100);
         uint64_t memory, virtualMemory;
         uint64_t total, free;
-        get_memory_usage(&memory, &virtualMemory);
+        getCurProcessMemUsage(&memory, &virtualMemory);
         getSystemMemorySize(&total, &free);
         std::string stringBuilder;
         memory >>= 20u;

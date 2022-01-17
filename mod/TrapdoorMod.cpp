@@ -43,7 +43,7 @@ namespace mod {
             this->configManager.getCommandsConfig());
         mod::initBackup();
         this->villageHelper.setConfig(this->configManager.getVillageConfig());
-        get_cpu_usage();
+        getCurProcessCPUUsage();
         this->initFunctionEnable();
         initBlockMap();
         InitItemNameMap();

@@ -8,7 +8,7 @@
 #include <cassert>
 #include <cstdio>
 #include <iostream>
-
+// from stackoverflow
 /// 时间转换
 static uint64_t file_time_2_utc(FILETIME *ftime) {
     LARGE_INTEGER li;
@@ -19,13 +19,13 @@ static uint64_t file_time_2_utc(FILETIME *ftime) {
 }
 
 /// 获得CPU的核数
-static int get_processor_number() {
+static int getProcessorNumber() {
     SYSTEM_INFO info;
     GetSystemInfo(&info);
     return (int)info.dwNumberOfProcessors;
 }
 
-int get_cpu_usage() {
+int getCurProcessCPUUsage() {
     // cpu数量
     static int processor_count_ = -1;
     //上一次的时间
@@ -42,7 +42,7 @@ int get_cpu_usage() {
     int64_t time_delta;
     int cpu = -1;
     if (processor_count_ == -1) {
-        processor_count_ = get_processor_number();
+        processor_count_ = getProcessorNumber();
     }
 
     GetSystemTimeAsFileTime(&now);
@@ -111,7 +111,7 @@ float GetCPULoad() {
                : -1.0f;
 }
 
-int get_memory_usage(uint64_t *mem, uint64_t *vmem) {
+int getCurProcessMemUsage(uint64_t *mem, uint64_t *vmem) {
     PROCESS_MEMORY_COUNTERS pmc;
     if (GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc))) {
         if (mem) *mem = pmc.WorkingSetSize;
@@ -130,7 +130,7 @@ int getSystemMemorySize(uint64_t *total, uint64_t *free) {
     return 0;
 }
 
-int get_io_bytes(uint64_t *read_bytes, uint64_t *write_bytes) {
+int getIOBytes(uint64_t *read_bytes, uint64_t *write_bytes) {
     IO_COUNTERS io_counter;
     if (GetProcessIoCounters(GetCurrentProcess(), &io_counter)) {
         if (read_bytes) *read_bytes = io_counter.ReadTransferCount;

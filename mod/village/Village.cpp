@@ -440,8 +440,12 @@ namespace mod {
     }
 
     void VillageHelper::removeAllNameTag() {
-        for (auto vill : this->villageList) {
-            vill.village->removeAllTags();
+        __try {
+            for (auto vill : this->villageList) {
+                vill.village->removeAllTags();
+            }
+        } __except (EXCEPTION_EXECUTE_HANDLER) {
+            // nothing
         }
     }
 
