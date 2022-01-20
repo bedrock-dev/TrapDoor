@@ -131,13 +131,17 @@ namespace mod::tick {
             trapdoor::warning(player, LANG("prof.error"));
             return;
         }
-
+        if (round <= 0 || round > 12000) {
+            trapdoor::error(player, LANG("prof.c.error"));
+            return;
+        }
         if (tickStatus != WorldTickStatus::Normal) {
             trapdoor::warning(player, LANG("prof.warning"));
         }
         L_DEBUG("begin profiling");
         broadcastMsg(LANG("prof.start"));
         gameProfiler.inProfiling = true;
+        gameProfiler.totalRound = round;
         gameProfiler.currentRound = gameProfiler.totalRound;
     }
 
@@ -152,10 +156,10 @@ namespace mod::tick {
             trapdoor::warning(player, LANG("prof.error"));
             return;
         }
-
         if (tick::getTickStatus() != tick::WorldTickStatus::Normal) {
             trapdoor::warning(player, LANG("prof.warning"));
         }
+
         L_DEBUG("begin profiling");
         info(player, LANG("prof.start"));
         getActorProfiler().inProfiling = true;
@@ -214,9 +218,11 @@ namespace mod::tick {
 
     void registerProfileCommand(CommandManager &commandManager) {
         commandManager.registerCmd("prof", "command.prof.desc")
+            ->then(ARG("c", "command.prof.c.desc", INT,
+                       { tick::profileWorld(player, holder->getInt()); }))
             ->then(ARG("actor", "command.prof.actor.desc", NONE,
                        { tick::profileEntities(player); }))
-            ->EXE({ tick::profileWorld(player); });
+            ->EXE({ tick::profileWorld(player, 100); });
         commandManager.registerCmd("mspt", "command.mspt.desc")->EXE({
             tick::mspt();
         });

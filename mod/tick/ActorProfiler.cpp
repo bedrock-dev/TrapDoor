@@ -21,22 +21,22 @@ namespace mod {
         }
     }  // namespace
 
-    void profileEntities(trapdoor::Actor *player) {
-        if (getActorProfiler().inProfiling) {
-            trapdoor::warning(player, "该指令运行中");
-            return;
-        }
+    // void profileEntities(trapdoor::Actor *player) {
+    //     if (getActorProfiler().inProfiling) {
+    //         trapdoor::warning(player, "该指令运行中");
+    //         return;
+    //     }
 
-        if (tick::getTickStatus() != tick::WorldTickStatus::Normal) {
-            trapdoor::warning(player,
-                              "现在游戏并没有处在正常模式，测量结果可能不准确");
-        }
-        L_DEBUG("begin actor profiling");
-        info(player, "开始测试");
-    
-        getActorProfiler().inProfiling = true;
-        getActorProfiler().currentRound = getActorProfiler().totalRound;
-    }
+    //     if (tick::getTickStatus() != tick::WorldTickStatus::Normal) {
+    //         trapdoor::warning(player,
+    //                           "现在游戏并没有处在正常模式，测量结果可能不准确");
+    //     }
+    //     L_DEBUG("begin actor profiling");
+    //     info(player, "开始测试");
+
+    //     getActorProfiler().inProfiling = true;
+    //     getActorProfiler().currentRound = getActorProfiler().totalRound;
+    // }
 
     void ActorProfiler::print() const {
         trapdoor::MessageBuilder builder;
