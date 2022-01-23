@@ -2,6 +2,12 @@
 
 #include <Windows.h>
 
+#pragma comment(lib, "LiteLoaderSDK/Lib/bedrock_server_api.lib")
+#pragma comment(lib, "LiteLoaderSDK/Lib/bedrock_server_var.lib")
+#pragma comment(lib, "LiteLoaderSDK/Lib/SymDBHelper.lib")
+#pragma comment(lib, "LiteLoaderSDK/Lib/LiteLoader.lib")
+#pragma comment(lib, "api/lib/detours.lib")
+
 #include "BDSMod.h"
 #include "TrapdoorMod.h"
 #include "lib/Remotery.h"

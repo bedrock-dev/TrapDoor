@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{5E59C2BC-C426-4006-8C65-FBDC286F228D}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(SolutionDir)\LiteLoaderSDK\Header;$(SolutionDir)\LiteLoaderSDK;$(SolutionDir)\api;$(SolutionDir)\mod;$(SolutionDir)\api\entity;$(SolutionDir)\api\lib;$(SolutionDir)\api\block;$(SolutionDir)\api\commands;$(SolutionDir)\api\graphics;$(SolutionDir)\api\language;$(SolutionDir)\api\tools;$(SolutionDir)\api\world;$(SolutionDir)\mod\spawn;$(SolutionDir)\mod\village;$(SolutionDir)\mod\config;$(IncludePath)</IncludePath>
+    <TargetName>$(ProjectName)_LL</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/D _SILENCE_CXX17_RESULT_OF_DEPRECATION_WARNING /D _CRT_SECURE_NO_WARNINGS /wd4828 /wd4819 /utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;_ADM64_;_AMD64_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <ExceptionHandling>Async</ExceptionHandling>
+    </ClCompile>
+    <Link>
+      <DelayLoadDLLs>bedrock_server.dll</DelayLoadDLLs>
+    </Link>
+    <PreBuildEvent>
+      <Command>if not exist $(SolutionDir)LiteLoaderSDK\Lib\bedrock_server_api.lib goto process
+if not exist $(SolutionDir)LiteLoaderSDK\Lib\bedrock_server_var.lib goto process
+goto end
+
+:process
+cd /d $(SolutionDir)\LiteLoaderSDK\Tools\
+if exist $(LocalDebuggerWorkingDirectory)\bedrock_server.pdb (
+LibraryBuilder.exe -o ..\Lib\ $(LocalDebuggerWorkingDirectory)
+) else (
+LibraryBuilder.exe -o ..\Lib\
+)
+
+:end
+			</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>if exist $(LocalDebuggerWorkingDirectory)\plugins\ (
+copy /Y $(TargetPath) $(LocalDebuggerWorkingDirectory)\plugins
+)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="api\BDSMod.cpp" />
+    <ClCompile Include="api\block\Block.cpp" />
+    <ClCompile Include="api\block\BlockLegacy.cpp" />
+    <ClCompile Include="api\block\BlockSource.cpp" />
+    <ClCompile Include="api\block\VanillaBlockType.cpp" />
+    <ClCompile Include="api\commands\ArgHolder.cpp" />
+    <ClCompile Include="api\commands\Command.cpp" />
+    <ClCompile Include="api\commands\CommandManager.cpp" />
+    <ClCompile Include="api\commands\CommandNode.cpp" />
+    <ClCompile Include="api\commands\TrapdoorCommand.cpp" />
+    <ClCompile Include="api\entity\Actor.cpp" />
+    <ClCompile Include="api\entity\Item.cpp" />
+    <ClCompile Include="api\entity\PlayerBuffer.cpp" />
+    <ClCompile Include="api\graphics\BlockPos.cpp" />
+    <ClCompile Include="api\graphics\Graphics.cpp" />
+    <ClCompile Include="api\graphics\Particle.cpp" />
+    <ClCompile Include="api\graphics\Vec3.cpp" />
+    <ClCompile Include="api\language\I18nManager.cpp" />
+    <ClCompile Include="api\lib\Remotery.c" />
+    <ClCompile Include="api\tools\DirtyLogger.cpp" />
+    <ClCompile Include="api\tools\Message.cpp" />
+    <ClCompile Include="api\tools\MsgBuilder.cpp" />
+    <ClCompile Include="api\world\Biome.cpp" />
+    <ClCompile Include="api\world\Dimension.cpp" />
+    <ClCompile Include="api\world\Level.cpp" />
+    <ClCompile Include="mod\config\ConfigManager.cpp" />
+    <ClCompile Include="mod\dllmain.cpp" />
+    <ClCompile Include="mod\eval\Eval.cpp" />
+    <ClCompile Include="mod\fakeplayer\easywsclient.cpp" />
+    <ClCompile Include="mod\fakeplayer\FakePlayerClient.cpp" />
+    <ClCompile Include="mod\function\BackupHelper.cpp" />
+    <ClCompile Include="mod\function\BlockRotationHelper.cpp" />
+    <ClCompile Include="mod\function\FunctionCommands.cpp" />
+    <ClCompile Include="mod\function\HopperCounter.cpp" />
+    <ClCompile Include="mod\function\SimpleBuilder.cpp" />
+    <ClCompile Include="mod\function\SingleFunctions.cpp" />
+    <ClCompile Include="mod\os\process_stat.cpp" />
+    <ClCompile Include="mod\player\PlayerFunction.cpp" />
+    <ClCompile Include="mod\spawn\HsaManager.cpp" />
+    <ClCompile Include="mod\spawn\SlimeChunkHelper.cpp" />
+    <ClCompile Include="mod\spawn\SpawnHelper.cpp" />
+    <ClCompile Include="mod\test\TrapdoorTest.cpp" />
+    <ClCompile Include="mod\tick\ActorProfiler.cpp" />
+    <ClCompile Include="mod\tick\GameTick.cpp" />
+    <ClCompile Include="mod\tick\SimpleProfiler.cpp" />
+    <ClCompile Include="mod\TrapdoorMod.cpp" />
+    <ClCompile Include="mod\village\POIInstance.cpp" />
+    <ClCompile Include="mod\village\Village.cpp" />
+    <ClCompile Include="out\build\x64-debug\cmakefiles\showincludes\main.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="api\BDSMod.h" />
+    <ClInclude Include="api\block\Block.h" />
+    <ClInclude Include="api\block\BlockLegacy.h" />
+    <ClInclude Include="api\block\BlockSource.h" />
+    <ClInclude Include="api\block\VanillaBlockType.h" />
+    <ClInclude Include="api\commands\ArgHolder.h" />
+    <ClInclude Include="api\commands\Command.h" />
+    <ClInclude Include="api\commands\CommandManager.h" />
+    <ClInclude Include="api\commands\CommandNode.h" />
+    <ClInclude Include="api\commands\TrapdoorCommand.h" />
+    <ClInclude Include="api\entity\Actor.h" />
+    <ClInclude Include="api\entity\Item.h" />
+    <ClInclude Include="api\entity\PlayerBuffer.h" />
+    <ClInclude Include="api\graphics\AABB.h" />
+    <ClInclude Include="api\graphics\BlockPos.h" />
+    <ClInclude Include="api\graphics\Graphics.h" />
+    <ClInclude Include="api\graphics\Particle.h" />
+    <ClInclude Include="api\graphics\Vec3.h" />
+    <ClInclude Include="api\language\I18nManager.h" />
+    <ClInclude Include="api\lib\CppEval.h" />
+    <ClInclude Include="api\lib\detours.h" />
+    <ClInclude Include="api\lib\detver.h" />
+    <ClInclude Include="api\lib\mod.h" />
+    <ClInclude Include="api\lib\Remotery.h" />
+    <ClInclude Include="api\lib\seh_exception.hpp" />
+    <ClInclude Include="api\lib\SymHook.h" />
+    <ClInclude Include="api\lib\SymHook_old.h" />
+    <ClInclude Include="api\lib\SymHook_old_1.h" />
+    <ClInclude Include="api\Offset.h" />
+    <ClInclude Include="api\tools\CastHelper.h" />
+    <ClInclude Include="api\tools\DirtyLogger.h" />
+    <ClInclude Include="api\tools\json.hpp" />
+    <ClInclude Include="api\tools\Message.h" />
+    <ClInclude Include="api\tools\MsgBuilder.h" />
+    <ClInclude Include="api\tools\noncopyable .h" />
+    <ClInclude Include="api\tools\ThreadPool.h" />
+    <ClInclude Include="api\trapdoor.h" />
+    <ClInclude Include="api\world\Biome.h" />
+    <ClInclude Include="api\world\Dimension.h" />
+    <ClInclude Include="api\world\Level.h" />
+    <ClInclude Include="mod\config\ConfigManager.h" />
+    <ClInclude Include="mod\eval\Eval.h" />
+    <ClInclude Include="mod\fakeplayer\easywsclient.hpp" />
+    <ClInclude Include="mod\fakeplayer\FakePlayerClient.h" />
+    <ClInclude Include="mod\function\BackupHelper.h" />
+    <ClInclude Include="mod\function\BlockRotationHelper.h" />
+    <ClInclude Include="mod\function\FunctionCommands.h" />
+    <ClInclude Include="mod\function\HopperCounter.h" />
+    <ClInclude Include="mod\function\SimpleBuilder.h" />
+    <ClInclude Include="mod\os\process_stat.h" />
+    <ClInclude Include="mod\player\PlayerFunction.h" />
+    <ClInclude Include="mod\spawn\HsaManager.h" />
+    <ClInclude Include="mod\spawn\SlimeChunkHelper.h" />
+    <ClInclude Include="mod\spawn\SpawnHelper.h" />
+    <ClInclude Include="mod\test\TrapdoorTest.h" />
+    <ClInclude Include="mod\tick\ActorProfiler.h" />
+    <ClInclude Include="mod\tick\GameTick.h" />
+    <ClInclude Include="mod\tick\SimpleProfiler.h" />
+    <ClInclude Include="mod\TrapdoorMod.h" />
+    <ClInclude Include="mod\village\POIInstance.h" />
+    <ClInclude Include="mod\village\Village.h" />
+    <ClInclude Include="out\build\x64-debug\cmakefiles\showincludes\foo.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

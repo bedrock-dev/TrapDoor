@@ -8,6 +8,8 @@
 #include "lib/mod.h"
 #include "tools/DirtyLogger.h"
 #include "tools/Message.h"
+#include "commands/TrapdoorCommand.h"
+
 
 namespace trapdoor {
     //全局模组对象
@@ -16,6 +18,7 @@ namespace trapdoor {
     void initializeMod(BDSMod *BDSMod) {
         L_DEBUG("create BDS mod instance");
         trapdoor::bdsMod = BDSMod;
+        registryCommand();
     }
 
     Level *BDSMod::getLevel() { return this->serverLevel; }
@@ -85,4 +88,6 @@ namespace trapdoor {
     }
 
     void BDSMod::tick() { ++this->trapdoorTick; }
+
+    
 }  // namespace trapdoor
