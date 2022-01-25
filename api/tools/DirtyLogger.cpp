@@ -60,7 +60,7 @@ namespace trapdoor {
     void initLogger(const std::string &logFileName) {
         logger = fopen(logFileName.c_str(), "a+");
         if (!logger) logger = stderr;
-        L_INFO("TRAPDOOR LOGGER INIT");
+        // L_INFO("TRAPDOOR LOGGER INIT");
     }
 
     //向日志里面打印信息

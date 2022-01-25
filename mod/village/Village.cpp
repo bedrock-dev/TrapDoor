@@ -7,7 +7,6 @@
 
 #include "BDSMod.h"
 #include "TrapdoorMod.h"
-#include "graphics/Graphics.h"
 #include "graphics/Particle.h"
 #include "tools/Message.h"
 #include "tools/MsgBuilder.h"
@@ -32,6 +31,8 @@ using namespace SymHook;
 namespace mod {
 
     namespace {
+
+        //下面是所有需要的偏移量
         const size_t BOUND_OFFSET = 104;
         // from Village::_trySpawnDefenderDwellers
         const size_t POPULATION_OFFSET = 22;
@@ -40,31 +41,38 @@ namespace mod {
         // from Village::_trySpawnDefenderDwellers
         const size_t DWELLER_POI_MAP_OFFSET = 96;
         // Village::_getDwellerMap
-        const size_t DWELLER_TICK_MAP_OFFSET = 152;
+        const size_t DWELLER_TICK_MAP_OFFSET = 160;
 
+        //居民数据
         struct DwellerData {
             uint64_t tick;
             trapdoor::BlockPos pos;
         };
 
+        enum DwellerType { Villager = 0, IronGolem = 1, Cat = 2, XXX = 3 };
         // typedef std::vector<std::weak_ptr<mod::POIInstance>> DwellerData;
+
+        //村庄的居民(dweller)表，是一个哈希表
         typedef std::array<
             std::unordered_map<trapdoor::ActorUniqueID, DwellerData,
                                trapdoor::ActorUniqueIDHash>,
             4>
             DwellerTickMapType;
 
+        //村庄的POI分配表
         typedef std::unordered_map<trapdoor::ActorUniqueID,
                                    std::array<std::weak_ptr<POIInstance>, 3>,
                                    std::hash<ActorUniqueID>>
             DwellerPOIMapType;
 
+        //从固定偏移量获取居民表
         DwellerPOIMapType *getDwellerPOIMap(Village *v) {
             return reinterpret_cast<DwellerPOIMapType *>(
                 (char *)v + DWELLER_POI_MAP_OFFSET);
         }
 
-        DwellerTickMapType *getDwellerTicklMap(Village *v) {
+        //从固定偏移量获取POI分配表
+        DwellerTickMapType *getDwellerTickMap(Village *v) {
             return reinterpret_cast<DwellerTickMapType *>(
                 (char *)v + DWELLER_TICK_MAP_OFFSET);
         }
@@ -106,7 +114,8 @@ namespace mod {
         auto workedNum = getWorkedVillagerNum();
         auto golemNum = getIronGolemNum();
         auto bedNum = getBedPOICount();
-        int maxValue = 20 > population ? 20 : population;
+        int maxValue = population > 20 ? 20 : population;
+        //刷铁傀儡的三个条件
         return (float)workedNum > population * 0.75 &&
                golemNum < population / 10 && bedNum > maxValue;
     }
@@ -260,7 +269,7 @@ namespace mod {
 
     //这个96是一个POI分配表
     void Village::removeAllTags() {
-        auto *tickMap = getDwellerTicklMap(this);
+        auto *tickMap = getDwellerTickMap(this);
         for (auto i : *tickMap) {
             for (auto &v : i) {
                 auto actor = trapdoor::bdsMod->fetchEntity(v.first.uid, false);
@@ -272,13 +281,13 @@ namespace mod {
     }
 
     void Village::showTimeStamp() {
-        auto *tickMap = getDwellerTicklMap(this);
+        auto *tickMap = getDwellerTickMap(this);
         int index = 0;
         for (auto i : *tickMap) {
             for (auto &v : i) {
                 auto actor = trapdoor::bdsMod->fetchEntity(v.first.uid, false);
                 if (actor) {
-                    if (index == 0) {
+                    if (index == DwellerType::Villager) {
                         actor->setNameTag(actor->getNameTag() + " " +
                                           std::to_string(v.second.tick));
                     } else {
@@ -293,13 +302,10 @@ namespace mod {
 
     void VillageHelper::clear() { villageList.clear(); }
 
-    void VillageHelper::insert(const VillageWithColor &vw) {
-        villageList.insert(vw);
-    }
+    void VillageHelper::insert(mod::Village *vw) { villageList.insert(vw); }
 
     void VillageHelper::draw() {
-        for (auto vw : villageList) {
-            auto village = vw.village;
+        for (auto village : villageList) {
             if (village) {
                 if (this->showBounds)
                     trapdoor::spawnRectangleParticle(
@@ -328,8 +334,7 @@ namespace mod {
         trapdoor::MessageBuilder builder;
         builder.text("village.info.allVillages"_i18);
         int i = 0;
-        for (auto vw : villageList) {
-            auto village = vw.village;
+        for (auto village : villageList) {
             if (village) {
                 i++;
                 auto aabb = village->getBounds();
@@ -357,7 +362,6 @@ namespace mod {
     }
 
     void VillageHelper::tick() {
-        // rmt_ScopedCPUSample(VILLAGE_TICK, 0)
         if (gameTick % 40 == 0) {
             // todo clear village and draw village;
             this->draw();
@@ -368,7 +372,46 @@ namespace mod {
 
     void VillageHelper::test() {
         for (auto &v : this->villageList) {
-            v.village->test();
+            //*DwellerTickMapTest
+            //*PASS
+            // auto map =
+            // getDwellerTickMap(v)->operator[](DwellerType::Villager); for
+            // (auto &kv : map) {
+            //     trapdoor::broadcastMsg("pos=[%d %d %d],timestamp=[%llu]\n",
+            //                            kv.second.pos.x, kv.second.pos.y,
+            //                            kv.second.pos.z, kv.second.tick);
+            // }
+
+            //* getDwellerPOIMapTest
+            //* PASS
+            // auto map = getDwellerPOIMap(v);
+
+            // for (auto &villager : *map) {
+            //     for (auto &p : villager.second) {
+            //         auto p0 = p.lock();
+            //         if (p0) {
+            //             auto p0_pos = p0->poiPos;
+            //             trapdoor::broadcastMsg("POI pos =[%d %d %d]\n",
+            //                                    p0_pos.x, p0_pos.y, p0_pos.z);
+            //         } else {
+            //             trapdoor::broadcastMsg("POI = nullptr\n");
+            //         }
+            //     }
+            // }
+
+            //*Villager traverse
+            auto map = getDwellerTickMap(v)->operator[](DwellerType::Villager);
+            for (auto &kv : map) {
+                auto actor = trapdoor::bdsMod->fetchEntity(kv.first.uid, false);
+                if (actor) {
+                    static int idx = 0;
+                    actor->setNameTag("idx =  " + std::to_string(idx));
+                    ++idx;
+                } else {
+                    trapdoor::broadcastMsg("find a nullptr[uid = %llu]",
+                                           kv.first.uid);
+                }
+            }
         }
     }
 
@@ -377,9 +420,9 @@ namespace mod {
         for (auto village : this->villageList) {
             idx++;
             __try {
-                village.village->showVillagerStatus(idx);
+                village->showVillagerStatus(idx);
             } __except (EXCEPTION_EXECUTE_HANDLER) {
-                // nothing
+                //    nothing
             }
         }
     }
@@ -389,9 +432,9 @@ namespace mod {
         mod::Village *target = nullptr;
         float maxDistance = 1024;
         for (auto village : this->villageList) {
-            auto dis = village.village->getCenter().distanceTo(pos);
+            auto dis = village->getCenter().distanceTo(pos);
             if (dis < maxDistance) {
-                target = village.village;
+                target = village;
                 maxDistance = dis;
             }
         }
@@ -404,7 +447,7 @@ namespace mod {
 
     void Village::test() {
         // finish
-        // auto *tickMap = getDwellerTicklMap(this);
+        // auto *tickMap = getDwellerTickMap(this);
         // for (auto i : *tickMap) {
         //     for (auto &v : i) {
         //         auto actor = trapdoor::bdsMod->fetchEntity(v.first.uid,
@@ -440,13 +483,17 @@ namespace mod {
     }
 
     void VillageHelper::removeAllNameTag() {
-        __try {
-            for (auto vill : this->villageList) {
-                vill.village->removeAllTags();
-            }
-        } __except (EXCEPTION_EXECUTE_HANDLER) {
-            // nothing
+        for (auto village : this->villageList) {
+            village->removeAllTags();
         }
+
+        // __try {
+        //     for (auto vill : this->villageList) {
+        //         vill.village->removeAllTags();
+        //     }
+        // } __except (EXCEPTION_EXECUTE_HANDLER) {
+        //     // nothing
+        // }
     }
 
     void VillageHelper::registerCommand(CommandManager &commandManager) {
@@ -494,17 +541,13 @@ namespace mod {
             }));
     }
 
-    bool VillageWithColor::operator<(const VillageWithColor &rhs) const {
-        return this->village < rhs.village;
-    }
-
 }  // namespace mod
 
+// hook村庄更新
 THook(void, Village_tick_2a1ecbf8, mod::Village *vill, void *tick,
       void *blockSource) {
     // village tick
     original(vill, tick, blockSource);
-    mod::VillageWithColor vw{vill, trapdoor::GRAPHIC_COLOR::GREEN};
     trapdoor::bdsMod->asInstance<mod::TrapdoorMod>()->getVillageHelper().insert(
-        vw);
+        vill);
 }

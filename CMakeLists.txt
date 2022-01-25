@@ -32,7 +32,6 @@ add_library(${MOD_API_NAME} STATIC
         api/graphics/AABB.h
         api/graphics/BlockPos.cpp
         api/graphics/Vec3.cpp
-        api/graphics/Graphics.cpp
         api/graphics/BlockPos.cpp
         api/world/Biome.cpp
         api/world/Dimension.cpp

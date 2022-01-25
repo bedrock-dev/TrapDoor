@@ -7,7 +7,6 @@
 #include <iostream>
 
 #include "commands/CommandManager.h"
-#include "graphics/Graphics.h"
 #include "graphics/Particle.h"
 #include "tools/DirtyLogger.h"
 

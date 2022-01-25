@@ -7,7 +7,6 @@
 #include "TrapdoorMod.h"
 #include "entity/Actor.h"
 #include "graphics/BlockPos.h"
-#include "graphics/Graphics.h"
 #include "graphics/Particle.h"
 #include "language/I18nManager.h"
 #include "lib/Remotery.h"

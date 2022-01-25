@@ -115,8 +115,13 @@ namespace trapdoor {
     }
 
     void Actor::setNameTag(const std::string &name) {
-        SYM_CALL(void (*)(void *actor, const std::string &str),
-                 Actor_setNameTag_2f9772d3, this, name);
+        __try {
+            SYM_CALL(void (*)(void *actor, const std::string &str),
+                     Actor_setNameTag_2f9772d3, this, name);
+
+        } __except (EXCEPTION_EXECUTE_HANDLER) {
+            // nothing
+        }
     }
 
     std::string ActorDefinitionIdentifier::getName() {

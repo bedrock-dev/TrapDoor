@@ -27,7 +27,6 @@ Remotery *rmt = nullptr;
 // dll注入初始化
 void mod_init() {
     rmt_CreateGlobalInstance(&rmt);
-    //   displayDisclaimerMessageBox(); //免责声明窗口
     initConsole();
     trapdoor::initLogger("plugins/trapdoor/trapdoor.log");  //初始化日志
 #ifdef BETA

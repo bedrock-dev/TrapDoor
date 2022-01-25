@@ -11,7 +11,6 @@
 #include "block/Block.h"
 #include "block/BlockLegacy.h"
 #include "graphics/AABB.h"
-#include "graphics/Graphics.h"
 #include "graphics/Particle.h"
 #include "lib/SymHook.h"
 #include "lib/mod.h"
