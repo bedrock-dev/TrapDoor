@@ -145,7 +145,7 @@ namespace mod {
 
     trapdoor::AABB Village::getGolemSpawnArea() {
         auto center = this->getCenter();
-        return trapdoor::AABB(center - Vec3(8, 3, 8), center + Vec3(8, 3, 8));
+        return trapdoor::AABB(center - Vec3(8, 6, 8), center + Vec3(9, 7, 9));
     }
 
     void Village::showVillagerStatus(int vIdx) {
