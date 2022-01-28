@@ -113,7 +113,7 @@
   },
   "village": {
     "bound": "red",
-    "spawn": "red",
+    "spawn": "blue",
     "poiQuery": "red",
     "center": "minecraft:heart_particle"
   },
