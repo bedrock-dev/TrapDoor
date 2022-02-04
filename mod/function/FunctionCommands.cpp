@@ -64,11 +64,13 @@ namespace mod {
         memory >>= 20u;
         total >>= 20u;
         free >>= 20u;
-
         trapdoor::MessageBuilder builder;
         builder.text("CPU  ");
         buildBar(builder, 100, 100 - totalCPUUsage, currentProcessCPUUsage, 50);
-        builder.textF("  0.%d  0.%d\n", currentProcessCPUUsage, totalCPUUsage);
+        builder.textF("  %d", currentProcessCPUUsage)
+            .text("%%%%")
+            .textF("  %d", totalCPUUsage)
+            .text("%%%%\n");
         builder.text("MEM  ");
         buildBar(builder, total, free, memory, 50);
         builder.textF("  %d MB %d MB\n", memory, total - free);

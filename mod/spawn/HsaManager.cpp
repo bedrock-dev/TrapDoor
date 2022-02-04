@@ -148,8 +148,12 @@ namespace mod {
                        }))
             ->then(ARG("find", "command.hsa.find.desc", NONE,
                        {
-                           broadcastMsg("find %s",
-                                        this->findB(player).toString().c_str());
+                           trapdoor::warning(
+                               player,
+                               "this function was blocked by developer");
+                           //    broadcastMsg("find %s",
+
+                           //                 this->findB(player).toString().c_str());
                        }))
             ->then(ARG("draw", "command.hsa.draw.desc", NONE,
                        { this->draw(player); }));
