@@ -38,7 +38,6 @@ void mod_init() {
     auto result = mod->asInstance<mod::TrapdoorMod>()->readConfigFile(
         "plugins/trapdoor/trapdoor-config.json");  //读取配置文件
     if (!result) {
-        L_ERROR("can not read configFile, trapdoor won't be injected");
         return;
     }
     trapdoor::initializeMod(mod);

@@ -25,6 +25,149 @@ namespace mod {
             }
             return GRAPH_COLOR::WHITE;
         }
+
+        bool generateConfigFile(const std::string &configFileName) {
+            std::string cfg = R"(
+   {
+  "EULA": true,
+  "commands": {
+    "/tick": {
+      "enable": true,
+      "permissionLevel": 1
+    },
+    "/village": {
+      "enable": true,
+      "permissionLevel": 0
+    },
+    "/prof": {
+      "enable": true,
+      "permissionLevel": 0
+    },
+    "/mspt": {
+      "enable": true,
+      "permissionLevel": 0
+    },
+    "/o": {
+      "enable": true,
+      "permissionLevel": 1
+    },
+    "/c": {
+      "enable": true,
+      "permissionLevel": 1
+    },
+    "/s": {
+      "enable": true,
+      "permissionLevel": 1
+    },
+    "/hsa": {
+      "enable": true,
+      "permissionLevel": 0
+    },
+    "/func": {
+      "enable": true,
+      "permissionLevel": 1
+    },
+    "/counter": {
+      "enable": true,
+      "permissionLevel": 1
+    },
+    "/td?": {
+      "enable": true,
+      "permissionLevel": 0
+    },
+    "/os": {
+      "enable": true,
+      "permissionLevel": 0
+    },
+    "/apicfg": {
+      "enable": true,
+      "permissionLevel": 1
+    },
+    "/draw": {
+      "enable": true,
+      "permissionLevel": 0
+    },
+    "/slime": {
+      "enable": true,
+      "permissionLevel": 0
+    },
+    "/backup": {
+      "enable": true,
+      "permissionLevel": 1
+    },
+    "/self": {
+      "enable": true,
+      "permissionLevel": 0
+    },
+    "/cl": {
+      "enable": true,
+      "permissionLevel": 0
+    },
+    "/dev": {
+      "enable": true,
+      "permissionLevel": 1
+    },
+    "/here": {
+      "enable": true,
+      "permissionLevel": 0
+    },
+    "/l": {
+      "enable": true,
+      "permissionLevel": 1
+    },
+    "/lang": {
+      "enable": true,
+      "permissionLevel": 1
+    },
+    "/spawn": {
+      "enable": true,
+      "permissionLevel": 0
+    },
+    "/fakeplayer": {
+      "enable": true,
+      "permissionLevel": 1
+    },
+    "/rs": {
+      "enable": true,
+      "permissionLevel": 1
+    }
+  },
+  "lowLevelVanillaCommands": ["stop"],
+  "server": {
+    "levelName": "Bedrock level",
+    "lang": "zh_cn",
+    "ws": "ws://127.0.0.1:54321"
+  },
+  "village": {
+    "bound": "red",
+    "spawn": "blue",
+    "poiQuery": "red",
+    "center": "minecraft:heart_particle"
+  },
+  "functionsEnable": {
+    "hopperCounter": false,
+    "spawnHelper": false,
+    "cactusRotate": false,
+    "simpleDraw": false,
+    "playerStat": false
+  },
+  "selfEnable": {
+    "chunkShow": true,
+    "distanceMeasure": true,
+    "redstoneStick": true
+  }
+}
+)";
+            std::ofstream of(configFileName);
+            if (of.is_open()) {
+                of << cfg;
+                of.close();
+                return true;
+            } else {
+                return false;
+            }
+        }
+
     }  // namespace
 
     bool ConfigManager::initialize(const std::string &configFileName) {
@@ -72,15 +215,35 @@ namespace mod {
 
     bool ConfigManager::readConfigFile(const std::string &configFileName) {
         try {
+            this->configJson.clear();
             std::ifstream i(configFileName);
             i >> this->configJson;
             L_DEBUG("read config file %s successfully\n",
                     configFileName.c_str());
+            L_DEBUG("test");
             return true;
+
         } catch (std::exception &e) {
-            L_ERROR("can not read config file %s with error %s",
-                    configFileName.c_str(), e.what());
-            return false;
+            L_ERROR(
+                "配置文件 [%s] 不存在或有格式问题,下面是错误信息:\n"
+                "%s",
+                configFileName.c_str(), e.what());
+            L_INFO(
+                "是否自动生成配置文件(会覆盖旧的而且表示您自动同意EULA):(Y = "
+                "是,N = 否)");
+            std::string res = "";
+            std::getline(std::cin, res);
+            if (res == "Y" || res == "y") {
+                if (generateConfigFile(configFileName)) {
+                    L_INFO("配置文件生成成功");
+                    return this->readConfigFile(configFileName);
+                } else {
+                    L_ERROR("配置文件生成失败");
+                    return false;
+                }
+            } else {
+                return false;
+            }
         }
     }
 
@@ -103,7 +266,7 @@ namespace mod {
 
             L_DEBUG("read function config successfully\n");
         } catch (std::exception &e) {
-            L_ERROR("can not read function config： %s", e.what());
+            L_ERROR("can not read function config: %s", e.what());
             return false;
         }
         return true;
