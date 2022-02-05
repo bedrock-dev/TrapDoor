@@ -11,7 +11,7 @@
 #define __FILENAME__                                                           \
     (__builtin_strrchr(__FILE__, '\\') ? __builtin_strrchr(__FILE__, '\\') + 1 \
                                        : __FILE__)
-#elif
+#else
 #define __FILENAME__                                                         \
     (__builtin_strrchr(__FILE__, '/') ? __builtin_strrchr(__FILE__, '/') + 1 \
                                       : __FILE__)

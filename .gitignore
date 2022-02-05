@@ -25,7 +25,6 @@ log/
 /x64
 *.filters
 *.user
-*.vcxproj
 *.zip
 /vsbuild
 /tools/sym/*.txt
