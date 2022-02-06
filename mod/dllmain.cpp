@@ -29,7 +29,6 @@ void mod_init() {
     rmt_CreateGlobalInstance(&rmt);
     initConsole();
     trapdoor::initLogger("plugins/trapdoor/trapdoor.log");  //初始化日志
-    trapdoor::setDevMode(true);
 #ifdef BETA
     trapdoor::setDevMode(true);
 #endif

@@ -17,7 +17,6 @@ namespace mod {
                          const std::string &prefix, const std::string &key,
                          float value, float mspt) {
             builder.sText(prefix, trapdoor::MSG_COLOR::GRAY);
-            L_DEBUG("%.3f,  %.3f\n", value, mspt);
             auto color = trapdoor::MSG_COLOR::WHITE;
             if (mspt > 40 && mspt <= 50) {
                 if (value / mspt > 0.25) {
