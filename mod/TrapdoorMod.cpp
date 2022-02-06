@@ -23,7 +23,6 @@ namespace mod {
         this->villageHelper.tick();
         this->hsaManager.tick();
         this->spawnHelper.tick();
-
         this->playerFunctions.tick();
         this->slimeChunkHelper.tick();
         if (this->fakePlayerClient) this->fakePlayerClient->tick();

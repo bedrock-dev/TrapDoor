@@ -38,8 +38,9 @@ namespace trapdoor {
         }
 
         inline void initialize() {
-            this->getSystemLangAndSet();
+            //读取语言文件
             this->findLanguageFile();
+            this->getSystemLangAndSet();
         }
     };
 

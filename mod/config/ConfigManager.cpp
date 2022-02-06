@@ -205,7 +205,7 @@ namespace mod {
                 L_DEBUG(" - %-10s enable:%d  level:%d", item.first.c_str(),
                         item.second.enable, item.second.permissionLevel);
             }
-            L_DEBUG("read command permission info successfully\n");
+            L_DEBUG("read command permission info successfully");
         } catch (const std::exception &e) {
             L_ERROR("error read command config : %s", e.what());
             return false;
@@ -264,7 +264,7 @@ namespace mod {
             this->functionConfig.playerStat =
                 funcConfig["playerStat"].get<bool>();
 
-            L_DEBUG("read function config successfully\n");
+            L_DEBUG("read function config successfully");
         } catch (std::exception &e) {
             L_ERROR("can not read function config: %s", e.what());
             return false;
@@ -310,7 +310,7 @@ namespace mod {
             for (const auto &item : this->lowerLevelVanillaCommands) {
                 L_DEBUG("- %s", item.c_str());
             }
-            L_DEBUG("read low level vanilla commands successfully\n");
+            L_DEBUG("read low level vanilla commands successfully");
         } catch (std::exception &e) {
             L_ERROR("error read low level vanilla command info : %s", e.what());
             return false;
@@ -326,7 +326,7 @@ namespace mod {
             this->serverConfig.levelName =
                 config["levelName"].get<std::string>();
             this->serverConfig.wsUrl = config["ws"].get<std::string>();
-            L_DEBUG(" - levelMame : %s\nread server info successfully\n",
+            L_DEBUG(" - levelMame : %s\nread server info successfully",
                     serverConfig.levelName.c_str());
         } catch (std::exception &e) {
             L_ERROR("can not read server config : %s", e.what());
@@ -352,7 +352,7 @@ namespace mod {
                 "%s\n - center:%s",
                 boundColor.c_str(), spawnColor.c_str(), poiQuery.c_str(),
                 centerParticle.c_str());
-            L_DEBUG("read village color successfully\n");
+            L_DEBUG("read village color successfully");
         } catch (std::exception &e) {
             L_ERROR("can not read village config : %s", e.what());
             return false;
@@ -370,7 +370,7 @@ namespace mod {
                 funcConfig["distanceMeasure"].get<bool>();
             this->selfEnableConfig.enableRedstoneStick =
                 funcConfig["redstoneStick"].get<bool>();
-            L_DEBUG("read self command config successfully\n");
+            L_DEBUG("read self command config successfully");
         } catch (std::exception &e) {
             L_ERROR("can not read self config: %s", e.what());
             return false;

@@ -33,16 +33,15 @@ namespace trapdoor {
         if (path.size() < 10) {
             return;
         }
-        // auto langName = path.substr(5, path.size() - 10);
         auto langName = path.substr(path.find_last_of('\\') + 1,
                                     path.size() - path.find_last_of('.'));
-        //  L_WARNING("find language file [%s]", langName.c_str());
         json langJson;
         try {
             std::ifstream i(path);
             i >> langJson;
         } catch (std::exception &e) {
-            L_ERROR("can not read config file %s ", path.c_str());
+            L_ERROR("can not read config file %s with reason:\n[%s] ",
+                    path.c_str(), e.what());
             return;
         }
 
@@ -52,7 +51,8 @@ namespace trapdoor {
                 this->strings[langName][key] = value.get<std::string>();
             }
         } catch (std::exception &e) {
-            L_ERROR("can not read config file %s ", path.c_str());
+            L_ERROR("can not read config file %s with reasion:\n[%s]",
+                    path.c_str(), e.what());
         }
     }
 

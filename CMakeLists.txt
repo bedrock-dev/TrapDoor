@@ -42,7 +42,7 @@ add_library(${MOD_API_NAME} STATIC
         api/tools/ThreadPool.h
         api/lib/Remotery.c
         api/language/I18nManager.cpp
-        api/language/I18nManager.h
+        api/language/LanguageManager.cpp
         api/tools/CastHelper.h
         api/Offset.h
         )

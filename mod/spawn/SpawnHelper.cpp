@@ -74,7 +74,7 @@ namespace mod {
         trapdoor::BlockPos topPos = {pos.x, maxY, pos.z};
         bool isSurface = true;
         bool hasFound = false;
-        while (topPos.y > 0) {
+        while (topPos.y > -64) {
             findNextSpawnPosition(player->getBlockSource(), &topPos, 41);
             if (topPos.y == pos.y) {
                 // L_INFO("pos %d %d %d  is valid spawn position surface: %d",
