@@ -32,15 +32,16 @@ void mod_init() {
 #ifdef BETA
     trapdoor::setDevMode(true);
 #endif
+    trapdoor::lang::initialize();
     mod::TrapdoorMod::printCopyRightInfo();  //打印日志
     auto *mod = createBDSModInstance();
-    mod->getI18NManager().initialize();
-    auto result = mod->asInstance<mod::TrapdoorMod>()->readConfigFile(
+    trapdoor::initializeMod(mod);
+    auto result = mod->asInstance<mod::TrapdoorMod>()->initConfig(
         "plugins/trapdoor/trapdoor-config.json");  //读取配置文件
     if (!result) {
+        L_ERROR("%s", trapdoor::LANG("config.read.error").c_str());
         return;
     }
-    trapdoor::initializeMod(mod);
 }
 
 void mod_exit() { rmt_DestroyGlobalInstance(rmt); }

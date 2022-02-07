@@ -8,6 +8,7 @@
 
 #include "commands/CommandManager.h"
 #include "graphics/Particle.h"
+#include "language/I18nManager.h"
 #include "tools/DirtyLogger.h"
 
 namespace mod {
@@ -167,7 +168,6 @@ namespace mod {
                 return false;
             }
         }
-
     }  // namespace
 
     bool ConfigManager::initialize(const std::string &configFileName) {
@@ -220,30 +220,31 @@ namespace mod {
             i >> this->configJson;
             L_DEBUG("read config file %s successfully\n",
                     configFileName.c_str());
-            L_DEBUG("test");
             return true;
 
         } catch (std::exception &e) {
-            L_ERROR(
-                "配置文件 [%s] 不存在或有格式问题,下面是错误信息:\n"
-                "%s",
-                configFileName.c_str(), e.what());
-            L_INFO(
-                "是否自动生成配置文件(会覆盖旧的而且表示您自动同意EULA):(Y = "
-                "是,N = 否)");
-            std::string res = "";
-            std::getline(std::cin, res);
-            if (res == "Y" || res == "y") {
-                if (generateConfigFile(configFileName)) {
-                    L_INFO("配置文件生成成功");
-                    return this->readConfigFile(configFileName);
-                } else {
-                    L_ERROR("配置文件生成失败");
-                    return false;
-                }
+            L_WARNING(trapdoor::LANG("config.read.warn").c_str(),
+                      configFileName.c_str(), e.what());
+            if (generateConfigFile(configFileName)) {
+                return this->readConfigFile(configFileName);
             } else {
                 return false;
             }
+
+            // L_INFO("%s", trapdoor::LANG("config.gen.tips").c_str());
+            // std::string res = "";
+            // std::getline(std::cin, res);
+            // if (res == "Y" || res == "y") {
+            //     if (generateConfigFile(configFileName)) {
+            //         L_INFO(trapdoor::LANG("config.gen.success").c_str());
+            //         return this->readConfigFile(configFileName);
+            //     } else {
+            //         L_ERROR("%s", trapdoor::LANG("config.gen.fail").c_str());
+            //         return false;
+            //     }
+            // } else {
+            //     return false;
+            // }
         }
     }
 

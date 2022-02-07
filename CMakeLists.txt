@@ -42,8 +42,8 @@ add_library(${MOD_API_NAME} STATIC
         api/tools/ThreadPool.h
         api/lib/Remotery.c
         api/language/I18nManager.cpp
-        api/language/LanguageManager.cpp
         api/tools/CastHelper.h
+    
         api/Offset.h
         )
 
@@ -57,6 +57,8 @@ target_include_directories(${MOD_API_NAME}
         api/world
         api/lib
         api/tools
+        api/language
+        api/language/lang
         )
 
 target_link_libraries(${MOD_API_NAME} ${PROJECT_SOURCE_DIR}/api/lib/detours.lib)
@@ -126,6 +128,8 @@ target_include_directories(
         api/world
         api/lib
         api/tools
+        api/language
+        api/language/lang
 )
 
 target_link_libraries(${MOD_NAME} ${MOD_API_NAME})

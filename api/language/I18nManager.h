@@ -11,38 +11,49 @@
 #include "tools/json.hpp"
 
 namespace trapdoor {
+
     using json = nlohmann::json;
 
-    class I18nManager {
-        std::string current_lang = "zh_cn";
-        std::set<std::string> languages;
-        std::unordered_map<std::string,
-                           std::unordered_map<std::string, std::string>>
-            strings;
+    namespace lang {
+        std::string getSystemLang();
+        bool tryChangeLang(const std::string &);
+        void initialize();
+        std::string getAllLanguages();
+        std::string get(const std::string &);
+    }  // namespace lang
 
-        void findLanguageFile();
+    // class I18nManager {
+    //     std::string current_lang = "zh_cn";
+    //     std::set<std::string> languages;
+    //     std::unordered_map<std::string,
+    //                        std::unordered_map<std::string, std::string>>
+    //         strings;
 
-        void readLanguageFile(const std::string &langName);
+    //     void findLanguageFile();
 
-        void getSystemLangAndSet();
+    //     void readLanguageFile(const std::string &langName);
 
-       public:
-        std::string get(const std::string &id);
+    //     void getSystemLangAndSet();
 
-        bool tryChangeLanguage(const std::string &language);
+    //    public:
+    //     std::string get(const std::string &id);
 
-        std::string getAllLanguages() {
-            std::string s;
-            for (const auto &lang : this->languages) s += lang + "\n";
-            return s;
-        }
+    //     bool tryChangeLanguage(const std::string &language);
 
-        inline void initialize() {
-            //读取语言文件
-            this->findLanguageFile();
-            this->getSystemLangAndSet();
-        }
-    };
+    //     std::string getAllLanguages() {
+    //         std::string s;
+    //         for (const auto &lang : this->languages) s += lang + "\n";
+    //         return s;
+    //     }
+
+    //     inline void initialize() {}
+    //     //{
+
+    //     //读取语言文件
+    //     //  this->findLanguageFile();
+    //     // this->getSystemLangAndSet();
+    //     // }
+    // };
 
     std::string LANG(const std::string &l);
 }  // namespace trapdoor

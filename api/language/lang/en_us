@@ -1,3 +1,4 @@
+R"=====(
 {
   "command.apicfg.desc": "Particles settings ",
   "command.apicfg.pvd.desc": "Set the visible distance of particles",
@@ -146,3 +147,4 @@
   "config.gen.fail": "Error in generate config file, BDS will exist",
   "config.exit.error": "Can't find config file,press any key to exit"
 }
+)====="

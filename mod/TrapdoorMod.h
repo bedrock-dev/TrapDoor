@@ -65,7 +65,7 @@ namespace mod {
 
         void lightTick();
 
-        inline bool readConfigFile(const std::string &configFileName) {
+        inline bool initConfig(const std::string &configFileName) {
             return this->configManager.initialize(configFileName);
         }
 
