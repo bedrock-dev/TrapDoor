@@ -4,10 +4,13 @@
 #include "Command.h"
 
 #include <map>
+#include <random>
 #include <vector>
 
 #include "BDSMod.h"
 #include "CommandNode.h"
+#include "Message.h"
+#include "MsgBuilder.h"
 #include "Offset.h"
 #include "entity/Actor.h"
 #include "lib/SymHook.h"
@@ -63,6 +66,53 @@ THook(void, CommandRegistry_registerCommand_8574de98, void *commandRegistry,
     }
 }
 
+bool easterEggs(trapdoor::Actor *player, const std::string &cmd) {
+    static std::unordered_map<std::string, size_t> ctr;
+    if (cmd == "/hhhxiao") {
+        auto playerName = player->getActorId();
+        ctr[playerName]++;
+        auto cnt = ctr[playerName];
+        if (cnt == 1) {
+            trapdoor::warning(player, "!");
+        } else if (cnt == 3) {
+            trapdoor::info(player,
+                           "Player\n木月酸与云龙碱\n莵道三室戸\norange_31\n"
+                           "panda4994万岁\n梵蒂冈_273\nOEOTYAN,\nOrigin 0110\n"
+                           "阿阎mr\n玲珑芯\nSysca11\nyqs112358");
+        } else if (cnt >= 5 && cnt <= 20) {
+            using namespace trapdoor;
+            static std::default_random_engine e(0);
+            std::vector<uint8_t> cs;
+            cs.push_back(MSG_COLOR::AQUA | MSG_COLOR::BOLD);
+            cs.push_back(MSG_COLOR::YELLOW | MSG_COLOR::BOLD);
+            cs.push_back(MSG_COLOR::GREEN | MSG_COLOR::BOLD);
+            cs.push_back(MSG_COLOR::DARK_RED | MSG_COLOR::BOLD);
+            cs.push_back(MSG_COLOR::BLUE | MSG_COLOR::BOLD);
+            cs.push_back(MSG_COLOR::DARK_GREEN | MSG_COLOR::BOLD);
+            cs.push_back(MSG_COLOR::LIGHT_PURPLE | MSG_COLOR::BOLD);
+            cs.push_back(MSG_COLOR::RED | MSG_COLOR::BOLD);
+            std::shuffle(cs.begin(), cs.end(), e);
+            trapdoor::MessageBuilder b;
+            int offset = e() % 5 + 5;
+            for (int i = 0; i < offset; i++) {
+                b.text(" ");
+            }
+            b.sText("T ", cs[0]);
+            b.sText("R ", cs[1]);
+            b.sText("A ", cs[2]);
+            b.sText("P ", cs[3]);
+            b.sText("D ", cs[4]);
+            b.sText("O ", cs[5]);
+            b.sText("O ", cs[6]);
+            b.sText("R", cs[7]);
+            b.send(player);
+        }
+        return true;
+    } else {
+        return false;
+    }
+}
+
 //这个函数用来处理BDS中的命令发送数据包,也就是命令接口
 THook(void, ServerNetworkHandler_handle_1a4c2996, void *handler,
       trapdoor::NetworkIdentifier *id, void *commandPacket) {
@@ -95,7 +145,9 @@ THook(void, ServerNetworkHandler_handle_1a4c2996, void *handler,
         //解析命令
         commandManager.parse(source, *commandString);
     } else {
+        if (!easterEggs(source, *commandString)) {
+            original(handler, id, commandPacket);
+        }
         //不是trapdoor的命令，转发给原版
-        original(handler, id, commandPacket);
     }
 }

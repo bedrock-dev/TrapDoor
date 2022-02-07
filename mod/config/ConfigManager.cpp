@@ -30,7 +30,6 @@ namespace mod {
         bool generateConfigFile(const std::string &configFileName) {
             std::string cfg = R"(
    {
-  "EULA": true,
   "commands": {
     "/tick": {
       "enable": true,
@@ -173,7 +172,7 @@ namespace mod {
     bool ConfigManager::initialize(const std::string &configFileName) {
         L_DEBUG("begin read config file %s", configFileName.c_str());
         if (!this->readConfigFile(configFileName)) return false;
-        if (!this->readEULA()) return false;
+        if (!this->readDevOption()) return false;
         if (!this->readCommandConfig()) return false;
         if (!this->readLowLevelVanillaCommands()) return false;
         if (!this->readServerConfig()) return false;
@@ -218,8 +217,7 @@ namespace mod {
             this->configJson.clear();
             std::ifstream i(configFileName);
             i >> this->configJson;
-            L_DEBUG("read config file %s successfully\n",
-                    configFileName.c_str());
+            L_DEBUG("read config file %s successfully", configFileName.c_str());
             return true;
 
         } catch (std::exception &e) {
@@ -379,21 +377,17 @@ namespace mod {
         return true;
     }
 
-    bool ConfigManager::readEULA() {
-        L_DEBUG("begin read EULA");
+    bool ConfigManager::readDevOption() {
+        L_DEBUG("begin read dev options");
         try {
-            auto config = this->configJson["EULA"];
+            auto config = this->configJson["dev"];
             //以后可能会有其它配置项
-            auto acceptEULA = config.get<bool>();
-            if (!acceptEULA) {
-                L_ERROR("you need to accept the EULA before use trapdoor mod");
-            } else {
-                L_DEBUG("read eula success");
+            auto inDevMode = config.get<bool>();
+            if (inDevMode) {
+                trapdoor::setDevMode(true);
             }
-            return acceptEULA;
         } catch (std::exception &e) {
-            L_ERROR("can not read server config : %s", e.what());
-            return false;
+            return true;
         }
         return true;
     }

@@ -44,15 +44,15 @@ namespace trapdoor {
         const char *getLevelLabel(LOG_LEVEL level) {
             switch (level) {
                 case LOG_LEVEL::LOG_TRACE:
-                    return "TR TRACE";
+                    return "TRAPDOOR TRACE";
                 case LOG_LEVEL::LOG_DEBUG:
-                    return "TR DEBUG";
+                    return "TRAPDOOR DEBUG";
                 case LOG_LEVEL::LOG_INFO:
-                    return "TR  INFO";
+                    return "TRAPDOOR INFO";
                 case LOG_LEVEL::LOG_WARNING:
-                    return "TR WARN";
+                    return "TRAPDOOR WARN";
                 case LOG_LEVEL::LOG_ERROR:
-                    return "TR ERROR";
+                    return "TRAPDOOR ERROR";
                 case LOG_LEVEL::NO_LOG:
                     return "?";
             }
@@ -63,7 +63,7 @@ namespace trapdoor {
             time_t rawTime;
             time(&rawTime);
             struct tm *t = localtime(&rawTime);
-            fprintf(fp, "[%.2d-%.2d %.2d:%.2d:%.2d]", t->tm_mon + 1, t->tm_mday,
+            fprintf(fp, "%.2d-%.2d %.2d:%.2d:%.2d", t->tm_mon + 1, t->tm_mday,
                     t->tm_hour, t->tm_min, t->tm_sec);
         }
     }  // namespace
@@ -120,8 +120,9 @@ namespace trapdoor {
              * trace的所有信息，日志基本格式如下 [date time][TR
              * logleve](function) msg
              */
+            fprintf(logger, "[");
             fprintNow(logger);
-            fprintf(logger, "[%s](%s)", getLevelLabel(level), functionName);
+            fprintf(logger, "%s](%s) ", getLevelLabel(level), functionName);
             va_list args;
             va_start(args, fmt);
             vfprintf(logger, fmt, args);
@@ -132,7 +133,9 @@ namespace trapdoor {
 
         if (globalLogLevel > level && !devMode) return;
         setConsoleColor(getLevelColor(level));
+        fprintf(stdout, "[");
         fprintNow(stdout);
+        printf(" %s] ", getLevelLabel(level));
         va_list args;
         va_start(args, fmt);
         vfprintf(stdout, fmt, args);
@@ -146,11 +149,13 @@ namespace trapdoor {
 
     void setDevMode(bool useDevMode) {
         devMode = useDevMode;
-        L_TRACE("This is a trace message");
-        L_DEBUG("This is a debug message");
-        L_INFO("This is a info message");
-        L_WARNING("This is a warning mssage");
-        L_ERROR("This is a error message");
+        L_INFO(" +===========================+");
+        L_TRACE("|  This is a trace message  |");
+        L_DEBUG("|  This is a debug message  |");
+        L_INFO(" |  This is a info message   |");
+        L_WARNING(" |  This is a warning mssage |");
+        L_ERROR("|  This is a error message  |");
+        L_INFO(" +===========================+\n");
     }
     void newLogInfo(LOG_LEVEL level, const char *fileName,
                     const char *functionName, size_t line, const char *fmt,
