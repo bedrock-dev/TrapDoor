@@ -6,14 +6,24 @@
 #include "commands/CommandNode.h"
 #include "language/I18nManager.h"
 #include "os/process_stat.h"
+#include "tools/DirtyLogger.h"
 #include "tools/Message.h"
 #include "tools/MsgBuilder.h"
+
 namespace mod {
 
     namespace {
         //[              |current usage      \ avaliable]
-        void buildBar(trapdoor::MessageBuilder& builder, int total,
+        bool buildBar(trapdoor::MessageBuilder& builder, int total,
                       int avaliable, int currentUsage, int length) {
+            if (total == 0) {
+                L_DEBUG("total = 0");
+                builder.text("[  ")
+                    .sText("Unknown", trapdoor::MSG_COLOR::RED)
+                    .text("  ]");
+                return false;
+            }
+
             int len_1 = static_cast<int>(
                 static_cast<float>(total - avaliable - currentUsage) / total *
                 length);
@@ -32,6 +42,8 @@ namespace mod {
             builder.sTextF(trapdoor::MSG_COLOR::GREEN, "%s", s2.c_str())
                 .textF("%s", s1.c_str())
                 .textF("%s]", s3.c_str());
+
+            return true;
         }
     }  // namespace
     //便捷模式切换
@@ -54,16 +66,9 @@ namespace mod {
     }
 
     void printfSysInfo(trapdoor::Actor* player) {
+        // CPU
         int currentProcessCPUUsage = getCurProcessCPUUsage();
         int totalCPUUsage = static_cast<int>(GetCPULoad() * 100);
-        uint64_t memory, virtualMemory;
-        uint64_t total, free;
-        getCurProcessMemUsage(&memory, &virtualMemory);
-        getSystemMemorySize(&total, &free);
-        std::string stringBuilder;
-        memory >>= 20u;
-        total >>= 20u;
-        free >>= 20u;
         trapdoor::MessageBuilder builder;
         builder.text("CPU  ");
         buildBar(builder, 100, 100 - totalCPUUsage, currentProcessCPUUsage, 50);
@@ -72,8 +77,17 @@ namespace mod {
             .textF("  %d", totalCPUUsage)
             .text("%%%%\n");
         builder.text("MEM  ");
-        buildBar(builder, total, free, memory, 50);
-        builder.textF("  %d MB %d MB\n", memory, total - free);
+        // MEM
+        uint64_t memory = 0, virtualMemory = 0;
+        uint64_t total = 0, free = 0;
+        getCurProcessMemUsage(&memory, &virtualMemory);
+        getSystemMemorySize(&total, &free);
+        memory >>= 20u;
+        total >>= 20u;
+        free >>= 20u;
+        if (buildBar(builder, total, free, memory, 50)) {
+            builder.textF("  %d MB %d MB\n", memory, total - free);
+        }
         builder.send(player);
     }
 }  // namespace mod
