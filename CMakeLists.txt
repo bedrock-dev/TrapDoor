@@ -42,8 +42,8 @@ add_library(${MOD_API_NAME} STATIC
         api/tools/ThreadPool.h
         api/lib/Remotery.c
         api/language/I18nManager.cpp
-        api/language/I18nManager.h
         api/tools/CastHelper.h
+    
         api/Offset.h
         )
 
@@ -57,12 +57,14 @@ target_include_directories(${MOD_API_NAME}
         api/world
         api/lib
         api/tools
+        api/language
+        api/language/lang
         )
 
 target_link_libraries(${MOD_API_NAME} ${PROJECT_SOURCE_DIR}/api/lib/detours.lib)
 
 ####################这里是具体功能##########################
-set(TRAPDOOR_VERSION 0.9.95)
+set(TRAPDOOR_VERSION 0.10.0)
 set(MCBE_VERSION 1.18.2.03)
 set(BETA OFF)
 set(TEST_NUMBER 1)
@@ -126,6 +128,8 @@ target_include_directories(
         api/world
         api/lib
         api/tools
+        api/language
+        api/language/lang
 )
 
 target_link_libraries(${MOD_NAME} ${MOD_API_NAME})

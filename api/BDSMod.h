@@ -39,7 +39,7 @@ namespace trapdoor {
         std::map<std::string, PlayerBuffer> playerCache;
         ThreadPool *threadPool = nullptr;
         ModConfig config;
-        I18nManager i18NManager;
+        //  I18nManager i18NManager;
         size_t trapdoorTick = 0;
 
        public:
@@ -86,7 +86,7 @@ namespace trapdoor {
        public:
         trapdoor::Actor *fetchEntity(int64_t id, bool b);
 
-        inline I18nManager &getI18NManager() { return this->i18NManager; }
+        //  inline I18nManager &getI18NManager() { return this->i18NManager; }
     };
 
     void initializeMod(BDSMod *bdsMod);

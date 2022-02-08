@@ -8,6 +8,7 @@
 
 #include "commands/CommandManager.h"
 #include "graphics/Particle.h"
+#include "language/I18nManager.h"
 #include "tools/DirtyLogger.h"
 
 namespace mod {
@@ -29,7 +30,6 @@ namespace mod {
         bool generateConfigFile(const std::string &configFileName) {
             std::string cfg = R"(
    {
-  "EULA": true,
   "commands": {
     "/tick": {
       "enable": true,
@@ -167,13 +167,12 @@ namespace mod {
                 return false;
             }
         }
-
     }  // namespace
 
     bool ConfigManager::initialize(const std::string &configFileName) {
         L_DEBUG("begin read config file %s", configFileName.c_str());
         if (!this->readConfigFile(configFileName)) return false;
-        if (!this->readEULA()) return false;
+        if (!this->readDevOption()) return false;
         if (!this->readCommandConfig()) return false;
         if (!this->readLowLevelVanillaCommands()) return false;
         if (!this->readServerConfig()) return false;
@@ -205,7 +204,7 @@ namespace mod {
                 L_DEBUG(" - %-10s enable:%d  level:%d", item.first.c_str(),
                         item.second.enable, item.second.permissionLevel);
             }
-            L_DEBUG("read command permission info successfully\n");
+            L_DEBUG("read command permission info successfully");
         } catch (const std::exception &e) {
             L_ERROR("error read command config : %s", e.what());
             return false;
@@ -218,32 +217,32 @@ namespace mod {
             this->configJson.clear();
             std::ifstream i(configFileName);
             i >> this->configJson;
-            L_DEBUG("read config file %s successfully\n",
-                    configFileName.c_str());
-            L_DEBUG("test");
+            L_DEBUG("read config file %s successfully", configFileName.c_str());
             return true;
 
         } catch (std::exception &e) {
-            L_ERROR(
-                "配置文件 [%s] 不存在或有格式问题,下面是错误信息:\n"
-                "%s",
-                configFileName.c_str(), e.what());
-            L_INFO(
-                "是否自动生成配置文件(会覆盖旧的而且表示您自动同意EULA):(Y = "
-                "是,N = 否)");
-            std::string res = "";
-            std::getline(std::cin, res);
-            if (res == "Y" || res == "y") {
-                if (generateConfigFile(configFileName)) {
-                    L_INFO("配置文件生成成功");
-                    return this->readConfigFile(configFileName);
-                } else {
-                    L_ERROR("配置文件生成失败");
-                    return false;
-                }
+            L_WARNING(trapdoor::LANG("config.read.warn").c_str(),
+                      configFileName.c_str(), e.what());
+            if (generateConfigFile(configFileName)) {
+                return this->readConfigFile(configFileName);
             } else {
                 return false;
             }
+
+            // L_INFO("%s", trapdoor::LANG("config.gen.tips").c_str());
+            // std::string res = "";
+            // std::getline(std::cin, res);
+            // if (res == "Y" || res == "y") {
+            //     if (generateConfigFile(configFileName)) {
+            //         L_INFO(trapdoor::LANG("config.gen.success").c_str());
+            //         return this->readConfigFile(configFileName);
+            //     } else {
+            //         L_ERROR("%s", trapdoor::LANG("config.gen.fail").c_str());
+            //         return false;
+            //     }
+            // } else {
+            //     return false;
+            // }
         }
     }
 
@@ -264,7 +263,7 @@ namespace mod {
             this->functionConfig.playerStat =
                 funcConfig["playerStat"].get<bool>();
 
-            L_DEBUG("read function config successfully\n");
+            L_DEBUG("read function config successfully");
         } catch (std::exception &e) {
             L_ERROR("can not read function config: %s", e.what());
             return false;
@@ -310,7 +309,7 @@ namespace mod {
             for (const auto &item : this->lowerLevelVanillaCommands) {
                 L_DEBUG("- %s", item.c_str());
             }
-            L_DEBUG("read low level vanilla commands successfully\n");
+            L_DEBUG("read low level vanilla commands successfully");
         } catch (std::exception &e) {
             L_ERROR("error read low level vanilla command info : %s", e.what());
             return false;
@@ -326,7 +325,7 @@ namespace mod {
             this->serverConfig.levelName =
                 config["levelName"].get<std::string>();
             this->serverConfig.wsUrl = config["ws"].get<std::string>();
-            L_DEBUG(" - levelMame : %s\nread server info successfully\n",
+            L_DEBUG(" - levelMame : %s\nread server info successfully",
                     serverConfig.levelName.c_str());
         } catch (std::exception &e) {
             L_ERROR("can not read server config : %s", e.what());
@@ -352,7 +351,7 @@ namespace mod {
                 "%s\n - center:%s",
                 boundColor.c_str(), spawnColor.c_str(), poiQuery.c_str(),
                 centerParticle.c_str());
-            L_DEBUG("read village color successfully\n");
+            L_DEBUG("read village color successfully");
         } catch (std::exception &e) {
             L_ERROR("can not read village config : %s", e.what());
             return false;
@@ -370,7 +369,7 @@ namespace mod {
                 funcConfig["distanceMeasure"].get<bool>();
             this->selfEnableConfig.enableRedstoneStick =
                 funcConfig["redstoneStick"].get<bool>();
-            L_DEBUG("read self command config successfully\n");
+            L_DEBUG("read self command config successfully");
         } catch (std::exception &e) {
             L_ERROR("can not read self config: %s", e.what());
             return false;
@@ -378,21 +377,17 @@ namespace mod {
         return true;
     }
 
-    bool ConfigManager::readEULA() {
-        L_DEBUG("begin read EULA");
+    bool ConfigManager::readDevOption() {
+        L_DEBUG("begin read dev options");
         try {
-            auto config = this->configJson["EULA"];
+            auto config = this->configJson["dev"];
             //以后可能会有其它配置项
-            auto acceptEULA = config.get<bool>();
-            if (!acceptEULA) {
-                L_ERROR("you need to accept the EULA before use trapdoor mod");
-            } else {
-                L_DEBUG("read eula success");
+            auto inDevMode = config.get<bool>();
+            if (inDevMode) {
+                trapdoor::setDevMode(true);
             }
-            return acceptEULA;
         } catch (std::exception &e) {
-            L_ERROR("can not read server config : %s", e.what());
-            return false;
+            return true;
         }
         return true;
     }

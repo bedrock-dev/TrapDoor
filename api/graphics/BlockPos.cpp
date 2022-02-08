@@ -113,9 +113,9 @@ namespace trapdoor {
     std::string facingToDirString(FACING facing) {
         switch (facing) {
             case FACING::POS_X:
-                return "west";
-            case FACING::NEG_X:
                 return "east";
+            case FACING::NEG_X:
+                return "west";
             case FACING::POS_Y:
                 return "up";
             case FACING::POS_Z:

@@ -23,7 +23,6 @@ namespace mod {
         this->villageHelper.tick();
         this->hsaManager.tick();
         this->spawnHelper.tick();
-
         this->playerFunctions.tick();
         this->slimeChunkHelper.tick();
         if (this->fakePlayerClient) this->fakePlayerClient->tick();
@@ -50,7 +49,7 @@ namespace mod {
         //初始化假人客户端的线程池
         this->fakePlayerClient = new FakePlayerClient(this->getThreadPool());
         this->fakePlayerClient->registerFakePlayerCommand(commandManager);
-        L_INFO("[INFO] Trapdoor init finish,Server Start");
+        L_INFO("Trapdoor init finish,Server started");
     }
 
     void TrapdoorMod::registerCommands() {

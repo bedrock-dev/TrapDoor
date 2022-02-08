@@ -2,6 +2,8 @@
 
 #include <Windows.h>
 
+#include <filesystem>
+
 #include "BDSMod.h"
 #include "TrapdoorMod.h"
 #include "lib/Remotery.h"
@@ -20,29 +22,38 @@ void initConsole() {
     SetConsoleMode(hOutput, dwMode);
 }
 
+// void createEmptyDir() {
+//     namespace fs = std::filesystem;
+//     if (!fs::exists("./plugins")) {
+//         fs::create_directories();
+//     }
+// }
 trapdoor::BDSMod *createBDSModInstance() { return new mod::TrapdoorMod(); }
 
 Remotery *rmt = nullptr;
 
 // dll注入初始化
 void mod_init() {
+    namespace fs = std::filesystem;
     rmt_CreateGlobalInstance(&rmt);
+    fs::create_directories("./plugins/trapdoor");
     initConsole();
     trapdoor::initLogger("plugins/trapdoor/trapdoor.log");  //初始化日志
+
 #ifdef BETA
     trapdoor::setDevMode(true);
 #endif
+    trapdoor::lang::initialize();
     mod::TrapdoorMod::printCopyRightInfo();  //打印日志
     auto *mod = createBDSModInstance();
-    mod->getI18NManager().initialize();
-    auto result = mod->asInstance<mod::TrapdoorMod>()->readConfigFile(
+    trapdoor::initializeMod(mod);
+    auto result = mod->asInstance<mod::TrapdoorMod>()->initConfig(
         "plugins/trapdoor/trapdoor-config.json");  //读取配置文件
     if (!result) {
+        L_ERROR("%s", trapdoor::LANG("config.read.error").c_str());
         return;
     }
-    trapdoor::initializeMod(mod);
 }
-
 void mod_exit() { rmt_DestroyGlobalInstance(rmt); }
 
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call,

@@ -16,10 +16,14 @@
     (__builtin_strrchr(__FILE__, '/') ? __builtin_strrchr(__FILE__, '/') + 1 \
                                       : __FILE__)
 #endif
+#define L_TRACE(fmt, ...)                                                \
+    trapdoor::logInfo(trapdoor::LOG_LEVEL::LOG_TRACE, __FUNCTION__, fmt, \
+                      __VA_ARGS__)
 
 #define L_DEBUG(fmt, ...)                                                \
     trapdoor::logInfo(trapdoor::LOG_LEVEL::LOG_DEBUG, __FUNCTION__, fmt, \
                       __VA_ARGS__)
+
 #define L_INFO(fmt, ...)                                                \
     trapdoor::logInfo(trapdoor::LOG_LEVEL::LOG_INFO, __FUNCTION__, fmt, \
                       __VA_ARGS__)
@@ -31,11 +35,12 @@
                       __VA_ARGS__)
 namespace trapdoor {
     enum class LOG_LEVEL {
-        LOG_DEBUG = 0,
-        LOG_INFO = 1,
-        LOG_WARNING = 2,
-        LOG_ERROR = 3,
-        NO_LOG = 4
+        LOG_TRACE = 0,
+        LOG_DEBUG = 1,
+        LOG_INFO = 2,
+        LOG_WARNING = 3,
+        LOG_ERROR = 4,
+        NO_LOG = 5
     };
 
     void initLogger(const std::string &logFileName);

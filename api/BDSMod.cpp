@@ -68,14 +68,12 @@ namespace trapdoor {
 
     void BDSMod::registerLangCommand() {
         this->commandManager.registerCmd("lang", "command.lang.desc")
-            ->then(ARG("list", "command.lang.list.desc", NONE,
-                       {
-                           trapdoor::info(player,
-                                          this->i18NManager.getAllLanguages());
-                       }))
+            ->then(ARG(
+                "list", "command.lang.list.desc", NONE,
+                { trapdoor::info(player, trapdoor::lang::getAllLanguages()); }))
             ->then(ARG("set", "command.lang.set.desc", STR, {
                 auto result =
-                    this->i18NManager.tryChangeLanguage(holder->getString());
+                    trapdoor::lang::tryChangeLang(holder->getString());
                 if (result) {
                     info(player, LANG("command.lang.set.success"));
                 } else {

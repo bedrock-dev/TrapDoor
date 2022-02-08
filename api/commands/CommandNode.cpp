@@ -101,7 +101,7 @@ namespace trapdoor {
             builder += std::string(idx * 4, ' ');
         }
 
-        builder.sText(this->getName(), MSG_COLOR::YELLOW | MSG_COLOR::BOLD);
+        builder.sText(this->getName(), MSG_COLOR::GREEN | MSG_COLOR::BOLD);
         builder += " <";
         switch (this->argType) {
             case ArgType::NONE:
