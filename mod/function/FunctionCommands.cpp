@@ -67,27 +67,49 @@ namespace mod {
 
     void printfSysInfo(trapdoor::Actor* player) {
         // CPU
-        int currentProcessCPUUsage = getCurProcessCPUUsage();
-        int totalCPUUsage = static_cast<int>(GetCPULoad() * 100);
-        trapdoor::MessageBuilder builder;
-        builder.text("CPU  ");
-        buildBar(builder, 100, 100 - totalCPUUsage, currentProcessCPUUsage, 50);
-        builder.textF("  %d", currentProcessCPUUsage)
-            .text("%%%%")
-            .textF("  %d", totalCPUUsage)
-            .text("%%%%\n");
-        builder.text("MEM  ");
-        // MEM
-        uint64_t memory = 0, virtualMemory = 0;
-        uint64_t total = 0, free = 0;
+        // int currentProcessCPUUsage = getCurProcessCPUUsage();
+        // int totalCPUUsage = static_cast<int>(GetCPULoad() * 100);
+        // trapdoor::MessageBuilder builder;
+        // builder.text("CPU  ");
+        // buildBar(builder, 100, 100 - totalCPUUsage, currentProcessCPUUsage,
+        // 50); builder.textF("  %d", currentProcessCPUUsage)
+        //     .text("%%%%")
+        //     .textF("  %d", totalCPUUsage)
+        //     .text("%%%%\n");
+        // builder.text("MEM  ");
+        // // MEM
+        // uint64_t memory = 0, virtualMemory = 0;
+        // uint64_t total = 0, free = 0;
+        // getCurProcessMemUsage(&memory, &virtualMemory);
+        // getSystemMemorySize(&total, &free);
+        // memory >>= 20u;
+        // total >>= 20u;
+        // free >>= 20u;
+        // if (buildBar(builder, total, free, memory, 50)) {
+        //     builder.textF("  %d MB %d MB\n", memory, total - free);
+        // }
+        // builder.send(player);
+        int CPUUsage = getCurProcessCPUUsage();
+        uint64_t memory, virtualMemory, ioRead, ioWrite;
         getCurProcessMemUsage(&memory, &virtualMemory);
-        getSystemMemorySize(&total, &free);
-        memory >>= 20u;
-        total >>= 20u;
-        free >>= 20u;
-        if (buildBar(builder, total, free, memory, 50)) {
-            builder.textF("  %d MB %d MB\n", memory, total - free);
-        }
+        getIOBytes(&ioRead, &ioWrite);
+        std::string stringBuilder;
+
+        trapdoor::MessageBuilder builder;
+        builder.text("CPU ")
+            .sTextF(trapdoor::MSG_COLOR::GREEN, "%d", CPUUsage)
+            .text("%%%%    ");
+        builder.text("MEM ")
+            .sTextF(trapdoor::MSG_COLOR::GREEN, "%d", memory >> 20u)
+            .text("MB");
         builder.send(player);
+        // stringBuilder += trapdoor::format(
+        //     "CPU: %d %%%%\n"
+        //     "Mem: " C_INT " MB VMem; " C_INT
+        //     " MB\n"
+        //     "Read/Write" C_INT "KB / " C_INT " KB",
+        //     CPUUsage, memory >> 20u, virtualMemory >> 20u, ioRead >> 10u,
+        //     ioWrite >> 10u);
+        // trapdoor::info(player, stringBuilder);
     }
 }  // namespace mod
