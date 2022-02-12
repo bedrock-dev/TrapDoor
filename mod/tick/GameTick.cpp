@@ -370,13 +370,33 @@ THook(void, LevelChunk_tickBlockEntities_41f9b2ca, void *levelChunk,
 }
 
 // BlockTickingQueue::pendingTicks
-THook(void, BlockTickingQueue_tickPendingTicks_e4625213, void *queue,
-      trapdoor::BlockSource *source, uint64_t until, int max, bool instalTick) {
+THook(void, BlockTickingQueue_tickPendingTicks_e4625213,
+      trapdoor::BlockTickingQueue *queue, trapdoor::BlockSource *source,
+      uint64_t until, int max, bool instalTick) {
+    // if (queue->next.queue.size() != 0 && flag) {
+    //     // printf("Tick = %llu queue size is (%zd,%zu)\n",
+    //     queue->currentTick,
+    //     //        queue->next.queue.size(), queue->active.queue.size());
+    //     for (auto &i : queue->next.queue) {
+    //         auto *b = i.data.block;
+    //         printf("[%d %d %d >%s]", i.data.pos.x, i.data.pos.y,
+    //         i.data.pos.z,
+    //                b->getName().c_str());
+    //     }
+    //     printf("\n");
+    // }
+
     if (mod::tick::gameProfiler.inProfiling) {
         TIMER_START
+        if (!queue->next.queue.empty()) {
+            auto tickData = queue->next.queue[0].data;
+            mod::tick::gameProfiler.ptCounter[tickData.pos.toChunkPos()] =
+                queue->next.queue.size();
+        }
         original(queue, source, until, max, instalTick);
         TIMER_END
         mod::tick::gameProfiler.chunkPendingTickTime += timeReslut;
+
     } else {
         original(queue, source, until, max, instalTick);
     }

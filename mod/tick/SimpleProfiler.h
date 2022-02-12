@@ -6,8 +6,10 @@
 #define MOD_SIMPLEPROFILER_H
 
 #include <chrono>
+#include <map>
 
 #include "entity/Actor.h"
+#include "graphics/BlockPos.h"
 #include "tools/noncopyable .h"
 
 typedef std::chrono::high_resolution_clock timer_clock;
@@ -36,9 +38,11 @@ namespace mod {
         microsecond_t redstonePendingAddTime = 0;
         microsecond_t redstonePendingRemoveTime = 0;
         microsecond_t trapdoorModTickTime = 0;
+        std::map<trapdoor::BlockPos2, size_t> ptCounter;
         size_t tickChunkNum = 0;
         size_t totalRound = 100;
         size_t currentRound = 0;
+
         bool inProfiling = false;
 
         void reset() {
@@ -57,6 +61,7 @@ namespace mod {
             trapdoorModTickTime = 0;  //模组自身的更新时间(heavy tick)
             tickChunkNum = 0;
             currentRound = 0;
+            this->ptCounter.clear();
         }
 
         void print() const;

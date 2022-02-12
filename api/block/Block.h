@@ -35,7 +35,28 @@ namespace trapdoor {
         //获取方块对象
         //  Block *getBlock();
     };
+    struct TickNextTickData {
+        trapdoor::BlockPos pos;
+        trapdoor::Block* block;
+        uint64_t tick;
+        int priorityOffset;
+    };
 
+    struct BlockTick {
+        bool removed;
+        TickNextTickData data;
+    };
+    struct TickDataSet {
+        std::vector<BlockTick> queue;
+    };
+    struct BlockTickingQueue {
+        void* owningChunk;
+        uint64_t currentTick;
+        TickDataSet next;
+        TickDataSet active;
+        bool ueueType;
+        bool instaTick;
+    };
 }  // namespace trapdoor
 typedef trapdoor::Block Block;
 typedef trapdoor::BlockActor BlockActor;

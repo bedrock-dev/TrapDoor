@@ -70,36 +70,57 @@ namespace mod {
         }
         color |= trapdoor::MSG_COLOR::BOLD;
 
+        size_t counter = 0;
+        size_t max = 0;
+        //根据统计的计划刻队列的长度来打印对应信息
+        bool existPtOverflow = false;
+        for (auto &kv : this->ptCounter) {
+            counter += kv.second;
+            if (max < kv.second) {
+                max = kv.second;
+            }
+            if (kv.second >= 100) {
+                existPtOverflow = true;
+            }
+        }
+
+        auto ptNum =
+            static_cast<float>(counter * this->totalRound) / tickChunkNum;
+
         builder.sTextF(color, "%.3fms", mspt)
             .sTextF(firstLineColor, "  TPS: ")
             .sTextF(color, "%d", tps)
-            .sTextF(firstLineColor, "  CHUNKS: %d\n",
-                    tickChunkNum / this->totalRound);
+            .sTextF(firstLineColor, "  CHUNKS: %d(pt: %.2f,%u)\n",
+                    tickChunkNum / this->totalRound, ptNum, max);
         addShowItem(builder, " - ", "Redstone", totalRedstoneTickTime, mspt);
-
         addShowItem(builder, "     - ", "SignalUpdate",
                     redstoneTickTime / rounds, mspt);
         builder.sText("  - ", trapdoor::MSG_COLOR::GRAY)
             .text("PendingUpdate: Invalid\n");
         addShowItem(builder, "     - ", "PendingRemove",
                     redstonePendingRemoveTime / rounds, mspt);
-
         addShowItem(builder, " - ", "EntitySystem",
                     levelEntitySystemTickTime / rounds, mspt);
         addShowItem(builder, " - ", "Chunk (un)load & village",
                     dimensionTickTime / rounds, mspt);
-
         addShowItem(builder, " - ", "ChunkTick", chunkTickTime / rounds, mspt);
-
         addShowItem(builder, "     - ", "BlockEntities",
                     chunkBlockEntityTickTime / rounds, mspt);
         addShowItem(builder, "     - ", "RandomTick",
                     chunkRandomTickTime / rounds, mspt);
-
         addShowItem(builder, "     - ", "PendingTick",
                     chunkPendingTickTime / rounds, mspt);
-        builder.broadcast();
 
+        if (existPtOverflow) {
+            builder.text("Here are pending tick overflow chunks:\n");
+            for (auto &kv : this->ptCounter) {
+                if (kv.second >= 100) {
+                    builder.sTextF(trapdoor::MSG_COLOR::RED, "[%d,%d] ",
+                                   kv.first.x * 16 + 8, kv.first.z * 16 + 8);
+                }
+            }
+        }
+        builder.broadcast();
         //     .textF(" - Chunk tick:    %.3fms (%d)\n", chunkTickTime / rounds,
         //            tickChunkNum / totalRound)
         //         .textF("   - Block entity:    %.3fms\n",
