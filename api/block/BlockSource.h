@@ -15,6 +15,8 @@ namespace trapdoor {
 
     class BlockPos;
 
+    class BlockPos2;
+
     class BlockSource {
        public:
         //获取某个位置的方块对象
@@ -40,6 +42,13 @@ namespace trapdoor {
         //        int getMaterial(const BlockPos *pos);
 
         // LevelChunk *getLevelChunk(const ChunkPos &chunkPos);
+    };
+
+    struct LevelChunk {
+        // //[24]?getPosition@LevelChunk@@QEBAAEBVChunkPos@@XZ;
+        // public: class ChunkPos const & __ptr64 __cdecl
+        // LevelChunk::getPosition(void)const __ptr64
+        BlockPos2 getPosition();
     };
 
 }  // namespace trapdoor

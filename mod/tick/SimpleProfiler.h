@@ -22,49 +22,72 @@ typedef std::chrono::high_resolution_clock timer_clock;
 
 namespace mod {
     typedef long long microsecond_t;
+    enum ProfileType { Normal, Chunk, PendingTick };
+
+    //区块统计数据
+    struct ChunkStat {
+        std::map<trapdoor::BlockPos2, microsecond_t> counter;
+        microsecond_t blockEntities = 0;
+        microsecond_t randomTick = 0;
+        microsecond_t pendingTick = 0;
+        size_t tickTime = 0;
+        inline void reset() {
+            counter.clear();
+            blockEntities = 0;
+            randomTick = 0;
+            pendingTick = 0;
+            tickTime = 0;
+        }
+    };
+    //红石统计数据
+    struct RedstoneStat {
+        microsecond_t signals = 0;
+        microsecond_t pendingAdd = 0;
+        microsecond_t pendingRemove = 0;
+        microsecond_t pendingUpdate = 0;
+        inline void reset() {
+            signals = 0;
+            pendingAdd = 0;
+            pendingRemove = 0;
+            pendingUpdate = 0;
+        }
+
+        microsecond_t total() const {
+            return signals + pendingAdd + pendingRemove + pendingUpdate;
+        }
+    };
 
     class SimpleProfiler : noncopyable {
        public:
-        microsecond_t serverLevelTickTime = 0;       // mspt
-        microsecond_t redstoneTickTime = 0;          //红石更新
-        microsecond_t dimensionTickTime = 0;         //区块加载卸载&村庄
-        microsecond_t chunkTickTime = 0;             //区块更新
-        microsecond_t chunkBlockEntityTickTime = 0;  //方块实体更新
-        microsecond_t chunkRandomTickTime = 0;       //随机刻更新
-        microsecond_t chunkPendingTickTime = 0;      //计划刻更新
-        microsecond_t chunkRandomPendingTickTime = 0;  //随机计划刻更新
+        ProfileType profileType;
+
+        ChunkStat chunkStat;
+        RedstoneStat redstonStat;
+        microsecond_t serverLevelTickTime = 0;  // mspt
+        microsecond_t dimensionTickTime = 0;    //区块加载卸载&村庄
         microsecond_t levelEntitySystemTickTime = 0;
-        microsecond_t redstonePendingUpdateTime = 0;
-        microsecond_t redstonePendingAddTime = 0;
-        microsecond_t redstonePendingRemoveTime = 0;
-        microsecond_t trapdoorModTickTime = 0;
         std::map<trapdoor::BlockPos2, size_t> ptCounter;
-        size_t tickChunkNum = 0;
         size_t totalRound = 100;
         size_t currentRound = 0;
-
         bool inProfiling = false;
-
+        //重重所有数据
         void reset() {
-            serverLevelTickTime = 0;         // mspt
-            redstoneTickTime = 0;            //红石更新
-            dimensionTickTime = 0;           //区块加载卸载&村庄
-            chunkTickTime = 0;               //区块更新
-            chunkBlockEntityTickTime = 0;    //方块实体更新
-            chunkRandomTickTime = 0;         //随机刻更新
-            chunkPendingTickTime = 0;        //计划刻更新
-            chunkRandomPendingTickTime = 0;  //随机计划刻更新
-            levelEntitySystemTickTime = 0;   //实体系统更新
-            redstonePendingAddTime = 0;
-            redstonePendingRemoveTime = 0;
-            redstonePendingUpdateTime = 0;
-            trapdoorModTickTime = 0;  //模组自身的更新时间(heavy tick)
-            tickChunkNum = 0;
+            serverLevelTickTime = 0;  // mspt
+            dimensionTickTime = 0;    //区块加载卸载&村庄
+            chunkStat.reset();
+            levelEntitySystemTickTime = 0;  //实体系统更新
+            redstonStat.reset();
             currentRound = 0;
             this->ptCounter.clear();
         }
 
         void print() const;
+
+        void printChunks() const;
+
+        void printPendingTicks() const;
+
+        void printBasics() const;
     };
 
 }  // namespace mod

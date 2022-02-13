@@ -147,3 +147,7 @@
 
 #获取BlockSource
 ?getRegion@Actor@@QEBAAEAVBlockSource@@XZ
+
+
+#获取区块坐标
+?getPosition@LevelChunk@@QEBAAEBVChunkPos@@XZ

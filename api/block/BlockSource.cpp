@@ -4,9 +4,11 @@
 #include "BlockSource.h"
 
 #include "Block.h"
+#include "graphics/BlockPos.h"
 #include "lib/SymHook.h"
 #include "lib/mod.h"
 #include "world/Biome.h"
+
 namespace trapdoor {
     using namespace SymHook;
 
@@ -43,6 +45,12 @@ namespace trapdoor {
     Biome *BlockSource::getBiome(const BlockPos *pos) {
         return SYM_CALL(Biome * (*)(BlockSource *, const BlockPos *),
                         BlockSource_getBiome_967864de, this, pos);
+    }
+
+    trapdoor::BlockPos2 LevelChunk::getPosition() {
+        auto res = *SYM_CALL(trapdoor::BlockPos2 * (*)(LevelChunk *),
+                             LevelChunk_getPosition_5b2499b2, this);
+        return res;
     }
 }  // namespace trapdoor
 // using namespace SymHook;

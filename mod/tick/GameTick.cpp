@@ -126,7 +126,7 @@ namespace mod::tick {
         }
     }
 
-    void profileWorld(trapdoor::Actor *player, int round) {
+    void profileWorld(trapdoor::Actor *player, int round, ProfileType t) {
         if (gameProfiler.inProfiling) {
             trapdoor::warning(player, LANG("prof.error"));
             return;
@@ -140,6 +140,7 @@ namespace mod::tick {
         }
         L_DEBUG("begin profiling");
         broadcastMsg(LANG("prof.start"));
+        gameProfiler.profileType = t;
         gameProfiler.inProfiling = true;
         gameProfiler.totalRound = round;
         gameProfiler.currentRound = gameProfiler.totalRound;
@@ -217,12 +218,26 @@ namespace mod::tick {
     }
 
     void registerProfileCommand(CommandManager &commandManager) {
-        commandManager.registerCmd("prof", "command.prof.desc")
+        commandManager
+            .registerCmd("prof", "command.prof.desc")
+            //自定义时常的基本测量
             ->then(ARG("c", "command.prof.c.desc", INT,
-                       { tick::profileWorld(player, holder->getInt()); }))
+                       {
+                           tick::profileWorld(player, holder->getInt(),
+                                              ProfileType::Normal);
+                       }))
+            //实体分析
             ->then(ARG("actor", "command.prof.actor.desc", NONE,
                        { tick::profileEntities(player); }))
-            ->EXE({ tick::profileWorld(player, 100); });
+            //区块卡顿分析
+            ->then(ARG("chunk", "command.prof.chunk.desc", NONE,
+                       { tick::profileWorld(player, 10, ProfileType::Chunk); }))
+            //计划可读长度分析
+            ->then(ARG(
+                "pt", "command.prof.pt.desc", NONE,
+                { tick::profileWorld(player, 10, ProfileType::PendingTick); }))
+            //默认基本分析(100gt)
+            ->EXE({ tick::profileWorld(player, 100, ProfileType::Normal); });
         commandManager.registerCmd("mspt", "command.mspt.desc")->EXE({
             tick::mspt();
         });
@@ -330,14 +345,14 @@ THook(void, Dimension_tick_39d89862, void *dim) {
     }
 }
 // LevelChunk::tick
-THook(void, LevelChunk_tick_9d729ccd, void *levelChunk,
+THook(void, LevelChunk_tick_9d729ccd, trapdoor::LevelChunk *levelChunk,
       trapdoor::BlockSource *blockSource, size_t *tick) {
     if (mod::tick::gameProfiler.inProfiling) {
+        auto p = levelChunk->getPosition();
         TIMER_START
         original(levelChunk, blockSource, tick);
         TIMER_END
-        mod::tick::gameProfiler.chunkTickTime += timeReslut;
-        mod::tick::gameProfiler.tickChunkNum++;
+        mod::tick::gameProfiler.chunkStat.counter[p] += timeReslut;
     } else {
         original(levelChunk, blockSource, tick);
     }
@@ -350,7 +365,7 @@ THook(void, LevelChunk_tickBlocks_66280c26, void *levelChunk, void *blockSource,
         TIMER_START
         original(levelChunk, blockSource, a3, a4);
         TIMER_END
-        mod::tick::gameProfiler.chunkRandomTickTime += timeReslut;
+        mod::tick::gameProfiler.chunkStat.randomTick += timeReslut;
     } else {
         original(levelChunk, blockSource, a3, a4);
     }
@@ -363,7 +378,7 @@ THook(void, LevelChunk_tickBlockEntities_41f9b2ca, void *levelChunk,
         TIMER_START
         original(levelChunk, blockSource);
         TIMER_END
-        mod::tick::gameProfiler.chunkBlockEntityTickTime += timeReslut;
+        mod::tick::gameProfiler.chunkStat.blockEntities += timeReslut;
     } else {
         original(levelChunk, blockSource);
     }
@@ -373,6 +388,8 @@ THook(void, LevelChunk_tickBlockEntities_41f9b2ca, void *levelChunk,
 THook(void, BlockTickingQueue_tickPendingTicks_e4625213,
       trapdoor::BlockTickingQueue *queue, trapdoor::BlockSource *source,
       uint64_t until, int max, bool instalTick) {
+    //上限调整为无限
+    //  max = INT32_MAX;
     // if (queue->next.queue.size() != 0 && flag) {
     //     // printf("Tick = %llu queue size is (%zd,%zu)\n",
     //     queue->currentTick,
@@ -395,8 +412,7 @@ THook(void, BlockTickingQueue_tickPendingTicks_e4625213,
         }
         original(queue, source, until, max, instalTick);
         TIMER_END
-        mod::tick::gameProfiler.chunkPendingTickTime += timeReslut;
-
+        mod::tick::gameProfiler.chunkStat.pendingTick += timeReslut;
     } else {
         original(queue, source, until, max, instalTick);
     }
@@ -408,7 +424,8 @@ THook(void, Dimension_tickRedstone_c8a7e6e5, void *dim) {
         TIMER_START
         original(dim);
         TIMER_END
-        mod::tick::gameProfiler.redstoneTickTime += timeReslut;
+        // mod::tick::gameProfiler.redstoneTickTime += timeReslut;
+        mod::tick::gameProfiler.redstonStat.signals += timeReslut;
     } else {
         original(dim);
     }
@@ -454,7 +471,8 @@ THook(void, CircuitSceneGraph_processPendingAdds_9d2954e5, void *graph) {
         TIMER_START
         original(graph);
         TIMER_END
-        mod::tick::gameProfiler.redstonePendingAddTime += timeReslut;
+        mod::tick::gameProfiler.redstonStat.pendingAdd += timeReslut;
+
     } else {
         original(graph);
     }
@@ -466,7 +484,7 @@ THook(void, CircuitSceneGraph_removeComponent_1f06081d, void *graph, void *bs) {
         TIMER_START
         original(graph, bs);
         TIMER_END
-        mod::tick::gameProfiler.redstonePendingRemoveTime += timeReslut;
+        mod::tick::gameProfiler.redstonStat.pendingRemove += timeReslut;
     } else {
         original(graph, bs);
     }
