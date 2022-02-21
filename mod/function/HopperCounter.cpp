@@ -91,7 +91,7 @@ namespace mod {
         }
         std::string stringBuilder;
         trapdoor::MessageBuilder builder;
-        builder.textF("Channel [%d]: Total %d items in %d gt (%.3f min(s))",
+        builder.textF("Channel [%d]: Total %d items in %d gt (%.3f min(s))\n",
                       channel, n, gameTick, gameTick / 1200.0);
 
         for (const auto &i : counterList) {

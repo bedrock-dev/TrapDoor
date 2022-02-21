@@ -54,15 +54,16 @@ namespace mod {
         this->verticalSpawnPositions.clear();
         auto dim = player->getDimensionID();
         this->dimensionID = dim;
-        int maxY = dim != 1 ? 255 : 127;
+        // 1.18后世界高度改了
+        int maxY = dim != 1 ? 320 : 127;
         trapdoor::BlockPos topPos = {pos.x, maxY, pos.z};
         do {
             findNextSpawnPosition(player->getBlockSource(), &topPos, 41);
             //   L_INFO("find pos %d %d %d", topPos.x, topPos.y, topPos.z);
-            if (topPos.y > 0)
+            if (topPos.y > -64)
                 this->verticalSpawnPositions.emplace_back(topPos.x, topPos.y,
                                                           topPos.z);
-        } while (topPos.y > 0);
+        } while (topPos.y > -64);
     }
 
     void SpawnHelper::printSpawnProbability(trapdoor::Actor *player,
@@ -70,7 +71,7 @@ namespace mod {
                                             uint32_t bright) const {
         if (!this->enable) return;
         auto dim = player->getDimensionID();
-        int maxY = dim != 1 ? 255 : 127;
+        int maxY = dim != 1 ? 320 : 127;
         trapdoor::BlockPos topPos = {pos.x, maxY, pos.z};
         bool isSurface = true;
         bool hasFound = false;

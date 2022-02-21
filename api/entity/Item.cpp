@@ -86,9 +86,9 @@ namespace trapdoor {
 
 using namespace SymHook;
 //右键代理类
-THook(void, Item_useOn_35e33f80, void *item, trapdoor::ItemStackBase *itemStack,
+THook(void, Item_useOn_51392594, void *item, trapdoor::ItemStackBase *itemStack,
       trapdoor::Actor *player, int x, int y, int z, unsigned int facing,
-      float dx, float dy, float dz) {
+      trapdoor::Vec3 *v) {
     uint64_t gameTick = trapdoor::bdsMod->getTrapdoorTick();
     // L_INFO("%.2f %.2f %.2f,tick =  %llu", x, y, z, gameTick);
     trapdoor::RightClickCache targetCache{gameTick, x, y, z};
@@ -100,10 +100,10 @@ THook(void, Item_useOn_35e33f80, void *item, trapdoor::ItemStackBase *itemStack,
     if (playerCache != targetCache) {
         //响应右键事件
         trapdoor::BlockPos pos(x, y, z);
-        const trapdoor::Vec3 vec3(dx, dy, dz);
+        const trapdoor::Vec3 vec3(v->x, v->y, v->z);
         trapdoor::bdsMod->useOnHook(player, itemStack->getItemName(), pos,
                                     facing, vec3);
         playerCache = targetCache;
     }
-    original(item, itemStack, player, x, y, z, facing, dx, dy, dz);
+    original(item, itemStack, player, x, y, z, facing, v);
 }

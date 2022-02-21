@@ -100,7 +100,8 @@
 ?setItem@HopperBlockActor@@UEAAXHAEBVItemStack@@@Z
 
 #物品右键方块
-?useOn@Item@@QEBA_NAEAVItemStack@@AEAVActor@@HHHEMMM@Z
+#?useOn@Item@@QEBA_NAEAVItemStack@@AEAVActor@@HHHEMMM@Z
+?useOn@Item@@QEBA_NAEAVItemStack@@AEAVActor@@HHHEAEBVVec3@@@Z
 
 #获取红石原件
 ?getBaseComponent@CircuitSceneGraph@@QEAAPEAVBaseCircuitComponent@@AEBVBlockPos@@@Z
