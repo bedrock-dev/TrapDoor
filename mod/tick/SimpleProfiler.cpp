@@ -111,7 +111,7 @@ namespace mod {
         }
         trapdoor::MessageBuilder builder;
         builder.textF(
-            "%zu chunks ticked,here are the cached pending tick size\n",
+            "%zu chunks ticked,here are the cached pending tick queue length\n",
             this->chunkStat.counter.size());
         for (int i = 0; i < count; i++) {
             auto &d = data[i];

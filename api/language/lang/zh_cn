@@ -14,6 +14,8 @@ R"=====(
   "command.tick.q.desc": "查询tick状态",
   "command.prof.desc": "游戏性能分析",
   "command.prof.actor.desc": "实体性能分析",
+  "command.prof.chunk.desc": "区块更新性能分析",
+  "command.prof.pt.desc": "计划刻（PendingTick）性能分析",
   "command.mspt.desc": "显示Mspt和tps",
   "tick.fz.set": "世界运行已经停止",
   "tick.r.set": "世界已恢复初始状态",
