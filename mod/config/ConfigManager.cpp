@@ -132,7 +132,7 @@ namespace mod {
       "permissionLevel": 1
     }
   },
-  "lowLevelVanillaCommands": ["stop"],
+  "lowLevelVanillaCommands": [],
   "server": {
     "levelName": "Bedrock level",
     "lang": "zh_cn",
