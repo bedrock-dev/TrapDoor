@@ -7,10 +7,8 @@
 #include "BDSMod.h"
 #include "Particle.h"
 #include "TrapdoorMod.h"
-#include "lib/Remotery.h"
 namespace mod {
     void SlimeChunkHelper::tick() {
-        rmt_ScopedCPUSample(SLIME, 0);
         constexpr int frequency = 100;
         if (!this->enable) return;
         if (gameTick % frequency == 0) {

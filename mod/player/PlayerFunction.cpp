@@ -9,7 +9,6 @@
 #include "graphics/BlockPos.h"
 #include "graphics/Particle.h"
 #include "language/I18nManager.h"
-#include "lib/Remotery.h"
 #include "tools/Message.h"
 #include "tools/MsgBuilder.h"
 #include "world/Biome.h"
@@ -17,7 +16,6 @@
 
 namespace mod {
     void PlayerFunction::tick() {
-        rmt_ScopedCPUSample(PLAYER_FUNC, 0);
         if (gameTick % 20 == 0) {
             auto modInstance = trapdoor::bdsMod->asInstance<mod::TrapdoorMod>();
             modInstance->getLevel()->forEachPlayer(

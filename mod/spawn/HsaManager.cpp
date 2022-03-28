@@ -13,7 +13,6 @@
 #include "entity/Actor.h"
 #include "graphics/AABB.h"
 #include "graphics/Particle.h"
-#include "lib/Remotery.h"
 #include "lib/SymHook.h"
 #include "lib/mod.h"
 #include "tools/DirtyLogger.h"
@@ -95,7 +94,6 @@ namespace mod {
     }
 
     void HsaManager::tick() {
-        rmt_ScopedCPUSample(HSA_TICK, 0);
         if (!this->enable) return;
         if (gameTick % 40 == 0) {
             trapdoor::GRAPHIC_COLOR color = trapdoor::GRAPHIC_COLOR::WHITE;

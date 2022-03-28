@@ -6,7 +6,6 @@
 
 #include "BDSMod.h"
 #include "TrapdoorMod.h"
-#include "lib/Remotery.h"
 #include "tools/DirtyLogger.h"
 
 /*
@@ -30,12 +29,9 @@ void initConsole() {
 // }
 trapdoor::BDSMod *createBDSModInstance() { return new mod::TrapdoorMod(); }
 
-Remotery *rmt = nullptr;
-
 // dll注入初始化
 void mod_init() {
     namespace fs = std::filesystem;
-    rmt_CreateGlobalInstance(&rmt);
     fs::create_directories("./plugins/trapdoor");
     initConsole();
     trapdoor::initLogger("plugins/trapdoor/trapdoor.log");  //初始化日志
@@ -54,7 +50,7 @@ void mod_init() {
         return;
     }
 }
-void mod_exit() { rmt_DestroyGlobalInstance(rmt); }
+void mod_exit() {}
 
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call,
                       LPVOID lpReserved) {

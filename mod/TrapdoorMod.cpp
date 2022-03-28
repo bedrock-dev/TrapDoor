@@ -10,7 +10,6 @@
 #include "eval/Eval.h"
 #include "function/BackupHelper.h"
 #include "function/FunctionCommands.h"
-#include "lib/Remotery.h"
 #include "os/process_stat.h"
 #include "test/TrapdoorTest.h"
 #include "tick/GameTick.h"
@@ -19,7 +18,6 @@
 namespace mod {
 
     void TrapdoorMod::heavyTick() {
-        rmt_ScopedCPUSample(MOD_TICK, 0);
         this->villageHelper.tick();
         this->hsaManager.tick();
         this->spawnHelper.tick();
