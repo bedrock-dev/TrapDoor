@@ -92,7 +92,7 @@ namespace mod {
         std::string stringBuilder;
         trapdoor::MessageBuilder builder;
         builder.textF("Channel [%d]: Total %d items in %d gt (%.3f min(s))\n",
-                      channel, n, gameTick, gameTick / 1200.0);
+                      channel, n, gameTick, gameTick / 1200.0f);
 
         for (const auto &i : counterList) {
             auto itemName = GetItemLocalName(i.first);
@@ -100,7 +100,7 @@ namespace mod {
                 .sTextF(trapdoor::MSG_COLOR::GREEN, "%d", i.second)
                 .text("(")
                 .sTextF(trapdoor::MSG_COLOR::GREEN, "%.3f",
-                        i.second * 1.0 / gameTick * 72000)
+                        i.second * 1.0f / gameTick * 72000)
                 .text("/hour)\n");
         }
         builder.send(actor);
@@ -121,9 +121,23 @@ THook(void, HopperBlockActor_setItem_c0e5f3ce,
     auto real_this = reinterpret_cast<trapdoor::BlockActor *>(
         reinterpret_cast<VA>(hopperActor) - 200);
     auto position = real_this->getPosition();
-    L_DEBUG("postion is:%d %d %d", position->x, position->y, position->z);
-    auto nearestPlayer =
-        trapdoor::bdsMod->getLevel()->getNearestPlayer(*position);
+    L_DEBUG("position is:%d %d %d", position->x, position->y, position->z);
+    auto block = real_this->getBlockSource();
+
+    trapdoor::Actor *nearestPlayer = nullptr;
+
+    auto *hopper_block = real_this->getBlock();
+
+    trapdoor::bdsMod->getLevel()->forEachPlayer([&](trapdoor::Actor *player) {
+        if (!player) return;
+        auto bs = player->getBlockSource();
+        if (!bs) return;
+        auto *block = bs->getBlock(*position);
+        if (hopper_block && block && block == hopper_block) {
+            nearestPlayer = player;
+        }
+    });
+
     if (!nearestPlayer) {
         original(hopperActor, index, itemStack);
         return;

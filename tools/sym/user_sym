@@ -152,3 +152,6 @@
 
 #获取区块坐标
 ?getPosition@LevelChunk@@QEBAAEBVChunkPos@@XZ
+
+#从BlockActor获取Block对象
+?getBlock@BlockActor@@QEBAPEBVBlock@@XZ
