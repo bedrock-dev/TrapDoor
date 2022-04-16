@@ -1,4 +1,5 @@
 #include "Eval.h"
+
 #include "trapdoor.h"
 
 namespace mod {
@@ -11,12 +12,12 @@ namespace mod {
         }
 
         std::string toLowerString(std::string str) {
-            transform(str.begin(), str.end(), str.begin(), (int (*)(int)) tolower);
+            transform(str.begin(), str.end(), str.begin(),
+                      (int (*)(int))tolower);
             return str;
         }
 
-        void stringReplace(std::string &str,
-                           const std::string &fstr,
+        void stringReplace(std::string &str, const std::string &fstr,
                            const std::string &rep) {
             std::string::size_type pos = 0;
             std::string::size_type a = fstr.length();
@@ -32,10 +33,11 @@ namespace mod {
                 }
         }
 
-    }
+    }  // namespace
 
     void eval(trapdoor::Actor *player, const std::string &str) {
         auto pos = player->getPos()->toBlockPos();
+        // build in variable
         getInBuildVariables()["x"] = pos.x;
         getInBuildVariables()["y"] = pos.y - 1;
         getInBuildVariables()["z"] = pos.z;
@@ -53,18 +55,15 @@ namespace mod {
         stringReplace(s, "mod", "%");
         stringReplace(s, "==", "=");
         stringReplace(s, "π", "pi");
-        std::ostringstream oss;
-        oss.precision(22);
-        auto x1 = cpp_eval::eval<double>(
-                s.c_str(), getInBuildVariables(), f);
-        if (abs(x1 - round(x1)) < 10E-8) {
-            x1 = round(x1);
-        }
-        if (x1 == -0)
-            x1 = 0;
-        oss << x1;
-        trapdoor::broadcastMsg("%s=§l§b%s", origin.c_str(),
+        auto result =
+            cpp_eval::eval<double>(s.c_str(), getInBuildVariables(), f);
+        if (abs(result - round(result)) < 10E-8) {
+            trapdoor::info(player, "%s=§l§b%d", origin.c_str(),
+                           static_cast<int>(round(result)));
 
-                               oss.str().c_str());
+        } else {
+            trapdoor::info(player, "%s=§l§b%.3lf", origin.c_str(), result);
+        }
     }
+
 }  // namespace mod

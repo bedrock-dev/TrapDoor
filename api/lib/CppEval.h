@@ -9,49 +9,49 @@
 #define CPP_EVAL_H_DFF520DB406EDCF31AB9A538F7E1C3BD_20040721__
 
 #include <cmath>
+#include <cstdlib>
 #include <map>
-#include <vector>
 #include <sstream>
 #include <stdexcept>
-#include <cstdlib>
+#include <vector>
 
 namespace cpp_eval {
-    template<typename number>
+    template <typename number>
     number eval(const char *expression);
 
-    template<typename number>
+    template <typename number>
     number eval(const char *expression,
                 const ::std::map<::std::string, number> &variables);
 
-    template<typename number, typename functions>
+    template <typename number, typename functions>
     number eval(const char *expression,
                 const ::std::map<::std::string, number> &variables,
                 functions &funcs);
 
-    template<typename number>
+    template <typename number>
     class dummy_functions {
-    public:
+       public:
         number operator()(const char *, const ::std::vector<number> &params) {
             return 0;
             //        return number();
         }
     };
 
-    template<typename number>
+    template <typename number>
     number eval(const char *expression) {
         ::std::map<::std::string, number> variables;
         dummy_functions<number> funcs;
         return eval(expression, variables, funcs);
     }
 
-    template<typename number>
+    template <typename number>
     number eval(const char *expression,
                 const ::std::map<::std::string, number> &variables) {
         dummy_functions<number> funcs;
         return eval(expression, variables, funcs);
     }
 
-    template<typename number, typename functions>
+    template <typename number, typename functions>
     class evaler {
         const ::std::map<::std::string, number> &mVariables;
         functions &mFuncs;
@@ -74,8 +74,8 @@ namespace cpp_eval {
             SUBTRACT_OR_NEGATIVE = '-',
 
             LESS_THAN = '<',              //<
-            LESS_THAN_OR_EQUAL = 262,      //<=
-            GREATER_THAN = '>',              //>
+            LESS_THAN_OR_EQUAL = 262,     //<=
+            GREATER_THAN = '>',           //>
             GREATER_THAN_OR_EQUAL = 264,  //>=
 
             EQUAL = '=',      //==
@@ -86,7 +86,7 @@ namespace cpp_eval {
             OR = '|',
 
             LOGIC_AND = 267,  //&&
-            LOGIC_OR = 268      //||
+            LOGIC_OR = 268    //||
         };
         Type mType;
         std::string mIdentifier;
@@ -118,7 +118,7 @@ namespace cpp_eval {
                          *mCurrent == LESS_THAN || *mCurrent == GREATER_THAN ||
                          *mCurrent == EQUAL || *mCurrent == AND ||
                          *mCurrent == XOR || *mCurrent == OR)
-                    mType = (Type) *mCurrent, ++mCurrent;
+                    mType = (Type)*mCurrent, ++mCurrent;
                 else if (isalpha(*mCurrent)) {
                     mType = IDENTIFIER;
                     mIdentifier.clear();
@@ -134,10 +134,9 @@ namespace cpp_eval {
                     // iss.setf(std::ios::fixed);
                     // iss.precision(18);
                     iss >> mValue;
-                    if (!iss)
-                        return;
+                    if (!iss) return;
                     mCurrent +=
-                            iss.rdbuf()->pubseekoff(0, std::ios::cur, std::ios::in);
+                        iss.rdbuf()->pubseekoff(0, std::ios::cur, std::ios::in);
                 }
                 break;
             }
@@ -160,12 +159,12 @@ namespace cpp_eval {
             number result = left;
             if (mType == LOGIC_OR)
                 match(LOGIC_OR),
-                        result = expression_LOGIC_OR(
-                                (((left > 0.5) ? 1.0 : 0.0) +
-                                 ((LOGIC_AND_expression() > 0.5) ? 1.0 : 0.0) >
-                                 0.5)
-                                ? 1.0
-                                : 0.0);
+                    result = expression_LOGIC_OR(
+                        (((left > 0.5) ? 1.0 : 0.0) +
+                             ((LOGIC_AND_expression() > 0.5) ? 1.0 : 0.0) >
+                         0.5)
+                            ? 1.0
+                            : 0.0);
             return result;
         }
 
@@ -177,8 +176,8 @@ namespace cpp_eval {
             number result = left;
             if (mType == LOGIC_AND)
                 match(LOGIC_AND), result = expression_LOGIC_AND(
-                        ((left > 0.5) ? 1.0 : 0.0) *
-                        ((OR_expression() > 0.5) ? 1.0 : 0.0));
+                                      ((left > 0.5) ? 1.0 : 0.0) *
+                                      ((OR_expression() > 0.5) ? 1.0 : 0.0));
             return result;
         }
 
@@ -188,9 +187,9 @@ namespace cpp_eval {
             number result = left;
             if (mType == OR)
                 match(OR),
-                        result = expression_OR(static_cast<number>(
-                                                       static_cast<long long>(round(left)) |
-                                                       static_cast<long long>(round(XOR_expression()))));
+                    result = expression_OR(static_cast<number>(
+                        static_cast<long long>(round(left)) |
+                        static_cast<long long>(round(XOR_expression()))));
             return result;
         }
 
@@ -200,9 +199,9 @@ namespace cpp_eval {
             number result = left;
             if (mType == XOR)
                 match(XOR),
-                        result = expression_XOR(static_cast<number>(
-                                                        static_cast<long long>(round(left)) ^
-                                                        static_cast<long long>(round(AND_expression()))));
+                    result = expression_XOR(static_cast<number>(
+                        static_cast<long long>(round(left)) ^
+                        static_cast<long long>(round(AND_expression()))));
             return result;
         }
 
@@ -212,9 +211,9 @@ namespace cpp_eval {
             number result = left;
             if (mType == AND)
                 match(AND),
-                        result = expression_AND(static_cast<number>(
-                                                        static_cast<long long>(round(left)) &
-                                                        static_cast<long long>(round(EQUAL_expression()))));
+                    result = expression_AND(static_cast<number>(
+                        static_cast<long long>(round(left)) &
+                        static_cast<long long>(round(EQUAL_expression()))));
             return result;
         }
 
@@ -226,10 +225,10 @@ namespace cpp_eval {
             number result = left;
             if (mType == NOT_EQUAL)
                 match(NOT_EQUAL), result = expression_EQUAL(
-                        left != COMPARE_expression() ? 1.0 : 0.0);
+                                      left != COMPARE_expression() ? 1.0 : 0.0);
             else if (mType == EQUAL)
                 match(EQUAL), result = expression_EQUAL(
-                        left == COMPARE_expression() ? 1.0 : 0.0);
+                                  left == COMPARE_expression() ? 1.0 : 0.0);
             return result;
         }
 
@@ -241,36 +240,35 @@ namespace cpp_eval {
             number result = left;
             if (mType == GREATER_THAN_OR_EQUAL)
                 match(GREATER_THAN_OR_EQUAL),
-                        result = expression_COMPARE(left >= low_expression() ? 1.0
-                                                                             : 0.0);
+                    result = expression_COMPARE(left >= low_expression() ? 1.0
+                                                                         : 0.0);
             else if (mType == GREATER_THAN)
                 match(GREATER_THAN),
-                        result =
-                                expression_COMPARE(left > low_expression() ? 1.0 : 0.0);
+                    result =
+                        expression_COMPARE(left > low_expression() ? 1.0 : 0.0);
             else if (mType == LESS_THAN_OR_EQUAL)
                 match(LESS_THAN_OR_EQUAL),
-                        result = expression_COMPARE(left <= low_expression() ? 1.0
-                                                                             : 0.0);
+                    result = expression_COMPARE(left <= low_expression() ? 1.0
+                                                                         : 0.0);
             else if (mType == LESS_THAN)
                 match(LESS_THAN),
-                        result =
-                                expression_COMPARE(left < low_expression() ? 1.0 : 0.0);
+                    result =
+                        expression_COMPARE(left < low_expression() ? 1.0 : 0.0);
             return result;
         }
 
         number low_expression() { return expression_R(higher_expression()); }
 
-        number expression_R(
-                const number &left) {  // expression_R        ->    +
+        number expression_R(const number &left) {  // expression_R        -> +
             // higher_expression expression_R | -
             // higher_expression expression_R | /e/
             number result = left;
             if (mType == ADD_OR_POSITIVE)
                 match(ADD_OR_POSITIVE),
-                        result = expression_R(left + higher_expression());
+                    result = expression_R(left + higher_expression());
             else if (mType == SUBTRACT_OR_NEGATIVE)
                 match(SUBTRACT_OR_NEGATIVE),
-                        result = expression_R(left - higher_expression());
+                    result = expression_R(left - higher_expression());
             return result;
         }
 
@@ -280,24 +278,24 @@ namespace cpp_eval {
         }
 
         number higher_expression_R(
-                const number &left) {  // higher_expression_R    ->    *
+            const number &left) {  // higher_expression_R    ->    *
             // sign_expression higher_expression_R | /
             // sign_expression higher_expression_R | /e/
             number result = left;
             if (mType == MULTIPLY)
                 match(MULTIPLY),
-                        result = higher_expression_R(left * sign_expression());
+                    result = higher_expression_R(left * sign_expression());
             else if (mType == DIVIDE)
                 match(DIVIDE),
-                        result = higher_expression_R(left / sign_expression());
+                    result = higher_expression_R(left / sign_expression());
             else if (mType == MOD)
                 match(MOD),
-                        result = higher_expression_R(fmod(left, sign_expression()));
+                    result = higher_expression_R(fmod(left, sign_expression()));
             return result;
         }
 
         number
-        sign_expression() {     // sign_expression        ->    + sign_expression |
+        sign_expression() {  // sign_expression        ->    + sign_expression |
             // - sign_expression | power_expression
             number result;
             if (mType == ADD_OR_POSITIVE)
@@ -309,7 +307,7 @@ namespace cpp_eval {
             return result;
         }
 
-        number power_expression() {     // power_expression    ->    factor **
+        number power_expression() {  // power_expression    ->    factor **
             // power_expression | factor
             number result = factor();
             if (mType == POWER)
@@ -324,14 +322,14 @@ namespace cpp_eval {
                 result = mValue, match(NUMBER);
             else if (mType == LEFT_BRACKET)
                 match(LEFT_BRACKET), result = expression(),
-                        match(RIGHT_BRACKET);
+                                     match(RIGHT_BRACKET);
             else
                 result = lang_structure();
             return result;
         }
 
         number
-        lang_structure() {    // lang_structure        ->    identifier lang_tail
+        lang_structure() {  // lang_structure        ->    identifier lang_tail
             std::string id = mIdentifier;
             match(IDENTIFIER);
             return lang_tail(id);
@@ -345,14 +343,13 @@ namespace cpp_eval {
                 std::vector<number> param = parameter_list();
                 result = mFuncs(id.c_str(), param);
             } else {
-                if (mVariables.find(id) == mVariables.end())
-                    return 0;
+                if (mVariables.find(id) == mVariables.end()) return 0;
                 result = mVariables.find(id)->second;
             }
             return result;
         }
 
-        std::vector<number> parameter_list() {    // parameter_list        ->    )
+        std::vector<number> parameter_list() {  // parameter_list        ->    )
             // | expression parameter_tail
             std::vector<number> result;
             for (;;) {
@@ -367,34 +364,33 @@ namespace cpp_eval {
         }
 
         void parameter_tail(
-                std::vector<number> &param) {  // parameter_tail        ->    ,
+            std::vector<number> &param) {  // parameter_tail        ->    ,
             // expression parameter_tail | /e/
             if (mType == PARAMETER_SEPERATOR)
                 match(PARAMETER_SEPERATOR), param.push_back(expression()),
-                        parameter_tail(param);
+                    parameter_tail(param);
         }
 
-    public:
+       public:
         evaler(const ::std::map<::std::string, number> &variables,
                functions &funcs)
-                : mVariables(variables), mFuncs(funcs) {}
+            : mVariables(variables), mFuncs(funcs) {}
 
         number operator()(const char *expr) {
             mCurrent = expr;
             look_ahead();
             number result = expression();
-            if (mType != FINISHED)
-                return 0;
+            if (mType != FINISHED) return 0;
             return result;
         }
     };
 
-    template<typename number, typename functions>
+    template <typename number, typename functions>
     number eval(const char *expression,
                 const ::std::map<::std::string, number> &variables,
                 functions &funcs) {
         return evaler<number, functions>(variables, funcs)(expression);
     }
-};    // namespace cpp_eval
+};  // namespace cpp_eval
 
-#endif    // CPP_EVAL_H_DFF520DB406EDCF31AB9A538F7E1C3BD_20040721__
+#endif  // CPP_EVAL_H_DFF520DB406EDCF31AB9A538F7E1C3BD_20040721__
