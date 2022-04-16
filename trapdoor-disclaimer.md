@@ -38,7 +38,7 @@ want to bear such risk, please stop using td plugin.
 appendix:
 Here are some suggestions for use:
   - Update the plug-in to the new version in time, because the td is still a beta version, the more you update it, the
-    less bugs you can expect
+    fewer bugs you can expect
   - Try to turn off unused functions
   - Timely backup and archive is always a good habit
 

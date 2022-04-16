@@ -1,0 +1,80 @@
+[04-15 20:04:18TRAPDOOR INFO](trapdoor::lang::tryChangeLang) set language to en_us
+[04-15 20:04:18TRAPDOOR DEBUG](trapdoor::initializeMod) create BDS mod instance
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::initialize) begin read config file plugins/trapdoor/trapdoor-config.json
+[04-15 20:04:18TRAPDOOR WARN](mod::ConfigManager::readConfigFile) Can not find config file,trapdoor will generate a defalue one [plugins/trapdoor/trapdoor-config.json]
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readConfigFile) read config file plugins/trapdoor/trapdoor-config.json successfully
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readDevOption) begin read dev options
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readCommandConfig) begin read command permission info
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readCommandConfig)  - /apicfg    enable:1  level:1
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readCommandConfig)  - /backup    enable:1  level:1
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readCommandConfig)  - /c         enable:1  level:1
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readCommandConfig)  - /cl        enable:1  level:0
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readCommandConfig)  - /counter   enable:1  level:1
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readCommandConfig)  - /dev       enable:1  level:1
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readCommandConfig)  - /draw      enable:1  level:0
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readCommandConfig)  - /fakeplayer enable:1  level:1
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readCommandConfig)  - /func      enable:1  level:1
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readCommandConfig)  - /here      enable:1  level:0
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readCommandConfig)  - /hsa       enable:1  level:0
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readCommandConfig)  - /l         enable:1  level:1
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readCommandConfig)  - /lang      enable:1  level:1
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readCommandConfig)  - /mspt      enable:1  level:0
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readCommandConfig)  - /o         enable:1  level:1
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readCommandConfig)  - /os        enable:1  level:0
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readCommandConfig)  - /prof      enable:1  level:0
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readCommandConfig)  - /rs        enable:1  level:1
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readCommandConfig)  - /s         enable:1  level:1
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readCommandConfig)  - /self      enable:1  level:0
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readCommandConfig)  - /slime     enable:1  level:0
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readCommandConfig)  - /spawn     enable:1  level:0
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readCommandConfig)  - /td?       enable:1  level:0
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readCommandConfig)  - /tick      enable:1  level:1
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readCommandConfig)  - /village   enable:1  level:0
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readCommandConfig) read command permission info successfully
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readLowLevelVanillaCommands) begin read low level vanilla command info
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readLowLevelVanillaCommands) here are the all low level commands:
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readLowLevelVanillaCommands) read low level vanilla commands successfully
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readServerConfig) begin read server info
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readServerConfig)  - levelMame : Bedrock level
+read server info successfully
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readVillageConfig) begin read village config info
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readVillageConfig)  - bound color: red
+ - spawn color: blue
+ - poiQueryColor: red
+ - center:minecraft:heart_particle
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readVillageConfig) read village color successfully
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readFunctionConfig) begin read function config
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readFunctionConfig) read function config successfully
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readSelfConfig) begin read self command config
+[04-15 20:04:18TRAPDOOR DEBUG](mod::ConfigManager::readSelfConfig) read self command config successfully
+[04-15 20:04:19TRAPDOOR DEBUG](TDHook_51CommandRegistry_registerCommand_8574de98::p) set command Registry 000001D544239950
+[04-15 20:04:19TRAPDOOR DEBUG](trapdoor::BDSMod::setCommandRegistry) set commandRegistry
+[04-15 20:04:19TRAPDOOR DEBUG](TDHook_51CommandRegistry_registerCommand_8574de98::p) init commandRegistry
+[04-15 20:04:19TRAPDOOR DEBUG](trapdoor::BDSMod::registerCommands) begin register command
+[04-15 20:04:19TRAPDOOR DEBUG](trapdoor::CommandManager::registerCmd) register command lang
+[04-15 20:04:19TRAPDOOR DEBUG](trapdoor::CommandManager::registerCmd) register command apicfg
+[04-15 20:04:19TRAPDOOR DEBUG](trapdoor::CommandManager::registerCmd) register command tick
+[04-15 20:04:19TRAPDOOR DEBUG](trapdoor::CommandManager::registerCmd) register command prof
+[04-15 20:04:19TRAPDOOR DEBUG](trapdoor::CommandManager::registerCmd) register command mspt
+[04-15 20:04:19TRAPDOOR DEBUG](trapdoor::CommandManager::registerCmd) register command backup
+[04-15 20:04:19TRAPDOOR DEBUG](trapdoor::CommandManager::registerCmd) register command hsa
+[04-15 20:04:19TRAPDOOR DEBUG](trapdoor::CommandManager::registerCmd) register command draw
+[04-15 20:04:19TRAPDOOR DEBUG](trapdoor::CommandManager::registerCmd) register command village
+[04-15 20:04:19TRAPDOOR DEBUG](trapdoor::CommandManager::registerCmd) register command counter
+[04-15 20:04:19TRAPDOOR DEBUG](trapdoor::CommandManager::registerCmd) register command o
+[04-15 20:04:19TRAPDOOR DEBUG](trapdoor::CommandManager::registerCmd) register command s
+[04-15 20:04:19TRAPDOOR DEBUG](trapdoor::CommandManager::registerCmd) register command c
+[04-15 20:04:19TRAPDOOR DEBUG](trapdoor::CommandManager::registerCmd) register command slime
+[04-15 20:04:19TRAPDOOR DEBUG](trapdoor::CommandManager::registerCmd) register command func
+[04-15 20:04:19TRAPDOOR DEBUG](trapdoor::CommandManager::registerCmd) register command self
+[04-15 20:04:19TRAPDOOR DEBUG](trapdoor::CommandManager::registerCmd) register command here
+[04-15 20:04:19TRAPDOOR DEBUG](trapdoor::CommandManager::registerCmd) register command l
+[04-15 20:04:19TRAPDOOR DEBUG](trapdoor::CommandManager::registerCmd) register command os
+[04-15 20:04:19TRAPDOOR DEBUG](trapdoor::CommandManager::registerCmd) register command cl
+[04-15 20:04:19TRAPDOOR DEBUG](trapdoor::CommandManager::registerCmd) register command td?
+[04-15 20:04:20TRAPDOOR DEBUG](TDHook_248ServerLevel_tick_86efb826::p) init level obj
+[04-15 20:04:20TRAPDOOR DEBUG](trapdoor::BDSMod::setLevel) init server level
+[04-15 20:04:20TRAPDOOR DEBUG](mod::TrapdoorMod::initialize) mod init
+[04-15 20:04:20TRAPDOOR DEBUG](trapdoor::BDSMod::initialize) init thread pool
+[04-15 20:04:20TRAPDOOR DEBUG](trapdoor::CommandManager::setCommandConfig) set command permission info
+[04-15 20:04:20TRAPDOOR DEBUG](mod::initBackup) create backup folder

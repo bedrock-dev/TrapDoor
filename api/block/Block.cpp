@@ -35,5 +35,9 @@ namespace trapdoor {
         return offset_cast<BlockPos *>(this, off::BLOCKACTOR_GET_POSITION);
         // return reinterpret_cast<BlockPos *>(reinterpret_cast<VA>(this) + 44);
     }
+    BlockSource *BlockActor::getBlockSource() {
+        // TODO
+        return nullptr;
+    }
 
 }  // namespace trapdoor

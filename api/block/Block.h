@@ -11,7 +11,7 @@
 namespace trapdoor {
 
     class BlockLegacy;
-
+    class BlockSource;
     class Block {
        public:
         // 获取方块legacy
@@ -34,6 +34,8 @@ namespace trapdoor {
 
         //获取方块对象
         //  Block *getBlock();
+        //通过方块实体获取方块源
+        BlockSource* getBlockSource();
     };
     struct TickNextTickData {
         trapdoor::BlockPos pos;

@@ -3,16 +3,15 @@ project(mod)
 set(CMAKE_CXX_STANDARD 17)
 #因为ABI原因这个项目只能msvc编译
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
-    add_compile_options(/wd4828 /wd4819 /EHsc /utf-8)
-else ()
-    message(this project don't support GNU gcc or clang, please use MSVC instead)
-endif ()
-set(CMAKE_BUILD_TYPE release)
-set(MOD_API_NAME trapdoor)
+    add_compile_options(/wd4828 /wd4819 /Zi /EHsc /utf-8 /MP)
+    #set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} ")
+    #set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /DEBUG /OPT:REF /OPT:ICF")
 
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Zi")
-set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /DEBUG /OPT:REF /OPT:ICF")
-set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "${CMAKE_SHARED_LINKER_FLAGS_RELEASE} /DEBUG /OPT:REF /OPT:ICF")
+else ()
+    message(this project don't support GNU gcc, please use MSVC instead)
+endif ()
+#set(CMAKE_BUILD_TYPE release)
+set(MOD_API_NAME trapdoor)
 
 
 add_library(${MOD_API_NAME} STATIC
@@ -42,7 +41,7 @@ add_library(${MOD_API_NAME} STATIC
         api/tools/ThreadPool.h
         api/language/I18nManager.cpp
         api/tools/CastHelper.h
-    
+
         api/Offset.h
         )
 
@@ -132,3 +131,4 @@ target_include_directories(
 )
 
 target_link_libraries(${MOD_NAME} ${MOD_API_NAME})
+

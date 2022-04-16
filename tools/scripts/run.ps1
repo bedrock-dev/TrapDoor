@@ -1,0 +1,1 @@
+MCDllInject.exe "C:\Users\xhy\Desktop\bedrock-server-1.18.12.01\bedrock_server.exe" ".\bin\Release"
