@@ -24,7 +24,7 @@ namespace mod {
     namespace {
 
         bool isValidWorldFolder(const std::filesystem::path &path) {
-            // TODO check if is a valid mineraft bedrock level
+            // TODO check if is a valid minecraft bedrock level
             return true;
         }
 
@@ -56,8 +56,9 @@ Copy-Item -Path $SourcePath -Destination "$Destination" -Recurse | Out-Null
             if (entry.status().type() == fs::file_type::directory) {
                 for (const auto &iter :
                      fs::directory_iterator(backupRootPath)) {
-                    if (fs::is_directory(iter.path()) &&
-                        isValidWorldFolder(iter.path())) {
+                    if (fs::is_directory(iter.path())
+                        // && isValidWorldFolder(iter.path())
+                    ) {
                         auto str = iter.path().string();
                         auto p1 = str.rfind('\\');
                         backupList.push_back(
@@ -116,10 +117,15 @@ Copy-Item -Path $SourcePath -Destination "$Destination" -Recurse | Out-Null
                 "./plugins/trapdoor/backup/" + target_backup_to_remove;
             // TODO: add remove to thread pool.
             trapdoor::info(player, "Remove path is [%s]", remove_path.c_str());
-            std::error_code ec;
-            fs::remove_all(remove_path, ec);
-            L_DEBUG("INfo is %s", ec.message().c_str());
+            try {
+                fs::remove_all(remove_path);
+                trapdoor::info(player, "Success");
+            } catch (std::exception &e) {
+                trapdoor::info(player, "Error remove backup with reason %s ",
+                               e.what());
+            }
         }
+
     }  // namespace
 
     void initBackup() {
@@ -142,7 +148,7 @@ Copy-Item -Path $SourcePath -Destination "$Destination" -Recurse | Out-Null
             ->then(ARG("crash", "command.backup.crash.desc", NONE, {
                 //这种指令的存在真的好吗
                 // trapdoor::warning(player, "this command has been removed");
-                *((char *)(0)) = 0;
+                abort();
             }));
     }
 
