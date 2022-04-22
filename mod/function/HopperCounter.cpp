@@ -118,13 +118,23 @@ THook(
   //附近没玩家，直接返回
   auto real_this = reinterpret_cast<trapdoor::BlockActor *>(
       reinterpret_cast<VA>(hopperActor) - 208);
+
   auto position = real_this->getPosition();
-  auto nearestPlayer =
-      trapdoor::bdsMod->getLevel()->getNearestPlayer(*position);
-  if (!nearestPlayer) {
-    original(hopperActor, index, itemStack);
-    return;
-  }
+  trapdoor::Actor *nearestPlayer = nullptr;
+
+  auto *hopper_block = real_this->getBlock();
+  trapdoor::bdsMod->getLevel()->forEachPlayer([&](trapdoor::Actor *player) {
+    if (!player)
+      return;
+    auto bs = player->getBlockSource();
+    if (!bs)
+      return;
+    auto *block = bs->getBlock(*position);
+    if (hopper_block && block && block == hopper_block) {
+      nearestPlayer = player;
+    }
+  });
+
   auto bs = nearestPlayer->getBlockSource();
   auto hopperBlockVariant =
       (trapdoor::FACING)bs->getBlock(*position)->getVariant();
