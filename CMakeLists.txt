@@ -3,14 +3,14 @@ project(mod)
 set(CMAKE_CXX_STANDARD 17)
 #因为ABI原因这个项目只能msvc编译
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
-    add_compile_options(/wd4828 /wd4819 /Zi /EHsc /utf-8 /MP)
-    #set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} ")
-    #set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /DEBUG /OPT:REF /OPT:ICF")
+    add_compile_options(/wd4828 /wd4819 /EHsc /utf-8)
+    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Zi")
+    set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /DEBUG /OPT:REF /OPT:ICF")
 
 else ()
     message(this project don't support GNU gcc, please use MSVC instead)
 endif ()
-#set(CMAKE_BUILD_TYPE release)
+set(CMAKE_BUILD_TYPE release)
 set(MOD_API_NAME trapdoor)
 
 
@@ -62,8 +62,8 @@ target_include_directories(${MOD_API_NAME}
 target_link_libraries(${MOD_API_NAME} ${PROJECT_SOURCE_DIR}/api/lib/detours.lib)
 
 ####################这里是具体功能##########################
-set(TRAPDOOR_VERSION 0.10.2)
-set(MCBE_VERSION 1.18.12.01)
+set(TRAPDOOR_VERSION 0.10.3)
+set(MCBE_VERSION 1.18.30.04)
 set(BETA OFF)
 set(TEST_NUMBER 1)
 add_definitions(-DTD_VERSION="${TRAPDOOR_VERSION}")
