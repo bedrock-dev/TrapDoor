@@ -36,7 +36,7 @@ namespace trapdoor {
     }
 
     Vec3 *Actor::getPos() {
-        return SYM_CALL(Vec3 * (*)(void *), SymHook::Actor_getPos_cecb628b,
+        return SYM_CALL(Vec3 * (*)(void *), SymHook::Actor_getPosition_8f5a9c5f,
                         this);
     }
 
