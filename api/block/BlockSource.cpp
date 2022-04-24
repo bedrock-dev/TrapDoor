@@ -26,7 +26,7 @@ namespace trapdoor {
 
     void BlockSource::setBlock(BlockPos *blockPos, Block *block) {
         SYM_CALL(void (*)(void *, int, int, int, Block *, int),
-                 BlockSource_setBlock_71ce9a25, this, blockPos->x, blockPos->y,
+                 BlockSource_setBlock_30b3a288, this, blockPos->x, blockPos->y,
                  blockPos->z, block, 3);
     }
 

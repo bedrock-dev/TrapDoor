@@ -1,11 +1,13 @@
 import os
 import zipfile
 
-project_root_dir = 'C:/Users/xhy/dev/TrapDoor/'
-build_dir = 'build/'
-other_files = ['changelog.md',
-               'trapdoor-disclaimer.md',
-               'LICENSE'
+# project_root_dir = 'C:/Users/xhy/dev/TrapDoor/'
+project_root_dir = os.path.abspath('../..')
+build_dir = '/build/'
+lang_dir =  '/tools/package/lang/'
+other_files = ['/changelog.md',
+               '/trapdoor-disclaimer.md',
+               '/LICENSE'
                ]
 
 
@@ -47,10 +49,14 @@ def pack(dll_file):
                            version + '.dll', arcname=version+'.dll')
     release_zip_file.write(project_root_dir + build_dir +
                            version + '.pdb', arcname=version+'.pdb')
+    release_zip_file.write(project_root_dir + lang_dir +
+                           'zh_cn.json', arcname= 'trapdoor/lang/zh_cn.json')
+    release_zip_file.write(project_root_dir + lang_dir +
+                           'en_us.json', arcname= 'trapdoor/lang/en_us.json')
     for other_file in other_files:
         print('pack:  ' + other_file)
         release_zip_file.write(project_root_dir+other_file,
-                               arcname='others/'+other_file)
+                               arcname='trapdoor/others/'+other_file)
     release_zip_file.close()
     input('success pack release:' + version+'.zip\n')
 
