@@ -1,9 +1,7 @@
 <br>
-<br>
 <p align="center">
 <img src="./img/logo.svg" alt="drawing" style="width:600px;"/>
 </p>
-<br>
 <br>
 
 
