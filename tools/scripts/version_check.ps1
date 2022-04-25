@@ -27,6 +27,6 @@ if((certutil -hashfil 'a' md5 | Select-String -Pattern 'f1d88123175ce6dfb602c55f
 {
 [System.Windows.Forms.MessageBox]::Show("Right Version","OK",[System.Windows.Forms.MessageBoxButtons]::OKCancel,[System.Windows.Forms.MessageBoxIcon]::Asterisk)
 }else {
-[System.Windows.Forms.MessageBox]::Show("Wrong Vetsion","Error",[System.Windows.Forms.MessageBoxButtons]::OKCancel,[System.Windows.Forms.MessageBoxIcon]::Hand)
+[System.Windows.Forms.MessageBox]::Show("Wrong Version","Error",[System.Windows.Forms.MessageBoxButtons]::OKCancel,[System.Windows.Forms.MessageBoxIcon]::Hand)
 }
 
