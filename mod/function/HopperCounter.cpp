@@ -123,6 +123,10 @@ THook(
   trapdoor::Actor *nearestPlayer = nullptr;
 
   auto *hopper_block = real_this->getBlock();
+  if (!hopper_block) {
+    // original(hopperActor, index, itemStack);
+    return;
+  }
   trapdoor::bdsMod->getLevel()->forEachPlayer([&](trapdoor::Actor *player) {
     if (!player)
       return;
@@ -135,7 +139,13 @@ THook(
     }
   });
 
+  if (!nearestPlayer) {
+    // original(hopperActor, index, itemStack);
+    return;
+  }
+
   auto bs = nearestPlayer->getBlockSource();
+
   auto hopperBlockVariant =
       (trapdoor::FACING)bs->getBlock(*position)->getVariant();
   auto attachBlockPos =
