@@ -39,7 +39,8 @@
 ?getDebugText@Actor@@UEAAXAEAV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@@Z
 
 #获取实体位置
-?getPos@Actor@@UEBAAEBVVec3@@XZ
+#?getPos@Actor@@UEBAAEBVVec3@@XZ
+?getPosition@Actor@@UEBAAEBVVec3@@XZ
 
 #获取实体的头顶标签
 ?getNameTag@Actor@@UEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
@@ -57,14 +58,14 @@
 ?setPlayerGameType@ServerPlayer@@UEAAXW4GameType@@@Z
 
 #从BlockSource中获取方块
-#?getBlock@BlockSource@@QEBAAEBVBlock@@AEBVBlockPos@@@Z
 ?getBlock@BlockSource@@UEBAAEBVBlock@@AEBVBlockPos@@@Z
 
 #同上，但是参数是int,int,int
 ?getBlock@BlockSource@@UEBAAEBVBlock@@HHH@Z
 
 #利用blocksource设置方块
-?setBlock@BlockSource@@QEAA_NHHHAEBVBlock@@H@Z
+#?setBlock@BlockSource@@QEAA_NHHHAEBVBlock@@H@Z[1.18.12-]
+?setBlock@BlockSource@@QEAA_NHHHAEBVBlock@@HPEAVActor@@@Z
 
 #更新邻居方块
 ?updateNeighborsAt@BlockSource@@QEAAXAEBVBlockPos@@@Z
