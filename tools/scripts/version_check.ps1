@@ -23,7 +23,7 @@ $FileBrowser.FileName
 }
 
 $file = Open-FileDialog 
-if((certutil -hashfil 'a' md5 | Select-String -Pattern 'f1d88123175ce6dfb602c55f5b8f1be5') -ne $null)
+if((certutil -hashfile  $file | Select-String -Pattern 'f0dc8804db447ca287a5f0ba5c5f5a0774a2cdd5') -ne $null)
 {
 [System.Windows.Forms.MessageBox]::Show("Right Version","OK",[System.Windows.Forms.MessageBoxButtons]::OKCancel,[System.Windows.Forms.MessageBoxIcon]::Asterisk)
 }else {
