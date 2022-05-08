@@ -33,7 +33,7 @@ namespace mod {
     constexpr uint64_t Continaer_can_open = 0X15EDAD0;
     THook(bool, Continaer_can_open, void *container, void *bs) {
         auto modInstance = trapdoor::bdsMod->asInstance<mod::TrapdoorMod>();
-        if (!modInstance->getSingFunction().noConatinerObstruct) {
+        if (modInstance->getSingFunction().noConatinerObstruct) {
             return true;
         } else {
             return original(container, bs);
