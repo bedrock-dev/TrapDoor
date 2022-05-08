@@ -29,4 +29,27 @@ namespace mod {
         if (!modInstance->getSingFunction().preventNCUpdate)
             original(source, pos);
     }
+    // 0X15EDAD0
+    constexpr uint64_t Continaer_can_open = 0X15EDAD0;
+    THook(bool, Continaer_can_open, void *container, void *bs) {
+        auto modInstance = trapdoor::bdsMod->asInstance<mod::TrapdoorMod>();
+        if (!modInstance->getSingFunction().noConatinerObstruct) {
+            return true;
+        } else {
+            return original(container, bs);
+        }
+    }
+
+    /*
+0XEA71D0
+public: virtual void __cdecl Container::removeItem(int,int) __ptr64
+?removeItem@Container@@UEAAXHH@Z
+    */
+    constexpr uint64_t Continaer_remove_item = 0XEA71D0;
+    THook(void, Continaer_remove_item, void *container, int slot, int count) {
+        auto modInstance = trapdoor::bdsMod->asInstance<mod::TrapdoorMod>();
+        if (!modInstance->getSingFunction().noContainerCost) {
+            original(container, slot, count);
+        }
+    }
 }  // namespace mod

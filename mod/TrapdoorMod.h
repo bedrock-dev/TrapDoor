@@ -25,6 +25,8 @@ namespace mod {
         bool preventExplosion = false;
         bool preventNCUpdate = false;
         bool enableBetterMspt = false;
+        bool noConatinerObstruct = false;
+        bool noContainerCost = false;
     };
 
     class TrapdoorMod : public trapdoor::BDSMod {

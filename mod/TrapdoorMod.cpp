@@ -100,10 +100,27 @@ namespace mod {
                                 holder->getBool());
                        }))
 
-            ->then(ARG("ncud", "command.func.ncud.desc", BOOL, {
-                // FUNC_DISABLED(player)
-                this->singleFunctions.preventNCUpdate = holder->getBool();
-                info(player, LANG("command.func.ncud.set"), holder->getBool());
+            ->then(ARG("ncud", "command.func.ncud.desc", BOOL,
+                       {
+                           // FUNC_DISABLED(player)
+                           this->singleFunctions.preventNCUpdate =
+                               holder->getBool();
+                           info(player, LANG("command.func.ncud.set"),
+                                holder->getBool());
+                       }))
+
+            //容器无开启碰撞检查
+            ->then(ARG("ncrob", "command.func.ncrob.desc", BOOL,
+                       {
+                           this->singleFunctions.noConatinerObstruct =
+                               holder->getBool();
+                           info(player, LANG("command.func.ncrob.set"),
+                                holder->getBool());
+                       }))
+            //容器无消耗
+            ->then(ARG("nccost", "command.func.ncost.desc", BOOL, {
+                this->singleFunctions.noContainerCost = holder->getBool();
+                info(player, LANG("command.func.ncost.set"), holder->getBool());
             }));
 
         commandManager.registerCmd("self", "command.self.desc")
