@@ -15,7 +15,6 @@
 #include "tick/GameTick.h"
 #include "trapdoor.h"
 
-
 namespace mod {
 
 void TrapdoorMod::heavyTick() {
@@ -91,23 +90,43 @@ void TrapdoorMod::registerCommands() {
                    info(player, LANG("command.func.draw.set"),
                         holder->getBool());
                  }))
-      //                ->then(ARG(
-      //                               "stat", "command.func.stat.desc", BOOL,
-      //                               {
-      //                                   this->playerStatisticManager.setAble(holder->getBool());
-      //                                   info(player,
-      //                                   LANG("command.func.stat.set"),
-      //                                   holder->getBool());
-      //                               }))
       ->then(ARG("expl", "command.func.expl.desc", BOOL,
                  {
                    this->singleFunctions.preventExplosion = holder->getBool();
                    info(player, LANG("command.func.expl.set"),
                         holder->getBool());
                  }))
-      ->then(ARG("ncud", "command.func.ncud.desc", BOOL, {
-        this->singleFunctions.preventNCUpdate = holder->getBool();
-        info(player, LANG("command.func.ncud.set"), holder->getBool());
+      ->then(ARG("ncud", "command.func.ncud.desc", BOOL,
+                 {
+                   this->singleFunctions.preventNCUpdate = holder->getBool();
+                   info(player, LANG("command.func.ncud.set"),
+                        holder->getBool());
+                 }))
+      //容器无开启碰撞检查
+      ->then(
+          ARG("ncrob", "command.func.ncrob.desc", BOOL,
+              {
+                this->singleFunctions.noConatinerObstruct = holder->getBool();
+                info(player, LANG("command.func.ncrob.set"), holder->getBool());
+              }))
+      //容器无消耗
+      ->then(ARG("nccost", "command.func.ncost.desc", BOOL,
+                 {
+                   this->singleFunctions.noContainerCost = holder->getBool();
+                   info(player, LANG("command.func.ncost.set"),
+                        holder->getBool());
+                 }))
+      //强制放置
+      ->then(ARG("fbld", "command.func.fbld.desc", INT,
+                 {
+                   this->singleFunctions.forceBuild = holder->getInt();
+                   info(player, LANG("command.func.fbld.set"),
+                        holder->getInt());
+                 }))
+      //高斯随机数调整
+      ->then(ARG("grng", "command.func.grng.desc", INT, {
+        this->singleFunctions.gaussRnd = holder->getInt();
+        info(player, LANG("command.func.grng.set"), holder->getInt());
       }));
 
   //史莱姆显示

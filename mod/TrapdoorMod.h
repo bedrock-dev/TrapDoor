@@ -21,71 +21,76 @@
 namespace mod {
 
 struct SingleFunction {
-    bool preventExplosion = false;
-    bool preventNCUpdate = false;
-    bool enableBetterMspt = false;
+  bool preventExplosion = false;
+  bool preventNCUpdate = false;
+  bool enableBetterMspt = false;
+  bool noConatinerObstruct = false;
+  bool noContainerCost = false;
+  int forceBuild = 0;
+  int gaussRnd = 1;
+  int maxPtSize = 100;
 };
 
 class TrapdoorMod : public trapdoor::BDSMod {
-  private:
-    SingleFunction singleFunctions;
-    HopperChannelManager hopperChannelManager;
-    VillageHelper villageHelper;
-    HsaManager hsaManager;
-    ConfigManager configManager;
-    SpawnHelper spawnHelper;
-    BlockRotationHelper rotationHelper;
-    PlayerFunction playerFunctions;
-    SimpleBuilder simpleBuilder;
-    SlimeChunkHelper slimeChunkHelper;
-    FakePlayerClient *fakePlayerClient = nullptr;
+private:
+  SingleFunction singleFunctions;
+  HopperChannelManager hopperChannelManager;
+  VillageHelper villageHelper;
+  HsaManager hsaManager;
+  ConfigManager configManager;
+  SpawnHelper spawnHelper;
+  BlockRotationHelper rotationHelper;
+  PlayerFunction playerFunctions;
+  SimpleBuilder simpleBuilder;
+  SlimeChunkHelper slimeChunkHelper;
+  FakePlayerClient *fakePlayerClient = nullptr;
 
-    void initFunctionEnable();
+  void initFunctionEnable();
 
-  public:
-    static void printCopyRightInfo();
+public:
+  static void printCopyRightInfo();
 
-    static std::string getModVersion();
+  static std::string getModVersion();
 
-    static void printOSInfo(trapdoor::Actor *player);
+  static void printOSInfo(trapdoor::Actor *player);
 
-    void initialize() override;
+  void initialize() override;
 
-    void registerCommands() override;
+  void registerCommands() override;
 
-    void useOnHook(Actor *player, const std::string &itemName, BlockPos &pos,
-                   unsigned int facing, const Vec3 &) override;
+  void useOnHook(Actor *player, const std::string &itemName, BlockPos &pos,
+                 unsigned int facing, const Vec3 &) override;
 
-    CommandPermissionLevel
-    resetVanillaCommandLevel(const std::string &name,
-                             CommandPermissionLevel oldLevel) override;
+  CommandPermissionLevel
+  resetVanillaCommandLevel(const std::string &name,
+                           CommandPermissionLevel oldLevel) override;
 
-    void heavyTick();
+  void heavyTick();
 
-    void lightTick();
+  void lightTick();
 
-    inline bool readConfigFile(const std::string &configFileName) {
-        return this->configManager.initialize(configFileName);
-    }
+  inline bool readConfigFile(const std::string &configFileName) {
+    return this->configManager.initialize(configFileName);
+  }
 
-    bool attackEntityHook(Actor *entity1, Actor *entity2) override;
+  bool attackEntityHook(Actor *entity1, Actor *entity2) override;
 
-    // get functions
-    inline HopperChannelManager &getHopperChannelManager() {
-        return this->hopperChannelManager;
-    }
+  // get functions
+  inline HopperChannelManager &getHopperChannelManager() {
+    return this->hopperChannelManager;
+  }
 
-    inline VillageHelper &getVillageHelper() { return this->villageHelper; }
+  inline VillageHelper &getVillageHelper() { return this->villageHelper; }
 
-    inline HsaManager &getHsaManager() { return this->hsaManager; }
+  inline HsaManager &getHsaManager() { return this->hsaManager; }
 
-    inline std::string getLevelName() {
-        return this->configManager.getServerConfig().levelName;
-    }
+  inline std::string getLevelName() {
+    return this->configManager.getServerConfig().levelName;
+  }
 
-    inline SingleFunction getSingFunction() { return this->singleFunctions; }
+  inline SingleFunction getSingFunction() { return this->singleFunctions; }
 
-    inline ConfigManager &getConfigManager() { return this->configManager; }
+  inline ConfigManager &getConfigManager() { return this->configManager; }
 };
 } // namespace mod
 
