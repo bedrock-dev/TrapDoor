@@ -110,10 +110,10 @@ void TrapdoorMod::registerCommands() {
                 info(player, LANG("command.func.ncrob.set"), holder->getBool());
               }))
       //容器无消耗
-      ->then(ARG("nccost", "command.func.ncost.desc", BOOL,
+      ->then(ARG("nccost", "command.func.nccost.desc", BOOL,
                  {
                    this->singleFunctions.noContainerCost = holder->getBool();
-                   info(player, LANG("command.func.ncost.set"),
+                   info(player, LANG("command.func.nccost.set"),
                         holder->getBool());
                  }))
       //强制放置
