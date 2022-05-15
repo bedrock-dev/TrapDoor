@@ -156,3 +156,11 @@
 
 #从BlockActor获取Block对象
 ?getBlock@BlockActor@@QEBAPEBVBlock@@XZ
+
+
+#容器删除物品
+?removeItem@Container@@UEAAXHH@Z
+
+#开容器
+?_canOpenThis@ChestBlockActor@@MEBA_NAEAVBlockSource@@@Z
+

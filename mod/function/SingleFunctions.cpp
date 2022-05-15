@@ -30,8 +30,8 @@ namespace mod {
             original(source, pos);
     }
     // 0X15EDAD0
-    constexpr uint64_t Continaer_can_open = 0X15EDAD0;
-    THook(bool, Continaer_can_open, void *container, void *bs) {
+    THook(bool, ChestBlockActor_canOpenThis_309ed47c, void *container,
+          void *bs) {
         auto modInstance = trapdoor::bdsMod->asInstance<mod::TrapdoorMod>();
         if (modInstance->getSingFunction().noConatinerObstruct) {
             return true;
@@ -40,13 +40,8 @@ namespace mod {
         }
     }
 
-    /*
-0XEA71D0
-public: virtual void __cdecl Container::removeItem(int,int) __ptr64
-?removeItem@Container@@UEAAXHH@Z
-    */
-    constexpr uint64_t Continaer_remove_item = 0XEA71D0;
-    THook(void, Continaer_remove_item, void *container, int slot, int count) {
+    THook(void, Container_removeItem_99dc40a0, void *container, int slot,
+          int count) {
         auto modInstance = trapdoor::bdsMod->asInstance<mod::TrapdoorMod>();
         if (!modInstance->getSingFunction().noContainerCost) {
             original(container, slot, count);
