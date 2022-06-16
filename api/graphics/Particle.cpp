@@ -40,8 +40,10 @@ namespace trapdoor {
         }
 
         std::string getLineParticleType(int length, FACING direction,
-                                        GRAPHIC_COLOR color) {
+                                        GRAPHIC_COLOR color,
+                                        bool back = false) {
             std::string str = "trapdoor:line";
+            if (back) str += "_back";
             str += std::to_string(length);
             switch (direction) {
                 case FACING::NEG_Y:
@@ -135,11 +137,19 @@ namespace trapdoor {
         for (auto points : positionList) {
             auto particleType =
                 getLineParticleType(points.second, direction, color);
+            auto backParticleType =
+                getLineParticleType(points.second, direction, color, true);
             auto particleTypeInv =
                 getLineParticleType(points.second, invFacing(direction), color);
+            auto backParticleTypeInv = getLineParticleType(
+                points.second, invFacing(direction), color, true);
+
             spawnParticle(points.first, particleType, dimType);
-            if (!bdsMod->getCfg().particlePerformanceMode)
+            spawnParticle(points.first, backParticleType, dimType);
+            if (!bdsMod->getCfg().particlePerformanceMode) {
                 spawnParticle(points.first, particleTypeInv, dimType);
+                spawnParticle(points.first, backParticleTypeInv, dimType);
+            }
         }
     }
 

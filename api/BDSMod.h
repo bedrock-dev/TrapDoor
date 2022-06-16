@@ -25,7 +25,7 @@ namespace trapdoor {
     class BDSMod : public noncopyable {
        public:
         struct ModConfig {
-            size_t particleViewDistance = 256;
+            size_t particleViewDistance = 96;
             bool particlePerformanceMode = false;
         };
 
