@@ -1,9 +1,8 @@
 
-## [重要通知 (Important Notification)](https://github.com/hhhxiao/TrapDoor/issues/87)
+1.19+ is avaliable here [https://github.com/hhhxiao/Trapdoor-ll](https://github.com/hhhxiao/Trapdoor-ll)
 
 ## [重要通知 (Important Notification)](https://github.com/hhhxiao/TrapDoor/issues/87)
 
-## [重要通知 (Important Notification)](https://github.com/hhhxiao/TrapDoor/issues/87)
 
 
 <br>
