@@ -164,17 +164,17 @@ namespace mod {
         addShowItem(builder, "     - ", "PendingRemove",
                     redstonStat.pendingRemove / rounds, mspt);
 
-        addShowItem(builder, " - ", "EntitySystem",
-                    levelEntitySystemTickTime / rounds, mspt);
         addShowItem(builder, " - ", "Chunk (un)load & village",
                     dimensionTickTime / rounds, mspt);
 
-        addShowItem(builder, " - ", "ChunkTick", chunkTickTime / rounds, mspt);
-        addShowItem(builder, "     - ", "BlockEntities",
+        addShowItem(builder, " - ", "EntitySystem",
+                    levelEntitySystemTickTime / rounds, mspt);
+        addShowItem(builder, "     - ", "ChunkTick", chunkTickTime / rounds, mspt);
+        addShowItem(builder, "         - ", "BlockEntities",
                     chunkStat.blockEntities / rounds, mspt);
-        addShowItem(builder, "     - ", "RandomTick",
+        addShowItem(builder, "         - ", "RandomTick",
                     chunkStat.randomTick / rounds, mspt);
-        addShowItem(builder, "     - ", "PendingTick",
+        addShowItem(builder, "         - ", "PendingTick",
                     chunkStat.pendingTick / rounds, mspt);
         builder.broadcast();
     }
